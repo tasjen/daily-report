@@ -1,4 +1,6 @@
+use base64::{engine::general_purpose::STANDARD, Engine};
 use chromiumoxide::browser::{Browser, BrowserConfig};
+use chromiumoxide::cdp::browser_protocol::network::{Headers, SetExtraHttpHeadersParams};
 use futures::StreamExt;
 
 #[tauri::command]
@@ -24,11 +26,23 @@ async fn test() -> Result<String, String> {
     });
 
     let page = browser
-        .new_page("https://portal.example.com/team")
+        .new_page("about:blank")
         .await
         .map_err(|e| e.to_string())?;
+
+    let token = STANDARD.encode("user:pass");
+    page.execute(SetExtraHttpHeadersParams::new(Headers::new(
+        serde_json::json!({ "Authorization": format!("Basic {}", token) }),
+    )))
+    .await
+    .map_err(|e| e.to_string())?;
+
+    page.goto("https://portal.example.com/team")
+        .await
+        .map_err(|e| e.to_string())?;
+
     println!("1");
-    tokio::time::sleep(std::time::Duration::from_millis(500)).await;
+    tokio::time::sleep(std::time::Duration::from_millis(2000)).await;
 
     // 1. Fill phone number
     // let nav = page.wait_for_navigation();
