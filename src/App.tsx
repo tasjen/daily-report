@@ -1,49 +1,73 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
 import { invoke } from "@tauri-apps/api/core";
 import "./App.css";
 
 function App() {
-  const [greetMsg, setGreetMsg] = useState("");
-  const [name, setName] = useState("");
+  const [svg, setSvg] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  async function greet() {
-    // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-    setGreetMsg(await invoke("greet", { name }));
+  async function runTest() {
+    setLoading(true);
+    setError(null);
+    setSvg(null);
+    try {
+      const result = await invoke<string>("test");
+      setSvg(result);
+    } catch (e) {
+      setError(String(e));
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
     <main className="container">
-      <h1>Welcome to Tauri + React</h1>
-
-      <div className="row">
-        <a href="https://vite.dev" target="_blank">
-          <img src="/vite.svg" className="logo vite" alt="Vite logo" />
-        </a>
-        <a href="https://tauri.app" target="_blank">
-          <img src="/tauri.svg" className="logo tauri" alt="Tauri logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <p>Click on the Tauri, Vite, and React logos to learn more.</p>
-
-      <form
-        className="row"
-        onSubmit={(e) => {
-          e.preventDefault();
-          greet();
+      {/* <div
+        style={{
+          position: "relative",
+          overflow: "hidden",
+          width: "100%",
+          paddingTop: "56.25%",
         }}
       >
-        <input
-          id="greet-input"
-          onChange={(e) => setName(e.currentTarget.value)}
-          placeholder="Enter a name..."
+        <iframe
+          onLoad={(e) => {
+            console.log(e.currentTarget);
+            console.log(
+              (
+                e.currentTarget.contentDocument ||
+                e.currentTarget.contentWindow?.document
+              )?.querySelector("input#tel"),
+            );
+          }}
+          style={{
+            resize: "both",
+            overflow: "auto",
+            width: "100%",
+            height: "100%",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0,
+          }}
+          src="https://portal.example.com/team/"
         />
-        <button type="submit">Greet</button>
-      </form>
-      <p>{greetMsg}</p>
+      </div> */}
+      <button
+        style={{ marginTop: "16px" }}
+        onClick={runTest}
+        disabled={loading}
+      >
+        {loading ? "Loading…" : "Test"}
+      </button>
+
+      {error && <p style={{ color: "red" }}>{error}</p>}
+
+      {svg && (
+        <div className="svg-result" dangerouslySetInnerHTML={{ __html: svg }} />
+      )}
     </main>
   );
 }
