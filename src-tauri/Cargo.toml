@@ -28,4 +28,7 @@ chrono = "0.4"
 tokio = { version = "1", features = ["full"] }
 tempfile = "3"
 base64 = "0.22"
+tauri-plugin-http = "2"
+tauri-plugin-store = "2"
+reqwest = { version = "0.12", features = ["json"] }
 
