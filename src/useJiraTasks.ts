@@ -22,7 +22,7 @@ export function useJiraTasks(date: Date) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          jql: `project = FLEX AND status CHANGED TO ("Done", "In Progress") BY currentUser() DURING ("${dateString} 00:00", "${dateString} 23:59")`,
+          jql: `project = FLEX AND status CHANGED BY currentUser() DURING ("${dateString} 00:00", "${dateString} 23:59")`,
           fields: ["status", "updated", "summary", "duedate"],
           maxResults: 10,
         }),
