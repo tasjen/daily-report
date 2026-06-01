@@ -109,7 +109,7 @@ async fn wait_for_url(page: &Page, expected: &str, timeout_ms: u64) -> Result<()
 }
 
 #[derive(Serialize)]
-struct get_task_options {
+struct TaskOptions {
     dates: Vec<String>,
     leaves: Vec<String>,
     projects: Vec<String>,
@@ -138,7 +138,7 @@ async fn reset_browser(state: tauri::State<'_, BrowserState>) -> Result<(), Stri
 }
 
 #[tauri::command]
-async fn get_task_options(state: tauri::State<'_, BrowserState>) -> Result<get_task_options, String> {
+async fn get_task_options(state: tauri::State<'_, BrowserState>) -> Result<TaskOptions, String> {
     let page = state.get_page().await?;
 
     page.goto("https://portal.example.com/team/task.php")
@@ -159,7 +159,7 @@ async fn get_task_options(state: tauri::State<'_, BrowserState>) -> Result<get_t
         .await
         .map_err(|e| e.to_string())?;
 
-    Ok(get_task_options {
+    Ok(TaskOptions {
         dates: date_options,
         leaves: leave_options,
         projects: project_options,
