@@ -3,6 +3,7 @@ import { createContext, use, useEffect, useState } from "react";
 import { Store } from "@tauri-apps/plugin-store";
 import SettingsForm from "./SettingsForm";
 import TaskList from "./TaskList";
+import { Loader2 } from "lucide-react";
 
 const StoreContext = createContext<Store | null>(null);
 
@@ -27,12 +28,12 @@ function App() {
   }, []);
 
   if (!store) {
-    return "Loading";
+    return <Loader2 className="animate-spin"/>;
   }
 
   return (
     <StoreContext value={store}>
-      <main className="container mx-auto">
+      <main className="container mx-auto p-4">
         <SettingsForm
           defaultOpen={configured === false}
           onSave={() => setConfigured(true)}

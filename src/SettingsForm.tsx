@@ -11,6 +11,8 @@ import {
 } from "./components/shared/dialog";
 import { Input } from "./components/shared/input";
 import { useQueryClient } from "@tanstack/react-query";
+import { ExternalLink, Settings } from "lucide-react";
+import { openUrl } from "@tauri-apps/plugin-opener";
 
 type Props = ComponentProps<typeof Dialog> & {
   onSave: () => void;
@@ -54,15 +56,18 @@ export default function SettingsForm({ onSave, ...props }: Props) {
   return (
     <Dialog open={open} onOpenChange={setOpen} {...props}>
       <DialogTrigger
-        className="float-end"
-        render={<Button className="float-end">Config</Button>}
+        render={
+          <Button size="icon-lg" className="absolute bottom-2 right-2" variant="ghost">
+            <Settings />
+          </Button>
+        }
       />
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Config</DialogTitle>
+          <DialogTitle>Settings</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <Label>
+          <Label className="flex flex-col gap-2 items-start">
             <p className="flex-none">Phone number</p>
             <Input
               type="tel"
@@ -71,8 +76,8 @@ export default function SettingsForm({ onSave, ...props }: Props) {
               required
             />
           </Label>
-          <Label>
-            <p className="flex-none">Email</p>
+          <Label className="flex flex-col gap-2 items-start">
+            <p className="flex-none">Jira email</p>
             <Input
               type="email"
               value={email}
@@ -80,8 +85,19 @@ export default function SettingsForm({ onSave, ...props }: Props) {
               required
             />
           </Label>
-          <Label>
-            <p className="flex-none">Jira API token</p>
+          <Label className="flex flex-col gap-2 items-start">
+            <p className="flex-none flex items-center gap-2">
+              Jira API token{" "}
+              <span
+                onClick={() =>
+                  openUrl(
+                    "https://id.atlassian.com/manage-profile/security/api-tokens",
+                  )
+                }
+              >
+                <ExternalLink size={16} className="inline" />
+              </span>
+            </p>
             <Input
               type="password"
               value={apiToken}
