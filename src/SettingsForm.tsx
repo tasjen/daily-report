@@ -1,4 +1,4 @@
-import { ComponentProps, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useStore } from "@/App";
 import { Label } from "@/components/shared/label";
 import { Button } from "@/components/shared/button";
@@ -13,17 +13,19 @@ import { Input } from "./components/shared/input";
 import { useQueryClient } from "@tanstack/react-query";
 import { ExternalLink, Settings } from "lucide-react";
 import { openUrl } from "@tauri-apps/plugin-opener";
+import { invoke } from "@tauri-apps/api/core";
 
-type Props = ComponentProps<typeof Dialog> & {
-  onSave: () => void;
+type Props = {
+  configured: boolean | null;
+  setConfigured: (configured: boolean) => void;
 };
 
-export default function SettingsForm({ onSave, ...props }: Props) {
+export default function SettingsForm({ configured, setConfigured }: Props) {
   const store = useStore();
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [apiToken, setApiToken] = useState("");
-  const [open, setOpen] = useState(props.defaultOpen);
+  const [open, setOpen] = useState(configured === false);
   const queryClient = useQueryClient();
 
   useEffect(() => {
@@ -48,21 +50,28 @@ export default function SettingsForm({ onSave, ...props }: Props) {
       store.set("api_token", apiToken),
     ]);
     await store.save();
-    onSave();
-    setOpen(false);
+    if (configured) {
+      await invoke("reset_browser");
+    }
     await queryClient.invalidateQueries({ queryKey: ["dateOptions"] });
+    setConfigured(true);
+    setOpen(false);
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen} {...props}>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
         render={
-          <Button size="icon-lg" className="absolute bottom-2 right-2" variant="ghost">
+          <Button
+            size="icon-lg"
+            className="absolute bottom-2 right-2"
+            variant="ghost"
+          >
             <Settings />
           </Button>
         }
       />
-      <DialogContent>
+      <DialogContent initialFocus={false}>
         <DialogHeader>
           <DialogTitle>Settings</DialogTitle>
         </DialogHeader>
@@ -102,6 +111,8 @@ export default function SettingsForm({ onSave, ...props }: Props) {
               type="password"
               value={apiToken}
               onChange={(e) => setApiToken(e.target.value)}
+              onFocus={(e) => (e.currentTarget.type = "text")}
+              onBlur={(e) => (e.currentTarget.type = "password")}
               required
             />
           </Label>

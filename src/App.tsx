@@ -4,7 +4,6 @@ import { Store } from "@tauri-apps/plugin-store";
 import SettingsForm from "./SettingsForm";
 import TaskList from "./TaskList";
 import { Loader2 } from "lucide-react";
-
 const StoreContext = createContext<Store | null>(null);
 
 export const useStore = () => {
@@ -25,19 +24,19 @@ function App() {
       const phone = await store.get("phone");
       setConfigured(!!phone);
     });
+    return () => {
+      store?.close();
+    };
   }, []);
 
   if (!store) {
-    return <Loader2 className="animate-spin"/>;
+    return <Loader2 className="animate-spin" />;
   }
 
   return (
     <StoreContext value={store}>
       <main className="container mx-auto p-4">
-        <SettingsForm
-          defaultOpen={configured === false}
-          onSave={() => setConfigured(true)}
-        />
+        <SettingsForm configured={configured} setConfigured={setConfigured} />
         {configured && <TaskList />}
       </main>
     </StoreContext>

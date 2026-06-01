@@ -14,7 +14,19 @@ struct BrowserState {
 
 impl BrowserState {
     fn new(app: tauri::AppHandle) -> Self {
-        Self { inner: Mutex::new(None), app }
+        Self {
+            inner: Mutex::new(None),
+            app,
+        }
+    }
+
+    async fn reset(&self) {
+        let mut guard = self.inner.lock().await;
+        if let Some((mut browser, page, _temp_dir)) = guard.take() {
+            let _ = page.close().await;
+            let _ = browser.close().await;
+            let _ = browser.wait().await;
+        }
     }
 
     async fn get_page(&self) -> Result<Page, String> {
@@ -96,9 +108,13 @@ async fn wait_for_url(page: &Page, expected: &str, timeout_ms: u64) -> Result<()
 }
 
 #[tauri::command]
-async fn get_date_options(
-    state: tauri::State<'_, BrowserState>,
-) -> Result<Vec<String>, String> {
+async fn reset_browser(state: tauri::State<'_, BrowserState>) -> Result<(), String> {
+    state.reset().await;
+    Ok(())
+}
+
+#[tauri::command]
+async fn get_date_options(state: tauri::State<'_, BrowserState>) -> Result<Vec<String>, String> {
     let page = state.get_page().await?;
 
     page.goto("https://portal.example.com/team/task.php")
@@ -140,7 +156,7 @@ pub fn run() {
         })
         .plugin(tauri_plugin_http::init())
         .plugin(tauri_plugin_opener::init())
-        .invoke_handler(tauri::generate_handler![get_date_options])
+        .invoke_handler(tauri::generate_handler![get_date_options, reset_browser])
         .build(tauri::generate_context!())
         .expect("error while running tauri application")
         .run(|app_handle, event| {
