@@ -1,21 +1,21 @@
-import { Copy, CopyCheck } from "lucide-react";
+import { Copy, CopyCheck, Loader2, RefreshCw } from "lucide-react";
 import { Button } from "./components/shared/button";
 import {
   Card,
-  CardAction,
   CardContent,
   CardHeader,
   CardTitle,
 } from "./components/shared/card";
-import { JiraIssue } from "./type";
+import { DateOption, JiraIssue } from "./type";
 import { useJiraTasks } from "./useJiraTasks";
 import { useState } from "react";
+import { Separator } from "./components/shared/separator";
 
 type Props = {
-  date: Date;
+  date: DateOption;
 };
 export default function Task({ date }: Props) {
-  const { data, isLoading, error } = useJiraTasks(date);
+  const { data, error, refetch, isFetching } = useJiraTasks(date);
   const [isCopied, setIsCopied] = useState(false);
   const summaryText = !data
     ? ""
@@ -32,38 +32,50 @@ export default function Task({ date }: Props) {
           ([status, issues]) =>
             `[${status}]\n${issues.map((i) => `${i.key}: ${i.fields.summary}`).join("\n")}`,
         )
-        .join("\n");
+        .join("\n\n");
+
   return (
     <Card onClick={() => console.log(data?.issues)}>
-      <CardHeader className="flex-none">
-        <CardTitle>{date.toISOString().split("T")[0]}</CardTitle>
-        {summaryText && (
-          <CardAction>
-            <Button
-              disabled={isCopied}
-              variant="outline"
-              onClick={async () => {
-                await navigator.clipboard.writeText(summaryText);
-                setIsCopied(true);
-                setTimeout(() => setIsCopied(false), 2000);
-              }}
-            >
-              {isCopied ? <CopyCheck /> : <Copy />}
-            </Button>
-          </CardAction>
-        )}
+      <CardHeader className="flex-none flex items-center">
+        <CardTitle>{date}</CardTitle>
+        <Button
+          size="icon-lg"
+          variant="ghost"
+          className="ml-auto"
+          onClick={() => refetch()}
+          disabled={isFetching}
+        >
+          <RefreshCw />
+        </Button>
       </CardHeader>
-      {isLoading ? (
-        "Loading..."
-      ) : error ? (
-        "Error: " + error
-      ) : !data ? (
-        "Error: No data"
-      ) : (
-        <CardContent>
-          <p className="whitespace-pre-wrap">{summaryText}</p>
-        </CardContent>
-      )}
+      <Separator />
+      <CardContent className="relative">
+        {isFetching ? (
+          <Loader2 className="animate-spin" />
+        ) : error ? (
+          "Error: " + error
+        ) : !data ? (
+          "Error: No data"
+        ) : (
+          <>
+            <p className="whitespace-pre-wrap mt-2">{summaryText}</p>
+            {summaryText && (
+              <Button
+                disabled={isCopied}
+                variant="outline"
+                className="absolute -top-2 right-2"
+                onClick={async () => {
+                  await navigator.clipboard.writeText(summaryText);
+                  setIsCopied(true);
+                  setTimeout(() => setIsCopied(false), 2000);
+                }}
+              >
+                {isCopied ? <CopyCheck /> : <Copy />}
+              </Button>
+            )}
+          </>
+        )}
+      </CardContent>
     </Card>
   );
 }

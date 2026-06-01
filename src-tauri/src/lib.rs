@@ -1,4 +1,5 @@
 use base64::{engine::general_purpose::STANDARD, Engine};
+use serde::Serialize;
 use chromiumoxide::browser::{Browser, BrowserConfig};
 use chromiumoxide::cdp::browser_protocol::network::{Headers, SetExtraHttpHeadersParams};
 use chromiumoxide::Page;
@@ -107,6 +108,29 @@ async fn wait_for_url(page: &Page, expected: &str, timeout_ms: u64) -> Result<()
     }
 }
 
+#[derive(Serialize)]
+struct get_task_options {
+    dates: Vec<String>,
+    leaves: Vec<String>,
+    projects: Vec<String>,
+}
+
+async fn get_option_values(page: &Page, selector: &str) -> Result<Vec<String>, String> {
+    let elements = page
+        .find_elements(selector)
+        .await
+        .map_err(|e| e.to_string())?;
+    let mut values = Vec::with_capacity(elements.len());
+    for el in &elements {
+        if let Some(value) = el.attribute("value").await.map_err(|e| e.to_string())? {
+            if !value.is_empty() {
+                values.push(value);
+            }
+        }
+    }
+    Ok(values)
+}
+
 #[tauri::command]
 async fn reset_browser(state: tauri::State<'_, BrowserState>) -> Result<(), String> {
     state.reset().await;
@@ -114,30 +138,32 @@ async fn reset_browser(state: tauri::State<'_, BrowserState>) -> Result<(), Stri
 }
 
 #[tauri::command]
-async fn get_date_options(state: tauri::State<'_, BrowserState>) -> Result<Vec<String>, String> {
+async fn get_task_options(state: tauri::State<'_, BrowserState>) -> Result<get_task_options, String> {
     let page = state.get_page().await?;
 
     page.goto("https://portal.example.com/team/task.php")
         .await
         .map_err(|e| e.to_string())?;
 
-    let elements = page
-        .find_elements("select#task_date option")
+    let date_options = get_option_values(&page, "select#task_date option")
         .await
         .map_err(|e| e.to_string())?;
-    let mut options = Vec::with_capacity(elements.len());
-    for el in &elements {
-        if let Some(value) = el.attribute("value").await.map_err(|e| e.to_string())? {
-            if !value.is_empty() {
-                options.push(value);
-            }
-        }
-    }
+    let leave_options = get_option_values(&page, "select#task_leave option")
+        .await
+        .map_err(|e| e.to_string())?;
+    let project_options = get_option_values(&page, "select#task_project_id1 option")
+        .await
+        .map_err(|e| e.to_string())?;
+
     page.goto("https://portal.example.com/team/member.php")
         .await
         .map_err(|e| e.to_string())?;
 
-    Ok(options)
+    Ok(get_task_options {
+        dates: date_options,
+        leaves: leave_options,
+        projects: project_options,
+    })
 }
 
 pub fn run() {
@@ -156,7 +182,7 @@ pub fn run() {
         })
         .plugin(tauri_plugin_http::init())
         .plugin(tauri_plugin_opener::init())
-        .invoke_handler(tauri::generate_handler![get_date_options, reset_browser])
+        .invoke_handler(tauri::generate_handler![get_task_options, reset_browser])
         .build(tauri::generate_context!())
         .expect("error while running tauri application")
         .run(|app_handle, event| {

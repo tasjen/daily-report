@@ -50,12 +50,12 @@ export default function SettingsForm({ configured, setConfigured }: Props) {
       store.set("api_token", apiToken),
     ]);
     await store.save();
+    setOpen(false);
     if (configured) {
       await invoke("reset_browser");
     }
-    await queryClient.invalidateQueries({ queryKey: ["dateOptions"] });
+    await queryClient.invalidateQueries({ queryKey: ["get_task_options"] });
     setConfigured(true);
-    setOpen(false);
   }
 
   return (
@@ -73,7 +73,10 @@ export default function SettingsForm({ configured, setConfigured }: Props) {
       />
       <DialogContent initialFocus={false}>
         <DialogHeader>
-          <DialogTitle>Settings</DialogTitle>
+          <DialogTitle className="flex items-center gap-2">
+            <Settings />
+            Settings
+          </DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <Label className="flex flex-col gap-2 items-start">
@@ -95,17 +98,23 @@ export default function SettingsForm({ configured, setConfigured }: Props) {
             />
           </Label>
           <Label className="flex flex-col gap-2 items-start">
-            <p className="flex-none flex items-center gap-2">
+            <p className="flex-none flex items-center gap-1">
               Jira API token{" "}
-              <span
-                onClick={() =>
+              <Button
+                size="icon-xs"
+                type="button"
+                variant="link"
+                onClick={() => {
                   openUrl(
                     "https://id.atlassian.com/manage-profile/security/api-tokens",
-                  )
+                  );
+                }}
+                render={
+                  <span>
+                    <ExternalLink size={16} className="inline" />
+                  </span>
                 }
-              >
-                <ExternalLink size={16} className="inline" />
-              </span>
+              />
             </p>
             <Input
               type="password"

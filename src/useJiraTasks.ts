@@ -1,13 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { useStore } from "./App";
 import { fetch } from "@tauri-apps/plugin-http";
-import { JiraIssue } from "./type";
+import { DateOption, JiraIssue } from "./type";
 
-export function useJiraTasks(date: Date) {
-  const dateString = date.toISOString().split("T")[0];
+export function useJiraTasks(date: DateOption) {
   const store = useStore();
   return useQuery({
-    queryKey: ["tasks", dateString],
+    queryKey: ["jira_tasks", date],
     staleTime: Infinity,
 
     queryFn: async () => {
@@ -22,9 +21,9 @@ export function useJiraTasks(date: Date) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          jql: `project = FLEX AND status CHANGED BY currentUser() DURING ("${dateString} 00:00", "${dateString} 23:59")`,
+          jql: `project = FLEX AND status CHANGED BY currentUser() DURING ("${date} 00:00", "${date} 23:59")`,
           fields: ["status", "updated", "summary", "duedate"],
-          maxResults: 10,
+          maxResults: 50,
         }),
       }).then((res) => {
         return res.json() as Promise<{ issues: JiraIssue[] }>;

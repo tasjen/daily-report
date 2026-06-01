@@ -16,6 +16,7 @@
           "url": "https://living-insider.atlassian.net/**"
         }
       ]
-    }
+    },
+    "core:window:allow-set-focus"
   ]
 }

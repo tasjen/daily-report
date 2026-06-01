@@ -10,3 +10,5 @@ export type JiraIssue = {
     };
   };
 };
+
+export type DateOption = `${string}-${string}-${string}`;

@@ -14,7 +14,7 @@ export const useStore = () => {
   return store;
 };
 
-function App() {
+export default function App() {
   const [configured, setConfigured] = useState<boolean | null>(null);
   const [store, setStore] = useState<Store | null>(null);
 
@@ -42,5 +42,3 @@ function App() {
     </StoreContext>
   );
 }
-
-export default App;

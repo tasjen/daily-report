@@ -1,21 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
-import { invoke } from "@tauri-apps/api/core";
 import Task from "./Task";
 import { Button } from "@/components/shared/button";
 import { Loader2, RefreshCw } from "lucide-react";
+import { useTaskOptions } from "./useTaskOptions";
 
 export default function TaskList() {
-  const {
-    data: dateOptions,
-    isFetching,
-    error,
-    refetch,
-  } = useQuery({
-    queryKey: ["dateOptions"],
-    staleTime: Infinity,
-    queryFn: () => invoke<string[]>("get_date_options"),
-    retry: false,
-  });
+  const { data, isFetching, error, refetch } = useTaskOptions();
 
   return (
     <div className="flex flex-col items-center gap-4">
@@ -24,9 +13,9 @@ export default function TaskList() {
       ) : error ? (
         <div className="text-red-500 flex flex-col gap-4">{String(error)}</div>
       ) : (
-        <ol className="flex flex-col gap-3">
-          {dateOptions?.map((option) => (
-            <Task key={option} date={new Date(option)} />
+        <ol className="flex flex-col w-full gap-3">
+          {data?.dates.slice(0, 20).map((option) => (
+            <Task key={option} date={option} />
           ))}
         </ol>
       )}
