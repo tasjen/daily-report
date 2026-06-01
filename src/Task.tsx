@@ -7,16 +7,28 @@ import {
   CardHeader,
   CardTitle,
 } from "./components/shared/card";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./components/shared/select";
 import { Separator } from "./components/shared/separator";
-import type { DateOption, JiraIssue } from "./type";
+import type { JiraIssue } from "./type";
 import { useJiraTasks } from "./useJiraTasks";
+import { useTaskOptions } from "./useTaskOptions";
 
 type Props = {
-  date: DateOption;
+  date: string;
 };
 export default function Task({ date }: Props) {
   const { data, error, refetch, isFetching } = useJiraTasks(date);
+  const { data: taskOptions } = useTaskOptions();
   const [isCopied, setIsCopied] = useState(false);
+  // const leaveOptions = taskOptions?.leaves ?? [];
+  const projectOptions = taskOptions?.projects ?? [];
   const summaryText = !data
     ? ""
     : Object.entries(
@@ -36,8 +48,26 @@ export default function Task({ date }: Props) {
 
   return (
     <Card onClick={() => console.log(data?.issues)}>
-      <CardHeader className="flex-none flex items-center">
+      <CardHeader className="flex-none flex gap-2 items-center">
         <CardTitle>{date}</CardTitle>
+        <Select
+          items={projectOptions}
+          defaultValue={projectOptions[0].value}
+          required
+        >
+          <SelectTrigger className="w-45">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              {projectOptions.map((item) => (
+                <SelectItem key={item.value} value={item.value}>
+                  {item.label}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
         <Button
           size="icon-lg"
           variant="ghost"
@@ -58,7 +88,9 @@ export default function Task({ date }: Props) {
           "Error: No data"
         ) : (
           <>
-            <p className="whitespace-pre-wrap mt-2">{summaryText}</p>
+            <p className="whitespace-pre-wrap mt-2">
+              {summaryText || "No tasks"}
+            </p>
             {summaryText && (
               <Button
                 disabled={isCopied}

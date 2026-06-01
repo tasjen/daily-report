@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetch } from "@tauri-apps/plugin-http";
 import { getStore } from "./getStore";
-import type { DateOption, JiraIssue } from "./type";
+import type { JiraIssue } from "./type";
 
-export function useJiraTasks(date: DateOption) {
+export function useJiraTasks(date: string) {
   return useQuery({
     queryKey: ["jira_tasks", date],
     staleTime: Infinity,

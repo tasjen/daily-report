@@ -14,9 +14,12 @@ export default function TaskList() {
         <div className="text-red-500 flex flex-col gap-4">{String(error)}</div>
       ) : (
         <ol className="flex flex-col w-full gap-3">
-          {data?.dates.slice(0, 20).map((option) => (
-            <Task key={option} date={option} />
-          ))}
+          {data?.dates
+            .slice(0, 20)
+            .filter((e) => e.value)
+            .map((option) => (
+              <Task key={option.value} date={option.value} />
+            ))}
         </ol>
       )}
       <Button

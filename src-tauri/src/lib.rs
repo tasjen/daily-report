@@ -1,9 +1,9 @@
 use base64::{engine::general_purpose::STANDARD, Engine};
-use serde::Serialize;
 use chromiumoxide::browser::{Browser, BrowserConfig};
 use chromiumoxide::cdp::browser_protocol::network::{Headers, SetExtraHttpHeadersParams};
 use chromiumoxide::Page;
 use futures::StreamExt;
+use serde::Serialize;
 use tauri::Manager;
 use tauri_plugin_store::StoreExt;
 use tokio::sync::Mutex;
@@ -109,26 +109,35 @@ async fn wait_for_url(page: &Page, expected: &str, timeout_ms: u64) -> Result<()
 }
 
 #[derive(Serialize)]
-struct TaskOptions {
-    dates: Vec<String>,
-    leaves: Vec<String>,
-    projects: Vec<String>,
+struct SelectOption {
+    label: String,
+    value: String,
 }
 
-async fn get_option_values(page: &Page, selector: &str) -> Result<Vec<String>, String> {
+#[derive(Serialize)]
+struct TaskOptions {
+    dates: Vec<SelectOption>,
+    leaves: Vec<SelectOption>,
+    projects: Vec<SelectOption>,
+}
+
+async fn get_select_options(page: &Page, selector: &str) -> Result<Vec<SelectOption>, String> {
     let elements = page
         .find_elements(selector)
         .await
         .map_err(|e| e.to_string())?;
-    let mut values = Vec::with_capacity(elements.len());
+    let mut options = Vec::with_capacity(elements.len());
     for el in &elements {
         if let Some(value) = el.attribute("value").await.map_err(|e| e.to_string())? {
-            if !value.is_empty() {
-                values.push(value);
-            }
+            let label = el
+                .inner_text()
+                .await
+                .map_err(|e| e.to_string())?
+                .unwrap_or_default();
+            options.push(SelectOption { label, value });
         }
     }
-    Ok(values)
+    Ok(options)
 }
 
 #[tauri::command]
@@ -145,13 +154,13 @@ async fn get_task_options(state: tauri::State<'_, BrowserState>) -> Result<TaskO
         .await
         .map_err(|e| e.to_string())?;
 
-    let date_options = get_option_values(&page, "select#task_date option")
+    let date_options = get_select_options(&page, "select#task_date option")
         .await
         .map_err(|e| e.to_string())?;
-    let leave_options = get_option_values(&page, "select#task_leave option")
+    let leave_options = get_select_options(&page, "select#task_leave option")
         .await
         .map_err(|e| e.to_string())?;
-    let project_options = get_option_values(&page, "select#task_project_id1 option")
+    let project_options = get_select_options(&page, "select#task_project_id1 option")
         .await
         .map_err(|e| e.to_string())?;
 
