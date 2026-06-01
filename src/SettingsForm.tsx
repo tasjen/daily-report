@@ -13,65 +13,44 @@ import {
   DialogTrigger,
 } from "./components/shared/dialog";
 import { Input } from "./components/shared/input";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "./components/shared/select";
-import { getStore } from "./getStore";
-import { useTaskOptions } from "./useTaskOptions";
+import DefaultProjectSelect from "./DefaultProjectSelect";
+import { type GlobalState, useGlobalState } from "./store";
 
-type Props = {
-  configured: boolean | null;
-  setConfigured: (configured: boolean) => void;
-};
-
-export default function SettingsForm({ configured, setConfigured }: Props) {
+export default function SettingsForm() {
+  const store = useGlobalState((state) => state.store);
+  const settings = useGlobalState((state) => state.settings);
+  const setSettings = useGlobalState((state) => state.setSettings);
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [apiToken, setApiToken] = useState("");
   const [defaultProject, setDefaultProject] = useState<string | null>(null);
-  const { data: taskOptions } = useTaskOptions();
-  const projectOptions = taskOptions?.projects ?? [];
-  const [open, setOpen] = useState(configured === false);
+  const [open, setOpen] = useState(!settings);
   const queryClient = useQueryClient();
 
   useEffect(() => {
-    if (!open) return;
-    (async () => {
-      const store = await getStore();
-      const [phone, email, apiToken, defaultProject] = await Promise.all([
-        store.get<string>("phone"),
-        store.get<string>("email"),
-        store.get<string>("api_token"),
-        store.get<string>("default_project"),
-      ]);
-      setPhone(phone ?? "");
-      setEmail(email ?? "");
-      setApiToken(apiToken ?? "");
-      setDefaultProject(defaultProject ?? "");
-    })();
+    if (!open || !settings) return;
+    setPhone(settings.phone);
+    setEmail(settings.email);
+    setApiToken(settings.api_token);
+    setDefaultProject(settings.default_project);
   }, [open]);
 
   async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
-    const store = await getStore();
-    await Promise.all([
-      store.set("phone", phone),
-      store.set("email", email),
-      store.set("api_token", apiToken),
-      store.set("default_project", defaultProject),
-    ]);
+    const newSettings: GlobalState["settings"] = {
+      phone,
+      email,
+      api_token: apiToken,
+      default_project: defaultProject ?? "",
+    };
+    await store.set("settings", newSettings);
     await store.save();
     setOpen(false);
-    if (configured) {
+    if (settings) {
       await invoke("reset_browser");
     }
     await queryClient.invalidateQueries({ queryKey: ["get_task_options"] });
-    setConfigured(true);
+    setSettings(newSettings);
   }
 
   return (
@@ -142,29 +121,18 @@ export default function SettingsForm({ configured, setConfigured }: Props) {
               required
             />
           </Label>
-          <Label className="flex flex-col gap-2 items-start">
-            <p className="flex-none flex items-center gap-1">
-              Default project{" "}
-            </p>
-            <Select
-              items={projectOptions}
-              value={defaultProject}
-              onValueChange={setDefaultProject}
-            >
-              <SelectTrigger className="w-60">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  {projectOptions.map((item) => (
-                    <SelectItem key={item.value} value={item.value}>
-                      {item.label}
-                    </SelectItem>
-                  ))}
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </Label>
+          {settings && (
+            <Label className="flex flex-col gap-2 items-start">
+              <p className="flex-none flex items-center gap-1">
+                Default project{" "}
+              </p>
+
+              <DefaultProjectSelect
+                value={defaultProject}
+                onValueChange={setDefaultProject}
+              />
+            </Label>
+          )}
           <Button type="submit">Save</Button>
         </form>
       </DialogContent>

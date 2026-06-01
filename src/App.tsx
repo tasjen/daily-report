@@ -1,44 +1,30 @@
 import "./App.css";
-import { Store } from "@tauri-apps/plugin-store";
 import { Loader2 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
+import DateList from "./DateList";
 import SettingsForm from "./SettingsForm";
-import TaskList from "./TaskList";
-
-// const StoreContext = createContext<Store | null>(null);
-async function getStore() {
-  const store = await Store.get("store.json");
-  if (!store) {
-    return Store.load("store.json");
-  }
-  return store;
-}
+import { type GlobalState, useGlobalState } from "./store";
 
 export default function App() {
-  const [configured, setConfigured] = useState<boolean | null>(null);
-  const storeRef = useRef<Store | null>(null);
+  const store = useGlobalState((state) => state.store);
+  const settings = useGlobalState((state) => state.settings);
+  const setSettings = useGlobalState((state) => state.setSettings);
 
   useEffect(() => {
     (async () => {
-      const store = await getStore();
-      storeRef.current = store;
-      const phone = await store.get("phone");
-      setConfigured(!!phone);
+      const settings = await store.get<GlobalState["settings"]>("settings");
+      setSettings(settings ?? null);
     })();
-
-    return () => {
-      storeRef.current?.close();
-    };
   }, []);
 
-  if (configured === null) {
+  if (settings === undefined) {
     return <Loader2 className="animate-spin" />;
   }
 
   return (
     <>
-      <SettingsForm configured={configured} setConfigured={setConfigured} />
-      {configured && <TaskList />}
+      <SettingsForm />
+      {settings && <DateList />}
     </>
   );
 }

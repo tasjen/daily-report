@@ -1,9 +1,9 @@
 import { Loader2, RefreshCw } from "lucide-react";
 import { Button } from "@/components/shared/button";
-import Task from "./Task";
+import DateCard from "./DateCard";
 import { useTaskOptions } from "./useTaskOptions";
 
-export default function TaskList() {
+export default function DateList() {
   const { data, isFetching, error, refetch } = useTaskOptions();
 
   return (
@@ -18,7 +18,7 @@ export default function TaskList() {
             .slice(0, 20)
             .filter((e) => e.value)
             .map((option) => (
-              <Task key={option.value} date={option.value} />
+              <DateCard key={option.value} date={option.value} />
             ))}
         </ol>
       )}

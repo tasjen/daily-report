@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import { Copy, CopyCheck, Loader2, RefreshCw } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "./components/shared/button";
@@ -17,7 +16,6 @@ import {
   SelectValue,
 } from "./components/shared/select";
 import { Separator } from "./components/shared/separator";
-import { getStore } from "./getStore";
 import type { JiraIssue } from "./type";
 import { useJiraTasks } from "./useJiraTasks";
 import { useTaskOptions } from "./useTaskOptions";
@@ -25,27 +23,10 @@ import { useTaskOptions } from "./useTaskOptions";
 type Props = {
   date: string;
 };
-export default function Task({ date }: Props) {
+export default function DateCard({ date }: Props) {
   const { data, error, refetch, isFetching } = useJiraTasks(date);
-  const { data: taskOptions } = useTaskOptions();
   const [isCopied, setIsCopied] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<string | null>(null);
-  const { data: defaultProject } = useQuery({
-    queryKey: ["default_project"],
-    staleTime: Infinity,
-    queryFn: async () => {
-      const store = await getStore();
-      return store.get<string>("default_project");
-    },
-  });
 
-  useEffect(() => {
-    if (defaultProject !== undefined) {
-      setSelectedProject(defaultProject);
-    }
-  }, [defaultProject]);
-  // const leaveOptions = taskOptions?.leaves ?? [];
-  const projectOptions = taskOptions?.projects ?? [];
   const summaryText = !data
     ? ""
     : Object.entries(
@@ -67,25 +48,6 @@ export default function Task({ date }: Props) {
     <Card onClick={() => console.log(data?.issues)}>
       <CardHeader className="flex-none flex gap-2 items-center">
         <CardTitle>{date}</CardTitle>
-        <Select
-          items={projectOptions}
-          value={selectedProject}
-          onValueChange={setSelectedProject}
-          required
-        >
-          <SelectTrigger className="w-45">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              {projectOptions.map((item) => (
-                <SelectItem key={item.value} value={item.value}>
-                  {item.label}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
         <Button
           size="icon-lg"
           variant="ghost"
@@ -111,10 +73,10 @@ export default function Task({ date }: Props) {
             </p>
             {summaryText && (
               <Button
-                disabled={isCopied}
                 variant="ghost"
                 className="absolute -top-2 right-2"
                 onClick={async () => {
+                  if (isCopied) return;
                   await navigator.clipboard.writeText(summaryText);
                   setIsCopied(true);
                   setTimeout(() => setIsCopied(false), 2000);

@@ -21,7 +21,10 @@
       "nursery": {
         "useSortedClasses": "on"
       },
-      "a11y": "off"
+      "a11y": "off",
+      "correctness": {
+        "useExhaustiveDependencies": "off"
+      }
     }
   },
   "javascript": {

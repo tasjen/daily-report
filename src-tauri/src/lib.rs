@@ -67,8 +67,8 @@ impl BrowserState {
 
         let store = self.app.store("store.json").map_err(|e| e.to_string())?;
         let phone = store
-            .get("phone")
-            .and_then(|v| v.as_str().map(String::from))
+            .get("settings")
+            .and_then(|v| v.get("phone").and_then(|p| p.as_str().map(String::from)))
             .ok_or("Phone number not configured")?;
 
         let input_el = page
@@ -179,14 +179,6 @@ pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_store::Builder::default().build())
         .setup(|app| {
-            let store = app.store("store.json")?;
-            if store.is_empty() {
-                store.set("phone", "");
-                store.set("email", "");
-                store.set("api_token", "");
-                store.set("default_project", "");
-            }
-            let _ = store.save();
             app.manage(BrowserState::new(app.handle().clone()));
             Ok(())
         })

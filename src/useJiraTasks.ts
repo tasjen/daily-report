@@ -1,18 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetch } from "@tauri-apps/plugin-http";
-import { getStore } from "./getStore";
+import { useGlobalState } from "./store";
 import type { JiraIssue } from "./type";
 
 export function useJiraTasks(date: string) {
+  const settings = useGlobalState((state) => state.settings);
   return useQuery({
     queryKey: ["jira_tasks", date],
     staleTime: Infinity,
-
+    enabled: Boolean(settings),
     queryFn: async () => {
-      const store = await getStore();
+      if (!settings) return;
       const JIRA_DOMAIN = "https://living-insider.atlassian.net";
-      const EMAIL = await store.get<string>("email");
-      const API_TOKEN = await store.get<string>("api_token");
+      const EMAIL = settings.email;
+      const API_TOKEN = settings.api_token;
       return fetch(`${JIRA_DOMAIN}/rest/api/3/search/jql`, {
         method: "POST",
         headers: {
