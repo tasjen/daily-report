@@ -1,5 +1,6 @@
+import { useQuery } from "@tanstack/react-query";
 import { Copy, CopyCheck, Loader2, RefreshCw } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "./components/shared/button";
 import {
   Card,
@@ -16,6 +17,7 @@ import {
   SelectValue,
 } from "./components/shared/select";
 import { Separator } from "./components/shared/separator";
+import { getStore } from "./getStore";
 import type { JiraIssue } from "./type";
 import { useJiraTasks } from "./useJiraTasks";
 import { useTaskOptions } from "./useTaskOptions";
@@ -27,6 +29,21 @@ export default function Task({ date }: Props) {
   const { data, error, refetch, isFetching } = useJiraTasks(date);
   const { data: taskOptions } = useTaskOptions();
   const [isCopied, setIsCopied] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<string | null>(null);
+  const { data: defaultProject } = useQuery({
+    queryKey: ["default_project"],
+    staleTime: Infinity,
+    queryFn: async () => {
+      const store = await getStore();
+      return store.get<string>("default_project");
+    },
+  });
+
+  useEffect(() => {
+    if (defaultProject !== undefined) {
+      setSelectedProject(defaultProject);
+    }
+  }, [defaultProject]);
   // const leaveOptions = taskOptions?.leaves ?? [];
   const projectOptions = taskOptions?.projects ?? [];
   const summaryText = !data
@@ -52,7 +69,8 @@ export default function Task({ date }: Props) {
         <CardTitle>{date}</CardTitle>
         <Select
           items={projectOptions}
-          defaultValue={projectOptions[0].value}
+          value={selectedProject}
+          onValueChange={setSelectedProject}
           required
         >
           <SelectTrigger className="w-45">

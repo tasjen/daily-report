@@ -184,6 +184,7 @@ pub fn run() {
                 store.set("phone", "");
                 store.set("email", "");
                 store.set("api_token", "");
+                store.set("default_project", "");
             }
             let _ = store.save();
             app.manage(BrowserState::new(app.handle().clone()));
