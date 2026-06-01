@@ -2,5 +2,5 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 fn main() {
-    daily_tauri_lib::run()
+    nok_eiang_lib::run()
 }
