@@ -1,44 +1,44 @@
 import "./App.css";
-import { createContext, use, useEffect, useState } from "react";
 import { Store } from "@tauri-apps/plugin-store";
+import { Loader2 } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import SettingsForm from "./SettingsForm";
 import TaskList from "./TaskList";
-import { Loader2 } from "lucide-react";
-const StoreContext = createContext<Store | null>(null);
 
-export const useStore = () => {
-  const store = use(StoreContext);
+// const StoreContext = createContext<Store | null>(null);
+async function getStore() {
+  const store = await Store.get("store.json");
   if (!store) {
-    throw new Error("useStore must be used within a StoreProvider");
+    return Store.load("store.json");
   }
   return store;
-};
+}
 
 export default function App() {
   const [configured, setConfigured] = useState<boolean | null>(null);
-  const [store, setStore] = useState<Store | null>(null);
+  const storeRef = useRef<Store | null>(null);
 
   useEffect(() => {
-    Store.load("store.json").then(async (store) => {
-      setStore(store);
+    (async () => {
+      const store = await getStore();
+      storeRef.current = store;
       const phone = await store.get("phone");
       setConfigured(!!phone);
-    });
+    })();
+
     return () => {
-      store?.close();
+      storeRef.current?.close();
     };
   }, []);
 
-  if (!store) {
+  if (configured === null) {
     return <Loader2 className="animate-spin" />;
   }
 
   return (
-    <StoreContext value={store}>
-      <main className="container mx-auto p-4">
-        <SettingsForm configured={configured} setConfigured={setConfigured} />
-        {configured && <TaskList />}
-      </main>
-    </StoreContext>
+    <>
+      <SettingsForm configured={configured} setConfigured={setConfigured} />
+      {configured && <TaskList />}
+    </>
   );
 }

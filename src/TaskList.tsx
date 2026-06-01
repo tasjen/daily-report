@@ -1,6 +1,6 @@
-import Task from "./Task";
-import { Button } from "@/components/shared/button";
 import { Loader2, RefreshCw } from "lucide-react";
+import { Button } from "@/components/shared/button";
+import Task from "./Task";
 import { useTaskOptions } from "./useTaskOptions";
 
 export default function TaskList() {
@@ -19,7 +19,12 @@ export default function TaskList() {
           ))}
         </ol>
       )}
-      <Button size="icon-lg" onClick={() => refetch()} disabled={isFetching}>
+      <Button
+        size="icon-lg"
+        variant="secondary"
+        onClick={() => refetch()}
+        disabled={isFetching}
+      >
         <RefreshCw />
       </Button>
     </div>

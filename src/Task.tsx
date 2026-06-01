@@ -1,4 +1,5 @@
 import { Copy, CopyCheck, Loader2, RefreshCw } from "lucide-react";
+import { useState } from "react";
 import { Button } from "./components/shared/button";
 import {
   Card,
@@ -6,10 +7,9 @@ import {
   CardHeader,
   CardTitle,
 } from "./components/shared/card";
-import { DateOption, JiraIssue } from "./type";
-import { useJiraTasks } from "./useJiraTasks";
-import { useState } from "react";
 import { Separator } from "./components/shared/separator";
+import type { DateOption, JiraIssue } from "./type";
+import { useJiraTasks } from "./useJiraTasks";
 
 type Props = {
   date: DateOption;
@@ -53,7 +53,7 @@ export default function Task({ date }: Props) {
         {isFetching ? (
           <Loader2 className="animate-spin" />
         ) : error ? (
-          "Error: " + error
+          `Error: ${error}`
         ) : !data ? (
           "Error: No data"
         ) : (
@@ -62,7 +62,7 @@ export default function Task({ date }: Props) {
             {summaryText && (
               <Button
                 disabled={isCopied}
-                variant="outline"
+                variant="ghost"
                 className="absolute -top-2 right-2"
                 onClick={async () => {
                   await navigator.clipboard.writeText(summaryText);

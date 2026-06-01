@@ -1,15 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import { useStore } from "./App";
 import { fetch } from "@tauri-apps/plugin-http";
-import { DateOption, JiraIssue } from "./type";
+import { getStore } from "./getStore";
+import type { DateOption, JiraIssue } from "./type";
 
 export function useJiraTasks(date: DateOption) {
-  const store = useStore();
   return useQuery({
     queryKey: ["jira_tasks", date],
     staleTime: Infinity,
 
     queryFn: async () => {
+      const store = await getStore();
       const JIRA_DOMAIN = "https://living-insider.atlassian.net";
       const EMAIL = await store.get<string>("email");
       const API_TOKEN = await store.get<string>("api_token");

@@ -11,15 +11,17 @@
   "formatter": {
     "enabled": true,
     "indentStyle": "space",
-    "indentWidth": 2
+    "indentWidth": 2,
+    "attributePosition": "auto"
   },
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": true,
       "nursery": {
-        "useSortedClasses": "error"
-      }
+        "useSortedClasses": "on"
+      },
+      "a11y": "off"
     }
   },
   "javascript": {

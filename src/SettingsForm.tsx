@@ -1,7 +1,10 @@
+import { useQueryClient } from "@tanstack/react-query";
+import { invoke } from "@tauri-apps/api/core";
+import { openUrl } from "@tauri-apps/plugin-opener";
+import { ExternalLink, Settings } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useStore } from "@/App";
-import { Label } from "@/components/shared/label";
 import { Button } from "@/components/shared/button";
+import { Label } from "@/components/shared/label";
 import {
   Dialog,
   DialogContent,
@@ -10,10 +13,7 @@ import {
   DialogTrigger,
 } from "./components/shared/dialog";
 import { Input } from "./components/shared/input";
-import { useQueryClient } from "@tanstack/react-query";
-import { ExternalLink, Settings } from "lucide-react";
-import { openUrl } from "@tauri-apps/plugin-opener";
-import { invoke } from "@tauri-apps/api/core";
+import { getStore } from "./getStore";
 
 type Props = {
   configured: boolean | null;
@@ -21,7 +21,6 @@ type Props = {
 };
 
 export default function SettingsForm({ configured, setConfigured }: Props) {
-  const store = useStore();
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [apiToken, setApiToken] = useState("");
@@ -31,6 +30,7 @@ export default function SettingsForm({ configured, setConfigured }: Props) {
   useEffect(() => {
     if (!open) return;
     (async () => {
+      const store = await getStore();
       const [phone, email, apiToken] = await Promise.all([
         store.get<string>("phone"),
         store.get<string>("email"),
@@ -44,6 +44,7 @@ export default function SettingsForm({ configured, setConfigured }: Props) {
 
   async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
+    const store = await getStore();
     await Promise.all([
       store.set("phone", phone),
       store.set("email", email),
@@ -104,6 +105,7 @@ export default function SettingsForm({ configured, setConfigured }: Props) {
                 size="icon-xs"
                 type="button"
                 variant="link"
+                nativeButton={false}
                 onClick={() => {
                   openUrl(
                     "https://id.atlassian.com/manage-profile/security/api-tokens",
