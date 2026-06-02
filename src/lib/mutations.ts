@@ -19,5 +19,6 @@ export function useSubmitTaskMutation() {
         };
       });
     },
+    onError: console.log,
   });
 }
