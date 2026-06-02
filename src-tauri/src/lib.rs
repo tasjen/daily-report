@@ -8,6 +8,39 @@ use tauri::Manager;
 use tauri_plugin_store::StoreExt;
 use tokio::sync::Mutex;
 
+#[derive(thiserror::Error, Debug)]
+enum AppError {
+    #[error("{0}")]
+    Msg(String),
+    #[error(transparent)]
+    Cdp(#[from] chromiumoxide::error::CdpError),
+    #[error(transparent)]
+    Io(#[from] std::io::Error),
+    #[error(transparent)]
+    Store(#[from] tauri_plugin_store::Error),
+    #[error(transparent)]
+    Json(#[from] serde_json::Error),
+}
+
+impl From<String> for AppError {
+    fn from(s: String) -> Self {
+        AppError::Msg(s)
+    }
+}
+
+impl From<&str> for AppError {
+    fn from(s: &str) -> Self {
+        AppError::Msg(s.to_string())
+    }
+}
+
+// Tauri command errors must be `Serialize`; serialize as the `Display` string.
+impl serde::Serialize for AppError {
+    fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
+        serializer.serialize_str(&self.to_string())
+    }
+}
+
 struct BrowserState {
     inner: Mutex<Option<(Browser, Page, tempfile::TempDir)>>,
     app: tauri::AppHandle,
@@ -60,7 +93,7 @@ impl BrowserState {
         }
     }
 
-    async fn get_page(&self) -> Result<Page, String> {
+    async fn get_page(&self) -> Result<Page, AppError> {
         let mut guard = self.inner.lock().await;
         if let Some((_, page, _)) = guard.as_ref() {
             if is_page_alive(page).await {
@@ -75,51 +108,35 @@ impl BrowserState {
         if let Some((mut browser, _page, _temp_dir)) = guard.take() {
             let _ = browser.kill().await;
         }
-        let temp_dir = tempfile::tempdir().map_err(|e| e.to_string())?;
+        let temp_dir = tempfile::tempdir()?;
         let mut config = BrowserConfig::builder().user_data_dir(temp_dir.path());
         if self.with_head {
             config = config.with_head();
         }
-        let (browser, mut handler) = Browser::launch(config.build().map_err(|e| e.to_string())?)
-            .await
-            .map_err(|e| e.to_string())?;
-        tokio::spawn(async move { while let Some(_) = handler.next().await {} });
-        let page = browser
-            .new_page("about:blank")
-            .await
-            .map_err(|e| e.to_string())?;
+        let (browser, mut handler) = Browser::launch(config.build()?).await?;
+        tokio::spawn(async move { while handler.next().await.is_some() {} });
+        let page = browser.new_page("about:blank").await?;
 
-        page.enable_stealth_mode()
-            .await
-            .map_err(|e| e.to_string())?;
+        page.enable_stealth_mode().await?;
         let token = STANDARD.encode("user:pass");
         page.execute(SetExtraHttpHeadersParams::new(Headers::new(
             serde_json::json!({ "Authorization": format!("Basic {}", token) }),
         )))
-        .await
-        .map_err(|e| e.to_string())?;
-        page.goto("https://portal.example.com/team")
-            .await
-            .map_err(|e| e.to_string())?;
+        .await?;
+        page.goto("https://portal.example.com/team").await?;
         tokio::time::sleep(std::time::Duration::from_millis(1000)).await;
 
-        let store = self.app.store("store.json").map_err(|e| e.to_string())?;
+        let store = self.app.store("store.json")?;
         let phone = store
             .get("settings")
             .and_then(|v| v.get("phone").and_then(|p| p.as_str().map(String::from)))
             .ok_or("Phone number not configured")?;
 
-        let input_el = page
-            .find_element("input[type='text']")
-            .await
-            .map_err(|e| e.to_string())?;
-        input_el.click().await.map_err(|e| e.to_string())?;
-        input_el.type_str(phone).await.map_err(|e| e.to_string())?;
+        let input_el = page.find_element("input[type='text']").await?;
+        input_el.click().await?;
+        input_el.type_str(phone).await?;
         tokio::time::sleep(std::time::Duration::from_millis(500)).await;
-        input_el
-            .press_key("Enter")
-            .await
-            .map_err(|e| e.to_string())?;
+        input_el.press_key("Enter").await?;
 
         wait_for_url(&page, "/team/member.php", 5_000).await?;
 
@@ -141,18 +158,17 @@ async fn is_page_alive(page: &Page) -> bool {
     )
 }
 
-async fn wait_for_url(page: &Page, expected: &str, timeout_ms: u64) -> Result<(), String> {
+async fn wait_for_url(page: &Page, expected: &str, timeout_ms: u64) -> Result<(), AppError> {
     let deadline = std::time::Instant::now() + std::time::Duration::from_millis(timeout_ms);
-    let initial_url = page.url().await.map_err(|e| e.to_string())?;
+    let initial_url = page.url().await?;
     loop {
         if std::time::Instant::now() > deadline {
-            return Err(format!("Timed out waiting for URL containing: {expected}"));
+            return Err(format!("Timed out waiting for URL containing: {expected}").into());
         }
         tokio::time::sleep(std::time::Duration::from_millis(200)).await;
         let url = tokio::time::timeout(std::time::Duration::from_millis(2_000), page.url())
             .await
-            .map_err(|_| "page.url() timed out".to_string())?
-            .map_err(|e| e.to_string())?;
+            .map_err(|_| "page.url() timed out")??;
         if url != initial_url && url.as_deref().is_some_and(|u| u.contains(expected)) {
             return Ok(());
         }
@@ -172,19 +188,12 @@ struct TaskParameters {
     projects: Vec<SelectOption>,
 }
 
-async fn get_select_options(page: &Page, selector: &str) -> Result<Vec<SelectOption>, String> {
-    let elements = page
-        .find_elements(selector)
-        .await
-        .map_err(|e| e.to_string())?;
+async fn get_select_options(page: &Page, selector: &str) -> Result<Vec<SelectOption>, AppError> {
+    let elements = page.find_elements(selector).await?;
     let mut options = Vec::with_capacity(elements.len());
     for el in &elements {
-        if let Some(value) = el.attribute("value").await.map_err(|e| e.to_string())? {
-            let label = el
-                .inner_text()
-                .await
-                .map_err(|e| e.to_string())?
-                .unwrap_or_default();
+        if let Some(value) = el.attribute("value").await? {
+            let label = el.inner_text().await?.unwrap_or_default();
             options.push(SelectOption { label, value });
         }
     }
@@ -192,7 +201,7 @@ async fn get_select_options(page: &Page, selector: &str) -> Result<Vec<SelectOpt
 }
 
 #[tauri::command]
-async fn close_headless_browser(state: tauri::State<'_, HeadlessBrowserState>) -> Result<(), String> {
+async fn close_headless_browser(state: tauri::State<'_, HeadlessBrowserState>) -> Result<(), AppError> {
     state.close().await;
     Ok(())
 }
@@ -200,26 +209,18 @@ async fn close_headless_browser(state: tauri::State<'_, HeadlessBrowserState>) -
 #[tauri::command]
 async fn get_task_parameters(
     state: tauri::State<'_, HeadlessBrowserState>,
-) -> Result<TaskParameters, String> {
+) -> Result<TaskParameters, AppError> {
     let page = state.get_page().await?;
 
     page.goto("https://portal.example.com/team/task.php")
-        .await
-        .map_err(|e| e.to_string())?;
+        .await?;
 
-    let date_options = get_select_options(&page, "select#task_date option")
-        .await
-        .map_err(|e| e.to_string())?;
-    let leave_options = get_select_options(&page, "select#task_leave option")
-        .await
-        .map_err(|e| e.to_string())?;
-    let project_options = get_select_options(&page, "select#task_project_id1 option")
-        .await
-        .map_err(|e| e.to_string())?;
+    let date_options = get_select_options(&page, "select#task_date option").await?;
+    let leave_options = get_select_options(&page, "select#task_leave option").await?;
+    let project_options = get_select_options(&page, "select#task_project_id1 option").await?;
 
     page.goto("https://portal.example.com/team/member.php")
-        .await
-        .map_err(|e| e.to_string())?;
+        .await?;
 
     Ok(TaskParameters {
         dates: date_options,
@@ -233,18 +234,16 @@ async fn submit_task(
     state: tauri::State<'_, HeadedBrowserState>,
     date: String,
     summary: String,
-) -> Result<(), String> {
+) -> Result<(), AppError> {
     let page = state.get_page().await?;
     page.goto("https://portal.example.com/team/task.php")
-        .await
-        .map_err(|e| e.to_string())?;
+        .await?;
     page.evaluate(format!(
         "document.querySelector('select#task_date').value = '{date}'"
     ))
-    .await
-    .map_err(|e| e.to_string())?;
+    .await?;
 
-    let store = state.app.store("store.json").map_err(|e| e.to_string())?;
+    let store = state.app.store("store.json")?;
     let default_project = store.get("settings").and_then(|v| {
         v.get("default_project")
             .and_then(|p| p.as_str().map(String::from))
@@ -253,16 +252,14 @@ async fn submit_task(
         page.evaluate(format!(
             "document.querySelector('select#task_project_id1').value = '{project}';"
         ))
-        .await
-        .map_err(|e| e.to_string())?;
+        .await?;
     }
 
-    let summary_text = serde_json::to_string(&summary).map_err(|e| e.to_string())?;
+    let summary_text = serde_json::to_string(&summary)?;
     page.evaluate(format!(
         "document.querySelector('textarea#task_comment1').value = {summary_text};"
     ))
-    .await
-    .map_err(|e| e.to_string())?;
+    .await?;
 
     Ok(())
 }
