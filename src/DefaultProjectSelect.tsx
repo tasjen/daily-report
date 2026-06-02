@@ -7,22 +7,22 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./components/shared/select";
-import { useTaskOptions } from "./useTaskOptions";
+import { useTaskParameters } from "./lib/queries";
 
 type Props = ComponentProps<typeof Select<string>>;
 
 export default function DefaultProjectSelect(props: Props) {
-  const { data: taskOptions } = useTaskOptions();
-  const projectOptions = taskOptions?.projects ?? [];
+  const { data } = useTaskParameters();
+  const projects = data?.projects ?? [];
 
   return (
-    <Select items={projectOptions} {...props}>
-      <SelectTrigger className="w-60">
+    <Select items={projects} {...props}>
+      <SelectTrigger className="w-full">
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          {projectOptions.map((item) => (
+          {projects?.map((item) => (
             <SelectItem key={item.value} value={item.value}>
               {item.label}
             </SelectItem>

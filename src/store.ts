@@ -13,14 +13,15 @@ export type GlobalState = {
       }
     | null
     | undefined;
-  setStore: (s: Exclude<GlobalState["store"], null>) => void;
+};
+
+export type GlobalAction = {
   setSettings: (s: Exclude<GlobalState["settings"], undefined>) => void;
 };
 
 // Create store using the curried form of `create`
-export const useGlobalState = create<GlobalState>()((set) => ({
+export const useGlobalState = create<GlobalState & GlobalAction>()((set) => ({
   store: new LazyStore("store.json"),
   settings: undefined,
-  setStore: (s) => set((prev) => ({ ...prev, store: s })),
   setSettings: (s) => set((prev) => ({ ...prev, settings: s })),
 }));

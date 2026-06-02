@@ -115,7 +115,7 @@ struct SelectOption {
 }
 
 #[derive(Serialize)]
-struct TaskOptions {
+struct TaskParameters {
     dates: Vec<SelectOption>,
     leaves: Vec<SelectOption>,
     projects: Vec<SelectOption>,
@@ -147,7 +147,7 @@ async fn reset_browser(state: tauri::State<'_, BrowserState>) -> Result<(), Stri
 }
 
 #[tauri::command]
-async fn get_task_options(state: tauri::State<'_, BrowserState>) -> Result<TaskOptions, String> {
+async fn get_task_parameters(state: tauri::State<'_, BrowserState>) -> Result<TaskParameters, String> {
     let page = state.get_page().await?;
 
     page.goto("https://portal.example.com/team/task.php")
@@ -168,7 +168,7 @@ async fn get_task_options(state: tauri::State<'_, BrowserState>) -> Result<TaskO
         .await
         .map_err(|e| e.to_string())?;
 
-    Ok(TaskOptions {
+    Ok(TaskParameters {
         dates: date_options,
         leaves: leave_options,
         projects: project_options,
@@ -184,7 +184,7 @@ pub fn run() {
         })
         .plugin(tauri_plugin_http::init())
         .plugin(tauri_plugin_opener::init())
-        .invoke_handler(tauri::generate_handler![get_task_options, reset_browser])
+        .invoke_handler(tauri::generate_handler![get_task_parameters, reset_browser])
         .build(tauri::generate_context!())
         .expect("error while running tauri application")
         .run(|app_handle, event| {

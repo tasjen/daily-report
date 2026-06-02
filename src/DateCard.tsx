@@ -1,5 +1,5 @@
 import { Copy, CopyCheck, Loader2, RefreshCw } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "./components/shared/button";
 import {
   Card,
@@ -7,18 +7,9 @@ import {
   CardHeader,
   CardTitle,
 } from "./components/shared/card";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "./components/shared/select";
 import { Separator } from "./components/shared/separator";
+import { useJiraTasks } from "./lib/queries";
 import type { JiraIssue } from "./type";
-import { useJiraTasks } from "./useJiraTasks";
-import { useTaskOptions } from "./useTaskOptions";
 
 type Props = {
   date: string;

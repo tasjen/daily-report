@@ -14,6 +14,7 @@ import {
 } from "./components/shared/dialog";
 import { Input } from "./components/shared/input";
 import DefaultProjectSelect from "./DefaultProjectSelect";
+import { taskParametersOptions } from "./lib/queries";
 import { type GlobalState, useGlobalState } from "./store";
 
 export default function SettingsForm() {
@@ -49,7 +50,7 @@ export default function SettingsForm() {
     if (settings) {
       await invoke("reset_browser");
     }
-    await queryClient.invalidateQueries({ queryKey: ["get_task_options"] });
+    await queryClient.invalidateQueries(taskParametersOptions());
     setSettings(newSettings);
   }
 
