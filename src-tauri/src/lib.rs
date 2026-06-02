@@ -8,6 +8,16 @@ use tauri::Manager;
 use tauri_plugin_store::StoreExt;
 use tokio::sync::Mutex;
 
+// Portal-specific constants. Update these here if the LivingInsider admin site
+// changes its URLs, HTTP-basic gate, or form markup.
+const ADMIN_BASE: &str = "https://portal.example.com/team";
+const BASIC_AUTH_CREDENTIAL: &str = "user:pass";
+const LOGIN_INPUT_SELECTOR: &str = "input[type='text']";
+const TASK_DATE_SELECT: &str = "select#task_date";
+const TASK_LEAVE_SELECT: &str = "select#task_leave";
+const TASK_PROJECT_SELECT: &str = "select#task_project_id1";
+const TASK_COMMENT_TEXTAREA: &str = "textarea#task_comment1";
+
 #[derive(thiserror::Error, Debug)]
 enum AppError {
     #[error("{0}")]
@@ -118,13 +128,12 @@ impl BrowserState {
         let page = browser.new_page("about:blank").await?;
 
         page.enable_stealth_mode().await?;
-        let token = STANDARD.encode("user:pass");
+        let token = STANDARD.encode(BASIC_AUTH_CREDENTIAL);
         page.execute(SetExtraHttpHeadersParams::new(Headers::new(
             serde_json::json!({ "Authorization": format!("Basic {}", token) }),
         )))
         .await?;
-        page.goto("https://portal.example.com/team").await?;
-        tokio::time::sleep(std::time::Duration::from_millis(1000)).await;
+        page.goto(ADMIN_BASE).await?;
 
         let store = self.app.store("store.json")?;
         let phone = store
@@ -132,13 +141,20 @@ impl BrowserState {
             .and_then(|v| v.get("phone").and_then(|p| p.as_str().map(String::from)))
             .ok_or("Phone number not configured")?;
 
-        let input_el = page.find_element("input[type='text']").await?;
-        input_el.click().await?;
-        input_el.type_str(phone).await?;
-        tokio::time::sleep(std::time::Duration::from_millis(500)).await;
-        input_el.press_key("Enter").await?;
+        // Build the JS via `serde_json::to_string` so the selector is
+        // properly quoted/escaped. The selector itself contains single quotes
+        // (`input[type='text']`), so hand-wrapping it in `'...'` breaks the JS.
+        let selector_js = serde_json::to_string(LOGIN_INPUT_SELECTOR)?;
+        page.evaluate(format!(
+            "
+                const phoneInput = document.querySelector({selector_js});
+                phoneInput.value = '{phone}';
+                phoneInput.form.submit();
+            "
+        ))
+        .await?;
 
-        wait_for_url(&page, "/team/member.php", 5_000).await?;
+        wait_for_url(&page, &format!("{ADMIN_BASE}/member.php"), 5_000).await?;
 
         *guard = Some((browser, page.clone(), temp_dir));
         Ok(page)
@@ -160,16 +176,15 @@ async fn is_page_alive(page: &Page) -> bool {
 
 async fn wait_for_url(page: &Page, expected: &str, timeout_ms: u64) -> Result<(), AppError> {
     let deadline = std::time::Instant::now() + std::time::Duration::from_millis(timeout_ms);
-    let initial_url = page.url().await?;
     loop {
         if std::time::Instant::now() > deadline {
-            return Err(format!("Timed out waiting for URL containing: {expected}").into());
+            return Err(format!("Timed out waiting for URL: {expected}").into());
         }
         tokio::time::sleep(std::time::Duration::from_millis(200)).await;
         let url = tokio::time::timeout(std::time::Duration::from_millis(2_000), page.url())
             .await
             .map_err(|_| "page.url() timed out")??;
-        if url != initial_url && url.as_deref().is_some_and(|u| u.contains(expected)) {
+        if url.as_deref() == Some(expected) {
             return Ok(());
         }
     }
@@ -201,7 +216,9 @@ async fn get_select_options(page: &Page, selector: &str) -> Result<Vec<SelectOpt
 }
 
 #[tauri::command]
-async fn close_headless_browser(state: tauri::State<'_, HeadlessBrowserState>) -> Result<(), AppError> {
+async fn close_headless_browser(
+    state: tauri::State<'_, HeadlessBrowserState>,
+) -> Result<(), AppError> {
     state.close().await;
     Ok(())
 }
@@ -212,15 +229,14 @@ async fn get_task_parameters(
 ) -> Result<TaskParameters, AppError> {
     let page = state.get_page().await?;
 
-    page.goto("https://portal.example.com/team/task.php")
-        .await?;
+    page.goto(format!("{ADMIN_BASE}/task.php")).await?;
 
-    let date_options = get_select_options(&page, "select#task_date option").await?;
-    let leave_options = get_select_options(&page, "select#task_leave option").await?;
-    let project_options = get_select_options(&page, "select#task_project_id1 option").await?;
+    let date_options = get_select_options(&page, &format!("{TASK_DATE_SELECT} option")).await?;
+    let leave_options = get_select_options(&page, &format!("{TASK_LEAVE_SELECT} option")).await?;
+    let project_options =
+        get_select_options(&page, &format!("{TASK_PROJECT_SELECT} option")).await?;
 
-    page.goto("https://portal.example.com/team/member.php")
-        .await?;
+    page.goto(format!("{ADMIN_BASE}/member.php")).await?;
 
     Ok(TaskParameters {
         dates: date_options,
@@ -236,10 +252,9 @@ async fn submit_task(
     summary: String,
 ) -> Result<(), AppError> {
     let page = state.get_page().await?;
-    page.goto("https://portal.example.com/team/task.php")
-        .await?;
+    page.goto(format!("{ADMIN_BASE}/task.php")).await?;
     page.evaluate(format!(
-        "document.querySelector('select#task_date').value = '{date}'"
+        "document.querySelector('{TASK_DATE_SELECT}').value = '{date}'"
     ))
     .await?;
 
@@ -250,14 +265,14 @@ async fn submit_task(
     });
     if let Some(project) = default_project {
         page.evaluate(format!(
-            "document.querySelector('select#task_project_id1').value = '{project}';"
+            "document.querySelector('{TASK_PROJECT_SELECT}').value = '{project}';"
         ))
         .await?;
     }
 
     let summary_text = serde_json::to_string(&summary)?;
     page.evaluate(format!(
-        "document.querySelector('textarea#task_comment1').value = {summary_text};"
+        "document.querySelector('{TASK_COMMENT_TEXTAREA}').value = {summary_text};"
     ))
     .await?;
 
