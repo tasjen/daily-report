@@ -126,7 +126,7 @@ export default function SettingsForm() {
               required
             />
           </Label>
-          {settings && isTaskParametersQuerySuccess && (
+          {isTaskParametersQuerySuccess && (
             <Label className="flex flex-col gap-2 items-start">
               <p className="flex-none flex items-center gap-1">
                 Default project{" "}
