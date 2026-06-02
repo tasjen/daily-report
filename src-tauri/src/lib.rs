@@ -11,13 +11,32 @@ use tokio::sync::Mutex;
 struct BrowserState {
     inner: Mutex<Option<(Browser, Page, tempfile::TempDir)>>,
     app: tauri::AppHandle,
+    with_head: bool,
+}
+
+struct HeadedBrowserState(BrowserState);
+struct HeadlessBrowserState(BrowserState);
+
+impl std::ops::Deref for HeadedBrowserState {
+    type Target = BrowserState;
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
+impl std::ops::Deref for HeadlessBrowserState {
+    type Target = BrowserState;
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
 }
 
 impl BrowserState {
-    fn new(app: tauri::AppHandle) -> Self {
+    fn new(app: tauri::AppHandle, with_head: bool) -> Self {
         Self {
             inner: Mutex::new(None),
             app,
+            with_head,
         }
     }
 
@@ -36,15 +55,13 @@ impl BrowserState {
             return Ok(page.clone());
         }
         let temp_dir = tempfile::tempdir().map_err(|e| e.to_string())?;
-        let (browser, mut handler) = Browser::launch(
-            BrowserConfig::builder()
-                .with_head()
-                .user_data_dir(temp_dir.path())
-                .build()
-                .map_err(|e| e.to_string())?,
-        )
-        .await
-        .map_err(|e| e.to_string())?;
+        let mut config = BrowserConfig::builder().user_data_dir(temp_dir.path());
+        if self.with_head {
+            config = config.with_head();
+        }
+        let (browser, mut handler) = Browser::launch(config.build().map_err(|e| e.to_string())?)
+            .await
+            .map_err(|e| e.to_string())?;
         tokio::spawn(async move { while let Some(_) = handler.next().await {} });
         let page = browser
             .new_page("about:blank")
@@ -141,14 +158,14 @@ async fn get_select_options(page: &Page, selector: &str) -> Result<Vec<SelectOpt
 }
 
 #[tauri::command]
-async fn reset_browser(state: tauri::State<'_, BrowserState>) -> Result<(), String> {
+async fn reset_browser(state: tauri::State<'_, HeadlessBrowserState>) -> Result<(), String> {
     state.reset().await;
     Ok(())
 }
 
 #[tauri::command]
 async fn get_task_parameters(
-    state: tauri::State<'_, BrowserState>,
+    state: tauri::State<'_, HeadlessBrowserState>,
 ) -> Result<TaskParameters, String> {
     let page = state.get_page().await?;
 
@@ -179,7 +196,7 @@ async fn get_task_parameters(
 
 #[tauri::command]
 async fn submit_task(
-    state: tauri::State<'_, BrowserState>,
+    state: tauri::State<'_, HeadedBrowserState>,
     date: String,
     summary: String,
 ) -> Result<(), String> {
@@ -220,7 +237,14 @@ pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_store::Builder::default().build())
         .setup(|app| {
-            app.manage(BrowserState::new(app.handle().clone()));
+            app.manage(HeadlessBrowserState(BrowserState::new(
+                app.handle().clone(),
+                false,
+            )));
+            app.manage(HeadedBrowserState(BrowserState::new(
+                app.handle().clone(),
+                true,
+            )));
             Ok(())
         })
         .plugin(tauri_plugin_http::init())
@@ -234,14 +258,9 @@ pub fn run() {
         .expect("error while running tauri application")
         .run(|app_handle, event| {
             if let tauri::RunEvent::Exit = event {
-                let state = app_handle.state::<BrowserState>();
                 tauri::async_runtime::block_on(async {
-                    let mut guard = state.inner.lock().await;
-                    if let Some((mut browser, page, _temp_dir)) = guard.take() {
-                        let _ = page.clone().close().await;
-                        let _ = browser.close().await;
-                        let _ = browser.wait().await;
-                    }
+                    app_handle.state::<HeadlessBrowserState>().reset().await;
+                    app_handle.state::<HeadedBrowserState>().reset().await;
                 });
             }
         });

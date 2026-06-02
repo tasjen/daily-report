@@ -54,6 +54,10 @@ export default function SettingsForm() {
     setSettings(newSettings);
   }
 
+  const isTaskParametersQuerySuccess =
+    queryClient.getQueryState(taskParametersOptions().queryKey)?.status ===
+    "success";
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
@@ -122,7 +126,7 @@ export default function SettingsForm() {
               required
             />
           </Label>
-          {settings && (
+          {settings && isTaskParametersQuerySuccess && (
             <Label className="flex flex-col gap-2 items-start">
               <p className="flex-none flex items-center gap-1">
                 Default project{" "}

@@ -1,6 +1,5 @@
 import { queryOptions, useQuery } from "@tanstack/react-query";
 import { invoke } from "@tauri-apps/api/core";
-import { getCurrentWindow } from "@tauri-apps/api/window";
 import { fetch as tauriFetch } from "@tauri-apps/plugin-http";
 import { type GlobalState, useGlobalState } from "@/store";
 import type { JiraIssue, SelectOption } from "@/type";
@@ -15,7 +14,6 @@ export function taskParametersOptions() {
         leaves: SelectOption[];
         projects: SelectOption[];
       }>("get_task_parameters");
-      await getCurrentWindow().setFocus();
       return result;
     },
     retry: false,
