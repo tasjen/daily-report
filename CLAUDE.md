@@ -55,6 +55,15 @@ Each `BrowserState` holds `Mutex<Option<(Browser, Page, TempDir)>>` — the brow
 is lazily launched on first use via `get_page()` and reused afterward. Each
 browser gets its own `tempfile::TempDir` as the Chromium user-data dir.
 
+`get_page()` validates the cached page before reusing it via `is_page_alive()`,
+a lightweight `page.url()` CDP round-trip (2s timeout). If the page can no longer
+be driven — e.g. the user manually closed the headed window — the stale instance
+is force-killed (`browser.kill()`) and a fresh one is launched and logged in.
+**Do not** use `Browser::try_wait()` (a process-level check) for this: on macOS the
+Chromium process keeps running after its last window closes, so a process check
+reports it alive while the page target is actually dead. Probe the page, not the
+process.
+
 ### Browser login flow (`BrowserState::get_page`)
 
 On first `get_page()` for an instance:
@@ -71,12 +80,15 @@ not match if already on the target URL, so navigate away before relying on it.
 ### Browser lifecycle / cleanup
 
 **All browser instances must be terminated on app close.** This is handled in the
-`RunEvent::Exit` handler in `run()`, which calls `.reset()` on both states.
-`reset()` closes the page, closes the browser, and `wait()`s for the process to
-exit; dropping the `TempDir` cleans up the user-data dir. `reset_browser` is also
-exposed as a command and called from the frontend when settings change (so a new
-login happens with the new phone number). When adding new browser instances or
-long-lived resources, make sure they are also torn down in the `Exit` handler.
+`RunEvent::Exit` handler in `run()`, which calls `.close()` on both states.
+`close()` attempts a graceful shutdown (close page → close browser → `wait()`),
+but bounds it with a 3s timeout and falls back to `browser.kill()` — if the user
+already closed the window the connection is gone, so the graceful close can never
+complete and `wait()` would otherwise block forever. Dropping the `TempDir` cleans
+up the user-data dir. `close()` is also exposed via the `close_headless_browser`
+command, called from the frontend when settings change (so a new login happens
+with the new phone number). When adding new browser instances or long-lived
+resources, make sure they are also torn down in the `Exit` handler.
 
 ### Tauri commands (the frontend ↔ backend boundary)
 
@@ -88,7 +100,7 @@ Defined in [src-tauri/src/lib.rs](src-tauri/src/lib.rs), registered in
 - `submit_task(date, summary)` — headed; navigates the form, sets the date select,
   sets `default_project` (read from `store.json`) if configured, and fills the
   comment textarea with `summary`. **Does not click submit** — the user does.
-- `reset_browser()` — tears down the headless browser (called after settings save).
+- `close_headless_browser()` — tears down the headless browser (called after settings save).
 
 Form field selectors on the portal (keep in sync if the portal changes):
 `select#task_date`, `select#task_leave`, `select#task_project_id1`,
@@ -103,7 +115,7 @@ Form field selectors on the portal (keep in sync if the portal changes):
   `null` if unset, or the object once configured.
 - [src/SettingsForm.tsx](src/SettingsForm.tsx) — dialog to edit secrets (phone,
   Jira email, Jira API token, default project). On save: writes to `store.json`,
-  calls `reset_browser`, invalidates `task_parameters`. Opens automatically when
+  calls `close_headless_browser`, invalidates `task_parameters`. Opens automatically when
   no settings exist.
 - [src/DateList.tsx](src/DateList.tsx) — runs `useTaskParameters`, renders one
   `DateCard` per date (first 20, non-empty values).

@@ -48,7 +48,7 @@ export default function SettingsForm() {
     await store.save();
     setOpen(false);
     if (settings) {
-      await invoke("reset_browser");
+      await invoke("close_headless_browser");
     }
     await queryClient.invalidateQueries(taskParametersOptions());
     setSettings(newSettings);

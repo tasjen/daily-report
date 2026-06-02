@@ -40,19 +40,40 @@ impl BrowserState {
         }
     }
 
-    async fn reset(&self) {
+    async fn close(&self) {
         let mut guard = self.inner.lock().await;
         if let Some((mut browser, page, _temp_dir)) = guard.take() {
-            let _ = page.close().await;
-            let _ = browser.close().await;
-            let _ = browser.wait().await;
+            // Try a graceful shutdown, but bound it: if the user already closed
+            // the window the connection is gone, so `close`/`wait` can never
+            // complete. Fall back to force-killing the lingering process.
+            let graceful = async {
+                let _ = page.close().await;
+                let _ = browser.close().await;
+                let _ = browser.wait().await;
+            };
+            if tokio::time::timeout(std::time::Duration::from_secs(3), graceful)
+                .await
+                .is_err()
+            {
+                let _ = browser.kill().await;
+            }
         }
     }
 
     async fn get_page(&self) -> Result<Page, String> {
         let mut guard = self.inner.lock().await;
         if let Some((_, page, _)) = guard.as_ref() {
-            return Ok(page.clone());
+            if is_page_alive(page).await {
+                return Ok(page.clone());
+            }
+        }
+        // Either there is no cached browser, or the cached one can no longer be
+        // driven (e.g. the user closed the window). Force-kill any lingering
+        // process and drop it so a fresh instance is launched below. We use
+        // `kill` rather than `close` + `wait`: once the connection is gone the
+        // close command can't be delivered, so `wait` would block forever.
+        if let Some((mut browser, _page, _temp_dir)) = guard.take() {
+            let _ = browser.kill().await;
         }
         let temp_dir = tempfile::tempdir().map_err(|e| e.to_string())?;
         let mut config = BrowserConfig::builder().user_data_dir(temp_dir.path());
@@ -107,6 +128,19 @@ impl BrowserState {
     }
 }
 
+/// Probes whether the cached page can still be driven over CDP. Returns false if
+/// the page target is closed, the connection is gone (the user closed the
+/// window), or the round-trip times out — signalling the browser must be
+/// relaunched. A process-level check (`Browser::try_wait`) is not enough: on
+/// macOS the Chromium process keeps running after its last window is closed, so
+/// we probe the page itself with a lightweight round-trip.
+async fn is_page_alive(page: &Page) -> bool {
+    matches!(
+        tokio::time::timeout(std::time::Duration::from_secs(2), page.url()).await,
+        Ok(Ok(_))
+    )
+}
+
 async fn wait_for_url(page: &Page, expected: &str, timeout_ms: u64) -> Result<(), String> {
     let deadline = std::time::Instant::now() + std::time::Duration::from_millis(timeout_ms);
     let initial_url = page.url().await.map_err(|e| e.to_string())?;
@@ -158,8 +192,8 @@ async fn get_select_options(page: &Page, selector: &str) -> Result<Vec<SelectOpt
 }
 
 #[tauri::command]
-async fn reset_browser(state: tauri::State<'_, HeadlessBrowserState>) -> Result<(), String> {
-    state.reset().await;
+async fn close_headless_browser(state: tauri::State<'_, HeadlessBrowserState>) -> Result<(), String> {
+    state.close().await;
     Ok(())
 }
 
@@ -251,7 +285,7 @@ pub fn run() {
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![
             get_task_parameters,
-            reset_browser,
+            close_headless_browser,
             submit_task
         ])
         .build(tauri::generate_context!())
@@ -259,8 +293,8 @@ pub fn run() {
         .run(|app_handle, event| {
             if let tauri::RunEvent::Exit = event {
                 tauri::async_runtime::block_on(async {
-                    app_handle.state::<HeadlessBrowserState>().reset().await;
-                    app_handle.state::<HeadedBrowserState>().reset().await;
+                    app_handle.state::<HeadlessBrowserState>().close().await;
+                    app_handle.state::<HeadedBrowserState>().close().await;
                 });
             }
         });
