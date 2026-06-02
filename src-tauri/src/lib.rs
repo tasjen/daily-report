@@ -147,7 +147,9 @@ async fn reset_browser(state: tauri::State<'_, BrowserState>) -> Result<(), Stri
 }
 
 #[tauri::command]
-async fn get_task_parameters(state: tauri::State<'_, BrowserState>) -> Result<TaskParameters, String> {
+async fn get_task_parameters(
+    state: tauri::State<'_, BrowserState>,
+) -> Result<TaskParameters, String> {
     let page = state.get_page().await?;
 
     page.goto("https://portal.example.com/team/task.php")
@@ -175,6 +177,45 @@ async fn get_task_parameters(state: tauri::State<'_, BrowserState>) -> Result<Ta
     })
 }
 
+#[tauri::command]
+async fn submit_task(
+    state: tauri::State<'_, BrowserState>,
+    date: String,
+    summary: String,
+) -> Result<(), String> {
+    let page = state.get_page().await?;
+    page.goto("https://portal.example.com/team/task.php")
+        .await
+        .map_err(|e| e.to_string())?;
+    page.evaluate(format!(
+        "document.querySelector('select#task_date').value = '{date}'"
+    ))
+    .await
+    .map_err(|e| e.to_string())?;
+
+    let store = state.app.store("store.json").map_err(|e| e.to_string())?;
+    let default_project = store.get("settings").and_then(|v| {
+        v.get("default_project")
+            .and_then(|p| p.as_str().map(String::from))
+    });
+    if let Some(project) = default_project {
+        page.evaluate(format!(
+            "document.querySelector('select#task_project_id1').value = '{project}';"
+        ))
+        .await
+        .map_err(|e| e.to_string())?;
+    }
+
+    let summary_text = serde_json::to_string(&summary).map_err(|e| e.to_string())?;
+    page.evaluate(format!(
+        "document.querySelector('textarea#task_comment1').value = {summary_text};"
+    ))
+    .await
+    .map_err(|e| e.to_string())?;
+
+    Ok(())
+}
+
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_store::Builder::default().build())
@@ -184,7 +225,11 @@ pub fn run() {
         })
         .plugin(tauri_plugin_http::init())
         .plugin(tauri_plugin_opener::init())
-        .invoke_handler(tauri::generate_handler![get_task_parameters, reset_browser])
+        .invoke_handler(tauri::generate_handler![
+            get_task_parameters,
+            reset_browser,
+            submit_task
+        ])
         .build(tauri::generate_context!())
         .expect("error while running tauri application")
         .run(|app_handle, event| {

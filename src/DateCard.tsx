@@ -1,4 +1,4 @@
-import { Copy, CopyCheck, Loader2, RefreshCw } from "lucide-react";
+import { Copy, CopyCheck, Loader2, Play, RefreshCw } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./components/shared/button";
 import {
@@ -8,6 +8,7 @@ import {
   CardTitle,
 } from "./components/shared/card";
 import { Separator } from "./components/shared/separator";
+import { useSubmitTaskMutation } from "./lib/mutations";
 import { useJiraTasks } from "./lib/queries";
 import type { JiraIssue } from "./type";
 
@@ -17,6 +18,7 @@ type Props = {
 export default function DateCard({ date }: Props) {
   const { data, error, refetch, isFetching } = useJiraTasks(date);
   const [isCopied, setIsCopied] = useState(false);
+  const { mutate: submitTask } = useSubmitTaskMutation();
 
   const summaryText = !data
     ? ""
@@ -47,6 +49,12 @@ export default function DateCard({ date }: Props) {
           disabled={isFetching}
         >
           <RefreshCw />
+        </Button>
+        <Button
+          variant="secondary"
+          onClick={() => submitTask({ date, summary: summaryText })}
+        >
+          <Play />
         </Button>
       </CardHeader>
       <Separator />
