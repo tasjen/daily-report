@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "nok-eiang",
+  "productName": "Daily Report",
   "version": "0.1.0",
-  "identifier": "com.livinginsider.nok-eiang",
+  "identifier": "com.livinginsider.daily-report",
   "build": {
     "beforeDevCommand": "pnpm dev",
     "devUrl": "http://localhost:1420",
@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "nok-eiang",
+        "title": "Daily Report",
         "width": 800,
         "height": 600
       }
