@@ -22,14 +22,23 @@ const TASK_COMMENT_TEXTAREA: &str = "textarea#task_comment1";
 enum AppError {
     #[error("{0}")]
     Msg(String),
+    // `CdpError` is large; box it so `Result<_, AppError>` stays small.
     #[error(transparent)]
-    Cdp(#[from] chromiumoxide::error::CdpError),
+    Cdp(Box<chromiumoxide::error::CdpError>),
     #[error(transparent)]
     Io(#[from] std::io::Error),
     #[error(transparent)]
     Store(#[from] tauri_plugin_store::Error),
     #[error(transparent)]
     Json(#[from] serde_json::Error),
+}
+
+// Manual `From` (rather than `#[from]`) so `?` boxes the error at the call site
+// and the variant can stay boxed.
+impl From<chromiumoxide::error::CdpError> for AppError {
+    fn from(e: chromiumoxide::error::CdpError) -> Self {
+        AppError::Cdp(Box::new(e))
+    }
 }
 
 impl From<String> for AppError {
@@ -60,19 +69,21 @@ struct BrowserState {
 struct HeadedBrowserState(BrowserState);
 struct HeadlessBrowserState(BrowserState);
 
-impl std::ops::Deref for HeadedBrowserState {
-    type Target = BrowserState;
-    fn deref(&self) -> &Self::Target {
-        &self.0
-    }
+/// Lets a `BrowserState` newtype deref to the inner state, so both wrappers
+/// share `get_page`/`close` without duplicating the boilerplate.
+macro_rules! impl_browser_state_deref {
+    ($wrapper:ty) => {
+        impl std::ops::Deref for $wrapper {
+            type Target = BrowserState;
+            fn deref(&self) -> &Self::Target {
+                &self.0
+            }
+        }
+    };
 }
 
-impl std::ops::Deref for HeadlessBrowserState {
-    type Target = BrowserState;
-    fn deref(&self) -> &Self::Target {
-        &self.0
-    }
-}
+impl_browser_state_deref!(HeadedBrowserState);
+impl_browser_state_deref!(HeadlessBrowserState);
 
 impl BrowserState {
     fn new(app: tauri::AppHandle, with_head: bool) -> Self {
@@ -103,6 +114,17 @@ impl BrowserState {
         }
     }
 
+    /// Reads the configured login phone number from `store.json`. Errors before
+    /// any browser is launched if it isn't set.
+    fn phone(&self) -> Result<String, AppError> {
+        let store = self.app.store("store.json")?;
+        let phone = store
+            .get("settings")
+            .and_then(|v| v.get("phone").and_then(|p| p.as_str().map(String::from)))
+            .ok_or("Phone number not configured")?;
+        Ok(phone)
+    }
+
     async fn get_page(&self) -> Result<Page, AppError> {
         let mut guard = self.inner.lock().await;
         if let Some((_, page, _)) = guard.as_ref() {
@@ -118,8 +140,20 @@ impl BrowserState {
         if let Some((mut browser, _page, _temp_dir)) = guard.take() {
             let _ = browser.kill().await;
         }
+        let (browser, page, temp_dir) = self.launch_and_login().await?;
+        *guard = Some((browser, page.clone(), temp_dir));
+        Ok(page)
+    }
+
+    /// Launches a fresh Chromium instance and logs into the admin portal,
+    /// returning the live browser/page and its user-data dir.
+    async fn launch_and_login(&self) -> Result<(Browser, Page, tempfile::TempDir), AppError> {
+        // Read the phone first so a missing config fails before we spend the
+        // cost of launching a browser.
+        let phone = self.phone()?;
+
         let temp_dir = tempfile::tempdir()?;
-        let mut config = BrowserConfig::builder().user_data_dir(temp_dir.path());
+        let mut config = BrowserConfig::builder().user_data_dir(temp_dir.path()).viewport(None);
         if self.with_head {
             config = config.with_head();
         }
@@ -134,12 +168,6 @@ impl BrowserState {
         )))
         .await?;
         page.goto(ADMIN_BASE).await?;
-
-        let store = self.app.store("store.json")?;
-        let phone = store
-            .get("settings")
-            .and_then(|v| v.get("phone").and_then(|p| p.as_str().map(String::from)))
-            .ok_or("Phone number not configured")?;
 
         // Build the JS via `serde_json::to_string` so the selector is
         // properly quoted/escaped. The selector itself contains single quotes
@@ -156,8 +184,7 @@ impl BrowserState {
 
         wait_for_url(&page, &format!("{ADMIN_BASE}/member.php"), 5_000).await?;
 
-        *guard = Some((browser, page.clone(), temp_dir));
-        Ok(page)
+        Ok((browser, page, temp_dir))
     }
 }
 
@@ -253,6 +280,7 @@ async fn submit_task(
 ) -> Result<(), AppError> {
     let page = state.get_page().await?;
     page.goto(format!("{ADMIN_BASE}/task.php")).await?;
+    page.bring_to_front().await?;
     page.evaluate(format!(
         "document.querySelector('{TASK_DATE_SELECT}').value = '{date}'"
     ))
@@ -282,6 +310,8 @@ async fn submit_task(
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_store::Builder::default().build())
+        .plugin(tauri_plugin_http::init())
+        .plugin(tauri_plugin_opener::init())
         .setup(|app| {
             app.manage(HeadlessBrowserState(BrowserState::new(
                 app.handle().clone(),
@@ -293,8 +323,6 @@ pub fn run() {
             )));
             Ok(())
         })
-        .plugin(tauri_plugin_http::init())
-        .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![
             get_task_parameters,
             close_headless_browser,
