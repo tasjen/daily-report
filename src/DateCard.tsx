@@ -10,6 +10,7 @@ import {
 import { Separator } from "./components/shared/separator";
 import { useSubmitTaskMutation } from "./lib/mutations";
 import { useJiraTasks } from "./lib/queries";
+import { cn } from "./lib/utils";
 import type { JiraIssue } from "./type";
 
 type Props = {
@@ -33,7 +34,10 @@ export default function DateCard({ date }: Props) {
       )
         .map(
           ([status, issues]) =>
-            `[${status}]\n${issues.map((i) => `${i.key}: ${i.fields.summary}`).join("\n")}`,
+            `[${status}]\n${issues
+              .sort((a, b) => a.key.localeCompare(b.key))
+              .map((i) => `${i.key}: ${i.fields.summary}`)
+              .join("\n")}`,
         )
         .join("\n\n");
 
@@ -67,8 +71,13 @@ export default function DateCard({ date }: Props) {
           "Error: No data"
         ) : (
           <>
-            <p className="whitespace-pre-wrap mt-2">
-              {summaryText || "No tasks"}
+            <p
+              className={cn(
+                "whitespace-pre-wrap mt-2",
+                !summaryText && "text-muted-foreground italic",
+              )}
+            >
+              {summaryText || "ไม่พบ Jira issue"}
             </p>
             {summaryText && (
               <Button

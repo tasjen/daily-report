@@ -13,6 +13,7 @@ import {
   DialogTrigger,
 } from "./components/shared/dialog";
 import { Input } from "./components/shared/input";
+import SpanRequired from "./components/shared/span-required";
 import DefaultProjectSelect from "./DefaultProjectSelect";
 import { taskParametersOptions } from "./lib/queries";
 import { type GlobalState, useGlobalState } from "./store";
@@ -80,7 +81,9 @@ export default function SettingsForm() {
         </DialogHeader>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <Label className="flex flex-col gap-2 items-start">
-            <p className="flex-none">Phone number</p>
+            <p className="flex-none">
+              Phone number <SpanRequired />
+            </p>
             <Input
               type="tel"
               value={phone}
@@ -89,7 +92,9 @@ export default function SettingsForm() {
             />
           </Label>
           <Label className="flex flex-col gap-2 items-start">
-            <p className="flex-none">Jira email</p>
+            <p className="flex-none">
+              Jira email <SpanRequired />
+            </p>
             <Input
               type="email"
               value={email}
@@ -99,7 +104,7 @@ export default function SettingsForm() {
           </Label>
           <Label className="flex flex-col gap-2 items-start">
             <p className="flex-none flex items-center gap-1">
-              Jira API token{" "}
+              Jira API token <SpanRequired />{" "}
               <Button
                 size="icon-xs"
                 type="button"
