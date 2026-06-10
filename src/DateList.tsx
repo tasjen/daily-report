@@ -24,14 +24,11 @@ export default function DateList() {
             ))}
         </ol>
       )}
-      <Button
-        size="icon-lg"
-        variant="secondary"
-        onClick={() => refetch()}
-        disabled={isFetching}
-      >
-        <RefreshCw />
-      </Button>
+      {!isFetching && (
+        <Button size="icon-lg" variant="secondary" onClick={() => refetch()}>
+          <RefreshCw />
+        </Button>
+      )}
     </div>
   );
 }
