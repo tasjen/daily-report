@@ -18,7 +18,7 @@ from the frontend.
 
 - **Backend:** Rust + Tauri 2, `chromiumoxide` (CDP browser automation), `tokio`.
 - **Frontend:** React 19, TypeScript, Vite 7.
-- **State/data:** `zustand` (global settings), `@tanstack/react-query` (server
+- **State/data:** `zustand` (global account), `@tanstack/react-query` (server
   state), `@tauri-apps/plugin-store` (persisted secrets in `store.json`).
 - **HTTP:** `@tauri-apps/plugin-http` (frontend calls to Jira; required to bypass
   browser CORS).
@@ -100,7 +100,7 @@ Defined in [src-tauri/src/lib.rs](src-tauri/src/lib.rs), registered in
 - `submit_task(date, summary)` — headed; navigates the form, sets the date select,
   sets `default_project` (read from `store.json`) if configured, and fills the
   comment textarea with `summary`. **Does not click submit** — the user does.
-- `close_headless_browser()` — tears down the headless browser (called after settings save).
+- `close_headless_browser()` — tears down the headless browser (called after account save).
 
 Form field selectors on the portal (keep in sync if the portal changes):
 `select#task_date`, `select#task_leave`, `select#task_project_id1`,
@@ -108,15 +108,15 @@ Form field selectors on the portal (keep in sync if the portal changes):
 
 ### Frontend structure
 
-- [src/App.tsx](src/App.tsx) — loads `settings` from the store on mount; shows
-  `SettingsForm` always and `DateList` once settings exist.
+- [src/App.tsx](src/App.tsx) — loads `account` from the store on mount; shows
+  `AccountForm` always and `DateList` once account exist.
 - [src/store.ts](src/store.ts) — zustand `useGlobalState`: holds the `LazyStore`
-  handle and the `settings` object. `settings` is `undefined` while loading,
+  handle and the `account` object. `account` is `undefined` while loading,
   `null` if unset, or the object once configured.
-- [src/SettingsForm.tsx](src/SettingsForm.tsx) — dialog to edit secrets (phone,
+- [src/AccountForm.tsx](src/AccountForm.tsx) — dialog to edit secrets (phone,
   Jira email, Jira API token, default project). On save: writes to `store.json`,
   calls `close_headless_browser`, invalidates `task_parameters`. Opens automatically when
-  no settings exist.
+  no account exist.
 - [src/DateList.tsx](src/DateList.tsx) — runs `useTaskParameters`, renders one
   `DateCard` per date (first 20, non-empty values).
 - [src/DateCard.tsx](src/DateCard.tsx) — per-date card. Queries Jira for that
@@ -129,9 +129,9 @@ Form field selectors on the portal (keep in sync if the portal changes):
   `submit_task`, refocuses the window, and optimistically removes the submitted
   date from the cached `task_parameters` list.
 
-### Settings / secrets (`store.json`)
+### Account / secrets (`store.json`)
 
-Persisted via the Tauri store plugin under the key `settings`:
+Persisted via the Tauri store plugin under the key `account`:
 
 ```ts
 { phone, email, api_token, default_project }

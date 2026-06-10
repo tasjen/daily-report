@@ -4,24 +4,32 @@ import { create } from "zustand";
 // Define types for state & actions
 export type GlobalState = {
   store: LazyStore;
-  settings:
+  account:
     | {
         phone: string;
         email: string;
         api_token: string;
-        default_project: string;
       }
     | null
+    | undefined;
+  preferences:
+    | {
+        default_project: string | null;
+        project_list: string[];
+      }
     | undefined;
 };
 
 export type GlobalAction = {
-  setSettings: (s: Exclude<GlobalState["settings"], undefined>) => void;
+  setPreferences: (p: Exclude<GlobalState["preferences"], undefined>) => void;
+  setAccount: (s: Exclude<GlobalState["account"], undefined>) => void;
 };
 
 // Create store using the curried form of `create`
 export const useGlobalState = create<GlobalState & GlobalAction>()((set) => ({
   store: new LazyStore("store.json"),
-  settings: undefined,
-  setSettings: (s) => set((prev) => ({ ...prev, settings: s })),
+  account: undefined,
+  preferences: undefined,
+  setAccount: (s) => set((prev) => ({ ...prev, account: s })),
+  setPreferences: (p) => set((prev) => ({ ...prev, preferences: p })),
 }));

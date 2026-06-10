@@ -15,8 +15,8 @@ const BASIC_AUTH_CREDENTIAL: &str = "user:pass";
 const LOGIN_INPUT_SELECTOR: &str = "input[type='text']";
 const TASK_DATE_SELECT: &str = "select#task_date";
 const TASK_LEAVE_SELECT: &str = "select#task_leave";
-const TASK_PROJECT_SELECT: &str = "select#task_project_id1";
-const TASK_COMMENT_TEXTAREA: &str = "textarea#task_comment1";
+const TASK_PROJECT_SELECT_1: &str = "select#task_project_id1";
+const TASK_COMMENT_TEXTAREA_1: &str = "textarea#task_comment1";
 
 #[derive(thiserror::Error, Debug)]
 enum AppError {
@@ -119,7 +119,7 @@ impl BrowserState {
     fn phone(&self) -> Result<String, AppError> {
         let store = self.app.store("store.json")?;
         let phone = store
-            .get("settings")
+            .get("account")
             .and_then(|v| v.get("phone").and_then(|p| p.as_str().map(String::from)))
             .ok_or("Phone number not configured")?;
         Ok(phone)
@@ -153,7 +153,9 @@ impl BrowserState {
         let phone = self.phone()?;
 
         let temp_dir = tempfile::tempdir()?;
-        let mut config = BrowserConfig::builder().user_data_dir(temp_dir.path()).viewport(None);
+        let mut config = BrowserConfig::builder()
+            .user_data_dir(temp_dir.path())
+            .viewport(None);
         if self.with_head {
             config = config.with_head();
         }
@@ -217,7 +219,7 @@ async fn wait_for_url(page: &Page, expected: &str, timeout_ms: u64) -> Result<()
     }
 }
 
-#[derive(Serialize)]
+#[derive(Serialize, Clone)]
 struct SelectOption {
     label: String,
     value: String,
@@ -242,6 +244,24 @@ async fn get_select_options(page: &Page, selector: &str) -> Result<Vec<SelectOpt
     Ok(options)
 }
 
+/// The project `<select>` options, scraped from the portal on first use and
+/// cached for the rest of the app's lifetime. The project list is stable, so
+/// callers (parameter scrape, label lookup in `submit_task`) share one scrape
+/// instead of hitting the form each time.
+static PROJECT_OPTIONS: tokio::sync::OnceCell<Vec<SelectOption>> =
+    tokio::sync::OnceCell::const_new();
+
+/// Returns the cached project options, scraping `page` once on the first call.
+/// `page` must already be on the task form.
+async fn get_project_options(page: &Page) -> Result<&'static [SelectOption], AppError> {
+    PROJECT_OPTIONS
+        .get_or_try_init(|| async {
+            get_select_options(page, &format!("{TASK_PROJECT_SELECT_1} option")).await
+        })
+        .await
+        .map(Vec::as_slice)
+}
+
 #[tauri::command]
 async fn close_headless_browser(
     state: tauri::State<'_, HeadlessBrowserState>,
@@ -260,8 +280,7 @@ async fn get_task_parameters(
 
     let date_options = get_select_options(&page, &format!("{TASK_DATE_SELECT} option")).await?;
     let leave_options = get_select_options(&page, &format!("{TASK_LEAVE_SELECT} option")).await?;
-    let project_options =
-        get_select_options(&page, &format!("{TASK_PROJECT_SELECT} option")).await?;
+    let project_options = get_project_options(&page).await?.to_vec();
 
     page.goto(format!("{ADMIN_BASE}/member.php")).await?;
 
@@ -287,22 +306,46 @@ async fn submit_task(
     .await?;
 
     let store = state.app.store("store.json")?;
-    let default_project = store.get("settings").and_then(|v| {
+    let default_project = store.get("preferences").and_then(|v| {
         v.get("default_project")
             .and_then(|p| p.as_str().map(String::from))
     });
-    if let Some(project) = default_project {
+    if let Some(project) = &default_project {
         page.evaluate(format!(
-            "document.querySelector('{TASK_PROJECT_SELECT}').value = '{project}';"
+            "document.querySelector('{TASK_PROJECT_SELECT_1}').value = '{project}';"
         ))
         .await?;
     }
 
     let summary_text = serde_json::to_string(&summary)?;
     page.evaluate(format!(
-        "document.querySelector('{TASK_COMMENT_TEXTAREA}').value = {summary_text};"
+        "document.querySelector('{TASK_COMMENT_TEXTAREA_1}').value = {summary_text};"
     ))
     .await?;
+
+    let project_list = store
+        .get("preferences")
+        .and_then(|v| v.get("project_list").and_then(|s| s.as_array().cloned()))
+        .unwrap_or_default();
+    if !project_list.is_empty() {
+        let project_list_js = serde_json::to_string(&project_list)?;
+        let default_project_js = serde_json::to_string(&default_project)?;
+        page.evaluate(format!(
+            "Array.from(document.querySelectorAll('select')).forEach((e) => {{
+                if (e.id.includes('task_project_id')) {{
+                    e.querySelectorAll('option').forEach((o) => {{
+                        if (!{project_list_js}.includes(o.value)
+                            && o.value != ''
+                            && o.value != {default_project_js})
+                        {{
+                            o.remove();
+                        }}
+                    }});
+                }}
+            }});"
+        ))
+        .await?;
+    }
 
     Ok(())
 }

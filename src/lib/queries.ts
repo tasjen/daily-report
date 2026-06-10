@@ -23,26 +23,26 @@ export function taskParametersOptions() {
 export function useTaskParameters(
   options?: ReturnType<typeof taskParametersOptions>,
 ) {
-  const settings = useGlobalState((state) => state.settings);
+  const account = useGlobalState((state) => state.account);
   return useQuery({
     ...taskParametersOptions(),
-    enabled: Boolean(settings),
+    enabled: Boolean(account),
     ...options,
   });
 }
 
 export function jiraTasksOptions(
   date: string,
-  settings?: GlobalState["settings"],
+  account?: GlobalState["account"],
 ) {
   return queryOptions({
     queryKey: ["jira_tasks", date],
     staleTime: Infinity,
     queryFn: async () => {
-      if (!settings) return;
+      if (!account) return;
       const JIRA_DOMAIN = "https://living-insider.atlassian.net";
-      const EMAIL = settings.email;
-      const API_TOKEN = settings.api_token;
+      const EMAIL = account.email;
+      const API_TOKEN = account.api_token;
       return tauriFetch(`${JIRA_DOMAIN}/rest/api/3/search/jql`, {
         method: "POST",
         headers: {
@@ -66,10 +66,10 @@ export function useJiraTasks(
   date: string,
   options?: ReturnType<typeof jiraTasksOptions>,
 ) {
-  const settings = useGlobalState((state) => state.settings);
+  const account = useGlobalState((state) => state.account);
   return useQuery({
-    ...jiraTasksOptions(date, settings),
-    enabled: Boolean(settings),
+    ...jiraTasksOptions(date, account),
+    enabled: Boolean(account),
     ...options,
   });
 }

@@ -44,11 +44,10 @@ export default function DateCard({ date }: Props) {
   return (
     <Card onClick={() => console.log(data?.issues)}>
       <CardHeader className="flex-none flex gap-2 items-center">
-        <CardTitle>{date}</CardTitle>
+        <CardTitle className="flex-1">{date}</CardTitle>
         <Button
           size="icon-lg"
           variant="ghost"
-          className="ml-auto"
           onClick={() => refetch()}
           disabled={isFetching}
         >
