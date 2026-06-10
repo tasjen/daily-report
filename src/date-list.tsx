@@ -1,5 +1,5 @@
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import { Loader2, RefreshCw } from "lucide-react";
+import { Loader2Icon, RefreshCwIcon } from "lucide-react";
 import { Button } from "@/components/shared/button";
 import DateCard from "./date-card";
 import { useTaskParameters } from "./lib/queries";
@@ -11,7 +11,7 @@ export default function DateList() {
   return (
     <div className="flex flex-col items-center gap-4">
       {isFetching ? (
-        <Loader2 className="animate-spin" />
+        <Loader2Icon className="animate-spin" />
       ) : error ? (
         <p className="text-red-500 flex flex-col gap-4 whitespace-pre-wrap text-center">
           {String(error)}
@@ -28,7 +28,7 @@ export default function DateList() {
       )}
       {!isFetching && (
         <Button size="icon-lg" variant="secondary" onClick={() => refetch()}>
-          <RefreshCw />
+          <RefreshCwIcon />
         </Button>
       )}
     </div>

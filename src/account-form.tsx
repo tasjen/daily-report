@@ -1,7 +1,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { invoke } from "@tauri-apps/api/core";
 import { openUrl } from "@tauri-apps/plugin-opener";
-import { ExternalLink, User } from "lucide-react";
+import { ExternalLinkIcon, UserCogIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/shared/button";
 import { Label } from "@/components/shared/label";
@@ -65,15 +65,19 @@ export default function AccountForm() {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
         render={
-          <Button size="icon-lg" variant="ghost">
-            <User />
+          <Button
+            size="icon-xl"
+            variant="ghost"
+            className="not-hover:text-ring"
+          >
+            <UserCogIcon className="size-6" />
           </Button>
         }
       />
       <DialogContent initialFocus={false}>
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
-            <User />
+            <UserCogIcon />
             Account
           </DialogTitle>
         </DialogHeader>
@@ -109,7 +113,7 @@ export default function AccountForm() {
                   onClick={() => openUrl(jiraTokenUrl)}
                   render={
                     <span>
-                      <ExternalLink size={16} className="inline" />
+                      <ExternalLinkIcon size={16} className="inline" />
                     </span>
                   }
                 />

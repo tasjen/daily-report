@@ -1,4 +1,4 @@
-import { Settings2 } from "lucide-react";
+import { Settings2Icon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/shared/button";
 import {
@@ -48,15 +48,19 @@ export default function PreferencesForm() {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
         render={
-          <Button size="icon-lg" variant="ghost">
-            <Settings2 />
+          <Button
+            size="icon-xl"
+            variant="ghost"
+            className="not-hover:text-ring"
+          >
+            <Settings2Icon className="size-6" />
           </Button>
         }
       />
       <DialogContent initialFocus={false}>
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
-            <Settings2 />
+            <Settings2Icon />
             Preferences
           </DialogTitle>
         </DialogHeader>

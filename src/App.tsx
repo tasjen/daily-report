@@ -1,5 +1,5 @@
 import "./App.css";
-import { Loader2 } from "lucide-react";
+import { Loader2Icon } from "lucide-react";
 import { useEffect } from "react";
 import AccountForm from "./account-form";
 import { Toaster } from "./components/shared/sonner";
@@ -31,7 +31,7 @@ export default function App() {
   }, []);
 
   if (account === undefined) {
-    return <Loader2 className="animate-spin" />;
+    return <Loader2Icon className="animate-spin" />;
   }
 
   return (

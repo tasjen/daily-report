@@ -1,4 +1,10 @@
-import { Copy, CopyCheck, Loader2, Play, RefreshCw } from "lucide-react";
+import {
+  CopyCheckIcon,
+  CopyIcon,
+  Loader2Icon,
+  PlayIcon,
+  RefreshCwIcon,
+} from "lucide-react";
 import { useState } from "react";
 import { Button } from "./components/shared/button";
 import {
@@ -53,19 +59,19 @@ export default function DateCard({ date }: Props) {
           onClick={() => refetch()}
           disabled={isFetching}
         >
-          <RefreshCw />
+          <RefreshCwIcon />
         </Button>
         <Button
           variant="secondary"
           onClick={() => submitTask({ date, summary: summaryText })}
         >
-          <Play />
+          <PlayIcon />
         </Button>
       </CardHeader>
       <Separator />
       <CardContent className="relative">
         {isFetching ? (
-          <Loader2 className="animate-spin" />
+          <Loader2Icon className="animate-spin" />
         ) : error ? (
           `Error: ${error}`
         ) : !data ? (
@@ -91,7 +97,7 @@ export default function DateCard({ date }: Props) {
                   setTimeout(() => setIsCopied(false), 2000);
                 }}
               >
-                {isCopied ? <CopyCheck /> : <Copy />}
+                {isCopied ? <CopyCheckIcon /> : <CopyIcon />}
               </Button>
             )}
           </>

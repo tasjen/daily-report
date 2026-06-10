@@ -1,5 +1,5 @@
 import { relaunch } from "@tauri-apps/plugin-process";
-import { Loader2 } from "lucide-react";
+import { Loader2Icon } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Button } from "./components/shared/button";
@@ -25,7 +25,7 @@ export default function ResetAppButton() {
         setIsLoading(false);
       }}
     >
-      {isLoading ? <Loader2 className="animate-spin" /> : "Reset"}
+      {isLoading ? <Loader2Icon className="animate-spin" /> : "Reset"}
     </Button>
   );
 }
