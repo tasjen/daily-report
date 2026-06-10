@@ -184,7 +184,9 @@ impl BrowserState {
         ))
         .await?;
 
-        wait_for_url(&page, &format!("{ADMIN_BASE}/member.php"), 5_000).await?;
+        wait_for_url(&page, &format!("{ADMIN_BASE}/member.php"), 5_000)
+            .await
+            .map_err(|e| AppError::from(format!("{e}\nIncorrect phone number")))?;
 
         Ok((browser, page, temp_dir))
     }

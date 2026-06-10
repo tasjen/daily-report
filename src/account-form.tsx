@@ -15,9 +15,17 @@ import {
 } from "./components/shared/dialog";
 import { Input } from "./components/shared/input";
 import SpanRequired from "./components/shared/span-required";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "./components/shared/tooltip";
 import { taskParametersOptions } from "./lib/queries";
 import ResetAppButton from "./reset-app-button";
 import { type GlobalState, useGlobalState } from "./store";
+
+const jiraTokenUrl =
+  "https://id.atlassian.com/manage-profile/security/api-tokens";
 
 export default function AccountForm() {
   const store = useGlobalState((state) => state.store);
@@ -94,30 +102,26 @@ export default function AccountForm() {
           </Label>
           <Label className="flex flex-col gap-2 items-start">
             <p className="flex-none flex items-center gap-1">
-              Jira API token <SpanRequired />{" "}
-              <Button
-                size="icon-xs"
-                type="button"
-                variant="link"
-                nativeButton={false}
-                onClick={() => {
-                  openUrl(
-                    "https://id.atlassian.com/manage-profile/security/api-tokens",
-                  );
-                }}
-                render={
-                  <span>
-                    <ExternalLink size={16} className="inline" />
-                  </span>
-                }
-              />
+              Jira API token <SpanRequired />
+              <Tooltip>
+                <TooltipTrigger
+                  className="cursor-pointer"
+                  onClick={() => openUrl(jiraTokenUrl)}
+                  render={
+                    <span>
+                      <ExternalLink size={16} className="inline" />
+                    </span>
+                  }
+                />
+                <TooltipContent className="text-nowrap max-w-[unset]">
+                  {jiraTokenUrl}
+                </TooltipContent>
+              </Tooltip>
             </p>
             <Input
               type="password"
               value={apiToken}
               onChange={(e) => setApiToken(e.target.value)}
-              onFocus={(e) => (e.currentTarget.type = "text")}
-              onBlur={(e) => (e.currentTarget.type = "password")}
               required
             />
           </Label>

@@ -3,6 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./App.css";
+import { TooltipProvider } from "./components/shared/tooltip";
 import { ThemeProvider } from "./theme-provider";
 
 const queryClient = new QueryClient({
@@ -19,9 +20,11 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <ThemeProvider storageKey="vite-ui-theme">
-        <main className="container mx-auto p-4">
-          <App />
-        </main>
+        <TooltipProvider>
+          <main className="container mx-auto p-4">
+            <App />
+          </main>
+        </TooltipProvider>
       </ThemeProvider>
     </QueryClientProvider>
   </React.StrictMode>,

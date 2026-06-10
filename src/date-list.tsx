@@ -13,11 +13,13 @@ export default function DateList() {
       {isFetching ? (
         <Loader2 className="animate-spin" />
       ) : error ? (
-        <div className="text-red-500 flex flex-col gap-4">{String(error)}</div>
+        <p className="text-red-500 flex flex-col gap-4 whitespace-pre-wrap text-center">
+          {String(error)}
+        </p>
       ) : (
         <ol ref={animateRef} className="flex flex-col w-full gap-3">
           {data?.dates
-            .slice(0, 20)
+            .slice(0, 5)
             .filter((e) => e.value)
             .map((option) => (
               <DateCard key={option.value} date={option.value} />
