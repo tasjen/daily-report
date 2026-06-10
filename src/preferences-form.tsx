@@ -9,11 +9,11 @@ import {
   DialogTrigger,
 } from "./components/shared/dialog";
 import { Label } from "./components/shared/label";
-import DefaultProjectSelect from "./DefaultProjectSelect";
+import DefaultProjectSelect from "./default-project-select";
 import { useTaskParameters } from "./lib/queries";
-import { ProjectListSelect } from "./ProjectListSelect";
+import { ProjectListSelect } from "./project-list-select";
 import { type GlobalState, useGlobalState } from "./store";
-import ThemeToggle from "./ThemeToggle";
+import ThemeToggle from "./theme-toggle";
 
 export default function PreferencesForm() {
   const store = useGlobalState((state) => state.store);

@@ -1,7 +1,7 @@
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { Loader2, RefreshCw } from "lucide-react";
 import { Button } from "@/components/shared/button";
-import DateCard from "./DateCard";
+import DateCard from "./date-card";
 import { useTaskParameters } from "./lib/queries";
 
 export default function DateList() {

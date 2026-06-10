@@ -16,7 +16,7 @@ import {
 import { Input } from "./components/shared/input";
 import SpanRequired from "./components/shared/span-required";
 import { taskParametersOptions } from "./lib/queries";
-import ResetAppButton from "./ResetAppButton";
+import ResetAppButton from "./reset-app-button";
 import { type GlobalState, useGlobalState } from "./store";
 
 export default function AccountForm() {

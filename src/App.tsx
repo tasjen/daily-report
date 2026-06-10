@@ -1,11 +1,11 @@
 import "./App.css";
 import { Loader2 } from "lucide-react";
 import { useEffect } from "react";
-import AccountForm from "./AccountForm";
+import AccountForm from "./account-form";
 import { Toaster } from "./components/shared/sonner";
-import DateList from "./DateList";
+import DateList from "./date-list";
 import { useTaskParameters } from "./lib/queries";
-import PreferencesForm from "./PreferencesForm";
+import PreferencesForm from "./preferences-form";
 import { type GlobalState, useGlobalState } from "./store";
 
 export default function App() {

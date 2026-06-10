@@ -7,7 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/shared/dropdown-menu";
-import { useTheme } from "@/ThemeProvider";
+import { useTheme } from "@/theme-provider";
 
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
