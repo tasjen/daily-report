@@ -64,7 +64,7 @@ export function jiraTasksOptions(
 
 export function useJiraTasks(
   date: string,
-  options?: ReturnType<typeof jiraTasksOptions>,
+  options?: Partial<ReturnType<typeof jiraTasksOptions>>,
 ) {
   const account = useGlobalState((state) => state.account);
   return useQuery({
