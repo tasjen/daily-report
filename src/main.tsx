@@ -3,6 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./App.css";
+import { ThemeProvider } from "./ThemeProvider";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -17,9 +18,11 @@ const queryClient = new QueryClient({
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <main className="container mx-auto p-4">
-        <App />
-      </main>
+      <ThemeProvider storageKey="vite-ui-theme">
+        <main className="container mx-auto p-4">
+          <App />
+        </main>
+      </ThemeProvider>
     </QueryClientProvider>
   </React.StrictMode>,
 );
