@@ -8,7 +8,8 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "start": "tauri dev",
-    "package": "tauri build"
+    "package": "tauri build",
+    "knip": "knip"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
@@ -38,10 +39,12 @@
   "devDependencies": {
     "@biomejs/biome": "2.4.16",
     "@tauri-apps/cli": "^2",
+    "@types/node": "^25.9.3",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react": "^4.6.0",
     "babel-plugin-react-compiler": "^1.0.0",
+    "knip": "^6.16.1",
     "lefthook": "^2.1.9",
     "typescript": "~5.8.3",
     "vite": "^7.0.4"
