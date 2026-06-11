@@ -1,5 +1,4 @@
 import "./App.css";
-import { Loader2Icon } from "lucide-react";
 import { useEffect } from "react";
 import AccountForm from "./account-form";
 import { Toaster } from "./components/shared/sonner";
@@ -8,7 +7,6 @@ import { useTaskParameters } from "./lib/queries";
 import PreferencesForm from "./preferences-form";
 import RefreshDateListButton from "./refresh-date-list-button";
 import { type GlobalState, useGlobalState } from "./store";
-import ThemeSelect from "./theme-select";
 
 export default function App() {
   const store = useGlobalState((state) => state.store);
