@@ -4,16 +4,15 @@ import { Button } from "@/components/shared/button";
 import {
   Dialog,
   DialogContent,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "./components/shared/dialog";
-import { Label } from "./components/shared/label";
 import DefaultProjectSelect from "./default-project-select";
 import { useTaskParameters } from "./lib/queries";
 import { ProjectListSelect } from "./project-list-select";
 import { type GlobalState, useGlobalState } from "./store";
-import ThemeToggle from "./theme-toggle";
 
 export default function PreferencesForm() {
   const store = useGlobalState((state) => state.store);
@@ -73,11 +72,9 @@ export default function PreferencesForm() {
             value={projectList}
             onValueChange={setProjectList}
           />
-          <div className="flex gap-2">
-            <Label>Theme</Label>
-            <ThemeToggle />
-          </div>
-          <Button type="submit">Save</Button>
+          <DialogFooter>
+            <Button type="submit">Save changes</Button>
+          </DialogFooter>
         </form>
       </DialogContent>
     </Dialog>

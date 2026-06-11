@@ -7,6 +7,7 @@ import DateList from "./date-list";
 import { useTaskParameters } from "./lib/queries";
 import PreferencesForm from "./preferences-form";
 import { type GlobalState, useGlobalState } from "./store";
+import ThemeToggle from "./theme-toggle";
 
 export default function App() {
   const store = useGlobalState((state) => state.store);
@@ -37,7 +38,8 @@ export default function App() {
   return (
     <>
       {account && <DateList />}
-      <div className="fixed bottom-2 right-2">
+      <div className="fixed bottom-2 flex gap-2 w-full container">
+        <ThemeToggle />
         {taskParametersQuery.isSuccess && <PreferencesForm />}
         <AccountForm />
       </div>
