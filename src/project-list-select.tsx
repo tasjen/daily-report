@@ -1,5 +1,4 @@
-import * as React from "react";
-
+import { Fragment } from "react";
 import {
   Combobox,
   ComboboxChip,
@@ -15,35 +14,43 @@ import {
 } from "@/components/shared/combobox";
 import { useTaskParameters } from "@/lib/queries";
 import { Label } from "./components/shared/label";
+import { useGlobalState } from "./store";
 import type { SelectOption } from "./type";
 
-type Props = Pick<
-  React.ComponentProps<typeof Combobox<string[]>>,
-  "value" | "onValueChange"
->;
-export function ProjectListSelect(props: Props) {
+export function ProjectListSelect() {
+  const store = useGlobalState((state) => state.store);
+  const preferences = useGlobalState((state) => state.preferences);
+  const setPreferences = useGlobalState((state) => state.setPreferences);
   const { data } = useTaskParameters();
   const projects = data?.projects ?? [];
-  const [open, setOpen] = React.useState(false);
   const anchor = useComboboxAnchor();
+
+  if (!data?.projects.length || !preferences) return null;
 
   return (
     <div className="flex flex-col gap-2 items-start">
       <Label className="flex-none">Project list</Label>
       <Combobox
-        open={open}
-        onOpenChange={setOpen}
         multiple
         autoHighlight
         items={projects}
-        {...props}
+        value={preferences.project_list}
+        onValueChange={async (val) => {
+          const newPreferences: typeof preferences = {
+            ...preferences,
+            project_list: val,
+          };
+          await store.set("preferences", newPreferences);
+          await store.save();
+          setPreferences(newPreferences);
+        }}
       >
         <ComboboxTrigger
           render={
             <ComboboxChips ref={anchor} className="w-full">
               <ComboboxValue>
                 {(values: string[]) => (
-                  <React.Fragment>
+                  <Fragment>
                     {values.map((v: string) => (
                       <ComboboxChip key={v}>
                         {projects.find((p) => p.value === v)?.label}
@@ -52,7 +59,7 @@ export function ProjectListSelect(props: Props) {
                     <ComboboxChipsInput
                       placeholder={!values.length ? "Add project" : undefined}
                     />
-                  </React.Fragment>
+                  </Fragment>
                 )}
               </ComboboxValue>
             </ComboboxChips>

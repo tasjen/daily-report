@@ -117,8 +117,13 @@ export default function AccountForm() {
                     </span>
                   }
                 />
-                <TooltipContent className="text-nowrap max-w-[unset]">
-                  {jiraTokenUrl}
+                <TooltipContent className="max-w-none">
+                  <p
+                    className="cursor-pointer font-semibold hover:underline"
+                    onClick={() => openUrl(jiraTokenUrl)}
+                  >
+                    {jiraTokenUrl}
+                  </p>
                 </TooltipContent>
               </Tooltip>
             </p>

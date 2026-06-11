@@ -18,14 +18,12 @@ const queryClient = new QueryClient({
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <main className="container mx-auto py-4 [&_svg]:flex-none">
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider storageKey="vite-ui-theme">
-          <TooltipProvider>
-            <App />
-          </TooltipProvider>
-        </ThemeProvider>
-      </QueryClientProvider>
-    </main>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider storageKey="vite-ui-theme">
+        <TooltipProvider>
+          <App />
+        </TooltipProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
   </React.StrictMode>,
 );

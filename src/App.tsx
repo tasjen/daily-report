@@ -6,8 +6,9 @@ import { Toaster } from "./components/shared/sonner";
 import DateList from "./date-list";
 import { useTaskParameters } from "./lib/queries";
 import PreferencesForm from "./preferences-form";
+import RefreshDateListButton from "./refresh-date-list-button";
 import { type GlobalState, useGlobalState } from "./store";
-import ThemeToggle from "./theme-toggle";
+import ThemeSelect from "./theme-select";
 
 export default function App() {
   const store = useGlobalState((state) => state.store);
@@ -32,18 +33,20 @@ export default function App() {
   }, []);
 
   if (account === undefined) {
-    return <Loader2Icon className="animate-spin" />;
+    return null;
   }
 
   return (
-    <>
-      {account && <DateList />}
-      <div className="fixed bottom-2 flex gap-2 w-full container">
-        <ThemeToggle />
+    <div className="flex">
+      <header className="sticky bottom-0 h-screen justify-end p-2 mt-auto z-10 flex flex-col gap-2">
+        <RefreshDateListButton />
         {taskParametersQuery.isSuccess && <PreferencesForm />}
         <AccountForm />
-      </div>
-      <Toaster />
-    </>
+      </header>
+      <main className="container py-4 [&_svg]:flex-none">
+        {account && <DateList />}
+        <Toaster />
+      </main>
+    </div>
   );
 }
