@@ -19,7 +19,8 @@
     "rules": {
       "recommended": true,
       "nursery": {
-        "useSortedClasses": "on"
+        "useSortedClasses": "on",
+        "noFloatingPromises": "on"
       },
       "a11y": "off",
       "correctness": {
