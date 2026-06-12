@@ -25,7 +25,7 @@ export default function ThemeSelect() {
               className="not-hover:text-ring"
             >
               <SunIcon className="size-6 dark:hidden" />
-              <MoonIcon className="size-6 not-dark:hidden" />
+              <MoonIcon className="not-dark:hidden size-6" />
               <span className="sr-only">Toggle theme</span>
             </Button>
           }

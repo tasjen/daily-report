@@ -17,7 +17,7 @@ export default function App() {
 
   return (
     <div className="flex">
-      <header className="sticky bottom-0 h-screen justify-end p-2 mt-auto z-10 flex flex-col gap-2">
+      <header className="sticky bottom-0 z-10 mt-auto flex h-screen flex-col justify-end gap-2 p-2">
         {taskParametersQuery.isSuccess && <OpenMemberPageButton />}
         <RefreshDateListButton />
         {taskParametersQuery.isSuccess && <PreferencesForm />}

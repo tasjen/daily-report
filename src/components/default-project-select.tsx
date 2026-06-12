@@ -18,8 +18,8 @@ export default function DefaultProjectSelect() {
   if (!data?.projects?.length || !preferences) return null;
 
   return (
-    <Label className="flex flex-col gap-2 items-start">
-      <p className="flex-none flex items-center gap-1">Default project</p>
+    <Label className="flex flex-col items-start gap-2">
+      <p className="flex flex-none items-center gap-1">Default project</p>
       <Select
         items={data.projects}
         value={preferences.default_project ?? data.projects[0].value}

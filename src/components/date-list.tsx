@@ -15,11 +15,11 @@ export default function DateList() {
       {isFetching ? (
         <Loader2Icon className="animate-spin" />
       ) : error ? (
-        <p className="text-red-500 flex flex-col gap-4 whitespace-pre-wrap text-center">
+        <p className="flex flex-col gap-4 whitespace-pre-wrap text-center text-red-500">
           {String(error)}
         </p>
       ) : (
-        <ol ref={animateRef} className="flex flex-col w-full max-w-5xl gap-4">
+        <ol ref={animateRef} className="flex w-full max-w-5xl flex-col gap-4">
           {data?.dates
             .filter((e) => e.value)
             .slice(0, 5)

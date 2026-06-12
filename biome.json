@@ -19,12 +19,13 @@
     "rules": {
       "recommended": true,
       "nursery": {
-        "useSortedClasses": "on",
+        "useSortedClasses": { "level": "info", "fix": "safe", "options": {} },
         "noFloatingPromises": "on"
       },
       "a11y": "off",
       "correctness": {
-        "useExhaustiveDependencies": "off"
+        "useExhaustiveDependencies": "off",
+        "noUnusedImports": { "level": "warn", "fix": "safe" }
       }
     }
   },

@@ -51,7 +51,7 @@ export default function DateCard({ date }: Props) {
 
   return (
     <Card onClick={() => console.log(data?.issues)}>
-      <CardHeader className="flex-none flex gap-2 items-center">
+      <CardHeader className="flex flex-none items-center gap-2">
         <CardTitle className="flex-1">{date}</CardTitle>
         <Button
           size="icon-lg"
@@ -80,7 +80,7 @@ export default function DateCard({ date }: Props) {
           <>
             <p
               className={cn(
-                "whitespace-pre-wrap mt-2",
+                "mt-2 whitespace-pre-wrap",
                 !summaryText && "text-muted-foreground italic",
               )}
             >

@@ -27,7 +27,7 @@ export function ProjectListSelect() {
   if (!data?.projects.length || !preferences) return null;
 
   return (
-    <div className="flex flex-col gap-2 items-start">
+    <div className="flex flex-col items-start gap-2">
       <Label className="flex-none">Project list</Label>
       <Combobox
         multiple

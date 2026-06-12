@@ -1,8 +1,17 @@
 {
+  "editor.formatOnSave": true,
+  "[javascript][javascriptreact][typescript][typescriptreact][json][jsonc][css]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.biome": "explicit",
+    "source.organizeImports.biome": "explicit"
+  },
   "rust-analyzer.linkedProjects": ["src-tauri/Cargo.toml"],
   "rust-analyzer.cargo.buildScripts.enable": true,
   "typescript.tsdk.path": "node_modules/typescript/lib",
   "typescript.preferences.autoImportFileExcludePatterns": [
     "**/node_modules/@base-ui/**"
-  ]
+  ],
+  "typescript.preferences.importModuleSpecifier": "non-relative"
 }

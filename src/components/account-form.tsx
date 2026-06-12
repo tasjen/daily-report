@@ -1,5 +1,5 @@
 import { openUrl } from "@tauri-apps/plugin-opener";
-import { ExternalLinkIcon, UserCogIcon, UserIcon } from "lucide-react";
+import { ExternalLinkIcon, UserIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import ResetAppButton from "@/components/reset-app-button";
 import { Button } from "@/components/shared/button";
@@ -63,7 +63,7 @@ export default function AccountForm() {
           </DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <Label className="flex flex-col gap-2 items-start">
+          <Label className="flex flex-col items-start gap-2">
             <p className="flex-none">
               Phone number <SpanRequired />
             </p>
@@ -74,7 +74,7 @@ export default function AccountForm() {
               required
             />
           </Label>
-          <Label className="flex flex-col gap-2 items-start">
+          <Label className="flex flex-col items-start gap-2">
             <p className="flex-none">
               Jira email <SpanRequired />
             </p>
@@ -85,8 +85,8 @@ export default function AccountForm() {
               required
             />
           </Label>
-          <Label className="flex flex-col gap-2 items-start">
-            <p className="flex-none flex items-center gap-1">
+          <Label className="flex flex-col items-start gap-2">
+            <p className="flex flex-none items-center gap-1">
               Jira API token <SpanRequired />
               <Tooltip>
                 <TooltipTrigger
