@@ -3,8 +3,8 @@ import { invoke } from "@tauri-apps/api/core";
 import { openUrl } from "@tauri-apps/plugin-opener";
 import { ExternalLinkIcon, UserCogIcon } from "lucide-react";
 import { useEffect, useState } from "react";
+import ResetAppButton from "@/components/reset-app-button";
 import { Button } from "@/components/shared/button";
-import { Label } from "@/components/shared/label";
 import {
   Dialog,
   DialogContent,
@@ -12,18 +12,18 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "./components/shared/dialog";
-import { Input } from "./components/shared/input";
-import SpanRequired from "./components/shared/span-required";
+} from "@/components/shared/dialog";
+import { Input } from "@/components/shared/input";
+import { Label } from "@/components/shared/label";
+import SpanRequired from "@/components/shared/span-required";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "./components/shared/tooltip";
-import { taskParametersOptions } from "./lib/queries";
-import { store } from "./lib/store";
-import ResetAppButton from "./reset-app-button";
-import { type GlobalState, useGlobalState } from "./store";
+} from "@/components/shared/tooltip";
+import { taskParametersOptions } from "@/lib/queries";
+import { store } from "@/lib/store";
+import { type GlobalState, useGlobalState } from "@/store";
 
 const jiraTokenUrl =
   "https://id.atlassian.com/manage-profile/security/api-tokens";

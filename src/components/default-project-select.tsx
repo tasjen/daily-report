@@ -1,4 +1,4 @@
-import { Label } from "./components/shared/label";
+import { Label } from "@/components/shared/label";
 import {
   Select,
   SelectContent,
@@ -6,10 +6,10 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./components/shared/select";
-import { useTaskParameters } from "./lib/queries";
-import { store } from "./lib/store";
-import { useGlobalState } from "./store";
+} from "@/components/shared/select";
+import { useTaskParameters } from "@/lib/queries";
+import { store } from "@/lib/store";
+import { useGlobalState } from "@/store";
 
 export default function DefaultProjectSelect() {
   const preferences = useGlobalState((state) => state.preferences);

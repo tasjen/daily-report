@@ -1,14 +1,14 @@
-import "./App.css";
+import "@/App.css";
 import { useEffect } from "react";
-import AccountForm from "./account-form";
-import { Toaster } from "./components/shared/sonner";
-import DateList from "./date-list";
-import { useTaskParameters } from "./lib/queries";
-import { store } from "./lib/store";
-import OpenMemberPageButton from "./open-member-page-button";
-import PreferencesForm from "./preferences-form";
-import RefreshDateListButton from "./refresh-date-list-button";
-import { type GlobalState, useGlobalState } from "./store";
+import AccountForm from "@/components/account-form";
+import DateList from "@/components/date-list";
+import OpenMemberPageButton from "@/components/open-member-page-button";
+import PreferencesForm from "@/components/preferences-form";
+import RefreshDateListButton from "@/components/refresh-date-list-button";
+import { Toaster } from "@/components/shared/sonner";
+import { useTaskParameters } from "@/lib/queries";
+import { store } from "@/lib/store";
+import { type GlobalState, useGlobalState } from "@/store";
 
 export default function App() {
   const account = useGlobalState((state) => state.account);

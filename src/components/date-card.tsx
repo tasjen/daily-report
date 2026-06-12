@@ -6,18 +6,18 @@ import {
   RefreshCwIcon,
 } from "lucide-react";
 import { useState } from "react";
-import { Button } from "./components/shared/button";
+import { Button } from "@/components/shared/button";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "./components/shared/card";
-import { Separator } from "./components/shared/separator";
-import { useSubmitTaskMutation } from "./lib/mutations";
-import { useJiraTasks } from "./lib/queries";
-import { cn } from "./lib/utils";
-import type { JiraIssue } from "./type";
+} from "@/components/shared/card";
+import { Separator } from "@/components/shared/separator";
+import { useSubmitTaskMutation } from "@/lib/mutations";
+import { useJiraTasks } from "@/lib/queries";
+import { cn } from "@/lib/utils";
+import type { JiraIssue } from "@/type";
 
 type Props = {
   date: string;

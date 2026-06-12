@@ -1,7 +1,7 @@
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { Loader2Icon } from "lucide-react";
-import DateCard from "./date-card";
-import { useTaskParameters } from "./lib/queries";
+import DateCard from "@/components/date-card";
+import { useTaskParameters } from "@/lib/queries";
 
 export default function DateList() {
   const { data, isFetching, error } = useTaskParameters();

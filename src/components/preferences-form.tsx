@@ -1,4 +1,6 @@
 import { Settings2Icon } from "lucide-react";
+import DefaultProjectSelect from "@/components/default-project-select";
+import { ProjectListSelect } from "@/components/project-list-select";
 import { Button } from "@/components/shared/button";
 import {
   Dialog,
@@ -6,10 +8,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "./components/shared/dialog";
-import DefaultProjectSelect from "./default-project-select";
-import { ProjectListSelect } from "./project-list-select";
-import ThemeSelect from "./theme-select";
+} from "@/components/shared/dialog";
+import ThemeSelect from "@/components/theme-select";
 
 export default function PreferencesForm() {
   return (

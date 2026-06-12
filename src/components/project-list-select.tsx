@@ -12,11 +12,11 @@ import {
   ComboboxValue,
   useComboboxAnchor,
 } from "@/components/shared/combobox";
+import { Label } from "@/components/shared/label";
 import { useTaskParameters } from "@/lib/queries";
-import { Label } from "./components/shared/label";
-import { store } from "./lib/store";
-import { useGlobalState } from "./store";
-import type { SelectOption } from "./type";
+import { store } from "@/lib/store";
+import { useGlobalState } from "@/store";
+import type { SelectOption } from "@/type";
 
 export function ProjectListSelect() {
   const preferences = useGlobalState((state) => state.preferences);

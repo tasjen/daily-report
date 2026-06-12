@@ -1,6 +1,6 @@
 import { RefreshCwIcon } from "lucide-react";
-import { Button } from "./components/shared/button";
-import { useTaskParameters } from "./lib/queries";
+import { Button } from "@/components/shared/button";
+import { useTaskParameters } from "@/lib/queries";
 
 export default function RefreshDateListButton() {
   const { isFetching, refetch } = useTaskParameters();

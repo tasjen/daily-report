@@ -2,8 +2,8 @@ import { relaunch } from "@tauri-apps/plugin-process";
 import { Loader2Icon } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
-import { Button } from "./components/shared/button";
-import { store } from "./lib/store";
+import { Button } from "@/components/shared/button";
+import { store } from "@/lib/store";
 
 export default function ResetAppButton() {
   const [isLoading, setIsLoading] = useState(false);

@@ -7,8 +7,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/shared/dropdown-menu";
-import { useTheme } from "@/theme-provider";
-import { Label } from "./components/shared/label";
+import { Label } from "@/components/shared/label";
+import { useTheme } from "@/components/theme-provider";
 
 export default function ThemeSelect() {
   const { theme, setTheme } = useTheme();
