@@ -23,9 +23,12 @@ type Props = {
   date: string;
 };
 export default function DateCard({ date }: Props) {
-  const { data, error, refetch, isFetching } = useJiraTasks(date, {
-    refetchOnMount: "always",
-  });
+  const { data, error, refetch, isFetching } = useJiraTasks(
+    `status CHANGED BY currentUser() DURING ("${date} 00:00", "${date} 23:59")`,
+    {
+      refetchOnMount: "always",
+    },
+  );
   const [isCopied, setIsCopied] = useState(false);
   const { mutate: submitTask } = useSubmitTaskMutation();
 

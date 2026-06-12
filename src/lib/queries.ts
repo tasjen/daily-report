@@ -58,9 +58,9 @@ export function useTaskParameters(
   });
 }
 
-export function jiraTasksOptions(date: string, account?: Account | null) {
+export function jiraTasksOptions(jql: string, account?: Account | null) {
   return queryOptions({
-    queryKey: ["jira_tasks", date],
+    queryKey: ["jira_tasks", jql],
     staleTime: Infinity,
     queryFn: async () => {
       if (!account) return;
@@ -75,7 +75,7 @@ export function jiraTasksOptions(date: string, account?: Account | null) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          jql: `status CHANGED BY currentUser() DURING ("${date} 00:00", "${date} 23:59")`,
+          jql,
           fields: ["status", "updated", "summary", "duedate"],
           maxResults: 50,
         }),
@@ -87,12 +87,12 @@ export function jiraTasksOptions(date: string, account?: Account | null) {
 }
 
 export function useJiraTasks(
-  date: string,
+  jql: string,
   options?: Partial<ReturnType<typeof jiraTasksOptions>>,
 ) {
   const { data: account } = useAccount();
   return useQuery({
-    ...jiraTasksOptions(date, account),
+    ...jiraTasksOptions(jql, account),
     enabled: Boolean(account),
     ...options,
   });
