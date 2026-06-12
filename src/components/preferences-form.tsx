@@ -9,7 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/shared/dialog";
-import ThemeSelect from "@/components/theme-select";
+import ThemeToggle from "@/components/theme-toggle";
 
 export default function PreferencesForm() {
   return (
@@ -31,7 +31,7 @@ export default function PreferencesForm() {
         <div className="flex flex-col gap-4">
           <DefaultProjectSelect />
           <ProjectListSelect />
-          <ThemeSelect />
+          <ThemeToggle />
         </div>
       </DialogContent>
     </Dialog>
