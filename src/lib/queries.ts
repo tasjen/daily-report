@@ -1,8 +1,35 @@
 import { queryOptions, useQuery } from "@tanstack/react-query";
 import { invoke } from "@tauri-apps/api/core";
 import { fetch as tauriFetch } from "@tauri-apps/plugin-http";
-import { type GlobalState, useGlobalState } from "@/store";
+import { type Account, type Preferences, store } from "@/lib/store";
 import type { JiraIssue, SelectOption } from "@/type";
+
+export function accountOptions() {
+  return queryOptions({
+    // queryFn must not return undefined, so "no account yet" is null
+    queryKey: ["account"],
+    queryFn: async () => (await store.get<Account>("account")) ?? null,
+  });
+}
+
+export function useAccount() {
+  return useQuery(accountOptions());
+}
+
+export function preferencesOptions() {
+  return queryOptions({
+    queryKey: ["preferences"],
+    queryFn: async () =>
+      (await store.get<Preferences>("preferences")) ?? {
+        default_project: null,
+        project_list: [],
+      },
+  });
+}
+
+export function usePreferences() {
+  return useQuery(preferencesOptions());
+}
 
 export function taskParametersOptions() {
   return queryOptions({
@@ -23,7 +50,7 @@ export function taskParametersOptions() {
 export function useTaskParameters(
   options?: ReturnType<typeof taskParametersOptions>,
 ) {
-  const account = useGlobalState((state) => state.account);
+  const { data: account } = useAccount();
   return useQuery({
     ...taskParametersOptions(),
     enabled: Boolean(account),
@@ -31,10 +58,7 @@ export function useTaskParameters(
   });
 }
 
-export function jiraTasksOptions(
-  date: string,
-  account?: GlobalState["account"],
-) {
+export function jiraTasksOptions(date: string, account?: Account | null) {
   return queryOptions({
     queryKey: ["jira_tasks", date],
     staleTime: Infinity,
@@ -66,7 +90,7 @@ export function useJiraTasks(
   date: string,
   options?: Partial<ReturnType<typeof jiraTasksOptions>>,
 ) {
-  const account = useGlobalState((state) => state.account);
+  const { data: account } = useAccount();
   return useQuery({
     ...jiraTasksOptions(date, account),
     enabled: Boolean(account),

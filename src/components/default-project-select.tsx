@@ -7,13 +7,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/shared/select";
-import { useTaskParameters } from "@/lib/queries";
-import { store } from "@/lib/store";
-import { useGlobalState } from "@/store";
+import { useSavePreferencesMutation } from "@/lib/mutations";
+import { usePreferences, useTaskParameters } from "@/lib/queries";
 
 export default function DefaultProjectSelect() {
-  const preferences = useGlobalState((state) => state.preferences);
-  const setPreferences = useGlobalState((state) => state.setPreferences);
+  const { data: preferences } = usePreferences();
+  const savePreferences = useSavePreferencesMutation();
   const { data } = useTaskParameters();
 
   if (!data?.projects?.length || !preferences) return null;
@@ -24,14 +23,11 @@ export default function DefaultProjectSelect() {
       <Select
         items={data.projects}
         value={preferences.default_project ?? data.projects[0].value}
-        onValueChange={async (val) => {
-          const newPreferences: typeof preferences = {
+        onValueChange={(val) => {
+          savePreferences.mutate({
             ...preferences,
             default_project: val ?? data.projects[0].value,
-          };
-          await store.set("preferences", newPreferences);
-          await store.save();
-          setPreferences(newPreferences);
+          });
         }}
       >
         <SelectTrigger className="w-full">

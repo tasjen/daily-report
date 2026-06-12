@@ -1,5 +1,3 @@
-import { useQueryClient } from "@tanstack/react-query";
-import { invoke } from "@tauri-apps/api/core";
 import { openUrl } from "@tauri-apps/plugin-opener";
 import { ExternalLinkIcon, UserCogIcon } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -21,21 +19,19 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/shared/tooltip";
-import { taskParametersOptions } from "@/lib/queries";
-import { store } from "@/lib/store";
-import { type GlobalState, useGlobalState } from "@/store";
+import { useSaveAccountMutation } from "@/lib/mutations";
+import { useAccount } from "@/lib/queries";
 
 const jiraTokenUrl =
   "https://id.atlassian.com/manage-profile/security/api-tokens";
 
 export default function AccountForm() {
-  const account = useGlobalState((state) => state.account);
-  const setAccount = useGlobalState((state) => state.setAccount);
+  const { data: account } = useAccount();
+  const saveAccount = useSaveAccountMutation();
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [apiToken, setApiToken] = useState("");
   const [open, setOpen] = useState(!account);
-  const queryClient = useQueryClient();
 
   useEffect(() => {
     if (!open || !account) return;
@@ -44,21 +40,10 @@ export default function AccountForm() {
     setApiToken(account.api_token);
   }, [open]);
 
-  async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
+  function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
-    const newAccount: GlobalState["account"] = {
-      phone,
-      email,
-      api_token: apiToken,
-    };
-    await store.set("account", newAccount);
-    await store.save();
+    saveAccount.mutate({ phone, email, api_token: apiToken });
     setOpen(false);
-    if (account) {
-      await invoke("close_headless_browser");
-    }
-    await queryClient.invalidateQueries(taskParametersOptions());
-    setAccount(newAccount);
   }
 
   return (

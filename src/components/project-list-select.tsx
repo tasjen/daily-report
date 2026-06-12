@@ -13,14 +13,13 @@ import {
   useComboboxAnchor,
 } from "@/components/shared/combobox";
 import { Label } from "@/components/shared/label";
-import { useTaskParameters } from "@/lib/queries";
-import { store } from "@/lib/store";
-import { useGlobalState } from "@/store";
+import { useSavePreferencesMutation } from "@/lib/mutations";
+import { usePreferences, useTaskParameters } from "@/lib/queries";
 import type { SelectOption } from "@/type";
 
 export function ProjectListSelect() {
-  const preferences = useGlobalState((state) => state.preferences);
-  const setPreferences = useGlobalState((state) => state.setPreferences);
+  const { data: preferences } = usePreferences();
+  const savePreferences = useSavePreferencesMutation();
   const { data } = useTaskParameters();
   const projects = data?.projects ?? [];
   const anchor = useComboboxAnchor();
@@ -35,14 +34,11 @@ export function ProjectListSelect() {
         autoHighlight
         items={projects}
         value={preferences.project_list}
-        onValueChange={async (val) => {
-          const newPreferences: typeof preferences = {
+        onValueChange={(val) => {
+          savePreferences.mutate({
             ...preferences,
             project_list: val,
-          };
-          await store.set("preferences", newPreferences);
-          await store.save();
-          setPreferences(newPreferences);
+          });
         }}
       >
         <ComboboxTrigger

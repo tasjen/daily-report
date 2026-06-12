@@ -1,37 +1,17 @@
 import "@/App.css";
-import { useEffect } from "react";
 import AccountForm from "@/components/account-form";
 import DateList from "@/components/date-list";
 import OpenMemberPageButton from "@/components/open-member-page-button";
 import PreferencesForm from "@/components/preferences-form";
 import RefreshDateListButton from "@/components/refresh-date-list-button";
 import { Toaster } from "@/components/shared/sonner";
-import { useTaskParameters } from "@/lib/queries";
-import { store } from "@/lib/store";
-import { type GlobalState, useGlobalState } from "@/store";
+import { useAccount, useTaskParameters } from "@/lib/queries";
 
 export default function App() {
-  const account = useGlobalState((state) => state.account);
-  const setAccount = useGlobalState((state) => state.setAccount);
-  const setPreferences = useGlobalState((state) => state.setPreferences);
+  const accountQuery = useAccount();
   const taskParametersQuery = useTaskParameters();
 
-  useEffect(() => {
-    (async () => {
-      const storeAccount = await store.get<GlobalState["account"]>("account");
-      const preferences =
-        await store.get<GlobalState["preferences"]>("preferences");
-      setAccount(storeAccount ?? null);
-      setPreferences(
-        preferences ?? {
-          default_project: null,
-          project_list: [],
-        },
-      );
-    })();
-  }, []);
-
-  if (account === undefined) {
+  if (accountQuery.isPending) {
     return null;
   }
 
@@ -44,7 +24,7 @@ export default function App() {
         <AccountForm />
       </header>
       <main className="container py-4 [&_svg]:flex-none">
-        {account && <DateList />}
+        {accountQuery.data && <DateList />}
         <Toaster />
       </main>
     </div>
