@@ -92,7 +92,9 @@ export default function DateCard({ date }: Props) {
             {summaryText && (
               <Button
                 variant="ghost"
-                className="absolute -top-2 right-2"
+                className={cn("absolute -top-2 right-2", {
+                  "not-hover:text-muted-foreground": !isCopied,
+                })}
                 onClick={async () => {
                   if (isCopied) return;
                   await navigator.clipboard.writeText(summaryText);
