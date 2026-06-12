@@ -14,11 +14,11 @@ import {
 } from "@/components/shared/combobox";
 import { useTaskParameters } from "@/lib/queries";
 import { Label } from "./components/shared/label";
+import { store } from "./lib/store";
 import { useGlobalState } from "./store";
 import type { SelectOption } from "./type";
 
 export function ProjectListSelect() {
-  const store = useGlobalState((state) => state.store);
   const preferences = useGlobalState((state) => state.preferences);
   const setPreferences = useGlobalState((state) => state.setPreferences);
   const { data } = useTaskParameters();

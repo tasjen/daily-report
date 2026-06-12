@@ -4,13 +4,13 @@ import AccountForm from "./account-form";
 import { Toaster } from "./components/shared/sonner";
 import DateList from "./date-list";
 import { useTaskParameters } from "./lib/queries";
+import { store } from "./lib/store";
 import OpenMemberPageButton from "./open-member-page-button";
 import PreferencesForm from "./preferences-form";
 import RefreshDateListButton from "./refresh-date-list-button";
 import { type GlobalState, useGlobalState } from "./store";
 
 export default function App() {
-  const store = useGlobalState((state) => state.store);
   const account = useGlobalState((state) => state.account);
   const setAccount = useGlobalState((state) => state.setAccount);
   const setPreferences = useGlobalState((state) => state.setPreferences);

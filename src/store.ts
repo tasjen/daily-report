@@ -1,9 +1,7 @@
-import { LazyStore } from "@tauri-apps/plugin-store";
 import { create } from "zustand";
 
 // Define types for state & actions
 export type GlobalState = {
-  store: LazyStore;
   account:
     | {
         phone: string;
@@ -27,7 +25,6 @@ export type GlobalAction = {
 
 // Create store using the curried form of `create`
 export const useGlobalState = create<GlobalState & GlobalAction>()((set) => ({
-  store: new LazyStore("store.json"),
   account: undefined,
   preferences: undefined,
   setAccount: (s) => set((prev) => ({ ...prev, account: s })),

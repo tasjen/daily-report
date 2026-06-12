@@ -3,10 +3,9 @@ import { Loader2Icon } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Button } from "./components/shared/button";
-import { useGlobalState } from "./store";
+import { store } from "./lib/store";
 
 export default function ResetAppButton() {
-  const store = useGlobalState((state) => state.store);
   const [isLoading, setIsLoading] = useState(false);
   return (
     <Button

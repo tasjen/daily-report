@@ -21,6 +21,7 @@ import {
   TooltipTrigger,
 } from "./components/shared/tooltip";
 import { taskParametersOptions } from "./lib/queries";
+import { store } from "./lib/store";
 import ResetAppButton from "./reset-app-button";
 import { type GlobalState, useGlobalState } from "./store";
 
@@ -28,7 +29,6 @@ const jiraTokenUrl =
   "https://id.atlassian.com/manage-profile/security/api-tokens";
 
 export default function AccountForm() {
-  const store = useGlobalState((state) => state.store);
   const account = useGlobalState((state) => state.account);
   const setAccount = useGlobalState((state) => state.setAccount);
   const [phone, setPhone] = useState("");
