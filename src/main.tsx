@@ -4,6 +4,8 @@ import ReactDOM from "react-dom/client";
 import App from "@/App";
 import "@/App.css";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "@/components/error-fallback";
 import { TooltipProvider } from "@/components/shared/tooltip";
 import { ThemeProvider } from "@/components/theme-provider";
 
@@ -19,13 +21,15 @@ const queryClient = new QueryClient({
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider storageKey="vite-ui-theme">
-        <TooltipProvider>
-          <App />
-        </TooltipProvider>
-      </ThemeProvider>
-      <ReactQueryDevtools />
-    </QueryClientProvider>
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider storageKey="vite-ui-theme">
+          <TooltipProvider>
+            <App />
+          </TooltipProvider>
+        </ThemeProvider>
+        <ReactQueryDevtools />
+      </QueryClientProvider>
+    </ErrorBoundary>
   </React.StrictMode>,
 );
