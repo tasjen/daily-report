@@ -10,7 +10,6 @@ export default function RefreshDateListButton() {
       variant="ghost"
       disabled={isFetching}
       onClick={() => refetch()}
-      className="not-hover:text-ring"
     >
       <RefreshCwIcon className="size-6" />
     </Button>

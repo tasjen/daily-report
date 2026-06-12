@@ -16,11 +16,7 @@ export default function PreferencesForm() {
     <Dialog>
       <DialogTrigger
         render={
-          <Button
-            size="icon-xl"
-            variant="ghost"
-            className="not-hover:text-ring"
-          >
+          <Button size="icon-xl" variant="ghost">
             <Settings2Icon className="size-6" />
           </Button>
         }

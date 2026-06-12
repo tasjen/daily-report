@@ -4,6 +4,7 @@ import AccountForm from "./account-form";
 import { Toaster } from "./components/shared/sonner";
 import DateList from "./date-list";
 import { useTaskParameters } from "./lib/queries";
+import OpenMemberPageButton from "./open-member-page-button";
 import PreferencesForm from "./preferences-form";
 import RefreshDateListButton from "./refresh-date-list-button";
 import { type GlobalState, useGlobalState } from "./store";
@@ -37,6 +38,7 @@ export default function App() {
   return (
     <div className="flex">
       <header className="sticky bottom-0 h-screen justify-end p-2 mt-auto z-10 flex flex-col gap-2">
+        {taskParametersQuery.isSuccess && <OpenMemberPageButton />}
         <RefreshDateListButton />
         {taskParametersQuery.isSuccess && <PreferencesForm />}
         <AccountForm />

@@ -65,11 +65,7 @@ export default function AccountForm() {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger
         render={
-          <Button
-            size="icon-xl"
-            variant="ghost"
-            className="not-hover:text-ring"
-          >
+          <Button size="icon-xl" variant="ghost">
             <UserCogIcon className="size-6" />
           </Button>
         }
