@@ -1,11 +1,20 @@
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { Loader2Icon } from "lucide-react";
+import { useState } from "react";
 import DateCard from "@/components/date-card";
+import { Button } from "@/components/shared/button";
 import { useTaskParameters } from "@/lib/queries";
+
+const PAGE_SIZE = 5;
 
 export default function DateList() {
   const { data, isFetching, error } = useTaskParameters();
-  const [animateRef] = useAutoAnimate({ disrespectUserMotionPreference: true });
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const [animateRef, setEnabled] = useAutoAnimate({
+    disrespectUserMotionPreference: true,
+  });
+
+  const dates = data?.dates.filter((e) => e.value) ?? [];
 
   return (
     <div className="flex flex-col items-center gap-4">
@@ -19,14 +28,25 @@ export default function DateList() {
           {String(error)}
         </p>
       ) : (
-        <ol ref={animateRef} className="flex w-full max-w-5xl flex-col gap-4">
-          {data?.dates
-            .filter((e) => e.value)
-            .slice(0, 5)
-            .map((option) => (
+        <>
+          <ol ref={animateRef} className="flex w-full max-w-5xl flex-col gap-4">
+            {dates.slice(0, visibleCount).map((option) => (
               <DateCard key={option.value} date={option.value} />
             ))}
-        </ol>
+          </ol>
+          {visibleCount < dates.length && (
+            <Button
+              variant="outline"
+              onClick={() => {
+                setEnabled(false);
+                setVisibleCount((prev) => prev + PAGE_SIZE);
+                setTimeout(() => setEnabled(true), 500);
+              }}
+            >
+              Load more
+            </Button>
+          )}
+        </>
       )}
     </div>
   );
