@@ -46,6 +46,7 @@ export function ProjectListSelect() {
         }}
       >
         <ComboboxTrigger
+          nativeButton={false}
           render={
             <ComboboxChips ref={anchor} className="w-full">
               <ComboboxValue>
