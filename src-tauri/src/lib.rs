@@ -188,6 +188,18 @@ impl BrowserState {
             .await
             .map_err(|e| AppError::from(format!("{e}\nIncorrect phone number")))?;
 
+        // Chromium starts with an initial blank tab in addition to the page we
+        // create; close it after login so the headed window doesn't show a
+        // stray empty tab. Best-effort: login already succeeded, so a cleanup
+        // failure shouldn't fail the launch.
+        if let Ok(pages) = browser.pages().await {
+            for p in pages {
+                if p.target_id() != page.target_id() {
+                    let _ = p.close().await;
+                }
+            }
+        }
+
         Ok((browser, page, temp_dir))
     }
 }
@@ -294,6 +306,14 @@ async fn get_task_parameters(
 }
 
 #[tauri::command]
+async fn open_member_page(state: tauri::State<'_, HeadedBrowserState>) -> Result<(), AppError> {
+    let page = state.get_page().await?;
+    page.goto(format!("{ADMIN_BASE}/member.php")).await?;
+    page.bring_to_front().await?;
+    Ok(())
+}
+
+#[tauri::command]
 async fn submit_task(
     state: tauri::State<'_, HeadedBrowserState>,
     date: String,
@@ -379,7 +399,8 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             get_task_parameters,
             close_headless_browser,
-            submit_task
+            submit_task,
+            open_member_page
         ])
         .build(tauri::generate_context!())
         .expect("error while running tauri application")
