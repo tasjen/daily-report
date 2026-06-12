@@ -3,6 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "@/App";
 import "@/App.css";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { TooltipProvider } from "@/components/shared/tooltip";
 import { ThemeProvider } from "@/components/theme-provider";
 
@@ -24,6 +25,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
           <App />
         </TooltipProvider>
       </ThemeProvider>
+      <ReactQueryDevtools />
     </QueryClientProvider>
   </React.StrictMode>,
 );
