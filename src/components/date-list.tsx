@@ -21,8 +21,8 @@ export default function DateList() {
       ) : (
         <ol ref={animateRef} className="flex flex-col w-full max-w-5xl gap-4">
           {data?.dates
-            .slice(0, 5)
             .filter((e) => e.value)
+            .slice(0, 5)
             .map((option) => (
               <DateCard key={option.value} date={option.value} />
             ))}
