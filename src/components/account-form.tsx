@@ -1,5 +1,5 @@
 import { openUrl } from "@tauri-apps/plugin-opener";
-import { ExternalLinkIcon, UserCogIcon } from "lucide-react";
+import { ExternalLinkIcon, UserCogIcon, UserIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import ResetAppButton from "@/components/reset-app-button";
 import { Button } from "@/components/shared/button";
@@ -51,14 +51,14 @@ export default function AccountForm() {
       <DialogTrigger
         render={
           <Button size="icon-xl" variant="ghost">
-            <UserCogIcon className="size-6" />
+            <UserIcon className="size-6" />
           </Button>
         }
       />
       <DialogContent initialFocus={false}>
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
-            <UserCogIcon />
+            <UserIcon />
             Account
           </DialogTitle>
         </DialogHeader>
