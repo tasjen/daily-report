@@ -15,18 +15,19 @@ export default function DefaultProjectSelect() {
   const savePreferences = useSavePreferencesMutation();
   const { data } = useTaskParameters();
 
-  if (!data?.projects?.length || !preferences) return null;
+  const firstProject = data?.projects[0];
+  if (!firstProject || !preferences) return null;
 
   return (
     <Label className="flex flex-col items-start gap-2">
       <p className="flex flex-none items-center gap-1">Default project</p>
       <Select
         items={data.projects}
-        value={preferences.default_project ?? data.projects[0].value}
+        value={preferences.default_project ?? firstProject.value}
         onValueChange={(val) => {
           savePreferences.mutate({
             ...preferences,
-            default_project: val ?? data.projects[0].value,
+            default_project: val ?? firstProject.value,
           });
         }}
       >
