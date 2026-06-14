@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/shared/button";
 import { store } from "@/lib/store";
 
-export default function ResetAppButton() {
+export default function SignOutButton() {
   const [isLoading, setIsLoading] = useState(false);
   return (
     <Button
@@ -24,7 +24,7 @@ export default function ResetAppButton() {
         setIsLoading(false);
       }}
     >
-      {isLoading ? <Loader2Icon className="animate-spin" /> : "Reset"}
+      {isLoading ? <Loader2Icon className="animate-spin" /> : "Sign out"}
     </Button>
   );
 }

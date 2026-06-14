@@ -3,7 +3,6 @@ import { openUrl } from "@tauri-apps/plugin-opener";
 import { ExternalLinkIcon, UserIcon } from "lucide-react";
 import { useState } from "react";
 import { z } from "zod";
-import ResetAppButton from "@/components/reset-app-button";
 import { Button } from "@/components/shared/button";
 import {
   Dialog,
@@ -26,6 +25,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/shared/tooltip";
+import SignOutButton from "@/components/sign-out-button";
 import { useSaveAccountMutation } from "@/lib/mutations";
 import { useAccount } from "@/lib/queries";
 
@@ -191,7 +191,7 @@ export default function AccountForm() {
           </FieldGroup>
 
           <DialogFooter>
-            <ResetAppButton />
+            <SignOutButton />
             <form.Subscribe selector={(state) => state.canSubmit}>
               {(canSubmit) => (
                 <Button type="submit" className="flex-1" disabled={!canSubmit}>
