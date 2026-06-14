@@ -1,4 +1,4 @@
-import { useForm } from "@tanstack/react-form";
+import { type AnyFieldApi, useForm } from "@tanstack/react-form";
 import { openUrl } from "@tauri-apps/plugin-opener";
 import { ExternalLinkIcon, UserIcon } from "lucide-react";
 import { useState } from "react";
@@ -41,6 +41,37 @@ const formSchema = z.object({
     .pipe(z.email("Enter a valid email address")),
   api_token: z.string().trim().min(1, "Jira API token is required"),
 });
+
+// Renders one labelled text input wired to a TanStack Form field. `field` is
+// typed as AnyFieldApi (the library's escape hatch for reusable field
+// components), which is fine here since every field holds a string.
+function TextField({
+  field,
+  label,
+  type,
+}: {
+  field: AnyFieldApi;
+  label: React.ReactNode;
+  type: React.HTMLInputTypeAttribute;
+}) {
+  const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+  return (
+    <Field data-invalid={isInvalid}>
+      <FieldLabel htmlFor={field.name}>{label}</FieldLabel>
+      <Input
+        id={field.name}
+        name={field.name}
+        type={type}
+        value={field.state.value}
+        onBlur={field.handleBlur}
+        onChange={(e) => field.handleChange(e.target.value)}
+        aria-invalid={isInvalid}
+        autoComplete="off"
+      />
+      {isInvalid && <FieldError errors={field.state.meta.errors} />}
+    </Field>
+  );
+}
 
 export default function AccountForm() {
   const { data: account } = useAccount();
@@ -98,66 +129,40 @@ export default function AccountForm() {
         >
           <FieldGroup>
             <form.Field name="phone">
-              {(field) => {
-                const isInvalid =
-                  field.state.meta.isTouched && !field.state.meta.isValid;
-                return (
-                  <Field data-invalid={isInvalid}>
-                    <FieldLabel htmlFor={field.name}>
+              {(field) => (
+                <TextField
+                  field={field}
+                  type="tel"
+                  label={
+                    <>
                       Phone number <SpanRequired />
-                    </FieldLabel>
-                    <Input
-                      id={field.name}
-                      name={field.name}
-                      type="tel"
-                      value={field.state.value}
-                      onBlur={field.handleBlur}
-                      onChange={(e) => field.handleChange(e.target.value)}
-                      aria-invalid={isInvalid}
-                      autoComplete="off"
-                    />
-                    {isInvalid && (
-                      <FieldError errors={field.state.meta.errors} />
-                    )}
-                  </Field>
-                );
-              }}
+                    </>
+                  }
+                />
+              )}
             </form.Field>
 
             <form.Field name="email">
-              {(field) => {
-                const isInvalid =
-                  field.state.meta.isTouched && !field.state.meta.isValid;
-                return (
-                  <Field data-invalid={isInvalid}>
-                    <FieldLabel htmlFor={field.name}>
+              {(field) => (
+                <TextField
+                  field={field}
+                  type="email"
+                  label={
+                    <>
                       Jira email <SpanRequired />
-                    </FieldLabel>
-                    <Input
-                      id={field.name}
-                      name={field.name}
-                      type="email"
-                      value={field.state.value}
-                      onBlur={field.handleBlur}
-                      onChange={(e) => field.handleChange(e.target.value)}
-                      aria-invalid={isInvalid}
-                      autoComplete="off"
-                    />
-                    {isInvalid && (
-                      <FieldError errors={field.state.meta.errors} />
-                    )}
-                  </Field>
-                );
-              }}
+                    </>
+                  }
+                />
+              )}
             </form.Field>
 
             <form.Field name="api_token">
-              {(field) => {
-                const isInvalid =
-                  field.state.meta.isTouched && !field.state.meta.isValid;
-                return (
-                  <Field data-invalid={isInvalid}>
-                    <FieldLabel htmlFor={field.name}>
+              {(field) => (
+                <TextField
+                  field={field}
+                  type="password"
+                  label={
+                    <>
                       Jira API token <SpanRequired />
                       <Tooltip>
                         <TooltipTrigger
@@ -178,23 +183,10 @@ export default function AccountForm() {
                           </p>
                         </TooltipContent>
                       </Tooltip>
-                    </FieldLabel>
-                    <Input
-                      id={field.name}
-                      name={field.name}
-                      type="password"
-                      value={field.state.value}
-                      onBlur={field.handleBlur}
-                      onChange={(e) => field.handleChange(e.target.value)}
-                      aria-invalid={isInvalid}
-                      autoComplete="off"
-                    />
-                    {isInvalid && (
-                      <FieldError errors={field.state.meta.errors} />
-                    )}
-                  </Field>
-                );
-              }}
+                    </>
+                  }
+                />
+              )}
             </form.Field>
           </FieldGroup>
 
