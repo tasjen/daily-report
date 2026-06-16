@@ -204,15 +204,20 @@ impl BrowserState {
     }
 }
 
-/// Probes whether the cached page can still be driven over CDP. Returns false if
-/// the page target is closed, the connection is gone (the user closed the
-/// window), or the round-trip times out — signalling the browser must be
-/// relaunched. A process-level check (`Browser::try_wait`) is not enough: on
-/// macOS the Chromium process keeps running after its last window is closed, so
-/// we probe the page itself with a lightweight round-trip.
+/// Probes whether the cached page can still be driven over CDP. Issues a real
+/// round-trip into the page's JS context (`Runtime.evaluate`) and returns false
+/// if it errors or times out, signalling the browser must be relaunched.
+///
+/// Do NOT probe with `page.url()`: chromiumoxide answers that from the handler's
+/// locally-cached frame state without contacting Chromium, so it keeps returning
+/// `Ok` even when the renderer/CDP session is dead (e.g. after the OS suspends
+/// the browser during a long idle) — a false positive that then strands the next
+/// real command on a ~30s CDP timeout. A process-level check (`Browser::try_wait`)
+/// is likewise insufficient: on macOS the process lingers after its last window
+/// closes. Probe the live session, not the cache or the process.
 async fn is_page_alive(page: &Page) -> bool {
     matches!(
-        tokio::time::timeout(std::time::Duration::from_secs(2), page.url()).await,
+        tokio::time::timeout(std::time::Duration::from_secs(2), page.evaluate("1")).await,
         Ok(Ok(_))
     )
 }
