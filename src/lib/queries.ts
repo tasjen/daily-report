@@ -58,7 +58,7 @@ export function useTaskParameters(
   });
 }
 
-export function jiraTasksOptions(jql: string, account?: Account | null) {
+export function jiraTasksQueryOptions(jql: string, account?: Account | null) {
   return queryOptions({
     queryKey: ["jira_tasks", jql],
     staleTime: Infinity,
@@ -86,13 +86,13 @@ export function jiraTasksOptions(jql: string, account?: Account | null) {
   });
 }
 
-export function useJiraTasks(
+export function useJiraTasksQuery(
   jql: string,
-  options?: Partial<ReturnType<typeof jiraTasksOptions>>,
+  options?: Partial<ReturnType<typeof jiraTasksQueryOptions>>,
 ) {
   const { data: account } = useAccount();
   return useQuery({
-    ...jiraTasksOptions(jql, account),
+    ...jiraTasksQueryOptions(jql, account),
     enabled: Boolean(account),
     ...options,
   });
