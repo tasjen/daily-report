@@ -18,6 +18,11 @@ const TASK_LEAVE_SELECT: &str = "select#task_leave";
 const TASK_PROJECT_SELECT_1: &str = "select#task_project_id1";
 const TASK_COMMENT_TEXTAREA_1: &str = "textarea#task_comment1";
 
+// Prefix for the per-browser Chromium user-data dirs created in the temp dir.
+// Distinctive so `sweep_stale_user_data_dirs` can reclaim leftovers without
+// touching other programs' `tempfile` dirs.
+const USER_DATA_DIR_PREFIX: &str = "daily-report-";
+
 #[derive(thiserror::Error, Debug)]
 enum AppError {
     #[error("{0}")]
@@ -152,7 +157,11 @@ impl BrowserState {
         // cost of launching a browser.
         let phone = self.phone()?;
 
-        let temp_dir = tempfile::tempdir()?;
+        // Prefix the user-data dir so leftovers from an unclean shutdown can be
+        // identified and swept on the next launch (see `sweep_stale_user_data_dirs`).
+        let temp_dir = tempfile::Builder::new()
+            .prefix(USER_DATA_DIR_PREFIX)
+            .tempdir()?;
         let mut config = BrowserConfig::builder()
             .user_data_dir(temp_dir.path())
             .viewport(None);
@@ -377,6 +386,27 @@ async fn submit_task(
     Ok(())
 }
 
+/// Removes Chromium user-data dirs left in the temp dir by previous runs that
+/// didn't shut down cleanly (force-quit, or `Ctrl+C` during `tauri dev`) — these
+/// would otherwise accumulate, each a multi-MB profile. Safe to delete all of
+/// them: the app is single-instance and this runs at startup before any browser
+/// launches, so every `daily-report-*` dir necessarily belongs to a prior, now
+/// dead run. Best-effort — individual failures are ignored.
+fn sweep_stale_user_data_dirs() {
+    let Ok(entries) = std::fs::read_dir(std::env::temp_dir()) else {
+        return;
+    };
+    for entry in entries.flatten() {
+        let is_ours = entry
+            .file_name()
+            .to_str()
+            .is_some_and(|name| name.starts_with(USER_DATA_DIR_PREFIX));
+        if is_ours && entry.path().is_dir() {
+            let _ = std::fs::remove_dir_all(entry.path());
+        }
+    }
+}
+
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| {
@@ -391,6 +421,9 @@ pub fn run() {
         .plugin(tauri_plugin_http::init())
         .plugin(tauri_plugin_opener::init())
         .setup(|app| {
+            // Reclaim user-data dirs leaked by a previous unclean shutdown,
+            // before this run creates any of its own.
+            sweep_stale_user_data_dirs();
             app.manage(HeadlessBrowserState(BrowserState::new(
                 app.handle().clone(),
                 false,
