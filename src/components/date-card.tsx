@@ -63,10 +63,12 @@ export default function DateCard({ date }: Props) {
 
   const issueOptions = useMemo<SelectOption[]>(
     () =>
-      allIssues.map((issue) => ({
-        value: issue.key,
-        label: `${issue.key}: ${issue.fields.summary}`,
-      })),
+      allIssues
+        .map((issue) => ({
+          value: issue.key,
+          label: `${issue.key}: ${issue.fields.summary}`,
+        }))
+        .sort((a, b) => a.value.localeCompare(b.value)),
     [allIssues],
   );
 
@@ -82,8 +84,7 @@ export default function DateCard({ date }: Props) {
     () =>
       allIssues
         .map((issue) => issue.key)
-        .filter((key) => overrides[key] ?? defaultCheckedKeys.has(key))
-        .sort((a, b) => a.localeCompare(b)),
+        .filter((key) => overrides[key] ?? defaultCheckedKeys.has(key)),
     [allIssues, overrides, defaultCheckedKeys],
   );
 
@@ -107,11 +108,6 @@ export default function DateCard({ date }: Props) {
     <Card>
       <CardHeader className="flex flex-none items-center gap-2">
         <CardTitle className="flex-1">{date}</CardTitle>
-        <TaskSelect
-          items={issueOptions}
-          value={selectedKeys}
-          onValueChange={handleSelectionChange}
-        />
         <Button
           size="icon-lg"
           variant="ghost"
@@ -164,6 +160,11 @@ export default function DateCard({ date }: Props) {
                 {isCopied ? <CopyCheckIcon /> : <CopyIcon />}
               </Button>
             )}
+            <TaskSelect
+              items={issueOptions}
+              value={selectedKeys}
+              onValueChange={handleSelectionChange}
+            />
           </>
         )}
       </CardContent>

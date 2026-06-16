@@ -1,5 +1,3 @@
-import { PlusIcon } from "lucide-react";
-import { Button } from "@/components/shared/button";
 import {
   Combobox,
   ComboboxContent,
@@ -7,7 +5,7 @@ import {
   ComboboxInput,
   ComboboxItem,
   ComboboxList,
-  ComboboxTrigger,
+  useComboboxAnchor,
 } from "@/components/shared/combobox";
 import type { SelectOption } from "@/type";
 
@@ -20,6 +18,7 @@ type Props = {
 // Multi-select dropdown with a Plus-icon trigger. Selected items show a check
 // in the list; there is no chips/value display on the trigger itself.
 export default function TaskSelect({ items, value, onValueChange }: Props) {
+  const anchor = useComboboxAnchor();
   return (
     <Combobox
       multiple
@@ -27,14 +26,18 @@ export default function TaskSelect({ items, value, onValueChange }: Props) {
       value={value}
       onValueChange={onValueChange}
     >
-      <ComboboxTrigger
-        showChevron={false}
-        render={<Button size="icon-lg" variant="ghost" />}
-      >
-        <PlusIcon />
-      </ComboboxTrigger>
-      <ComboboxContent className="w-xl">
+      <div className="mt-4" ref={anchor}>
         <ComboboxInput showTrigger={false} placeholder="Search tasks" />
+      </div>
+      <ComboboxContent
+        anchor={anchor}
+        className="w-xl"
+        side="bottom"
+        positionerProps={{
+          collisionAvoidance: { side: "none" },
+          collisionPadding: { bottom: 0 },
+        }}
+      >
         <ComboboxEmpty>No tasks found.</ComboboxEmpty>
         <ComboboxList>
           {(option: SelectOption) => (
