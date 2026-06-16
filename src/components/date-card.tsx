@@ -26,7 +26,7 @@ type Props = {
 export default function DateCard({ date }: Props) {
   const dateAfter = getDateAfter(date);
   const jqlStatusUpdatedByMe = `status CHANGED BY currentUser() DURING ("${date}", "${dateAfter}")`;
-  const jqlMyActiveSprintNotDone = `assignee = currentUser() AND sprint in openSprints() AND statusCategory != Done`;
+  const jqlMyActiveSprintNotDone = `assignee = currentUser() AND created <= "${date}" AND sprint in openSprints() AND statusCategory != Done`;
   const jqlCreatedByMe = `creator = currentUser() AND created >= "${date}" AND created < "${dateAfter}"`;
 
   // Each set is queried separately so it can carry its own default: only the
