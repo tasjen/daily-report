@@ -152,7 +152,12 @@ impl BrowserState {
     /// subdirs so the two instances never contend for the same profile lock.
     fn user_data_dir(&self) -> Result<std::path::PathBuf, AppError> {
         let subdir = if self.with_head { "headed" } else { "headless" };
-        Ok(self.app.path().app_cache_dir()?.join("profiles").join(subdir))
+        Ok(self
+            .app
+            .path()
+            .app_cache_dir()?
+            .join("profiles")
+            .join(subdir))
     }
 
     /// Launches a fresh Chromium instance and logs into the admin portal.
@@ -169,6 +174,7 @@ impl BrowserState {
         std::fs::create_dir_all(&user_data_dir)?;
         let mut config = BrowserConfig::builder()
             .user_data_dir(&user_data_dir)
+            .incognito()
             .viewport(None);
         if self.with_head {
             config = config.with_head();
