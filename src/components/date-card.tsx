@@ -32,15 +32,12 @@ export default function DateCard({ date }: Props) {
   // Each set is queried separately so it can carry its own default: only the
   // status-updated issues are checked by default; created and active-sprint
   // issues are offered as options but start unchecked.
-  const statusQuery = useJiraTasksQuery(jqlStatusUpdatedByMe, {
+  const queryOptions = {
     refetchOnMount: "always",
-  });
-  const sprintQuery = useJiraTasksQuery(jqlMyActiveSprintNotDone, {
-    refetchOnMount: "always",
-  });
-  const createdQuery = useJiraTasksQuery(jqlCreatedByMe, {
-    refetchOnMount: "always",
-  });
+  } as const;
+  const statusQuery = useJiraTasksQuery(jqlStatusUpdatedByMe, queryOptions);
+  const sprintQuery = useJiraTasksQuery(jqlMyActiveSprintNotDone, queryOptions);
+  const createdQuery = useJiraTasksQuery(jqlCreatedByMe, queryOptions);
 
   const error = statusQuery.error ?? createdQuery.error ?? sprintQuery.error;
   const isFetching =
