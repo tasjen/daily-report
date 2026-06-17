@@ -18,11 +18,6 @@ const TASK_LEAVE_SELECT: &str = "select#task_leave";
 const TASK_PROJECT_SELECT_1: &str = "select#task_project_id1";
 const TASK_COMMENT_TEXTAREA_1: &str = "textarea#task_comment1";
 
-// Prefix for the per-browser Chromium user-data dirs created in the temp dir.
-// Distinctive so `sweep_stale_user_data_dirs` can reclaim leftovers without
-// touching other programs' `tempfile` dirs.
-const USER_DATA_DIR_PREFIX: &str = "daily-report-";
-
 #[derive(thiserror::Error, Debug)]
 enum AppError {
     #[error("{0}")]
@@ -36,6 +31,8 @@ enum AppError {
     Store(#[from] tauri_plugin_store::Error),
     #[error(transparent)]
     Json(#[from] serde_json::Error),
+    #[error(transparent)]
+    Tauri(#[from] tauri::Error),
 }
 
 // Manual `From` (rather than `#[from]`) so `?` boxes the error at the call site
@@ -66,7 +63,7 @@ impl serde::Serialize for AppError {
 }
 
 struct BrowserState {
-    inner: Mutex<Option<(Browser, Page, tempfile::TempDir)>>,
+    inner: Mutex<Option<(Browser, Page)>>,
     app: tauri::AppHandle,
     with_head: bool,
 }
@@ -101,7 +98,7 @@ impl BrowserState {
 
     async fn close(&self) {
         let mut guard = self.inner.lock().await;
-        if let Some((mut browser, page, _temp_dir)) = guard.take() {
+        if let Some((mut browser, page)) = guard.take() {
             // Try a graceful shutdown, but bound it: if the user already closed
             // the window the connection is gone, so `close`/`wait` can never
             // complete. Fall back to force-killing the lingering process.
@@ -132,7 +129,7 @@ impl BrowserState {
 
     async fn get_page(&self) -> Result<Page, AppError> {
         let mut guard = self.inner.lock().await;
-        if let Some((_, page, _)) = guard.as_ref() {
+        if let Some((_, page)) = guard.as_ref() {
             if is_page_alive(page).await {
                 return Ok(page.clone());
             }
@@ -142,28 +139,36 @@ impl BrowserState {
         // process and drop it so a fresh instance is launched below. We use
         // `kill` rather than `close` + `wait`: once the connection is gone the
         // close command can't be delivered, so `wait` would block forever.
-        if let Some((mut browser, _page, _temp_dir)) = guard.take() {
+        if let Some((mut browser, _page)) = guard.take() {
             let _ = browser.kill().await;
         }
-        let (browser, page, temp_dir) = self.launch_and_login().await?;
-        *guard = Some((browser, page.clone(), temp_dir));
+        let (browser, page) = self.launch_and_login().await?;
+        *guard = Some((browser, page.clone()));
         Ok(page)
     }
 
-    /// Launches a fresh Chromium instance and logs into the admin portal,
-    /// returning the live browser/page and its user-data dir.
-    async fn launch_and_login(&self) -> Result<(Browser, Page, tempfile::TempDir), AppError> {
+    /// Path to this browser's Chromium user-data dir, under the app's own cache
+    /// dir (not the shared system temp). Headed and headless get separate
+    /// subdirs so the two instances never contend for the same profile lock.
+    fn user_data_dir(&self) -> Result<std::path::PathBuf, AppError> {
+        let subdir = if self.with_head { "headed" } else { "headless" };
+        Ok(self.app.path().app_cache_dir()?.join("profiles").join(subdir))
+    }
+
+    /// Launches a fresh Chromium instance and logs into the admin portal.
+    async fn launch_and_login(&self) -> Result<(Browser, Page), AppError> {
         // Read the phone first so a missing config fails before we spend the
         // cost of launching a browser.
         let phone = self.phone()?;
 
-        // Prefix the user-data dir so leftovers from an unclean shutdown can be
-        // identified and swept on the next launch (see `sweep_stale_user_data_dirs`).
-        let temp_dir = tempfile::Builder::new()
-            .prefix(USER_DATA_DIR_PREFIX)
-            .tempdir()?;
+        // Start each launch from a clean profile in our own cache dir. Wiping
+        // also clears any stale `SingletonLock` a previous unclean shutdown left
+        // behind, so a leftover Chromium can't make this launch hand off and exit.
+        let user_data_dir = self.user_data_dir()?;
+        let _ = std::fs::remove_dir_all(&user_data_dir);
+        std::fs::create_dir_all(&user_data_dir)?;
         let mut config = BrowserConfig::builder()
-            .user_data_dir(temp_dir.path())
+            .user_data_dir(&user_data_dir)
             .viewport(None);
         if self.with_head {
             config = config.with_head();
@@ -209,7 +214,7 @@ impl BrowserState {
             }
         }
 
-        Ok((browser, page, temp_dir))
+        Ok((browser, page))
     }
 }
 
@@ -386,27 +391,6 @@ async fn submit_task(
     Ok(())
 }
 
-/// Removes Chromium user-data dirs left in the temp dir by previous runs that
-/// didn't shut down cleanly (force-quit, or `Ctrl+C` during `tauri dev`) — these
-/// would otherwise accumulate, each a multi-MB profile. Safe to delete all of
-/// them: the app is single-instance and this runs at startup before any browser
-/// launches, so every `daily-report-*` dir necessarily belongs to a prior, now
-/// dead run. Best-effort — individual failures are ignored.
-fn sweep_stale_user_data_dirs() {
-    let Ok(entries) = std::fs::read_dir(std::env::temp_dir()) else {
-        return;
-    };
-    for entry in entries.flatten() {
-        let is_ours = entry
-            .file_name()
-            .to_str()
-            .is_some_and(|name| name.starts_with(USER_DATA_DIR_PREFIX));
-        if is_ours && entry.path().is_dir() {
-            let _ = std::fs::remove_dir_all(entry.path());
-        }
-    }
-}
-
 pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| {
@@ -421,9 +405,6 @@ pub fn run() {
         .plugin(tauri_plugin_http::init())
         .plugin(tauri_plugin_opener::init())
         .setup(|app| {
-            // Reclaim user-data dirs leaked by a previous unclean shutdown,
-            // before this run creates any of its own.
-            sweep_stale_user_data_dirs();
             app.manage(HeadlessBrowserState(BrowserState::new(
                 app.handle().clone(),
                 false,

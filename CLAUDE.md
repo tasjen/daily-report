@@ -51,18 +51,25 @@ newtype wrappers registered as Tauri managed state:
 - **`HeadedBrowserState`** (`with_head: true`) — used by `submit_task` so the user
   can see the pre-filled form and click submit themselves. Runs visible.
 
-Each `BrowserState` holds `Mutex<Option<(Browser, Page, TempDir)>>` — the browser
-is lazily launched on first use via `get_page()` and reused afterward. Each
-browser gets its own `tempfile::TempDir` as the Chromium user-data dir.
+Each `BrowserState` holds `Mutex<Option<(Browser, Page)>>` — the browser is lazily
+launched on first use via `get_page()` and reused afterward. Each browser's
+Chromium user-data dir is a fixed path under the app's own cache dir
+(`app_cache_dir()/profiles/{headed,headless}` — separate subdirs so the two never
+contend for the same profile lock), wiped at the start of each launch. Using the
+app cache dir rather than the shared system temp avoids macOS "access data from
+other apps" prompts; wiping clears any stale `SingletonLock` from an unclean
+shutdown so a leftover Chromium can't make the next launch hand off and exit.
 
 `get_page()` validates the cached page before reusing it via `is_page_alive()`,
-a lightweight `page.url()` CDP round-trip (2s timeout). If the page can no longer
-be driven — e.g. the user manually closed the headed window — the stale instance
-is force-killed (`browser.kill()`) and a fresh one is launched and logged in.
-**Do not** use `Browser::try_wait()` (a process-level check) for this: on macOS the
-Chromium process keeps running after its last window closes, so a process check
-reports it alive while the page target is actually dead. Probe the page, not the
-process.
+a real round-trip into the page's JS context (`page.evaluate("1")`, 2s timeout).
+**Do not** probe with `page.url()`: chromiumoxide answers that from its locally
+cached frame state without contacting Chromium, so it stays `Ok` even when the
+session is dead (e.g. after the OS suspends the browser during a long idle) — a
+false positive that strands the next real command on a ~30s CDP timeout. A
+process-level check (`Browser::try_wait()`) is likewise insufficient: on macOS the
+process lingers after its last window closes. Probe the live session, not the
+cache or the process. When the probe fails the stale instance is force-killed
+(`browser.kill()`) and a fresh one is launched and logged in.
 
 ### Browser login flow (`BrowserState::get_page`)
 
@@ -84,8 +91,10 @@ not match if already on the target URL, so navigate away before relying on it.
 `close()` attempts a graceful shutdown (close page → close browser → `wait()`),
 but bounds it with a 3s timeout and falls back to `browser.kill()` — if the user
 already closed the window the connection is gone, so the graceful close can never
-complete and `wait()` would otherwise block forever. Dropping the `TempDir` cleans
-up the user-data dir. `close()` is also exposed via the `close_headless_browser`
+complete and `wait()` would otherwise block forever. The user-data dirs are *not*
+deleted on close: they are fixed paths under the app cache dir, bounded to two,
+and wiped at the start of the next launch (which also reclaims anything a
+force-quit left behind). `close()` is also exposed via the `close_headless_browser`
 command, called from the frontend when settings change (so a new login happens
 with the new phone number). When adding new browser instances or long-lived
 resources, make sure they are also torn down in the `Exit` handler.
