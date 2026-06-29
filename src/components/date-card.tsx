@@ -184,7 +184,7 @@ function buildSummary(issues: JiraIssue[]): string {
       ([status, statusIssues]) =>
         `[${status}]\n${statusIssues
           .sort((a, b) => a.key.localeCompare(b.key))
-          .map((issue) => `· ${issue.key}: ${issue.fields.summary}`)
+          .map((issue) => `• ${issue.key}: ${issue.fields.summary}`)
           .join("\n")}`,
     )
     .join("\n\n");
