@@ -46,10 +46,22 @@ export default function TaskSelect({
         }}
       >
         <ComboboxEmpty>No tasks found.</ComboboxEmpty>
-        <ComboboxList className="scrollbar-thin scrollbar-thumb-muted-foreground">
+        <ComboboxList className="scrollbar-thin scrollbar-thumb-muted-foreground space-y-1">
           {(option: SelectOption) => (
-            <ComboboxItem key={option.value} value={option.value}>
-              {option.label}
+            <ComboboxItem
+              key={option.value}
+              value={option.value}
+              className="flex items-start gap-2"
+            >
+              {(() => {
+                const [key, description] = option.label.split(": ");
+                return (
+                  <>
+                    <span className="flex-none">{key}</span>
+                    <span>{description}</span>
+                  </>
+                );
+              })()}
             </ComboboxItem>
           )}
         </ComboboxList>
