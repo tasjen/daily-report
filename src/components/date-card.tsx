@@ -151,7 +151,7 @@ export default function DateCard({ date }: Props) {
         </Button>
       </CardHeader>
       <Separator />
-      <CardContent className="relative space-y-4">
+      <CardContent className="space-y-4">
         <div className="flex gap-2">
           {optionGroups.map((group) => (
             <TaskSelect
@@ -171,32 +171,34 @@ export default function DateCard({ date }: Props) {
         ) : error ? (
           `Error: ${error}`
         ) : (
-          <>
-            <p
-              className={cn(
-                "mt-2 whitespace-pre-wrap",
-                !summaryText && "text-muted-foreground italic",
-              )}
-            >
-              {summaryText || "ไม่พบ Jira issue"}
-            </p>
-            {summaryText && (
-              <Button
-                variant="ghost"
-                className={cn("absolute -top-2 right-2", {
-                  "not-hover:text-muted-foreground": !isCopied,
-                })}
-                onClick={async () => {
-                  if (isCopied) return;
-                  await navigator.clipboard.writeText(summaryText);
-                  setIsCopied(true);
-                  setTimeout(() => setIsCopied(false), 2000);
-                }}
-              >
-                {isCopied ? <CopyCheckIcon /> : <CopyIcon />}
-              </Button>
+          <p
+            className={cn(
+              "relative mt-2 whitespace-pre-wrap",
+              !summaryText && "text-muted-foreground italic",
             )}
-          </>
+          >
+            {!summaryText ? (
+              "ไม่พบ Jira issue"
+            ) : (
+              <>
+                {summaryText}
+                <Button
+                  variant="ghost"
+                  className={cn("absolute -top-2 right-2", {
+                    "not-hover:text-muted-foreground": !isCopied,
+                  })}
+                  onClick={async () => {
+                    if (isCopied) return;
+                    await navigator.clipboard.writeText(summaryText);
+                    setIsCopied(true);
+                    setTimeout(() => setIsCopied(false), 2000);
+                  }}
+                >
+                  {isCopied ? <CopyCheckIcon /> : <CopyIcon />}
+                </Button>
+              </>
+            )}
+          </p>
         )}
       </CardContent>
     </Card>
