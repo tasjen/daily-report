@@ -18,7 +18,7 @@ import TaskSelect from "@/components/task-select";
 import { useSubmitTaskMutation } from "@/lib/mutations";
 import { useJiraTasksQuery } from "@/lib/queries";
 import { cn } from "@/lib/utils";
-import type { JiraIssue, SelectOption } from "@/type";
+import type { JiraIssue } from "@/type";
 
 type Props = {
   date: string;
@@ -26,8 +26,8 @@ type Props = {
 export default function DateCard({ date }: Props) {
   const dateAfter = getDateAfter(date);
   const jqlStatusUpdatedByMe = `status CHANGED BY currentUser() DURING ("${date}", "${dateAfter}")`;
-  const jqlMyActiveSprintNotDone = `assignee = currentUser() AND created <= "${date}" AND sprint in openSprints() AND statusCategory != Done`;
   const jqlCreatedByMe = `creator = currentUser() AND created >= "${date}" AND created < "${dateAfter}"`;
+  const jqlMyActiveSprintNotDone = `assignee = currentUser() AND created <= "${date}" AND sprint in openSprints() AND statusCategory != Done`;
 
   // Each set is queried separately so it can carry its own default: only the
   // status-updated issues are checked by default; created and active-sprint
@@ -36,37 +36,60 @@ export default function DateCard({ date }: Props) {
     refetchOnMount: "always",
   } as const;
   const statusQuery = useJiraTasksQuery(jqlStatusUpdatedByMe, queryOptions);
-  const sprintQuery = useJiraTasksQuery(jqlMyActiveSprintNotDone, queryOptions);
   const createdQuery = useJiraTasksQuery(jqlCreatedByMe, queryOptions);
+  const sprintQuery = useJiraTasksQuery(jqlMyActiveSprintNotDone, queryOptions);
 
   const error = statusQuery.error ?? createdQuery.error ?? sprintQuery.error;
   const isFetching =
-    statusQuery.isFetching || sprintQuery.isFetching || createdQuery.isFetching;
+    statusQuery.isFetching || createdQuery.isFetching || sprintQuery.isFetching;
 
-  // Union of all three result sets, de-duplicated by issue key. Sources are
-  // merged in priority order (status-updated, then created, then active-sprint)
-  // so an issue appearing in more than one keeps its highest-priority grouping.
-  const allIssues = useMemo(() => {
-    const byKey = new Map<string, JiraIssue>();
-    for (const issue of [
-      ...(statusQuery.data?.issues ?? []),
-      ...(sprintQuery.data?.issues ?? []),
-      ...(createdQuery.data?.issues ?? []),
-    ]) {
-      if (!byKey.has(issue.key)) byKey.set(issue.key, issue);
-    }
-    return [...byKey.values()];
+  // Group issues by the query that surfaced them, de-duplicated by key across
+  // groups: an issue appearing in more than one query stays in the
+  // highest-priority group (status-updated, then active-sprint, then created).
+  // Empty groups are dropped.
+  const issueGroups = useMemo(() => {
+    const seen = new Set<string>();
+    const sources: { label: string; issues: JiraIssue[] }[] = [
+      { label: "Status updated by me", issues: statusQuery.data?.issues ?? [] },
+      { label: "Created today by me", issues: createdQuery.data?.issues ?? [] },
+      {
+        label: "Assigned to me not done",
+        issues: sprintQuery.data?.issues ?? [],
+      },
+    ];
+    return sources
+      .map(({ label, issues }) => ({
+        label,
+        issues: issues.filter((issue) => {
+          if (seen.has(issue.key)) return false;
+          seen.add(issue.key);
+          return true;
+        }),
+      }))
+      .filter((group) => group.issues.length > 0);
   }, [statusQuery.data, createdQuery.data, sprintQuery.data]);
 
-  const issueOptions = useMemo<SelectOption[]>(
+  // Flat union of every grouped issue, used for selection/summary bookkeeping.
+  const allIssues = useMemo(
+    () => issueGroups.flatMap((group) => group.issues),
+    [issueGroups],
+  );
+
+  // One option list per source query, rendered as its own TaskSelect. `keys`
+  // is kept alongside so the per-group selection handler can scope its toggles.
+  const optionGroups = useMemo(
     () =>
-      allIssues
-        .map((issue) => ({
-          value: issue.key,
-          label: `${issue.key}: ${issue.fields.summary}`,
-        }))
-        .sort((a, b) => a.value.localeCompare(b.value)),
-    [allIssues],
+      issueGroups.map((group) => ({
+        label: group.label,
+        keys: group.issues.map((issue) => issue.key),
+        items: group.issues
+          .map((issue) => ({
+            value: issue.key,
+            label: `${issue.key}: ${issue.fields.summary}`,
+          }))
+          .sort((a, b) => a.value.localeCompare(b.value)),
+      })),
+    [issueGroups],
   );
 
   // Status-updated issues start checked; everything else starts unchecked.
@@ -84,14 +107,16 @@ export default function DateCard({ date }: Props) {
         .filter((key) => overrides[key] ?? defaultCheckedKeys.has(key)),
     [allIssues, overrides, defaultCheckedKeys],
   );
+  const selectedKeySet = useMemo(() => new Set(selectedKeys), [selectedKeys]);
 
-  function handleSelectionChange(keys: string[]) {
-    const next = new Set(keys);
-    setOverrides(
-      Object.fromEntries(
-        allIssues.map((issue) => [issue.key, next.has(issue.key)]),
-      ),
-    );
+  // Each TaskSelect reports only its own group's selection, so merge those keys
+  // into `overrides` without disturbing the other groups' toggles.
+  function handleSelectionChange(groupKeys: string[], selected: string[]) {
+    const next = new Set(selected);
+    setOverrides((prev) => ({
+      ...prev,
+      ...Object.fromEntries(groupKeys.map((key) => [key, next.has(key)])),
+    }));
   }
 
   const summaryText = useMemo(() => {
@@ -126,7 +151,21 @@ export default function DateCard({ date }: Props) {
         </Button>
       </CardHeader>
       <Separator />
-      <CardContent className="relative">
+      <CardContent className="relative space-y-4">
+        <div className="flex gap-2">
+          {optionGroups.map((group) => (
+            <TaskSelect
+              key={group.label}
+              className="min-w-0 flex-1"
+              label={group.label}
+              items={group.items}
+              value={group.keys.filter((key) => selectedKeySet.has(key))}
+              onValueChange={(selected) =>
+                handleSelectionChange(group.keys, selected)
+              }
+            />
+          ))}
+        </div>
         {isFetching ? (
           <Loader2Icon className="animate-spin" />
         ) : error ? (
@@ -157,11 +196,6 @@ export default function DateCard({ date }: Props) {
                 {isCopied ? <CopyCheckIcon /> : <CopyIcon />}
               </Button>
             )}
-            <TaskSelect
-              items={issueOptions}
-              value={selectedKeys}
-              onValueChange={handleSelectionChange}
-            />
           </>
         )}
       </CardContent>

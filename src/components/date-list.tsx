@@ -30,17 +30,17 @@ export default function DateList() {
       ) : (
         <>
           <ol ref={animateRef} className="flex w-full max-w-5xl flex-col gap-4">
-            {
-              // [
-              //   { value: "2026-06-15", label: "2023-06-15" },
-              //   { value: "2026-06-16", label: "2023-06-16" },
-              //   { value: "2026-06-17", label: "2023-06-17" },
-              //   { value: "2026-06-18", label: "2023-06-18" },
-              // ]
-              dates.slice(0, visibleCount).map((option) => (
+            {[
+              // { value: "2026-06-15", label: "2023-06-15" },
+              // { value: "2026-06-16", label: "2023-06-16" },
+              // { value: "2026-06-17", label: "2023-06-17" },
+              { value: "2026-06-30", label: "2023-06-30" },
+            ]
+              // dates
+              .slice(0, visibleCount)
+              .map((option) => (
                 <DateCard key={option.value} date={option.value} />
-              ))
-            }
+              ))}
           </ol>
           {visibleCount < dates.length && (
             <Button
