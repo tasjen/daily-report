@@ -23,7 +23,7 @@ export default function App() {
         {taskParametersQuery.isSuccess && <PreferencesForm />}
         <AccountForm />
       </header>
-      <main className="container py-4 [&_svg]:flex-none">
+      <main className="container py-4 pr-4 [&_svg]:flex-none">
         {accountQuery.data && <DateList />}
         <Toaster />
       </main>
