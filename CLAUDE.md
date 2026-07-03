@@ -78,11 +78,12 @@ On first `get_page()` for an instance:
 2. Set a Basic-auth `Authorization` header (HTTP basic gate on the admin site).
 3. Navigate to `/team`, read `phone` from `store.json`, type it into the login
    input, press Enter.
-4. `wait_for_url` polls until the URL changes to contain `/team/member.php`,
+4. `wait_for_url` polls until the URL starts with `/team/member.php`,
    confirming login succeeded.
 
-`wait_for_url` compares against the *initial* URL and requires a change — it will
-not match if already on the target URL, so navigate away before relying on it.
+`wait_for_url` does a prefix match on the current URL (so query params or a
+trailing slash appended by a redirect still count), and succeeds immediately
+if the page is already on the target URL.
 
 ### Browser lifecycle / cleanup
 

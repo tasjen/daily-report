@@ -206,7 +206,11 @@ impl BrowserState {
 
         wait_for_url(&page, &format!("{ADMIN_BASE}/member.php"), 5_000)
             .await
-            .map_err(|e| AppError::from(format!("{e}\nIncorrect phone number")))?;
+            .map_err(|e| {
+                AppError::from(format!(
+                    "{e}\nIncorrect phone number, or the portal was slow to respond"
+                ))
+            })?;
 
         // Chromium starts with an initial blank tab in addition to the page we
         // create; close it after login so the headed window doesn't show a
@@ -242,6 +246,9 @@ async fn is_page_alive(page: &Page) -> bool {
     )
 }
 
+/// Polls until the page URL starts with `expected`. Prefix match rather than
+/// equality, so a redirect that appends query params, a fragment, or a
+/// trailing slash still counts as arrival.
 async fn wait_for_url(page: &Page, expected: &str, timeout_ms: u64) -> Result<(), AppError> {
     let deadline = std::time::Instant::now() + std::time::Duration::from_millis(timeout_ms);
     loop {
@@ -252,7 +259,7 @@ async fn wait_for_url(page: &Page, expected: &str, timeout_ms: u64) -> Result<()
         let url = tokio::time::timeout(std::time::Duration::from_millis(2_000), page.url())
             .await
             .map_err(|_| "page.url() timed out")??;
-        if url.as_deref() == Some(expected) {
+        if url.as_deref().is_some_and(|u| u.starts_with(expected)) {
             return Ok(());
         }
     }
