@@ -63,7 +63,7 @@ export function jiraTasksQueryOptions(jql: string, account?: Account | null) {
     queryKey: ["jira_tasks", jql],
     staleTime: Infinity,
     queryFn: async () => {
-      if (!account) return;
+      if (!account) throw new Error("No account has been set");
       const JIRA_DOMAIN = "https://living-insider.atlassian.net";
       const EMAIL = account.email;
       const API_TOKEN = account.api_token;
