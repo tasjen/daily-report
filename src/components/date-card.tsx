@@ -1,4 +1,5 @@
 import {
+  CircleAlertIcon,
   CopyCheckIcon,
   CopyIcon,
   Loader2Icon,
@@ -169,7 +170,10 @@ export default function DateCard({ date }: Props) {
         {isFetching ? (
           <Loader2Icon className="animate-spin" />
         ) : error ? (
-          `Error: ${error}`
+          <p className="flex items-start gap-2 whitespace-pre-wrap text-red-500">
+            <CircleAlertIcon className="mt-1 size-4" />
+            {error instanceof Error ? error.message : String(error)}
+          </p>
         ) : (
           <p
             className={cn(
