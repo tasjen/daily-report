@@ -240,7 +240,7 @@ function buildSummary(issues: JiraIssue[]): string {
 
 function getDateAfter(date: string): string {
   const d = new Date(date);
-  d.setDate(d.getDate() + 1);
+  d.setUTCDate(d.getUTCDate() + 1);
   const result = d.toISOString().split("T")[0];
   if (!result) throw new Error("Invalid date");
   return result;
