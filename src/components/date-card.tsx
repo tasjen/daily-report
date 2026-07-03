@@ -126,7 +126,8 @@ export default function DateCard({ date }: Props) {
   }, [allIssues, selectedKeys]);
 
   const [isCopied, setIsCopied] = useState(false);
-  const { mutate: submitTask } = useSubmitTaskMutation();
+  const { mutate: submitTask, isPending: isSubmitting } =
+    useSubmitTaskMutation();
   return (
     <Card>
       <CardHeader className="flex flex-none items-center gap-2">
@@ -147,8 +148,15 @@ export default function DateCard({ date }: Props) {
         <Button
           variant="secondary"
           onClick={() => submitTask({ date, summary: summaryText })}
+          // no submitting while the summary is still loading, failed to load,
+          // or came out empty — the pre-filled form would be blank or stale
+          disabled={isSubmitting || isFetching || Boolean(error)}
         >
-          <PlayIcon />
+          {isSubmitting ? (
+            <Loader2Icon className="animate-spin" />
+          ) : (
+            <PlayIcon />
+          )}
         </Button>
       </CardHeader>
       <Separator />
