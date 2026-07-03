@@ -28,7 +28,7 @@ export default function DateCard({ date }: Props) {
   const dateAfter = getDateAfter(date);
   const jqlStatusUpdatedByMe = `status CHANGED BY currentUser() DURING ("${date}", "${dateAfter}")`;
   const jqlCreatedByMe = `creator = currentUser() AND created >= "${date}" AND created < "${dateAfter}"`;
-  const jqlMyActiveSprintNotDone = `assignee = currentUser() AND created <= "${date}" AND sprint in openSprints() AND statusCategory != Done`;
+  const jqlMyActiveSprintNotDone = `assignee = currentUser() AND created < "${dateAfter}" AND sprint in openSprints() AND statusCategory != Done`;
 
   // Each set is queried separately so it can carry its own default: only the
   // status-updated issues are checked by default; created and active-sprint
