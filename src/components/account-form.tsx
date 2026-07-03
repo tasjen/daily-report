@@ -64,7 +64,11 @@ function TextField({
         type={type}
         value={field.state.value}
         onBlur={field.handleBlur}
-        onChange={(e) => field.handleChange(e.target.value)}
+        // none of the account fields legitimately contain whitespace, so strip
+        // it as the user types — also cleans stray spaces/newlines on paste,
+        // which zod's .trim() only validates against but never removes from
+        // the submitted value
+        onChange={(e) => field.handleChange(e.target.value.replaceAll(" ", ""))}
         aria-invalid={isInvalid}
         autoComplete="off"
       />
