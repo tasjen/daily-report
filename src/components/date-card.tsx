@@ -212,7 +212,13 @@ export default function DateCard({ date }: Props) {
             )}
           >
             {!summaryText ? (
-              "ไม่พบ Jira issue"
+              // no issues at all vs. issues exist but none selected (reachable
+              // when `default_task_groups` is empty or all were unchecked)
+              allIssues.length ? (
+                "No Jira issues selected"
+              ) : (
+                "No Jira issues found"
+              )
             ) : (
               <>
                 {summaryText}
