@@ -131,13 +131,20 @@ export default function DateCard({ date }: Props) {
   );
   const selectedKeySet = useMemo(() => new Set(selectedKeys), [selectedKeys]);
 
-  // Each TaskSelect reports only its own group's selection, so merge those keys
-  // into `overrides` without disturbing the other groups' toggles.
+  // Each TaskSelect reports its group's entire new selection, not which issue
+  // was clicked — so diff it against the current effective selection and
+  // record overrides only for issues whose state actually changed. Issues the
+  // user never touched keep following `defaultCheckedKeys` when the default
+  // task groups preference changes.
   function handleSelectionChange(groupKeys: string[], selected: string[]) {
     const next = new Set(selected);
     setOverrides((prev) => ({
       ...prev,
-      ...Object.fromEntries(groupKeys.map((key) => [key, next.has(key)])),
+      ...Object.fromEntries(
+        groupKeys
+          .filter((key) => next.has(key) !== selectedKeySet.has(key))
+          .map((key) => [key, next.has(key)]),
+      ),
     }));
   }
 
