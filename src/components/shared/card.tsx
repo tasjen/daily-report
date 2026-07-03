@@ -2,13 +2,18 @@ import type * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-function Card({
+function Card<T extends React.ElementType = "div">({
+  as,
   className,
   size = "default",
   ...props
-}: React.ComponentProps<"div"> & { size?: "default" | "sm" }) {
+}: {
+  as?: T;
+  size?: "default" | "sm";
+} & Omit<React.ComponentProps<T>, "as" | "size">) {
+  const Comp: React.ElementType = as ?? "div";
   return (
-    <div
+    <Comp
       data-slot="card"
       data-size={size}
       className={cn(

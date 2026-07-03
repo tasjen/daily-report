@@ -129,7 +129,7 @@ export default function DateCard({ date }: Props) {
   const { mutate: submitTask, isPending: isSubmitting } =
     useSubmitTaskMutation();
   return (
-    <Card>
+    <Card as="li">
       <CardHeader className="flex flex-none items-center gap-2">
         <CardTitle className="flex-1">{date}</CardTitle>
         <Button
