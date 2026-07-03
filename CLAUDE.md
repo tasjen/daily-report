@@ -94,10 +94,12 @@ already closed the window the connection is gone, so the graceful close can neve
 complete and `wait()` would otherwise block forever. The user-data dirs are *not*
 deleted on close: they are fixed paths under the app cache dir, bounded to two,
 and wiped at the start of the next launch (which also reclaims anything a
-force-quit left behind). `close()` is also exposed via the `close_headless_browser`
-command, called from the frontend when settings change (so a new login happens
-with the new phone number). When adding new browser instances or long-lived
-resources, make sure they are also torn down in the `Exit` handler.
+force-quit left behind). `close()` is also exposed via the `close_browsers`
+command, which tears down **both** instances and is called from the frontend
+when the account changes (so a new login happens with the new phone number —
+a reused headed session would otherwise submit tasks as the previous member).
+When adding new browser instances or long-lived resources, make sure they are
+also torn down in the `Exit` handler.
 
 ### Tauri commands (the frontend ↔ backend boundary)
 
@@ -109,7 +111,8 @@ Defined in [src-tauri/src/lib.rs](src-tauri/src/lib.rs), registered in
 - `submit_task(date, summary)` — headed; navigates the form, sets the date select,
   sets `default_project` (read from `store.json`) if configured, and fills the
   comment textarea with `summary`. **Does not click submit** — the user does.
-- `close_headless_browser()` — tears down the headless browser (called after account save).
+- `close_browsers()` — tears down both browser instances (called after account save,
+  so neither session keeps the old login).
 
 Form field selectors on the portal (keep in sync if the portal changes):
 `select#task_date`, `select#task_leave`, `select#task_project_id1`,
@@ -124,7 +127,7 @@ Form field selectors on the portal (keep in sync if the portal changes):
   `null` if unset, or the object once configured.
 - [src/AccountForm.tsx](src/AccountForm.tsx) — dialog to edit secrets (phone,
   Jira email, Jira API token, default project). On save: writes to `store.json`,
-  calls `close_headless_browser`, invalidates `task_parameters`. Opens automatically when
+  calls `close_browsers`, invalidates `task_parameters`. Opens automatically when
   no account exist.
 - [src/DateList.tsx](src/DateList.tsx) — runs `useTaskParameters`, renders one
   `DateCard` per date (first 20, non-empty values).

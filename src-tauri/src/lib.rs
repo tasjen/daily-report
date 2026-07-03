@@ -301,11 +301,16 @@ async fn get_project_options(page: &Page) -> Result<&'static [SelectOption], App
         .map(Vec::as_slice)
 }
 
+/// Tears down both browser instances so the next command logs in fresh.
+/// Called from the frontend after the account changes: both sessions belong
+/// to the old login, and a reused headed session would submit tasks as the
+/// previous member.
 #[tauri::command]
-async fn close_headless_browser(
-    state: tauri::State<'_, HeadlessBrowserState>,
+async fn close_browsers(
+    headless: tauri::State<'_, HeadlessBrowserState>,
+    headed: tauri::State<'_, HeadedBrowserState>,
 ) -> Result<(), AppError> {
-    state.close().await;
+    tokio::join!(headless.close(), headed.close());
     Ok(())
 }
 
@@ -423,7 +428,7 @@ pub fn run() {
         })
         .invoke_handler(tauri::generate_handler![
             get_task_parameters,
-            close_headless_browser,
+            close_browsers,
             submit_task,
             open_member_page
         ])

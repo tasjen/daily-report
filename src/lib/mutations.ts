@@ -37,10 +37,12 @@ export function useSaveAccountMutation() {
     },
     onSuccess: async (account) => {
       const previous = queryClient.getQueryData(accountOptions().queryKey);
-      // close the old session before updating the cache: setQueryData enables
-      // the task_parameters query, which must log in with the new account
+      // close both browser sessions before updating the cache: the headless
+      // one must log in again with the new account when setQueryData enables
+      // the task_parameters query, and a lingering headed session would
+      // submit tasks as the previous member
       if (previous) {
-        await invoke("close_headless_browser");
+        await invoke("close_browsers");
       }
       queryClient.setQueryData(accountOptions().queryKey, account);
       await queryClient.invalidateQueries(taskParametersOptions());
