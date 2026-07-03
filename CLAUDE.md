@@ -18,8 +18,9 @@ from the frontend.
 
 - **Backend:** Rust + Tauri 2, `chromiumoxide` (CDP browser automation), `tokio`.
 - **Frontend:** React 19, TypeScript, Vite 7.
-- **State/data:** `zustand` (global account), `@tanstack/react-query` (server
-  state), `@tauri-apps/plugin-store` (persisted secrets in `store.json`).
+- **State/data:** `@tanstack/react-query` (server state; also fronts the
+  persisted store), `@tauri-apps/plugin-store` (secrets + preferences in
+  `store.json`).
 - **HTTP:** `@tauri-apps/plugin-http` (frontend calls to Jira; required to bypass
   browser CORS).
 - **UI:** Tailwind CSS v4, shadcn-style components built on `@base-ui/react`,
@@ -110,8 +111,9 @@ Defined in [src-tauri/src/lib.rs](src-tauri/src/lib.rs), registered in
 - `get_task_parameters() -> TaskParameters` — headless scrape of form `<select>`
   options. Returns `{ dates, leaves, projects }`, each `Vec<SelectOption {label, value}>`.
 - `submit_task(date, summary)` — headed; navigates the form, sets the date select,
-  sets `default_project` (read from `store.json`) if configured, and fills the
-  comment textarea with `summary`. **Does not click submit** — the user does.
+  sets `default_project` and filters the project options to `project_list` (both
+  read from the `preferences` key in `store.json`), and fills the comment textarea
+  with `summary`. **Does not click submit** — the user does.
 - `close_browsers()` — tears down both browser instances (called after account save,
   so neither session keeps the old login).
 
@@ -121,52 +123,82 @@ Form field selectors on the portal (keep in sync if the portal changes):
 
 ### Frontend structure
 
-- [src/App.tsx](src/App.tsx) — loads `account` from the store on mount; shows
-  `AccountForm` always and `DateList` once account exist.
-- [src/store.ts](src/store.ts) — zustand `useGlobalState`: holds the `LazyStore`
-  handle and the `account` object. `account` is `undefined` while loading,
-  `null` if unset, or the object once configured.
-- [src/AccountForm.tsx](src/AccountForm.tsx) — dialog to edit secrets (phone,
-  Jira email, Jira API token, default project). On save: writes to `store.json`,
-  calls `close_browsers`, invalidates `task_parameters`. Opens automatically when
-  no account exist.
-- [src/DateList.tsx](src/DateList.tsx) — runs `useTaskParameters`, renders one
-  `DateCard` per date (first 20, non-empty values).
-- [src/DateCard.tsx](src/DateCard.tsx) — per-date card. Queries Jira for that
-  date, groups issues by status into the `summaryText` shown/copied/submitted,
-  and has the submit (`Play`) button → `useSubmitTaskMutation`.
+- [src/App.tsx](src/App.tsx) — sidebar with `OpenMemberPageButton`,
+  `RefreshDateListButton`, `PreferencesForm`, `AccountForm`; renders `DateList`
+  once an account exists.
+- [src/lib/store.ts](src/lib/store.ts) — the `LazyStore` handle plus the
+  `Account`/`Preferences`/`TaskGroupType` types and `DEFAULT_PREFERENCES`.
+  No client state library: account and preferences are read through react-query
+  (`useAccount`/`usePreferences` in `queries.ts`).
+- [src/lib/task-groups.ts](src/lib/task-groups.ts) — `TASK_GROUPS`: the three
+  Jira task groups (type + label), shared by `DateCard` and the preferences form.
+- [src/components/account-form.tsx](src/components/account-form.tsx) — dialog to
+  edit secrets (phone, Jira email, Jira API token); inputs strip all spaces. On
+  save: writes to `store.json`, calls `close_browsers`, invalidates
+  `task_parameters`. Opens automatically when no account exists.
+- [src/components/preferences-form.tsx](src/components/preferences-form.tsx) —
+  dialog with `DefaultProjectSelect`, `ProjectListSelect`,
+  `DefaultTaskGroupsSelect`, and `ThemeToggle`.
+- [src/components/date-list.tsx](src/components/date-list.tsx) — runs
+  `useTaskParameters`, renders a `DateCard` per non-empty date, paginated 5 at a
+  time with a "Load more" button.
+- [src/components/date-card.tsx](src/components/date-card.tsx) — per-date card.
+  Runs three Jira queries (status-changed-by-me, created-by-me, my-open-sprint),
+  shows each as its own `TaskSelect` group. Groups in `default_task_groups`
+  render first and their issues start checked; dedup by issue key runs in
+  display order, so a duplicate lands in the first group on screen and defaults
+  follow the *displayed* group. User toggles are kept as per-issue `overrides`
+  on top of the defaults (only actually-changed issues are recorded). Selected
+  issues become the `summaryText` (grouped by status) shown/copied/submitted via
+  the submit (`Play`) button → `useSubmitTaskMutation`.
 - [src/lib/queries.ts](src/lib/queries.ts) — react-query options/hooks.
-  `taskParametersOptions` wraps the `get_task_parameters` command; `jiraTasksOptions`
-  calls the Jira REST API directly.
-- [src/lib/mutations.ts](src/lib/mutations.ts) — `useSubmitTaskMutation`: invokes
-  `submit_task`, refocuses the window, and optimistically removes the submitted
-  date from the cached `task_parameters` list.
+  `taskParametersOptions` wraps the `get_task_parameters` command;
+  `jiraTasksQueryOptions` calls the Jira REST API directly; `preferencesOptions`
+  merges the stored object over `DEFAULT_PREFERENCES` field-by-field.
+- [src/lib/mutations.ts](src/lib/mutations.ts) — `useSubmitTaskMutation`
+  (invokes `submit_task`, optimistically removes the submitted date),
+  `useSaveAccountMutation`, and `useSavePreferencesMutation` (optimistic cache
+  update in `onMutate` — consumers compute next preferences from current ones,
+  so a late cache write would let rapid edits clobber each other).
 
-### Account / secrets (`store.json`)
+### Account & preferences (`store.json`)
 
-Persisted via the Tauri store plugin under the key `account`:
+Persisted via the Tauri store plugin under two keys:
 
 ```ts
-{ phone, email, api_token, default_project }
+account:     { phone, email, api_token }
+preferences: { default_project, project_list, default_task_groups }
 ```
 
 `phone` authenticates into the admin portal; `email` + `api_token` authenticate
-to Jira. The **same `store.json` is read from both sides** — the frontend via
-`LazyStore`, the backend via `app.store("store.json")` — so field names must stay
-in sync between [src/store.ts](src/store.ts) and the Rust code.
+to Jira. `default_project`/`project_list` are also read by the Rust side in
+`submit_task`; `default_task_groups` (which task groups start checked on a
+date card, default `["status"]`) is frontend-only. The **same `store.json` is
+read from both sides** — the frontend via `LazyStore`, the backend via
+`app.store("store.json")` — so field names must stay in sync between
+[src/lib/store.ts](src/lib/store.ts) and the Rust code. When adding a
+`Preferences` field, give it a default in `DEFAULT_PREFERENCES`: the per-field
+merge in `preferencesOptions` is what upgrades stores saved before the field
+existed.
 
 ### Jira integration
 
-[src/lib/queries.ts](src/lib/queries.ts) `jiraTasksOptions` POSTs to
+[src/lib/queries.ts](src/lib/queries.ts) `jiraTasksQueryOptions` POSTs to
 `https://living-insider.atlassian.net/rest/api/3/search/jql` using
 `@tauri-apps/plugin-http` `fetch` (not browser `fetch` — needed to avoid CORS and
 because the host is allowlisted in capabilities). Auth is Basic
-`base64(email:api_token)`. The JQL finds issues whose status was changed by the
-current user during the given date:
-`status CHANGED BY currentUser() DURING ("<date> 00:00", "<date> 23:59")`.
+`base64(email:api_token)`. `DateCard` runs three JQL queries per date (bounded
+by `<date>` inclusive to `<date+1>` exclusive):
 
-`DateCard` groups the returned issues by `fields.status.name` and formats them as
-`[Status]\nKEY: summary` blocks — this becomes the report comment.
+- status: `status CHANGED BY currentUser() DURING ("<date>", "<date+1>")`
+- created: `creator = currentUser() AND created >= "<date>" AND created < "<date+1>"`
+- sprint: `assignee = currentUser() AND created < "<date+1>" AND sprint in openSprints() AND statusCategory != Done`
+
+Jira Cloud returns 200 with zero issues on bad credentials (anonymous
+fallback); the auth failure is detected via the `x-seraph-loginreason` header.
+
+`DateCard` formats the *selected* issues, grouped by `fields.status.name`, as
+`[Status]\n• KEY: summary` blocks — this becomes the report comment.
 
 ## Conventions & gotchas
 
