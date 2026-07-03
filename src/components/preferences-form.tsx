@@ -1,5 +1,6 @@
 import { Settings2Icon } from "lucide-react";
 import DefaultProjectSelect from "@/components/default-project-select";
+import DefaultTaskGroupsSelect from "@/components/default-task-groups-select";
 import { ProjectListSelect } from "@/components/project-list-select";
 import { Button } from "@/components/shared/button";
 import {
@@ -31,6 +32,7 @@ export default function PreferencesForm() {
         <div className="flex flex-col gap-4">
           <DefaultProjectSelect />
           <ProjectListSelect />
+          <DefaultTaskGroupsSelect />
           <ThemeToggle />
         </div>
       </DialogContent>

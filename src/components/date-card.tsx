@@ -17,7 +17,9 @@ import {
 import { Separator } from "@/components/shared/separator";
 import TaskSelect from "@/components/task-select";
 import { useSubmitTaskMutation } from "@/lib/mutations";
-import { useJiraTasksQuery } from "@/lib/queries";
+import { useJiraTasksQuery, usePreferences } from "@/lib/queries";
+import { DEFAULT_PREFERENCES, type TaskGroupType } from "@/lib/store";
+import { TASK_GROUPS } from "@/lib/task-groups";
 import { cn } from "@/lib/utils";
 import type { JiraIssue } from "@/type";
 
@@ -30,9 +32,8 @@ export default function DateCard({ date }: Props) {
   const jqlCreatedByMe = `creator = currentUser() AND created >= "${date}" AND created < "${dateAfter}"`;
   const jqlMyActiveSprintNotDone = `assignee = currentUser() AND created < "${dateAfter}" AND sprint in openSprints() AND statusCategory != Done`;
 
-  // Each set is queried separately so it can carry its own default: only the
-  // status-updated issues are checked by default; created and active-sprint
-  // issues are offered as options but start unchecked.
+  // Each set is queried separately so its issues can be grouped by source and
+  // defaulted per the user's `default_task_groups` preference.
   const queryOptions = {
     refetchOnMount: "always",
   } as const;
@@ -44,31 +45,43 @@ export default function DateCard({ date }: Props) {
   const isFetching =
     statusQuery.isFetching || createdQuery.isFetching || sprintQuery.isFetching;
 
-  // Group issues by the query that surfaced them, de-duplicated by key across
-  // groups: an issue appearing in more than one query stays in the
-  // highest-priority group (status-updated, then active-sprint, then created).
-  // Empty groups are dropped.
+  const { data: preferences } = usePreferences();
+  const defaultGroupIds = useMemo(
+    () =>
+      new Set(
+        preferences?.default_task_groups ??
+          DEFAULT_PREFERENCES.default_task_groups,
+      ),
+    [preferences],
+  );
+
+  // Group issues by the query that surfaced them. Default groups come first
+  // (base TASK_GROUPS order within each partition), and dedup by key runs in
+  // that same display order — so an issue appearing in more than one query
+  // stays in the first group shown on screen. Empty groups are dropped.
   const issueGroups = useMemo(() => {
     const seen = new Set<string>();
-    const sources: { label: string; issues: JiraIssue[] }[] = [
-      { label: "Status updated by me", issues: statusQuery.data?.issues ?? [] },
-      { label: "Created today by me", issues: createdQuery.data?.issues ?? [] },
-      {
-        label: "Assigned to me not done",
-        issues: sprintQuery.data?.issues ?? [],
-      },
+    const issuesById: Record<TaskGroupType, JiraIssue[]> = {
+      status: statusQuery.data?.issues ?? [],
+      created: createdQuery.data?.issues ?? [],
+      sprint: sprintQuery.data?.issues ?? [],
+    };
+    const ordered = [
+      ...TASK_GROUPS.filter((group) => defaultGroupIds.has(group.type)),
+      ...TASK_GROUPS.filter((group) => !defaultGroupIds.has(group.type)),
     ];
-    return sources
-      .map(({ label, issues }) => ({
+    return ordered
+      .map(({ type: id, label }) => ({
+        id,
         label,
-        issues: issues.filter((issue) => {
+        issues: issuesById[id].filter((issue) => {
           if (seen.has(issue.key)) return false;
           seen.add(issue.key);
           return true;
         }),
       }))
       .filter((group) => group.issues.length > 0);
-  }, [statusQuery.data, createdQuery.data, sprintQuery.data]);
+  }, [statusQuery.data, createdQuery.data, sprintQuery.data, defaultGroupIds]);
 
   // Flat union of every grouped issue, used for selection/summary bookkeeping.
   const allIssues = useMemo(
@@ -81,6 +94,7 @@ export default function DateCard({ date }: Props) {
   const optionGroups = useMemo(
     () =>
       issueGroups.map((group) => ({
+        type: group.id,
         label: group.label,
         keys: group.issues.map((issue) => issue.key),
         items: group.issues
@@ -93,12 +107,19 @@ export default function DateCard({ date }: Props) {
     [issueGroups],
   );
 
-  // Status-updated issues start checked; everything else starts unchecked.
-  // `overrides` records the user's explicit toggles on top of that default, so
-  // new issues from a later refetch still pick up the correct default.
+  // Issues displayed under a default task group start checked; everything
+  // else starts unchecked. Membership is post-dedup on purpose: what starts
+  // checked always matches the groups the user sees on screen. `overrides`
+  // records the user's explicit toggles on top of that default, so new issues
+  // from a later refetch still pick up the correct default.
   const defaultCheckedKeys = useMemo(
-    () => new Set(statusQuery.data?.issues.map((issue) => issue.key)),
-    [statusQuery.data],
+    () =>
+      new Set(
+        issueGroups
+          .filter((group) => defaultGroupIds.has(group.id))
+          .flatMap((group) => group.issues.map((issue) => issue.key)),
+      ),
+    [issueGroups, defaultGroupIds],
   );
   const [overrides, setOverrides] = useState<Record<string, boolean>>({});
   const selectedKeys = useMemo(
@@ -148,8 +169,9 @@ export default function DateCard({ date }: Props) {
         <Button
           variant="secondary"
           onClick={() => submitTask({ date, summary: summaryText })}
-          // no submitting while the summary is still loading, failed to load,
-          // or came out empty — the pre-filled form would be blank or stale
+          // no submitting while the summary is still loading or failed to
+          // load — the pre-filled form would be stale. An empty summary is
+          // allowed: the user may fill the comment in the portal themselves.
           disabled={isSubmitting || isFetching || Boolean(error)}
         >
           {isSubmitting ? (
@@ -164,7 +186,7 @@ export default function DateCard({ date }: Props) {
         <div className="flex gap-2">
           {optionGroups.map((group) => (
             <TaskSelect
-              key={group.label}
+              key={group.type}
               className="min-w-0 flex-1"
               label={group.label}
               items={group.items}

@@ -1,7 +1,12 @@
 import { queryOptions, useQuery } from "@tanstack/react-query";
 import { invoke } from "@tauri-apps/api/core";
 import { fetch as tauriFetch } from "@tauri-apps/plugin-http";
-import { type Account, type Preferences, store } from "@/lib/store";
+import {
+  type Account,
+  DEFAULT_PREFERENCES,
+  type Preferences,
+  store,
+} from "@/lib/store";
 import type { JiraIssue, SelectOption } from "@/type";
 
 export function accountOptions() {
@@ -19,11 +24,12 @@ export function useAccount() {
 export function preferencesOptions() {
   return queryOptions({
     queryKey: ["preferences"],
-    queryFn: async () =>
-      (await store.get<Preferences>("preferences")) ?? {
-        default_project: null,
-        project_list: [],
-      },
+    // Per-field merge, not `??`: preferences persisted before a field was
+    // added would otherwise come back missing that field.
+    queryFn: async (): Promise<Preferences> => ({
+      ...DEFAULT_PREFERENCES,
+      ...(await store.get<Partial<Preferences>>("preferences")),
+    }),
   });
 }
 
