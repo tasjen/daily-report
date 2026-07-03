@@ -54,7 +54,12 @@ export default function TaskSelect({
               className="flex items-start gap-2"
             >
               {(() => {
-                const [key, description] = option.label.split(": ");
+                const splitStr = ": ";
+                const splitIndex = option.label.indexOf(splitStr);
+                const key = option.label.slice(0, splitIndex);
+                const description = option.label.slice(
+                  splitIndex + splitStr.length,
+                );
                 return (
                   <>
                     <span className="flex-none">{key}</span>
