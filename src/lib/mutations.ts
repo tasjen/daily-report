@@ -59,9 +59,24 @@ export function useSavePreferencesMutation() {
       await store.save();
       return preferences;
     },
-    onSuccess: (preferences) => {
+    // Update the cache optimistically, not in onSuccess: consumers compute the
+    // next preferences from the current ones, so a save that only lands in the
+    // cache after store.save() resolves leaves a window where a quick second
+    // edit reads stale data and silently reverts the first.
+    onMutate: async (preferences) => {
+      await queryClient.cancelQueries(preferencesOptions());
+      const previous = queryClient.getQueryData(preferencesOptions().queryKey);
       queryClient.setQueryData(preferencesOptions().queryKey, preferences);
+      return { previous };
     },
-    onError: (error) => toast.error(String(error)),
+    onError: (error, _preferences, context) => {
+      if (context?.previous) {
+        queryClient.setQueryData(
+          preferencesOptions().queryKey,
+          context.previous,
+        );
+      }
+      toast.error(String(error));
+    },
   });
 }
