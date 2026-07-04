@@ -178,13 +178,15 @@ Persisted via the Tauri store plugin under two keys:
 
 ```ts
 account:     { phone, email, api_token }
-preferences: { default_project, project_list, default_task_groups }
+preferences: { default_project, project_list, default_task_groups, autofill_summary }
 ```
 
 `phone` authenticates into the admin portal; `email` + `api_token` authenticate
 to Jira. `default_project`/`project_list` are also read by the Rust side in
 `submit_task`; `default_task_groups` (which task groups start checked on a
-date card, default `["status"]`) is frontend-only. The **same `store.json` is
+date card, default `["status"]`) and `autofill_summary` (whether submit passes
+the built summary or an empty string, default `true`; when `true`, Jira
+fetching also disables the submit button) are frontend-only. The **same `store.json` is
 read from both sides** — the frontend via `LazyStore`, the backend via
 `app.store("store.json")` — so field names must stay in sync between
 [src/lib/store.ts](src/lib/store.ts) and the Rust code. When adding a

@@ -153,6 +153,9 @@ export default function DateCard({ date }: Props) {
     return buildSummary(allIssues.filter((issue) => selected.has(issue.key)));
   }, [allIssues, selectedKeys]);
 
+  const autofillSummary =
+    preferences?.autofill_summary ?? DEFAULT_PREFERENCES.autofill_summary;
+
   const [isCopied, setIsCopied] = useState(false);
   const { mutate: submitTask, isPending: isSubmitting } =
     useSubmitTaskMutation();
@@ -175,11 +178,10 @@ export default function DateCard({ date }: Props) {
         </Button>
         <Button
           variant="secondary"
-          onClick={() => submitTask({ date, summary: summaryText })}
-          // no submitting while the summary is still loading or failed to
-          // load — the pre-filled form would be stale. An empty summary is
-          // allowed: the user may fill the comment in the portal themselves.
-          disabled={isSubmitting || isFetching || Boolean(error)}
+          onClick={() =>
+            submitTask({ date, summary: autofillSummary ? summaryText : "" })
+          }
+          disabled={isSubmitting || (autofillSummary && isFetching)}
         >
           {isSubmitting ? (
             <Loader2Icon className="animate-spin" />

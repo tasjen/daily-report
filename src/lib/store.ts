@@ -14,6 +14,7 @@ export type Preferences = {
   default_project: string | null;
   project_list: string[];
   default_task_groups: TaskGroupType[];
+  autofill_summary: boolean;
 };
 
 // Fallback merged under whatever is persisted, so preferences saved before a
@@ -22,6 +23,7 @@ export const DEFAULT_PREFERENCES: Preferences = {
   default_project: null,
   project_list: [],
   default_task_groups: ["status"],
+  autofill_summary: true,
 };
 
 export const store = new LazyStore("store.json");

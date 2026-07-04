@@ -26,18 +26,22 @@ export default function DefaultTaskGroupsSelect() {
   return (
     <div className="flex flex-col items-start gap-2">
       <Label className="flex-none">Default selected task groups</Label>
-      {TASK_GROUPS.map((group) => (
-        <Label
-          key={group.type}
-          className="flex items-center gap-2 font-normal text-sm"
-        >
-          <Checkbox
-            checked={selected.has(group.type)}
-            onCheckedChange={(checked) => toggle(group.type, checked === true)}
-          />
-          {group.label}
-        </Label>
-      ))}
+      <div className="flex flex-col gap-1">
+        {TASK_GROUPS.map((group) => (
+          <Label
+            key={group.type}
+            className="flex items-center gap-2 font-normal text-sm"
+          >
+            <Checkbox
+              checked={selected.has(group.type)}
+              onCheckedChange={(checked) =>
+                toggle(group.type, checked === true)
+              }
+            />
+            {group.label}
+          </Label>
+        ))}
+      </div>
     </div>
   );
 }
