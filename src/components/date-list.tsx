@@ -19,10 +19,10 @@ export default function DateList() {
   const isMocking = true;
   if (import.meta.env.DEV && isMocking && !dates.length) {
     dates.push(
-      { value: "2026-06-15", label: "2023-06-15" },
-      { value: "2026-06-16", label: "2023-06-16" },
-      { value: "2026-06-17", label: "2023-06-17" },
       { value: "2026-06-30", label: "2023-06-30" },
+      { value: "2026-06-17", label: "2023-06-17" },
+      { value: "2026-06-16", label: "2023-06-16" },
+      { value: "2026-06-15", label: "2023-06-15" },
     );
   }
 

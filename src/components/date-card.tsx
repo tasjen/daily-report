@@ -175,13 +175,22 @@ export default function DateCard({ date }: Props) {
   const autofillSummary =
     preferences?.autofill_summary ?? DEFAULT_PREFERENCES.autofill_summary;
 
+  const dateRelation = getDateRelation(date);
+
   const [isCopied, setIsCopied] = useState(false);
   const { mutate: submitTask, isPending: isSubmitting } =
     useSubmitTaskMutation();
   return (
     <Card as="li">
       <CardHeader className="flex flex-none items-center gap-2">
-        <CardTitle className="flex-1">{date}</CardTitle>
+        <CardTitle className="flex-1">
+          {date}
+          {dateRelation && (
+            <span className="ml-2 font-normal text-muted-foreground text-sm">
+              ({dateRelation})
+            </span>
+          )}
+        </CardTitle>
         <Button
           size="icon-lg"
           variant="ghost"
@@ -292,6 +301,29 @@ function buildSummary(issues: JiraIssue[]): string {
           .join("\n")}`,
     )
     .join("\n\n");
+}
+
+// "Today"/"Yesterday", the weekday name within the last week, then "N days
+// ago". Diffed at UTC midnight so a DST shift can't skew the day count.
+function getDateRelation(date: string): string | null {
+  const [year, month, day] = date.split("-").map(Number);
+  if (year === undefined || month === undefined || day === undefined) {
+    return null;
+  }
+  const dateUtc = Date.UTC(year, month - 1, day);
+  const now = new Date();
+  const todayUtc = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+  const diffDays = Math.round((todayUtc - dateUtc) / 86_400_000);
+  if (Number.isNaN(diffDays) || diffDays < 0) return null;
+  if (diffDays === 0) return "Today";
+  if (diffDays === 1) return "Yesterday";
+  if (diffDays < 7) {
+    return new Date(dateUtc).toLocaleDateString("en-US", {
+      weekday: "long",
+      timeZone: "UTC",
+    });
+  }
+  return `${diffDays} days ago`;
 }
 
 function getDateAfter(date: string): string {
