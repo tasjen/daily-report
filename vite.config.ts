@@ -15,6 +15,11 @@ export default defineConfig(async () => ({
     alias: { "@": path.resolve(__dirname, "./src") },
   },
 
+  build: {
+    // Desktop app: assets load from disk, so a large single chunk is fine
+    chunkSizeWarningLimit: 1000,
+  },
+
   // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
   //
   // 1. prevent Vite from obscuring rust errors
