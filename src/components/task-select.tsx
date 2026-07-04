@@ -1,3 +1,4 @@
+import { SearchIcon } from "lucide-react";
 import {
   Combobox,
   ComboboxContent,
@@ -35,7 +36,10 @@ export default function TaskSelect({
     >
       <div className={className} ref={anchor}>
         {label && <Label className="mb-2 px-1">{label}</Label>}
-        <ComboboxInput showTrigger={false} placeholder="Search tasks" />
+        <ComboboxInput
+          startAddon={<SearchIcon className="pointer-events-none" />}
+          placeholder="Search tasks"
+        />
       </div>
       <ComboboxContent
         anchor={anchor}

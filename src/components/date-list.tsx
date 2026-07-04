@@ -16,6 +16,16 @@ export default function DateList() {
 
   const dates = data?.dates.filter((e) => e.value) ?? [];
 
+  const isMocking = true;
+  if (import.meta.env.DEV && isMocking && !dates.length) {
+    dates.push(
+      { value: "2026-06-15", label: "2023-06-15" },
+      { value: "2026-06-16", label: "2023-06-16" },
+      { value: "2026-06-17", label: "2023-06-17" },
+      { value: "2026-06-30", label: "2023-06-30" },
+    );
+  }
+
   return (
     <div className="flex flex-col items-center gap-4">
       <p className="text-muted-foreground">
@@ -32,17 +42,9 @@ export default function DateList() {
       ) : (
         <>
           <ol ref={animateRef} className="flex w-full max-w-5xl flex-col gap-4">
-            {
-              // [
-              // { value: "2026-06-15", label: "2023-06-15" },
-              // { value: "2026-06-16", label: "2023-06-16" },
-              // { value: "2026-06-17", label: "2023-06-17" },
-              // { value: "2026-06-30", label: "2023-06-30" },
-              // ]
-              dates.slice(0, visibleCount).map((option) => (
-                <DateCard key={option.value} date={option.value} />
-              ))
-            }
+            {dates.slice(0, visibleCount).map((option) => (
+              <DateCard key={option.value} date={option.value} />
+            ))}
           </ol>
           {visibleCount < dates.length && (
             <Button
