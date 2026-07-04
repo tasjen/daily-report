@@ -99,7 +99,9 @@ and wiped at the start of the next launch (which also reclaims anything a
 force-quit left behind). `close()` is also exposed via the `close_browsers`
 command, which tears down **both** instances and is called from the frontend
 when the account changes (so a new login happens with the new phone number —
-a reused headed session would otherwise submit tasks as the previous member).
+a reused headed session would otherwise submit tasks as the previous member)
+and when the window is refocused after ≥1h unfocused (`useResetWhenAway` —
+see Frontend structure).
 When adding new browser instances or long-lived resources, make sure they are
 also torn down in the `Exit` handler.
 
@@ -115,7 +117,8 @@ Defined in [src-tauri/src/lib.rs](src-tauri/src/lib.rs), registered in
   read from the `preferences` key in `store.json`), and fills the comment textarea
   with `summary`. **Does not click submit** — the user does.
 - `close_browsers()` — tears down both browser instances (called after account save,
-  so neither session keeps the old login).
+  so neither session keeps the old login, and by the ≥1h-away reset in
+  `use-reset-when-away.ts`).
 
 Form field selectors on the portal (keep in sync if the portal changes):
 `select#task_date`, `select#task_leave`, `select#task_project_id1`,
@@ -125,7 +128,15 @@ Form field selectors on the portal (keep in sync if the portal changes):
 
 - [src/App.tsx](src/App.tsx) — sidebar with `OpenMemberPageButton`,
   `RefreshDateListButton`, `PreferencesForm`, `AccountForm`; renders `DateList`
-  once an account exists.
+  once an account exists; mounts `useResetWhenAway`.
+- [src/lib/use-reset-when-away.ts](src/lib/use-reset-when-away.ts) —
+  `useResetWhenAway`: when the window regains focus after being unfocused
+  ≥1h, calls `close_browsers` and, once teardown settles, reloads the
+  webview. Order matters: a reload alone would not reset the backend
+  `BrowserState`s — the next command after teardown launches and logs in
+  fresh. `relaunch()` is a last-resort fallback used only when the
+  `close_browsers` invoke itself fails (needs `process:allow-restart` in
+  capabilities and `tauri_plugin_process` registered — both in place).
 - [src/lib/store.ts](src/lib/store.ts) — the `LazyStore` handle plus the
   `Account`/`Preferences`/`TaskGroupType` types and `DEFAULT_PREFERENCES`.
   No client state library: account and preferences are read through react-query
@@ -209,7 +220,15 @@ fallback); the auth failure is detected via the `x-seraph-loginreason` header.
   Adding a new external Jira host or a new window API requires editing it.
 - **react-query defaults** ([src/main.tsx](src/main.tsx)): `staleTime: Infinity`,
   no refetch on window focus. Data is refreshed via explicit refetch buttons or
-  cache invalidation, not automatically.
+  cache invalidation, not automatically — the one exception is the ≥1h-away
+  reset, which reloads the whole webview.
+- **`relaunch()` races `tauri-plugin-single-instance`.** Restart spawns the new
+  process before the old one exits; if the new instance's single-instance check
+  runs while the old is still shutting down, it defers to the dying instance
+  and the app just quits. `useResetWhenAway` uses `relaunch()` only as a
+  last-resort fallback (its trigger — the `close_browsers` invoke rejecting —
+  is nearly unreachable); verify this combination before relying on it
+  anywhere else.
 - **`submit_task` builds JS by string interpolation.** `summary` is safely passed
   through `serde_json::to_string`, but `date`/`project` are interpolated raw into
   `evaluate(...)` — they come from the portal's own option values, so keep it that

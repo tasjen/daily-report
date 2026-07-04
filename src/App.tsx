@@ -6,10 +6,12 @@ import PreferencesForm from "@/components/preferences-form";
 import RefreshDateListButton from "@/components/refresh-date-list-button";
 import { Toaster } from "@/components/shared/sonner";
 import { useAccount, useTaskParameters } from "@/lib/queries";
+import { useResetWhenAway } from "@/lib/use-reset-when-away";
 
 export default function App() {
   const accountQuery = useAccount();
   const taskParametersQuery = useTaskParameters();
+  useResetWhenAway();
 
   if (accountQuery.isPending) {
     return null;
