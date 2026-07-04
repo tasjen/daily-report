@@ -27,6 +27,8 @@ export default function DateList() {
         <p className="flex flex-col gap-4 whitespace-pre-wrap text-center text-red-500">
           {String(error)}
         </p>
+      ) : !dates.length ? (
+        <p className="text-muted-foreground italic">No reports to submit</p>
       ) : (
         <>
           <ol ref={animateRef} className="flex w-full max-w-5xl flex-col gap-4">
