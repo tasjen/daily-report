@@ -96,9 +96,19 @@ impl BrowserState {
         }
     }
 
+    /// Which instance this is, for log lines.
+    fn label(&self) -> &'static str {
+        if self.with_head {
+            "headed"
+        } else {
+            "headless"
+        }
+    }
+
     async fn close(&self) {
         let mut guard = self.inner.lock().await;
         if let Some((mut browser, page)) = guard.take() {
+            log::info!("closing {} browser", self.label());
             // Try a graceful shutdown, but bound it: if the user already closed
             // the window the connection is gone, so `close`/`wait` can never
             // complete. Fall back to force-killing the lingering process.
@@ -111,6 +121,10 @@ impl BrowserState {
                 .await
                 .is_err()
             {
+                log::warn!(
+                    "graceful close of {} browser timed out, force-killing",
+                    self.label()
+                );
                 let _ = browser.kill().await;
             }
         }
@@ -133,6 +147,10 @@ impl BrowserState {
             if is_page_alive(page).await {
                 return Ok(page.clone());
             }
+            log::warn!(
+                "cached {} browser session no longer responds, relaunching",
+                self.label()
+            );
         }
         // Either there is no cached browser, or the cached one can no longer be
         // driven (e.g. the user closed the window). Force-kill any lingering
@@ -169,6 +187,7 @@ impl BrowserState {
         // Start each launch from a clean profile in our own cache dir. Wiping
         // also clears any stale `SingletonLock` a previous unclean shutdown left
         // behind, so a leftover Chromium can't make this launch hand off and exit.
+        log::info!("launching {} browser", self.label());
         let user_data_dir = self.user_data_dir()?;
         let _ = std::fs::remove_dir_all(&user_data_dir);
         std::fs::create_dir_all(&user_data_dir)?;
@@ -207,10 +226,12 @@ impl BrowserState {
         wait_for_url(&page, &format!("{ADMIN_BASE}/member.php"), 5_000)
             .await
             .map_err(|e| {
+                log::warn!("{} browser login failed: {e}", self.label());
                 AppError::from(format!(
                     "{e}\nIncorrect phone number, or the portal was slow to respond"
                 ))
             })?;
+        log::info!("{} browser logged into portal", self.label());
 
         // Chromium starts with an initial blank tab in addition to the page we
         // create; close it after login so the headed window doesn't show a
@@ -317,6 +338,7 @@ async fn close_browsers(
     headless: tauri::State<'_, HeadlessBrowserState>,
     headed: tauri::State<'_, HeadedBrowserState>,
 ) -> Result<(), AppError> {
+    log::info!("close_browsers: tearing down both browser instances");
     tokio::join!(headless.close(), headed.close());
     Ok(())
 }
@@ -335,6 +357,12 @@ async fn get_task_parameters(
 
     page.goto(format!("{ADMIN_BASE}/member.php")).await?;
 
+    log::info!(
+        "get_task_parameters: scraped {} dates, {} leaves, {} projects",
+        date_options.len(),
+        leave_options.len(),
+        project_options.len()
+    );
     Ok(TaskParameters {
         dates: date_options,
         leaves: leave_options,
@@ -356,6 +384,10 @@ async fn submit_task(
     date: String,
     summary: String,
 ) -> Result<(), AppError> {
+    log::info!(
+        "submit_task: pre-filling form for date {date} ({} char summary)",
+        summary.len()
+    );
     let page = state.get_page().await?;
     page.goto(format!("{ADMIN_BASE}/task.php")).await?;
     page.bring_to_front().await?;
@@ -410,7 +442,20 @@ async fn submit_task(
 }
 
 pub fn run() {
-    tauri::Builder::default()
+    let mut builder = tauri::Builder::default();
+    // Logs go to the terminal in dev only — never to disk. Release builds
+    // don't register the plugin at all, so log macros become no-ops there.
+    if cfg!(debug_assertions) {
+        builder = builder.plugin(
+            tauri_plugin_log::Builder::new()
+                .targets([tauri_plugin_log::Target::new(
+                    tauri_plugin_log::TargetKind::Stdout,
+                )])
+                .level(log::LevelFilter::Info)
+                .build(),
+        );
+    }
+    builder
         .plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| {
             let _ = app
                 .get_webview_window("main")

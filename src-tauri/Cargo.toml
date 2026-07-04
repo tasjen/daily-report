@@ -30,10 +30,19 @@ tauri-plugin-http = "2"
 tauri-plugin-store = "2"
 tauri-plugin-process = "2"
 tauri-plugin-opener = "2"
+tauri-plugin-log = "2"
+log = "0.4"
 
 # https://v2.tauri.app/concept/size/
 [profile.dev]
 incremental = true
+
+# Dependencies (chromiumoxide, tokio, ...) are compiled once and cached, so
+# optimizing them keeps incremental rebuilds fast while the dev binary's
+# CDP/websocket handling runs at near-release speed. Our own crate stays at
+# opt-level 0 for fast rebuilds and accurate debugging.
+[profile.dev.package."*"]
+opt-level = 2
 
 [profile.release]
 codegen-units = 1
