@@ -220,7 +220,7 @@ export default function DateCard({ date }: Props) {
       </CardHeader>
       <Separator />
       <CardContent className="space-y-4">
-        <div className="flex gap-2">
+        <div className="flex flex-col gap-2 min-[832px]:flex-row">
           {optionGroups.map((group) => (
             <TaskSelect
               key={group.type}
@@ -244,7 +244,7 @@ export default function DateCard({ date }: Props) {
         ) : (
           <p
             className={cn(
-              "relative mt-2 whitespace-pre-wrap",
+              "relative mt-4 whitespace-pre-wrap",
               !summaryText && "text-muted-foreground italic",
             )}
           >
@@ -261,7 +261,7 @@ export default function DateCard({ date }: Props) {
                 {summaryText}
                 <Button
                   variant="ghost"
-                  className={cn("absolute -top-2 right-2", {
+                  className={cn("absolute -top-2 right-0", {
                     "not-hover:text-muted-foreground": !isCopied,
                   })}
                   onClick={async () => {

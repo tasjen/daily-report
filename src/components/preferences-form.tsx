@@ -11,6 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/shared/dialog";
+import { Separator } from "@/components/shared/separator";
 import ThemeToggle from "@/components/theme-toggle";
 
 export default function PreferencesForm() {
@@ -34,6 +35,7 @@ export default function PreferencesForm() {
           <DefaultProjectSelect />
           <ProjectListSelect />
           <DefaultTaskGroupsSelect />
+          <Separator />
           <AutofillSummaryToggle />
           <ThemeToggle />
         </div>

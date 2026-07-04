@@ -19,8 +19,10 @@ export default function DefaultProjectSelect() {
   if (!firstProject || !preferences) return null;
 
   return (
-    <Label className="flex flex-col items-start gap-2">
-      <p className="flex flex-none items-center gap-1">Default project</p>
+    <div className="flex flex-col items-start gap-2">
+      <Label className="flex flex-none items-center gap-1">
+        Default project
+      </Label>
       <Select
         items={data.projects}
         value={preferences.default_project ?? firstProject.value}
@@ -44,6 +46,6 @@ export default function DefaultProjectSelect() {
           </SelectGroup>
         </SelectContent>
       </Select>
-    </Label>
+    </div>
   );
 }

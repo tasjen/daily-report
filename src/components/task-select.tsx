@@ -27,6 +27,7 @@ export default function TaskSelect({
   className,
 }: Props) {
   const anchor = useComboboxAnchor();
+  const allSelected = items.length > 0 && value.length === items.length;
   return (
     <Combobox
       multiple
@@ -35,7 +36,16 @@ export default function TaskSelect({
       onValueChange={onValueChange}
     >
       <div className={className} ref={anchor}>
-        {label && <Label className="mb-2 px-1">{label}</Label>}
+        {label && (
+          <Label className="mb-2 text-nowrap px-1">
+            {label}
+            {allSelected && (
+              <span className="font-normal text-muted-foreground">
+                (all selected)
+              </span>
+            )}
+          </Label>
+        )}
         <ComboboxInput
           startAddon={<SearchIcon className="pointer-events-none" />}
           placeholder="Search tasks"
