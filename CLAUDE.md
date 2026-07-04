@@ -20,7 +20,7 @@ from the frontend.
 - **Frontend:** React 19, TypeScript, Vite 7.
 - **State/data:** `@tanstack/react-query` (server state; also fronts the
   persisted store), `@tauri-apps/plugin-store` (secrets + preferences in
-  `store.json`).
+  `store.json`), `mutative` (immutable nested updates of cached objects).
 - **HTTP:** `@tauri-apps/plugin-http` (frontend calls to Jira; required to bypass
   browser CORS).
 - **UI:** Tailwind CSS v4, shadcn-style components built on `@base-ui/react`,
@@ -211,7 +211,11 @@ Jira Cloud returns 200 with zero issues on bad credentials (anonymous
 fallback); the auth failure is detected via the `x-seraph-loginreason` header.
 
 `DateCard` formats the *selected* issues, grouped by `fields.status.name`, as
-`[Status]\n• KEY: summary` blocks — this becomes the report comment.
+`[Status]\n• KEY: summary` blocks — this becomes the report comment. Issues
+displayed under the "created" group (post-dedup) are relabeled (via `mutative`
+`create` — the originals live in the react-query cache, see the immutability
+convention below) to a synthetic "Created" status before grouping, so they land
+in their own `[Created]` block, sorted alphabetically among the status blocks.
 
 ## Conventions & gotchas
 
@@ -224,6 +228,16 @@ fallback); the auth failure is detected via the `x-seraph-loginreason` header.
   no refetch on window focus. Data is refreshed via explicit refetch buttons or
   cache invalidation, not automatically — the one exception is the ≥1h-away
   reset, which reloads the whole webview.
+- **Never mutate objects that came out of the react-query cache.** Derived
+  arrays (`filter`/`flatMap`/`map` results) are new, but their *elements* are
+  still references into `query.data` — an in-place write goes straight into the
+  cache, and with `staleTime: Infinity` the original value is unrecoverable
+  until a manual refetch. Render-phase code (`useMemo` included) must stay
+  pure. For a nested update, derive a modified copy with `mutative`'s
+  `create(obj, draft => { ... })` (structural sharing, cache untouched) — see
+  the `[Created]` relabel in `date-card.tsx`. Note `mutative` does **not**
+  auto-freeze its output, so an accidental mutation won't throw at runtime;
+  it just silently corrupts the cache.
 - **`relaunch()` races `tauri-plugin-single-instance`.** Restart spawns the new
   process before the old one exits; if the new instance's single-instance check
   runs while the old is still shutting down, it defers to the dying instance

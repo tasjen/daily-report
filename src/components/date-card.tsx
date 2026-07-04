@@ -6,6 +6,7 @@ import {
   PlayIcon,
   RefreshCwIcon,
 } from "lucide-react";
+import { create } from "mutative";
 import { useMemo, useState } from "react";
 import { Button } from "@/components/shared/button";
 import {
@@ -148,10 +149,28 @@ export default function DateCard({ date }: Props) {
     }));
   }
 
+  // Issues displayed under the "created" group are relabeled to a synthetic
+  // "Created" status so buildSummary's group-by-status gives them their own
+  // [Created] block. Cloned, not mutated — issues live in the react-query cache.
   const summaryText = useMemo(() => {
     const selected = new Set(selectedKeys);
-    return buildSummary(allIssues.filter((issue) => selected.has(issue.key)));
-  }, [allIssues, selectedKeys]);
+    const createdKeys = new Set(
+      issueGroups
+        .find((group) => group.id === "created")
+        ?.issues.map((issue) => issue.key) ?? [],
+    );
+    return buildSummary(
+      allIssues
+        .filter((issue) => selected.has(issue.key))
+        .map((issue) =>
+          createdKeys.has(issue.key)
+            ? create(issue, (draft) => {
+                draft.fields.status.name = "Created";
+              })
+            : issue,
+        ),
+    );
+  }, [allIssues, issueGroups, selectedKeys]);
 
   const autofillSummary =
     preferences?.autofill_summary ?? DEFAULT_PREFERENCES.autofill_summary;
