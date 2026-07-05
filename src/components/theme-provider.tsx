@@ -1,3 +1,4 @@
+import { getCurrentWindow } from "@tauri-apps/api/window";
 import { createContext, useContext, useEffect, useState } from "react";
 
 type Theme = "dark" | "light" | "system";
@@ -45,6 +46,7 @@ export function ThemeProvider({
       return;
     }
 
+    getCurrentWindow().setTheme(theme).catch(console.error);
     root.classList.add(theme);
   }, [theme]);
 

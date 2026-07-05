@@ -15,6 +15,7 @@
         }
       ]
     },
+    "core:window:allow-set-background-color",
     "core:window:allow-set-focus",
     "core:window:allow-show",
     "process:allow-restart"
