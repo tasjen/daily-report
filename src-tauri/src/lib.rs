@@ -457,12 +457,21 @@ pub fn run() {
     }
     builder
         .plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| {
-            let _ = app
-                .get_webview_window("main")
-                .expect("no main window")
-                .set_focus();
+            let window = app.get_webview_window("main").expect("no main window");
+            // Show before focusing: the window starts hidden until the frontend
+            // reveals it (see main.tsx), and focusing a hidden window does
+            // nothing — this is the escape hatch if the frontend never loads.
+            let _ = window.show();
+            let _ = window.set_focus();
         }))
-        .plugin(tauri_plugin_window_state::Builder::new().build())
+        .plugin(
+            tauri_plugin_window_state::Builder::new()
+                .with_state_flags(
+                    tauri_plugin_window_state::StateFlags::all()
+                        & !tauri_plugin_window_state::StateFlags::VISIBLE,
+                )
+                .build(),
+        )
         .plugin(tauri_plugin_process::init())
         .plugin(tauri_plugin_store::Builder::default().build())
         .plugin(tauri_plugin_http::init())

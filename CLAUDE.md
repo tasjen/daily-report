@@ -34,6 +34,7 @@ pnpm start      # tauri dev — run the full desktop app (use this to test)
 pnpm dev        # vite only (frontend, no Tauri backend — rarely useful here)
 pnpm build      # tsc + vite build (typecheck + bundle frontend)
 pnpm package    # tauri build — produce distributable bundles
+cargo check --manifest-path src-tauri/Cargo.toml   # typecheck Rust backend only
 npx @biomejs/biome check --write .   # lint + format (also runs on pre-commit)
 ```
 
@@ -104,6 +105,26 @@ and when the window is refocused after ≥1h unfocused (`useResetWhenAway` —
 see Frontend structure).
 When adding new browser instances or long-lived resources, make sure they are
 also torn down in the `Exit` handler.
+
+### Window startup visibility (anti-flash handshake)
+
+The main window is created hidden (`"visible": false` in
+[src-tauri/tauri.conf.json](src-tauri/tauri.conf.json)) so it never appears
+before the UI has rendered; the frontend reveals it — `ShowWindowOnMount` in
+[src/main.tsx](src/main.tsx) calls `show()` + `setFocus()` on mount (needs
+`core:window:allow-show` in capabilities). It must stay the **outermost**
+component: parent effects run after child effects, so the theme class is
+applied before the window becomes visible. Two backend pieces keep this
+working — break either and the flash returns or the app looks dead:
+
+- `tauri-plugin-window-state` is registered with
+  `StateFlags::all() & !StateFlags::VISIBLE`. With the default flags it
+  restores the previous session's visibility at window creation, re-showing
+  the window before the frontend is ready — intermittently, since it depends
+  on saved state.
+- The single-instance callback calls `show()` before `set_focus()`: if the
+  frontend ever fails to load (window stuck hidden), launching the app again
+  reveals the window instead of silently focusing an invisible one.
 
 ### Tauri commands (the frontend ↔ backend boundary)
 
