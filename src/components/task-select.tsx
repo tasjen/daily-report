@@ -61,28 +61,24 @@ export default function TaskSelect({
       >
         <ComboboxEmpty>No tasks found.</ComboboxEmpty>
         <ComboboxList className="scrollbar-thin scrollbar-thumb-muted-foreground space-y-1">
-          {(option: SelectOption) => (
-            <ComboboxItem
-              key={option.value}
-              value={option.value}
-              className="flex items-start gap-2"
-            >
-              {(() => {
-                const splitStr = ": ";
-                const splitIndex = option.label.indexOf(splitStr);
-                const key = option.label.slice(0, splitIndex);
-                const description = option.label.slice(
-                  splitIndex + splitStr.length,
-                );
-                return (
-                  <>
-                    <span className="flex-none">{key}</span>
-                    <span>{description}</span>
-                  </>
-                );
-              })()}
-            </ComboboxItem>
-          )}
+          {(option: SelectOption) => {
+            const splitStr = ": ";
+            const splitIndex = option.label.indexOf(splitStr);
+            const key = option.label.slice(0, splitIndex);
+            const description = option.label.slice(
+              splitIndex + splitStr.length,
+            );
+            return (
+              <ComboboxItem
+                key={option.value}
+                value={option.value}
+                className="flex items-start gap-2"
+              >
+                <span className="flex-none">{key}</span>
+                <span>{description}</span>
+              </ComboboxItem>
+            );
+          }}
         </ComboboxList>
       </ComboboxContent>
     </Combobox>
