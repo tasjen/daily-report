@@ -8,7 +8,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "start": "tauri dev",
+    "start": "tauri dev --config src-tauri/tauri.conf.dev.json",
     "package": "tauri build",
     "knip": "knip",
     "clean": "rm -rf dist node_modules/.vite && pnpm i"
