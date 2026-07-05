@@ -1,5 +1,11 @@
+import { InfoIcon } from "lucide-react";
 import { Checkbox } from "@/components/shared/checkbox";
 import { Label } from "@/components/shared/label";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/shared/tooltip";
 import { useSavePreferencesMutation } from "@/lib/mutations";
 import { usePreferences } from "@/lib/queries";
 import type { TaskGroupType } from "@/lib/store";
@@ -25,7 +31,21 @@ export default function DefaultTaskGroupsSelect() {
 
   return (
     <div className="flex flex-col items-start gap-2">
-      <Label className="flex-none">Default selected task groups</Label>
+      <Label className="flex flex-none items-center gap-1">
+        Default selected task groups
+        <Tooltip>
+          <TooltipTrigger
+            render={
+              <span>
+                <InfoIcon size={16} className="inline" />
+              </span>
+            }
+          />
+          <TooltipContent>
+            The task groups whose issues start all checked by default
+          </TooltipContent>
+        </Tooltip>
+      </Label>
       <div className="flex flex-col gap-1">
         {TASK_GROUPS.map((group) => (
           <Label

@@ -1,3 +1,4 @@
+import { InfoIcon } from "lucide-react";
 import { Fragment } from "react";
 import {
   Combobox,
@@ -13,6 +14,11 @@ import {
   useComboboxAnchor,
 } from "@/components/shared/combobox";
 import { Label } from "@/components/shared/label";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/shared/tooltip";
 import { useSavePreferencesMutation } from "@/lib/mutations";
 import { usePreferences, useTaskParameters } from "@/lib/queries";
 import type { SelectOption } from "@/type";
@@ -28,7 +34,22 @@ export function ProjectListSelect() {
 
   return (
     <div className="flex flex-col items-start gap-2">
-      <Label className="flex-none">Project list</Label>
+      <Label className="flex flex-none items-center gap-1">
+        Project list
+        <Tooltip>
+          <TooltipTrigger
+            render={
+              <span>
+                <InfoIcon size={16} className="inline" />
+              </span>
+            }
+          />
+          <TooltipContent>
+            Limits the portal form's project options to these projects; leave
+            empty to keep all projects
+          </TooltipContent>
+        </Tooltip>
+      </Label>
       <Combobox
         multiple
         autoHighlight
