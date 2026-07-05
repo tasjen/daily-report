@@ -11,7 +11,7 @@
     "start": "tauri dev",
     "package": "tauri build",
     "knip": "knip",
-    "vite:prune": "rm -rf node_modules/.vite && pnpm i"
+    "clean": "rm -rf dist node_modules/.vite && pnpm i"
   },
   "dependencies": {
     "@base-ui/react": "^1.6.0",
