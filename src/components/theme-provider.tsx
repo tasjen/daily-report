@@ -1,13 +1,18 @@
 import { getCurrentWindow } from "@tauri-apps/api/window";
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  type PropsWithChildren,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 type Theme = "dark" | "light" | "system";
 
-type ThemeProviderProps = {
-  children: React.ReactNode;
+type ThemeProviderProps = PropsWithChildren<{
   defaultTheme?: Theme;
   storageKey?: string;
-};
+}>;
 
 type ThemeProviderState = {
   theme: Theme;
