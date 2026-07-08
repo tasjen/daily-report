@@ -13,7 +13,7 @@ export type Account = {
 // dialog rejects duplicates, so no generated ids.
 export type Favorites = string[];
 
-export type TaskGroupType = "status" | "created" | "sprint";
+export type TaskGroupType = "status" | "created" | "sprint" | "favorite";
 
 export type Preferences = {
   default_project: string | null;
