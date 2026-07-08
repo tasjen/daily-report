@@ -17,6 +17,7 @@ const TASK_DATE_SELECT: &str = "select#task_date";
 const TASK_LEAVE_SELECT: &str = "select#task_leave";
 const TASK_PROJECT_SELECT_1: &str = "select#task_project_id1";
 const TASK_COMMENT_TEXTAREA_1: &str = "textarea#task_comment1";
+const TASK_FORM_SELECTOR: &str = "form[action='task.php']";
 
 #[derive(thiserror::Error, Debug)]
 enum AppError {
@@ -437,6 +438,46 @@ async fn submit_task(
         ))
         .await?;
     }
+
+    let auto_submit = store
+        .get("preferences")
+        .and_then(|v| v.get("auto_submit").and_then(|b| b.as_bool()))
+        .unwrap_or(false);
+    if !auto_submit {
+        return Ok(());
+    }
+
+    // The selector contains single quotes, so pass it through
+    // `serde_json::to_string` instead of hand-wrapping it in '...'
+    // (same technique as the login selector).
+    log::info!("submit_task: auto-submitting the task form");
+    let form_selector_js = serde_json::to_string(TASK_FORM_SELECTOR)?;
+    page.evaluate(format!(
+        "document.querySelector({form_selector_js}).submit();"
+    ))
+    .await?;
+
+    let auto_close = store
+        .get("preferences")
+        .and_then(|v| v.get("auto_close").and_then(|b| b.as_bool()))
+        .unwrap_or(false);
+    if !auto_close {
+        return Ok(());
+    }
+
+    // Only close once the portal confirms the submission by navigating to
+    // member.php. On timeout the submission state is unknown: return the
+    // error and leave the browser open so the user can see what happened.
+    wait_for_url(&page, &format!("{ADMIN_BASE}/member.php"), 10_000)
+        .await
+        .map_err(|e| {
+            log::warn!("auto-close skipped, submission not confirmed: {e}");
+            AppError::from(format!(
+                "{e}\nThe portal didn't confirm the submission; leaving the browser open"
+            ))
+        })?;
+    log::info!("submit_task: submission confirmed, closing headed browser");
+    state.close().await;
 
     Ok(())
 }

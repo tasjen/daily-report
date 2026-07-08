@@ -1,4 +1,6 @@
 import { Settings2Icon } from "lucide-react";
+import AutoCloseToggle from "@/components/auto-close-toggle";
+import AutoSubmitToggle from "@/components/auto-submit-toggle";
 import AutofillSummaryToggle from "@/components/autofill-summary-toggle";
 import DefaultProjectSelect from "@/components/default-project-select";
 import DefaultTaskGroupsSelect from "@/components/default-task-groups-select";
@@ -24,20 +26,26 @@ export default function PreferencesForm() {
           </Button>
         }
       />
-      <DialogContent initialFocus={false}>
+      <DialogContent initialFocus={false} className="max-w-lg">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Settings2Icon />
             Preferences
           </DialogTitle>
         </DialogHeader>
-        <div className="flex flex-col gap-4">
-          <DefaultProjectSelect />
-          <ProjectListSelect />
-          <DefaultTaskGroupsSelect />
-          <Separator />
-          <AutofillSummaryToggle />
-          <ThemeToggle />
+        <div className="flex gap-4">
+          <div className="flex flex-col gap-4">
+            <DefaultProjectSelect />
+            <ProjectListSelect />
+            <DefaultTaskGroupsSelect />
+          </div>
+          <Separator orientation="vertical" />
+          <div className="flex flex-none flex-col gap-4">
+            <AutofillSummaryToggle />
+            <AutoSubmitToggle />
+            <AutoCloseToggle />
+            <ThemeToggle />
+          </div>
         </div>
       </DialogContent>
     </Dialog>
