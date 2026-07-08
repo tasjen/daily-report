@@ -468,7 +468,7 @@ async fn submit_task(
     // Only close once the portal confirms the submission by navigating to
     // member.php. On timeout the submission state is unknown: return the
     // error and leave the browser open so the user can see what happened.
-    wait_for_url(&page, &format!("{ADMIN_BASE}/member.php"), 10_000)
+    wait_for_url(&page, &format!("{ADMIN_BASE}/task_report.php"), 10_000)
         .await
         .map_err(|e| {
             log::warn!("auto-close skipped, submission not confirmed: {e}");
