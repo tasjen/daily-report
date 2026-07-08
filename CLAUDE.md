@@ -217,12 +217,12 @@ favorites:   string[]
 ```
 
 `phone` authenticates into the admin portal; `email` + `api_token` authenticate
-to Jira. `default_project`/`project_list` are also read by the Rust side in
-`submit_task`; `default_task_groups` (which task groups start checked on a
-date card, default `["status"]`), `autofill_summary` (whether submit passes
+to Jira. `default_project`/`project_list` and `auto_submit`/`auto_close` (both
+default `false`) are also read by the Rust side in `submit_task`;
+`default_task_groups` (which task groups start checked on a
+date card, default `["status"]`) and `autofill_summary` (whether submit passes
 the built summary or an empty string, default `true`; when `true`, Jira
-fetching also disables the submit button), and `auto_submit`/`auto_close`
-(both default `false`) are frontend-only. `favorites` — free-form favorite
+fetching also disables the submit button) are frontend-only. `favorites` — free-form favorite
 task texts, insertion-ordered, the text itself is the identity — is also
 frontend-only: unlike `preferences`, the Rust side never reads it. The **same
 `store.json` is read from both sides** — the frontend via `LazyStore`, the
