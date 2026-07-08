@@ -26,22 +26,26 @@ export default function PreferencesForm() {
           </Button>
         }
       />
-      <DialogContent initialFocus={false}>
+      <DialogContent initialFocus={false} className="max-w-lg">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Settings2Icon />
             Preferences
           </DialogTitle>
         </DialogHeader>
-        <div className="flex flex-col gap-4">
-          <DefaultProjectSelect />
-          <ProjectListSelect />
-          <DefaultTaskGroupsSelect />
-          <Separator />
-          <AutofillSummaryToggle />
-          <AutoSubmitToggle />
-          <AutoCloseToggle />
-          <ThemeToggle />
+        <div className="flex gap-4">
+          <div className="flex flex-col gap-4">
+            <DefaultProjectSelect />
+            <ProjectListSelect />
+            <DefaultTaskGroupsSelect />
+          </div>
+          <Separator orientation="vertical" />
+          <div className="flex flex-none flex-col gap-4">
+            <AutofillSummaryToggle />
+            <AutoSubmitToggle />
+            <AutoCloseToggle />
+            <ThemeToggle />
+          </div>
         </div>
       </DialogContent>
     </Dialog>
