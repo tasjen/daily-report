@@ -1,4 +1,6 @@
 import { Settings2Icon } from "lucide-react";
+import AutoCloseToggle from "@/components/auto-close-toggle";
+import AutoSubmitToggle from "@/components/auto-submit-toggle";
 import AutofillSummaryToggle from "@/components/autofill-summary-toggle";
 import DefaultProjectSelect from "@/components/default-project-select";
 import DefaultTaskGroupsSelect from "@/components/default-task-groups-select";
@@ -37,6 +39,8 @@ export default function PreferencesForm() {
           <DefaultTaskGroupsSelect />
           <Separator />
           <AutofillSummaryToggle />
+          <AutoSubmitToggle />
+          <AutoCloseToggle />
           <ThemeToggle />
         </div>
       </DialogContent>

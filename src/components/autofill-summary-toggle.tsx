@@ -17,6 +17,9 @@ export default function AutofillSummaryToggle() {
           savePreferences.mutate({
             ...preferences,
             autofill_summary: checked,
+            // turning auto-fill off disarms the dependent toggles
+            auto_submit: checked && preferences.auto_submit,
+            auto_close: checked && preferences.auto_close,
           })
         }
       />
