@@ -267,7 +267,12 @@ export default function DateCard({ date }: Props) {
       </CardHeader>
       <Separator />
       <CardContent className="space-y-4">
-        <div className="flex flex-col gap-2 min-[832px]:flex-row">
+        <div
+          className={cn("flex flex-col gap-2 min-[832px]:flex-row", {
+            "min-[832px]:grid min-[832px]:grid-cols-2":
+              optionGroups.filter((group) => group.items.length > 0).length > 3,
+          })}
+        >
           {optionGroups.map((group) => (
             <TaskSelect
               key={group.type}
