@@ -17,6 +17,10 @@ type Props = {
   onValueChange: (keys: string[]) => void;
   label?: string;
   className?: string;
+  // render item labels as-is instead of splitting on ": " into
+  // "KEY: description" columns (used by the favorites group, whose labels
+  // are free text)
+  plainLabels?: boolean;
 };
 
 export default function TaskSelect({
@@ -25,6 +29,7 @@ export default function TaskSelect({
   onValueChange,
   label,
   className,
+  plainLabels,
 }: Props) {
   const anchor = useComboboxAnchor();
   const allSelected = items.length > 0 && value.length === items.length;
@@ -62,6 +67,13 @@ export default function TaskSelect({
         <ComboboxEmpty>No tasks found.</ComboboxEmpty>
         <ComboboxList className="scrollbar-thin scrollbar-thumb-muted-foreground space-y-1">
           {(option: SelectOption) => {
+            if (plainLabels) {
+              return (
+                <ComboboxItem key={option.value} value={option.value}>
+                  <span>{option.label}</span>
+                </ComboboxItem>
+              );
+            }
             const splitStr = ": ";
             const splitIndex = option.label.indexOf(splitStr);
             const key = option.label.slice(0, splitIndex);
