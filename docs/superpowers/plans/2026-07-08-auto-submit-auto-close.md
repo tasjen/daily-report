@@ -1,6 +1,6 @@
 # Auto-submit & Auto-close Preferences Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Add two chained preference toggles — Auto-submit (backend submits the portal's task form after filling it) and Auto-close (backend closes the headed browser after the submission is confirmed).
 
@@ -30,7 +30,7 @@
 - Consumes: nothing new.
 - Produces: `Preferences.auto_submit: boolean` and `Preferences.auto_close: boolean` (both default `false`) — Task 3's toggle components read and save these; Task 2's Rust code reads the same JSON keys from `store.json`.
 
-- [ ] **Step 1: Add the fields to the type and defaults**
+- [x] **Step 1: Add the fields to the type and defaults**
 
 In `src/lib/store.ts`, change the `Preferences` type and `DEFAULT_PREFERENCES`:
 
@@ -56,12 +56,12 @@ export const DEFAULT_PREFERENCES: Preferences = {
 };
 ```
 
-- [ ] **Step 2: Verify the frontend still typechecks**
+- [x] **Step 2: Verify the frontend still typechecks**
 
 Run: `pnpm build`
 Expected: succeeds. (Adding required fields to `Preferences` compiles because every consumer spreads whole `preferences` objects; the only literal of the full type is `DEFAULT_PREFERENCES`, updated above.)
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/lib/store.ts
@@ -79,7 +79,7 @@ git commit -m "Add auto_submit and auto_close preference fields"
 - Consumes: `preferences.auto_submit` / `preferences.auto_close` JSON keys from `store.json` (written by Tasks 1/3; absent keys read as `false`). Existing helpers: `wait_for_url(&Page, &str, u64)`, `BrowserState::close()`, `ADMIN_BASE`.
 - Produces: no signature change — `submit_task(date, summary)` keeps its exact Tauri command signature. New constant `TASK_FORM_SELECTOR: &str = "form[action='task.php']"`.
 
-- [ ] **Step 1: Add the form selector constant**
+- [x] **Step 1: Add the form selector constant**
 
 In the portal constants block at the top of `src-tauri/src/lib.rs`, after `TASK_COMMENT_TEXTAREA_1`:
 
@@ -87,7 +87,7 @@ In the portal constants block at the top of `src-tauri/src/lib.rs`, after `TASK_
 const TASK_FORM_SELECTOR: &str = "form[action='task.php']";
 ```
 
-- [ ] **Step 2: Extend `submit_task`**
+- [x] **Step 2: Extend `submit_task`**
 
 Replace the final `Ok(())` of `submit_task` (directly after the `if !project_list.is_empty() { ... }` block) with:
 
@@ -140,12 +140,12 @@ Notes for the implementer:
 - `close()` is safe to call here: `get_page()`'s lock guard was released when it returned, and `close()` re-acquires the mutex itself.
 - The stored flags can be trusted without re-checking the chain (`auto_close` implies `auto_submit`) because the frontend cascades `false` downward on every save (Task 3).
 
-- [ ] **Step 3: Verify the backend compiles**
+- [x] **Step 3: Verify the backend compiles**
 
 Run: `cargo check --manifest-path src-tauri/Cargo.toml`
 Expected: succeeds with no warnings about unused variables/constants.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src-tauri/src/lib.rs
@@ -166,7 +166,7 @@ git commit -m "Auto-submit task form and auto-close browser per preferences"
 - Consumes: `Preferences.auto_submit`/`auto_close` from Task 1; existing `usePreferences()` (react-query hook returning `{ data: Preferences | undefined }`) and `useSavePreferencesMutation()` (mutation taking a full `Preferences` object); shared `Switch` (forwards base-ui `disabled` prop), `Label`, `Tooltip`/`TooltipTrigger`/`TooltipContent`.
 - Produces: default-exported React components `AutoSubmitToggle` and `AutoCloseToggle`.
 
-- [ ] **Step 1: Create `src/components/auto-submit-toggle.tsx`**
+- [x] **Step 1: Create `src/components/auto-submit-toggle.tsx`**
 
 The tooltip sits in a sibling of the `Label` (not inside it) so clicking the info icon can't toggle the switch:
 
@@ -222,7 +222,7 @@ export default function AutoSubmitToggle() {
 }
 ```
 
-- [ ] **Step 2: Create `src/components/auto-close-toggle.tsx`**
+- [x] **Step 2: Create `src/components/auto-close-toggle.tsx`**
 
 ```tsx
 import { InfoIcon } from "lucide-react";
@@ -274,7 +274,7 @@ export default function AutoCloseToggle() {
 }
 ```
 
-- [ ] **Step 3: Cascade in `src/components/autofill-summary-toggle.tsx`**
+- [x] **Step 3: Cascade in `src/components/autofill-summary-toggle.tsx`**
 
 Change the `onCheckedChange` handler (only this — the rest of the file stays as-is):
 
@@ -290,7 +290,7 @@ Change the `onCheckedChange` handler (only this — the rest of the file stays a
         }
 ```
 
-- [ ] **Step 4: Render the toggles in `src/components/preferences-form.tsx`**
+- [x] **Step 4: Render the toggles in `src/components/preferences-form.tsx`**
 
 Add the imports:
 
@@ -308,7 +308,7 @@ and render them between `AutofillSummaryToggle` and `ThemeToggle`:
           <ThemeToggle />
 ```
 
-- [ ] **Step 5: Lint + typecheck**
+- [x] **Step 5: Lint + typecheck**
 
 Run: `npx @biomejs/biome check --write .`
 Expected: no remaining diagnostics (import order may be auto-fixed).
@@ -316,7 +316,7 @@ Expected: no remaining diagnostics (import order may be auto-fixed).
 Run: `pnpm build`
 Expected: succeeds.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add src/components/auto-submit-toggle.tsx src/components/auto-close-toggle.tsx src/components/autofill-summary-toggle.tsx src/components/preferences-form.tsx
