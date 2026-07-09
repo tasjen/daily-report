@@ -4,6 +4,7 @@ import { fetch as tauriFetch } from "@tauri-apps/plugin-http";
 import {
   type Account,
   DEFAULT_PREFERENCES,
+  type Favorites,
   type Preferences,
   store,
 } from "@/lib/store";
@@ -35,6 +36,18 @@ export function preferencesOptions() {
 
 export function usePreferences() {
   return useQuery(preferencesOptions());
+}
+
+export function favoritesOptions() {
+  return queryOptions({
+    // stores saved before the key existed return undefined, hence ?? []
+    queryKey: ["favorites"],
+    queryFn: async () => (await store.get<Favorites>("favorites")) ?? [],
+  });
+}
+
+export function useFavorites() {
+  return useQuery(favoritesOptions());
 }
 
 export function taskParametersOptions() {

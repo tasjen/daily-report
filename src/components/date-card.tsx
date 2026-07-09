@@ -18,11 +18,16 @@ import {
 import { Separator } from "@/components/shared/separator";
 import TaskSelect from "@/components/task-select";
 import { useSubmitTaskMutation } from "@/lib/mutations";
-import { useJiraTasksQuery, usePreferences } from "@/lib/queries";
+import { useFavorites, useJiraTasksQuery, usePreferences } from "@/lib/queries";
 import { DEFAULT_PREFERENCES, type TaskGroupType } from "@/lib/store";
 import { TASK_GROUPS } from "@/lib/task-groups";
 import { cn } from "@/lib/utils";
 import type { JiraIssue } from "@/type";
+
+// Prefix that namespaces favorite keys away from real Jira issue keys, so
+// dedup/selection state can never collide and the summary builder can split
+// favorites back out of the flat selection.
+const FAVORITE_KEY_PREFIX = "favorite:";
 
 type Props = {
   date: string;
@@ -46,6 +51,25 @@ export default function DateCard({ date }: Props) {
   const isFetching =
     statusQuery.isFetching || createdQuery.isFetching || sprintQuery.isFetching;
 
+  const { data: favorites } = useFavorites();
+  // Favorites masquerade as issues so the existing dedup/default-checked/
+  // override machinery applies unchanged. buildSummary never sees them —
+  // they're split back out into plain leading lines.
+  const favoriteIssues = useMemo(
+    () =>
+      (favorites ?? []).map((text) => ({
+        id: text,
+        key: `${FAVORITE_KEY_PREFIX}${text}`,
+        fields: {
+          summary: text,
+          status: { name: "" },
+          updated: "",
+          duedate: "",
+        },
+      })),
+    [favorites],
+  );
+
   const { data: preferences } = usePreferences();
   const defaultGroupIds = useMemo(
     () =>
@@ -66,6 +90,7 @@ export default function DateCard({ date }: Props) {
       status: statusQuery.data?.issues ?? [],
       created: createdQuery.data?.issues ?? [],
       sprint: sprintQuery.data?.issues ?? [],
+      favorite: favoriteIssues,
     };
     const ordered = [
       ...TASK_GROUPS.filter((group) => defaultGroupIds.has(group.type)),
@@ -82,7 +107,13 @@ export default function DateCard({ date }: Props) {
         }),
       }))
       .filter((group) => group.issues.length > 0);
-  }, [statusQuery.data, createdQuery.data, sprintQuery.data, defaultGroupIds]);
+  }, [
+    statusQuery.data,
+    createdQuery.data,
+    sprintQuery.data,
+    favoriteIssues,
+    defaultGroupIds,
+  ]);
 
   // Flat union of every grouped issue, used for selection/summary bookkeeping.
   const allIssues = useMemo(
@@ -98,12 +129,20 @@ export default function DateCard({ date }: Props) {
         type: group.id,
         label: group.label,
         keys: group.issues.map((issue) => issue.key),
-        items: group.issues
-          .map((issue) => ({
-            value: issue.key,
-            label: `${issue.key}: ${issue.fields.summary}`,
-          }))
-          .sort((a, b) => a.value.localeCompare(b.value)),
+        // Favorites show their text alone, in the order they were added;
+        // Jira issues show "KEY: summary" sorted by key.
+        items:
+          group.id === "favorite"
+            ? group.issues.map((issue) => ({
+                value: issue.key,
+                label: issue.fields.summary,
+              }))
+            : group.issues
+                .map((issue) => ({
+                  value: issue.key,
+                  label: `${issue.key}: ${issue.fields.summary}`,
+                }))
+                .sort((a, b) => a.value.localeCompare(b.value)),
       })),
     [issueGroups],
   );
@@ -149,19 +188,26 @@ export default function DateCard({ date }: Props) {
     }));
   }
 
+  // Selected favorites lead the summary as plain "• text" lines outside any
+  // status block; the remaining Jira issues are grouped by status as before.
   // Issues displayed under the "created" group are relabeled to a synthetic
   // "Created" status so buildSummary's group-by-status gives them their own
   // [Created] block. Cloned, not mutated — issues live in the react-query cache.
   const summaryText = useMemo(() => {
     const selected = new Set(selectedKeys);
+    const selectedIssues = allIssues.filter((issue) => selected.has(issue.key));
     const createdKeys = new Set(
       issueGroups
         .find((group) => group.id === "created")
         ?.issues.map((issue) => issue.key) ?? [],
     );
-    return buildSummary(
-      allIssues
-        .filter((issue) => selected.has(issue.key))
+    const favoriteLines = selectedIssues
+      .filter((issue) => issue.key.startsWith(FAVORITE_KEY_PREFIX))
+      .map((issue) => `• ${issue.fields.summary}`)
+      .join("\n");
+    const jiraSummary = buildSummary(
+      selectedIssues
+        .filter((issue) => !issue.key.startsWith(FAVORITE_KEY_PREFIX))
         .map((issue) =>
           createdKeys.has(issue.key)
             ? create(issue, (draft) => {
@@ -170,6 +216,7 @@ export default function DateCard({ date }: Props) {
             : issue,
         ),
     );
+    return [favoriteLines, jiraSummary].filter(Boolean).join("\n\n");
   }, [allIssues, issueGroups, selectedKeys]);
 
   const autofillSummary =
@@ -220,13 +267,19 @@ export default function DateCard({ date }: Props) {
       </CardHeader>
       <Separator />
       <CardContent className="space-y-4">
-        <div className="flex flex-col gap-2 min-[832px]:flex-row">
+        <div
+          className={cn("flex flex-col gap-2 min-[832px]:flex-row", {
+            "min-[832px]:grid min-[832px]:grid-cols-2":
+              optionGroups.filter((group) => group.items.length > 0).length > 3,
+          })}
+        >
           {optionGroups.map((group) => (
             <TaskSelect
               key={group.type}
               className="min-w-0 flex-1"
               label={group.label}
               items={group.items}
+              plainLabels={group.type === "favorite"}
               value={group.keys.filter((key) => selectedKeySet.has(key))}
               onValueChange={(selected) =>
                 handleSelectionChange(group.keys, selected)
@@ -249,12 +302,12 @@ export default function DateCard({ date }: Props) {
             )}
           >
             {!summaryText ? (
-              // no issues at all vs. issues exist but none selected (reachable
+              // no tasks at all vs. tasks exist but none selected (reachable
               // when `default_task_groups` is empty or all were unchecked)
               allIssues.length ? (
-                "No Jira issues selected"
+                "No tasks selected"
               ) : (
-                "No Jira issues found"
+                "No tasks found"
               )
             ) : (
               <>

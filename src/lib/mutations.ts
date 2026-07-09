@@ -3,10 +3,11 @@ import { invoke } from "@tauri-apps/api/core";
 import { toast } from "sonner";
 import {
   accountOptions,
+  favoritesOptions,
   preferencesOptions,
   taskParametersOptions,
 } from "./queries";
-import { type Account, type Preferences, store } from "./store";
+import { type Account, type Favorites, type Preferences, store } from "./store";
 
 export function useSubmitTaskMutation() {
   const queryClient = useQueryClient();
@@ -75,6 +76,32 @@ export function useSavePreferencesMutation() {
           preferencesOptions().queryKey,
           context.previous,
         );
+      }
+      toast.error(String(error));
+    },
+  });
+}
+
+export function useSaveFavoritesMutation() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (favorites: Favorites) => {
+      await store.set("favorites", favorites);
+      await store.save();
+      return favorites;
+    },
+    // Optimistic for the same reason as preferences: consumers compute the
+    // next array from the current one, so a late cache write would let rapid
+    // edits clobber each other.
+    onMutate: async (favorites) => {
+      await queryClient.cancelQueries(favoritesOptions());
+      const previous = queryClient.getQueryData(favoritesOptions().queryKey);
+      queryClient.setQueryData(favoritesOptions().queryKey, favorites);
+      return { previous };
+    },
+    onError: (error, _favorites, context) => {
+      if (context?.previous) {
+        queryClient.setQueryData(favoritesOptions().queryKey, context.previous);
       }
       toast.error(String(error));
     },

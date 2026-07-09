@@ -8,7 +8,12 @@ export type Account = {
   api_token: string;
 };
 
-export type TaskGroupType = "status" | "created" | "sprint";
+// Free-form favorite tasks, insertion-ordered. Frontend-only: the Rust side
+// never reads this key. The text itself is the identity — the favorites
+// dialog rejects duplicates, so no generated ids.
+export type Favorites = string[];
+
+export type TaskGroupType = "status" | "created" | "sprint" | "favorite";
 
 export type Preferences = {
   default_project: string | null;

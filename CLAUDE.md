@@ -148,8 +148,8 @@ Form field selectors on the portal (keep in sync if the portal changes):
 ### Frontend structure
 
 - [src/App.tsx](src/App.tsx) — sidebar with `OpenMemberPageButton`,
-  `RefreshDateListButton`, `PreferencesForm`, `AccountForm`; renders `DateList`
-  once an account exists; mounts `useResetWhenAway`.
+  `RefreshDateListButton`, `FavoritesForm`, `PreferencesForm`, `AccountForm`;
+  renders `DateList` once an account exists; mounts `useResetWhenAway`.
 - [src/lib/use-reset-when-away.ts](src/lib/use-reset-when-away.ts) —
   `useResetWhenAway`: when the window regains focus after being unfocused
   ≥1h, calls `close_browsers` and, once teardown settles, reloads the
@@ -162,8 +162,9 @@ Form field selectors on the portal (keep in sync if the portal changes):
   `Account`/`Preferences`/`TaskGroupType` types and `DEFAULT_PREFERENCES`.
   No client state library: account and preferences are read through react-query
   (`useAccount`/`usePreferences` in `queries.ts`).
-- [src/lib/task-groups.ts](src/lib/task-groups.ts) — `TASK_GROUPS`: the three
-  Jira task groups (type + label), shared by `DateCard` and the preferences form.
+- [src/lib/task-groups.ts](src/lib/task-groups.ts) — `TASK_GROUPS`: the four
+  task groups (three Jira-queried plus local favorites, last), shared by
+  `DateCard` and the preferences form.
 - [src/components/account-form.tsx](src/components/account-form.tsx) — dialog to
   edit secrets (phone, Jira email, Jira API token); inputs strip all spaces. On
   save: writes to `store.json`, calls `close_browsers`, invalidates
@@ -171,46 +172,62 @@ Form field selectors on the portal (keep in sync if the portal changes):
 - [src/components/preferences-form.tsx](src/components/preferences-form.tsx) —
   dialog with `DefaultProjectSelect`, `ProjectListSelect`,
   `DefaultTaskGroupsSelect`, and `ThemeToggle`.
+- [src/components/favorites-form.tsx](src/components/favorites-form.tsx) —
+  star-icon dialog in the sidebar for the `favorites` list: add (rejects
+  duplicates and blank text) and delete only, saved immediately via
+  `useSaveFavoritesMutation`.
 - [src/components/date-list.tsx](src/components/date-list.tsx) — runs
   `useTaskParameters`, renders a `DateCard` per non-empty date, paginated 5 at a
   time with a "Load more" button.
 - [src/components/date-card.tsx](src/components/date-card.tsx) — per-date card.
-  Runs three Jira queries (status-changed-by-me, created-by-me, my-open-sprint),
-  shows each as its own `TaskSelect` group. Groups in `default_task_groups`
+  Runs three Jira queries (status-changed-by-me, created-by-me, my-open-sprint)
+  plus `useFavorites` for the local favorites group, shows each as its own
+  `TaskSelect` group (favorites render with `plainLabels`, wrapped in
+  `favorite:`-prefixed issue-shaped objects so dedup/default-checked/override
+  logic is reused unchanged). Groups in `default_task_groups`
   render first and their issues start checked; dedup by issue key runs in
   display order, so a duplicate lands in the first group on screen and defaults
   follow the *displayed* group. User toggles are kept as per-issue `overrides`
   on top of the defaults (only actually-changed issues are recorded). Selected
-  issues become the `summaryText` (grouped by status) shown/copied/submitted via
-  the submit (`Play`) button → `useSubmitTaskMutation`.
+  favorites lead the `summaryText` as plain bullets, ahead of the Jira issues
+  (grouped by status), shown/copied/submitted via the submit (`Play`) button →
+  `useSubmitTaskMutation`.
 - [src/lib/queries.ts](src/lib/queries.ts) — react-query options/hooks.
   `taskParametersOptions` wraps the `get_task_parameters` command;
   `jiraTasksQueryOptions` calls the Jira REST API directly; `preferencesOptions`
-  merges the stored object over `DEFAULT_PREFERENCES` field-by-field.
+  merges the stored object over `DEFAULT_PREFERENCES` field-by-field;
+  `favoritesOptions`/`useFavorites` read the `favorites` key (`?? []` covers
+  stores saved before the key existed).
 - [src/lib/mutations.ts](src/lib/mutations.ts) — `useSubmitTaskMutation`
   (invokes `submit_task`, optimistically removes the submitted date),
-  `useSaveAccountMutation`, and `useSavePreferencesMutation` (optimistic cache
-  update in `onMutate` — consumers compute next preferences from current ones,
-  so a late cache write would let rapid edits clobber each other).
+  `useSaveAccountMutation`, `useSavePreferencesMutation`, and
+  `useSaveFavoritesMutation` (the latter two update the cache optimistically
+  in `onMutate` — consumers compute the next preferences/favorites from the
+  current value, so a late cache write would let rapid edits clobber each
+  other).
 
-### Account & preferences (`store.json`)
+### Account, preferences & favorites (`store.json`)
 
-Persisted via the Tauri store plugin under two keys:
+Persisted via the Tauri store plugin under three keys:
 
 ```ts
 account:     { phone, email, api_token }
-preferences: { default_project, project_list, default_task_groups, autofill_summary }
+preferences: { default_project, project_list, default_task_groups, autofill_summary, auto_submit, auto_close }
+favorites:   string[]
 ```
 
 `phone` authenticates into the admin portal; `email` + `api_token` authenticate
-to Jira. `default_project`/`project_list` are also read by the Rust side in
-`submit_task`; `default_task_groups` (which task groups start checked on a
+to Jira. `default_project`/`project_list` and `auto_submit`/`auto_close` (both
+default `false`) are also read by the Rust side in `submit_task`;
+`default_task_groups` (which task groups start checked on a
 date card, default `["status"]`) and `autofill_summary` (whether submit passes
 the built summary or an empty string, default `true`; when `true`, Jira
-fetching also disables the submit button) are frontend-only. The **same `store.json` is
-read from both sides** — the frontend via `LazyStore`, the backend via
-`app.store("store.json")` — so field names must stay in sync between
-[src/lib/store.ts](src/lib/store.ts) and the Rust code. When adding a
+fetching also disables the submit button) are frontend-only. `favorites` — free-form favorite
+task texts, insertion-ordered, the text itself is the identity — is also
+frontend-only: unlike `preferences`, the Rust side never reads it. The **same
+`store.json` is read from both sides** — the frontend via `LazyStore`, the
+backend via `app.store("store.json")` — so field names must stay in sync
+between [src/lib/store.ts](src/lib/store.ts) and the Rust code. When adding a
 `Preferences` field, give it a default in `DEFAULT_PREFERENCES`: the per-field
 merge in `preferencesOptions` is what upgrades stores saved before the field
 existed.
