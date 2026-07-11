@@ -41,6 +41,16 @@ const formSchema = z.object({
     .min(1, "Jira email is required")
     .pipe(z.email("Enter a valid email address")),
   api_token: z.string().trim().min(1, "Jira API token is required"),
+  portal_url: z
+    .string()
+    .trim()
+    .min(1, "Portal URL is required")
+    .pipe(z.url({ protocol: /^https?$/, error: "Enter a valid http(s) URL" })),
+  portal_credential: z
+    .string()
+    .trim()
+    .min(1, "Portal credential is required")
+    .refine((value) => value.includes(":"), "Use the username:password format"),
 });
 
 // Renders one labelled text input wired to a TanStack Form field. `field` is
@@ -81,17 +91,31 @@ function TextField({
 export default function AccountForm() {
   const { data: account } = useAccount();
   const saveAccount = useSaveAccountMutation();
-  const [open, setOpen] = useState(!account);
+  // Open automatically until fully configured: covers both a fresh install
+  // (no account at all) and an existing store saved before the portal fields
+  // existed. Any account saved through this form always has every field, so
+  // checking the two newest fields subsumes the old `!account` check.
+  const [open, setOpen] = useState(
+    !account?.portal_url || !account?.portal_credential,
+  );
 
   const form = useForm({
     defaultValues: {
       phone: account?.phone ?? "",
       email: account?.email ?? "",
       api_token: account?.api_token ?? "",
+      portal_url: account?.portal_url ?? "",
+      portal_credential: account?.portal_credential ?? "",
     },
     validators: { onChange: formSchema },
     onSubmit: ({ value }) => {
-      saveAccount.mutate(value);
+      // TanStack Form submits the raw field values, not zod's parsed output,
+      // so schema transforms would never reach `value` — normalize the
+      // trailing slash here (the backend joins with `{base_url}/task.php`).
+      saveAccount.mutate({
+        ...value,
+        portal_url: value.portal_url.replace(/\/+$/, ""),
+      });
       setOpen(false);
     },
   });
@@ -104,6 +128,8 @@ export default function AccountForm() {
         phone: account?.phone ?? "",
         email: account?.email ?? "",
         api_token: account?.api_token ?? "",
+        portal_url: account?.portal_url ?? "",
+        portal_credential: account?.portal_credential ?? "",
       });
     }
     setOpen(next);
@@ -138,6 +164,34 @@ export default function AccountForm() {
         </DialogHeader>
         <ScrollArea className="-mr-3 max-h-[60dvh] pt-4 pr-3">
           <FieldGroup className="pb-4">
+            <form.Field name="portal_url">
+              {(field) => (
+                <TextField
+                  field={field}
+                  type="url"
+                  label={
+                    <>
+                      Portal URL <SpanRequired />
+                    </>
+                  }
+                />
+              )}
+            </form.Field>
+
+            <form.Field name="portal_credential">
+              {(field) => (
+                <TextField
+                  field={field}
+                  type="password"
+                  label={
+                    <>
+                      Portal credential <SpanRequired />
+                    </>
+                  }
+                />
+              )}
+            </form.Field>
+
             <form.Field name="phone">
               {(field) => (
                 <TextField
