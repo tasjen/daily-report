@@ -76,11 +76,15 @@ cache or the process. When the probe fails the stale instance is force-killed
 ### Browser login flow (`BrowserState::get_page`)
 
 On first `get_page()` for an instance:
-1. Launch Chromium (headless or headed), enable stealth mode.
-2. Set a Basic-auth `Authorization` header (HTTP basic gate on the admin site).
-3. Navigate to `/team`, read `phone` from `store.json`, type it into the login
+1. Read `phone`, `portal_url`, and `portal_credential` from `store.json`
+   (all under the `account` key), failing fast — before Chromium is spent —
+   if any is missing.
+2. Launch Chromium (headless or headed), enable stealth mode.
+3. Set a Basic-auth `Authorization` header from `portal_credential`
+   (HTTP basic gate on the admin site).
+4. Navigate to `portal_url`, type the phone into the login
    input, press Enter.
-4. `wait_for_url` polls until the URL starts with `/team/member.php`,
+5. `wait_for_url` polls until the URL starts with `<portal_url>/member.php`,
    confirming login succeeded.
 
 `wait_for_url` does a prefix match on the current URL (so query params or a
@@ -166,9 +170,9 @@ Form field selectors on the portal (keep in sync if the portal changes):
   task groups (three Jira-queried plus local favorites, last), shared by
   `DateCard` and the preferences form.
 - [src/components/account-form.tsx](src/components/account-form.tsx) — dialog to
-  edit secrets (phone, Jira email, Jira API token); inputs strip all spaces. On
+  edit secrets (portal URL, portal credential, phone, Jira email, Jira API token); inputs strip all spaces. On
   save: writes to `store.json`, calls `close_browsers`, invalidates
-  `task_parameters`. Opens automatically when no account exists.
+  `task_parameters`. Opens automatically until the portal fields are configured (covers fresh installs and stores saved before those fields existed).
 - [src/components/preferences-form.tsx](src/components/preferences-form.tsx) —
   dialog with `DefaultProjectSelect`, `ProjectListSelect`,
   `DefaultTaskGroupsSelect`, and `ThemeToggle`.
@@ -211,13 +215,16 @@ Form field selectors on the portal (keep in sync if the portal changes):
 Persisted via the Tauri store plugin under three keys:
 
 ```ts
-account:     { phone, email, api_token }
+account:     { phone, email, api_token, portal_url, portal_credential }
 preferences: { default_project, project_list, default_task_groups, autofill_summary, auto_submit, auto_close }
 favorites:   string[]
 ```
 
-`phone` authenticates into the admin portal; `email` + `api_token` authenticate
-to Jira. `default_project`/`project_list` and `auto_submit`/`auto_close` (both
+`phone` authenticates into the admin portal; `portal_url` (portal base URL,
+stored without a trailing slash) and `portal_credential` (`user:pass` for the
+portal's HTTP basic gate) tell the backend where that portal is — all three
+are read by the Rust side. `email` + `api_token` authenticate to Jira.
+`default_project`/`project_list` and `auto_submit`/`auto_close` (both
 default `false`) are also read by the Rust side in `submit_task`;
 `default_task_groups` (which task groups start checked on a
 date card, default `["status"]`) and `autofill_summary` (whether submit passes
@@ -287,8 +294,10 @@ in their own `[Created]` block, sorted alphabetically among the status blocks.
   through `serde_json::to_string`, but `date`/`project` are interpolated raw into
   `evaluate(...)` — they come from the portal's own option values, so keep it that
   way and don't feed untrusted strings into those paths.
-- **Hardcoded values** live in `lib.rs`: the admin URL, the Basic-auth credential,
-  and the login selectors. These are portal-specific; update here if the portal
-  changes.
+- **Hardcoded values** live in `lib.rs`: the login/form selectors only. They are
+  portal-specific; update them if the portal's markup changes. The portal base
+  URL and Basic-auth credential are *not* compiled in — they are user-supplied
+  via the Account form (`account.portal_url` / `account.portal_credential` in
+  `store.json`) and read per-use by `portal_url()` / `portal_credential()`.
 - Biome enforces sorted Tailwind classes and organized imports; the pre-commit
   hook auto-fixes staged files.
