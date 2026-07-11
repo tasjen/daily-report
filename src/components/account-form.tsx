@@ -19,6 +19,7 @@ import {
   FieldLabel,
 } from "@/components/shared/field";
 import { Input } from "@/components/shared/input";
+import { ScrollArea } from "@/components/shared/scroll-area";
 import SpanRequired from "@/components/shared/span-required";
 import {
   Tooltip,
@@ -117,21 +118,26 @@ export default function AccountForm() {
           </Button>
         }
       />
-      <DialogContent initialFocus={false}>
+      <DialogContent
+        render={
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              form.handleSubmit();
+            }}
+          />
+        }
+        initialFocus={false}
+        className="gap-0"
+      >
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <UserIcon />
             Account
           </DialogTitle>
         </DialogHeader>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            form.handleSubmit();
-          }}
-          className="flex flex-col gap-4"
-        >
-          <FieldGroup>
+        <ScrollArea className="-mr-3 max-h-[60dvh] pt-4 pr-3">
+          <FieldGroup className="pb-4">
             <form.Field name="phone">
               {(field) => (
                 <TextField
@@ -193,18 +199,17 @@ export default function AccountForm() {
               )}
             </form.Field>
           </FieldGroup>
-
-          <DialogFooter>
-            <SignOutButton />
-            <form.Subscribe selector={(state) => state.canSubmit}>
-              {(canSubmit) => (
-                <Button type="submit" className="flex-1" disabled={!canSubmit}>
-                  Save
-                </Button>
-              )}
-            </form.Subscribe>
-          </DialogFooter>
-        </form>
+        </ScrollArea>
+        <DialogFooter>
+          <SignOutButton />
+          <form.Subscribe selector={(state) => state.canSubmit}>
+            {(canSubmit) => (
+              <Button type="submit" className="flex-1" disabled={!canSubmit}>
+                Save
+              </Button>
+            )}
+          </form.Subscribe>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );
