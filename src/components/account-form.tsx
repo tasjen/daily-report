@@ -1,7 +1,7 @@
 import { type AnyFieldApi, useForm } from "@tanstack/react-form";
 import { openUrl } from "@tauri-apps/plugin-opener";
 import { ExternalLinkIcon, UserIcon } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { z } from "zod";
 import { Button } from "@/components/shared/button";
 import {
@@ -111,12 +111,10 @@ export default function AccountForm() {
   );
 
   const verifyAccount = useVerifyAccountMutation();
-  // Latest `open` for the async submit flow: closing the dialog while a
-  // verification is in flight must discard the result, not save it.
-  const openRef = useRef(open);
-  useEffect(() => {
-    openRef.current = open;
-  }, [open]);
+  // Each dialog close invalidates in-flight submissions: a verification that
+  // settles after the user closed the dialog (even if they reopened it since)
+  // must be discarded, not saved.
+  const submitSessionRef = useRef(0);
 
   const form = useForm({
     defaultValues: {
@@ -129,16 +127,21 @@ export default function AccountForm() {
     validators: { onChange: formSchema },
     onSubmit: async ({ value }) => {
       const accountNormalized = normalizePortalUrl(value);
+      const session = submitSessionRef.current;
       try {
         await verifyAccount.mutateAsync(accountNormalized);
       } catch {
         // Verification failed: keep the dialog open. The error box and
-        // "Save anyway" button render from `verifyAccount` state.
+        // "Save anyway" button render from `verifyAccount` state — unless
+        // this submission's dialog session was closed while the check ran,
+        // in which case the late failure must not surface in a reopened
+        // dialog.
+        if (session !== submitSessionRef.current) verifyAccount.reset();
         return;
       }
-      // The user may have closed the dialog while verification ran; treat
-      // that as a cancel and discard the result.
-      if (!openRef.current) return;
+      // The dialog may have been closed (and even reopened) while the check
+      // ran; a submission from a closed session is a cancel — discard it.
+      if (session !== submitSessionRef.current) return;
       saveAccount.mutate(accountNormalized);
       setOpen(false);
     },
@@ -158,6 +161,8 @@ export default function AccountForm() {
       // drop any verification error from a previous attempt so the error box
       // and "Save anyway" don't reappear on a fresh open
       verifyAccount.reset();
+    } else {
+      submitSessionRef.current += 1;
     }
     setOpen(next);
   }
