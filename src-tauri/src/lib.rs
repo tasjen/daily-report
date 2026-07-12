@@ -89,6 +89,13 @@ macro_rules! impl_browser_state_deref {
 impl_browser_state_deref!(HeadedBrowserState);
 impl_browser_state_deref!(HeadlessBrowserState);
 
+/// Holds the throwaway browser used by `verify_portal_login` while a check is
+/// in flight, so the `RunEvent::Exit` handler can kill it if the app closes
+/// mid-verify (invariant: every browser instance must be terminated on app
+/// close). The `Mutex` also serializes concurrent verifies, which share one
+/// profile dir.
+struct VerifyBrowserState(Mutex<Option<Browser>>);
+
 impl BrowserState {
     fn new(app: tauri::AppHandle, with_head: bool) -> Self {
         Self {
@@ -401,6 +408,39 @@ async fn close_browsers(
     Ok(())
 }
 
+/// Verifies the given portal values by performing a real login in a throwaway
+/// headless browser. Takes the *candidate* values as arguments — this never
+/// reads `store.json` — so nothing persists unless the frontend decides to
+/// save after this succeeds. Pass or fail, the browser is killed before
+/// returning; it exists only for the duration of the check.
+#[tauri::command]
+async fn verify_portal_login(
+    app: tauri::AppHandle,
+    state: tauri::State<'_, VerifyBrowserState>,
+    portal_url: String,
+    portal_credential: String,
+    phone: String,
+) -> Result<(), AppError> {
+    log::info!("verify_portal_login: checking candidate portal values");
+    // The frontend normalizes the trailing slash before saving, but this runs
+    // on pre-save input — trim defensively, matching `portal_url()`.
+    let base_url = portal_url.trim_end_matches('/');
+    let user_data_dir = app.path().app_cache_dir()?.join("profiles").join("verify");
+
+    // Hold the lock for the whole check: it serializes concurrent verifies
+    // (they share the profile dir) and parking the browser here is what lets
+    // the Exit handler kill it if the app closes mid-login.
+    let mut guard = state.0.lock().await;
+    let (browser, page) = launch_browser(&user_data_dir, false, "verify").await?;
+    *guard = Some(browser);
+    let login_result = login_to_portal(&page, &phone, base_url, &portal_credential, "verify").await;
+    // Throwaway either way: nothing to keep after the check.
+    if let Some(mut browser) = guard.take() {
+        let _ = browser.kill().await;
+    }
+    login_result
+}
+
 #[tauri::command]
 async fn get_task_parameters(
     state: tauri::State<'_, HeadlessBrowserState>,
@@ -586,13 +626,15 @@ pub fn run() {
                 app.handle().clone(),
                 true,
             )));
+            app.manage(VerifyBrowserState(Mutex::new(None)));
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
             get_task_parameters,
             close_browsers,
             submit_task,
-            open_member_page
+            open_member_page,
+            verify_portal_login
         ])
         .build(tauri::generate_context!())
         .expect("error while running tauri application")
@@ -601,6 +643,17 @@ pub fn run() {
                 tauri::async_runtime::block_on(async {
                     app_handle.state::<HeadlessBrowserState>().close().await;
                     app_handle.state::<HeadedBrowserState>().close().await;
+                    // The verify browser is throwaway: kill it outright if a
+                    // verification was in flight when the app closed.
+                    if let Some(mut browser) = app_handle
+                        .state::<VerifyBrowserState>()
+                        .0
+                        .lock()
+                        .await
+                        .take()
+                    {
+                        let _ = browser.kill().await;
+                    }
                 });
             }
         });
