@@ -102,7 +102,7 @@ reason).
 but bounds it with a 3s timeout and falls back to `browser.kill()` — if the user
 already closed the window the connection is gone, so the graceful close can never
 complete and `wait()` would otherwise block forever. The user-data dirs are *not*
-deleted on close: they are fixed paths under the app cache dir, bounded to two,
+deleted on close: they are fixed paths under the app cache dir, bounded to three,
 and wiped at the start of the next launch (which also reclaims anything a
 force-quit left behind). `close()` is also exposed via the `close_browsers`
 command, which tears down **both** instances and is called from the frontend
@@ -184,7 +184,9 @@ Form field selectors on the portal (keep in sync if the portal changes):
   (`useVerifyAccountMutation`); on failure an error box lists each failed
   check and a "Save anyway" button can skip verification (offline / portal
   down). Only then writes to `store.json`, calls `close_browsers`, and
-  invalidates `task_parameters`. Opens automatically until the portal fields are configured (covers fresh installs and stores saved before those fields existed).
+  invalidates `task_parameters`. Opens automatically until the portal fields
+  are configured (covers fresh installs and stores saved before those fields
+  existed).
 - [src/components/preferences-form.tsx](src/components/preferences-form.tsx) —
   dialog with `DefaultProjectSelect`, `ProjectListSelect`,
   `DefaultTaskGroupsSelect`, and `ThemeToggle`.

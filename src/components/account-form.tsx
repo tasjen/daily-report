@@ -159,7 +159,9 @@ export default function AccountForm() {
         portal_credential: account?.portal_credential ?? "",
       });
       // drop any verification error from a previous attempt so the error box
-      // and "Save anyway" don't reappear on a fresh open
+      // and "Save anyway" don't reappear on a fresh open. This also detaches
+      // the observer from a verification still in flight, re-enabling the
+      // Save button in a reopened dialog — load-bearing for the resubmit flow.
       verifyAccount.reset();
     } else {
       submitSessionRef.current += 1;
