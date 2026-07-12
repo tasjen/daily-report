@@ -8,10 +8,11 @@ use tauri::Manager;
 use tauri_plugin_store::StoreExt;
 use tokio::sync::Mutex;
 
-// Portal-specific constants. Update these here if the LivingInsider admin site
-// changes its URLs, HTTP-basic gate, or form markup.
-const ADMIN_BASE: &str = "https://portal.example.com/team";
-const BASIC_AUTH_CREDENTIAL: &str = "user:pass";
+// Portal-specific selectors. Update these here if the admin site changes its
+// form markup. The portal base URL and Basic-auth credential are NOT compiled
+// in: they are user-supplied via the Account form and read from `store.json`
+// (`account.portal_url` / `account.portal_credential`) — see `portal_url()`
+// and `portal_credential()`.
 const LOGIN_INPUT_SELECTOR: &str = "input[type='text']";
 const TASK_DATE_SELECT: &str = "select#task_date";
 const TASK_LEAVE_SELECT: &str = "select#task_leave";
@@ -134,12 +135,7 @@ impl BrowserState {
     /// Reads the configured login phone number from `store.json`. Errors before
     /// any browser is launched if it isn't set.
     fn phone(&self) -> Result<String, AppError> {
-        let store = self.app.store("store.json")?;
-        let phone = store
-            .get("account")
-            .and_then(|v| v.get("phone").and_then(|p| p.as_str().map(String::from)))
-            .ok_or("Phone number not configured")?;
-        Ok(phone)
+        account_str_field(&self.app, "phone", "Phone number not configured")
     }
 
     async fn get_page(&self) -> Result<Page, AppError> {
@@ -181,9 +177,11 @@ impl BrowserState {
 
     /// Launches a fresh Chromium instance and logs into the admin portal.
     async fn launch_and_login(&self) -> Result<(Browser, Page), AppError> {
-        // Read the phone first so a missing config fails before we spend the
+        // Read the config first so a missing value fails before we spend the
         // cost of launching a browser.
         let phone = self.phone()?;
+        let base_url = portal_url(&self.app)?;
+        let credential = portal_credential(&self.app)?;
 
         // Start each launch from a clean profile in our own cache dir. Wiping
         // also clears any stale `SingletonLock` a previous unclean shutdown left
@@ -204,12 +202,12 @@ impl BrowserState {
         let page = browser.new_page("about:blank").await?;
 
         page.enable_stealth_mode().await?;
-        let token = STANDARD.encode(BASIC_AUTH_CREDENTIAL);
+        let token = STANDARD.encode(&credential);
         page.execute(SetExtraHttpHeadersParams::new(Headers::new(
             serde_json::json!({ "Authorization": format!("Basic {}", token) }),
         )))
         .await?;
-        page.goto(ADMIN_BASE).await?;
+        page.goto(base_url.as_str()).await?;
 
         // Build the JS via `serde_json::to_string` so the selector is
         // properly quoted/escaped. The selector itself contains single quotes
@@ -224,12 +222,12 @@ impl BrowserState {
         ))
         .await?;
 
-        wait_for_url(&page, &format!("{ADMIN_BASE}/member.php"), 5_000)
+        wait_for_url(&page, &format!("{base_url}/member.php"), 5_000)
             .await
             .map_err(|e| {
                 log::warn!("{} browser login failed: {e}", self.label());
                 AppError::from(format!(
-                    "{e}\nIncorrect phone number, or the portal was slow to respond"
+                    "{e}\nWrong phone number, portal URL, or portal credential — or the portal was slow to respond"
                 ))
             })?;
         log::info!("{} browser logged into portal", self.label());
@@ -248,6 +246,38 @@ impl BrowserState {
 
         Ok((browser, page))
     }
+}
+
+/// Reads a required string field from the `account` object in `store.json`,
+/// erroring with `missing_msg` when the store key, object, or field is absent
+/// or empty. Free function (not a `BrowserState` method) so commands can read
+/// portal config without holding a browser state reference.
+fn account_str_field(
+    app: &tauri::AppHandle,
+    field: &str,
+    missing_msg: &'static str,
+) -> Result<String, AppError> {
+    let store = app.store("store.json")?;
+    let value = store
+        .get("account")
+        .and_then(|v| v.get(field).and_then(|f| f.as_str().map(String::from)))
+        .filter(|s| !s.is_empty())
+        .ok_or(missing_msg)?;
+    Ok(value)
+}
+
+/// The user-configured portal base URL. Trailing slashes are trimmed
+/// defensively — callers join paths as `format!("{base_url}/task.php")` —
+/// though the frontend already normalizes on save.
+fn portal_url(app: &tauri::AppHandle) -> Result<String, AppError> {
+    let url = account_str_field(app, "portal_url", "Portal URL not configured")?;
+    Ok(url.trim_end_matches('/').to_string())
+}
+
+/// The user-configured HTTP Basic-auth credential (`user:pass`), encoded
+/// verbatim into the `Authorization` header.
+fn portal_credential(app: &tauri::AppHandle) -> Result<String, AppError> {
+    account_str_field(app, "portal_credential", "Portal credential not configured")
 }
 
 /// Probes whether the cached page can still be driven over CDP. Issues a real
@@ -348,15 +378,16 @@ async fn close_browsers(
 async fn get_task_parameters(
     state: tauri::State<'_, HeadlessBrowserState>,
 ) -> Result<TaskParameters, AppError> {
+    let base_url = portal_url(&state.app)?;
     let page = state.get_page().await?;
 
-    page.goto(format!("{ADMIN_BASE}/task.php")).await?;
+    page.goto(format!("{base_url}/task.php")).await?;
 
     let date_options = get_select_options(&page, &format!("{TASK_DATE_SELECT} option")).await?;
     let leave_options = get_select_options(&page, &format!("{TASK_LEAVE_SELECT} option")).await?;
     let project_options = get_project_options(&page).await?.to_vec();
 
-    page.goto(format!("{ADMIN_BASE}/member.php")).await?;
+    page.goto(format!("{base_url}/member.php")).await?;
 
     log::info!(
         "get_task_parameters: scraped {} dates, {} leaves, {} projects",
@@ -373,8 +404,9 @@ async fn get_task_parameters(
 
 #[tauri::command]
 async fn open_member_page(state: tauri::State<'_, HeadedBrowserState>) -> Result<(), AppError> {
+    let base_url = portal_url(&state.app)?;
     let page = state.get_page().await?;
-    page.goto(format!("{ADMIN_BASE}/member.php")).await?;
+    page.goto(format!("{base_url}/member.php")).await?;
     page.bring_to_front().await?;
     Ok(())
 }
@@ -389,8 +421,9 @@ async fn submit_task(
         "submit_task: pre-filling form for date {date} ({} char summary)",
         summary.len()
     );
+    let base_url = portal_url(&state.app)?;
     let page = state.get_page().await?;
-    page.goto(format!("{ADMIN_BASE}/task.php")).await?;
+    page.goto(format!("{base_url}/task.php")).await?;
     page.bring_to_front().await?;
     page.evaluate(format!(
         "document.querySelector('{TASK_DATE_SELECT}').value = '{date}'"
@@ -468,7 +501,7 @@ async fn submit_task(
     // Only close once the portal confirms the submission by navigating to
     // member.php. On timeout the submission state is unknown: return the
     // error and leave the browser open so the user can see what happened.
-    wait_for_url(&page, &format!("{ADMIN_BASE}/task_report.php"), 10_000)
+    wait_for_url(&page, &format!("{base_url}/task_report.php"), 10_000)
         .await
         .map_err(|e| {
             log::warn!("auto-close skipped, submission not confirmed: {e}");

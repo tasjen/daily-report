@@ -6,6 +6,12 @@ export type Account = {
   phone: string;
   email: string;
   api_token: string;
+  // Portal base URL, stored without a trailing slash — the backend joins
+  // paths as `format!("{base_url}/task.php")`.
+  portal_url: string;
+  // HTTP Basic-auth credential in "user:pass" form, encoded verbatim into
+  // the Authorization header by the backend.
+  portal_credential: string;
 };
 
 // Free-form favorite tasks, insertion-ordered. Frontend-only: the Rust side
