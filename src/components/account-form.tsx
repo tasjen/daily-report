@@ -1,7 +1,7 @@
 import { type AnyFieldApi, useForm } from "@tanstack/react-form";
 import { openUrl } from "@tauri-apps/plugin-opener";
 import { ExternalLinkIcon, UserIcon } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import { Button } from "@/components/shared/button";
 import {
@@ -27,8 +27,12 @@ import {
   TooltipTrigger,
 } from "@/components/shared/tooltip";
 import SignOutButton from "@/components/sign-out-button";
-import { useSaveAccountMutation } from "@/lib/mutations";
+import {
+  useSaveAccountMutation,
+  useVerifyAccountMutation,
+} from "@/lib/mutations";
 import { useAccount } from "@/lib/queries";
+import type { Account } from "@/lib/store";
 
 const jiraTokenUrl =
   "https://id.atlassian.com/manage-profile/security/api-tokens";
@@ -52,6 +56,13 @@ const formSchema = z.object({
     .min(1, "Portal credential is required")
     .refine((value) => value.includes(":"), "Use the username:password format"),
 });
+
+// TanStack Form submits the raw field values, not zod's parsed output, so
+// schema transforms would never reach the submitted value — normalize the
+// trailing slash here (the backend joins with `{base_url}/task.php`).
+function normalizePortalUrl(value: Account): Account {
+  return { ...value, portal_url: value.portal_url.replace(/\/+$/, "") };
+}
 
 // Renders one labelled text input wired to a TanStack Form field. `field` is
 // typed as AnyFieldApi (the library's escape hatch for reusable field
@@ -99,6 +110,14 @@ export default function AccountForm() {
     !account?.portal_url || !account?.portal_credential,
   );
 
+  const verifyAccount = useVerifyAccountMutation();
+  // Latest `open` for the async submit flow: closing the dialog while a
+  // verification is in flight must discard the result, not save it.
+  const openRef = useRef(open);
+  useEffect(() => {
+    openRef.current = open;
+  }, [open]);
+
   const form = useForm({
     defaultValues: {
       phone: account?.phone ?? "",
@@ -108,14 +127,19 @@ export default function AccountForm() {
       portal_credential: account?.portal_credential ?? "",
     },
     validators: { onChange: formSchema },
-    onSubmit: ({ value }) => {
-      // TanStack Form submits the raw field values, not zod's parsed output,
-      // so schema transforms would never reach `value` — normalize the
-      // trailing slash here (the backend joins with `{base_url}/task.php`).
-      saveAccount.mutate({
-        ...value,
-        portal_url: value.portal_url.replace(/\/+$/, ""),
-      });
+    onSubmit: async ({ value }) => {
+      const accountNormalized = normalizePortalUrl(value);
+      try {
+        await verifyAccount.mutateAsync(accountNormalized);
+      } catch {
+        // Verification failed: keep the dialog open. The error box and
+        // "Save anyway" button render from `verifyAccount` state.
+        return;
+      }
+      // The user may have closed the dialog while verification ran; treat
+      // that as a cancel and discard the result.
+      if (!openRef.current) return;
+      saveAccount.mutate(accountNormalized);
       setOpen(false);
     },
   });
@@ -131,6 +155,9 @@ export default function AccountForm() {
         portal_url: account?.portal_url ?? "",
         portal_credential: account?.portal_credential ?? "",
       });
+      // drop any verification error from a previous attempt so the error box
+      // and "Save anyway" don't reappear on a fresh open
+      verifyAccount.reset();
     }
     setOpen(next);
   }
@@ -254,13 +281,41 @@ export default function AccountForm() {
             </form.Field>
           </FieldGroup>
         </ScrollArea>
+        {verifyAccount.isError && (
+          <div
+            role="alert"
+            className="mb-4 whitespace-pre-line rounded-lg bg-destructive/10 px-3 py-2 text-destructive text-sm"
+          >
+            {verifyAccount.error.message}
+          </div>
+        )}
         <DialogFooter>
           <SignOutButton />
           <form.Subscribe selector={(state) => state.canSubmit}>
             {(canSubmit) => (
-              <Button type="submit" className="flex-1" disabled={!canSubmit}>
-                Save
-              </Button>
+              <>
+                {verifyAccount.isError && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="flex-1"
+                    disabled={!canSubmit}
+                    onClick={() => {
+                      saveAccount.mutate(normalizePortalUrl(form.state.values));
+                      setOpen(false);
+                    }}
+                  >
+                    Save anyway
+                  </Button>
+                )}
+                <Button
+                  type="submit"
+                  className="flex-1"
+                  disabled={!canSubmit || verifyAccount.isPending}
+                >
+                  {verifyAccount.isPending ? "Verifying…" : "Save"}
+                </Button>
+              </>
             )}
           </form.Subscribe>
         </DialogFooter>
