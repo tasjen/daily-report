@@ -25,6 +25,7 @@ GitHub (public repo, so Actions runners are free):
 | Auto-update | Yes — `tauri-plugin-updater` + `latest.json` on releases |
 | Version management | Manual bump; release workflow guards tag ↔ config match |
 | Release implementation | Official `tauri-apps/tauri-action` |
+| macOS install method | `curl \| bash` install script (macOS only; Windows uses the NSIS installer directly) |
 
 ## 1. CI workflow — `.github/workflows/ci.yml`
 
@@ -109,13 +110,51 @@ start seeing the update.
   that point, so the failure is benign: the user reopens the app manually.
   No mitigation is built.
 
-## 4. Documentation & extras
+## 4. macOS install script — `install.sh`
 
-- **README — Install section:** download links to the Releases page; the
-  macOS unquarantine one-liner for the "app is damaged" dialog
-  (`xattr -d com.apple.quarantine "/Applications/Daily Report.app"`); the
-  Windows SmartScreen "More info → Run anyway" note. Only the *first* install
-  has this friction — updater-delivered updates bypass it.
+The primary macOS install method is a one-liner:
+
+```
+curl -fsSL https://raw.githubusercontent.com/tasjen/daily-report/main/install.sh | bash
+```
+
+Rationale: the quarantine attribute is only applied by quarantine-aware apps
+(browsers). `curl` never sets it, so an app downloaded by the script never
+triggers Gatekeeper's "app is damaged" dialog at all — this is the cleanest
+unsigned-distribution path, not just a workaround.
+
+Script behavior (a dozen auditable lines of bash, committed at the repo
+root, served via `raw.githubusercontent.com` so it versions with `main` and
+needs no per-release re-upload):
+
+1. Check `uname -m` is `arm64`; exit with a clear message on Intel Macs
+   (there is no x64 build and Rosetta cannot run an arm64-only binary).
+2. Resolve the latest release via the GitHub API and pick the asset ending
+   in `.app.tar.gz` (the macOS updater artifact — already produced by the
+   release workflow; no DMG mounting needed).
+3. Quit the app if it is running, remove any existing
+   `/Applications/Daily Report.app`, extract the tarball into
+   `/Applications`.
+4. `xattr -dr com.apple.quarantine` on the installed app (belt-and-braces —
+   should be a no-op given step 2's curl download).
+5. `open` the app.
+
+The script is a one-time bootstrap per machine: after the first install the
+in-app updater keeps users current. The DMG remains on the Releases page as
+the manual alternative. No Windows equivalent — the script exists to solve
+the macOS-specific quarantine problem; SmartScreen's warning is tied to the
+unsigned binary's reputation, not the download method, so a script would not
+remove it.
+
+## 5. Documentation & extras
+
+- **README — Install section:** macOS: the `curl | bash` one-liner as the
+  primary method, with the manual alternative (download the DMG, then
+  `xattr -d com.apple.quarantine "/Applications/Daily Report.app"` for the
+  "app is damaged" dialog). Windows: download the NSIS installer from the
+  Releases page and click through SmartScreen ("More info → Run anyway").
+  Only the *first* install has this friction — updater-delivered updates
+  bypass it.
 - **Release checklist** (README or CLAUDE.md): bump the version in
   `package.json`, `src-tauri/tauri.conf.json`, and `src-tauri/Cargo.toml`
   (the guard only enforces tauri.conf.json; the other two are kept in sync
