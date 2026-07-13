@@ -30,7 +30,7 @@ jobs:
         include:
           - platform: macos-latest
             rust-targets: aarch64-apple-darwin
-            args: --target aarch64-apple-darwin --bundles dmg
+            args: --target aarch64-apple-darwin --bundles app,dmg
           - platform: windows-latest
             rust-targets: x86_64-pc-windows-msvc
             args: --bundles nsis
