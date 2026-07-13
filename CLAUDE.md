@@ -162,6 +162,10 @@ Form field selectors on the portal (keep in sync if the portal changes):
   fresh. `relaunch()` is a last-resort fallback used only when the
   `close_browsers` invoke itself fails (needs `process:allow-restart` in
   capabilities and `tauri_plugin_process` registered — both in place).
+- [src/lib/use-update-check.ts](src/lib/use-update-check.ts) —
+  `useUpdateCheck`: on launch (production only), asks the updater plugin for
+  a newer release and, if found, shows a persistent toast whose action
+  downloads, installs, and relaunches.
 - [src/lib/store.ts](src/lib/store.ts) — the `LazyStore` handle plus the
   `Account`/`Preferences`/`TaskGroupType` types and `DEFAULT_PREFERENCES`.
   No client state library: account and preferences are read through react-query
@@ -261,6 +265,41 @@ displayed under the "created" group (post-dedup) are relabeled (via `mutative`
 `create` — the originals live in the react-query cache, see the immutability
 convention below) to a synthetic "Created" status before grouping, so they land
 in their own `[Created]` block, sorted alphabetically among the status blocks.
+
+## CI/CD & releasing
+
+- **CI** ([.github/workflows/ci.yml](.github/workflows/ci.yml)): PRs and
+  pushes to `main` run two parallel jobs — `frontend` (Biome, `pnpm build`)
+  and `rust` (`cargo check` with Tauri's Linux deps).
+- **Releases** ([.github/workflows/release.yml](.github/workflows/release.yml)):
+  pushing a `vX.Y.Z` tag builds macOS (Apple Silicon, dmg) and Windows
+  (NSIS) via `tauri-apps/tauri-action` and uploads installers, updater
+  artifacts, and `latest.json` to a **draft** GitHub Release. A guard job
+  fails the run if the tag doesn't match `version` in
+  `src-tauri/tauri.conf.json`.
+- **Release checklist:**
+  1. Bump `version` in `package.json`, `src-tauri/tauri.conf.json`, and
+     `src-tauri/Cargo.toml` (the guard only enforces tauri.conf.json; the
+     others are kept in sync for hygiene). Run
+     `cargo check --manifest-path src-tauri/Cargo.toml` to refresh
+     `Cargo.lock`, and commit it too.
+  2. Merge to `main`, then `git tag vX.Y.Z && git push origin vX.Y.Z`.
+  3. When the draft release appears, write the notes and **Publish**.
+     Publishing is what makes `releases/latest/download/latest.json` live —
+     existing installs see the update on next launch.
+- **Updater:** `tauri-plugin-updater` checks GitHub Releases on launch
+  (`use-update-check.ts`, no-op in dev). Updater artifacts are signed with
+  the key in the `TAURI_SIGNING_PRIVATE_KEY`(+`_PASSWORD`) repo secrets; the
+  public key lives in `tauri.conf.json`. **Losing the private key means
+  shipped apps can't verify future updates** — users would have to reinstall
+  manually.
+- **[install.sh](install.sh)** (repo root) is the macOS install one-liner
+  (`curl | bash` from `raw.githubusercontent.com/.../main/install.sh`).
+  curl sets no quarantine attribute, so unsigned builds installed this way
+  never hit Gatekeeper's "damaged" dialog. Keep its asset-matching suffix
+  (`.app.tar.gz`) in sync with what the release workflow uploads.
+- Branch protection (GitHub settings, manual): `main` requires the
+  `frontend` and `rust` checks.
 
 ## Conventions & gotchas
 
