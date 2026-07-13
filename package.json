@@ -11,6 +11,7 @@
     "start": "tauri dev --config src-tauri/tauri.conf.dev.json",
     "package": "tauri build",
     "knip": "knip",
+    "bump": "node scripts/bump-version.mjs",
     "clean": "rm -rf dist node_modules/.vite && pnpm i"
   },
   "dependencies": {

@@ -293,12 +293,16 @@ in their own `[Created]` block, sorted alphabetically among the status blocks.
   fails the run if the tag doesn't match `version` in
   `src-tauri/tauri.conf.json`.
 - **Release checklist:**
-  1. Bump `version` in `package.json`, `src-tauri/tauri.conf.json`, and
-     `src-tauri/Cargo.toml` (the guard only enforces tauri.conf.json; the
-     others are kept in sync for hygiene). Run
-     `cargo check --manifest-path src-tauri/Cargo.toml` to refresh
-     `Cargo.lock`, and commit it too.
-  2. Merge to `main`, then `git tag vX.Y.Z && git push origin vX.Y.Z`.
+  1. `pnpm bump <X.Y.Z|major|minor|patch>`
+     ([scripts/bump-version.mjs](scripts/bump-version.mjs)) — updates the
+     version in `package.json`, `src-tauri/tauri.conf.json`, and
+     `src-tauri/Cargo.toml` (+`Cargo.lock` via `cargo metadata`; the guard
+     only enforces tauri.conf.json, the others are kept in sync for
+     hygiene), then branches to `release/vX.Y.Z`, commits, pushes, and
+     opens the prefilled PR page. Requires a clean, up-to-date `main`.
+  2. Merge the bump PR, pull `main`, then `pnpm bump --tag` — verifies
+     `main` is current and the tag is new, then tags `vX.Y.Z` and pushes
+     it (this is what triggers the release build).
   3. When the draft release appears, verify its asset list first — `.dmg`,
      `.app.tar.gz`(+`.sig`), `-setup.exe`(+`.sig`), and a `latest.json`
      containing both `darwin-aarch64` and `windows-x86_64` entries (a
