@@ -98,10 +98,12 @@ start seeing the update.
 - `tauri.conf.json`:
   - `bundle.createUpdaterArtifacts: true`
   - `plugins.updater.endpoints: ["https://github.com/tasjen/daily-report/releases/latest/download/latest.json"]`
-  - Bundle selection (dmg on macOS, NSIS-only on Windows — MSI would make
-    the updater manifest ambiguous) is enforced with per-platform
-    `--bundles` flags in the release workflow matrix; `bundle.targets`
-    stays `"all"` so local `pnpm package` keeps working on any host.
+  - Bundle selection (app + dmg on macOS — `app` is what emits the
+    `.app.tar.gz` updater artifact — and NSIS-only on Windows, since MSI
+    would make the updater manifest ambiguous) is enforced with
+    per-platform `--bundles` flags in the release workflow matrix;
+    `bundle.targets` stays `"all"` so local `pnpm package` keeps working
+    on any host.
 - Frontend: on app mount, run `check()`; when an update exists, show a sonner
   toast with an "Update & restart" action → `downloadAndInstall()` →
   `relaunch()`.

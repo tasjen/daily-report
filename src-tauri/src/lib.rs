@@ -89,6 +89,13 @@ macro_rules! impl_browser_state_deref {
 impl_browser_state_deref!(HeadedBrowserState);
 impl_browser_state_deref!(HeadlessBrowserState);
 
+/// Holds the throwaway browser used by `verify_portal_login` while a check is
+/// in flight, so the `RunEvent::Exit` handler can kill it if the app closes
+/// mid-verify (invariant: every browser instance must be terminated on app
+/// close). The `Mutex` also serializes concurrent verifies, which share one
+/// profile dir.
+struct VerifyBrowserState(Mutex<Option<Browser>>);
+
 impl BrowserState {
     fn new(app: tauri::AppHandle, with_head: bool) -> Self {
         Self {
@@ -183,54 +190,9 @@ impl BrowserState {
         let base_url = portal_url(&self.app)?;
         let credential = portal_credential(&self.app)?;
 
-        // Start each launch from a clean profile in our own cache dir. Wiping
-        // also clears any stale `SingletonLock` a previous unclean shutdown left
-        // behind, so a leftover Chromium can't make this launch hand off and exit.
-        log::info!("launching {} browser", self.label());
-        let user_data_dir = self.user_data_dir()?;
-        let _ = std::fs::remove_dir_all(&user_data_dir);
-        std::fs::create_dir_all(&user_data_dir)?;
-        let mut config = BrowserConfig::builder()
-            .user_data_dir(&user_data_dir)
-            .incognito()
-            .viewport(None);
-        if self.with_head {
-            config = config.with_head();
-        }
-        let (browser, mut handler) = Browser::launch(config.build()?).await?;
-        tokio::spawn(async move { while handler.next().await.is_some() {} });
-        let page = browser.new_page("about:blank").await?;
-
-        page.enable_stealth_mode().await?;
-        let token = STANDARD.encode(&credential);
-        page.execute(SetExtraHttpHeadersParams::new(Headers::new(
-            serde_json::json!({ "Authorization": format!("Basic {}", token) }),
-        )))
-        .await?;
-        page.goto(base_url.as_str()).await?;
-
-        // Build the JS via `serde_json::to_string` so the selector is
-        // properly quoted/escaped. The selector itself contains single quotes
-        // (`input[type='text']`), so hand-wrapping it in `'...'` breaks the JS.
-        let selector_js = serde_json::to_string(LOGIN_INPUT_SELECTOR)?;
-        page.evaluate(format!(
-            "
-                const phoneInput = document.querySelector({selector_js});
-                phoneInput.value = '{phone}';
-                phoneInput.form.submit();
-            "
-        ))
-        .await?;
-
-        wait_for_url(&page, &format!("{base_url}/member.php"), 5_000)
-            .await
-            .map_err(|e| {
-                log::warn!("{} browser login failed: {e}", self.label());
-                AppError::from(format!(
-                    "{e}\nWrong phone number, portal URL, or portal credential — or the portal was slow to respond"
-                ))
-            })?;
-        log::info!("{} browser logged into portal", self.label());
+        let (browser, page) =
+            launch_browser(&self.user_data_dir()?, self.with_head, self.label()).await?;
+        login_to_portal(&page, &phone, &base_url, &credential, self.label()).await?;
 
         // Chromium starts with an initial blank tab in addition to the page we
         // create; close it after login so the headed window doesn't show a
@@ -246,6 +208,78 @@ impl BrowserState {
 
         Ok((browser, page))
     }
+}
+
+/// Launches a fresh Chromium instance from a clean profile at `user_data_dir`.
+/// `label` is used for log lines only. Shared by `BrowserState::launch_and_login`
+/// and `verify_portal_login`.
+async fn launch_browser(
+    user_data_dir: &std::path::Path,
+    with_head: bool,
+    label: &str,
+) -> Result<(Browser, Page), AppError> {
+    // Start each launch from a clean profile in our own cache dir. Wiping
+    // also clears any stale `SingletonLock` a previous unclean shutdown left
+    // behind, so a leftover Chromium can't make this launch hand off and exit.
+    log::info!("launching {label} browser");
+    let _ = std::fs::remove_dir_all(user_data_dir);
+    std::fs::create_dir_all(user_data_dir)?;
+    let mut config = BrowserConfig::builder()
+        .user_data_dir(user_data_dir)
+        .incognito()
+        .viewport(None);
+    if with_head {
+        config = config.with_head();
+    }
+    let (browser, mut handler) = Browser::launch(config.build()?).await?;
+    tokio::spawn(async move { while handler.next().await.is_some() {} });
+    let page = browser.new_page("about:blank").await?;
+    Ok((browser, page))
+}
+
+/// Logs `page` into the admin portal: Basic-auth header, navigate to
+/// `base_url`, type the phone into the login input, confirm arrival at
+/// member.php. Shared by `BrowserState::launch_and_login` (values from
+/// `store.json`) and `verify_portal_login` (candidate values from the
+/// Account form), so the login sequence can't drift between the two.
+async fn login_to_portal(
+    page: &Page,
+    phone: &str,
+    base_url: &str,
+    credential: &str,
+    label: &str,
+) -> Result<(), AppError> {
+    page.enable_stealth_mode().await?;
+    let token = STANDARD.encode(credential);
+    page.execute(SetExtraHttpHeadersParams::new(Headers::new(
+        serde_json::json!({ "Authorization": format!("Basic {}", token) }),
+    )))
+    .await?;
+    page.goto(base_url).await?;
+
+    // Build the JS via `serde_json::to_string` so the selector is
+    // properly quoted/escaped. The selector itself contains single quotes
+    // (`input[type='text']`), so hand-wrapping it in `'...'` breaks the JS.
+    let selector_js = serde_json::to_string(LOGIN_INPUT_SELECTOR)?;
+    page.evaluate(format!(
+        "
+            const phoneInput = document.querySelector({selector_js});
+            phoneInput.value = '{phone}';
+            phoneInput.form.submit();
+        "
+    ))
+    .await?;
+
+    wait_for_url(page, &format!("{base_url}/member.php"), 5_000)
+        .await
+        .map_err(|e| {
+            log::warn!("{label} browser login failed: {e}");
+            AppError::from(format!(
+                "{e}\nWrong phone number, portal URL, or portal credential — or the portal was slow to respond"
+            ))
+        })?;
+    log::info!("{label} browser logged into portal");
+    Ok(())
 }
 
 /// Reads a required string field from the `account` object in `store.json`,
@@ -372,6 +406,39 @@ async fn close_browsers(
     log::info!("close_browsers: tearing down both browser instances");
     tokio::join!(headless.close(), headed.close());
     Ok(())
+}
+
+/// Verifies the given portal values by performing a real login in a throwaway
+/// headless browser. Takes the *candidate* values as arguments — this never
+/// reads `store.json` — so nothing persists unless the frontend decides to
+/// save after this succeeds. Pass or fail, the browser is killed before
+/// returning; it exists only for the duration of the check.
+#[tauri::command]
+async fn verify_portal_login(
+    app: tauri::AppHandle,
+    state: tauri::State<'_, VerifyBrowserState>,
+    portal_url: String,
+    portal_credential: String,
+    phone: String,
+) -> Result<(), AppError> {
+    log::info!("verify_portal_login: checking candidate portal values");
+    // The frontend normalizes the trailing slash before saving, but this runs
+    // on pre-save input — trim defensively, matching `portal_url()`.
+    let base_url = portal_url.trim_end_matches('/');
+    let user_data_dir = app.path().app_cache_dir()?.join("profiles").join("verify");
+
+    // Hold the lock for the whole check: it serializes concurrent verifies
+    // (they share the profile dir) and parking the browser here is what lets
+    // the Exit handler kill it if the app closes mid-login.
+    let mut guard = state.0.lock().await;
+    let (browser, page) = launch_browser(&user_data_dir, false, "verify").await?;
+    *guard = Some(browser);
+    let login_result = login_to_portal(&page, &phone, base_url, &portal_credential, "verify").await;
+    // Throwaway either way: nothing to keep after the check.
+    if let Some(mut browser) = guard.take() {
+        let _ = browser.kill().await;
+    }
+    login_result
 }
 
 #[tauri::command]
@@ -560,13 +627,15 @@ pub fn run() {
                 app.handle().clone(),
                 true,
             )));
+            app.manage(VerifyBrowserState(Mutex::new(None)));
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
             get_task_parameters,
             close_browsers,
             submit_task,
-            open_member_page
+            open_member_page,
+            verify_portal_login
         ])
         .build(tauri::generate_context!())
         .expect("error while running tauri application")
@@ -575,6 +644,17 @@ pub fn run() {
                 tauri::async_runtime::block_on(async {
                     app_handle.state::<HeadlessBrowserState>().close().await;
                     app_handle.state::<HeadedBrowserState>().close().await;
+                    // The verify browser is throwaway: kill it outright if a
+                    // verification was in flight when the app closed.
+                    if let Some(mut browser) = app_handle
+                        .state::<VerifyBrowserState>()
+                        .0
+                        .lock()
+                        .await
+                        .take()
+                    {
+                        let _ = browser.kill().await;
+                    }
                 });
             }
         });

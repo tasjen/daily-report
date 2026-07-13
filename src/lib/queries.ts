@@ -10,6 +10,8 @@ import {
 } from "@/lib/store";
 import type { JiraIssue, SelectOption } from "@/type";
 
+const JIRA_DOMAIN = "https://living-insider.atlassian.net";
+
 export function accountOptions() {
   return queryOptions({
     // queryFn must not return undefined, so "no account yet" is null
@@ -77,13 +79,45 @@ export function useTaskParameters(
   });
 }
 
+/**
+ * Checks that the Jira email + API token actually authenticate, via the cheap
+ * `/myself` endpoint. Same failure detection as `jiraTasksQueryOptions`: Jira
+ * Cloud may fall back to anonymous access instead of rejecting bad
+ * credentials, flagging the failure only via the `x-seraph-loginreason`
+ * header. Resolves on success, throws with a user-facing message otherwise.
+ */
+export async function verifyJiraCredentials(
+  email: string,
+  apiToken: string,
+): Promise<void> {
+  const res = await tauriFetch(`${JIRA_DOMAIN}/rest/api/3/myself`, {
+    method: "GET",
+    headers: {
+      Authorization: `Basic ${btoa(`${email}:${apiToken}`)}`,
+      Accept: "application/json",
+    },
+  });
+  const loginReason = res.headers.get("x-seraph-loginreason");
+  if (loginReason && loginReason !== "OK") {
+    throw new Error(
+      `Jira authentication failed (${loginReason}) — check your Jira email and API token`,
+    );
+  }
+  if (!res.ok) {
+    throw new Error(
+      res.status === 401
+        ? "Jira authentication failed — check your Jira email and API token"
+        : `Jira request failed (${res.status} ${res.statusText})`,
+    );
+  }
+}
+
 export function jiraTasksQueryOptions(jql: string, account?: Account | null) {
   return queryOptions({
     queryKey: ["jira_tasks", jql],
     staleTime: Infinity,
     queryFn: async () => {
       if (!account) throw new Error("No account has been set");
-      const JIRA_DOMAIN = "https://living-insider.atlassian.net";
       const EMAIL = account.email;
       const API_TOKEN = account.api_token;
       const res = await tauriFetch(`${JIRA_DOMAIN}/rest/api/3/search/jql`, {

@@ -12,7 +12,7 @@ jobs:
   guard:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Verify tag matches tauri.conf.json version
         run: |
           TAG_VERSION="${GITHUB_REF_NAME#v}"
@@ -30,13 +30,13 @@ jobs:
         include:
           - platform: macos-latest
             rust-targets: aarch64-apple-darwin
-            args: --target aarch64-apple-darwin --bundles dmg
+            args: --target aarch64-apple-darwin --bundles app,dmg
           - platform: windows-latest
             rust-targets: x86_64-pc-windows-msvc
             args: --bundles nsis
     runs-on: ${{ matrix.platform }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
       - uses: actions/setup-node@v4
         with:
@@ -49,7 +49,7 @@ jobs:
         with:
           workspaces: src-tauri
       - run: pnpm install --frozen-lockfile
-      - uses: tauri-apps/tauri-action@v0
+      - uses: tauri-apps/tauri-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}

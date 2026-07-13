@@ -95,11 +95,14 @@ if the page is already on the target URL.
 
 **All browser instances must be terminated on app close.** This is handled in the
 `RunEvent::Exit` handler in `run()`, which calls `.close()` on both states.
+The `Exit` handler also kills the transient `verify_portal_login` browser if
+a verification is in flight (parked in `VerifyBrowserState` for exactly this
+reason).
 `close()` attempts a graceful shutdown (close page → close browser → `wait()`),
 but bounds it with a 3s timeout and falls back to `browser.kill()` — if the user
 already closed the window the connection is gone, so the graceful close can never
 complete and `wait()` would otherwise block forever. The user-data dirs are *not*
-deleted on close: they are fixed paths under the app cache dir, bounded to two,
+deleted on close: they are fixed paths under the app cache dir, bounded to three,
 and wiped at the start of the next launch (which also reclaims anything a
 force-quit left behind). `close()` is also exposed via the `close_browsers`
 command, which tears down **both** instances and is called from the frontend
@@ -144,6 +147,11 @@ Defined in [src-tauri/src/lib.rs](src-tauri/src/lib.rs), registered in
 - `close_browsers()` — tears down both browser instances (called after account save,
   so neither session keeps the old login, and by the ≥1h-away reset in
   `use-reset-when-away.ts`).
+- `verify_portal_login(portal_url, portal_credential, phone)` — logs into the
+  portal in a throwaway headless browser (own profile dir,
+  `profiles/verify`) using the *candidate* values passed as arguments — it
+  never reads `store.json`. Used by the Account form to verify before
+  saving; the browser is killed after the check, pass or fail.
 
 Form field selectors on the portal (keep in sync if the portal changes):
 `select#task_date`, `select#task_leave`, `select#task_project_id1`,
@@ -174,9 +182,15 @@ Form field selectors on the portal (keep in sync if the portal changes):
   task groups (three Jira-queried plus local favorites, last), shared by
   `DateCard` and the preferences form.
 - [src/components/account-form.tsx](src/components/account-form.tsx) — dialog to
-  edit secrets (portal URL, portal credential, phone, Jira email, Jira API token); inputs strip all spaces. On
-  save: writes to `store.json`, calls `close_browsers`, invalidates
-  `task_parameters`. Opens automatically until the portal fields are configured (covers fresh installs and stores saved before those fields existed).
+  edit secrets (portal URL, portal credential, phone, Jira email, Jira API token); inputs strip all spaces.
+  On save: verifies the candidate values first — portal via
+  `verify_portal_login`, Jira via a `/rest/api/3/myself` call — in parallel
+  (`useVerifyAccountMutation`); on failure an error box lists each failed
+  check and a "Save anyway" button can skip verification (offline / portal
+  down). Only then writes to `store.json`, calls `close_browsers`, and
+  invalidates `task_parameters`. Opens automatically until the portal fields
+  are configured (covers fresh installs and stores saved before those fields
+  existed).
 - [src/components/preferences-form.tsx](src/components/preferences-form.tsx) —
   dialog with `DefaultProjectSelect`, `ProjectListSelect`,
   `DefaultTaskGroupsSelect`, and `ThemeToggle`.
@@ -272,7 +286,8 @@ in their own `[Created]` block, sorted alphabetically among the status blocks.
   pushes to `main` run two parallel jobs — `frontend` (Biome, `pnpm build`)
   and `rust` (`cargo check` with Tauri's Linux deps).
 - **Releases** ([.github/workflows/release.yml](.github/workflows/release.yml)):
-  pushing a `vX.Y.Z` tag builds macOS (Apple Silicon, dmg) and Windows
+  pushing a `vX.Y.Z` tag builds macOS (Apple Silicon, app + dmg — `app`
+  supplies the `.app.tar.gz` updater artifact) and Windows
   (NSIS) via `tauri-apps/tauri-action` and uploads installers, updater
   artifacts, and `latest.json` to a **draft** GitHub Release. A guard job
   fails the run if the tag doesn't match `version` in
@@ -284,8 +299,11 @@ in their own `[Created]` block, sorted alphabetically among the status blocks.
      `cargo check --manifest-path src-tauri/Cargo.toml` to refresh
      `Cargo.lock`, and commit it too.
   2. Merge to `main`, then `git tag vX.Y.Z && git push origin vX.Y.Z`.
-  3. When the draft release appears, write the notes and **Publish**.
-     Publishing is what makes `releases/latest/download/latest.json` live —
+  3. When the draft release appears, verify its asset list first — `.dmg`,
+     `.app.tar.gz`(+`.sig`), `-setup.exe`(+`.sig`), and a `latest.json`
+     containing both `darwin-aarch64` and `windows-x86_64` entries (a
+     missing platform means a bundling regression) — then write the notes
+     and **Publish**. Publishing is what makes `releases/latest/download/latest.json` live —
      existing installs see the update on next launch.
 - **Updater:** `tauri-plugin-updater` checks GitHub Releases on launch
   (`use-update-check.ts`, no-op in dev). Updater artifacts are signed with
