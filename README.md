@@ -25,7 +25,7 @@ drag the app to Applications. The build is unsigned, so macOS will claim the
 app "is damaged and can't be opened" — clear the quarantine flag once:
 
 ```sh
-xattr -d com.apple.quarantine "/Applications/Daily Report.app"
+xattr -dr com.apple.quarantine "/Applications/Daily Report.app"
 ```
 
 </details>

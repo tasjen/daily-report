@@ -272,7 +272,8 @@ in their own `[Created]` block, sorted alphabetically among the status blocks.
   pushes to `main` run two parallel jobs — `frontend` (Biome, `pnpm build`)
   and `rust` (`cargo check` with Tauri's Linux deps).
 - **Releases** ([.github/workflows/release.yml](.github/workflows/release.yml)):
-  pushing a `vX.Y.Z` tag builds macOS (Apple Silicon, dmg) and Windows
+  pushing a `vX.Y.Z` tag builds macOS (Apple Silicon, app + dmg — `app`
+  supplies the `.app.tar.gz` updater artifact) and Windows
   (NSIS) via `tauri-apps/tauri-action` and uploads installers, updater
   artifacts, and `latest.json` to a **draft** GitHub Release. A guard job
   fails the run if the tag doesn't match `version` in
@@ -284,8 +285,11 @@ in their own `[Created]` block, sorted alphabetically among the status blocks.
      `cargo check --manifest-path src-tauri/Cargo.toml` to refresh
      `Cargo.lock`, and commit it too.
   2. Merge to `main`, then `git tag vX.Y.Z && git push origin vX.Y.Z`.
-  3. When the draft release appears, write the notes and **Publish**.
-     Publishing is what makes `releases/latest/download/latest.json` live —
+  3. When the draft release appears, verify its asset list first — `.dmg`,
+     `.app.tar.gz`(+`.sig`), `-setup.exe`(+`.sig`), and a `latest.json`
+     containing both `darwin-aarch64` and `windows-x86_64` entries (a
+     missing platform means a bundling regression) — then write the notes
+     and **Publish**. Publishing is what makes `releases/latest/download/latest.json` live —
      existing installs see the update on next launch.
 - **Updater:** `tauri-plugin-updater` checks GitHub Releases on launch
   (`use-update-check.ts`, no-op in dev). Updater artifacts are signed with
