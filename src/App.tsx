@@ -8,11 +8,13 @@ import RefreshDateListButton from "@/components/refresh-date-list-button";
 import { Toaster } from "@/components/shared/sonner";
 import { useAccount, useTaskParameters } from "@/lib/queries";
 import { useResetWhenAway } from "@/lib/use-reset-when-away";
+import { useUpdateCheck } from "@/lib/use-update-check";
 
 export default function App() {
   const accountQuery = useAccount();
   const taskParametersQuery = useTaskParameters();
   useResetWhenAway();
+  useUpdateCheck();
 
   if (accountQuery.isPending) {
     return null;
