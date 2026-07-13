@@ -6,6 +6,7 @@ import {
   favoritesOptions,
   preferencesOptions,
   taskParametersOptions,
+  verifyJiraCredentials,
 } from "./queries";
 import { type Account, type Favorites, type Preferences, store } from "./store";
 
@@ -25,6 +26,58 @@ export function useSubmitTaskMutation() {
       });
     },
     onError: (error) => toast.error(String(error)),
+  });
+}
+
+export class VerifyAccountError extends Error {
+  failures: { portal?: string; jira?: string };
+
+  constructor(failures: { portal?: string; jira?: string }) {
+    super(
+      [
+        failures.portal && `Portal: ${failures.portal}`,
+        failures.jira && `Jira: ${failures.jira}`,
+      ]
+        .filter(Boolean)
+        .join("\n"),
+    );
+    this.name = "VerifyAccountError";
+    this.failures = failures;
+  }
+}
+
+/**
+ * Runs both credential checks in parallel against the *candidate* account
+ * values — nothing is saved here, and nothing reads or writes the query
+ * cache. The portal check is a real headless-browser login (backend
+ * command); the Jira check is a cheap REST call. Throws VerifyAccountError
+ * naming each failed check so the Account form can label the error lines.
+ * No onError toast: the form shows the error in the dialog instead.
+ */
+export function useVerifyAccountMutation() {
+  return useMutation({
+    mutationFn: async (account: Account) => {
+      const [portal, jira] = await Promise.allSettled([
+        invoke("verify_portal_login", {
+          portalUrl: account.portal_url,
+          portalCredential: account.portal_credential,
+          phone: account.phone,
+        }),
+        verifyJiraCredentials(account.email, account.api_token),
+      ]);
+      const failures: { portal?: string; jira?: string } = {};
+      // invoke() rejects with the backend's serialized error string
+      if (portal.status === "rejected") failures.portal = String(portal.reason);
+      if (jira.status === "rejected") {
+        failures.jira =
+          jira.reason instanceof Error
+            ? jira.reason.message
+            : String(jira.reason);
+      }
+      if (failures.portal || failures.jira) {
+        throw new VerifyAccountError(failures);
+      }
+    },
   });
 }
 
