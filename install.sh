@@ -16,9 +16,10 @@ if [ "$(uname -m)" != "arm64" ]; then
 fi
 
 echo "Looking up the latest release..."
-ASSET_URL="$(curl -fsSL "https://api.github.com/repos/$REPO/releases/latest" |
+RELEASE_JSON="$(curl -fsSL "https://api.github.com/repos/$REPO/releases/latest")"
+ASSET_URL="$(printf '%s' "$RELEASE_JSON" |
   grep -o '"browser_download_url": *"[^"]*\.app\.tar\.gz"' |
-  head -n 1 | cut -d '"' -f 4)"
+  head -n 1 | cut -d '"' -f 4 || true)"
 
 if [ -z "$ASSET_URL" ]; then
   echo "Could not find a .app.tar.gz asset in the latest release." >&2
