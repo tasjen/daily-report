@@ -24,6 +24,11 @@ export type TaskGroupType = "status" | "created" | "sprint" | "favorite";
 export type Preferences = {
   default_project: string | null;
   project_list: string[];
+  // Jira project key (e.g. "ABC") → portal project option id. Selected tasks
+  // are bucketed by mapped portal project and each bucket fills its own
+  // project-select/textarea row pair in the task form, largest bucket first.
+  // The form has 3 row pairs, so the editor caps this at 3 distinct values.
+  project_map: Record<string, string>;
   default_task_groups: TaskGroupType[];
   autofill_summary: boolean;
   auto_submit: boolean;
@@ -35,6 +40,7 @@ export type Preferences = {
 export const DEFAULT_PREFERENCES: Preferences = {
   default_project: null,
   project_list: [],
+  project_map: {},
   default_task_groups: ["status"],
   autofill_summary: true,
   auto_submit: false,

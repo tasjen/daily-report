@@ -10,10 +10,15 @@ import {
 } from "./queries";
 import { type Account, type Favorites, type Preferences, store } from "./store";
 
+// One project/comment row pair of the portal's task form. `project` is a
+// portal project option id; null lets the backend fall back to the
+// default_project preference (only meaningful on the first row).
+export type SubmitTaskEntry = { project: string | null; summary: string };
+
 export function useSubmitTaskMutation() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (arg: { date: string; summary: string }) => {
+    mutationFn: async (arg: { date: string; entries: SubmitTaskEntry[] }) => {
       await invoke("submit_task", arg);
     },
     onSuccess: (_, arg) => {

@@ -17,7 +17,7 @@ import {
 } from "@/components/shared/card";
 import { Separator } from "@/components/shared/separator";
 import TaskSelect from "@/components/task-select";
-import { useSubmitTaskMutation } from "@/lib/mutations";
+import { type SubmitTaskEntry, useSubmitTaskMutation } from "@/lib/mutations";
 import { useFavorites, useJiraTasksQuery, usePreferences } from "@/lib/queries";
 import { DEFAULT_PREFERENCES, type TaskGroupType } from "@/lib/store";
 import { TASK_GROUPS } from "@/lib/task-groups";
@@ -188,12 +188,22 @@ export default function DateCard({ date }: Props) {
     }));
   }
 
+  const projectMap =
+    preferences?.project_map ?? DEFAULT_PREFERENCES.project_map;
+
   // Selected favorites lead the summary as plain "• text" lines outside any
   // status block; the remaining Jira issues are grouped by status as before.
   // Issues displayed under the "created" group are relabeled to a synthetic
   // "Created" status so buildSummary's group-by-status gives them their own
   // [Created] block. Cloned, not mutated — issues live in the react-query cache.
-  const summaryText = useMemo(() => {
+  //
+  // `submitEntries` splits the same selection into up to 3 form rows by the
+  // project_map preference (Jira project key → portal project id): mapped
+  // issues bucket by portal project, largest bucket first; favorites and
+  // unmapped issues always ride along in row 1's comment. With no mapped
+  // bucket this degrades to a single row whose project the backend defaults.
+  // `summaryText` (the preview/copy text) stays the unsplit combined summary.
+  const { summaryText, submitEntries } = useMemo(() => {
     const selected = new Set(selectedKeys);
     const selectedIssues = allIssues.filter((issue) => selected.has(issue.key));
     const createdKeys = new Set(
@@ -205,19 +215,56 @@ export default function DateCard({ date }: Props) {
       .filter((issue) => issue.key.startsWith(FAVORITE_KEY_PREFIX))
       .map((issue) => `• ${issue.fields.summary}`)
       .join("\n");
-    const jiraSummary = buildSummary(
-      selectedIssues
-        .filter((issue) => !issue.key.startsWith(FAVORITE_KEY_PREFIX))
-        .map((issue) =>
-          createdKeys.has(issue.key)
-            ? create(issue, (draft) => {
-                draft.fields.status.name = "Created";
-              })
-            : issue,
-        ),
+    const jiraIssues = selectedIssues
+      .filter((issue) => !issue.key.startsWith(FAVORITE_KEY_PREFIX))
+      .map((issue) =>
+        createdKeys.has(issue.key)
+          ? create(issue, (draft) => {
+              draft.fields.status.name = "Created";
+            })
+          : issue,
+      );
+    const summaryText = [favoriteLines, buildSummary(jiraIssues)]
+      .filter(Boolean)
+      .join("\n\n");
+
+    const buckets = new Map<string, JiraIssue[]>();
+    const unmapped: JiraIssue[] = [];
+    for (const issue of jiraIssues) {
+      const projectKey = issue.key.split("-")[0];
+      const portalProject = projectKey ? projectMap[projectKey] : undefined;
+      if (portalProject) {
+        const bucket = buckets.get(portalProject) ?? [];
+        bucket.push(issue);
+        buckets.set(portalProject, bucket);
+      } else {
+        unmapped.push(issue);
+      }
+    }
+    // Stable sort, so equally-sized buckets keep display order. The map
+    // editor caps distinct portal projects at 3, but a hand-edited store
+    // could exceed it — merge any overflow into the 3rd row's issues.
+    const ranked = [...buckets.entries()].sort(
+      (a, b) => b[1].length - a[1].length,
     );
-    return [favoriteLines, jiraSummary].filter(Boolean).join("\n\n");
-  }, [allIssues, issueGroups, selectedKeys]);
+    const rows = ranked.slice(0, 3);
+    const lastRow = rows[rows.length - 1];
+    if (lastRow) {
+      for (const [, issues] of ranked.slice(3)) lastRow[1].push(...issues);
+    }
+    const submitEntries: SubmitTaskEntry[] = rows.length
+      ? rows.map(([project, issues], i) => ({
+          project,
+          summary:
+            i === 0
+              ? [favoriteLines, buildSummary([...issues, ...unmapped])]
+                  .filter(Boolean)
+                  .join("\n\n")
+              : buildSummary(issues),
+        }))
+      : [{ project: null, summary: summaryText }];
+    return { summaryText, submitEntries };
+  }, [allIssues, issueGroups, selectedKeys, projectMap]);
 
   const autofillSummary =
     preferences?.autofill_summary ?? DEFAULT_PREFERENCES.autofill_summary;
@@ -254,7 +301,15 @@ export default function DateCard({ date }: Props) {
         <Button
           variant="secondary"
           onClick={() =>
-            submitTask({ date, summary: autofillSummary ? summaryText : "" })
+            submitTask({
+              date,
+              // Without autofill there is no text to split by project, so
+              // send one empty row and let the backend fall back to the
+              // default project — the pre-mapping behavior.
+              entries: autofillSummary
+                ? submitEntries
+                : [{ project: null, summary: "" }],
+            })
           }
           disabled={isSubmitting || (autofillSummary && isFetching)}
         >
