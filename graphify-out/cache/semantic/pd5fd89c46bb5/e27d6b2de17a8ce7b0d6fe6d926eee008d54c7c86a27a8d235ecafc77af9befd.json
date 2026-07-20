@@ -1,0 +1,230 @@
+{
+  "nodes": [
+    {
+      "id": "_agents_skills_to_issues_skill_to_issues",
+      "label": "To Issues",
+      "file_type": "document",
+      "source_file": ".agents/skills/to-issues/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_to_issues_skill_prefactoring",
+      "label": "Prefactoring",
+      "file_type": "rationale",
+      "rationale": "Making the change easy before making the easy change can remove structural obstacles before vertical feature slices begin.",
+      "source_file": ".agents/skills/to-issues/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_to_issues_skill_tracer_bullet_issues",
+      "label": "Tracer Bullet Issues",
+      "file_type": "rationale",
+      "rationale": "Each issue should deliver a narrow but complete and independently verifiable path through all integration layers.",
+      "source_file": ".agents/skills/to-issues/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_to_issues_skill_vertical_slice_rules",
+      "label": "Vertical Slice Rules",
+      "file_type": "concept",
+      "source_file": ".agents/skills/to-issues/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_to_issues_skill_breakdown_quiz",
+      "label": "Issue Breakdown Quiz",
+      "file_type": "concept",
+      "source_file": ".agents/skills/to-issues/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_to_issues_skill_dependency_ordered_publication",
+      "label": "Dependency-Ordered Issue Publication",
+      "file_type": "rationale",
+      "rationale": "Publishing blockers first yields real issue identifiers that downstream slices can reference.",
+      "source_file": ".agents/skills/to-issues/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_to_issues_skill_afk_ready_issues",
+      "label": "AFK-Ready Issues",
+      "file_type": "concept",
+      "source_file": ".agents/skills/to-issues/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_to_issues_skill_issue_body_template",
+      "label": "Vertical Slice Issue Body Template",
+      "file_type": "concept",
+      "source_file": ".agents/skills/to-issues/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_to_issues_skill_parent_issue_preservation",
+      "label": "Parent Issue Preservation",
+      "file_type": "rationale",
+      "rationale": "The decomposition publishes child issues without closing or modifying the source issue.",
+      "source_file": ".agents/skills/to-issues/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "_agents_skills_to_issues_skill_to_issues",
+      "target": "_agents_skills_setup_matt_pocock_skills_skill_setup_matt_pocock_skills",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/to-issues/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_to_issues_skill_to_issues",
+      "target": "_agents_skills_to_issues_skill_prefactoring",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/to-issues/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_to_issues_skill_to_issues",
+      "target": "_agents_skills_to_issues_skill_tracer_bullet_issues",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/to-issues/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_to_issues_skill_tracer_bullet_issues",
+      "target": "_agents_skills_to_issues_skill_vertical_slice_rules",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/to-issues/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_to_issues_skill_breakdown_quiz",
+      "target": "_agents_skills_to_issues_skill_tracer_bullet_issues",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/to-issues/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_to_issues_skill_dependency_ordered_publication",
+      "target": "_agents_skills_to_issues_skill_tracer_bullet_issues",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/to-issues/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_to_issues_skill_afk_ready_issues",
+      "target": "_agents_skills_setup_matt_pocock_skills_triage_labels_ready_for_agent",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/to-issues/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_to_issues_skill_issue_body_template",
+      "target": "_agents_skills_to_issues_skill_afk_ready_issues",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/to-issues/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_to_issues_skill_dependency_ordered_publication",
+      "target": "_agents_skills_to_issues_skill_issue_body_template",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/to-issues/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_to_issues_skill_parent_issue_preservation",
+      "target": "_agents_skills_to_issues_skill_issue_body_template",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/to-issues/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_to_issues_skill_tracer_bullet_issues",
+      "target": "_agents_skills_tdd_skill_vertical_slice_tdd",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": ".agents/skills/to-issues/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_to_issues_skill_issue_body_template",
+      "target": "_agents_skills_prototype_skill_prototype_answer_capture",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/to-issues/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

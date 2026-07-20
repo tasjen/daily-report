@@ -1,0 +1,70 @@
+{
+  "nodes": [
+    {
+      "id": "agents_skills_domain_modeling_adr_format_adr_format",
+      "label": "ADR Format",
+      "file_type": "document",
+      "source_file": ".agents/skills/domain-modeling/ADR-FORMAT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_domain_modeling_adr_format_minimal_adr",
+      "label": "Minimal ADR",
+      "file_type": "rationale",
+      "source_file": ".agents/skills/domain-modeling/ADR-FORMAT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_domain_modeling_adr_format_adr_eligibility_test",
+      "label": "ADR Eligibility Test",
+      "file_type": "rationale",
+      "source_file": ".agents/skills/domain-modeling/ADR-FORMAT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "agents_skills_domain_modeling_adr_format_adr_format",
+      "target": "agents_skills_domain_modeling_adr_format_minimal_adr",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/domain-modeling/ADR-FORMAT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_domain_modeling_adr_format_adr_format",
+      "target": "agents_skills_domain_modeling_adr_format_adr_eligibility_test",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/domain-modeling/ADR-FORMAT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_domain_modeling_adr_format_minimal_adr",
+      "target": "agents_skills_domain_modeling_adr_format_adr_format",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/domain-modeling/ADR-FORMAT.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

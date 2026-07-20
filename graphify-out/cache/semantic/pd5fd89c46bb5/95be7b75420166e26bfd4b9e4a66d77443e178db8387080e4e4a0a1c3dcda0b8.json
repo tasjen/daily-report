@@ -1,0 +1,83 @@
+{
+  "nodes": [
+    {
+      "id": "_agents_skills_teach_mission_format_mission_format",
+      "label": "Mission Format",
+      "file_type": "document",
+      "source_file": ".agents/skills/teach/MISSION-FORMAT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_teach_mission_format_concrete_learning_mission",
+      "label": "Concrete Learning Mission",
+      "file_type": "rationale",
+      "rationale": "A specific real-world outcome gives teaching decisions a practical compass; an abstract wish to understand a topic does not.",
+      "source_file": ".agents/skills/teach/MISSION-FORMAT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_teach_mission_format_one_mission_per_workspace",
+      "label": "One Mission per Workspace",
+      "file_type": "rationale",
+      "rationale": "Unrelated learning goals need separate workspaces so one mission can coherently steer lessons and resources.",
+      "source_file": ".agents/skills/teach/MISSION-FORMAT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_teach_mission_format_success_constraints_and_scope",
+      "label": "Mission Success, Constraints, and Scope",
+      "file_type": "concept",
+      "source_file": ".agents/skills/teach/MISSION-FORMAT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "_agents_skills_teach_mission_format_mission_format",
+      "target": "_agents_skills_teach_mission_format_concrete_learning_mission",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/teach/MISSION-FORMAT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_teach_mission_format_mission_format",
+      "target": "_agents_skills_teach_mission_format_one_mission_per_workspace",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/teach/MISSION-FORMAT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_teach_mission_format_concrete_learning_mission",
+      "target": "_agents_skills_teach_mission_format_success_constraints_and_scope",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/teach/MISSION-FORMAT.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

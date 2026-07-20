@@ -1,0 +1,28 @@
+{
+  "nodes": [
+    {
+      "id": "agents_skills_grill_me_skill_grill_me",
+      "label": "Grill Me",
+      "file_type": "document",
+      "source_file": ".agents/skills/grill-me/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "agents_skills_grill_me_skill_grill_me",
+      "target": "agents_skills_grilling_skill_grilling",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/grill-me/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

@@ -1,0 +1,60 @@
+{
+  "nodes": [
+    {
+      "id": "_agents_skills_setup_matt_pocock_skills_issue_tracker_local_local_markdown_issue_tracker",
+      "label": "Local Markdown Issue Tracker",
+      "file_type": "document",
+      "source_file": ".agents/skills/setup-matt-pocock-skills/issue-tracker-local.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_setup_matt_pocock_skills_issue_tracker_local_scratch_issue_layout",
+      "label": "Scratch Issue Layout",
+      "file_type": "concept",
+      "source_file": ".agents/skills/setup-matt-pocock-skills/issue-tracker-local.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_setup_matt_pocock_skills_issue_tracker_local_local_wayfinding_operations",
+      "label": "Local Markdown Wayfinding Operations",
+      "file_type": "concept",
+      "source_file": ".agents/skills/setup-matt-pocock-skills/issue-tracker-local.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "_agents_skills_setup_matt_pocock_skills_issue_tracker_local_local_markdown_issue_tracker",
+      "target": "_agents_skills_setup_matt_pocock_skills_issue_tracker_local_scratch_issue_layout",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/setup-matt-pocock-skills/issue-tracker-local.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_setup_matt_pocock_skills_issue_tracker_local_local_markdown_issue_tracker",
+      "target": "_agents_skills_setup_matt_pocock_skills_issue_tracker_local_local_wayfinding_operations",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/setup-matt-pocock-skills/issue-tracker-local.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

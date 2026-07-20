@@ -1,0 +1,91 @@
+{
+  "nodes": [
+    {
+      "id": "_agents_skills_setup_matt_pocock_skills_issue_tracker_github_github_issue_tracker",
+      "label": "GitHub Issue Tracker",
+      "file_type": "document",
+      "source_file": ".agents/skills/setup-matt-pocock-skills/issue-tracker-github.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_setup_matt_pocock_skills_issue_tracker_github_external_pr_triage",
+      "label": "External Pull Request Triage",
+      "file_type": "concept",
+      "source_file": ".agents/skills/setup-matt-pocock-skills/issue-tracker-github.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_setup_matt_pocock_skills_issue_tracker_github_shared_issue_pr_number_space",
+      "label": "Shared GitHub Issue and PR Number Space",
+      "file_type": "concept",
+      "source_file": ".agents/skills/setup-matt-pocock-skills/issue-tracker-github.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_setup_matt_pocock_skills_issue_tracker_github_github_wayfinding_operations",
+      "label": "GitHub Wayfinding Operations",
+      "file_type": "concept",
+      "source_file": ".agents/skills/setup-matt-pocock-skills/issue-tracker-github.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "_agents_skills_setup_matt_pocock_skills_issue_tracker_github_github_issue_tracker",
+      "target": "_agents_skills_setup_matt_pocock_skills_issue_tracker_github_external_pr_triage",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/setup-matt-pocock-skills/issue-tracker-github.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_setup_matt_pocock_skills_issue_tracker_github_external_pr_triage",
+      "target": "_agents_skills_setup_matt_pocock_skills_issue_tracker_github_shared_issue_pr_number_space",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/setup-matt-pocock-skills/issue-tracker-github.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_setup_matt_pocock_skills_issue_tracker_github_github_issue_tracker",
+      "target": "_agents_skills_setup_matt_pocock_skills_issue_tracker_github_github_wayfinding_operations",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/setup-matt-pocock-skills/issue-tracker-github.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_setup_matt_pocock_skills_issue_tracker_github_github_wayfinding_operations",
+      "target": "_agents_skills_setup_matt_pocock_skills_issue_tracker_gitlab_gitlab_wayfinding_operations",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": ".agents/skills/setup-matt-pocock-skills/issue-tracker-github.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

@@ -1,0 +1,198 @@
+{
+  "nodes": [
+    {
+      "id": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_submit_auto_close_design",
+      "label": "Auto-Submit and Auto-Close Design",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_submit",
+      "label": "Auto-Submit Preference",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_close",
+      "label": "Auto-Close Preference",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_cascade_rule",
+      "label": "Auto-Fill to Auto-Submit to Auto-Close Cascade Rule",
+      "file_type": "rationale",
+      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_preference_schema",
+      "label": "Auto-Submit Preference Schema",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_backend_submit_flow",
+      "label": "Backend Automatic Submission Flow",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_uncertainty_leaves_browser_open",
+      "label": "Submission Uncertainty Leaves Browser Open",
+      "file_type": "rationale",
+      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_submit_auto_close_design",
+      "target": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_submit",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_submit_auto_close_design",
+      "target": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_close",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_submit_auto_close_design",
+      "target": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_cascade_rule",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_submit_auto_close_design",
+      "target": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_preference_schema",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_submit_auto_close_design",
+      "target": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_backend_submit_flow",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_cascade_rule",
+      "target": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_submit",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_cascade_rule",
+      "target": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_close",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_submit",
+      "target": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_backend_submit_flow",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_close",
+      "target": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_backend_submit_flow",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_uncertainty_leaves_browser_open",
+      "target": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_backend_submit_flow",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "auto_submit_dependency_chain",
+      "label": "Auto-Fill, Auto-Submit, and Auto-Close Dependency Chain",
+      "nodes": [
+        "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_submit",
+        "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_close",
+        "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_cascade_rule"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md"
+    }
+  ]
+}

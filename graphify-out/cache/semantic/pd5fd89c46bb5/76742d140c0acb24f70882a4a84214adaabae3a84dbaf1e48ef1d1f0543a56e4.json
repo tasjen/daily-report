@@ -1,0 +1,272 @@
+{
+  "nodes": [
+    {
+      "id": "docs_superpowers_specs_2026_07_12_cicd_design_ci_cd_design",
+      "label": "CI/CD Design",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_12_cicd_design_continuous_integration_checks",
+      "label": "Continuous Integration Checks",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_12_cicd_design_tag_driven_release_pipeline",
+      "label": "Tag-Driven Release Pipeline",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_12_cicd_design_in_app_auto_updater",
+      "label": "In-App Auto-Updater",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_12_cicd_design_updater_signing_key",
+      "label": "Updater Signing Key",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_12_cicd_design_curl_based_macos_installer",
+      "label": "curl-Based macOS Installer",
+      "file_type": "rationale",
+      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_12_cicd_design_draft_release_publish_gate",
+      "label": "Draft Release Publish Gate",
+      "file_type": "rationale",
+      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_12_cicd_design_unsigned_distribution_strategy",
+      "label": "Unsigned Distribution Strategy",
+      "file_type": "rationale",
+      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_12_cicd_design_release_version_guard",
+      "label": "Release Tag-to-Version Guard",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "docs_superpowers_specs_2026_07_12_cicd_design_ci_cd_design",
+      "target": "docs_superpowers_specs_2026_07_12_cicd_design_continuous_integration_checks",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_12_cicd_design_ci_cd_design",
+      "target": "docs_superpowers_specs_2026_07_12_cicd_design_tag_driven_release_pipeline",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_12_cicd_design_ci_cd_design",
+      "target": "docs_superpowers_specs_2026_07_12_cicd_design_in_app_auto_updater",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_12_cicd_design_ci_cd_design",
+      "target": "docs_superpowers_specs_2026_07_12_cicd_design_updater_signing_key",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_12_cicd_design_ci_cd_design",
+      "target": "docs_superpowers_specs_2026_07_12_cicd_design_curl_based_macos_installer",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_12_cicd_design_ci_cd_design",
+      "target": "docs_superpowers_specs_2026_07_12_cicd_design_draft_release_publish_gate",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_12_cicd_design_ci_cd_design",
+      "target": "docs_superpowers_specs_2026_07_12_cicd_design_unsigned_distribution_strategy",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_12_cicd_design_ci_cd_design",
+      "target": "docs_superpowers_specs_2026_07_12_cicd_design_release_version_guard",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_12_cicd_design_continuous_integration_checks",
+      "target": "_github_workflows_ci_ci_workflow",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_12_cicd_design_tag_driven_release_pipeline",
+      "target": "_github_workflows_release_release_workflow",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_12_cicd_design_release_version_guard",
+      "target": "_github_workflows_release_version_guard_job",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_12_cicd_design_updater_signing_key",
+      "target": "_github_workflows_release_updater_artifact_signing",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_12_cicd_design_draft_release_publish_gate",
+      "target": "_github_workflows_release_draft_github_release",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_12_cicd_design_curl_based_macos_installer",
+      "target": "_github_workflows_release_cross_platform_build_matrix",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_12_cicd_design_unsigned_distribution_strategy",
+      "target": "docs_superpowers_specs_2026_07_12_cicd_design_curl_based_macos_installer",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "signed_release_delivery_chain",
+      "label": "Signed Release and Update Delivery Chain",
+      "nodes": [
+        "docs_superpowers_specs_2026_07_12_cicd_design_tag_driven_release_pipeline",
+        "docs_superpowers_specs_2026_07_12_cicd_design_release_version_guard",
+        "docs_superpowers_specs_2026_07_12_cicd_design_updater_signing_key",
+        "docs_superpowers_specs_2026_07_12_cicd_design_draft_release_publish_gate",
+        "docs_superpowers_specs_2026_07_12_cicd_design_in_app_auto_updater"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md"
+    }
+  ]
+}

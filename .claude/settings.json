@@ -7,5 +7,27 @@
     "superpowers@claude-plugins-official": true,
     "frontend-design@claude-plugins-official": true,
     "andrej-karpathy-skills@karpathy-skills": true
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|Grep",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/livinginsider/.local/bin/graphify hook-guard search"
+          }
+        ]
+      },
+      {
+        "matcher": "Read|Glob",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/livinginsider/.local/bin/graphify hook-guard read"
+          }
+        ]
+      }
+    ]
   }
 }

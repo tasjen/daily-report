@@ -1,0 +1,123 @@
+{
+  "nodes": [
+    {
+      "id": "_agents_skills_setup_matt_pocock_skills_triage_labels_triage_label_mapping",
+      "label": "Triage Label Mapping",
+      "file_type": "document",
+      "source_file": ".agents/skills/setup-matt-pocock-skills/triage-labels.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_setup_matt_pocock_skills_triage_labels_needs_triage",
+      "label": "needs-triage",
+      "file_type": "concept",
+      "source_file": ".agents/skills/setup-matt-pocock-skills/triage-labels.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_setup_matt_pocock_skills_triage_labels_needs_info",
+      "label": "needs-info",
+      "file_type": "concept",
+      "source_file": ".agents/skills/setup-matt-pocock-skills/triage-labels.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_setup_matt_pocock_skills_triage_labels_ready_for_agent",
+      "label": "ready-for-agent",
+      "file_type": "concept",
+      "source_file": ".agents/skills/setup-matt-pocock-skills/triage-labels.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_setup_matt_pocock_skills_triage_labels_ready_for_human",
+      "label": "ready-for-human",
+      "file_type": "concept",
+      "source_file": ".agents/skills/setup-matt-pocock-skills/triage-labels.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_setup_matt_pocock_skills_triage_labels_wontfix",
+      "label": "wontfix",
+      "file_type": "concept",
+      "source_file": ".agents/skills/setup-matt-pocock-skills/triage-labels.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "_agents_skills_setup_matt_pocock_skills_triage_labels_triage_label_mapping",
+      "target": "_agents_skills_setup_matt_pocock_skills_triage_labels_needs_triage",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/setup-matt-pocock-skills/triage-labels.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_setup_matt_pocock_skills_triage_labels_triage_label_mapping",
+      "target": "_agents_skills_setup_matt_pocock_skills_triage_labels_needs_info",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/setup-matt-pocock-skills/triage-labels.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_setup_matt_pocock_skills_triage_labels_triage_label_mapping",
+      "target": "_agents_skills_setup_matt_pocock_skills_triage_labels_ready_for_agent",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/setup-matt-pocock-skills/triage-labels.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_setup_matt_pocock_skills_triage_labels_triage_label_mapping",
+      "target": "_agents_skills_setup_matt_pocock_skills_triage_labels_ready_for_human",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/setup-matt-pocock-skills/triage-labels.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_setup_matt_pocock_skills_triage_labels_triage_label_mapping",
+      "target": "_agents_skills_setup_matt_pocock_skills_triage_labels_wontfix",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/setup-matt-pocock-skills/triage-labels.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

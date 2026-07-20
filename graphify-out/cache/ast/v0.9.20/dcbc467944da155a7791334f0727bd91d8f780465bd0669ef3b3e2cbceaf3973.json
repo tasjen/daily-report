@@ -1,0 +1,62 @@
+{
+  "nodes": [
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_knip_json",
+      "label": "knip.json",
+      "file_type": "code",
+      "source_file": "knip.json",
+      "source_location": "L1"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_knip_schema",
+      "label": "$schema",
+      "file_type": "code",
+      "source_file": "knip.json",
+      "source_location": "L2"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_knip_tags",
+      "label": "tags",
+      "file_type": "code",
+      "source_file": "knip.json",
+      "source_location": "L3"
+    },
+    {
+      "id": "ref_lintignore",
+      "label": "-lintignore",
+      "file_type": "concept",
+      "source_file": "knip.json",
+      "source_location": "L3"
+    }
+  ],
+  "edges": [
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_knip_json",
+      "target": "users_livinginsider_documents_repos_daily_report_knip_schema",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "knip.json",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_knip_json",
+      "target": "users_livinginsider_documents_repos_daily_report_knip_tags",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "knip.json",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_knip_tags",
+      "target": "ref_lintignore",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "knip.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "context": "import"
+    }
+  ]
+}

@@ -1,0 +1,233 @@
+{
+  "nodes": [
+    {
+      "id": "agents_skills_diagnosing_bugs_skill_diagnosing_bugs",
+      "label": "Diagnosing Bugs",
+      "file_type": "document",
+      "source_file": ".agents/skills/diagnosing-bugs/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_diagnosing_bugs_skill_tight_feedback_loop",
+      "label": "Tight Feedback Loop",
+      "file_type": "rationale",
+      "source_file": ".agents/skills/diagnosing-bugs/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_diagnosing_bugs_skill_red_capable_command",
+      "label": "Red-capable Command",
+      "file_type": "concept",
+      "source_file": ".agents/skills/diagnosing-bugs/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_diagnosing_bugs_skill_reproduce_and_minimise",
+      "label": "Reproduce and Minimise",
+      "file_type": "rationale",
+      "source_file": ".agents/skills/diagnosing-bugs/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_diagnosing_bugs_skill_ranked_falsifiable_hypotheses",
+      "label": "Ranked Falsifiable Hypotheses",
+      "file_type": "concept",
+      "source_file": ".agents/skills/diagnosing-bugs/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_diagnosing_bugs_skill_prediction_driven_instrumentation",
+      "label": "Prediction-driven Instrumentation",
+      "file_type": "concept",
+      "source_file": ".agents/skills/diagnosing-bugs/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_diagnosing_bugs_skill_performance_measurement_branch",
+      "label": "Performance Measurement Branch",
+      "file_type": "concept",
+      "source_file": ".agents/skills/diagnosing-bugs/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_diagnosing_bugs_skill_regression_test_at_correct_seam",
+      "label": "Regression Test at Correct Seam",
+      "file_type": "rationale",
+      "source_file": ".agents/skills/diagnosing-bugs/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_diagnosing_bugs_skill_cleanup_and_architecture_post_mortem",
+      "label": "Cleanup and Architecture Post-mortem",
+      "file_type": "concept",
+      "source_file": ".agents/skills/diagnosing-bugs/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "agents_skills_diagnosing_bugs_skill_diagnosing_bugs",
+      "target": "agents_skills_diagnosing_bugs_skill_tight_feedback_loop",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/diagnosing-bugs/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_diagnosing_bugs_skill_tight_feedback_loop",
+      "target": "agents_skills_diagnosing_bugs_skill_red_capable_command",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/diagnosing-bugs/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_diagnosing_bugs_skill_tight_feedback_loop",
+      "target": "agents_skills_diagnosing_bugs_skill_diagnosing_bugs",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/diagnosing-bugs/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_diagnosing_bugs_skill_reproduce_and_minimise",
+      "target": "agents_skills_diagnosing_bugs_skill_red_capable_command",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/diagnosing-bugs/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_diagnosing_bugs_skill_ranked_falsifiable_hypotheses",
+      "target": "agents_skills_diagnosing_bugs_skill_reproduce_and_minimise",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/diagnosing-bugs/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_diagnosing_bugs_skill_prediction_driven_instrumentation",
+      "target": "agents_skills_diagnosing_bugs_skill_ranked_falsifiable_hypotheses",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/diagnosing-bugs/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_diagnosing_bugs_skill_performance_measurement_branch",
+      "target": "agents_skills_diagnosing_bugs_skill_prediction_driven_instrumentation",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/diagnosing-bugs/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_diagnosing_bugs_skill_regression_test_at_correct_seam",
+      "target": "agents_skills_diagnosing_bugs_skill_reproduce_and_minimise",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/diagnosing-bugs/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_diagnosing_bugs_skill_regression_test_at_correct_seam",
+      "target": "agents_skills_codebase_design_skill_interface_test_surface",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": ".agents/skills/diagnosing-bugs/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_diagnosing_bugs_skill_cleanup_and_architecture_post_mortem",
+      "target": "agents_skills_diagnosing_bugs_skill_regression_test_at_correct_seam",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/diagnosing-bugs/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_diagnosing_bugs_skill_cleanup_and_architecture_post_mortem",
+      "target": "agents_skills_codebase_design_skill_codebase_design",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": ".agents/skills/diagnosing-bugs/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "hard_bug_diagnosis_loop",
+      "label": "Hard Bug Diagnosis Loop",
+      "nodes": [
+        "agents_skills_diagnosing_bugs_skill_tight_feedback_loop",
+        "agents_skills_diagnosing_bugs_skill_reproduce_and_minimise",
+        "agents_skills_diagnosing_bugs_skill_ranked_falsifiable_hypotheses",
+        "agents_skills_diagnosing_bugs_skill_prediction_driven_instrumentation",
+        "agents_skills_diagnosing_bugs_skill_regression_test_at_correct_seam",
+        "agents_skills_diagnosing_bugs_skill_cleanup_and_architecture_post_mortem"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/diagnosing-bugs/SKILL.md"
+    }
+  ]
+}

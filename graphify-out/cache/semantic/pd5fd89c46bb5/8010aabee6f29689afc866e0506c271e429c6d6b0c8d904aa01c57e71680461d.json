@@ -1,0 +1,104 @@
+{
+  "nodes": [
+    {
+      "id": "_agents_skills_setup_matt_pocock_skills_domain_domain_docs",
+      "label": "Domain Docs",
+      "file_type": "document",
+      "source_file": ".agents/skills/setup-matt-pocock-skills/domain.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_setup_matt_pocock_skills_domain_single_context_layout",
+      "label": "Single-Context Domain Layout",
+      "file_type": "concept",
+      "source_file": ".agents/skills/setup-matt-pocock-skills/domain.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_setup_matt_pocock_skills_domain_multi_context_layout",
+      "label": "Multi-Context Domain Layout",
+      "file_type": "concept",
+      "source_file": ".agents/skills/setup-matt-pocock-skills/domain.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_setup_matt_pocock_skills_domain_glossary_vocabulary_discipline",
+      "label": "Glossary Vocabulary Discipline",
+      "file_type": "rationale",
+      "rationale": "Using the canonical domain term in issues, refactors, hypotheses, and tests prevents synonym drift across engineering work.",
+      "source_file": ".agents/skills/setup-matt-pocock-skills/domain.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_setup_matt_pocock_skills_domain_adr_conflict_flagging",
+      "label": "ADR Conflict Flagging",
+      "file_type": "rationale",
+      "rationale": "Outputs that contradict recorded decisions should surface the conflict instead of silently overriding it.",
+      "source_file": ".agents/skills/setup-matt-pocock-skills/domain.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "_agents_skills_setup_matt_pocock_skills_domain_domain_docs",
+      "target": "_agents_skills_setup_matt_pocock_skills_domain_single_context_layout",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/setup-matt-pocock-skills/domain.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_setup_matt_pocock_skills_domain_domain_docs",
+      "target": "_agents_skills_setup_matt_pocock_skills_domain_multi_context_layout",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/setup-matt-pocock-skills/domain.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_setup_matt_pocock_skills_domain_domain_docs",
+      "target": "_agents_skills_setup_matt_pocock_skills_domain_glossary_vocabulary_discipline",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/setup-matt-pocock-skills/domain.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_setup_matt_pocock_skills_domain_domain_docs",
+      "target": "_agents_skills_setup_matt_pocock_skills_domain_adr_conflict_flagging",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/setup-matt-pocock-skills/domain.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

@@ -1,0 +1,214 @@
+{
+  "nodes": [
+    {
+      "id": "_agents_skills_prototype_logic_logic_prototype",
+      "label": "Logic Prototype",
+      "file_type": "document",
+      "source_file": ".agents/skills/prototype/LOGIC.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_prototype_logic_explicit_prototype_question",
+      "label": "Explicit Prototype Question",
+      "file_type": "rationale",
+      "rationale": "Writing the state-model question down prevents a prototype from efficiently answering the wrong question.",
+      "source_file": ".agents/skills/prototype/LOGIC.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_prototype_logic_portable_pure_logic_module",
+      "label": "Portable Pure Logic Module",
+      "file_type": "rationale",
+      "rationale": "Separating pure domain logic from the throwaway terminal shell lets the validated logic move into production while the shell is deleted.",
+      "source_file": ".agents/skills/prototype/LOGIC.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_prototype_logic_pure_reducer",
+      "label": "Pure Reducer",
+      "file_type": "concept",
+      "source_file": ".agents/skills/prototype/LOGIC.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_prototype_logic_state_machine",
+      "label": "State Machine",
+      "file_type": "concept",
+      "source_file": ".agents/skills/prototype/LOGIC.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_prototype_logic_pure_function_set",
+      "label": "Pure Function Set",
+      "file_type": "concept",
+      "source_file": ".agents/skills/prototype/LOGIC.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_prototype_logic_stateful_module_interface",
+      "label": "Stateful Module Interface",
+      "file_type": "concept",
+      "source_file": ".agents/skills/prototype/LOGIC.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_prototype_logic_lightweight_tui",
+      "label": "Lightweight TUI",
+      "file_type": "concept",
+      "source_file": ".agents/skills/prototype/LOGIC.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_prototype_logic_in_memory_prototype_state",
+      "label": "In-Memory Prototype State",
+      "file_type": "rationale",
+      "rationale": "Keeping prototype state in memory isolates the design question from production persistence concerns.",
+      "source_file": ".agents/skills/prototype/LOGIC.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "_agents_skills_prototype_logic_logic_prototype",
+      "target": "_agents_skills_prototype_logic_explicit_prototype_question",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/prototype/LOGIC.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_prototype_logic_logic_prototype",
+      "target": "_agents_skills_prototype_logic_portable_pure_logic_module",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/prototype/LOGIC.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_prototype_logic_portable_pure_logic_module",
+      "target": "_agents_skills_prototype_logic_pure_reducer",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/prototype/LOGIC.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_prototype_logic_portable_pure_logic_module",
+      "target": "_agents_skills_prototype_logic_state_machine",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/prototype/LOGIC.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_prototype_logic_portable_pure_logic_module",
+      "target": "_agents_skills_prototype_logic_pure_function_set",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/prototype/LOGIC.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_prototype_logic_portable_pure_logic_module",
+      "target": "_agents_skills_prototype_logic_stateful_module_interface",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/prototype/LOGIC.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_prototype_logic_lightweight_tui",
+      "target": "_agents_skills_prototype_logic_portable_pure_logic_module",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/prototype/LOGIC.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_prototype_logic_lightweight_tui",
+      "target": "_agents_skills_prototype_logic_in_memory_prototype_state",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/prototype/LOGIC.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_prototype_logic_lightweight_tui",
+      "target": "_agents_skills_prototype_skill_state_visibility",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": ".agents/skills/prototype/LOGIC.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "logic_prototype_module_shapes",
+      "label": "Portable Logic Prototype Module Shapes",
+      "nodes": [
+        "_agents_skills_prototype_logic_pure_reducer",
+        "_agents_skills_prototype_logic_state_machine",
+        "_agents_skills_prototype_logic_pure_function_set",
+        "_agents_skills_prototype_logic_stateful_module_interface"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/prototype/LOGIC.md"
+    }
+  ]
+}

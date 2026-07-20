@@ -1,0 +1,83 @@
+{
+  "nodes": [
+    {
+      "id": "_agents_skills_research_skill_research",
+      "label": "Research Skill",
+      "file_type": "document",
+      "source_file": ".agents/skills/research/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_research_skill_primary_source_research",
+      "label": "Primary-Source Research",
+      "file_type": "rationale",
+      "rationale": "Claims should be traced to the official documentation, source code, specification, or first-party API that owns them.",
+      "source_file": ".agents/skills/research/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_research_skill_background_research_agent",
+      "label": "Background Research Agent",
+      "file_type": "rationale",
+      "rationale": "Delegating reading to a background agent lets the main agent continue useful work while sources are investigated.",
+      "source_file": ".agents/skills/research/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_research_skill_cited_markdown_findings",
+      "label": "Cited Markdown Findings",
+      "file_type": "concept",
+      "source_file": ".agents/skills/research/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "_agents_skills_research_skill_research",
+      "target": "_agents_skills_research_skill_background_research_agent",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/research/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_research_skill_background_research_agent",
+      "target": "_agents_skills_research_skill_primary_source_research",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/research/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_research_skill_primary_source_research",
+      "target": "_agents_skills_research_skill_cited_markdown_findings",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/research/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

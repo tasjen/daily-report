@@ -1,0 +1,167 @@
+{
+  "nodes": [
+    {
+      "id": "_agents_skills_improve_codebase_architecture_skill_improve_codebase_architecture",
+      "label": "Improve Codebase Architecture",
+      "file_type": "document",
+      "source_file": ".agents/skills/improve-codebase-architecture/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_improve_codebase_architecture_skill_deepening_opportunity",
+      "label": "Deepening Opportunity",
+      "file_type": "rationale",
+      "rationale": "Turning shallow modules into deep modules concentrates complexity behind simpler interfaces, improving testability and AI navigability.",
+      "source_file": ".agents/skills/improve-codebase-architecture/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_improve_codebase_architecture_skill_deep_module_design_vocabulary",
+      "label": "Deep Module Design Vocabulary",
+      "file_type": "concept",
+      "source_file": ".agents/skills/improve-codebase-architecture/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_improve_codebase_architecture_skill_deletion_test",
+      "label": "Deletion Test",
+      "file_type": "rationale",
+      "rationale": "A module is usefully deep when deleting it would disperse complexity rather than concentrate it.",
+      "source_file": ".agents/skills/improve-codebase-architecture/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_improve_codebase_architecture_skill_architecture_review_html_report",
+      "label": "Architecture Review HTML Report",
+      "file_type": "concept",
+      "source_file": ".agents/skills/improve-codebase-architecture/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_improve_codebase_architecture_skill_adr_aware_review",
+      "label": "ADR-Aware Architecture Review",
+      "file_type": "rationale",
+      "rationale": "Existing architectural decisions should not be re-litigated unless observed friction is strong enough to justify reopening them.",
+      "source_file": ".agents/skills/improve-codebase-architecture/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_improve_codebase_architecture_skill_grilling_and_domain_modeling_loop",
+      "label": "Grilling and Domain Modeling Loop",
+      "file_type": "concept",
+      "source_file": ".agents/skills/improve-codebase-architecture/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "_agents_skills_improve_codebase_architecture_skill_improve_codebase_architecture",
+      "target": "_agents_skills_improve_codebase_architecture_skill_deepening_opportunity",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/improve-codebase-architecture/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_improve_codebase_architecture_skill_deepening_opportunity",
+      "target": "_agents_skills_improve_codebase_architecture_skill_deep_module_design_vocabulary",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/improve-codebase-architecture/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_improve_codebase_architecture_skill_deletion_test",
+      "target": "_agents_skills_improve_codebase_architecture_skill_deepening_opportunity",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/improve-codebase-architecture/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_improve_codebase_architecture_skill_improve_codebase_architecture",
+      "target": "_agents_skills_improve_codebase_architecture_skill_architecture_review_html_report",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/improve-codebase-architecture/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_improve_codebase_architecture_skill_architecture_review_html_report",
+      "target": "_agents_skills_improve_codebase_architecture_skill_deepening_opportunity",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/improve-codebase-architecture/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_improve_codebase_architecture_skill_adr_aware_review",
+      "target": "_agents_skills_improve_codebase_architecture_skill_architecture_review_html_report",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/improve-codebase-architecture/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_improve_codebase_architecture_skill_improve_codebase_architecture",
+      "target": "_agents_skills_improve_codebase_architecture_skill_grilling_and_domain_modeling_loop",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/improve-codebase-architecture/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_improve_codebase_architecture_skill_adr_aware_review",
+      "target": "_agents_skills_setup_matt_pocock_skills_domain_adr_conflict_flagging",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": ".agents/skills/improve-codebase-architecture/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

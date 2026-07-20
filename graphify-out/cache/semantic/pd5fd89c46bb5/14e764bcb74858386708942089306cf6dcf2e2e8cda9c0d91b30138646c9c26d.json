@@ -1,0 +1,93 @@
+{
+  "nodes": [
+    {
+      "id": "_agents_skills_teach_resources_format_resources_format",
+      "label": "Resources Format",
+      "file_type": "document",
+      "source_file": ".agents/skills/teach/RESOURCES-FORMAT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_teach_resources_format_high_trust_resources",
+      "label": "High-Trust Resources",
+      "file_type": "rationale",
+      "rationale": "Teaching claims should come from primary sources, recognized experts, peer-reviewed work, and well-moderated communities rather than unverified model memory or marketing.",
+      "source_file": ".agents/skills/teach/RESOURCES-FORMAT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_teach_resources_format_knowledge_and_wisdom_resources",
+      "label": "Knowledge and Wisdom Resources",
+      "file_type": "concept",
+      "source_file": ".agents/skills/teach/RESOURCES-FORMAT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_teach_resources_format_resource_gaps_and_pruning",
+      "label": "Resource Gaps and Pruning",
+      "file_type": "rationale",
+      "rationale": "Explicit gaps drive future search, while removing shallow or off-mission sources keeps the collection small and trustworthy.",
+      "source_file": ".agents/skills/teach/RESOURCES-FORMAT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "_agents_skills_teach_resources_format_resources_format",
+      "target": "_agents_skills_teach_resources_format_high_trust_resources",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/teach/RESOURCES-FORMAT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_teach_resources_format_resources_format",
+      "target": "_agents_skills_teach_resources_format_knowledge_and_wisdom_resources",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/teach/RESOURCES-FORMAT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_teach_resources_format_resource_gaps_and_pruning",
+      "target": "_agents_skills_teach_resources_format_high_trust_resources",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/teach/RESOURCES-FORMAT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_teach_resources_format_high_trust_resources",
+      "target": "_agents_skills_research_skill_primary_source_research",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": ".agents/skills/teach/RESOURCES-FORMAT.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

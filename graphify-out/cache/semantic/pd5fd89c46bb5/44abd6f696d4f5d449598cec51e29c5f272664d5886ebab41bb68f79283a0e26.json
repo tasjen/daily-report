@@ -1,0 +1,122 @@
+{
+  "nodes": [
+    {
+      "id": "_agents_skills_triage_out_of_scope_out_of_scope_knowledge_base",
+      "label": "Out-of-Scope Knowledge Base",
+      "file_type": "document",
+      "source_file": ".agents/skills/triage/OUT-OF-SCOPE.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_triage_out_of_scope_institutional_memory",
+      "label": "Institutional Memory for Rejections",
+      "file_type": "rationale",
+      "source_file": ".agents/skills/triage/OUT-OF-SCOPE.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_triage_out_of_scope_rejection_deduplication",
+      "label": "Rejected-Request Deduplication",
+      "file_type": "rationale",
+      "source_file": ".agents/skills/triage/OUT-OF-SCOPE.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_triage_out_of_scope_concept_similarity_matching",
+      "label": "Concept-Similarity Matching",
+      "file_type": "concept",
+      "source_file": ".agents/skills/triage/OUT-OF-SCOPE.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_triage_out_of_scope_enhancement_rejection_rule",
+      "label": "Enhancement Rejection Recording Rule",
+      "file_type": "concept",
+      "source_file": ".agents/skills/triage/OUT-OF-SCOPE.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "_agents_skills_triage_out_of_scope_out_of_scope_knowledge_base",
+      "target": "_agents_skills_triage_out_of_scope_institutional_memory",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/triage/OUT-OF-SCOPE.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_triage_out_of_scope_out_of_scope_knowledge_base",
+      "target": "_agents_skills_triage_out_of_scope_rejection_deduplication",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/triage/OUT-OF-SCOPE.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_triage_out_of_scope_out_of_scope_knowledge_base",
+      "target": "_agents_skills_triage_out_of_scope_concept_similarity_matching",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/triage/OUT-OF-SCOPE.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_triage_out_of_scope_out_of_scope_knowledge_base",
+      "target": "_agents_skills_triage_out_of_scope_enhancement_rejection_rule",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/triage/OUT-OF-SCOPE.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_triage_out_of_scope_institutional_memory",
+      "target": "_agents_skills_triage_out_of_scope_out_of_scope_knowledge_base",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/triage/OUT-OF-SCOPE.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_triage_out_of_scope_rejection_deduplication",
+      "target": "_agents_skills_triage_out_of_scope_out_of_scope_knowledge_base",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/triage/OUT-OF-SCOPE.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

@@ -1,0 +1,102 @@
+{
+  "nodes": [
+    {
+      "id": "lefthook_quality_gate_pipeline",
+      "label": "Quality Gate Pipeline",
+      "file_type": "code",
+      "source_file": "lefthook.yaml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "lefthook_biome_pre_commit_check",
+      "label": "Biome Pre-commit Check",
+      "file_type": "code",
+      "source_file": "lefthook.yaml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "lefthook_rustfmt_pre_commit_check",
+      "label": "Rustfmt Pre-commit Check",
+      "file_type": "code",
+      "source_file": "lefthook.yaml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "lefthook_typescript_pre_push_check",
+      "label": "TypeScript Pre-push Check",
+      "file_type": "code",
+      "source_file": "lefthook.yaml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "lefthook_clippy_pre_push_check",
+      "label": "Clippy Pre-push Check",
+      "file_type": "code",
+      "source_file": "lefthook.yaml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "lefthook_quality_gate_pipeline",
+      "target": "lefthook_biome_pre_commit_check",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lefthook.yaml",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "lefthook_quality_gate_pipeline",
+      "target": "lefthook_rustfmt_pre_commit_check",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lefthook.yaml",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "lefthook_quality_gate_pipeline",
+      "target": "lefthook_typescript_pre_push_check",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lefthook.yaml",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "lefthook_quality_gate_pipeline",
+      "target": "lefthook_clippy_pre_push_check",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lefthook.yaml",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}
