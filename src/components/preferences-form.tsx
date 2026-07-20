@@ -5,6 +5,7 @@ import AutofillSummaryToggle from "@/components/autofill-summary-toggle";
 import DefaultProjectSelect from "@/components/default-project-select";
 import DefaultTaskGroupsSelect from "@/components/default-task-groups-select";
 import { ProjectListSelect } from "@/components/project-list-select";
+import ProjectMapForm from "@/components/project-map-form";
 import { Button } from "@/components/shared/button";
 import {
   Dialog,
@@ -26,7 +27,7 @@ export default function PreferencesForm() {
           </Button>
         }
       />
-      <DialogContent initialFocus={false} className="max-w-lg">
+      <DialogContent initialFocus={false} className="max-w-2xl">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Settings2Icon />
@@ -37,6 +38,7 @@ export default function PreferencesForm() {
           <div className="flex flex-col gap-4">
             <DefaultProjectSelect />
             <ProjectListSelect />
+            <ProjectMapForm />
             <DefaultTaskGroupsSelect />
           </div>
           <Separator orientation="vertical" />

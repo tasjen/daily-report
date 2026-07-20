@@ -16,8 +16,10 @@ use tokio::sync::Mutex;
 const LOGIN_INPUT_SELECTOR: &str = "input[type='text']";
 const TASK_DATE_SELECT: &str = "select#task_date";
 const TASK_LEAVE_SELECT: &str = "select#task_leave";
-const TASK_PROJECT_SELECT_1: &str = "select#task_project_id1";
-const TASK_COMMENT_TEXTAREA_1: &str = "textarea#task_comment1";
+// The task form has 3 project/comment row pairs, numbered 1-3; append the row
+// number to these prefixes to get a row's selectors.
+const TASK_PROJECT_SELECT_PREFIX: &str = "select#task_project_id";
+const TASK_COMMENT_TEXTAREA_PREFIX: &str = "textarea#task_comment";
 const TASK_FORM_SELECTOR: &str = "form[action='task.php']";
 
 #[derive(thiserror::Error, Debug)]
@@ -388,7 +390,7 @@ static PROJECT_OPTIONS: tokio::sync::OnceCell<Vec<SelectOption>> =
 async fn get_project_options(page: &Page) -> Result<&'static [SelectOption], AppError> {
     PROJECT_OPTIONS
         .get_or_try_init(|| async {
-            get_select_options(page, &format!("{TASK_PROJECT_SELECT_1} option")).await
+            get_select_options(page, &format!("{TASK_PROJECT_SELECT_PREFIX}1 option")).await
         })
         .await
         .map(Vec::as_slice)
@@ -478,15 +480,25 @@ async fn open_member_page(state: tauri::State<'_, HeadedBrowserState>) -> Result
     Ok(())
 }
 
+/// One project/comment row pair of the task form, sent by the frontend (which
+/// buckets the selected tasks by the `project_map` preference). `project` is a
+/// portal project option id; `None` on the first row falls back to the
+/// `default_project` preference — the pre-mapping behavior.
+#[derive(serde::Deserialize)]
+struct TaskEntry {
+    project: Option<String>,
+    summary: String,
+}
+
 #[tauri::command]
 async fn submit_task(
     state: tauri::State<'_, HeadedBrowserState>,
     date: String,
-    summary: String,
+    mut entries: Vec<TaskEntry>,
 ) -> Result<(), AppError> {
     log::info!(
-        "submit_task: pre-filling form for date {date} ({} char summary)",
-        summary.len()
+        "submit_task: pre-filling form for date {date} ({} row(s))",
+        entries.len().max(1)
     );
     let base_url = portal_url(&state.app)?;
     let page = state.get_page().await?;
@@ -502,34 +514,58 @@ async fn submit_task(
         v.get("default_project")
             .and_then(|p| p.as_str().map(String::from))
     });
-    if let Some(project) = &default_project {
+
+    // The form has 3 row pairs. The frontend already merges overflow into the
+    // 3rd entry and always sends at least one; both are re-enforced here so a
+    // malformed invoke can't index a row the form doesn't have.
+    entries.truncate(3);
+    if entries.is_empty() {
+        entries.push(TaskEntry {
+            project: None,
+            summary: String::new(),
+        });
+    }
+    for (i, entry) in entries.iter().enumerate() {
+        let row = i + 1;
+        let project = entry.project.as_ref().or(if row == 1 {
+            default_project.as_ref()
+        } else {
+            None
+        });
+        if let Some(project) = project {
+            let project_js = serde_json::to_string(project)?;
+            page.evaluate(format!(
+                "document.querySelector('{TASK_PROJECT_SELECT_PREFIX}{row}').value = {project_js};"
+            ))
+            .await?;
+        }
+        let summary_js = serde_json::to_string(&entry.summary)?;
         page.evaluate(format!(
-            "document.querySelector('{TASK_PROJECT_SELECT_1}').value = '{project}';"
+            "document.querySelector('{TASK_COMMENT_TEXTAREA_PREFIX}{row}').value = {summary_js};"
         ))
         .await?;
     }
-
-    let summary_text = serde_json::to_string(&summary)?;
-    page.evaluate(format!(
-        "document.querySelector('{TASK_COMMENT_TEXTAREA_1}').value = {summary_text};"
-    ))
-    .await?;
 
     let project_list = store
         .get("preferences")
         .and_then(|v| v.get("project_list").and_then(|s| s.as_array().cloned()))
         .unwrap_or_default();
     if !project_list.is_empty() {
-        let project_list_js = serde_json::to_string(&project_list)?;
-        let default_project_js = serde_json::to_string(&default_project)?;
+        // Every value set on a row select must survive the filter, so the
+        // keep list is project_list + default_project + each entry's project.
+        let mut keep = project_list;
+        keep.extend(
+            default_project
+                .iter()
+                .chain(entries.iter().filter_map(|e| e.project.as_ref()))
+                .map(|p| serde_json::Value::String(p.clone())),
+        );
+        let keep_js = serde_json::to_string(&keep)?;
         page.evaluate(format!(
             "Array.from(document.querySelectorAll('select')).forEach((e) => {{
                 if (e.id.includes('task_project_id')) {{
                     e.querySelectorAll('option').forEach((o) => {{
-                        if (!{project_list_js}.includes(o.value)
-                            && o.value != ''
-                            && o.value != {default_project_js})
-                        {{
+                        if (!{keep_js}.includes(o.value) && o.value != '') {{
                             o.remove();
                         }}
                     }});

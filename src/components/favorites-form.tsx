@@ -10,6 +10,11 @@ import {
   DialogTrigger,
 } from "@/components/shared/dialog";
 import { Input } from "@/components/shared/input";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/shared/tooltip";
 import { useSaveFavoritesMutation } from "@/lib/mutations";
 import { useFavorites } from "@/lib/queries";
 
@@ -17,18 +22,30 @@ export default function FavoritesForm() {
   const { data: favorites } = useFavorites();
   const saveFavorites = useSaveFavoritesMutation();
   const [text, setText] = useState("");
+  const [projectKey, setProjectKey] = useState("");
   const [listRef] = useAutoAnimate();
 
   // The trimmed text is the favorite's identity, so adding is disabled for
-  // an empty result or an exact duplicate of an existing favorite.
+  // an empty result or an exact duplicate of an existing favorite. The
+  // project key is optional and not part of the identity — it can be a real
+  // Jira project key or any custom label, as long as it matches a Project
+  // mapping entry. Normalized to uppercase like the project_map keys so the
+  // date card's lookup can't miss on casing.
   const trimmed = text.trim();
-  const canAdd = Boolean(trimmed && favorites && !favorites.includes(trimmed));
+  const trimmedKey = projectKey.trim().toUpperCase();
+  const canAdd = Boolean(
+    trimmed && favorites && !favorites.some((f) => f.text === trimmed),
+  );
 
   function handleAdd(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!canAdd || !favorites) return;
-    saveFavorites.mutate([...favorites, trimmed]);
+    saveFavorites.mutate([
+      ...favorites,
+      { text: trimmed, project_key: trimmedKey || null },
+    ]);
     setText("");
+    setProjectKey("");
   }
 
   return (
@@ -50,14 +67,19 @@ export default function FavoritesForm() {
         {favorites?.length ? (
           <ul ref={listRef} className="flex flex-col gap-1">
             {favorites.map((favorite) => (
-              <li key={favorite} className="flex items-center gap-2">
-                <span className="flex-1 break-all">{favorite}</span>
+              <li key={favorite.text} className="flex items-center gap-2">
+                {favorite.project_key && (
+                  <span className="flex-none rounded bg-muted px-1.5 py-0.5 font-mono text-muted-foreground text-xs">
+                    {favorite.project_key}
+                  </span>
+                )}
+                <span className="flex-1 break-all">{favorite.text}</span>
                 <Button
                   size="icon"
                   variant="ghost"
                   onClick={() =>
                     saveFavorites.mutate(
-                      favorites.filter((f) => f !== favorite),
+                      favorites.filter((f) => f.text !== favorite.text),
                     )
                   }
                 >
@@ -75,6 +97,23 @@ export default function FavoritesForm() {
             onChange={(e) => setText(e.target.value)}
             placeholder="Add a favorite task"
           />
+          <Tooltip>
+            <TooltipTrigger
+              render={
+                <Input
+                  value={projectKey}
+                  onChange={(e) => setProjectKey(e.target.value)}
+                  placeholder="Project key"
+                  className="w-30 flex-none font-mono"
+                />
+              }
+            />
+            <TooltipContent>
+              Optional project key (a Jira key or any custom one) — a favorite
+              with a key follows the Project mapping preference into that
+              project's form row; without one it goes into the first row
+            </TooltipContent>
+          </Tooltip>
           <Button type="submit" disabled={!canAdd}>
             <PlusIcon />
           </Button>

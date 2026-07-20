@@ -140,10 +140,14 @@ Defined in [src-tauri/src/lib.rs](src-tauri/src/lib.rs), registered in
 
 - `get_task_parameters() -> TaskParameters` — headless scrape of form `<select>`
   options. Returns `{ dates, leaves, projects }`, each `Vec<SelectOption {label, value}>`.
-- `submit_task(date, summary)` — headed; navigates the form, sets the date select,
-  sets `default_project` and filters the project options to `project_list` (both
-  read from the `preferences` key in `store.json`), and fills the comment textarea
-  with `summary`. **Does not click submit** — the user does.
+- `submit_task(date, entries)` — headed; navigates the form and sets the date
+  select. `entries` is up to 3 `{ project, summary }` row pairs (built by
+  `DateCard` from the `project_map` preference, largest bucket first): row *n*
+  gets its project set on `task_project_id{n}` and its summary filled into
+  `task_comment{n}`. A `null` project on row 1 falls back to `default_project`
+  (read from the `preferences` key in `store.json`); the project options on
+  every row select are filtered to `project_list` + `default_project` + the
+  entries' projects. **Does not click submit** — the user does.
 - `close_browsers()` — tears down both browser instances (called after account save,
   so neither session keeps the old login, and by the ≥1h-away reset in
   `use-reset-when-away.ts`).
@@ -154,8 +158,9 @@ Defined in [src-tauri/src/lib.rs](src-tauri/src/lib.rs), registered in
   saving; the browser is killed after the check, pass or fail.
 
 Form field selectors on the portal (keep in sync if the portal changes):
-`select#task_date`, `select#task_leave`, `select#task_project_id1`,
-`textarea#task_comment1`.
+`select#task_date`, `select#task_leave`, and 3 project/comment row pairs
+`select#task_project_id1..3` / `textarea#task_comment1..3` (prefix constants
+in `lib.rs`, row number appended).
 
 ### Frontend structure
 
@@ -192,12 +197,19 @@ Form field selectors on the portal (keep in sync if the portal changes):
   are configured (covers fresh installs and stores saved before those fields
   existed).
 - [src/components/preferences-form.tsx](src/components/preferences-form.tsx) —
-  dialog with `DefaultProjectSelect`, `ProjectListSelect`,
+  dialog with `DefaultProjectSelect`, `ProjectListSelect`, `ProjectMapForm`,
   `DefaultTaskGroupsSelect`, and `ThemeToggle`.
+- [src/components/project-map-form.tsx](src/components/project-map-form.tsx) —
+  add/delete editor for the `project_map` preference (project key → portal
+  project, keys normalized to uppercase). "Project key" is the umbrella term:
+  a Jira issue-key prefix or a favorite's custom `project_key` tag. Rejects
+  duplicate keys and caps the map at 3 distinct portal projects — the form
+  has 3 row pairs.
 - [src/components/favorites-form.tsx](src/components/favorites-form.tsx) —
   star-icon dialog in the sidebar for the `favorites` list: add (rejects
-  duplicates and blank text) and delete only, saved immediately via
-  `useSaveFavoritesMutation`.
+  duplicate/blank text; an optional project key, normalized to
+  uppercase, tags the favorite for `project_map` routing) and delete only,
+  saved immediately via `useSaveFavoritesMutation`.
 - [src/components/date-list.tsx](src/components/date-list.tsx) — runs
   `useTaskParameters`, renders a `DateCard` per non-empty date, paginated 5 at a
   time with a "Load more" button.
@@ -212,8 +224,17 @@ Form field selectors on the portal (keep in sync if the portal changes):
   follow the *displayed* group. User toggles are kept as per-issue `overrides`
   on top of the defaults (only actually-changed issues are recorded). Selected
   favorites lead the `summaryText` as plain bullets, ahead of the Jira issues
-  (grouped by status), shown/copied/submitted via the submit (`Play`) button →
-  `useSubmitTaskMutation`.
+  (grouped by status), shown/copied via the preview. The submit (`Play`)
+  button → `useSubmitTaskMutation` sends `submitEntries` instead: the same
+  selection split into up to 3 form rows by the `project_map` preference
+  (an issue's project key = the part of `issue.key` before the `-`, a
+  favorite's = its `project_key` tag). Mapped tasks bucket by portal project
+  — favorites count toward bucket size — largest bucket first, each row's
+  favorites leading its comment as plain bullets; unmapped tasks always ride
+  in row 1's summary (issues merged into its status grouping); overflow
+  buckets past 3 (only possible via a hand-edited store) merge into row 3. No mapped bucket → one `{ project: null }` entry, which
+  the backend defaults — likewise when `autofill_summary` is off, since there
+  is no text to split.
 - [src/lib/queries.ts](src/lib/queries.ts) — react-query options/hooks.
   `taskParametersOptions` wraps the `get_task_parameters` command;
   `jiraTasksQueryOptions` calls the Jira REST API directly; `preferencesOptions`
@@ -234,8 +255,8 @@ Persisted via the Tauri store plugin under three keys:
 
 ```ts
 account:     { phone, email, api_token, portal_url, portal_credential }
-preferences: { default_project, project_list, default_task_groups, autofill_summary, auto_submit, auto_close }
-favorites:   string[]
+preferences: { default_project, project_list, project_map, default_task_groups, autofill_summary, auto_submit, auto_close }
+favorites:   { text, project_key }[]
 ```
 
 `phone` authenticates into the admin portal; `portal_url` (portal base URL,
@@ -245,11 +266,19 @@ are read by the Rust side. `email` + `api_token` authenticate to Jira.
 `default_project`/`project_list` and `auto_submit`/`auto_close` (both
 default `false`) are also read by the Rust side in `submit_task`;
 `default_task_groups` (which task groups start checked on a
-date card, default `["status"]`) and `autofill_summary` (whether submit passes
+date card, default `["status"]`), `autofill_summary` (whether submit passes
 the built summary or an empty string, default `true`; when `true`, Jira
-fetching also disables the submit button) are frontend-only. `favorites` — free-form favorite
-task texts, insertion-ordered, the text itself is the identity — is also
-frontend-only: unlike `preferences`, the Rust side never reads it. The **same
+fetching also disables the submit button), and `project_map` (project key →
+portal project option id, default `{}`, at most 3 distinct values —
+`DateCard` uses it to split the submission into per-project form rows) are
+frontend-only. `favorites` — free-form favorite
+tasks, insertion-ordered, the `text` is the identity; `project_key` is an
+optional project key (a Jira one or any custom label; null = none) that
+routes the favorite through `project_map` like a real issue — is also
+frontend-only: unlike
+`preferences`, the Rust side never reads it. Favorites saved before
+`project_key` existed are plain strings; `favoritesOptions` normalizes them
+to the object shape at read time. The **same
 `store.json` is read from both sides** — the frontend via `LazyStore`, the
 backend via `app.store("store.json")` — so field names must stay in sync
 between [src/lib/store.ts](src/lib/store.ts) and the Rust code. When adding a
@@ -351,10 +380,11 @@ in their own `[Created]` block, sorted alphabetically among the status blocks.
   last-resort fallback (its trigger — the `close_browsers` invoke rejecting —
   is nearly unreachable); verify this combination before relying on it
   anywhere else.
-- **`submit_task` builds JS by string interpolation.** `summary` is safely passed
-  through `serde_json::to_string`, but `date`/`project` are interpolated raw into
-  `evaluate(...)` — they come from the portal's own option values, so keep it that
-  way and don't feed untrusted strings into those paths.
+- **`submit_task` builds JS by string interpolation.** Entry summaries and
+  projects are safely passed through `serde_json::to_string`, but `date` is
+  interpolated raw into `evaluate(...)` — it comes from the portal's own
+  option values, so keep it that way and don't feed untrusted strings into
+  that path.
 - **Hardcoded values** live in `lib.rs`: the login/form selectors only. They are
   portal-specific; update them if the portal's markup changes. The portal base
   URL and Basic-auth credential are *not* compiled in — they are user-supplied
