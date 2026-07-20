@@ -1,0 +1,153 @@
+{
+  "nodes": [
+    {
+      "id": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_custom_portal_credentials_design",
+      "label": "Custom Portal Credentials Design",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-11-custom-portal-credentials-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_account_portal_fields",
+      "label": "Account Portal URL and Credential Fields",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/specs/2026-07-11-custom-portal-credentials-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_no_compiled_defaults",
+      "label": "No Compiled-In Portal Defaults",
+      "file_type": "rationale",
+      "source_file": "docs/superpowers/specs/2026-07-11-custom-portal-credentials-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_fail_fast_configuration",
+      "label": "Fail-Fast Portal Configuration Read",
+      "file_type": "rationale",
+      "source_file": "docs/superpowers/specs/2026-07-11-custom-portal-credentials-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_portal_store_helpers",
+      "label": "Portal Store-Reading Helpers",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/specs/2026-07-11-custom-portal-credentials-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_browser_session_reset",
+      "label": "Browser Session Reset on Account Save",
+      "file_type": "rationale",
+      "source_file": "docs/superpowers/specs/2026-07-11-custom-portal-credentials-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_custom_portal_credentials_design",
+      "target": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_account_portal_fields",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-11-custom-portal-credentials-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_custom_portal_credentials_design",
+      "target": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_no_compiled_defaults",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-11-custom-portal-credentials-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_custom_portal_credentials_design",
+      "target": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_fail_fast_configuration",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-11-custom-portal-credentials-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_custom_portal_credentials_design",
+      "target": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_portal_store_helpers",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-11-custom-portal-credentials-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_custom_portal_credentials_design",
+      "target": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_browser_session_reset",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-11-custom-portal-credentials-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_no_compiled_defaults",
+      "target": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_account_portal_fields",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-11-custom-portal-credentials-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_fail_fast_configuration",
+      "target": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_portal_store_helpers",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-11-custom-portal-credentials-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_browser_session_reset",
+      "target": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_account_portal_fields",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-11-custom-portal-credentials-design.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

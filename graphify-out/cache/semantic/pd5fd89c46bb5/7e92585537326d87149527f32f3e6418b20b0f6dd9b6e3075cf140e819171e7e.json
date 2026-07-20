@@ -1,0 +1,188 @@
+{
+  "nodes": [
+    {
+      "id": "_agents_skills_prototype_ui_ui_prototype",
+      "label": "UI Prototype",
+      "file_type": "document",
+      "source_file": ".agents/skills/prototype/UI.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_prototype_ui_radically_different_variants",
+      "label": "Radically Different UI Variants",
+      "file_type": "rationale",
+      "rationale": "Variants must disagree about structure, hierarchy, and primary affordance so comparison resolves a real design decision rather than cosmetic taste.",
+      "source_file": ".agents/skills/prototype/UI.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_prototype_ui_existing_page_sub_shape",
+      "label": "Existing Page Sub-Shape",
+      "file_type": "rationale",
+      "rationale": "Hosting variants inside a real page preserves authentic data, navigation, density, and constraints that expose design problems hidden by an isolated route.",
+      "source_file": ".agents/skills/prototype/UI.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_prototype_ui_new_page_sub_shape",
+      "label": "New Page Sub-Shape",
+      "file_type": "concept",
+      "source_file": ".agents/skills/prototype/UI.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_prototype_ui_variant_url_parameter",
+      "label": "Variant URL Parameter",
+      "file_type": "concept",
+      "source_file": ".agents/skills/prototype/UI.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_prototype_ui_prototype_switcher",
+      "label": "Prototype Switcher",
+      "file_type": "concept",
+      "source_file": ".agents/skills/prototype/UI.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_prototype_ui_production_gate",
+      "label": "Prototype Production Gate",
+      "file_type": "rationale",
+      "rationale": "Hiding the switcher in production prevents an accidentally merged prototype control from reaching users.",
+      "source_file": ".agents/skills/prototype/UI.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_prototype_ui_ui_winner_cleanup",
+      "label": "UI Winner Cleanup",
+      "file_type": "concept",
+      "source_file": ".agents/skills/prototype/UI.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "_agents_skills_prototype_ui_ui_prototype",
+      "target": "_agents_skills_prototype_ui_radically_different_variants",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/prototype/UI.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_prototype_ui_ui_prototype",
+      "target": "_agents_skills_prototype_ui_existing_page_sub_shape",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/prototype/UI.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_prototype_ui_ui_prototype",
+      "target": "_agents_skills_prototype_ui_new_page_sub_shape",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/prototype/UI.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_prototype_ui_existing_page_sub_shape",
+      "target": "_agents_skills_prototype_ui_new_page_sub_shape",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/prototype/UI.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_prototype_ui_radically_different_variants",
+      "target": "_agents_skills_prototype_ui_variant_url_parameter",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/prototype/UI.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_prototype_ui_prototype_switcher",
+      "target": "_agents_skills_prototype_ui_variant_url_parameter",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/prototype/UI.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_prototype_ui_prototype_switcher",
+      "target": "_agents_skills_prototype_ui_production_gate",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/prototype/UI.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_prototype_ui_ui_winner_cleanup",
+      "target": "_agents_skills_prototype_skill_prototype_answer_capture",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": ".agents/skills/prototype/UI.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_prototype_ui_variant_url_parameter",
+      "target": "_agents_skills_prototype_skill_state_visibility",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": ".agents/skills/prototype/UI.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

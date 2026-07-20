@@ -1,0 +1,245 @@
+{
+  "nodes": [
+    {
+      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_version_bump_script_design",
+      "label": "Version-Bump Script Design",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_bump_mode",
+      "label": "Version Bump Mode",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_tag_mode",
+      "label": "Release Tag Mode",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_clean_current_main_preconditions",
+      "label": "Clean Current Main Preconditions",
+      "file_type": "rationale",
+      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_tauri_config_version_source_of_truth",
+      "label": "tauri.conf.json Version Source of Truth",
+      "file_type": "rationale",
+      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_targeted_version_replacements",
+      "label": "Targeted Verified Version Replacements",
+      "file_type": "rationale",
+      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_cargo_lock_refresh",
+      "label": "Cargo.lock Refresh via cargo metadata",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_human_pr_gate",
+      "label": "Human PR Merge Gate",
+      "file_type": "rationale",
+      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "docs_superpowers_specs_2026_07_13_version_bump_script_design_version_bump_script_design",
+      "target": "docs_superpowers_specs_2026_07_13_version_bump_script_design_bump_mode",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_13_version_bump_script_design_version_bump_script_design",
+      "target": "docs_superpowers_specs_2026_07_13_version_bump_script_design_tag_mode",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_13_version_bump_script_design_version_bump_script_design",
+      "target": "docs_superpowers_specs_2026_07_13_version_bump_script_design_clean_current_main_preconditions",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_13_version_bump_script_design_version_bump_script_design",
+      "target": "docs_superpowers_specs_2026_07_13_version_bump_script_design_tauri_config_version_source_of_truth",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_13_version_bump_script_design_version_bump_script_design",
+      "target": "docs_superpowers_specs_2026_07_13_version_bump_script_design_targeted_version_replacements",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_13_version_bump_script_design_version_bump_script_design",
+      "target": "docs_superpowers_specs_2026_07_13_version_bump_script_design_cargo_lock_refresh",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_13_version_bump_script_design_version_bump_script_design",
+      "target": "docs_superpowers_specs_2026_07_13_version_bump_script_design_human_pr_gate",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_13_version_bump_script_design_clean_current_main_preconditions",
+      "target": "docs_superpowers_specs_2026_07_13_version_bump_script_design_bump_mode",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_13_version_bump_script_design_clean_current_main_preconditions",
+      "target": "docs_superpowers_specs_2026_07_13_version_bump_script_design_tag_mode",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_13_version_bump_script_design_targeted_version_replacements",
+      "target": "docs_superpowers_specs_2026_07_13_version_bump_script_design_bump_mode",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_13_version_bump_script_design_cargo_lock_refresh",
+      "target": "docs_superpowers_specs_2026_07_13_version_bump_script_design_bump_mode",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_13_version_bump_script_design_human_pr_gate",
+      "target": "docs_superpowers_specs_2026_07_13_version_bump_script_design_tag_mode",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_13_version_bump_script_design_tauri_config_version_source_of_truth",
+      "target": "_github_workflows_release_version_guard_job",
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_13_version_bump_script_design_tag_mode",
+      "target": "_github_workflows_release_release_workflow",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_13_version_bump_script_design_human_pr_gate",
+      "target": "docs_superpowers_specs_2026_07_12_cicd_design_draft_release_publish_gate",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

@@ -1,0 +1,185 @@
+{
+  "nodes": [
+    {
+      "id": "agents_skills_code_review_skill_code_review",
+      "label": "Code Review",
+      "file_type": "document",
+      "source_file": ".agents/skills/code-review/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_code_review_skill_two_axis_review",
+      "label": "Two-axis Review",
+      "file_type": "rationale",
+      "source_file": ".agents/skills/code-review/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_code_review_skill_fixed_point_diff",
+      "label": "Fixed-point Diff",
+      "file_type": "concept",
+      "source_file": ".agents/skills/code-review/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_code_review_skill_spec_source_discovery",
+      "label": "Spec Source Discovery",
+      "file_type": "concept",
+      "source_file": ".agents/skills/code-review/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_code_review_skill_standards_axis",
+      "label": "Standards Axis",
+      "file_type": "concept",
+      "source_file": ".agents/skills/code-review/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_code_review_skill_spec_axis",
+      "label": "Spec Axis",
+      "file_type": "concept",
+      "source_file": ".agents/skills/code-review/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_code_review_skill_fowler_smell_baseline",
+      "label": "Fowler Smell Baseline",
+      "file_type": "concept",
+      "source_file": ".agents/skills/code-review/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_code_review_skill_separate_axis_reporting",
+      "label": "Separate Axis Reporting",
+      "file_type": "rationale",
+      "source_file": ".agents/skills/code-review/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "agents_skills_code_review_skill_code_review",
+      "target": "agents_skills_code_review_skill_two_axis_review",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/code-review/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_code_review_skill_code_review",
+      "target": "agents_skills_code_review_skill_fixed_point_diff",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/code-review/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_code_review_skill_two_axis_review",
+      "target": "agents_skills_code_review_skill_standards_axis",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/code-review/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_code_review_skill_two_axis_review",
+      "target": "agents_skills_code_review_skill_spec_axis",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/code-review/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_code_review_skill_spec_axis",
+      "target": "agents_skills_code_review_skill_spec_source_discovery",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/code-review/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_code_review_skill_standards_axis",
+      "target": "agents_skills_code_review_skill_fowler_smell_baseline",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/code-review/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_code_review_skill_fixed_point_diff",
+      "target": "agents_skills_code_review_skill_two_axis_review",
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": ".agents/skills/code-review/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_code_review_skill_separate_axis_reporting",
+      "target": "agents_skills_code_review_skill_two_axis_review",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/code-review/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_code_review_skill_fixed_point_diff",
+      "target": "agents_skills_diagnosing_bugs_skill_red_capable_command",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.65,
+      "source_file": ".agents/skills/code-review/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

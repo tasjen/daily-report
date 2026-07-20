@@ -1,0 +1,193 @@
+{
+  "nodes": [
+    {
+      "id": "agents_skills_codebase_design_design_it_twice_design_it_twice",
+      "label": "Design It Twice",
+      "file_type": "document",
+      "source_file": ".agents/skills/codebase-design/DESIGN-IT-TWICE.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_codebase_design_design_it_twice_problem_space_framing",
+      "label": "Problem-space Framing",
+      "file_type": "concept",
+      "source_file": ".agents/skills/codebase-design/DESIGN-IT-TWICE.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_codebase_design_design_it_twice_parallel_interface_alternatives",
+      "label": "Parallel Interface Alternatives",
+      "file_type": "rationale",
+      "source_file": ".agents/skills/codebase-design/DESIGN-IT-TWICE.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_codebase_design_design_it_twice_minimal_interface_constraint",
+      "label": "Minimal Interface Constraint",
+      "file_type": "concept",
+      "source_file": ".agents/skills/codebase-design/DESIGN-IT-TWICE.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_codebase_design_design_it_twice_common_caller_constraint",
+      "label": "Common-caller Constraint",
+      "file_type": "concept",
+      "source_file": ".agents/skills/codebase-design/DESIGN-IT-TWICE.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_codebase_design_design_it_twice_design_comparison",
+      "label": "Design Comparison",
+      "file_type": "concept",
+      "source_file": ".agents/skills/codebase-design/DESIGN-IT-TWICE.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "agents_skills_codebase_design_design_it_twice_design_it_twice",
+      "target": "agents_skills_codebase_design_skill_codebase_design",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/codebase-design/DESIGN-IT-TWICE.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_codebase_design_design_it_twice_design_it_twice",
+      "target": "agents_skills_codebase_design_design_it_twice_problem_space_framing",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/codebase-design/DESIGN-IT-TWICE.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_codebase_design_design_it_twice_design_it_twice",
+      "target": "agents_skills_codebase_design_design_it_twice_parallel_interface_alternatives",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/codebase-design/DESIGN-IT-TWICE.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_codebase_design_design_it_twice_design_it_twice",
+      "target": "agents_skills_codebase_design_design_it_twice_design_comparison",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/codebase-design/DESIGN-IT-TWICE.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_codebase_design_design_it_twice_problem_space_framing",
+      "target": "agents_skills_codebase_design_deepening_dependency_classification",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/codebase-design/DESIGN-IT-TWICE.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_codebase_design_design_it_twice_parallel_interface_alternatives",
+      "target": "agents_skills_codebase_design_design_it_twice_minimal_interface_constraint",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/codebase-design/DESIGN-IT-TWICE.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_codebase_design_design_it_twice_parallel_interface_alternatives",
+      "target": "agents_skills_codebase_design_design_it_twice_common_caller_constraint",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/codebase-design/DESIGN-IT-TWICE.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_codebase_design_design_it_twice_minimal_interface_constraint",
+      "target": "agents_skills_codebase_design_skill_interface",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/codebase-design/DESIGN-IT-TWICE.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_codebase_design_design_it_twice_common_caller_constraint",
+      "target": "agents_skills_codebase_design_skill_interface",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/codebase-design/DESIGN-IT-TWICE.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_codebase_design_design_it_twice_design_comparison",
+      "target": "agents_skills_codebase_design_skill_depth",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/codebase-design/DESIGN-IT-TWICE.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_codebase_design_design_it_twice_design_comparison",
+      "target": "agents_skills_codebase_design_skill_locality",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/codebase-design/DESIGN-IT-TWICE.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_codebase_design_design_it_twice_design_comparison",
+      "target": "agents_skills_codebase_design_skill_seam",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/codebase-design/DESIGN-IT-TWICE.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

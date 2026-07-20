@@ -1,0 +1,184 @@
+{
+  "nodes": [
+    {
+      "id": "agents_skills_domain_modeling_skill_domain_modeling",
+      "label": "Domain Modeling",
+      "file_type": "document",
+      "source_file": ".agents/skills/domain-modeling/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_domain_modeling_skill_glossary_challenge",
+      "label": "Glossary Challenge",
+      "file_type": "concept",
+      "source_file": ".agents/skills/domain-modeling/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_domain_modeling_skill_fuzzy_term_sharpening",
+      "label": "Fuzzy-term Sharpening",
+      "file_type": "concept",
+      "source_file": ".agents/skills/domain-modeling/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_domain_modeling_skill_concrete_scenario_testing",
+      "label": "Concrete Scenario Testing",
+      "file_type": "concept",
+      "source_file": ".agents/skills/domain-modeling/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_domain_modeling_skill_code_model_cross_check",
+      "label": "Code-model Cross-check",
+      "file_type": "concept",
+      "source_file": ".agents/skills/domain-modeling/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_domain_modeling_skill_inline_context_update",
+      "label": "Inline Context Update",
+      "file_type": "rationale",
+      "source_file": ".agents/skills/domain-modeling/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_domain_modeling_skill_sparse_adr_offering",
+      "label": "Sparse ADR Offering",
+      "file_type": "rationale",
+      "source_file": ".agents/skills/domain-modeling/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "agents_skills_domain_modeling_skill_domain_modeling",
+      "target": "agents_skills_domain_modeling_context_format_context_format",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/domain-modeling/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_domain_modeling_skill_domain_modeling",
+      "target": "agents_skills_domain_modeling_adr_format_adr_format",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/domain-modeling/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_domain_modeling_skill_domain_modeling",
+      "target": "agents_skills_domain_modeling_skill_glossary_challenge",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/domain-modeling/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_domain_modeling_skill_domain_modeling",
+      "target": "agents_skills_domain_modeling_skill_fuzzy_term_sharpening",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/domain-modeling/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_domain_modeling_skill_domain_modeling",
+      "target": "agents_skills_domain_modeling_skill_concrete_scenario_testing",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/domain-modeling/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_domain_modeling_skill_domain_modeling",
+      "target": "agents_skills_domain_modeling_skill_code_model_cross_check",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/domain-modeling/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_domain_modeling_skill_glossary_challenge",
+      "target": "agents_skills_domain_modeling_context_format_canonical_domain_language",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/domain-modeling/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_domain_modeling_skill_fuzzy_term_sharpening",
+      "target": "agents_skills_domain_modeling_skill_glossary_challenge",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/domain-modeling/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_domain_modeling_skill_inline_context_update",
+      "target": "agents_skills_domain_modeling_context_format_context_format",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/domain-modeling/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_domain_modeling_skill_sparse_adr_offering",
+      "target": "agents_skills_domain_modeling_adr_format_adr_eligibility_test",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/domain-modeling/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

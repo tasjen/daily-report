@@ -1,0 +1,214 @@
+{
+  "nodes": [
+    {
+      "id": "agents_skills_ask_matt_skill_ask_matt",
+      "label": "Ask Matt",
+      "file_type": "document",
+      "source_file": ".agents/skills/ask-matt/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_ask_matt_skill_main_flow",
+      "label": "Idea-to-Ship Main Flow",
+      "file_type": "concept",
+      "source_file": ".agents/skills/ask-matt/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_ask_matt_skill_prototype_detour",
+      "label": "Prototype Detour",
+      "file_type": "concept",
+      "source_file": ".agents/skills/ask-matt/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_ask_matt_skill_multi_session_issue_flow",
+      "label": "Multi-session Issue Flow",
+      "file_type": "concept",
+      "source_file": ".agents/skills/ask-matt/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_ask_matt_skill_triage_and_diagnosis_on_ramps",
+      "label": "Triage and Diagnosis On-ramps",
+      "file_type": "concept",
+      "source_file": ".agents/skills/ask-matt/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_ask_matt_skill_context_hygiene",
+      "label": "Context Hygiene",
+      "file_type": "rationale",
+      "source_file": ".agents/skills/ask-matt/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_ask_matt_skill_architecture_health_loop",
+      "label": "Architecture Health Loop",
+      "file_type": "concept",
+      "source_file": ".agents/skills/ask-matt/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "agents_skills_ask_matt_skill_ask_matt",
+      "target": "agents_skills_ask_matt_skill_main_flow",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/ask-matt/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_ask_matt_skill_ask_matt",
+      "target": "agents_skills_ask_matt_skill_prototype_detour",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/ask-matt/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_ask_matt_skill_ask_matt",
+      "target": "agents_skills_ask_matt_skill_multi_session_issue_flow",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/ask-matt/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_ask_matt_skill_ask_matt",
+      "target": "agents_skills_ask_matt_skill_triage_and_diagnosis_on_ramps",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/ask-matt/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_ask_matt_skill_ask_matt",
+      "target": "agents_skills_ask_matt_skill_architecture_health_loop",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/ask-matt/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_ask_matt_skill_main_flow",
+      "target": "agents_skills_grill_with_docs_skill_grill_with_docs",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/ask-matt/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_ask_matt_skill_main_flow",
+      "target": "agents_skills_implement_skill_implementation_flow",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/ask-matt/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_ask_matt_skill_main_flow",
+      "target": "agents_skills_handoff_skill_handoff",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/ask-matt/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_ask_matt_skill_prototype_detour",
+      "target": "agents_skills_handoff_skill_handoff",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/ask-matt/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_ask_matt_skill_multi_session_issue_flow",
+      "target": "agents_skills_implement_skill_implementation_flow",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/ask-matt/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_ask_matt_skill_triage_and_diagnosis_on_ramps",
+      "target": "agents_skills_diagnosing_bugs_skill_diagnosing_bugs",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/ask-matt/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_ask_matt_skill_context_hygiene",
+      "target": "agents_skills_handoff_skill_handoff",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/ask-matt/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_ask_matt_skill_architecture_health_loop",
+      "target": "agents_skills_codebase_design_skill_codebase_design",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/ask-matt/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

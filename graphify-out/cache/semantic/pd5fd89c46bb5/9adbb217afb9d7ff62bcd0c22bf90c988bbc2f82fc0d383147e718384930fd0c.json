@@ -1,0 +1,103 @@
+{
+  "nodes": [
+    {
+      "id": "_agents_skills_tdd_tests_good_and_bad_tests",
+      "label": "Good and Bad Tests",
+      "file_type": "document",
+      "source_file": ".agents/skills/tdd/tests.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_tdd_tests_integration_style_behavior_test",
+      "label": "Integration-Style Behavior Test",
+      "file_type": "concept",
+      "source_file": ".agents/skills/tdd/tests.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_tdd_tests_interface_based_verification",
+      "label": "Interface-Based Verification",
+      "file_type": "rationale",
+      "rationale": "Observing results through the same public interface callers use avoids coupling assertions to database or internal side channels.",
+      "source_file": ".agents/skills/tdd/tests.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_tdd_tests_independent_expected_value",
+      "label": "Independent Expected Value",
+      "file_type": "rationale",
+      "rationale": "Expected values must come from a known literal, worked example, or specification rather than recomputing the implementation.",
+      "source_file": ".agents/skills/tdd/tests.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "_agents_skills_tdd_tests_good_and_bad_tests",
+      "target": "_agents_skills_tdd_tests_integration_style_behavior_test",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/tdd/tests.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_tdd_tests_integration_style_behavior_test",
+      "target": "_agents_skills_tdd_tests_interface_based_verification",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/tdd/tests.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_tdd_tests_good_and_bad_tests",
+      "target": "_agents_skills_tdd_tests_independent_expected_value",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/tdd/tests.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_tdd_tests_interface_based_verification",
+      "target": "_agents_skills_tdd_skill_behavior_through_public_interfaces",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": ".agents/skills/tdd/tests.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_tdd_tests_independent_expected_value",
+      "target": "_agents_skills_tdd_skill_tautological_test",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": ".agents/skills/tdd/tests.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

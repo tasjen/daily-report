@@ -1,0 +1,184 @@
+{
+  "nodes": [
+    {
+      "id": "_agents_skills_triage_skill_triage_state_machine",
+      "label": "Triage State Machine",
+      "file_type": "document",
+      "source_file": ".agents/skills/triage/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_triage_skill_category_roles",
+      "label": "Bug and Enhancement Category Roles",
+      "file_type": "concept",
+      "source_file": ".agents/skills/triage/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_triage_skill_state_roles",
+      "label": "Triage State Roles",
+      "file_type": "concept",
+      "source_file": ".agents/skills/triage/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_triage_skill_claim_verification",
+      "label": "Claim Verification Before Grilling",
+      "file_type": "concept",
+      "source_file": ".agents/skills/triage/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_triage_skill_redundancy_and_prior_rejection_checks",
+      "label": "Redundancy and Prior-Rejection Checks",
+      "file_type": "concept",
+      "source_file": ".agents/skills/triage/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_triage_skill_grilling_flow",
+      "label": "Grilling and Domain-Modeling Flow",
+      "file_type": "concept",
+      "source_file": ".agents/skills/triage/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_triage_skill_ready_for_agent_transition",
+      "label": "Ready-for-Agent Transition",
+      "file_type": "concept",
+      "source_file": ".agents/skills/triage/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "_agents_skills_triage_skill_triage_state_machine",
+      "target": "_agents_skills_triage_skill_category_roles",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/triage/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_triage_skill_triage_state_machine",
+      "target": "_agents_skills_triage_skill_state_roles",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/triage/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_triage_skill_triage_state_machine",
+      "target": "_agents_skills_triage_skill_claim_verification",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/triage/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_triage_skill_triage_state_machine",
+      "target": "_agents_skills_triage_skill_redundancy_and_prior_rejection_checks",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/triage/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_triage_skill_triage_state_machine",
+      "target": "_agents_skills_triage_skill_grilling_flow",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/triage/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_triage_skill_triage_state_machine",
+      "target": "_agents_skills_triage_skill_ready_for_agent_transition",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/triage/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_triage_skill_triage_state_machine",
+      "target": "_agents_skills_triage_agent_brief_agent_brief",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/triage/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_triage_skill_triage_state_machine",
+      "target": "_agents_skills_triage_out_of_scope_out_of_scope_knowledge_base",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/triage/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_triage_skill_ready_for_agent_transition",
+      "target": "_agents_skills_triage_agent_brief_agent_brief",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/triage/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_triage_skill_redundancy_and_prior_rejection_checks",
+      "target": "_agents_skills_triage_out_of_scope_out_of_scope_knowledge_base",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/triage/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

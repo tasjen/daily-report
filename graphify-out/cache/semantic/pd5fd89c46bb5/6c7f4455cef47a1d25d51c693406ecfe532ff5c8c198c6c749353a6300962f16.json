@@ -1,0 +1,81 @@
+{
+  "nodes": [
+    {
+      "id": "agents_skills_handoff_skill_handoff",
+      "label": "Handoff",
+      "file_type": "document",
+      "source_file": ".agents/skills/handoff/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_handoff_skill_temporary_handoff_document",
+      "label": "Temporary Handoff Document",
+      "file_type": "concept",
+      "source_file": ".agents/skills/handoff/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_handoff_skill_artifact_referencing",
+      "label": "Artifact Referencing",
+      "file_type": "rationale",
+      "source_file": ".agents/skills/handoff/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_handoff_skill_sensitive_data_redaction",
+      "label": "Sensitive Data Redaction",
+      "file_type": "rationale",
+      "source_file": ".agents/skills/handoff/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "agents_skills_handoff_skill_handoff",
+      "target": "agents_skills_handoff_skill_temporary_handoff_document",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/handoff/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_handoff_skill_artifact_referencing",
+      "target": "agents_skills_handoff_skill_temporary_handoff_document",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/handoff/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_handoff_skill_sensitive_data_redaction",
+      "target": "agents_skills_handoff_skill_temporary_handoff_document",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/handoff/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

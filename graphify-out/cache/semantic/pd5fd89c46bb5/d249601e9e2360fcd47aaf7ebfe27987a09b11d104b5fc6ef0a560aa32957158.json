@@ -1,0 +1,231 @@
+{
+  "nodes": [
+    {
+      "id": "_agents_skills_setup_matt_pocock_skills_skill_setup_matt_pocock_skills",
+      "label": "Setup Matt Pocock Skills",
+      "file_type": "document",
+      "source_file": ".agents/skills/setup-matt-pocock-skills/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_setup_matt_pocock_skills_skill_engineering_skills_configuration",
+      "label": "Engineering Skills Configuration",
+      "file_type": "concept",
+      "source_file": ".agents/skills/setup-matt-pocock-skills/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_setup_matt_pocock_skills_skill_issue_tracker_decision",
+      "label": "Issue Tracker Decision",
+      "file_type": "concept",
+      "source_file": ".agents/skills/setup-matt-pocock-skills/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_setup_matt_pocock_skills_skill_pr_request_surface",
+      "label": "Pull Requests as a Request Surface",
+      "file_type": "rationale",
+      "rationale": "External pull or merge requests can enter triage as feature requests, while collaborators' in-flight work should remain outside that queue.",
+      "source_file": ".agents/skills/setup-matt-pocock-skills/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_setup_matt_pocock_skills_skill_triage_label_vocabulary",
+      "label": "Triage Label Vocabulary",
+      "file_type": "concept",
+      "source_file": ".agents/skills/setup-matt-pocock-skills/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_setup_matt_pocock_skills_skill_domain_docs_layout",
+      "label": "Domain Docs Layout Decision",
+      "file_type": "concept",
+      "source_file": ".agents/skills/setup-matt-pocock-skills/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_setup_matt_pocock_skills_skill_agent_skills_block",
+      "label": "Agent Skills Configuration Block",
+      "file_type": "concept",
+      "source_file": ".agents/skills/setup-matt-pocock-skills/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_setup_matt_pocock_skills_skill_prompt_driven_setup",
+      "label": "Prompt-Driven Setup",
+      "file_type": "rationale",
+      "rationale": "The setup explores existing conventions, explains each decision, and confirms a draft before writing so repository-specific choices are not guessed.",
+      "source_file": ".agents/skills/setup-matt-pocock-skills/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "_agents_skills_setup_matt_pocock_skills_skill_setup_matt_pocock_skills",
+      "target": "_agents_skills_setup_matt_pocock_skills_skill_engineering_skills_configuration",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/setup-matt-pocock-skills/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_setup_matt_pocock_skills_skill_engineering_skills_configuration",
+      "target": "_agents_skills_setup_matt_pocock_skills_skill_issue_tracker_decision",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/setup-matt-pocock-skills/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_setup_matt_pocock_skills_skill_engineering_skills_configuration",
+      "target": "_agents_skills_setup_matt_pocock_skills_skill_triage_label_vocabulary",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/setup-matt-pocock-skills/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_setup_matt_pocock_skills_skill_engineering_skills_configuration",
+      "target": "_agents_skills_setup_matt_pocock_skills_skill_domain_docs_layout",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/setup-matt-pocock-skills/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_setup_matt_pocock_skills_skill_issue_tracker_decision",
+      "target": "_agents_skills_setup_matt_pocock_skills_skill_pr_request_surface",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/setup-matt-pocock-skills/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_setup_matt_pocock_skills_skill_engineering_skills_configuration",
+      "target": "_agents_skills_setup_matt_pocock_skills_skill_agent_skills_block",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/setup-matt-pocock-skills/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_setup_matt_pocock_skills_skill_prompt_driven_setup",
+      "target": "_agents_skills_setup_matt_pocock_skills_skill_engineering_skills_configuration",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/setup-matt-pocock-skills/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_setup_matt_pocock_skills_skill_issue_tracker_decision",
+      "target": "_agents_skills_setup_matt_pocock_skills_issue_tracker_github_github_issue_tracker",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/setup-matt-pocock-skills/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_setup_matt_pocock_skills_skill_issue_tracker_decision",
+      "target": "_agents_skills_setup_matt_pocock_skills_issue_tracker_gitlab_gitlab_issue_tracker",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/setup-matt-pocock-skills/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_setup_matt_pocock_skills_skill_issue_tracker_decision",
+      "target": "_agents_skills_setup_matt_pocock_skills_issue_tracker_local_local_markdown_issue_tracker",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/setup-matt-pocock-skills/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_setup_matt_pocock_skills_skill_triage_label_vocabulary",
+      "target": "_agents_skills_setup_matt_pocock_skills_triage_labels_triage_label_mapping",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/setup-matt-pocock-skills/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_setup_matt_pocock_skills_skill_domain_docs_layout",
+      "target": "_agents_skills_setup_matt_pocock_skills_domain_domain_docs",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/setup-matt-pocock-skills/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "setup_issue_tracker_implementations",
+      "label": "Supported Issue Tracker Implementations",
+      "nodes": [
+        "_agents_skills_setup_matt_pocock_skills_issue_tracker_github_github_issue_tracker",
+        "_agents_skills_setup_matt_pocock_skills_issue_tracker_gitlab_gitlab_issue_tracker",
+        "_agents_skills_setup_matt_pocock_skills_issue_tracker_local_local_markdown_issue_tracker"
+      ],
+      "relation": "implement",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/setup-matt-pocock-skills/SKILL.md"
+    }
+  ]
+}

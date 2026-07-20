@@ -1,0 +1,145 @@
+{
+  "nodes": [
+    {
+      "id": "_agents_skills_prototype_skill_prototype",
+      "label": "Prototype",
+      "file_type": "document",
+      "source_file": ".agents/skills/prototype/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_prototype_skill_throwaway_prototype",
+      "label": "Throwaway Prototype",
+      "file_type": "rationale",
+      "rationale": "A prototype exists to answer one design question quickly; only the validated answer should survive.",
+      "source_file": ".agents/skills/prototype/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_prototype_skill_logic_branch",
+      "label": "Logic Prototype Branch",
+      "file_type": "concept",
+      "source_file": ".agents/skills/prototype/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_prototype_skill_ui_branch",
+      "label": "UI Prototype Branch",
+      "file_type": "concept",
+      "source_file": ".agents/skills/prototype/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_prototype_skill_state_visibility",
+      "label": "Prototype State Visibility",
+      "file_type": "rationale",
+      "rationale": "Rendering the complete relevant state after every action or variant switch makes mistaken assumptions observable.",
+      "source_file": ".agents/skills/prototype/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_prototype_skill_prototype_answer_capture",
+      "label": "Prototype Answer Capture",
+      "file_type": "concept",
+      "source_file": ".agents/skills/prototype/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "_agents_skills_prototype_skill_prototype",
+      "target": "_agents_skills_prototype_skill_throwaway_prototype",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/prototype/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_prototype_skill_prototype",
+      "target": "_agents_skills_prototype_skill_logic_branch",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/prototype/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_prototype_skill_prototype",
+      "target": "_agents_skills_prototype_skill_ui_branch",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/prototype/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_prototype_skill_throwaway_prototype",
+      "target": "_agents_skills_prototype_skill_prototype_answer_capture",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/prototype/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_prototype_skill_prototype",
+      "target": "_agents_skills_prototype_skill_state_visibility",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/prototype/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_prototype_skill_logic_branch",
+      "target": "_agents_skills_prototype_logic_logic_prototype",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/prototype/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_prototype_skill_ui_branch",
+      "target": "_agents_skills_prototype_ui_ui_prototype",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/prototype/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

@@ -1,0 +1,112 @@
+{
+  "nodes": [
+    {
+      "id": "_github_workflows_release_release_workflow",
+      "label": "Release Workflow",
+      "file_type": "code",
+      "source_file": ".github/workflows/release.yml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_github_workflows_release_version_guard_job",
+      "label": "Release Version Guard Job",
+      "file_type": "code",
+      "source_file": ".github/workflows/release.yml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_github_workflows_release_cross_platform_build_matrix",
+      "label": "macOS and Windows Build Matrix",
+      "file_type": "code",
+      "source_file": ".github/workflows/release.yml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_github_workflows_release_updater_artifact_signing",
+      "label": "Updater Artifact Signing",
+      "file_type": "code",
+      "source_file": ".github/workflows/release.yml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_github_workflows_release_draft_github_release",
+      "label": "Draft GitHub Release",
+      "file_type": "code",
+      "source_file": ".github/workflows/release.yml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "_github_workflows_release_release_workflow",
+      "target": "_github_workflows_release_version_guard_job",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".github/workflows/release.yml",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_github_workflows_release_release_workflow",
+      "target": "_github_workflows_release_cross_platform_build_matrix",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".github/workflows/release.yml",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_github_workflows_release_cross_platform_build_matrix",
+      "target": "_github_workflows_release_version_guard_job",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".github/workflows/release.yml",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_github_workflows_release_cross_platform_build_matrix",
+      "target": "_github_workflows_release_updater_artifact_signing",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".github/workflows/release.yml",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_github_workflows_release_release_workflow",
+      "target": "_github_workflows_release_draft_github_release",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".github/workflows/release.yml",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

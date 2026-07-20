@@ -1,0 +1,105 @@
+{
+  "nodes": [
+    {
+      "id": "_agents_skills_teach_learning_record_format_learning_record_format",
+      "label": "Learning Record Format",
+      "file_type": "document",
+      "source_file": ".agents/skills/teach/LEARNING-RECORD-FORMAT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_teach_learning_record_format_decision_grade_learning_record",
+      "label": "Decision-Grade Learning Record",
+      "file_type": "rationale",
+      "rationale": "Learning records preserve non-obvious lessons and prior knowledge that change what future sessions should teach, rather than logging session activity.",
+      "source_file": ".agents/skills/teach/LEARNING-RECORD-FORMAT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_teach_learning_record_format_evidence_of_learning",
+      "label": "Evidence of Learning",
+      "file_type": "rationale",
+      "rationale": "Demonstrated understanding, disclosed prior depth, corrected misconceptions, or a mission shift are evidence strong enough to set a new teaching baseline.",
+      "source_file": ".agents/skills/teach/LEARNING-RECORD-FORMAT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_teach_learning_record_format_learning_record_supersession",
+      "label": "Learning Record Supersession",
+      "file_type": "rationale",
+      "rationale": "Contradicted understanding is marked superseded rather than deleted so the evolution of the learner's mental model remains visible.",
+      "source_file": ".agents/skills/teach/LEARNING-RECORD-FORMAT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_teach_learning_record_format_zone_of_proximal_development_input",
+      "label": "Zone of Proximal Development Input",
+      "file_type": "concept",
+      "source_file": ".agents/skills/teach/LEARNING-RECORD-FORMAT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "_agents_skills_teach_learning_record_format_learning_record_format",
+      "target": "_agents_skills_teach_learning_record_format_decision_grade_learning_record",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/teach/LEARNING-RECORD-FORMAT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_teach_learning_record_format_evidence_of_learning",
+      "target": "_agents_skills_teach_learning_record_format_decision_grade_learning_record",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/teach/LEARNING-RECORD-FORMAT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_teach_learning_record_format_decision_grade_learning_record",
+      "target": "_agents_skills_teach_learning_record_format_zone_of_proximal_development_input",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/teach/LEARNING-RECORD-FORMAT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_teach_learning_record_format_learning_record_supersession",
+      "target": "_agents_skills_teach_learning_record_format_decision_grade_learning_record",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/teach/LEARNING-RECORD-FORMAT.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

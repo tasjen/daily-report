@@ -1,0 +1,91 @@
+{
+  "nodes": [
+    {
+      "id": "agents_skills_domain_modeling_context_format_context_format",
+      "label": "CONTEXT.md Format",
+      "file_type": "document",
+      "source_file": ".agents/skills/domain-modeling/CONTEXT-FORMAT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_domain_modeling_context_format_canonical_domain_language",
+      "label": "Canonical Domain Language",
+      "file_type": "rationale",
+      "source_file": ".agents/skills/domain-modeling/CONTEXT-FORMAT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_domain_modeling_context_format_single_context_layout",
+      "label": "Single-context Layout",
+      "file_type": "concept",
+      "source_file": ".agents/skills/domain-modeling/CONTEXT-FORMAT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_domain_modeling_context_format_context_map",
+      "label": "Multi-context Map",
+      "file_type": "concept",
+      "source_file": ".agents/skills/domain-modeling/CONTEXT-FORMAT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "agents_skills_domain_modeling_context_format_context_format",
+      "target": "agents_skills_domain_modeling_context_format_canonical_domain_language",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/domain-modeling/CONTEXT-FORMAT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_domain_modeling_context_format_context_format",
+      "target": "agents_skills_domain_modeling_context_format_single_context_layout",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/domain-modeling/CONTEXT-FORMAT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_domain_modeling_context_format_context_format",
+      "target": "agents_skills_domain_modeling_context_format_context_map",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/domain-modeling/CONTEXT-FORMAT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_domain_modeling_context_format_canonical_domain_language",
+      "target": "agents_skills_improve_codebase_architecture_html_report_vocabulary_compliance",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": ".agents/skills/domain-modeling/CONTEXT-FORMAT.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

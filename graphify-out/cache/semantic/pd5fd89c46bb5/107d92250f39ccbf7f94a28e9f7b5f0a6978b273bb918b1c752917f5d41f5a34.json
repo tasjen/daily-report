@@ -1,0 +1,17 @@
+{
+  "nodes": [
+    {
+      "id": "src_tauri_icons_ios_appicon_40x40_2x_1_daily_report_ios_app_icon",
+      "label": "Daily Report iOS App Icon 40pt 2x Variant",
+      "file_type": "image",
+      "source_file": "src-tauri/icons/ios/AppIcon-40x40@2x-1.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [],
+  "hyperedges": []
+}

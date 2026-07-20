@@ -1,0 +1,17 @@
+{
+  "nodes": [
+    {
+      "id": "src_tauri_icons_ios_appicon_76x76_1x_daily_report_ipad_app_icon",
+      "label": "Daily Report iPad App Icon 76pt 1x",
+      "file_type": "image",
+      "source_file": "src-tauri/icons/ios/AppIcon-76x76@1x.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [],
+  "hyperedges": []
+}

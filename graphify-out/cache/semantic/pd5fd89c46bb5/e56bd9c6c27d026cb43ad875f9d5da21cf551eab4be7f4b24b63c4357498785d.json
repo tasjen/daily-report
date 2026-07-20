@@ -1,0 +1,198 @@
+{
+  "nodes": [
+    {
+      "id": "_agents_skills_tdd_skill_test_driven_development",
+      "label": "Test-Driven Development",
+      "file_type": "document",
+      "source_file": ".agents/skills/tdd/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_tdd_skill_red_green_loop",
+      "label": "Red-Green Loop",
+      "file_type": "concept",
+      "source_file": ".agents/skills/tdd/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_tdd_skill_behavior_through_public_interfaces",
+      "label": "Behavior Through Public Interfaces",
+      "file_type": "rationale",
+      "rationale": "Tests should specify observable capability and survive internal refactoring by avoiding implementation details.",
+      "source_file": ".agents/skills/tdd/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_tdd_skill_pre_agreed_test_seams",
+      "label": "Pre-Agreed Test Seams",
+      "file_type": "rationale",
+      "rationale": "Confirming public seams before testing concentrates effort on critical paths and complex logic instead of every internal edge case.",
+      "source_file": ".agents/skills/tdd/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_tdd_skill_implementation_coupled_test",
+      "label": "Implementation-Coupled Test",
+      "file_type": "concept",
+      "source_file": ".agents/skills/tdd/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_tdd_skill_tautological_test",
+      "label": "Tautological Test",
+      "file_type": "concept",
+      "source_file": ".agents/skills/tdd/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_tdd_skill_horizontal_slicing",
+      "label": "Horizontal Slicing",
+      "file_type": "concept",
+      "source_file": ".agents/skills/tdd/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_tdd_skill_vertical_slice_tdd",
+      "label": "Vertical Slice TDD",
+      "file_type": "rationale",
+      "rationale": "One test and one minimal implementation per cycle lets each tracer bullet respond to what the prior cycle revealed.",
+      "source_file": ".agents/skills/tdd/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "_agents_skills_tdd_skill_test_driven_development",
+      "target": "_agents_skills_tdd_skill_red_green_loop",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/tdd/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_tdd_skill_test_driven_development",
+      "target": "_agents_skills_tdd_skill_behavior_through_public_interfaces",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/tdd/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_tdd_skill_test_driven_development",
+      "target": "_agents_skills_tdd_skill_pre_agreed_test_seams",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/tdd/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_tdd_skill_test_driven_development",
+      "target": "_agents_skills_tdd_skill_implementation_coupled_test",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/tdd/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_tdd_skill_test_driven_development",
+      "target": "_agents_skills_tdd_skill_tautological_test",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/tdd/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_tdd_skill_test_driven_development",
+      "target": "_agents_skills_tdd_skill_horizontal_slicing",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/tdd/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_tdd_skill_red_green_loop",
+      "target": "_agents_skills_tdd_skill_vertical_slice_tdd",
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/tdd/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_tdd_skill_test_driven_development",
+      "target": "_agents_skills_tdd_mocking_system_boundary_mocking",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/tdd/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_tdd_skill_test_driven_development",
+      "target": "_agents_skills_tdd_tests_good_and_bad_tests",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/tdd/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_tdd_skill_pre_agreed_test_seams",
+      "target": "_agents_skills_improve_codebase_architecture_skill_deep_module_design_vocabulary",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": ".agents/skills/tdd/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

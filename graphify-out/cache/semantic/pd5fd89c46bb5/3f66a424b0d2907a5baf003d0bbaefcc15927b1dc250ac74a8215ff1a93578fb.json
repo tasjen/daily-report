@@ -1,0 +1,17 @@
+{
+  "nodes": [
+    {
+      "id": "src_tauri_icons_square107x107logo_daily_report_app_icon",
+      "label": "Daily Report App Icon",
+      "file_type": "image",
+      "source_file": "src-tauri/icons/Square107x107Logo.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [],
+  "hyperedges": []
+}

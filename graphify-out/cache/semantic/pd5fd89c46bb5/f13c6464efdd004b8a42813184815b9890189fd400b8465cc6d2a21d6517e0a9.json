@@ -1,0 +1,283 @@
+{
+  "nodes": [
+    {
+      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_account_verification_design",
+      "label": "Account Verification Design",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_candidate_portal_verification",
+      "label": "Candidate-Only Portal Verification Command",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_shared_portal_login_helper",
+      "label": "Shared Portal Login Helper",
+      "file_type": "rationale",
+      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_verification_browser_isolation",
+      "label": "Throwaway Verification Browser Isolation",
+      "file_type": "rationale",
+      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_exit_cleanup_invariant",
+      "label": "Verification Browser Exit-Cleanup Invariant",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_jira_credentials_check",
+      "label": "Jira Credentials Check",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_parallel_account_verification",
+      "label": "Parallel Account Verification",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_verify_account_error",
+      "label": "Labeled VerifyAccountError",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_save_anyway_escape_hatch",
+      "label": "Save Anyway Escape Hatch",
+      "file_type": "rationale",
+      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_verification_error_lifecycle",
+      "label": "Verification Error-State Lifecycle",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "docs_superpowers_specs_2026_07_12_account_verification_design_account_verification_design",
+      "target": "docs_superpowers_specs_2026_07_12_account_verification_design_candidate_portal_verification",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_12_account_verification_design_account_verification_design",
+      "target": "docs_superpowers_specs_2026_07_12_account_verification_design_shared_portal_login_helper",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_12_account_verification_design_account_verification_design",
+      "target": "docs_superpowers_specs_2026_07_12_account_verification_design_verification_browser_isolation",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_12_account_verification_design_account_verification_design",
+      "target": "docs_superpowers_specs_2026_07_12_account_verification_design_jira_credentials_check",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_12_account_verification_design_account_verification_design",
+      "target": "docs_superpowers_specs_2026_07_12_account_verification_design_parallel_account_verification",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_12_account_verification_design_account_verification_design",
+      "target": "docs_superpowers_specs_2026_07_12_account_verification_design_save_anyway_escape_hatch",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_12_account_verification_design_candidate_portal_verification",
+      "target": "docs_superpowers_specs_2026_07_12_account_verification_design_shared_portal_login_helper",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_12_account_verification_design_verification_browser_isolation",
+      "target": "docs_superpowers_specs_2026_07_12_account_verification_design_exit_cleanup_invariant",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_12_account_verification_design_parallel_account_verification",
+      "target": "docs_superpowers_specs_2026_07_12_account_verification_design_candidate_portal_verification",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_12_account_verification_design_parallel_account_verification",
+      "target": "docs_superpowers_specs_2026_07_12_account_verification_design_jira_credentials_check",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_12_account_verification_design_parallel_account_verification",
+      "target": "docs_superpowers_specs_2026_07_12_account_verification_design_verify_account_error",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_12_account_verification_design_save_anyway_escape_hatch",
+      "target": "docs_superpowers_specs_2026_07_12_account_verification_design_verify_account_error",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_12_account_verification_design_verification_error_lifecycle",
+      "target": "docs_superpowers_specs_2026_07_12_account_verification_design_verify_account_error",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_12_account_verification_design_candidate_portal_verification",
+      "target": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_account_portal_fields",
+      "relation": "shares_data_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_12_account_verification_design_shared_portal_login_helper",
+      "target": "_agents_skills_writing_great_skills_glossary_single_source_of_truth",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "parallel_account_verification_flow",
+      "label": "Parallel Portal and Jira Account Verification Flow",
+      "nodes": [
+        "docs_superpowers_specs_2026_07_12_account_verification_design_candidate_portal_verification",
+        "docs_superpowers_specs_2026_07_12_account_verification_design_jira_credentials_check",
+        "docs_superpowers_specs_2026_07_12_account_verification_design_parallel_account_verification",
+        "docs_superpowers_specs_2026_07_12_account_verification_design_verify_account_error",
+        "docs_superpowers_specs_2026_07_12_account_verification_design_save_anyway_escape_hatch"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md"
+    }
+  ]
+}

@@ -1,0 +1,143 @@
+{
+  "nodes": [
+    {
+      "id": "agents_skills_improve_codebase_architecture_html_report_architecture_html_report",
+      "label": "Architecture HTML Report",
+      "file_type": "document",
+      "source_file": ".agents/skills/improve-codebase-architecture/HTML-REPORT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_improve_codebase_architecture_html_report_self_contained_cdn_scaffold",
+      "label": "Self-contained CDN Scaffold",
+      "file_type": "concept",
+      "source_file": ".agents/skills/improve-codebase-architecture/HTML-REPORT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_improve_codebase_architecture_html_report_candidate_card",
+      "label": "Deepening Candidate Card",
+      "file_type": "concept",
+      "source_file": ".agents/skills/improve-codebase-architecture/HTML-REPORT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_improve_codebase_architecture_html_report_before_after_diagram",
+      "label": "Before-and-after Diagram",
+      "file_type": "concept",
+      "source_file": ".agents/skills/improve-codebase-architecture/HTML-REPORT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_improve_codebase_architecture_html_report_vocabulary_compliance",
+      "label": "Codebase-design Vocabulary Compliance",
+      "file_type": "rationale",
+      "source_file": ".agents/skills/improve-codebase-architecture/HTML-REPORT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_improve_codebase_architecture_html_report_top_recommendation",
+      "label": "Top Recommendation",
+      "file_type": "concept",
+      "source_file": ".agents/skills/improve-codebase-architecture/HTML-REPORT.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "agents_skills_improve_codebase_architecture_html_report_architecture_html_report",
+      "target": "agents_skills_improve_codebase_architecture_html_report_self_contained_cdn_scaffold",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/improve-codebase-architecture/HTML-REPORT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_improve_codebase_architecture_html_report_architecture_html_report",
+      "target": "agents_skills_improve_codebase_architecture_html_report_candidate_card",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/improve-codebase-architecture/HTML-REPORT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_improve_codebase_architecture_html_report_candidate_card",
+      "target": "agents_skills_improve_codebase_architecture_html_report_before_after_diagram",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/improve-codebase-architecture/HTML-REPORT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_improve_codebase_architecture_html_report_candidate_card",
+      "target": "agents_skills_codebase_design_deepening_dependency_classification",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/improve-codebase-architecture/HTML-REPORT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_improve_codebase_architecture_html_report_vocabulary_compliance",
+      "target": "agents_skills_codebase_design_skill_codebase_design",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/improve-codebase-architecture/HTML-REPORT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_improve_codebase_architecture_html_report_architecture_html_report",
+      "target": "agents_skills_improve_codebase_architecture_html_report_top_recommendation",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/improve-codebase-architecture/HTML-REPORT.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_improve_codebase_architecture_html_report_before_after_diagram",
+      "target": "agents_skills_codebase_design_design_it_twice_design_comparison",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": ".agents/skills/improve-codebase-architecture/HTML-REPORT.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

@@ -1,0 +1,245 @@
+{
+  "nodes": [
+    {
+      "id": "agents_skills_codebase_design_deepening_deepening",
+      "label": "Deepening",
+      "file_type": "document",
+      "source_file": ".agents/skills/codebase-design/DEEPENING.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_codebase_design_deepening_dependency_classification",
+      "label": "Dependency Classification",
+      "file_type": "concept",
+      "source_file": ".agents/skills/codebase-design/DEEPENING.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_codebase_design_deepening_in_process_dependency",
+      "label": "In-process Dependency",
+      "file_type": "concept",
+      "source_file": ".agents/skills/codebase-design/DEEPENING.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_codebase_design_deepening_local_substitutable_dependency",
+      "label": "Local-substitutable Dependency",
+      "file_type": "concept",
+      "source_file": ".agents/skills/codebase-design/DEEPENING.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_codebase_design_deepening_remote_owned_dependency",
+      "label": "Remote but Owned Dependency",
+      "file_type": "concept",
+      "source_file": ".agents/skills/codebase-design/DEEPENING.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_codebase_design_deepening_true_external_dependency",
+      "label": "True External Dependency",
+      "file_type": "concept",
+      "source_file": ".agents/skills/codebase-design/DEEPENING.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_codebase_design_deepening_ports_and_adapters",
+      "label": "Ports and Adapters",
+      "file_type": "rationale",
+      "source_file": ".agents/skills/codebase-design/DEEPENING.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "agents_skills_codebase_design_deepening_replace_dont_layer_testing",
+      "label": "Replace-don't-layer Testing",
+      "file_type": "rationale",
+      "source_file": ".agents/skills/codebase-design/DEEPENING.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "agents_skills_codebase_design_deepening_deepening",
+      "target": "agents_skills_codebase_design_skill_module",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/codebase-design/DEEPENING.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_codebase_design_deepening_deepening",
+      "target": "agents_skills_codebase_design_skill_interface",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/codebase-design/DEEPENING.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_codebase_design_deepening_deepening",
+      "target": "agents_skills_codebase_design_skill_seam",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/codebase-design/DEEPENING.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_codebase_design_deepening_deepening",
+      "target": "agents_skills_codebase_design_skill_adapter",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/codebase-design/DEEPENING.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_codebase_design_deepening_dependency_classification",
+      "target": "agents_skills_codebase_design_deepening_in_process_dependency",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/codebase-design/DEEPENING.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_codebase_design_deepening_dependency_classification",
+      "target": "agents_skills_codebase_design_deepening_local_substitutable_dependency",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/codebase-design/DEEPENING.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_codebase_design_deepening_dependency_classification",
+      "target": "agents_skills_codebase_design_deepening_remote_owned_dependency",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/codebase-design/DEEPENING.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_codebase_design_deepening_dependency_classification",
+      "target": "agents_skills_codebase_design_deepening_true_external_dependency",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/codebase-design/DEEPENING.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_codebase_design_deepening_remote_owned_dependency",
+      "target": "agents_skills_codebase_design_deepening_ports_and_adapters",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/codebase-design/DEEPENING.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_codebase_design_deepening_true_external_dependency",
+      "target": "agents_skills_codebase_design_deepening_ports_and_adapters",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/codebase-design/DEEPENING.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_codebase_design_deepening_ports_and_adapters",
+      "target": "agents_skills_codebase_design_skill_seam",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/codebase-design/DEEPENING.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_codebase_design_deepening_ports_and_adapters",
+      "target": "agents_skills_codebase_design_skill_interface",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/codebase-design/DEEPENING.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_codebase_design_deepening_ports_and_adapters",
+      "target": "agents_skills_codebase_design_skill_adapter",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/codebase-design/DEEPENING.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_codebase_design_deepening_replace_dont_layer_testing",
+      "target": "agents_skills_codebase_design_skill_interface_test_surface",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/codebase-design/DEEPENING.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "agents_skills_codebase_design_deepening_replace_dont_layer_testing",
+      "target": "agents_skills_codebase_design_deepening_deepening",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/codebase-design/DEEPENING.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

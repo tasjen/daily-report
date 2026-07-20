@@ -1,0 +1,68 @@
+{
+  "nodes": [
+    {
+      "id": "docs_superpowers_plans_2026_07_08_favorites_favorites_implementation_plan",
+      "label": "Favorites Implementation Plan",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-07-08-favorites.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "docs_superpowers_plans_2026_07_08_favorites_favorites_implementation_plan",
+      "target": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_design",
+      "relation": "cites",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-07-08-favorites.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_plans_2026_07_08_favorites_favorites_implementation_plan",
+      "target": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_store_key",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-07-08-favorites.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_plans_2026_07_08_favorites_favorites_implementation_plan",
+      "target": "docs_superpowers_specs_2026_07_08_favorites_design_synthetic_issue_adapter",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-07-08-favorites.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_plans_2026_07_08_favorites_favorites_implementation_plan",
+      "target": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_task_group",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-07-08-favorites.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_plans_2026_07_08_favorites_favorites_implementation_plan",
+      "target": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_first_summary",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/plans/2026-07-08-favorites.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

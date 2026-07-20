@@ -1,0 +1,184 @@
+{
+  "nodes": [
+    {
+      "id": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_design",
+      "label": "Favorites Design",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_08_favorites_design_free_form_favorite_tasks",
+      "label": "Free-Form Favorite Tasks",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_store_key",
+      "label": "Top-Level Favorites Store Key",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_08_favorites_design_optimistic_favorites_save",
+      "label": "Optimistic Favorites Save",
+      "file_type": "rationale",
+      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_08_favorites_design_synthetic_issue_adapter",
+      "label": "Synthetic Issue-Shaped Favorites Adapter",
+      "file_type": "rationale",
+      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_task_group",
+      "label": "Favorites Task Group",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_first_summary",
+      "label": "Favorites-First Summary Formatting",
+      "file_type": "concept",
+      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_design",
+      "target": "docs_superpowers_specs_2026_07_08_favorites_design_free_form_favorite_tasks",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_design",
+      "target": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_store_key",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_design",
+      "target": "docs_superpowers_specs_2026_07_08_favorites_design_optimistic_favorites_save",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_design",
+      "target": "docs_superpowers_specs_2026_07_08_favorites_design_synthetic_issue_adapter",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_design",
+      "target": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_task_group",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_design",
+      "target": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_first_summary",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_08_favorites_design_synthetic_issue_adapter",
+      "target": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_task_group",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_08_favorites_design_optimistic_favorites_save",
+      "target": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_store_key",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_task_group",
+      "target": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_first_summary",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_store_key",
+      "target": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_preference_schema",
+      "relation": "shares_data_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

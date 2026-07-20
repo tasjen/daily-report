@@ -1,0 +1,671 @@
+{
+  "nodes": [
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_json",
+      "label": "biome.json",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L1"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_schema",
+      "label": "$schema",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L2"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_vcs",
+      "label": "vcs",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L3"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_vcs_enabled",
+      "label": "enabled",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L4"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_vcs_clientkind",
+      "label": "clientKind",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L5"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_vcs_useignorefile",
+      "label": "useIgnoreFile",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L6"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_files",
+      "label": "files",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L8"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_files_includes",
+      "label": "includes",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L9"
+    },
+    {
+      "id": "ref",
+      "label": "**",
+      "file_type": "concept",
+      "source_file": "biome.json",
+      "source_location": "L9"
+    },
+    {
+      "id": "ref_dist",
+      "label": "!!**/dist",
+      "file_type": "concept",
+      "source_file": "biome.json",
+      "source_location": "L9"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_formatter",
+      "label": "formatter",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L11"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_formatter_enabled",
+      "label": "enabled",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L12"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_formatter_indentstyle",
+      "label": "indentStyle",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L13"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_formatter_indentwidth",
+      "label": "indentWidth",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L14"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_formatter_attributeposition",
+      "label": "attributePosition",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L15"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_linter",
+      "label": "linter",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L17"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_linter_enabled",
+      "label": "enabled",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L18"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_linter_rules",
+      "label": "rules",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L19"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_rules_recommended",
+      "label": "recommended",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L20"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_rules_nursery",
+      "label": "nursery",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L21"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_nursery_usesortedclasses",
+      "label": "useSortedClasses",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L22"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_usesortedclasses_level",
+      "label": "level",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L22"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_usesortedclasses_fix",
+      "label": "fix",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L22"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_usesortedclasses_options",
+      "label": "options",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L22"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_nursery_nofloatingpromises",
+      "label": "noFloatingPromises",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L23"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_rules_a11y",
+      "label": "a11y",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L25"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_rules_correctness",
+      "label": "correctness",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L26"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_correctness_useexhaustivedependencies",
+      "label": "useExhaustiveDependencies",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L27"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_correctness_nounusedimports",
+      "label": "noUnusedImports",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L28"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_nounusedimports_level",
+      "label": "level",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L28"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_nounusedimports_fix",
+      "label": "fix",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L28"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_javascript",
+      "label": "javascript",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L32"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_javascript_formatter",
+      "label": "formatter",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L33"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_formatter_quotestyle",
+      "label": "quoteStyle",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L34"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_assist",
+      "label": "assist",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L37"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_assist_enabled",
+      "label": "enabled",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L38"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_assist_actions",
+      "label": "actions",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L39"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_actions_source",
+      "label": "source",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L40"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_source_organizeimports",
+      "label": "organizeImports",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L41"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_css",
+      "label": "css",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L45"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_css_parser",
+      "label": "parser",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L46"
+    },
+    {
+      "id": "users_livinginsider_documents_repos_daily_report_biome_parser_tailwinddirectives",
+      "label": "tailwindDirectives",
+      "file_type": "code",
+      "source_file": "biome.json",
+      "source_location": "L47"
+    }
+  ],
+  "edges": [
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_json",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_schema",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_json",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_vcs",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_vcs",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_vcs_enabled",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_vcs",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_vcs_clientkind",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_vcs",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_vcs_useignorefile",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_json",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_files",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_files",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_files_includes",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_files_includes",
+      "target": "ref",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L9",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_files_includes",
+      "target": "ref_dist",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L9",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_json",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_formatter",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_formatter",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_formatter_enabled",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_formatter",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_formatter_indentstyle",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_formatter",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_formatter_indentwidth",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_formatter",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_formatter_attributeposition",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_json",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_linter",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_linter",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_linter_enabled",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_linter",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_linter_rules",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_linter_rules",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_rules_recommended",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_linter_rules",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_rules_nursery",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_rules_nursery",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_nursery_usesortedclasses",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_nursery_usesortedclasses",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_usesortedclasses_level",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_nursery_usesortedclasses",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_usesortedclasses_fix",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_nursery_usesortedclasses",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_usesortedclasses_options",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_rules_nursery",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_nursery_nofloatingpromises",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_linter_rules",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_rules_a11y",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_linter_rules",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_rules_correctness",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_rules_correctness",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_correctness_useexhaustivedependencies",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_rules_correctness",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_correctness_nounusedimports",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_correctness_nounusedimports",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_nounusedimports_level",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_correctness_nounusedimports",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_nounusedimports_fix",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_json",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_javascript",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L32",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_javascript",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_javascript_formatter",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_javascript_formatter",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_formatter_quotestyle",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L34",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_json",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_assist",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L37",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_assist",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_assist_enabled",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L38",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_assist",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_assist_actions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L39",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_assist_actions",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_actions_source",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L40",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_actions_source",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_source_organizeimports",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L41",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_json",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_css",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L45",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_css",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_css_parser",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "users_livinginsider_documents_repos_daily_report_biome_css_parser",
+      "target": "users_livinginsider_documents_repos_daily_report_biome_parser_tailwinddirectives",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "biome.json",
+      "source_location": "L47",
+      "weight": 1.0
+    }
+  ]
+}

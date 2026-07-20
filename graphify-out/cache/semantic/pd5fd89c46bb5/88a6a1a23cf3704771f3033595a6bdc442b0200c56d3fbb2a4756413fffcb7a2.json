@@ -1,0 +1,132 @@
+{
+  "nodes": [
+    {
+      "id": "_agents_skills_triage_agent_brief_agent_brief",
+      "label": "Agent Brief",
+      "file_type": "document",
+      "source_file": ".agents/skills/triage/AGENT-BRIEF.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_triage_agent_brief_durability_over_precision",
+      "label": "Durability over Precision",
+      "file_type": "rationale",
+      "source_file": ".agents/skills/triage/AGENT-BRIEF.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_triage_agent_brief_behavioral_contract",
+      "label": "Behavioral, Not Procedural Contract",
+      "file_type": "rationale",
+      "source_file": ".agents/skills/triage/AGENT-BRIEF.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_triage_agent_brief_complete_acceptance_criteria",
+      "label": "Complete Acceptance Criteria",
+      "file_type": "concept",
+      "source_file": ".agents/skills/triage/AGENT-BRIEF.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_triage_agent_brief_explicit_scope_boundaries",
+      "label": "Explicit Scope Boundaries",
+      "file_type": "concept",
+      "source_file": ".agents/skills/triage/AGENT-BRIEF.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "_agents_skills_triage_agent_brief_agent_brief",
+      "target": "_agents_skills_triage_agent_brief_durability_over_precision",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/triage/AGENT-BRIEF.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_triage_agent_brief_agent_brief",
+      "target": "_agents_skills_triage_agent_brief_behavioral_contract",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/triage/AGENT-BRIEF.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_triage_agent_brief_agent_brief",
+      "target": "_agents_skills_triage_agent_brief_complete_acceptance_criteria",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/triage/AGENT-BRIEF.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_triage_agent_brief_agent_brief",
+      "target": "_agents_skills_triage_agent_brief_explicit_scope_boundaries",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/triage/AGENT-BRIEF.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_triage_agent_brief_durability_over_precision",
+      "target": "_agents_skills_triage_agent_brief_agent_brief",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/triage/AGENT-BRIEF.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_triage_agent_brief_behavioral_contract",
+      "target": "_agents_skills_triage_agent_brief_agent_brief",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/triage/AGENT-BRIEF.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_triage_agent_brief_complete_acceptance_criteria",
+      "target": "_agents_skills_writing_great_skills_glossary_completion_criterion",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": ".agents/skills/triage/AGENT-BRIEF.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

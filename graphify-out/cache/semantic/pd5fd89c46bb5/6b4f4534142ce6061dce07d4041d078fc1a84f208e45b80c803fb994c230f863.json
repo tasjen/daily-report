@@ -1,0 +1,448 @@
+{
+  "nodes": [
+    {
+      "id": "_agents_skills_writing_great_skills_glossary_building_great_skills_glossary",
+      "label": "Building Great Skills Glossary",
+      "file_type": "document",
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_writing_great_skills_glossary_predictability",
+      "label": "Predictability",
+      "file_type": "concept",
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_writing_great_skills_glossary_model_invoked_skill",
+      "label": "Model-Invoked Skill",
+      "file_type": "concept",
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_writing_great_skills_glossary_user_invoked_skill",
+      "label": "User-Invoked Skill",
+      "file_type": "concept",
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_writing_great_skills_glossary_context_pointer",
+      "label": "Context Pointer",
+      "file_type": "concept",
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_writing_great_skills_glossary_context_load",
+      "label": "Context Load",
+      "file_type": "concept",
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_writing_great_skills_glossary_cognitive_load",
+      "label": "Cognitive Load",
+      "file_type": "concept",
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_writing_great_skills_glossary_router_skill",
+      "label": "Router Skill",
+      "file_type": "rationale",
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_writing_great_skills_glossary_granularity",
+      "label": "Skill Granularity",
+      "file_type": "concept",
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_writing_great_skills_glossary_information_hierarchy",
+      "label": "Information Hierarchy",
+      "file_type": "concept",
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_writing_great_skills_glossary_progressive_disclosure",
+      "label": "Progressive Disclosure",
+      "file_type": "rationale",
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_writing_great_skills_glossary_leading_word",
+      "label": "Leading Word",
+      "file_type": "rationale",
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_writing_great_skills_glossary_completion_criterion",
+      "label": "Completion Criterion",
+      "file_type": "concept",
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_writing_great_skills_glossary_legwork",
+      "label": "Legwork",
+      "file_type": "concept",
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_writing_great_skills_glossary_post_completion_steps",
+      "label": "Post-Completion Steps",
+      "file_type": "concept",
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_writing_great_skills_glossary_premature_completion",
+      "label": "Premature Completion",
+      "file_type": "concept",
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_writing_great_skills_glossary_single_source_of_truth",
+      "label": "Single Source of Truth",
+      "file_type": "rationale",
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_writing_great_skills_glossary_duplication",
+      "label": "Duplication",
+      "file_type": "concept",
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_writing_great_skills_glossary_relevance",
+      "label": "Relevance",
+      "file_type": "concept",
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_writing_great_skills_glossary_sediment",
+      "label": "Sediment",
+      "file_type": "concept",
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_writing_great_skills_glossary_no_op",
+      "label": "No-Op Instruction",
+      "file_type": "concept",
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "_agents_skills_writing_great_skills_glossary_building_great_skills_glossary",
+      "target": "_agents_skills_writing_great_skills_glossary_predictability",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_writing_great_skills_glossary_building_great_skills_glossary",
+      "target": "_agents_skills_writing_great_skills_glossary_model_invoked_skill",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_writing_great_skills_glossary_building_great_skills_glossary",
+      "target": "_agents_skills_writing_great_skills_glossary_user_invoked_skill",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_writing_great_skills_glossary_building_great_skills_glossary",
+      "target": "_agents_skills_writing_great_skills_glossary_information_hierarchy",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_writing_great_skills_glossary_building_great_skills_glossary",
+      "target": "_agents_skills_writing_great_skills_glossary_leading_word",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_writing_great_skills_glossary_building_great_skills_glossary",
+      "target": "_agents_skills_writing_great_skills_glossary_completion_criterion",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_writing_great_skills_glossary_building_great_skills_glossary",
+      "target": "_agents_skills_writing_great_skills_glossary_single_source_of_truth",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_writing_great_skills_glossary_model_invoked_skill",
+      "target": "_agents_skills_writing_great_skills_glossary_context_load",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_writing_great_skills_glossary_user_invoked_skill",
+      "target": "_agents_skills_writing_great_skills_glossary_cognitive_load",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_writing_great_skills_glossary_router_skill",
+      "target": "_agents_skills_writing_great_skills_glossary_cognitive_load",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_writing_great_skills_glossary_granularity",
+      "target": "_agents_skills_writing_great_skills_glossary_context_load",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_writing_great_skills_glossary_granularity",
+      "target": "_agents_skills_writing_great_skills_glossary_cognitive_load",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_writing_great_skills_glossary_information_hierarchy",
+      "target": "_agents_skills_writing_great_skills_glossary_progressive_disclosure",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_writing_great_skills_glossary_progressive_disclosure",
+      "target": "_agents_skills_writing_great_skills_glossary_context_pointer",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_writing_great_skills_glossary_leading_word",
+      "target": "_agents_skills_writing_great_skills_glossary_predictability",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_writing_great_skills_glossary_completion_criterion",
+      "target": "_agents_skills_writing_great_skills_glossary_premature_completion",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_writing_great_skills_glossary_completion_criterion",
+      "target": "_agents_skills_writing_great_skills_glossary_legwork",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_writing_great_skills_glossary_post_completion_steps",
+      "target": "_agents_skills_writing_great_skills_glossary_premature_completion",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_writing_great_skills_glossary_single_source_of_truth",
+      "target": "_agents_skills_writing_great_skills_glossary_duplication",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_writing_great_skills_glossary_relevance",
+      "target": "_agents_skills_writing_great_skills_glossary_sediment",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_writing_great_skills_glossary_no_op",
+      "target": "_agents_skills_writing_great_skills_glossary_leading_word",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/writing-great-skills/GLOSSARY.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": []
+}

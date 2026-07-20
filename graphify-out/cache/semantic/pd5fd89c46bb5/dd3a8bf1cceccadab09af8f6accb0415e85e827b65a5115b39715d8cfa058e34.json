@@ -1,0 +1,17 @@
+{
+  "nodes": [
+    {
+      "id": "src_tauri_icons_ios_appicon_83_5x83_5_2x_daily_report_ipad_pro_app_icon",
+      "label": "Daily Report iPad Pro App Icon 83.5pt 2x",
+      "file_type": "image",
+      "source_file": "src-tauri/icons/ios/AppIcon-83.5x83.5@2x.png",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [],
+  "hyperedges": []
+}

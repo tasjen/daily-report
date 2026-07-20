@@ -1,0 +1,361 @@
+{
+  "nodes": [
+    {
+      "id": "_agents_skills_teach_skill_teach",
+      "label": "Teach",
+      "file_type": "document",
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_teach_skill_teaching_workspace",
+      "label": "Teaching Workspace",
+      "file_type": "concept",
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_teach_skill_knowledge_skills_and_wisdom",
+      "label": "Knowledge, Skills, and Wisdom",
+      "file_type": "concept",
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_teach_skill_mission_grounding",
+      "label": "Mission-Grounded Teaching",
+      "file_type": "rationale",
+      "rationale": "Every lesson and resource choice should trace to the learner's concrete reason for acquiring the topic.",
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_teach_skill_self_contained_html_lesson",
+      "label": "Self-Contained HTML Lesson",
+      "file_type": "concept",
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_teach_skill_reusable_lesson_assets",
+      "label": "Reusable Lesson Assets",
+      "file_type": "rationale",
+      "rationale": "Shared stylesheets, widgets, simulators, and diagram helpers keep lessons visually coherent and avoid duplicating components.",
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_teach_skill_fluency_strength",
+      "label": "Fluency Strength",
+      "file_type": "concept",
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_teach_skill_storage_strength",
+      "label": "Storage Strength",
+      "file_type": "rationale",
+      "rationale": "Long-term retention is the goal because smooth in-the-moment retrieval can create an illusion of mastery.",
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_teach_skill_desirable_difficulty",
+      "label": "Desirable Difficulty",
+      "file_type": "rationale",
+      "rationale": "Retrieval practice, spacing, and interleaving make skill practice effortful enough to build durable storage strength.",
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_teach_skill_zone_of_proximal_development",
+      "label": "Zone of Proximal Development",
+      "file_type": "concept",
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_teach_skill_tight_feedback_loop",
+      "label": "Tight Feedback Loop",
+      "file_type": "rationale",
+      "rationale": "Immediate, ideally automatic feedback lets learners correct performance while the attempted skill is still active.",
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_teach_skill_community_wisdom",
+      "label": "Community Wisdom",
+      "file_type": "rationale",
+      "rationale": "Real-world communities let the learner test skills against practitioners and acquire judgment unavailable from knowledge alone.",
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_teach_skill_reference_documents",
+      "label": "Reference Documents",
+      "file_type": "concept",
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "_agents_skills_teach_skill_teaching_notes",
+      "label": "Teaching Notes",
+      "file_type": "concept",
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "_agents_skills_teach_skill_teach",
+      "target": "_agents_skills_teach_skill_teaching_workspace",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_teach_skill_teach",
+      "target": "_agents_skills_teach_skill_knowledge_skills_and_wisdom",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_teach_skill_teaching_workspace",
+      "target": "_agents_skills_teach_mission_format_mission_format",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_teach_skill_teaching_workspace",
+      "target": "_agents_skills_teach_resources_format_resources_format",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_teach_skill_teaching_workspace",
+      "target": "_agents_skills_teach_learning_record_format_learning_record_format",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_teach_skill_teaching_workspace",
+      "target": "_agents_skills_teach_skill_self_contained_html_lesson",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_teach_skill_teaching_workspace",
+      "target": "_agents_skills_teach_skill_reusable_lesson_assets",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_teach_skill_teaching_workspace",
+      "target": "_agents_skills_teach_skill_teaching_notes",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_teach_skill_mission_grounding",
+      "target": "_agents_skills_teach_mission_format_concrete_learning_mission",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_teach_skill_self_contained_html_lesson",
+      "target": "_agents_skills_teach_skill_mission_grounding",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_teach_skill_self_contained_html_lesson",
+      "target": "_agents_skills_teach_skill_reusable_lesson_assets",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_teach_skill_storage_strength",
+      "target": "_agents_skills_teach_skill_fluency_strength",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_teach_skill_desirable_difficulty",
+      "target": "_agents_skills_teach_skill_storage_strength",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_teach_skill_zone_of_proximal_development",
+      "target": "_agents_skills_teach_learning_record_format_zone_of_proximal_development_input",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_teach_skill_self_contained_html_lesson",
+      "target": "_agents_skills_teach_skill_zone_of_proximal_development",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_teach_skill_tight_feedback_loop",
+      "target": "_agents_skills_teach_skill_self_contained_html_lesson",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_teach_skill_community_wisdom",
+      "target": "_agents_skills_teach_resources_format_knowledge_and_wisdom_resources",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "_agents_skills_teach_skill_reference_documents",
+      "target": "_agents_skills_teach_glossary_format_glossary_format",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/teach/SKILL.md",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "teaching_knowledge_skills_wisdom_model",
+      "label": "Knowledge Skills and Wisdom Learning Model",
+      "nodes": [
+        "_agents_skills_teach_resources_format_high_trust_resources",
+        "_agents_skills_teach_skill_self_contained_html_lesson",
+        "_agents_skills_teach_skill_community_wisdom"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/skills/teach/SKILL.md"
+    }
+  ]
+}
