@@ -63,6 +63,7 @@ export default function ProjectMapForm() {
       project_map: { ...projectMap, [trimmedKey]: selectedProject },
     });
     setKey("");
+    setProjectId(null);
   }
 
   return (
@@ -89,7 +90,7 @@ export default function ProjectMapForm() {
         </Tooltip>
       </Label>
       {Object.keys(projectMap).length > 0 && (
-        <ul ref={listRef} className="flex w-full flex-col gap-1">
+        <ul ref={listRef} className="flex w-full flex-col">
           {Object.entries(projectMap).map(([projectKey, portalProject]) => (
             <li key={projectKey} className="flex items-center gap-2 text-sm">
               <span className="font-mono">{projectKey}</span>
@@ -98,7 +99,7 @@ export default function ProjectMapForm() {
                 {projectLabel(portalProject)}
               </span>
               <Button
-                size="icon"
+                size="icon-sm"
                 variant="ghost"
                 onClick={() => {
                   const { [projectKey]: _removed, ...rest } = projectMap;
