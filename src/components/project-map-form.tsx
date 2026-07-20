@@ -47,8 +47,8 @@ export default function ProjectMapForm() {
   ]);
   const canAdd = Boolean(
     trimmedKey &&
-    !(trimmedKey in projectMap) &&
-    distinctValues.size <= MAX_DISTINCT_PROJECTS,
+      !(trimmedKey in projectMap) &&
+      distinctValues.size <= MAX_DISTINCT_PROJECTS,
   );
 
   function projectLabel(value: string) {
