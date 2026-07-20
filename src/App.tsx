@@ -25,7 +25,7 @@ export default function App() {
       <header className="sticky bottom-0 z-10 mt-auto flex h-screen flex-col justify-end gap-2 p-2">
         {taskParametersQuery.isSuccess && <OpenMemberPageButton />}
         <RefreshDateListButton />
-        <FavoritesForm />
+        {taskParametersQuery.isSuccess && <FavoritesForm />}
         {taskParametersQuery.isSuccess && <PreferencesForm />}
         <AccountForm />
       </header>

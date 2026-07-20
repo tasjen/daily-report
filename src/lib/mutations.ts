@@ -8,7 +8,7 @@ import {
   taskParametersOptions,
   verifyJiraCredentials,
 } from "./queries";
-import { type Account, type Favorites, type Preferences, store } from "./store";
+import { type Account, type Favorite, type Preferences, store } from "./store";
 
 // One project/comment row pair of the portal's task form. `project` is a
 // portal project option id; null lets the backend fall back to the
@@ -143,7 +143,7 @@ export function useSavePreferencesMutation() {
 export function useSaveFavoritesMutation() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (favorites: Favorites) => {
+    mutationFn: async (favorites: Favorite[]) => {
       await store.set("favorites", favorites);
       await store.save();
       return favorites;

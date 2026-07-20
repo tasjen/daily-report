@@ -36,8 +36,9 @@ export default function ProjectMapForm() {
   if (!firstProject || !preferences) return null;
 
   const projectMap = preferences.project_map;
-  // Jira project keys are uppercase; normalize so the lookup against issue
-  // key prefixes (e.g. "ABC-123" → "ABC") can't miss on casing.
+  // A project key is either a Jira issue-key prefix (e.g. "ABC-123" → "ABC")
+  // or a favorite's custom key. Normalize to uppercase so lookups can't miss
+  // on casing (favorite keys are normalized the same way).
   const trimmedKey = key.trim().toUpperCase();
   const selectedProject = projectId ?? firstProject.value;
   const distinctValues = new Set([
@@ -46,8 +47,8 @@ export default function ProjectMapForm() {
   ]);
   const canAdd = Boolean(
     trimmedKey &&
-      !(trimmedKey in projectMap) &&
-      distinctValues.size <= MAX_DISTINCT_PROJECTS,
+    !(trimmedKey in projectMap) &&
+    distinctValues.size <= MAX_DISTINCT_PROJECTS,
   );
 
   function projectLabel(value: string) {
@@ -77,20 +78,21 @@ export default function ProjectMapForm() {
             }
           />
           <TooltipContent>
-            Maps Jira project keys to the portal's projects. Selected tasks are
-            grouped by portal project and each group fills its own project +
-            comment pair in the task form, largest group first (max{" "}
-            {MAX_DISTINCT_PROJECTS} portal projects — the form has{" "}
-            {MAX_DISTINCT_PROJECTS} pairs). Unmapped tasks and favorites go into
-            the first comment.
+            Maps project keys to the portal's projects — an issue's key is its
+            Jira key prefix (ABC-123 → ABC), a favorite's is its own optional
+            key. Selected tasks are grouped by portal project and each group
+            fills its own project + comment pair in the task form, largest group
+            first (max {MAX_DISTINCT_PROJECTS} portal projects — the form has{" "}
+            {MAX_DISTINCT_PROJECTS} pairs). Unmapped tasks go into the first
+            comment.
           </TooltipContent>
         </Tooltip>
       </Label>
       {Object.keys(projectMap).length > 0 && (
         <ul ref={listRef} className="flex w-full flex-col gap-1">
-          {Object.entries(projectMap).map(([jiraKey, portalProject]) => (
-            <li key={jiraKey} className="flex items-center gap-2 text-sm">
-              <span className="font-mono">{jiraKey}</span>
+          {Object.entries(projectMap).map(([projectKey, portalProject]) => (
+            <li key={projectKey} className="flex items-center gap-2 text-sm">
+              <span className="font-mono">{projectKey}</span>
               <MoveRightIcon className="size-4 flex-none text-muted-foreground" />
               <span className="min-w-0 flex-1 truncate">
                 {projectLabel(portalProject)}
@@ -99,7 +101,7 @@ export default function ProjectMapForm() {
                 size="icon"
                 variant="ghost"
                 onClick={() => {
-                  const { [jiraKey]: _removed, ...rest } = projectMap;
+                  const { [projectKey]: _removed, ...rest } = projectMap;
                   savePreferences.mutate({ ...preferences, project_map: rest });
                 }}
               >
@@ -113,8 +115,8 @@ export default function ProjectMapForm() {
         <Input
           value={key}
           onChange={(e) => setKey(e.target.value)}
-          placeholder="Jira key"
-          className="w-24 flex-none font-mono"
+          placeholder="Project key"
+          className="w-30 flex-none font-mono"
         />
         <Select
           items={data.projects}

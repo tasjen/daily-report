@@ -57,11 +57,11 @@ export default function DateCard({ date }: Props) {
   // they're split back out into plain leading lines.
   const favoriteIssues = useMemo(
     () =>
-      (favorites ?? []).map((text) => ({
-        id: text,
-        key: `${FAVORITE_KEY_PREFIX}${text}`,
+      (favorites ?? []).map((favorite) => ({
+        id: favorite.text,
+        key: `${FAVORITE_KEY_PREFIX}${favorite.text}`,
         fields: {
-          summary: text,
+          summary: favorite.text,
           status: { name: "" },
           updated: "",
           duedate: "",
@@ -198,11 +198,14 @@ export default function DateCard({ date }: Props) {
   // [Created] block. Cloned, not mutated — issues live in the react-query cache.
   //
   // `submitEntries` splits the same selection into up to 3 form rows by the
-  // project_map preference (Jira project key → portal project id): mapped
-  // issues bucket by portal project, largest bucket first; favorites and
-  // unmapped issues always ride along in row 1's comment. With no mapped
-  // bucket this degrades to a single row whose project the backend defaults.
-  // `summaryText` (the preview/copy text) stays the unsplit combined summary.
+  // project_map preference (project key → portal project id): an issue's
+  // project key comes from its Jira key prefix, a favorite's from its
+  // optional `project_key` tag. Mapped tasks bucket by portal project — favorites
+  // count toward bucket size — largest bucket first; each row's favorites
+  // lead its comment as plain bullets. Unmapped tasks always ride along in
+  // row 1's comment. With no mapped bucket this degrades to a single row
+  // whose project the backend defaults. `summaryText` (the preview/copy
+  // text) stays the unsplit combined summary.
   const { summaryText, submitEntries } = useMemo(() => {
     const selected = new Set(selectedKeys);
     const selectedIssues = allIssues.filter((issue) => selected.has(issue.key));
@@ -211,10 +214,9 @@ export default function DateCard({ date }: Props) {
         .find((group) => group.id === "created")
         ?.issues.map((issue) => issue.key) ?? [],
     );
-    const favoriteLines = selectedIssues
+    const selectedFavoriteTexts = selectedIssues
       .filter((issue) => issue.key.startsWith(FAVORITE_KEY_PREFIX))
-      .map((issue) => `• ${issue.fields.summary}`)
-      .join("\n");
+      .map((issue) => issue.fields.summary);
     const jiraIssues = selectedIssues
       .filter((issue) => !issue.key.startsWith(FAVORITE_KEY_PREFIX))
       .map((issue) =>
@@ -224,47 +226,81 @@ export default function DateCard({ date }: Props) {
             })
           : issue,
       );
-    const summaryText = [favoriteLines, buildSummary(jiraIssues)]
+    const bulletLines = (texts: string[]) =>
+      texts.map((text) => `• ${text}`).join("\n");
+    const summaryText = [
+      bulletLines(selectedFavoriteTexts),
+      buildSummary(jiraIssues),
+    ]
       .filter(Boolean)
       .join("\n\n");
 
-    const buckets = new Map<string, JiraIssue[]>();
-    const unmapped: JiraIssue[] = [];
+    const favoriteKeyByText = new Map(
+      (favorites ?? []).map((favorite) => [
+        favorite.text,
+        favorite.project_key,
+      ]),
+    );
+    type Bucket = { issues: JiraIssue[]; favoriteTexts: string[] };
+    const buckets = new Map<string, Bucket>();
+    const getBucket = (portalProject: string): Bucket => {
+      let bucket = buckets.get(portalProject);
+      if (!bucket) {
+        bucket = { issues: [], favoriteTexts: [] };
+        buckets.set(portalProject, bucket);
+      }
+      return bucket;
+    };
+    const unmappedIssues: JiraIssue[] = [];
+    const unmappedFavoriteTexts: string[] = [];
     for (const issue of jiraIssues) {
       const projectKey = issue.key.split("-")[0];
       const portalProject = projectKey ? projectMap[projectKey] : undefined;
-      if (portalProject) {
-        const bucket = buckets.get(portalProject) ?? [];
-        bucket.push(issue);
-        buckets.set(portalProject, bucket);
-      } else {
-        unmapped.push(issue);
-      }
+      if (portalProject) getBucket(portalProject).issues.push(issue);
+      else unmappedIssues.push(issue);
     }
-    // Stable sort, so equally-sized buckets keep display order. The map
-    // editor caps distinct portal projects at 3, but a hand-edited store
-    // could exceed it — merge any overflow into the 3rd row's issues.
+    for (const text of selectedFavoriteTexts) {
+      const projectKey = favoriteKeyByText.get(text);
+      const portalProject = projectKey ? projectMap[projectKey] : undefined;
+      if (portalProject) getBucket(portalProject).favoriteTexts.push(text);
+      else unmappedFavoriteTexts.push(text);
+    }
+    // Stable sort by task count (favorites included), so equally-sized
+    // buckets keep display order. The map editor caps distinct portal
+    // projects at 3, but a hand-edited store could exceed it — merge any
+    // overflow into the 3rd row.
+    const size = (bucket: Bucket) =>
+      bucket.issues.length + bucket.favoriteTexts.length;
     const ranked = [...buckets.entries()].sort(
-      (a, b) => b[1].length - a[1].length,
+      (a, b) => size(b[1]) - size(a[1]),
     );
     const rows = ranked.slice(0, 3);
     const lastRow = rows[rows.length - 1];
     if (lastRow) {
-      for (const [, issues] of ranked.slice(3)) lastRow[1].push(...issues);
+      for (const [, bucket] of ranked.slice(3)) {
+        lastRow[1].issues.push(...bucket.issues);
+        lastRow[1].favoriteTexts.push(...bucket.favoriteTexts);
+      }
     }
     const submitEntries: SubmitTaskEntry[] = rows.length
-      ? rows.map(([project, issues], i) => ({
+      ? rows.map(([project, bucket], i) => ({
           project,
-          summary:
-            i === 0
-              ? [favoriteLines, buildSummary([...issues, ...unmapped])]
-                  .filter(Boolean)
-                  .join("\n\n")
-              : buildSummary(issues),
+          summary: [
+            bulletLines(
+              i === 0
+                ? [...bucket.favoriteTexts, ...unmappedFavoriteTexts]
+                : bucket.favoriteTexts,
+            ),
+            buildSummary(
+              i === 0 ? [...bucket.issues, ...unmappedIssues] : bucket.issues,
+            ),
+          ]
+            .filter(Boolean)
+            .join("\n\n"),
         }))
       : [{ project: null, summary: summaryText }];
     return { summaryText, submitEntries };
-  }, [allIssues, issueGroups, selectedKeys, projectMap]);
+  }, [allIssues, issueGroups, selectedKeys, projectMap, favorites]);
 
   const autofillSummary =
     preferences?.autofill_summary ?? DEFAULT_PREFERENCES.autofill_summary;

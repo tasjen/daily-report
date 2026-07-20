@@ -17,7 +17,7 @@ export default function DateList() {
   const dates = data?.dates.filter((e) => e.value) ?? [];
 
   const isMocking = true;
-  if (import.meta.env.DEV && isMocking && dates.length) {
+  if (import.meta.env.DEV && isMocking && !dates.length) {
     dates.push(
       { value: "2026-06-30", label: "2023-06-30" },
       { value: "2026-06-17", label: "2023-06-17" },

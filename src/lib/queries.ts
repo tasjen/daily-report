@@ -4,7 +4,7 @@ import { fetch as tauriFetch } from "@tauri-apps/plugin-http";
 import {
   type Account,
   DEFAULT_PREFERENCES,
-  type Favorites,
+  type Favorite,
   type Preferences,
   store,
 } from "@/lib/store";
@@ -42,9 +42,18 @@ export function usePreferences() {
 
 export function favoritesOptions() {
   return queryOptions({
-    // stores saved before the key existed return undefined, hence ?? []
+    // stores saved before the key existed return undefined, hence ?? [];
+    // favorites saved before project keys existed are plain strings —
+    // normalize so consumers always see the object shape (the store itself
+    // upgrades on the next save).
     queryKey: ["favorites"],
-    queryFn: async () => (await store.get<Favorites>("favorites")) ?? [],
+    queryFn: async (): Promise<Favorite[]> =>
+      ((await store.get<(string | Favorite)[]>("favorites")) ?? []).map(
+        (favorite) =>
+          typeof favorite === "string"
+            ? { text: favorite, project_key: null }
+            : favorite,
+      ),
   });
 }
 

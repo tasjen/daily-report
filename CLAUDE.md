@@ -200,13 +200,16 @@ in `lib.rs`, row number appended).
   dialog with `DefaultProjectSelect`, `ProjectListSelect`, `ProjectMapForm`,
   `DefaultTaskGroupsSelect`, and `ThemeToggle`.
 - [src/components/project-map-form.tsx](src/components/project-map-form.tsx) —
-  add/delete editor for the `project_map` preference (Jira project key →
-  portal project, keys normalized to uppercase). Rejects duplicate keys and
-  caps the map at 3 distinct portal projects — the form has 3 row pairs.
+  add/delete editor for the `project_map` preference (project key → portal
+  project, keys normalized to uppercase). "Project key" is the umbrella term:
+  a Jira issue-key prefix or a favorite's custom `project_key` tag. Rejects
+  duplicate keys and caps the map at 3 distinct portal projects — the form
+  has 3 row pairs.
 - [src/components/favorites-form.tsx](src/components/favorites-form.tsx) —
   star-icon dialog in the sidebar for the `favorites` list: add (rejects
-  duplicates and blank text) and delete only, saved immediately via
-  `useSaveFavoritesMutation`.
+  duplicate/blank text; an optional project key, normalized to
+  uppercase, tags the favorite for `project_map` routing) and delete only,
+  saved immediately via `useSaveFavoritesMutation`.
 - [src/components/date-list.tsx](src/components/date-list.tsx) — runs
   `useTaskParameters`, renders a `DateCard` per non-empty date, paginated 5 at a
   time with a "Load more" button.
@@ -224,11 +227,12 @@ in `lib.rs`, row number appended).
   (grouped by status), shown/copied via the preview. The submit (`Play`)
   button → `useSubmitTaskMutation` sends `submitEntries` instead: the same
   selection split into up to 3 form rows by the `project_map` preference
-  (issue's Jira project key = the part of `issue.key` before the `-`). Mapped
-  issues bucket by portal project, largest bucket first; favorites and
-  unmapped issues always ride in row 1's summary (merged into its status
-  grouping); overflow buckets past 3 (only possible via a hand-edited store)
-  merge into row 3. No mapped bucket → one `{ project: null }` entry, which
+  (an issue's project key = the part of `issue.key` before the `-`, a
+  favorite's = its `project_key` tag). Mapped tasks bucket by portal project
+  — favorites count toward bucket size — largest bucket first, each row's
+  favorites leading its comment as plain bullets; unmapped tasks always ride
+  in row 1's summary (issues merged into its status grouping); overflow
+  buckets past 3 (only possible via a hand-edited store) merge into row 3. No mapped bucket → one `{ project: null }` entry, which
   the backend defaults — likewise when `autofill_summary` is off, since there
   is no text to split.
 - [src/lib/queries.ts](src/lib/queries.ts) — react-query options/hooks.
@@ -252,7 +256,7 @@ Persisted via the Tauri store plugin under three keys:
 ```ts
 account:     { phone, email, api_token, portal_url, portal_credential }
 preferences: { default_project, project_list, project_map, default_task_groups, autofill_summary, auto_submit, auto_close }
-favorites:   string[]
+favorites:   { text, project_key }[]
 ```
 
 `phone` authenticates into the admin portal; `portal_url` (portal base URL,
@@ -264,12 +268,17 @@ default `false`) are also read by the Rust side in `submit_task`;
 `default_task_groups` (which task groups start checked on a
 date card, default `["status"]`), `autofill_summary` (whether submit passes
 the built summary or an empty string, default `true`; when `true`, Jira
-fetching also disables the submit button), and `project_map` (Jira project
-key → portal project option id, default `{}`, at most 3 distinct values —
+fetching also disables the submit button), and `project_map` (project key →
+portal project option id, default `{}`, at most 3 distinct values —
 `DateCard` uses it to split the submission into per-project form rows) are
 frontend-only. `favorites` — free-form favorite
-task texts, insertion-ordered, the text itself is the identity — is also
-frontend-only: unlike `preferences`, the Rust side never reads it. The **same
+tasks, insertion-ordered, the `text` is the identity; `project_key` is an
+optional project key (a Jira one or any custom label; null = none) that
+routes the favorite through `project_map` like a real issue — is also
+frontend-only: unlike
+`preferences`, the Rust side never reads it. Favorites saved before
+`project_key` existed are plain strings; `favoritesOptions` normalizes them
+to the object shape at read time. The **same
 `store.json` is read from both sides** — the frontend via `LazyStore`, the
 backend via `app.store("store.json")` — so field names must stay in sync
 between [src/lib/store.ts](src/lib/store.ts) and the Rust code. When adding a
