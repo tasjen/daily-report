@@ -52,6 +52,35 @@ pnpm start        # run the app in dev mode
 pnpm package      # build a distributable bundle locally
 ```
 
+### Codebase navigation with Graphify
+
+This repository includes a generated knowledge graph in
+[`graphify-out/`](graphify-out/). Use it to explore architecture and
+cross-file relationships without scanning the entire codebase:
+
+```sh
+graphify query "How does browser login work?"
+graphify path "BrowserState" "submit_task"
+graphify explain "useResetWhenAway"
+```
+
+The main outputs are:
+
+- [`graph.html`](graphify-out/graph.html) — interactive visualization
+- [`GRAPH_REPORT.md`](graphify-out/GRAPH_REPORT.md) — architecture report,
+  central nodes, and suggested questions
+- [`graph.json`](graphify-out/graph.json) — raw graph data for tools and agents
+
+After changing code or documentation, refresh the graph incrementally:
+
+```sh
+graphify update .
+```
+
+In an agent session with the Graphify skill, the equivalent command is
+`/graphify . --update`. Incremental updates re-extract only changed files;
+code-only updates use deterministic AST extraction and require no API key.
+
 See [CLAUDE.md](CLAUDE.md) for architecture notes, CI/CD, and the release
 process.
 

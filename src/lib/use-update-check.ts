@@ -24,6 +24,7 @@ export function useUpdateCheck() {
                 loading: "Downloading update…",
                 success: "Restarting…",
                 error: (e) => `Update failed: ${e}`,
+                closeButton: true,
               });
             },
           },
