@@ -560,8 +560,8 @@
     "semantic_hash": "1c1a505b7b8b95d1079e3d3861275c07"
   },
   ".github/workflows/ci.yml": {
-    "mtime": 1784642358.9847002,
-    "ast_hash": "c3ecd918a65cc39948ca660b3a4c0578",
+    "mtime": 1784645770.0908291,
+    "ast_hash": "45ce9a2a8bfa4258323c847fe084aa94",
     "semantic_hash": ""
   },
   ".github/workflows/release.yml": {
@@ -570,13 +570,13 @@
     "semantic_hash": "8256fa2ea48dcac01c482b49c36e74cd"
   },
   "AGENTS.md": {
-    "mtime": 1784642310.510548,
-    "ast_hash": "bddea00da10d81f559c305d56fe9dba4",
+    "mtime": 1784645776.2453117,
+    "ast_hash": "fbd551a7c870dcbdf3ceab9fee4ee211",
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1784642310.510548,
-    "ast_hash": "bddea00da10d81f559c305d56fe9dba4",
+    "mtime": 1784645776.2453117,
+    "ast_hash": "fbd551a7c870dcbdf3ceab9fee4ee211",
     "semantic_hash": ""
   },
   "README.md": {

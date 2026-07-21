@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: read
+  pull-requests: read
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -18,62 +19,59 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
       - name: Check for frontend changes
         id: changes
-        env:
-          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
-        run: |
-          if ! git cat-file -e "${BASE_SHA}^{commit}" 2>/dev/null; then
-            echo "required=true" >> "$GITHUB_OUTPUT"
-          elif git diff --quiet "$BASE_SHA" "$GITHUB_SHA" -- \
-            .github/workflows/ci.yml .npmrc index.html pnpm-lock.yaml pnpm-workspace.yaml public src \
-            ':(glob)**/*.cjs' ':(glob)**/*.css' ':(glob)**/*.js' ':(glob)**/*.json' \
-            ':(glob)**/*.jsx' ':(glob)**/*.mjs' ':(glob)**/*.ts' ':(glob)**/*.tsx' \
-            ':(glob,exclude)graphify-out/**' ':(glob,exclude)src-tauri/**'; then
-            echo "required=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "required=true" >> "$GITHUB_OUTPUT"
-          fi
-      - if: steps.changes.outputs.required == 'true'
+        uses: dorny/paths-filter@v4
+        with:
+          # Mirrors Biome's scope (everything except graphify-out — including
+          # src-tauri's JSON configs) plus everything pnpm build reads.
+          filters: |
+            frontend:
+              - '.github/workflows/ci.yml'
+              - '.npmrc'
+              - 'index.html'
+              - 'pnpm-lock.yaml'
+              - 'pnpm-workspace.yaml'
+              - 'public/**'
+              - 'src/**'
+              - '*.{cjs,css,js,json,jsx,mjs,ts,tsx}'
+              - '!(graphify-out)/**/*.{cjs,css,js,json,jsx,mjs,ts,tsx}'
+      - if: steps.changes.outputs.frontend == 'true'
         uses: pnpm/action-setup@v6
-      - if: steps.changes.outputs.required == 'true'
+      - if: steps.changes.outputs.frontend == 'true'
         uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: pnpm
-      - if: steps.changes.outputs.required == 'true'
+      - if: steps.changes.outputs.frontend == 'true'
         run: pnpm install --frozen-lockfile
-      - if: steps.changes.outputs.required == 'true'
+      - if: steps.changes.outputs.frontend == 'true'
         run: pnpm exec biome ci .
-      - if: steps.changes.outputs.required == 'true'
+      - if: steps.changes.outputs.frontend == 'true'
         run: pnpm build
 
   rust:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
       - name: Check for Rust changes
         id: changes
-        env:
-          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
-        run: |
-          if ! git cat-file -e "${BASE_SHA}^{commit}" 2>/dev/null; then
-            echo "required=true" >> "$GITHUB_OUTPUT"
-          elif git diff --quiet "$BASE_SHA" "$GITHUB_SHA" -- \
-            .cargo .github/workflows/ci.yml Cargo.lock Cargo.toml rust-toolchain rust-toolchain.toml src-tauri; then
-            echo "required=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "required=true" >> "$GITHUB_OUTPUT"
-          fi
-      - if: steps.changes.outputs.required == 'true'
+        uses: dorny/paths-filter@v4
+        with:
+          filters: |
+            rust:
+              - '.cargo/**'
+              - '.github/workflows/ci.yml'
+              - 'Cargo.lock'
+              - 'Cargo.toml'
+              - 'rust-toolchain'
+              - 'rust-toolchain.toml'
+              - 'src-tauri/**'
+      - if: steps.changes.outputs.rust == 'true'
         uses: dtolnay/rust-toolchain@stable
-      - if: steps.changes.outputs.required == 'true'
+      - if: steps.changes.outputs.rust == 'true'
         uses: swatinem/rust-cache@v2
         with:
           workspaces: src-tauri
-      - if: steps.changes.outputs.required == 'true'
+      - if: steps.changes.outputs.rust == 'true'
         run: cargo check --manifest-path src-tauri/Cargo.toml --locked
