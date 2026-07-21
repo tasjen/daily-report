@@ -312,8 +312,26 @@ in their own `[Created]` block, sorted alphabetically among the status blocks.
 ## CI/CD & releasing
 
 - **CI** ([.github/workflows/ci.yml](.github/workflows/ci.yml)): PRs and
-  pushes to `main` run two parallel jobs — `frontend` (Biome, `pnpm build`)
-  and `rust` (`cargo check` with Tauri's Linux deps).
+  pushes to `main` create two parallel required jobs. `frontend` runs Biome
+  and `pnpm build` on Ubuntu; `rust` runs `cargo check` on macOS, avoiding
+  the Linux-only Tauri system-dependency installation. Each job resolves its
+  relevant paths with `dorny/paths-filter` and `if:`-guards its
+  toolchain/setup/check steps on the result, so an irrelevant change still
+  completes the required check without doing the work. Three things keep that
+  working:
+  - `permissions:` must grant `pull-requests: read` — on PR events the filter
+    reads changed files from the API, and the explicit permissions block would
+    otherwise deny it.
+  - The `graphify-out` exclusion is the extglob `!(graphify-out)/**/*.{…}`,
+    *not* a leading-`!` line: paths-filter matches if **any** pattern matches,
+    so a negation line matches nearly everything. The exclusion earns its keep
+    because `graphify update .` commits `graphify-out/*.json` alongside
+    Rust-only changes.
+  - The `frontend` filter covers `src-tauri`'s JSON (`tauri.conf*.json`,
+    `capabilities/*.json`) because Biome checks them — keep it in sync with
+    `files.includes` in `biome.json`. Excluding `src-tauri` wholesale would let
+    a formatting violation in those configs reach `main` unchecked.
+  No `fetch-depth: 0` is needed; paths-filter deepens the shallow clone itself.
 - **Releases** ([.github/workflows/release.yml](.github/workflows/release.yml)):
   pushing a `vX.Y.Z` tag builds macOS (Apple Silicon, app + dmg — `app`
   supplies the `.app.tar.gz` updater artifact) and Windows
