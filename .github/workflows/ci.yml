@@ -18,25 +18,62 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: pnpm/action-setup@v6
-      - uses: actions/setup-node@v7
+        with:
+          fetch-depth: 0
+      - name: Check for frontend changes
+        id: changes
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          if ! git cat-file -e "${BASE_SHA}^{commit}" 2>/dev/null; then
+            echo "required=true" >> "$GITHUB_OUTPUT"
+          elif git diff --quiet "$BASE_SHA" "$GITHUB_SHA" -- \
+            .github/workflows/ci.yml .npmrc index.html pnpm-lock.yaml pnpm-workspace.yaml public src \
+            ':(glob)**/*.cjs' ':(glob)**/*.css' ':(glob)**/*.js' ':(glob)**/*.json' \
+            ':(glob)**/*.jsx' ':(glob)**/*.mjs' ':(glob)**/*.ts' ':(glob)**/*.tsx' \
+            ':(glob,exclude)graphify-out/**' ':(glob,exclude)src-tauri/**'; then
+            echo "required=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "required=true" >> "$GITHUB_OUTPUT"
+          fi
+      - if: steps.changes.outputs.required == 'true'
+        uses: pnpm/action-setup@v6
+      - if: steps.changes.outputs.required == 'true'
+        uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm exec biome ci .
-      - run: pnpm build
+      - if: steps.changes.outputs.required == 'true'
+        run: pnpm install --frozen-lockfile
+      - if: steps.changes.outputs.required == 'true'
+        run: pnpm exec biome ci .
+      - if: steps.changes.outputs.required == 'true'
+        run: pnpm build
 
   rust:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v7
-      - name: Install Tauri system dependencies
+        with:
+          fetch-depth: 0
+      - name: Check for Rust changes
+        id: changes
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
         run: |
-          sudo apt-get update
-          sudo apt-get install -y libwebkit2gtk-4.1-dev build-essential curl wget file libxdo-dev libssl-dev libayatana-appindicator3-dev librsvg2-dev
-      - uses: dtolnay/rust-toolchain@stable
-      - uses: swatinem/rust-cache@v2
+          if ! git cat-file -e "${BASE_SHA}^{commit}" 2>/dev/null; then
+            echo "required=true" >> "$GITHUB_OUTPUT"
+          elif git diff --quiet "$BASE_SHA" "$GITHUB_SHA" -- \
+            .cargo .github/workflows/ci.yml Cargo.lock Cargo.toml rust-toolchain rust-toolchain.toml src-tauri; then
+            echo "required=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "required=true" >> "$GITHUB_OUTPUT"
+          fi
+      - if: steps.changes.outputs.required == 'true'
+        uses: dtolnay/rust-toolchain@stable
+      - if: steps.changes.outputs.required == 'true'
+        uses: swatinem/rust-cache@v2
         with:
           workspaces: src-tauri
-      - run: cargo check --manifest-path src-tauri/Cargo.toml --locked
+      - if: steps.changes.outputs.required == 'true'
+        run: cargo check --manifest-path src-tauri/Cargo.toml --locked

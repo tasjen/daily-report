@@ -312,8 +312,11 @@ in their own `[Created]` block, sorted alphabetically among the status blocks.
 ## CI/CD & releasing
 
 - **CI** ([.github/workflows/ci.yml](.github/workflows/ci.yml)): PRs and
-  pushes to `main` run two parallel jobs — `frontend` (Biome, `pnpm build`)
-  and `rust` (`cargo check` with Tauri's Linux deps).
+  pushes to `main` create two parallel required jobs. Each job first checks the
+  changed paths and skips its toolchain/setup/check steps when they are
+  irrelevant, while still completing the required check. `frontend` runs Biome
+  and `pnpm build` on Ubuntu; `rust` runs `cargo check` on macOS, avoiding the
+  Linux-only Tauri system-dependency installation.
 - **Releases** ([.github/workflows/release.yml](.github/workflows/release.yml)):
   pushing a `vX.Y.Z` tag builds macOS (Apple Silicon, app + dmg — `app`
   supplies the `.app.tar.gz` updater artifact) and Windows
