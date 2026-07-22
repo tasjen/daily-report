@@ -230,9 +230,12 @@ in `lib.rs`, row number appended).
   (an issue's project key = the part of `issue.key` before the `-`, a
   favorite's = its `project_key` tag). Mapped tasks bucket by portal project
   — favorites count toward bucket size — largest bucket first, each row's
-  favorites leading its comment as plain bullets; unmapped tasks always ride
-  in row 1's summary (issues merged into its status grouping); overflow
-  buckets past 3 (only possible via a hand-edited store) merge into row 3. No mapped bucket → one `{ project: null }` entry, which
+  favorites leading its comment as plain bullets; unmapped tasks bucket
+  under `default_project` when one is set (joining its mapped bucket, if
+  any), else ride in row 1's summary (issues merged into its status
+  grouping); overflow buckets past 3 (a distinct default-project bucket
+  joining 3 mapped ones, or a hand-edited store) merge into row 3. No
+  bucket at all → one `{ project: null }` entry, which
   the backend defaults — likewise when `autofill_summary` is off, since there
   is no text to split.
 - [src/lib/queries.ts](src/lib/queries.ts) — react-query options/hooks.

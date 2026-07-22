@@ -1,7 +1,7 @@
-# Graph Report - daily-report  (2026-07-22)
+# Graph Report - daily-report  (2026-07-21)
 
 ## Corpus Check
-- 125 files · ~103,003 words
+- 125 files · ~102,592 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `0ef6f493`
+- Built from commit: `f50cdb17`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -297,7 +297,7 @@ Nodes (5): initialState, Theme, ThemeProviderContext, ThemeProviderProps, ThemeP
 
 ### Community 31 - "Persistent Settings Store"
 Cohesion: 0.29
-Nodes (7): class-variance-authority, mutative, dependencies, class-variance-authority, mutative, @tauri-apps/plugin-http, @tauri-apps/plugin-http
+Nodes (7): class-variance-authority, clsx, dependencies, class-variance-authority, clsx, @tauri-apps/plugin-http, @tauri-apps/plugin-http
 
 ### Community 32 - "Daily Report Date Cards"
 Cohesion: 0.53
