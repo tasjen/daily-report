@@ -37,8 +37,9 @@ export default function DefaultProjectSelect() {
             }
           />
           <TooltipContent>
-            The pre-selected project in the first project dropdown of the
-            portal's task form
+            The portal project that tasks without a Project mapping entry fall
+            back to — and the first dropdown's default when the form is
+            otherwise empty
           </TooltipContent>
         </Tooltip>
       </Label>

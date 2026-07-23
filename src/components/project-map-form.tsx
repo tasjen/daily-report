@@ -84,8 +84,9 @@ export default function ProjectMapForm() {
             key. Selected tasks are grouped by portal project and each group
             fills its own project + comment pair in the task form, largest group
             first (max {MAX_DISTINCT_PROJECTS} portal projects — the form has{" "}
-            {MAX_DISTINCT_PROJECTS} pairs). Unmapped tasks go into the first
-            comment.
+            {MAX_DISTINCT_PROJECTS} pairs). Unmapped tasks fall back to the
+            default project's group, or the first comment when no default
+            project is set.
           </TooltipContent>
         </Tooltip>
       </Label>
