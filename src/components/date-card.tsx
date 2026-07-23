@@ -190,6 +190,8 @@ export default function DateCard({ date }: Props) {
 
   const projectMap =
     preferences?.project_map ?? DEFAULT_PREFERENCES.project_map;
+  const defaultProject =
+    preferences?.default_project ?? DEFAULT_PREFERENCES.default_project;
 
   // Selected favorites lead the summary as plain "• text" lines outside any
   // status block; the remaining Jira issues are grouped by status as before.
@@ -202,10 +204,11 @@ export default function DateCard({ date }: Props) {
   // project key comes from its Jira key prefix, a favorite's from its
   // optional `project_key` tag. Mapped tasks bucket by portal project — favorites
   // count toward bucket size — largest bucket first; each row's favorites
-  // lead its comment as plain bullets. Unmapped tasks always ride along in
-  // row 1's comment. With no mapped bucket this degrades to a single row
-  // whose project the backend defaults. `summaryText` (the preview/copy
-  // text) stays the unsplit combined summary.
+  // lead its comment as plain bullets. Unmapped tasks bucket under the
+  // default project when one is set (joining its mapped bucket, if any);
+  // without a default they ride along in row 1's comment. With no bucket at
+  // all this degrades to a single row whose project the backend defaults.
+  // `summaryText` (the preview/copy text) stays the unsplit combined summary.
   const { summaryText, submitEntries } = useMemo(() => {
     const selected = new Set(selectedKeys);
     const selectedIssues = allIssues.filter((issue) => selected.has(issue.key));
@@ -253,22 +256,24 @@ export default function DateCard({ date }: Props) {
     };
     const unmappedIssues: JiraIssue[] = [];
     const unmappedFavoriteTexts: string[] = [];
+    // No mapping for the task's project key → the default project's bucket
+    // when one is set, else the unmapped arrays appended to row 1 below.
+    const resolvePortalProject = (projectKey: string | null | undefined) =>
+      (projectKey ? projectMap[projectKey] : undefined) ?? defaultProject;
     for (const issue of jiraIssues) {
-      const projectKey = issue.key.split("-")[0];
-      const portalProject = projectKey ? projectMap[projectKey] : undefined;
+      const portalProject = resolvePortalProject(issue.key.split("-")[0]);
       if (portalProject) getBucket(portalProject).issues.push(issue);
       else unmappedIssues.push(issue);
     }
     for (const text of selectedFavoriteTexts) {
-      const projectKey = favoriteKeyByText.get(text);
-      const portalProject = projectKey ? projectMap[projectKey] : undefined;
+      const portalProject = resolvePortalProject(favoriteKeyByText.get(text));
       if (portalProject) getBucket(portalProject).favoriteTexts.push(text);
       else unmappedFavoriteTexts.push(text);
     }
     // Stable sort by task count (favorites included), so equally-sized
     // buckets keep display order. The map editor caps distinct portal
-    // projects at 3, but a hand-edited store could exceed it — merge any
-    // overflow into the 3rd row.
+    // projects at 3, but a distinct default-project bucket (or a hand-edited
+    // store) can push past that — merge any overflow into the 3rd row.
     const size = (bucket: Bucket) =>
       bucket.issues.length + bucket.favoriteTexts.length;
     const ranked = [...buckets.entries()].sort(
@@ -300,7 +305,14 @@ export default function DateCard({ date }: Props) {
         }))
       : [{ project: null, summary: summaryText }];
     return { summaryText, submitEntries };
-  }, [allIssues, issueGroups, selectedKeys, projectMap, favorites]);
+  }, [
+    allIssues,
+    issueGroups,
+    selectedKeys,
+    projectMap,
+    defaultProject,
+    favorites,
+  ]);
 
   const autofillSummary =
     preferences?.autofill_summary ?? DEFAULT_PREFERENCES.autofill_summary;

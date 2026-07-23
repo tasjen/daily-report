@@ -18,8 +18,9 @@ export type Account = {
 // key. The text itself is the identity — the favorites dialog rejects
 // duplicates, so no generated ids. `project_key` optionally tags the favorite
 // with a project key (a real Jira one or any custom label) so the date card
-// buckets it through `project_map` like a real issue; null keeps it in the
-// first form row. Favorites saved before the field existed are plain strings
+// buckets it through `project_map` like a real issue; null routes it like an
+// unmapped task (the default project's bucket when set, else the first form
+// row). Favorites saved before the field existed are plain strings
 // — `favoritesOptions` normalizes them to this shape at read time.
 export type Favorite = { text: string; project_key: string | null };
 

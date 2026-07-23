@@ -1635,8 +1635,8 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "package_dependencies_clsx",
-      "community": 53,
-      "community_name": "Immutable State Updates",
+      "community": 31,
+      "community_name": "Persistent Settings Store",
       "norm_label": "clsx"
     },
     {
@@ -1646,8 +1646,8 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "clsx",
-      "community": 53,
-      "community_name": "Immutable State Updates",
+      "community": 31,
+      "community_name": "Persistent Settings Store",
       "norm_label": "clsx"
     },
     {
@@ -1679,8 +1679,8 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "package_dependencies_mutative",
-      "community": 31,
-      "community_name": "Persistent Settings Store",
+      "community": 53,
+      "community_name": "Immutable State Updates",
       "norm_label": "mutative"
     },
     {
@@ -1690,8 +1690,8 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "mutative",
-      "community": 31,
-      "community_name": "Persistent Settings Store",
+      "community": 53,
+      "community_name": "Immutable State Updates",
       "norm_label": "mutative"
     },
     {
@@ -3810,7 +3810,7 @@
       "label": "buildSummary()",
       "file_type": "code",
       "source_file": "src/components/date-card.tsx",
-      "source_location": "L441",
+      "source_location": "L429",
       "_origin": "ast",
       "id": "src_components_date_card_buildsummary",
       "community": 32,
@@ -3821,7 +3821,7 @@
       "label": "getDateRelation()",
       "file_type": "code",
       "source_file": "src/components/date-card.tsx",
-      "source_location": "L464",
+      "source_location": "L452",
       "_origin": "ast",
       "id": "src_components_date_card_getdaterelation",
       "community": 32,
@@ -3832,7 +3832,7 @@
       "label": "getDateAfter()",
       "file_type": "code",
       "source_file": "src/components/date-card.tsx",
-      "source_location": "L485",
+      "source_location": "L473",
       "_origin": "ast",
       "id": "src_components_date_card_getdateafter",
       "community": 32,
@@ -5691,7 +5691,7 @@
       "label": "Favorite",
       "file_type": "code",
       "source_file": "src/lib/store.ts",
-      "source_location": "L25",
+      "source_location": "L24",
       "_origin": "ast",
       "id": "src_lib_store_favorite",
       "community": 12,
@@ -5702,7 +5702,7 @@
       "label": "TaskGroupType",
       "file_type": "code",
       "source_file": "src/lib/store.ts",
-      "source_location": "L27",
+      "source_location": "L26",
       "_origin": "ast",
       "id": "src_lib_store_taskgrouptype",
       "community": 12,
@@ -5713,7 +5713,7 @@
       "label": "Preferences",
       "file_type": "code",
       "source_file": "src/lib/store.ts",
-      "source_location": "L29",
+      "source_location": "L28",
       "_origin": "ast",
       "id": "src_lib_store_preferences",
       "community": 12,
@@ -5724,7 +5724,7 @@
       "label": "DEFAULT_PREFERENCES",
       "file_type": "code",
       "source_file": "src/lib/store.ts",
-      "source_location": "L47",
+      "source_location": "L46",
       "_origin": "ast",
       "id": "src_lib_store_default_preferences",
       "community": 12,
@@ -5735,7 +5735,7 @@
       "label": "store",
       "file_type": "code",
       "source_file": "src/lib/store.ts",
-      "source_location": "L57",
+      "source_location": "L56",
       "_origin": "ast",
       "id": "src_lib_store_store",
       "community": 12,
@@ -6578,8 +6578,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "daily report application",
-      "community_name": "Repository Architecture Guides",
-      "id": "readme_daily_report"
+      "id": "readme_daily_report",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "macOS Installation Flow",
@@ -6592,8 +6592,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "macos installation flow",
-      "community_name": "Repository Architecture Guides",
-      "id": "readme_macos_installation_flow"
+      "id": "readme_macos_installation_flow",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "In-app Update Flow",
@@ -6606,8 +6606,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "in-app update flow",
-      "community_name": "Repository Architecture Guides",
-      "id": "readme_in_app_update_flow"
+      "id": "readme_in_app_update_flow",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Development Workflow",
@@ -6620,8 +6620,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "development workflow",
-      "community_name": "Repository Architecture Guides",
-      "id": "readme_development_workflow"
+      "id": "readme_development_workflow",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Release Automation",
@@ -6634,8 +6634,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "release automation",
-      "community_name": "Repository Architecture Guides",
-      "id": "readme_release_automation"
+      "id": "readme_release_automation",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Version Synchronization",
@@ -6648,8 +6648,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "version synchronization",
-      "community_name": "Repository Architecture Guides",
-      "id": "readme_version_synchronization"
+      "id": "readme_version_synchronization",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Draft Release Validation",
@@ -6662,8 +6662,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "draft release validation",
-      "community_name": "Repository Architecture Guides",
-      "id": "readme_draft_release_validation"
+      "id": "readme_draft_release_validation",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Frontend HTML Shell",
@@ -6676,8 +6676,8 @@
       "contributor": null,
       "community": 39,
       "norm_label": "frontend html shell",
-      "community_name": "Frontend HTML Entrypoint",
-      "id": "index_frontend_html_shell"
+      "id": "index_frontend_html_shell",
+      "community_name": "Frontend HTML Entrypoint"
     },
     {
       "label": "React Root Mount",
@@ -6690,8 +6690,8 @@
       "contributor": null,
       "community": 39,
       "norm_label": "react root mount",
-      "community_name": "Frontend HTML Entrypoint",
-      "id": "index_react_root_mount"
+      "id": "index_react_root_mount",
+      "community_name": "Frontend HTML Entrypoint"
     },
     {
       "label": "Vite Frontend Entrypoint",
@@ -6704,8 +6704,8 @@
       "contributor": null,
       "community": 39,
       "norm_label": "vite frontend entrypoint",
-      "community_name": "Frontend HTML Entrypoint",
-      "id": "index_vite_frontend_entrypoint"
+      "id": "index_vite_frontend_entrypoint",
+      "community_name": "Frontend HTML Entrypoint"
     },
     {
       "label": "Quality Gate Pipeline",
@@ -6718,8 +6718,8 @@
       "contributor": null,
       "community": 33,
       "norm_label": "quality gate pipeline",
-      "community_name": "Git Hook Quality Gates",
-      "id": "lefthook_quality_gate_pipeline"
+      "id": "lefthook_quality_gate_pipeline",
+      "community_name": "Git Hook Quality Gates"
     },
     {
       "label": "Biome Pre-commit Check",
@@ -6732,8 +6732,8 @@
       "contributor": null,
       "community": 33,
       "norm_label": "biome pre-commit check",
-      "community_name": "Git Hook Quality Gates",
-      "id": "lefthook_biome_pre_commit_check"
+      "id": "lefthook_biome_pre_commit_check",
+      "community_name": "Git Hook Quality Gates"
     },
     {
       "label": "Rustfmt Pre-commit Check",
@@ -6746,8 +6746,8 @@
       "contributor": null,
       "community": 33,
       "norm_label": "rustfmt pre-commit check",
-      "community_name": "Git Hook Quality Gates",
-      "id": "lefthook_rustfmt_pre_commit_check"
+      "id": "lefthook_rustfmt_pre_commit_check",
+      "community_name": "Git Hook Quality Gates"
     },
     {
       "label": "TypeScript Pre-push Check",
@@ -6760,8 +6760,8 @@
       "contributor": null,
       "community": 33,
       "norm_label": "typescript pre-push check",
-      "community_name": "Git Hook Quality Gates",
-      "id": "lefthook_typescript_pre_push_check"
+      "id": "lefthook_typescript_pre_push_check",
+      "community_name": "Git Hook Quality Gates"
     },
     {
       "label": "Clippy Pre-push Check",
@@ -6774,8 +6774,8 @@
       "contributor": null,
       "community": 33,
       "norm_label": "clippy pre-push check",
-      "community_name": "Git Hook Quality Gates",
-      "id": "lefthook_clippy_pre_push_check"
+      "id": "lefthook_clippy_pre_push_check",
+      "community_name": "Git Hook Quality Gates"
     },
     {
       "label": "Ask Matt",
@@ -6788,8 +6788,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "ask matt",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_ask_matt_skill_ask_matt"
+      "id": "agents_skills_ask_matt_skill_ask_matt",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "Idea-to-Ship Main Flow",
@@ -6802,8 +6802,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "idea-to-ship main flow",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_ask_matt_skill_main_flow"
+      "id": "agents_skills_ask_matt_skill_main_flow",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "Prototype Detour",
@@ -6816,8 +6816,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "prototype detour",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_ask_matt_skill_prototype_detour"
+      "id": "agents_skills_ask_matt_skill_prototype_detour",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "Multi-session Issue Flow",
@@ -6830,8 +6830,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "multi-session issue flow",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_ask_matt_skill_multi_session_issue_flow"
+      "id": "agents_skills_ask_matt_skill_multi_session_issue_flow",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "Triage and Diagnosis On-ramps",
@@ -6844,8 +6844,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "triage and diagnosis on-ramps",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_ask_matt_skill_triage_and_diagnosis_on_ramps"
+      "id": "agents_skills_ask_matt_skill_triage_and_diagnosis_on_ramps",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "Context Hygiene",
@@ -6858,8 +6858,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "context hygiene",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_ask_matt_skill_context_hygiene"
+      "id": "agents_skills_ask_matt_skill_context_hygiene",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "Architecture Health Loop",
@@ -6872,8 +6872,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "architecture health loop",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_ask_matt_skill_architecture_health_loop"
+      "id": "agents_skills_ask_matt_skill_architecture_health_loop",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "Code Review",
@@ -6886,8 +6886,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "code review",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_code_review_skill_code_review"
+      "id": "agents_skills_code_review_skill_code_review",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "Two-axis Review",
@@ -6900,8 +6900,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "two-axis review",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_code_review_skill_two_axis_review"
+      "id": "agents_skills_code_review_skill_two_axis_review",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "Fixed-point Diff",
@@ -6914,8 +6914,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "fixed-point diff",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_code_review_skill_fixed_point_diff"
+      "id": "agents_skills_code_review_skill_fixed_point_diff",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "Spec Source Discovery",
@@ -6928,8 +6928,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "spec source discovery",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_code_review_skill_spec_source_discovery"
+      "id": "agents_skills_code_review_skill_spec_source_discovery",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "Standards Axis",
@@ -6942,8 +6942,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "standards axis",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_code_review_skill_standards_axis"
+      "id": "agents_skills_code_review_skill_standards_axis",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "Spec Axis",
@@ -6956,8 +6956,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "spec axis",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_code_review_skill_spec_axis"
+      "id": "agents_skills_code_review_skill_spec_axis",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "Fowler Smell Baseline",
@@ -6970,8 +6970,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "fowler smell baseline",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_code_review_skill_fowler_smell_baseline"
+      "id": "agents_skills_code_review_skill_fowler_smell_baseline",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "Separate Axis Reporting",
@@ -6984,8 +6984,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "separate axis reporting",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_code_review_skill_separate_axis_reporting"
+      "id": "agents_skills_code_review_skill_separate_axis_reporting",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "Codebase Design",
@@ -6998,8 +6998,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "codebase design",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_codebase_design_skill_codebase_design"
+      "id": "agents_skills_codebase_design_skill_codebase_design",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "Module",
@@ -7012,8 +7012,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "module",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_codebase_design_skill_module"
+      "id": "agents_skills_codebase_design_skill_module",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "Interface",
@@ -7026,8 +7026,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "interface",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_codebase_design_skill_interface"
+      "id": "agents_skills_codebase_design_skill_interface",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "Implementation",
@@ -7040,8 +7040,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "implementation",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_codebase_design_skill_implementation"
+      "id": "agents_skills_codebase_design_skill_implementation",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "Depth",
@@ -7054,8 +7054,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "depth",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_codebase_design_skill_depth"
+      "id": "agents_skills_codebase_design_skill_depth",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "Seam",
@@ -7068,8 +7068,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "seam",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_codebase_design_skill_seam"
+      "id": "agents_skills_codebase_design_skill_seam",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "Adapter",
@@ -7082,8 +7082,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "adapter",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_codebase_design_skill_adapter"
+      "id": "agents_skills_codebase_design_skill_adapter",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "Leverage",
@@ -7096,8 +7096,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "leverage",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_codebase_design_skill_leverage"
+      "id": "agents_skills_codebase_design_skill_leverage",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "Locality",
@@ -7110,8 +7110,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "locality",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_codebase_design_skill_locality"
+      "id": "agents_skills_codebase_design_skill_locality",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "Deletion Test",
@@ -7124,8 +7124,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "deletion test",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_codebase_design_skill_deletion_test"
+      "id": "agents_skills_codebase_design_skill_deletion_test",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "Interface as Test Surface",
@@ -7138,8 +7138,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "interface as test surface",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_codebase_design_skill_interface_test_surface"
+      "id": "agents_skills_codebase_design_skill_interface_test_surface",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "Real Seam Requires Two Adapters",
@@ -7152,8 +7152,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "real seam requires two adapters",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_codebase_design_skill_real_seam_rule"
+      "id": "agents_skills_codebase_design_skill_real_seam_rule",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "Deepening",
@@ -7166,8 +7166,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "deepening",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_codebase_design_deepening_deepening"
+      "id": "agents_skills_codebase_design_deepening_deepening",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "Dependency Classification",
@@ -7180,8 +7180,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "dependency classification",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_codebase_design_deepening_dependency_classification"
+      "id": "agents_skills_codebase_design_deepening_dependency_classification",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "In-process Dependency",
@@ -7194,8 +7194,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "in-process dependency",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_codebase_design_deepening_in_process_dependency"
+      "id": "agents_skills_codebase_design_deepening_in_process_dependency",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "Local-substitutable Dependency",
@@ -7208,8 +7208,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "local-substitutable dependency",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_codebase_design_deepening_local_substitutable_dependency"
+      "id": "agents_skills_codebase_design_deepening_local_substitutable_dependency",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "Remote but Owned Dependency",
@@ -7222,8 +7222,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "remote but owned dependency",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_codebase_design_deepening_remote_owned_dependency"
+      "id": "agents_skills_codebase_design_deepening_remote_owned_dependency",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "True External Dependency",
@@ -7236,8 +7236,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "true external dependency",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_codebase_design_deepening_true_external_dependency"
+      "id": "agents_skills_codebase_design_deepening_true_external_dependency",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "Ports and Adapters",
@@ -7250,8 +7250,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "ports and adapters",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_codebase_design_deepening_ports_and_adapters"
+      "id": "agents_skills_codebase_design_deepening_ports_and_adapters",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "Replace-don't-layer Testing",
@@ -7264,8 +7264,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "replace-don't-layer testing",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_codebase_design_deepening_replace_dont_layer_testing"
+      "id": "agents_skills_codebase_design_deepening_replace_dont_layer_testing",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "Design It Twice",
@@ -7278,8 +7278,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "design it twice",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_codebase_design_design_it_twice_design_it_twice"
+      "id": "agents_skills_codebase_design_design_it_twice_design_it_twice",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "Problem-space Framing",
@@ -7292,8 +7292,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "problem-space framing",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_codebase_design_design_it_twice_problem_space_framing"
+      "id": "agents_skills_codebase_design_design_it_twice_problem_space_framing",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "Parallel Interface Alternatives",
@@ -7306,8 +7306,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "parallel interface alternatives",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_codebase_design_design_it_twice_parallel_interface_alternatives"
+      "id": "agents_skills_codebase_design_design_it_twice_parallel_interface_alternatives",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "Minimal Interface Constraint",
@@ -7320,8 +7320,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "minimal interface constraint",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_codebase_design_design_it_twice_minimal_interface_constraint"
+      "id": "agents_skills_codebase_design_design_it_twice_minimal_interface_constraint",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "Common-caller Constraint",
@@ -7334,8 +7334,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "common-caller constraint",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_codebase_design_design_it_twice_common_caller_constraint"
+      "id": "agents_skills_codebase_design_design_it_twice_common_caller_constraint",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "Design Comparison",
@@ -7348,8 +7348,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "design comparison",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_codebase_design_design_it_twice_design_comparison"
+      "id": "agents_skills_codebase_design_design_it_twice_design_comparison",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "Diagnosing Bugs",
@@ -7362,8 +7362,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "diagnosing bugs",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_diagnosing_bugs_skill_diagnosing_bugs"
+      "id": "agents_skills_diagnosing_bugs_skill_diagnosing_bugs",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "Tight Feedback Loop",
@@ -7376,8 +7376,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "tight feedback loop",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_diagnosing_bugs_skill_tight_feedback_loop"
+      "id": "agents_skills_diagnosing_bugs_skill_tight_feedback_loop",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "Red-capable Command",
@@ -7390,8 +7390,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "red-capable command",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_diagnosing_bugs_skill_red_capable_command"
+      "id": "agents_skills_diagnosing_bugs_skill_red_capable_command",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "Reproduce and Minimise",
@@ -7404,8 +7404,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "reproduce and minimise",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_diagnosing_bugs_skill_reproduce_and_minimise"
+      "id": "agents_skills_diagnosing_bugs_skill_reproduce_and_minimise",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "Ranked Falsifiable Hypotheses",
@@ -7418,8 +7418,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "ranked falsifiable hypotheses",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_diagnosing_bugs_skill_ranked_falsifiable_hypotheses"
+      "id": "agents_skills_diagnosing_bugs_skill_ranked_falsifiable_hypotheses",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "Prediction-driven Instrumentation",
@@ -7432,8 +7432,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "prediction-driven instrumentation",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_diagnosing_bugs_skill_prediction_driven_instrumentation"
+      "id": "agents_skills_diagnosing_bugs_skill_prediction_driven_instrumentation",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "Performance Measurement Branch",
@@ -7446,8 +7446,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "performance measurement branch",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_diagnosing_bugs_skill_performance_measurement_branch"
+      "id": "agents_skills_diagnosing_bugs_skill_performance_measurement_branch",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "Regression Test at Correct Seam",
@@ -7460,8 +7460,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "regression test at correct seam",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_diagnosing_bugs_skill_regression_test_at_correct_seam"
+      "id": "agents_skills_diagnosing_bugs_skill_regression_test_at_correct_seam",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "Cleanup and Architecture Post-mortem",
@@ -7474,8 +7474,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "cleanup and architecture post-mortem",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_diagnosing_bugs_skill_cleanup_and_architecture_post_mortem"
+      "id": "agents_skills_diagnosing_bugs_skill_cleanup_and_architecture_post_mortem",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "ADR Format",
@@ -7488,8 +7488,8 @@
       "contributor": null,
       "community": 49,
       "norm_label": "adr format",
-      "community_name": "Class Name Utility",
-      "id": "agents_skills_domain_modeling_adr_format_adr_format"
+      "id": "agents_skills_domain_modeling_adr_format_adr_format",
+      "community_name": "Class Name Utility"
     },
     {
       "label": "Minimal ADR",
@@ -7502,8 +7502,8 @@
       "contributor": null,
       "community": 49,
       "norm_label": "minimal adr",
-      "community_name": "Class Name Utility",
-      "id": "agents_skills_domain_modeling_adr_format_minimal_adr"
+      "id": "agents_skills_domain_modeling_adr_format_minimal_adr",
+      "community_name": "Class Name Utility"
     },
     {
       "label": "ADR Eligibility Test",
@@ -7516,8 +7516,8 @@
       "contributor": null,
       "community": 49,
       "norm_label": "adr eligibility test",
-      "community_name": "Class Name Utility",
-      "id": "agents_skills_domain_modeling_adr_format_adr_eligibility_test"
+      "id": "agents_skills_domain_modeling_adr_format_adr_eligibility_test",
+      "community_name": "Class Name Utility"
     },
     {
       "label": "CONTEXT.md Format",
@@ -7530,8 +7530,8 @@
       "contributor": null,
       "community": 49,
       "norm_label": "context.md format",
-      "community_name": "Class Name Utility",
-      "id": "agents_skills_domain_modeling_context_format_context_format"
+      "id": "agents_skills_domain_modeling_context_format_context_format",
+      "community_name": "Class Name Utility"
     },
     {
       "label": "Canonical Domain Language",
@@ -7544,8 +7544,8 @@
       "contributor": null,
       "community": 49,
       "norm_label": "canonical domain language",
-      "community_name": "Class Name Utility",
-      "id": "agents_skills_domain_modeling_context_format_canonical_domain_language"
+      "id": "agents_skills_domain_modeling_context_format_canonical_domain_language",
+      "community_name": "Class Name Utility"
     },
     {
       "label": "Single-context Layout",
@@ -7558,8 +7558,8 @@
       "contributor": null,
       "community": 49,
       "norm_label": "single-context layout",
-      "community_name": "Class Name Utility",
-      "id": "agents_skills_domain_modeling_context_format_single_context_layout"
+      "id": "agents_skills_domain_modeling_context_format_single_context_layout",
+      "community_name": "Class Name Utility"
     },
     {
       "label": "Multi-context Map",
@@ -7572,8 +7572,8 @@
       "contributor": null,
       "community": 49,
       "norm_label": "multi-context map",
-      "community_name": "Class Name Utility",
-      "id": "agents_skills_domain_modeling_context_format_context_map"
+      "id": "agents_skills_domain_modeling_context_format_context_map",
+      "community_name": "Class Name Utility"
     },
     {
       "label": "Domain Modeling",
@@ -7586,8 +7586,8 @@
       "contributor": null,
       "community": 49,
       "norm_label": "domain modeling",
-      "community_name": "Class Name Utility",
-      "id": "agents_skills_domain_modeling_skill_domain_modeling"
+      "id": "agents_skills_domain_modeling_skill_domain_modeling",
+      "community_name": "Class Name Utility"
     },
     {
       "label": "Glossary Challenge",
@@ -7600,8 +7600,8 @@
       "contributor": null,
       "community": 49,
       "norm_label": "glossary challenge",
-      "community_name": "Class Name Utility",
-      "id": "agents_skills_domain_modeling_skill_glossary_challenge"
+      "id": "agents_skills_domain_modeling_skill_glossary_challenge",
+      "community_name": "Class Name Utility"
     },
     {
       "label": "Fuzzy-term Sharpening",
@@ -7614,8 +7614,8 @@
       "contributor": null,
       "community": 49,
       "norm_label": "fuzzy-term sharpening",
-      "community_name": "Class Name Utility",
-      "id": "agents_skills_domain_modeling_skill_fuzzy_term_sharpening"
+      "id": "agents_skills_domain_modeling_skill_fuzzy_term_sharpening",
+      "community_name": "Class Name Utility"
     },
     {
       "label": "Concrete Scenario Testing",
@@ -7628,8 +7628,8 @@
       "contributor": null,
       "community": 49,
       "norm_label": "concrete scenario testing",
-      "community_name": "Class Name Utility",
-      "id": "agents_skills_domain_modeling_skill_concrete_scenario_testing"
+      "id": "agents_skills_domain_modeling_skill_concrete_scenario_testing",
+      "community_name": "Class Name Utility"
     },
     {
       "label": "Code-model Cross-check",
@@ -7642,8 +7642,8 @@
       "contributor": null,
       "community": 49,
       "norm_label": "code-model cross-check",
-      "community_name": "Class Name Utility",
-      "id": "agents_skills_domain_modeling_skill_code_model_cross_check"
+      "id": "agents_skills_domain_modeling_skill_code_model_cross_check",
+      "community_name": "Class Name Utility"
     },
     {
       "label": "Inline Context Update",
@@ -7656,8 +7656,8 @@
       "contributor": null,
       "community": 49,
       "norm_label": "inline context update",
-      "community_name": "Class Name Utility",
-      "id": "agents_skills_domain_modeling_skill_inline_context_update"
+      "id": "agents_skills_domain_modeling_skill_inline_context_update",
+      "community_name": "Class Name Utility"
     },
     {
       "label": "Sparse ADR Offering",
@@ -7670,8 +7670,8 @@
       "contributor": null,
       "community": 49,
       "norm_label": "sparse adr offering",
-      "community_name": "Class Name Utility",
-      "id": "agents_skills_domain_modeling_skill_sparse_adr_offering"
+      "id": "agents_skills_domain_modeling_skill_sparse_adr_offering",
+      "community_name": "Class Name Utility"
     },
     {
       "label": "Grill Me",
@@ -7684,8 +7684,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "grill me",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_grill_me_skill_grill_me"
+      "id": "agents_skills_grill_me_skill_grill_me",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "Grill With Docs",
@@ -7698,8 +7698,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "grill with docs",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_grill_with_docs_skill_grill_with_docs"
+      "id": "agents_skills_grill_with_docs_skill_grill_with_docs",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "Grilling Interview",
@@ -7712,8 +7712,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "grilling interview",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_grilling_skill_grilling"
+      "id": "agents_skills_grilling_skill_grilling",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "Handoff",
@@ -7726,8 +7726,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "handoff",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_handoff_skill_handoff"
+      "id": "agents_skills_handoff_skill_handoff",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "Temporary Handoff Document",
@@ -7740,8 +7740,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "temporary handoff document",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_handoff_skill_temporary_handoff_document"
+      "id": "agents_skills_handoff_skill_temporary_handoff_document",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "Artifact Referencing",
@@ -7754,8 +7754,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "artifact referencing",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_handoff_skill_artifact_referencing"
+      "id": "agents_skills_handoff_skill_artifact_referencing",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "Sensitive Data Redaction",
@@ -7768,8 +7768,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "sensitive data redaction",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_handoff_skill_sensitive_data_redaction"
+      "id": "agents_skills_handoff_skill_sensitive_data_redaction",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "Implementation Flow",
@@ -7782,8 +7782,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "implementation flow",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_implement_skill_implementation_flow"
+      "id": "agents_skills_implement_skill_implementation_flow",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "TDD at Pre-agreed Seams",
@@ -7796,8 +7796,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "tdd at pre-agreed seams",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_implement_skill_tdd_at_pre_agreed_seams"
+      "id": "agents_skills_implement_skill_tdd_at_pre_agreed_seams",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "Regular Verification",
@@ -7810,8 +7810,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "regular verification",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_implement_skill_regular_verification"
+      "id": "agents_skills_implement_skill_regular_verification",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "Final Review and Commit",
@@ -7824,8 +7824,8 @@
       "contributor": null,
       "community": 3,
       "norm_label": "final review and commit",
-      "community_name": "Engineering Workflow Skills",
-      "id": "agents_skills_implement_skill_final_review_and_commit"
+      "id": "agents_skills_implement_skill_final_review_and_commit",
+      "community_name": "Engineering Workflow Skills"
     },
     {
       "label": "Architecture HTML Report",
@@ -7838,8 +7838,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "architecture html report",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_improve_codebase_architecture_html_report_architecture_html_report"
+      "id": "agents_skills_improve_codebase_architecture_html_report_architecture_html_report",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "Self-contained CDN Scaffold",
@@ -7852,8 +7852,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "self-contained cdn scaffold",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_improve_codebase_architecture_html_report_self_contained_cdn_scaffold"
+      "id": "agents_skills_improve_codebase_architecture_html_report_self_contained_cdn_scaffold",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "Deepening Candidate Card",
@@ -7866,8 +7866,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "deepening candidate card",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_improve_codebase_architecture_html_report_candidate_card"
+      "id": "agents_skills_improve_codebase_architecture_html_report_candidate_card",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "Before-and-after Diagram",
@@ -7880,8 +7880,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "before-and-after diagram",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_improve_codebase_architecture_html_report_before_after_diagram"
+      "id": "agents_skills_improve_codebase_architecture_html_report_before_after_diagram",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "Codebase-design Vocabulary Compliance",
@@ -7894,8 +7894,8 @@
       "contributor": null,
       "community": 49,
       "norm_label": "codebase-design vocabulary compliance",
-      "community_name": "Class Name Utility",
-      "id": "agents_skills_improve_codebase_architecture_html_report_vocabulary_compliance"
+      "id": "agents_skills_improve_codebase_architecture_html_report_vocabulary_compliance",
+      "community_name": "Class Name Utility"
     },
     {
       "label": "Top Recommendation",
@@ -7908,8 +7908,8 @@
       "contributor": null,
       "community": 6,
       "norm_label": "top recommendation",
-      "community_name": "Deep Module Design",
-      "id": "agents_skills_improve_codebase_architecture_html_report_top_recommendation"
+      "id": "agents_skills_improve_codebase_architecture_html_report_top_recommendation",
+      "community_name": "Deep Module Design"
     },
     {
       "label": "Improve Codebase Architecture",
@@ -7922,8 +7922,8 @@
       "contributor": null,
       "community": 1,
       "norm_label": "improve codebase architecture",
-      "community_name": "Test Design Principles",
-      "id": "_agents_skills_improve_codebase_architecture_skill_improve_codebase_architecture"
+      "id": "_agents_skills_improve_codebase_architecture_skill_improve_codebase_architecture",
+      "community_name": "Test Design Principles"
     },
     {
       "label": "Deepening Opportunity",
@@ -7937,8 +7937,8 @@
       "contributor": null,
       "community": 1,
       "norm_label": "deepening opportunity",
-      "community_name": "Test Design Principles",
-      "id": "_agents_skills_improve_codebase_architecture_skill_deepening_opportunity"
+      "id": "_agents_skills_improve_codebase_architecture_skill_deepening_opportunity",
+      "community_name": "Test Design Principles"
     },
     {
       "label": "Deep Module Design Vocabulary",
@@ -7951,8 +7951,8 @@
       "contributor": null,
       "community": 1,
       "norm_label": "deep module design vocabulary",
-      "community_name": "Test Design Principles",
-      "id": "_agents_skills_improve_codebase_architecture_skill_deep_module_design_vocabulary"
+      "id": "_agents_skills_improve_codebase_architecture_skill_deep_module_design_vocabulary",
+      "community_name": "Test Design Principles"
     },
     {
       "label": "Deletion Test",
@@ -7966,8 +7966,8 @@
       "contributor": null,
       "community": 1,
       "norm_label": "deletion test",
-      "community_name": "Test Design Principles",
-      "id": "_agents_skills_improve_codebase_architecture_skill_deletion_test"
+      "id": "_agents_skills_improve_codebase_architecture_skill_deletion_test",
+      "community_name": "Test Design Principles"
     },
     {
       "label": "Architecture Review HTML Report",
@@ -7980,8 +7980,8 @@
       "contributor": null,
       "community": 1,
       "norm_label": "architecture review html report",
-      "community_name": "Test Design Principles",
-      "id": "_agents_skills_improve_codebase_architecture_skill_architecture_review_html_report"
+      "id": "_agents_skills_improve_codebase_architecture_skill_architecture_review_html_report",
+      "community_name": "Test Design Principles"
     },
     {
       "label": "ADR-Aware Architecture Review",
@@ -7995,8 +7995,8 @@
       "contributor": null,
       "community": 1,
       "norm_label": "adr-aware architecture review",
-      "community_name": "Test Design Principles",
-      "id": "_agents_skills_improve_codebase_architecture_skill_adr_aware_review"
+      "id": "_agents_skills_improve_codebase_architecture_skill_adr_aware_review",
+      "community_name": "Test Design Principles"
     },
     {
       "label": "Prototype",
@@ -8009,8 +8009,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "prototype",
-      "community_name": "Prototype Design Methods",
-      "id": "_agents_skills_prototype_skill_prototype"
+      "id": "_agents_skills_prototype_skill_prototype",
+      "community_name": "Prototype Design Methods"
     },
     {
       "label": "Throwaway Prototype",
@@ -8024,8 +8024,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "throwaway prototype",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_prototype_skill_throwaway_prototype"
+      "id": "_agents_skills_prototype_skill_throwaway_prototype",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "Logic Prototype Branch",
@@ -8038,8 +8038,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "logic prototype branch",
-      "community_name": "Prototype Design Methods",
-      "id": "_agents_skills_prototype_skill_logic_branch"
+      "id": "_agents_skills_prototype_skill_logic_branch",
+      "community_name": "Prototype Design Methods"
     },
     {
       "label": "UI Prototype Branch",
@@ -8052,8 +8052,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "ui prototype branch",
-      "community_name": "Prototype Design Methods",
-      "id": "_agents_skills_prototype_skill_ui_branch"
+      "id": "_agents_skills_prototype_skill_ui_branch",
+      "community_name": "Prototype Design Methods"
     },
     {
       "label": "Prototype State Visibility",
@@ -8067,8 +8067,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "prototype state visibility",
-      "community_name": "Prototype Design Methods",
-      "id": "_agents_skills_prototype_skill_state_visibility"
+      "id": "_agents_skills_prototype_skill_state_visibility",
+      "community_name": "Prototype Design Methods"
     },
     {
       "label": "Prototype Answer Capture",
@@ -8081,8 +8081,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "prototype answer capture",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_prototype_skill_prototype_answer_capture"
+      "id": "_agents_skills_prototype_skill_prototype_answer_capture",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "Logic Prototype",
@@ -8095,8 +8095,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "logic prototype",
-      "community_name": "Prototype Design Methods",
-      "id": "_agents_skills_prototype_logic_logic_prototype"
+      "id": "_agents_skills_prototype_logic_logic_prototype",
+      "community_name": "Prototype Design Methods"
     },
     {
       "label": "Explicit Prototype Question",
@@ -8110,8 +8110,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "explicit prototype question",
-      "community_name": "Prototype Design Methods",
-      "id": "_agents_skills_prototype_logic_explicit_prototype_question"
+      "id": "_agents_skills_prototype_logic_explicit_prototype_question",
+      "community_name": "Prototype Design Methods"
     },
     {
       "label": "Portable Pure Logic Module",
@@ -8125,8 +8125,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "portable pure logic module",
-      "community_name": "Prototype Design Methods",
-      "id": "_agents_skills_prototype_logic_portable_pure_logic_module"
+      "id": "_agents_skills_prototype_logic_portable_pure_logic_module",
+      "community_name": "Prototype Design Methods"
     },
     {
       "label": "Pure Reducer",
@@ -8139,8 +8139,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "pure reducer",
-      "community_name": "Prototype Design Methods",
-      "id": "_agents_skills_prototype_logic_pure_reducer"
+      "id": "_agents_skills_prototype_logic_pure_reducer",
+      "community_name": "Prototype Design Methods"
     },
     {
       "label": "State Machine",
@@ -8153,8 +8153,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "state machine",
-      "community_name": "Prototype Design Methods",
-      "id": "_agents_skills_prototype_logic_state_machine"
+      "id": "_agents_skills_prototype_logic_state_machine",
+      "community_name": "Prototype Design Methods"
     },
     {
       "label": "Pure Function Set",
@@ -8167,8 +8167,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "pure function set",
-      "community_name": "Prototype Design Methods",
-      "id": "_agents_skills_prototype_logic_pure_function_set"
+      "id": "_agents_skills_prototype_logic_pure_function_set",
+      "community_name": "Prototype Design Methods"
     },
     {
       "label": "Stateful Module Interface",
@@ -8181,8 +8181,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "stateful module interface",
-      "community_name": "Prototype Design Methods",
-      "id": "_agents_skills_prototype_logic_stateful_module_interface"
+      "id": "_agents_skills_prototype_logic_stateful_module_interface",
+      "community_name": "Prototype Design Methods"
     },
     {
       "label": "Lightweight TUI",
@@ -8195,8 +8195,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "lightweight tui",
-      "community_name": "Prototype Design Methods",
-      "id": "_agents_skills_prototype_logic_lightweight_tui"
+      "id": "_agents_skills_prototype_logic_lightweight_tui",
+      "community_name": "Prototype Design Methods"
     },
     {
       "label": "In-Memory Prototype State",
@@ -8210,8 +8210,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "in-memory prototype state",
-      "community_name": "Prototype Design Methods",
-      "id": "_agents_skills_prototype_logic_in_memory_prototype_state"
+      "id": "_agents_skills_prototype_logic_in_memory_prototype_state",
+      "community_name": "Prototype Design Methods"
     },
     {
       "label": "UI Prototype",
@@ -8224,8 +8224,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "ui prototype",
-      "community_name": "Prototype Design Methods",
-      "id": "_agents_skills_prototype_ui_ui_prototype"
+      "id": "_agents_skills_prototype_ui_ui_prototype",
+      "community_name": "Prototype Design Methods"
     },
     {
       "label": "Radically Different UI Variants",
@@ -8239,8 +8239,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "radically different ui variants",
-      "community_name": "Prototype Design Methods",
-      "id": "_agents_skills_prototype_ui_radically_different_variants"
+      "id": "_agents_skills_prototype_ui_radically_different_variants",
+      "community_name": "Prototype Design Methods"
     },
     {
       "label": "Existing Page Sub-Shape",
@@ -8254,8 +8254,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "existing page sub-shape",
-      "community_name": "Prototype Design Methods",
-      "id": "_agents_skills_prototype_ui_existing_page_sub_shape"
+      "id": "_agents_skills_prototype_ui_existing_page_sub_shape",
+      "community_name": "Prototype Design Methods"
     },
     {
       "label": "New Page Sub-Shape",
@@ -8268,8 +8268,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "new page sub-shape",
-      "community_name": "Prototype Design Methods",
-      "id": "_agents_skills_prototype_ui_new_page_sub_shape"
+      "id": "_agents_skills_prototype_ui_new_page_sub_shape",
+      "community_name": "Prototype Design Methods"
     },
     {
       "label": "Variant URL Parameter",
@@ -8282,8 +8282,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "variant url parameter",
-      "community_name": "Prototype Design Methods",
-      "id": "_agents_skills_prototype_ui_variant_url_parameter"
+      "id": "_agents_skills_prototype_ui_variant_url_parameter",
+      "community_name": "Prototype Design Methods"
     },
     {
       "label": "Prototype Switcher",
@@ -8296,8 +8296,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "prototype switcher",
-      "community_name": "Prototype Design Methods",
-      "id": "_agents_skills_prototype_ui_prototype_switcher"
+      "id": "_agents_skills_prototype_ui_prototype_switcher",
+      "community_name": "Prototype Design Methods"
     },
     {
       "label": "Prototype Production Gate",
@@ -8311,8 +8311,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "prototype production gate",
-      "community_name": "Prototype Design Methods",
-      "id": "_agents_skills_prototype_ui_production_gate"
+      "id": "_agents_skills_prototype_ui_production_gate",
+      "community_name": "Prototype Design Methods"
     },
     {
       "label": "UI Winner Cleanup",
@@ -8325,8 +8325,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "ui winner cleanup",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_prototype_ui_ui_winner_cleanup"
+      "id": "_agents_skills_prototype_ui_ui_winner_cleanup",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "Research Skill",
@@ -8339,8 +8339,8 @@
       "contributor": null,
       "community": 9,
       "norm_label": "research skill",
-      "community_name": "Research and Teaching Skills",
-      "id": "_agents_skills_research_skill_research"
+      "id": "_agents_skills_research_skill_research",
+      "community_name": "Research and Teaching Skills"
     },
     {
       "label": "Primary-Source Research",
@@ -8354,8 +8354,8 @@
       "contributor": null,
       "community": 9,
       "norm_label": "primary-source research",
-      "community_name": "Research and Teaching Skills",
-      "id": "_agents_skills_research_skill_primary_source_research"
+      "id": "_agents_skills_research_skill_primary_source_research",
+      "community_name": "Research and Teaching Skills"
     },
     {
       "label": "Background Research Agent",
@@ -8369,8 +8369,8 @@
       "contributor": null,
       "community": 9,
       "norm_label": "background research agent",
-      "community_name": "Research and Teaching Skills",
-      "id": "_agents_skills_research_skill_background_research_agent"
+      "id": "_agents_skills_research_skill_background_research_agent",
+      "community_name": "Research and Teaching Skills"
     },
     {
       "label": "Cited Markdown Findings",
@@ -8383,8 +8383,8 @@
       "contributor": null,
       "community": 9,
       "norm_label": "cited markdown findings",
-      "community_name": "Research and Teaching Skills",
-      "id": "_agents_skills_research_skill_cited_markdown_findings"
+      "id": "_agents_skills_research_skill_cited_markdown_findings",
+      "community_name": "Research and Teaching Skills"
     },
     {
       "label": "Setup Matt Pocock Skills",
@@ -8397,8 +8397,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "setup matt pocock skills",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_setup_matt_pocock_skills_skill_setup_matt_pocock_skills"
+      "id": "_agents_skills_setup_matt_pocock_skills_skill_setup_matt_pocock_skills",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "Engineering Skills Configuration",
@@ -8411,8 +8411,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "engineering skills configuration",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_setup_matt_pocock_skills_skill_engineering_skills_configuration"
+      "id": "_agents_skills_setup_matt_pocock_skills_skill_engineering_skills_configuration",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "Issue Tracker Decision",
@@ -8425,8 +8425,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "issue tracker decision",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_setup_matt_pocock_skills_skill_issue_tracker_decision"
+      "id": "_agents_skills_setup_matt_pocock_skills_skill_issue_tracker_decision",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "Pull Requests as a Request Surface",
@@ -8440,8 +8440,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "pull requests as a request surface",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_setup_matt_pocock_skills_skill_pr_request_surface"
+      "id": "_agents_skills_setup_matt_pocock_skills_skill_pr_request_surface",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "Triage Label Vocabulary",
@@ -8454,8 +8454,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "triage label vocabulary",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_setup_matt_pocock_skills_skill_triage_label_vocabulary"
+      "id": "_agents_skills_setup_matt_pocock_skills_skill_triage_label_vocabulary",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "Domain Docs Layout Decision",
@@ -8468,8 +8468,8 @@
       "contributor": null,
       "community": 1,
       "norm_label": "domain docs layout decision",
-      "community_name": "Test Design Principles",
-      "id": "_agents_skills_setup_matt_pocock_skills_skill_domain_docs_layout"
+      "id": "_agents_skills_setup_matt_pocock_skills_skill_domain_docs_layout",
+      "community_name": "Test Design Principles"
     },
     {
       "label": "Agent Skills Configuration Block",
@@ -8482,8 +8482,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "agent skills configuration block",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_setup_matt_pocock_skills_skill_agent_skills_block"
+      "id": "_agents_skills_setup_matt_pocock_skills_skill_agent_skills_block",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "Prompt-Driven Setup",
@@ -8497,8 +8497,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "prompt-driven setup",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_setup_matt_pocock_skills_skill_prompt_driven_setup"
+      "id": "_agents_skills_setup_matt_pocock_skills_skill_prompt_driven_setup",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "Domain Docs",
@@ -8511,8 +8511,8 @@
       "contributor": null,
       "community": 1,
       "norm_label": "domain docs",
-      "community_name": "Test Design Principles",
-      "id": "_agents_skills_setup_matt_pocock_skills_domain_domain_docs"
+      "id": "_agents_skills_setup_matt_pocock_skills_domain_domain_docs",
+      "community_name": "Test Design Principles"
     },
     {
       "label": "Single-Context Domain Layout",
@@ -8525,8 +8525,8 @@
       "contributor": null,
       "community": 1,
       "norm_label": "single-context domain layout",
-      "community_name": "Test Design Principles",
-      "id": "_agents_skills_setup_matt_pocock_skills_domain_single_context_layout"
+      "id": "_agents_skills_setup_matt_pocock_skills_domain_single_context_layout",
+      "community_name": "Test Design Principles"
     },
     {
       "label": "Multi-Context Domain Layout",
@@ -8539,8 +8539,8 @@
       "contributor": null,
       "community": 1,
       "norm_label": "multi-context domain layout",
-      "community_name": "Test Design Principles",
-      "id": "_agents_skills_setup_matt_pocock_skills_domain_multi_context_layout"
+      "id": "_agents_skills_setup_matt_pocock_skills_domain_multi_context_layout",
+      "community_name": "Test Design Principles"
     },
     {
       "label": "Glossary Vocabulary Discipline",
@@ -8554,8 +8554,8 @@
       "contributor": null,
       "community": 1,
       "norm_label": "glossary vocabulary discipline",
-      "community_name": "Test Design Principles",
-      "id": "_agents_skills_setup_matt_pocock_skills_domain_glossary_vocabulary_discipline"
+      "id": "_agents_skills_setup_matt_pocock_skills_domain_glossary_vocabulary_discipline",
+      "community_name": "Test Design Principles"
     },
     {
       "label": "ADR Conflict Flagging",
@@ -8569,8 +8569,8 @@
       "contributor": null,
       "community": 1,
       "norm_label": "adr conflict flagging",
-      "community_name": "Test Design Principles",
-      "id": "_agents_skills_setup_matt_pocock_skills_domain_adr_conflict_flagging"
+      "id": "_agents_skills_setup_matt_pocock_skills_domain_adr_conflict_flagging",
+      "community_name": "Test Design Principles"
     },
     {
       "label": "GitHub Issue Tracker",
@@ -8583,8 +8583,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "github issue tracker",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_setup_matt_pocock_skills_issue_tracker_github_github_issue_tracker"
+      "id": "_agents_skills_setup_matt_pocock_skills_issue_tracker_github_github_issue_tracker",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "External Pull Request Triage",
@@ -8597,8 +8597,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "external pull request triage",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_setup_matt_pocock_skills_issue_tracker_github_external_pr_triage"
+      "id": "_agents_skills_setup_matt_pocock_skills_issue_tracker_github_external_pr_triage",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "Shared GitHub Issue and PR Number Space",
@@ -8611,8 +8611,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "shared github issue and pr number space",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_setup_matt_pocock_skills_issue_tracker_github_shared_issue_pr_number_space"
+      "id": "_agents_skills_setup_matt_pocock_skills_issue_tracker_github_shared_issue_pr_number_space",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "GitHub Wayfinding Operations",
@@ -8625,8 +8625,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "github wayfinding operations",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_setup_matt_pocock_skills_issue_tracker_github_github_wayfinding_operations"
+      "id": "_agents_skills_setup_matt_pocock_skills_issue_tracker_github_github_wayfinding_operations",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "GitLab Issue Tracker",
@@ -8639,8 +8639,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "gitlab issue tracker",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_setup_matt_pocock_skills_issue_tracker_gitlab_gitlab_issue_tracker"
+      "id": "_agents_skills_setup_matt_pocock_skills_issue_tracker_gitlab_gitlab_issue_tracker",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "External Merge Request Triage",
@@ -8653,8 +8653,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "external merge request triage",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_setup_matt_pocock_skills_issue_tracker_gitlab_external_merge_request_triage"
+      "id": "_agents_skills_setup_matt_pocock_skills_issue_tracker_gitlab_external_merge_request_triage",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "Separate GitLab Issue and MR Number Spaces",
@@ -8667,8 +8667,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "separate gitlab issue and mr number spaces",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_setup_matt_pocock_skills_issue_tracker_gitlab_separate_issue_mr_number_spaces"
+      "id": "_agents_skills_setup_matt_pocock_skills_issue_tracker_gitlab_separate_issue_mr_number_spaces",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "Local Markdown Issue Tracker",
@@ -8681,8 +8681,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "local markdown issue tracker",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_setup_matt_pocock_skills_issue_tracker_local_local_markdown_issue_tracker"
+      "id": "_agents_skills_setup_matt_pocock_skills_issue_tracker_local_local_markdown_issue_tracker",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "Scratch Issue Layout",
@@ -8695,8 +8695,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "scratch issue layout",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_setup_matt_pocock_skills_issue_tracker_local_scratch_issue_layout"
+      "id": "_agents_skills_setup_matt_pocock_skills_issue_tracker_local_scratch_issue_layout",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "Local Markdown Wayfinding Operations",
@@ -8709,8 +8709,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "local markdown wayfinding operations",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_setup_matt_pocock_skills_issue_tracker_local_local_wayfinding_operations"
+      "id": "_agents_skills_setup_matt_pocock_skills_issue_tracker_local_local_wayfinding_operations",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "Triage Label Mapping",
@@ -8723,8 +8723,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "triage label mapping",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_setup_matt_pocock_skills_triage_labels_triage_label_mapping"
+      "id": "_agents_skills_setup_matt_pocock_skills_triage_labels_triage_label_mapping",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "needs-triage",
@@ -8737,8 +8737,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "needs-triage",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_setup_matt_pocock_skills_triage_labels_needs_triage"
+      "id": "_agents_skills_setup_matt_pocock_skills_triage_labels_needs_triage",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "needs-info",
@@ -8751,8 +8751,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "needs-info",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_setup_matt_pocock_skills_triage_labels_needs_info"
+      "id": "_agents_skills_setup_matt_pocock_skills_triage_labels_needs_info",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "ready-for-agent",
@@ -8765,8 +8765,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "ready-for-agent",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_setup_matt_pocock_skills_triage_labels_ready_for_agent"
+      "id": "_agents_skills_setup_matt_pocock_skills_triage_labels_ready_for_agent",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "ready-for-human",
@@ -8779,8 +8779,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "ready-for-human",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_setup_matt_pocock_skills_triage_labels_ready_for_human"
+      "id": "_agents_skills_setup_matt_pocock_skills_triage_labels_ready_for_human",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "wontfix",
@@ -8793,8 +8793,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "wontfix",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_setup_matt_pocock_skills_triage_labels_wontfix"
+      "id": "_agents_skills_setup_matt_pocock_skills_triage_labels_wontfix",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "Test-Driven Development",
@@ -8807,8 +8807,8 @@
       "contributor": null,
       "community": 1,
       "norm_label": "test-driven development",
-      "community_name": "Test Design Principles",
-      "id": "_agents_skills_tdd_skill_test_driven_development"
+      "id": "_agents_skills_tdd_skill_test_driven_development",
+      "community_name": "Test Design Principles"
     },
     {
       "label": "Red-Green Loop",
@@ -8821,8 +8821,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "red-green loop",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_tdd_skill_red_green_loop"
+      "id": "_agents_skills_tdd_skill_red_green_loop",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "Behavior Through Public Interfaces",
@@ -8836,8 +8836,8 @@
       "contributor": null,
       "community": 1,
       "norm_label": "behavior through public interfaces",
-      "community_name": "Test Design Principles",
-      "id": "_agents_skills_tdd_skill_behavior_through_public_interfaces"
+      "id": "_agents_skills_tdd_skill_behavior_through_public_interfaces",
+      "community_name": "Test Design Principles"
     },
     {
       "label": "Pre-Agreed Test Seams",
@@ -8851,8 +8851,8 @@
       "contributor": null,
       "community": 1,
       "norm_label": "pre-agreed test seams",
-      "community_name": "Test Design Principles",
-      "id": "_agents_skills_tdd_skill_pre_agreed_test_seams"
+      "id": "_agents_skills_tdd_skill_pre_agreed_test_seams",
+      "community_name": "Test Design Principles"
     },
     {
       "label": "Implementation-Coupled Test",
@@ -8865,8 +8865,8 @@
       "contributor": null,
       "community": 1,
       "norm_label": "implementation-coupled test",
-      "community_name": "Test Design Principles",
-      "id": "_agents_skills_tdd_skill_implementation_coupled_test"
+      "id": "_agents_skills_tdd_skill_implementation_coupled_test",
+      "community_name": "Test Design Principles"
     },
     {
       "label": "Tautological Test",
@@ -8879,8 +8879,8 @@
       "contributor": null,
       "community": 1,
       "norm_label": "tautological test",
-      "community_name": "Test Design Principles",
-      "id": "_agents_skills_tdd_skill_tautological_test"
+      "id": "_agents_skills_tdd_skill_tautological_test",
+      "community_name": "Test Design Principles"
     },
     {
       "label": "Horizontal Slicing",
@@ -8893,8 +8893,8 @@
       "contributor": null,
       "community": 1,
       "norm_label": "horizontal slicing",
-      "community_name": "Test Design Principles",
-      "id": "_agents_skills_tdd_skill_horizontal_slicing"
+      "id": "_agents_skills_tdd_skill_horizontal_slicing",
+      "community_name": "Test Design Principles"
     },
     {
       "label": "Vertical Slice TDD",
@@ -8908,8 +8908,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "vertical slice tdd",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_tdd_skill_vertical_slice_tdd"
+      "id": "_agents_skills_tdd_skill_vertical_slice_tdd",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "System-Boundary Mocking",
@@ -8922,8 +8922,8 @@
       "contributor": null,
       "community": 1,
       "norm_label": "system-boundary mocking",
-      "community_name": "Test Design Principles",
-      "id": "_agents_skills_tdd_mocking_system_boundary_mocking"
+      "id": "_agents_skills_tdd_mocking_system_boundary_mocking",
+      "community_name": "Test Design Principles"
     },
     {
       "label": "Dependency Injection",
@@ -8937,8 +8937,8 @@
       "contributor": null,
       "community": 1,
       "norm_label": "dependency injection",
-      "community_name": "Test Design Principles",
-      "id": "_agents_skills_tdd_mocking_dependency_injection"
+      "id": "_agents_skills_tdd_mocking_dependency_injection",
+      "community_name": "Test Design Principles"
     },
     {
       "label": "SDK-Style Boundary Interface",
@@ -8952,8 +8952,8 @@
       "contributor": null,
       "community": 1,
       "norm_label": "sdk-style boundary interface",
-      "community_name": "Test Design Principles",
-      "id": "_agents_skills_tdd_mocking_sdk_style_boundary_interface"
+      "id": "_agents_skills_tdd_mocking_sdk_style_boundary_interface",
+      "community_name": "Test Design Principles"
     },
     {
       "label": "Internal Collaborator Mocking",
@@ -8966,8 +8966,8 @@
       "contributor": null,
       "community": 1,
       "norm_label": "internal collaborator mocking",
-      "community_name": "Test Design Principles",
-      "id": "_agents_skills_tdd_mocking_internal_collaborator_mocking"
+      "id": "_agents_skills_tdd_mocking_internal_collaborator_mocking",
+      "community_name": "Test Design Principles"
     },
     {
       "label": "Good and Bad Tests",
@@ -8980,8 +8980,8 @@
       "contributor": null,
       "community": 1,
       "norm_label": "good and bad tests",
-      "community_name": "Test Design Principles",
-      "id": "_agents_skills_tdd_tests_good_and_bad_tests"
+      "id": "_agents_skills_tdd_tests_good_and_bad_tests",
+      "community_name": "Test Design Principles"
     },
     {
       "label": "Integration-Style Behavior Test",
@@ -8994,8 +8994,8 @@
       "contributor": null,
       "community": 1,
       "norm_label": "integration-style behavior test",
-      "community_name": "Test Design Principles",
-      "id": "_agents_skills_tdd_tests_integration_style_behavior_test"
+      "id": "_agents_skills_tdd_tests_integration_style_behavior_test",
+      "community_name": "Test Design Principles"
     },
     {
       "label": "Interface-Based Verification",
@@ -9009,8 +9009,8 @@
       "contributor": null,
       "community": 1,
       "norm_label": "interface-based verification",
-      "community_name": "Test Design Principles",
-      "id": "_agents_skills_tdd_tests_interface_based_verification"
+      "id": "_agents_skills_tdd_tests_interface_based_verification",
+      "community_name": "Test Design Principles"
     },
     {
       "label": "Independent Expected Value",
@@ -9024,8 +9024,8 @@
       "contributor": null,
       "community": 1,
       "norm_label": "independent expected value",
-      "community_name": "Test Design Principles",
-      "id": "_agents_skills_tdd_tests_independent_expected_value"
+      "id": "_agents_skills_tdd_tests_independent_expected_value",
+      "community_name": "Test Design Principles"
     },
     {
       "label": "Glossary Format",
@@ -9038,8 +9038,8 @@
       "contributor": null,
       "community": 1,
       "norm_label": "glossary format",
-      "community_name": "Test Design Principles",
-      "id": "_agents_skills_teach_glossary_format_glossary_format"
+      "id": "_agents_skills_teach_glossary_format_glossary_format",
+      "community_name": "Test Design Principles"
     },
     {
       "label": "Canonical Learning Language",
@@ -9053,8 +9053,8 @@
       "contributor": null,
       "community": 1,
       "norm_label": "canonical learning language",
-      "community_name": "Test Design Principles",
-      "id": "_agents_skills_teach_glossary_format_canonical_learning_language"
+      "id": "_agents_skills_teach_glossary_format_canonical_learning_language",
+      "community_name": "Test Design Principles"
     },
     {
       "label": "Evidence-Gated Term Promotion",
@@ -9068,8 +9068,8 @@
       "contributor": null,
       "community": 9,
       "norm_label": "evidence-gated term promotion",
-      "community_name": "Research and Teaching Skills",
-      "id": "_agents_skills_teach_glossary_format_evidence_gated_term_promotion"
+      "id": "_agents_skills_teach_glossary_format_evidence_gated_term_promotion",
+      "community_name": "Research and Teaching Skills"
     },
     {
       "label": "Glossary Ambiguity Resolution",
@@ -9082,8 +9082,8 @@
       "contributor": null,
       "community": 1,
       "norm_label": "glossary ambiguity resolution",
-      "community_name": "Test Design Principles",
-      "id": "_agents_skills_teach_glossary_format_glossary_ambiguity_resolution"
+      "id": "_agents_skills_teach_glossary_format_glossary_ambiguity_resolution",
+      "community_name": "Test Design Principles"
     },
     {
       "label": "Learning Record Format",
@@ -9096,8 +9096,8 @@
       "contributor": null,
       "community": 9,
       "norm_label": "learning record format",
-      "community_name": "Research and Teaching Skills",
-      "id": "_agents_skills_teach_learning_record_format_learning_record_format"
+      "id": "_agents_skills_teach_learning_record_format_learning_record_format",
+      "community_name": "Research and Teaching Skills"
     },
     {
       "label": "Decision-Grade Learning Record",
@@ -9111,8 +9111,8 @@
       "contributor": null,
       "community": 9,
       "norm_label": "decision-grade learning record",
-      "community_name": "Research and Teaching Skills",
-      "id": "_agents_skills_teach_learning_record_format_decision_grade_learning_record"
+      "id": "_agents_skills_teach_learning_record_format_decision_grade_learning_record",
+      "community_name": "Research and Teaching Skills"
     },
     {
       "label": "Evidence of Learning",
@@ -9126,8 +9126,8 @@
       "contributor": null,
       "community": 9,
       "norm_label": "evidence of learning",
-      "community_name": "Research and Teaching Skills",
-      "id": "_agents_skills_teach_learning_record_format_evidence_of_learning"
+      "id": "_agents_skills_teach_learning_record_format_evidence_of_learning",
+      "community_name": "Research and Teaching Skills"
     },
     {
       "label": "Learning Record Supersession",
@@ -9141,8 +9141,8 @@
       "contributor": null,
       "community": 9,
       "norm_label": "learning record supersession",
-      "community_name": "Research and Teaching Skills",
-      "id": "_agents_skills_teach_learning_record_format_learning_record_supersession"
+      "id": "_agents_skills_teach_learning_record_format_learning_record_supersession",
+      "community_name": "Research and Teaching Skills"
     },
     {
       "label": "Zone of Proximal Development Input",
@@ -9155,8 +9155,8 @@
       "contributor": null,
       "community": 9,
       "norm_label": "zone of proximal development input",
-      "community_name": "Research and Teaching Skills",
-      "id": "_agents_skills_teach_learning_record_format_zone_of_proximal_development_input"
+      "id": "_agents_skills_teach_learning_record_format_zone_of_proximal_development_input",
+      "community_name": "Research and Teaching Skills"
     },
     {
       "label": "Mission Format",
@@ -9169,8 +9169,8 @@
       "contributor": null,
       "community": 9,
       "norm_label": "mission format",
-      "community_name": "Research and Teaching Skills",
-      "id": "_agents_skills_teach_mission_format_mission_format"
+      "id": "_agents_skills_teach_mission_format_mission_format",
+      "community_name": "Research and Teaching Skills"
     },
     {
       "label": "Concrete Learning Mission",
@@ -9184,8 +9184,8 @@
       "contributor": null,
       "community": 9,
       "norm_label": "concrete learning mission",
-      "community_name": "Research and Teaching Skills",
-      "id": "_agents_skills_teach_mission_format_concrete_learning_mission"
+      "id": "_agents_skills_teach_mission_format_concrete_learning_mission",
+      "community_name": "Research and Teaching Skills"
     },
     {
       "label": "One Mission per Workspace",
@@ -9199,8 +9199,8 @@
       "contributor": null,
       "community": 9,
       "norm_label": "one mission per workspace",
-      "community_name": "Research and Teaching Skills",
-      "id": "_agents_skills_teach_mission_format_one_mission_per_workspace"
+      "id": "_agents_skills_teach_mission_format_one_mission_per_workspace",
+      "community_name": "Research and Teaching Skills"
     },
     {
       "label": "Mission Success, Constraints, and Scope",
@@ -9213,8 +9213,8 @@
       "contributor": null,
       "community": 9,
       "norm_label": "mission success, constraints, and scope",
-      "community_name": "Research and Teaching Skills",
-      "id": "_agents_skills_teach_mission_format_success_constraints_and_scope"
+      "id": "_agents_skills_teach_mission_format_success_constraints_and_scope",
+      "community_name": "Research and Teaching Skills"
     },
     {
       "label": "Resources Format",
@@ -9227,8 +9227,8 @@
       "contributor": null,
       "community": 9,
       "norm_label": "resources format",
-      "community_name": "Research and Teaching Skills",
-      "id": "_agents_skills_teach_resources_format_resources_format"
+      "id": "_agents_skills_teach_resources_format_resources_format",
+      "community_name": "Research and Teaching Skills"
     },
     {
       "label": "High-Trust Resources",
@@ -9242,8 +9242,8 @@
       "contributor": null,
       "community": 9,
       "norm_label": "high-trust resources",
-      "community_name": "Research and Teaching Skills",
-      "id": "_agents_skills_teach_resources_format_high_trust_resources"
+      "id": "_agents_skills_teach_resources_format_high_trust_resources",
+      "community_name": "Research and Teaching Skills"
     },
     {
       "label": "Knowledge and Wisdom Resources",
@@ -9256,8 +9256,8 @@
       "contributor": null,
       "community": 9,
       "norm_label": "knowledge and wisdom resources",
-      "community_name": "Research and Teaching Skills",
-      "id": "_agents_skills_teach_resources_format_knowledge_and_wisdom_resources"
+      "id": "_agents_skills_teach_resources_format_knowledge_and_wisdom_resources",
+      "community_name": "Research and Teaching Skills"
     },
     {
       "label": "Resource Gaps and Pruning",
@@ -9271,8 +9271,8 @@
       "contributor": null,
       "community": 9,
       "norm_label": "resource gaps and pruning",
-      "community_name": "Research and Teaching Skills",
-      "id": "_agents_skills_teach_resources_format_resource_gaps_and_pruning"
+      "id": "_agents_skills_teach_resources_format_resource_gaps_and_pruning",
+      "community_name": "Research and Teaching Skills"
     },
     {
       "label": "Teach",
@@ -9285,8 +9285,8 @@
       "contributor": null,
       "community": 9,
       "norm_label": "teach",
-      "community_name": "Research and Teaching Skills",
-      "id": "_agents_skills_teach_skill_teach"
+      "id": "_agents_skills_teach_skill_teach",
+      "community_name": "Research and Teaching Skills"
     },
     {
       "label": "Teaching Workspace",
@@ -9299,8 +9299,8 @@
       "contributor": null,
       "community": 9,
       "norm_label": "teaching workspace",
-      "community_name": "Research and Teaching Skills",
-      "id": "_agents_skills_teach_skill_teaching_workspace"
+      "id": "_agents_skills_teach_skill_teaching_workspace",
+      "community_name": "Research and Teaching Skills"
     },
     {
       "label": "Knowledge, Skills, and Wisdom",
@@ -9313,8 +9313,8 @@
       "contributor": null,
       "community": 9,
       "norm_label": "knowledge, skills, and wisdom",
-      "community_name": "Research and Teaching Skills",
-      "id": "_agents_skills_teach_skill_knowledge_skills_and_wisdom"
+      "id": "_agents_skills_teach_skill_knowledge_skills_and_wisdom",
+      "community_name": "Research and Teaching Skills"
     },
     {
       "label": "Mission-Grounded Teaching",
@@ -9328,8 +9328,8 @@
       "contributor": null,
       "community": 9,
       "norm_label": "mission-grounded teaching",
-      "community_name": "Research and Teaching Skills",
-      "id": "_agents_skills_teach_skill_mission_grounding"
+      "id": "_agents_skills_teach_skill_mission_grounding",
+      "community_name": "Research and Teaching Skills"
     },
     {
       "label": "Self-Contained HTML Lesson",
@@ -9342,8 +9342,8 @@
       "contributor": null,
       "community": 9,
       "norm_label": "self-contained html lesson",
-      "community_name": "Research and Teaching Skills",
-      "id": "_agents_skills_teach_skill_self_contained_html_lesson"
+      "id": "_agents_skills_teach_skill_self_contained_html_lesson",
+      "community_name": "Research and Teaching Skills"
     },
     {
       "label": "Reusable Lesson Assets",
@@ -9357,8 +9357,8 @@
       "contributor": null,
       "community": 9,
       "norm_label": "reusable lesson assets",
-      "community_name": "Research and Teaching Skills",
-      "id": "_agents_skills_teach_skill_reusable_lesson_assets"
+      "id": "_agents_skills_teach_skill_reusable_lesson_assets",
+      "community_name": "Research and Teaching Skills"
     },
     {
       "label": "Fluency Strength",
@@ -9371,8 +9371,8 @@
       "contributor": null,
       "community": 38,
       "norm_label": "fluency strength",
-      "community_name": "Learning Retention Techniques",
-      "id": "_agents_skills_teach_skill_fluency_strength"
+      "id": "_agents_skills_teach_skill_fluency_strength",
+      "community_name": "Learning Retention Techniques"
     },
     {
       "label": "Storage Strength",
@@ -9386,8 +9386,8 @@
       "contributor": null,
       "community": 38,
       "norm_label": "storage strength",
-      "community_name": "Learning Retention Techniques",
-      "id": "_agents_skills_teach_skill_storage_strength"
+      "id": "_agents_skills_teach_skill_storage_strength",
+      "community_name": "Learning Retention Techniques"
     },
     {
       "label": "Desirable Difficulty",
@@ -9401,8 +9401,8 @@
       "contributor": null,
       "community": 38,
       "norm_label": "desirable difficulty",
-      "community_name": "Learning Retention Techniques",
-      "id": "_agents_skills_teach_skill_desirable_difficulty"
+      "id": "_agents_skills_teach_skill_desirable_difficulty",
+      "community_name": "Learning Retention Techniques"
     },
     {
       "label": "Zone of Proximal Development",
@@ -9415,8 +9415,8 @@
       "contributor": null,
       "community": 9,
       "norm_label": "zone of proximal development",
-      "community_name": "Research and Teaching Skills",
-      "id": "_agents_skills_teach_skill_zone_of_proximal_development"
+      "id": "_agents_skills_teach_skill_zone_of_proximal_development",
+      "community_name": "Research and Teaching Skills"
     },
     {
       "label": "Tight Feedback Loop",
@@ -9430,8 +9430,8 @@
       "contributor": null,
       "community": 9,
       "norm_label": "tight feedback loop",
-      "community_name": "Research and Teaching Skills",
-      "id": "_agents_skills_teach_skill_tight_feedback_loop"
+      "id": "_agents_skills_teach_skill_tight_feedback_loop",
+      "community_name": "Research and Teaching Skills"
     },
     {
       "label": "Community Wisdom",
@@ -9445,8 +9445,8 @@
       "contributor": null,
       "community": 9,
       "norm_label": "community wisdom",
-      "community_name": "Research and Teaching Skills",
-      "id": "_agents_skills_teach_skill_community_wisdom"
+      "id": "_agents_skills_teach_skill_community_wisdom",
+      "community_name": "Research and Teaching Skills"
     },
     {
       "label": "Reference Documents",
@@ -9459,8 +9459,8 @@
       "contributor": null,
       "community": 1,
       "norm_label": "reference documents",
-      "community_name": "Test Design Principles",
-      "id": "_agents_skills_teach_skill_reference_documents"
+      "id": "_agents_skills_teach_skill_reference_documents",
+      "community_name": "Test Design Principles"
     },
     {
       "label": "Teaching Notes",
@@ -9473,8 +9473,8 @@
       "contributor": null,
       "community": 9,
       "norm_label": "teaching notes",
-      "community_name": "Research and Teaching Skills",
-      "id": "_agents_skills_teach_skill_teaching_notes"
+      "id": "_agents_skills_teach_skill_teaching_notes",
+      "community_name": "Research and Teaching Skills"
     },
     {
       "label": "To Issues",
@@ -9487,8 +9487,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "to issues",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_to_issues_skill_to_issues"
+      "id": "_agents_skills_to_issues_skill_to_issues",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "Prefactoring",
@@ -9502,8 +9502,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "prefactoring",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_to_issues_skill_prefactoring"
+      "id": "_agents_skills_to_issues_skill_prefactoring",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "Tracer Bullet Issues",
@@ -9517,8 +9517,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "tracer bullet issues",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_to_issues_skill_tracer_bullet_issues"
+      "id": "_agents_skills_to_issues_skill_tracer_bullet_issues",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "Vertical Slice Rules",
@@ -9531,8 +9531,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "vertical slice rules",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_to_issues_skill_vertical_slice_rules"
+      "id": "_agents_skills_to_issues_skill_vertical_slice_rules",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "Issue Breakdown Quiz",
@@ -9545,8 +9545,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "issue breakdown quiz",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_to_issues_skill_breakdown_quiz"
+      "id": "_agents_skills_to_issues_skill_breakdown_quiz",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "Dependency-Ordered Issue Publication",
@@ -9560,8 +9560,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "dependency-ordered issue publication",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_to_issues_skill_dependency_ordered_publication"
+      "id": "_agents_skills_to_issues_skill_dependency_ordered_publication",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "AFK-Ready Issues",
@@ -9574,8 +9574,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "afk-ready issues",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_to_issues_skill_afk_ready_issues"
+      "id": "_agents_skills_to_issues_skill_afk_ready_issues",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "Vertical Slice Issue Body Template",
@@ -9588,8 +9588,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "vertical slice issue body template",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_to_issues_skill_issue_body_template"
+      "id": "_agents_skills_to_issues_skill_issue_body_template",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "Parent Issue Preservation",
@@ -9603,8 +9603,8 @@
       "contributor": null,
       "community": 21,
       "norm_label": "parent issue preservation",
-      "community_name": "Issue Tracker Integrations",
-      "id": "_agents_skills_to_issues_skill_parent_issue_preservation"
+      "id": "_agents_skills_to_issues_skill_parent_issue_preservation",
+      "community_name": "Issue Tracker Integrations"
     },
     {
       "label": "To-PRD Skill",
@@ -9617,8 +9617,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "to-prd skill",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_to_prd_skill_to_prd"
+      "id": "_agents_skills_to_prd_skill_to_prd",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Highest-Level Test Seam Selection",
@@ -9631,8 +9631,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "highest-level test seam selection",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_to_prd_skill_test_seam_selection"
+      "id": "_agents_skills_to_prd_skill_test_seam_selection",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "PRD Template",
@@ -9645,8 +9645,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "prd template",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_to_prd_skill_prd_template"
+      "id": "_agents_skills_to_prd_skill_prd_template",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Ready-for-Agent PRD Publication",
@@ -9659,8 +9659,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "ready-for-agent prd publication",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_to_prd_skill_ready_for_agent_publication"
+      "id": "_agents_skills_to_prd_skill_ready_for_agent_publication",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Agent Brief",
@@ -9673,8 +9673,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "agent brief",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_triage_agent_brief_agent_brief"
+      "id": "_agents_skills_triage_agent_brief_agent_brief",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Durability over Precision",
@@ -9687,8 +9687,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "durability over precision",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_triage_agent_brief_durability_over_precision"
+      "id": "_agents_skills_triage_agent_brief_durability_over_precision",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Behavioral, Not Procedural Contract",
@@ -9701,8 +9701,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "behavioral, not procedural contract",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_triage_agent_brief_behavioral_contract"
+      "id": "_agents_skills_triage_agent_brief_behavioral_contract",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Complete Acceptance Criteria",
@@ -9715,8 +9715,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "complete acceptance criteria",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_triage_agent_brief_complete_acceptance_criteria"
+      "id": "_agents_skills_triage_agent_brief_complete_acceptance_criteria",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Explicit Scope Boundaries",
@@ -9729,8 +9729,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "explicit scope boundaries",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_triage_agent_brief_explicit_scope_boundaries"
+      "id": "_agents_skills_triage_agent_brief_explicit_scope_boundaries",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Out-of-Scope Knowledge Base",
@@ -9743,8 +9743,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "out-of-scope knowledge base",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_triage_out_of_scope_out_of_scope_knowledge_base"
+      "id": "_agents_skills_triage_out_of_scope_out_of_scope_knowledge_base",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Institutional Memory for Rejections",
@@ -9757,8 +9757,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "institutional memory for rejections",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_triage_out_of_scope_institutional_memory"
+      "id": "_agents_skills_triage_out_of_scope_institutional_memory",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Rejected-Request Deduplication",
@@ -9771,8 +9771,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "rejected-request deduplication",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_triage_out_of_scope_rejection_deduplication"
+      "id": "_agents_skills_triage_out_of_scope_rejection_deduplication",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Concept-Similarity Matching",
@@ -9785,8 +9785,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "concept-similarity matching",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_triage_out_of_scope_concept_similarity_matching"
+      "id": "_agents_skills_triage_out_of_scope_concept_similarity_matching",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Enhancement Rejection Recording Rule",
@@ -9799,8 +9799,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "enhancement rejection recording rule",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_triage_out_of_scope_enhancement_rejection_rule"
+      "id": "_agents_skills_triage_out_of_scope_enhancement_rejection_rule",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Triage State Machine",
@@ -9813,8 +9813,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "triage state machine",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_triage_skill_triage_state_machine"
+      "id": "_agents_skills_triage_skill_triage_state_machine",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Bug and Enhancement Category Roles",
@@ -9827,8 +9827,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "bug and enhancement category roles",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_triage_skill_category_roles"
+      "id": "_agents_skills_triage_skill_category_roles",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Triage State Roles",
@@ -9841,8 +9841,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "triage state roles",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_triage_skill_state_roles"
+      "id": "_agents_skills_triage_skill_state_roles",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Claim Verification Before Grilling",
@@ -9855,8 +9855,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "claim verification before grilling",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_triage_skill_claim_verification"
+      "id": "_agents_skills_triage_skill_claim_verification",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Redundancy and Prior-Rejection Checks",
@@ -9869,8 +9869,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "redundancy and prior-rejection checks",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_triage_skill_redundancy_and_prior_rejection_checks"
+      "id": "_agents_skills_triage_skill_redundancy_and_prior_rejection_checks",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Grilling and Domain-Modeling Flow",
@@ -9883,8 +9883,8 @@
       "contributor": null,
       "community": 1,
       "norm_label": "grilling and domain-modeling flow",
-      "community_name": "Test Design Principles",
-      "id": "_agents_skills_triage_skill_grilling_flow"
+      "id": "_agents_skills_triage_skill_grilling_flow",
+      "community_name": "Test Design Principles"
     },
     {
       "label": "Ready-for-Agent Transition",
@@ -9897,8 +9897,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "ready-for-agent transition",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_triage_skill_ready_for_agent_transition"
+      "id": "_agents_skills_triage_skill_ready_for_agent_transition",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Building Great Skills Glossary",
@@ -9911,8 +9911,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "building great skills glossary",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_writing_great_skills_glossary_building_great_skills_glossary"
+      "id": "_agents_skills_writing_great_skills_glossary_building_great_skills_glossary",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Predictability",
@@ -9925,8 +9925,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "predictability",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_writing_great_skills_glossary_predictability"
+      "id": "_agents_skills_writing_great_skills_glossary_predictability",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Model-Invoked Skill",
@@ -9939,8 +9939,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "model-invoked skill",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_writing_great_skills_glossary_model_invoked_skill"
+      "id": "_agents_skills_writing_great_skills_glossary_model_invoked_skill",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "User-Invoked Skill",
@@ -9953,8 +9953,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "user-invoked skill",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_writing_great_skills_glossary_user_invoked_skill"
+      "id": "_agents_skills_writing_great_skills_glossary_user_invoked_skill",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Context Pointer",
@@ -9967,8 +9967,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "context pointer",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_writing_great_skills_glossary_context_pointer"
+      "id": "_agents_skills_writing_great_skills_glossary_context_pointer",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Context Load",
@@ -9981,8 +9981,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "context load",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_writing_great_skills_glossary_context_load"
+      "id": "_agents_skills_writing_great_skills_glossary_context_load",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Cognitive Load",
@@ -9995,8 +9995,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "cognitive load",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_writing_great_skills_glossary_cognitive_load"
+      "id": "_agents_skills_writing_great_skills_glossary_cognitive_load",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Router Skill",
@@ -10009,8 +10009,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "router skill",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_writing_great_skills_glossary_router_skill"
+      "id": "_agents_skills_writing_great_skills_glossary_router_skill",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Skill Granularity",
@@ -10023,8 +10023,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "skill granularity",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_writing_great_skills_glossary_granularity"
+      "id": "_agents_skills_writing_great_skills_glossary_granularity",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Information Hierarchy",
@@ -10037,8 +10037,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "information hierarchy",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_writing_great_skills_glossary_information_hierarchy"
+      "id": "_agents_skills_writing_great_skills_glossary_information_hierarchy",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Progressive Disclosure",
@@ -10051,8 +10051,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "progressive disclosure",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_writing_great_skills_glossary_progressive_disclosure"
+      "id": "_agents_skills_writing_great_skills_glossary_progressive_disclosure",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Leading Word",
@@ -10065,8 +10065,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "leading word",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_writing_great_skills_glossary_leading_word"
+      "id": "_agents_skills_writing_great_skills_glossary_leading_word",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Completion Criterion",
@@ -10079,8 +10079,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "completion criterion",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_writing_great_skills_glossary_completion_criterion"
+      "id": "_agents_skills_writing_great_skills_glossary_completion_criterion",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Legwork",
@@ -10093,8 +10093,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "legwork",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_writing_great_skills_glossary_legwork"
+      "id": "_agents_skills_writing_great_skills_glossary_legwork",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Post-Completion Steps",
@@ -10107,8 +10107,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "post-completion steps",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_writing_great_skills_glossary_post_completion_steps"
+      "id": "_agents_skills_writing_great_skills_glossary_post_completion_steps",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Premature Completion",
@@ -10121,8 +10121,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "premature completion",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_writing_great_skills_glossary_premature_completion"
+      "id": "_agents_skills_writing_great_skills_glossary_premature_completion",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Single Source of Truth",
@@ -10135,8 +10135,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "single source of truth",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_writing_great_skills_glossary_single_source_of_truth"
+      "id": "_agents_skills_writing_great_skills_glossary_single_source_of_truth",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Duplication",
@@ -10149,8 +10149,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "duplication",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_writing_great_skills_glossary_duplication"
+      "id": "_agents_skills_writing_great_skills_glossary_duplication",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Relevance",
@@ -10163,8 +10163,8 @@
       "contributor": null,
       "community": 46,
       "norm_label": "relevance",
-      "community_name": "Skill Content Pruning",
-      "id": "_agents_skills_writing_great_skills_glossary_relevance"
+      "id": "_agents_skills_writing_great_skills_glossary_relevance",
+      "community_name": "Skill Content Pruning"
     },
     {
       "label": "Sediment",
@@ -10177,8 +10177,8 @@
       "contributor": null,
       "community": 46,
       "norm_label": "sediment",
-      "community_name": "Skill Content Pruning",
-      "id": "_agents_skills_writing_great_skills_glossary_sediment"
+      "id": "_agents_skills_writing_great_skills_glossary_sediment",
+      "community_name": "Skill Content Pruning"
     },
     {
       "label": "No-Op Instruction",
@@ -10191,8 +10191,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "no-op instruction",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_writing_great_skills_glossary_no_op"
+      "id": "_agents_skills_writing_great_skills_glossary_no_op",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Writing Great Skills",
@@ -10205,8 +10205,8 @@
       "contributor": null,
       "community": 5,
       "norm_label": "writing great skills",
-      "community_name": "Skill Contracts and Triage",
-      "id": "_agents_skills_writing_great_skills_skill_writing_great_skills"
+      "id": "_agents_skills_writing_great_skills_skill_writing_great_skills",
+      "community_name": "Skill Contracts and Triage"
     },
     {
       "label": "Dependabot Configuration",
@@ -10219,8 +10219,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "dependabot configuration",
-      "community_name": "CI and Release Automation",
-      "id": "_github_dependabot_dependabot_configuration"
+      "id": "_github_dependabot_dependabot_configuration",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "Weekly GitHub Actions Updates",
@@ -10233,8 +10233,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "weekly github actions updates",
-      "community_name": "CI and Release Automation",
-      "id": "_github_dependabot_github_actions_updates"
+      "id": "_github_dependabot_github_actions_updates",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "Weekly npm Updates",
@@ -10247,8 +10247,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "weekly npm updates",
-      "community_name": "CI and Release Automation",
-      "id": "_github_dependabot_npm_updates"
+      "id": "_github_dependabot_npm_updates",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "Weekly Cargo Updates",
@@ -10261,8 +10261,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "weekly cargo updates",
-      "community_name": "CI and Release Automation",
-      "id": "_github_dependabot_cargo_updates"
+      "id": "_github_dependabot_cargo_updates",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "Auto-Submit and Auto-Close Implementation Plan",
@@ -10275,8 +10275,8 @@
       "contributor": null,
       "community": 18,
       "norm_label": "auto-submit and auto-close implementation plan",
-      "community_name": "Submission Automation and Favorites",
-      "id": "docs_superpowers_plans_2026_07_08_auto_submit_auto_close_auto_submit_auto_close_implementation_plan"
+      "id": "docs_superpowers_plans_2026_07_08_auto_submit_auto_close_auto_submit_auto_close_implementation_plan",
+      "community_name": "Submission Automation and Favorites"
     },
     {
       "label": "Auto-Submit and Auto-Close Design",
@@ -10289,8 +10289,8 @@
       "contributor": null,
       "community": 18,
       "norm_label": "auto-submit and auto-close design",
-      "community_name": "Submission Automation and Favorites",
-      "id": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_submit_auto_close_design"
+      "id": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_submit_auto_close_design",
+      "community_name": "Submission Automation and Favorites"
     },
     {
       "label": "Auto-Submit Preference",
@@ -10303,8 +10303,8 @@
       "contributor": null,
       "community": 18,
       "norm_label": "auto-submit preference",
-      "community_name": "Submission Automation and Favorites",
-      "id": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_submit"
+      "id": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_submit",
+      "community_name": "Submission Automation and Favorites"
     },
     {
       "label": "Auto-Close Preference",
@@ -10317,8 +10317,8 @@
       "contributor": null,
       "community": 18,
       "norm_label": "auto-close preference",
-      "community_name": "Submission Automation and Favorites",
-      "id": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_close"
+      "id": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_close",
+      "community_name": "Submission Automation and Favorites"
     },
     {
       "label": "Auto-Fill to Auto-Submit to Auto-Close Cascade Rule",
@@ -10331,8 +10331,8 @@
       "contributor": null,
       "community": 18,
       "norm_label": "auto-fill to auto-submit to auto-close cascade rule",
-      "community_name": "Submission Automation and Favorites",
-      "id": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_cascade_rule"
+      "id": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_cascade_rule",
+      "community_name": "Submission Automation and Favorites"
     },
     {
       "label": "Auto-Submit Preference Schema",
@@ -10345,8 +10345,8 @@
       "contributor": null,
       "community": 18,
       "norm_label": "auto-submit preference schema",
-      "community_name": "Submission Automation and Favorites",
-      "id": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_preference_schema"
+      "id": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_preference_schema",
+      "community_name": "Submission Automation and Favorites"
     },
     {
       "label": "Backend Automatic Submission Flow",
@@ -10359,8 +10359,8 @@
       "contributor": null,
       "community": 18,
       "norm_label": "backend automatic submission flow",
-      "community_name": "Submission Automation and Favorites",
-      "id": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_backend_submit_flow"
+      "id": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_backend_submit_flow",
+      "community_name": "Submission Automation and Favorites"
     },
     {
       "label": "Submission Uncertainty Leaves Browser Open",
@@ -10373,8 +10373,8 @@
       "contributor": null,
       "community": 18,
       "norm_label": "submission uncertainty leaves browser open",
-      "community_name": "Submission Automation and Favorites",
-      "id": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_uncertainty_leaves_browser_open"
+      "id": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_uncertainty_leaves_browser_open",
+      "community_name": "Submission Automation and Favorites"
     },
     {
       "label": "Favorites Implementation Plan",
@@ -10387,8 +10387,8 @@
       "contributor": null,
       "community": 18,
       "norm_label": "favorites implementation plan",
-      "community_name": "Submission Automation and Favorites",
-      "id": "docs_superpowers_plans_2026_07_08_favorites_favorites_implementation_plan"
+      "id": "docs_superpowers_plans_2026_07_08_favorites_favorites_implementation_plan",
+      "community_name": "Submission Automation and Favorites"
     },
     {
       "label": "Favorites Design",
@@ -10401,8 +10401,8 @@
       "contributor": null,
       "community": 18,
       "norm_label": "favorites design",
-      "community_name": "Submission Automation and Favorites",
-      "id": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_design"
+      "id": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_design",
+      "community_name": "Submission Automation and Favorites"
     },
     {
       "label": "Free-Form Favorite Tasks",
@@ -10415,8 +10415,8 @@
       "contributor": null,
       "community": 18,
       "norm_label": "free-form favorite tasks",
-      "community_name": "Submission Automation and Favorites",
-      "id": "docs_superpowers_specs_2026_07_08_favorites_design_free_form_favorite_tasks"
+      "id": "docs_superpowers_specs_2026_07_08_favorites_design_free_form_favorite_tasks",
+      "community_name": "Submission Automation and Favorites"
     },
     {
       "label": "Top-Level Favorites Store Key",
@@ -10429,8 +10429,8 @@
       "contributor": null,
       "community": 18,
       "norm_label": "top-level favorites store key",
-      "community_name": "Submission Automation and Favorites",
-      "id": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_store_key"
+      "id": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_store_key",
+      "community_name": "Submission Automation and Favorites"
     },
     {
       "label": "Optimistic Favorites Save",
@@ -10443,8 +10443,8 @@
       "contributor": null,
       "community": 18,
       "norm_label": "optimistic favorites save",
-      "community_name": "Submission Automation and Favorites",
-      "id": "docs_superpowers_specs_2026_07_08_favorites_design_optimistic_favorites_save"
+      "id": "docs_superpowers_specs_2026_07_08_favorites_design_optimistic_favorites_save",
+      "community_name": "Submission Automation and Favorites"
     },
     {
       "label": "Synthetic Issue-Shaped Favorites Adapter",
@@ -10457,8 +10457,8 @@
       "contributor": null,
       "community": 18,
       "norm_label": "synthetic issue-shaped favorites adapter",
-      "community_name": "Submission Automation and Favorites",
-      "id": "docs_superpowers_specs_2026_07_08_favorites_design_synthetic_issue_adapter"
+      "id": "docs_superpowers_specs_2026_07_08_favorites_design_synthetic_issue_adapter",
+      "community_name": "Submission Automation and Favorites"
     },
     {
       "label": "Favorites Task Group",
@@ -10471,8 +10471,8 @@
       "contributor": null,
       "community": 18,
       "norm_label": "favorites task group",
-      "community_name": "Submission Automation and Favorites",
-      "id": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_task_group"
+      "id": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_task_group",
+      "community_name": "Submission Automation and Favorites"
     },
     {
       "label": "Favorites-First Summary Formatting",
@@ -10485,8 +10485,8 @@
       "contributor": null,
       "community": 18,
       "norm_label": "favorites-first summary formatting",
-      "community_name": "Submission Automation and Favorites",
-      "id": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_first_summary"
+      "id": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_first_summary",
+      "community_name": "Submission Automation and Favorites"
     },
     {
       "label": "Custom Portal Credentials Design",
@@ -10499,8 +10499,8 @@
       "contributor": null,
       "community": 17,
       "norm_label": "custom portal credentials design",
-      "community_name": "Account Verification Design",
-      "id": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_custom_portal_credentials_design"
+      "id": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_custom_portal_credentials_design",
+      "community_name": "Account Verification Design"
     },
     {
       "label": "Account Portal URL and Credential Fields",
@@ -10513,8 +10513,8 @@
       "contributor": null,
       "community": 17,
       "norm_label": "account portal url and credential fields",
-      "community_name": "Account Verification Design",
-      "id": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_account_portal_fields"
+      "id": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_account_portal_fields",
+      "community_name": "Account Verification Design"
     },
     {
       "label": "No Compiled-In Portal Defaults",
@@ -10527,8 +10527,8 @@
       "contributor": null,
       "community": 17,
       "norm_label": "no compiled-in portal defaults",
-      "community_name": "Account Verification Design",
-      "id": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_no_compiled_defaults"
+      "id": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_no_compiled_defaults",
+      "community_name": "Account Verification Design"
     },
     {
       "label": "Fail-Fast Portal Configuration Read",
@@ -10541,8 +10541,8 @@
       "contributor": null,
       "community": 17,
       "norm_label": "fail-fast portal configuration read",
-      "community_name": "Account Verification Design",
-      "id": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_fail_fast_configuration"
+      "id": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_fail_fast_configuration",
+      "community_name": "Account Verification Design"
     },
     {
       "label": "Portal Store-Reading Helpers",
@@ -10555,8 +10555,8 @@
       "contributor": null,
       "community": 17,
       "norm_label": "portal store-reading helpers",
-      "community_name": "Account Verification Design",
-      "id": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_portal_store_helpers"
+      "id": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_portal_store_helpers",
+      "community_name": "Account Verification Design"
     },
     {
       "label": "Browser Session Reset on Account Save",
@@ -10569,8 +10569,8 @@
       "contributor": null,
       "community": 17,
       "norm_label": "browser session reset on account save",
-      "community_name": "Account Verification Design",
-      "id": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_browser_session_reset"
+      "id": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_browser_session_reset",
+      "community_name": "Account Verification Design"
     },
     {
       "label": "Account Verification Implementation Plan",
@@ -10583,8 +10583,8 @@
       "contributor": null,
       "community": 17,
       "norm_label": "account verification implementation plan",
-      "community_name": "Account Verification Design",
-      "id": "docs_superpowers_plans_2026_07_12_account_verification_account_verification_implementation_plan"
+      "id": "docs_superpowers_plans_2026_07_12_account_verification_account_verification_implementation_plan",
+      "community_name": "Account Verification Design"
     },
     {
       "label": "Account Verification Design",
@@ -10597,8 +10597,8 @@
       "contributor": null,
       "community": 17,
       "norm_label": "account verification design",
-      "community_name": "Account Verification Design",
-      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_account_verification_design"
+      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_account_verification_design",
+      "community_name": "Account Verification Design"
     },
     {
       "label": "Candidate-Only Portal Verification Command",
@@ -10611,8 +10611,8 @@
       "contributor": null,
       "community": 17,
       "norm_label": "candidate-only portal verification command",
-      "community_name": "Account Verification Design",
-      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_candidate_portal_verification"
+      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_candidate_portal_verification",
+      "community_name": "Account Verification Design"
     },
     {
       "label": "Shared Portal Login Helper",
@@ -10625,8 +10625,8 @@
       "contributor": null,
       "community": 17,
       "norm_label": "shared portal login helper",
-      "community_name": "Account Verification Design",
-      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_shared_portal_login_helper"
+      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_shared_portal_login_helper",
+      "community_name": "Account Verification Design"
     },
     {
       "label": "Throwaway Verification Browser Isolation",
@@ -10639,8 +10639,8 @@
       "contributor": null,
       "community": 17,
       "norm_label": "throwaway verification browser isolation",
-      "community_name": "Account Verification Design",
-      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_verification_browser_isolation"
+      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_verification_browser_isolation",
+      "community_name": "Account Verification Design"
     },
     {
       "label": "Verification Browser Exit-Cleanup Invariant",
@@ -10653,8 +10653,8 @@
       "contributor": null,
       "community": 17,
       "norm_label": "verification browser exit-cleanup invariant",
-      "community_name": "Account Verification Design",
-      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_exit_cleanup_invariant"
+      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_exit_cleanup_invariant",
+      "community_name": "Account Verification Design"
     },
     {
       "label": "Jira Credentials Check",
@@ -10667,8 +10667,8 @@
       "contributor": null,
       "community": 17,
       "norm_label": "jira credentials check",
-      "community_name": "Account Verification Design",
-      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_jira_credentials_check"
+      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_jira_credentials_check",
+      "community_name": "Account Verification Design"
     },
     {
       "label": "Parallel Account Verification",
@@ -10681,8 +10681,8 @@
       "contributor": null,
       "community": 17,
       "norm_label": "parallel account verification",
-      "community_name": "Account Verification Design",
-      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_parallel_account_verification"
+      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_parallel_account_verification",
+      "community_name": "Account Verification Design"
     },
     {
       "label": "Labeled VerifyAccountError",
@@ -10695,8 +10695,8 @@
       "contributor": null,
       "community": 17,
       "norm_label": "labeled verifyaccounterror",
-      "community_name": "Account Verification Design",
-      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_verify_account_error"
+      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_verify_account_error",
+      "community_name": "Account Verification Design"
     },
     {
       "label": "Save Anyway Escape Hatch",
@@ -10709,8 +10709,8 @@
       "contributor": null,
       "community": 17,
       "norm_label": "save anyway escape hatch",
-      "community_name": "Account Verification Design",
-      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_save_anyway_escape_hatch"
+      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_save_anyway_escape_hatch",
+      "community_name": "Account Verification Design"
     },
     {
       "label": "Verification Error-State Lifecycle",
@@ -10723,8 +10723,8 @@
       "contributor": null,
       "community": 17,
       "norm_label": "verification error-state lifecycle",
-      "community_name": "Account Verification Design",
-      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_verification_error_lifecycle"
+      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_verification_error_lifecycle",
+      "community_name": "Account Verification Design"
     },
     {
       "label": "CI/CD Implementation Plan",
@@ -10737,8 +10737,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "ci/cd implementation plan",
-      "community_name": "CI and Release Automation",
-      "id": "docs_superpowers_plans_2026_07_12_cicd_ci_cd_implementation_plan"
+      "id": "docs_superpowers_plans_2026_07_12_cicd_ci_cd_implementation_plan",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "CI/CD Design",
@@ -10751,8 +10751,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "ci/cd design",
-      "community_name": "CI and Release Automation",
-      "id": "docs_superpowers_specs_2026_07_12_cicd_design_ci_cd_design"
+      "id": "docs_superpowers_specs_2026_07_12_cicd_design_ci_cd_design",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "Continuous Integration Checks",
@@ -10765,8 +10765,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "continuous integration checks",
-      "community_name": "CI and Release Automation",
-      "id": "docs_superpowers_specs_2026_07_12_cicd_design_continuous_integration_checks"
+      "id": "docs_superpowers_specs_2026_07_12_cicd_design_continuous_integration_checks",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "Tag-Driven Release Pipeline",
@@ -10779,8 +10779,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "tag-driven release pipeline",
-      "community_name": "CI and Release Automation",
-      "id": "docs_superpowers_specs_2026_07_12_cicd_design_tag_driven_release_pipeline"
+      "id": "docs_superpowers_specs_2026_07_12_cicd_design_tag_driven_release_pipeline",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "In-App Auto-Updater",
@@ -10793,8 +10793,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "in-app auto-updater",
-      "community_name": "CI and Release Automation",
-      "id": "docs_superpowers_specs_2026_07_12_cicd_design_in_app_auto_updater"
+      "id": "docs_superpowers_specs_2026_07_12_cicd_design_in_app_auto_updater",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "Updater Signing Key",
@@ -10807,8 +10807,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "updater signing key",
-      "community_name": "CI and Release Automation",
-      "id": "docs_superpowers_specs_2026_07_12_cicd_design_updater_signing_key"
+      "id": "docs_superpowers_specs_2026_07_12_cicd_design_updater_signing_key",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "curl-Based macOS Installer",
@@ -10821,8 +10821,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "curl-based macos installer",
-      "community_name": "CI and Release Automation",
-      "id": "docs_superpowers_specs_2026_07_12_cicd_design_curl_based_macos_installer"
+      "id": "docs_superpowers_specs_2026_07_12_cicd_design_curl_based_macos_installer",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "Draft Release Publish Gate",
@@ -10835,8 +10835,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "draft release publish gate",
-      "community_name": "CI and Release Automation",
-      "id": "docs_superpowers_specs_2026_07_12_cicd_design_draft_release_publish_gate"
+      "id": "docs_superpowers_specs_2026_07_12_cicd_design_draft_release_publish_gate",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "Unsigned Distribution Strategy",
@@ -10849,8 +10849,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "unsigned distribution strategy",
-      "community_name": "CI and Release Automation",
-      "id": "docs_superpowers_specs_2026_07_12_cicd_design_unsigned_distribution_strategy"
+      "id": "docs_superpowers_specs_2026_07_12_cicd_design_unsigned_distribution_strategy",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "Release Tag-to-Version Guard",
@@ -10863,8 +10863,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "release tag-to-version guard",
-      "community_name": "CI and Release Automation",
-      "id": "docs_superpowers_specs_2026_07_12_cicd_design_release_version_guard"
+      "id": "docs_superpowers_specs_2026_07_12_cicd_design_release_version_guard",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "Version-Bump Script Design",
@@ -10877,8 +10877,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "version-bump script design",
-      "community_name": "CI and Release Automation",
-      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_version_bump_script_design"
+      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_version_bump_script_design",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "Version Bump Mode",
@@ -10891,8 +10891,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "version bump mode",
-      "community_name": "CI and Release Automation",
-      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_bump_mode"
+      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_bump_mode",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "Release Tag Mode",
@@ -10905,8 +10905,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "release tag mode",
-      "community_name": "CI and Release Automation",
-      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_tag_mode"
+      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_tag_mode",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "Clean Current Main Preconditions",
@@ -10919,8 +10919,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "clean current main preconditions",
-      "community_name": "CI and Release Automation",
-      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_clean_current_main_preconditions"
+      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_clean_current_main_preconditions",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "tauri.conf.json Version Source of Truth",
@@ -10933,8 +10933,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "tauri.conf.json version source of truth",
-      "community_name": "CI and Release Automation",
-      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_tauri_config_version_source_of_truth"
+      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_tauri_config_version_source_of_truth",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "Targeted Verified Version Replacements",
@@ -10947,8 +10947,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "targeted verified version replacements",
-      "community_name": "CI and Release Automation",
-      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_targeted_version_replacements"
+      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_targeted_version_replacements",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "Cargo.lock Refresh via cargo metadata",
@@ -10961,8 +10961,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "cargo.lock refresh via cargo metadata",
-      "community_name": "CI and Release Automation",
-      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_cargo_lock_refresh"
+      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_cargo_lock_refresh",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "Human PR Merge Gate",
@@ -10975,8 +10975,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "human pr merge gate",
-      "community_name": "CI and Release Automation",
-      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_human_pr_gate"
+      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_human_pr_gate",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "Tauri Logo",
@@ -10989,8 +10989,8 @@
       "contributor": null,
       "community": 102,
       "norm_label": "tauri logo",
-      "community_name": "Tauri Brand Logo",
-      "id": "public_tauri_tauri_logo"
+      "id": "public_tauri_tauri_logo",
+      "community_name": "Tauri Brand Logo"
     },
     {
       "label": "Vite Logo",
@@ -11003,8 +11003,8 @@
       "contributor": null,
       "community": 103,
       "norm_label": "vite logo",
-      "community_name": "Vite Brand Logo",
-      "id": "public_vite_vite_logo"
+      "id": "public_vite_vite_logo",
+      "community_name": "Vite Brand Logo"
     },
     {
       "label": "Daily Report App Icon",
@@ -11017,8 +11017,8 @@
       "contributor": null,
       "community": 105,
       "norm_label": "daily report app icon",
-      "community_name": "Standard App Icon",
-      "id": "src_tauri_icons_128x128_daily_report_app_icon"
+      "id": "src_tauri_icons_128x128_daily_report_app_icon",
+      "community_name": "Standard App Icon"
     },
     {
       "label": "Daily Report App Icon",
@@ -11031,8 +11031,8 @@
       "contributor": null,
       "community": 104,
       "norm_label": "daily report app icon",
-      "community_name": "Retina App Icon",
-      "id": "src_tauri_icons_128x128_2x_daily_report_app_icon"
+      "id": "src_tauri_icons_128x128_2x_daily_report_app_icon",
+      "community_name": "Retina App Icon"
     },
     {
       "label": "Daily Report App Icon",
@@ -11045,8 +11045,8 @@
       "contributor": null,
       "community": 106,
       "norm_label": "daily report app icon",
-      "community_name": "Small App Icon",
-      "id": "src_tauri_icons_32x32_daily_report_app_icon"
+      "id": "src_tauri_icons_32x32_daily_report_app_icon",
+      "community_name": "Small App Icon"
     },
     {
       "label": "Daily Report App Icon",
@@ -11059,8 +11059,8 @@
       "contributor": null,
       "community": 107,
       "norm_label": "daily report app icon",
-      "community_name": "Medium App Icon",
-      "id": "src_tauri_icons_64x64_daily_report_app_icon"
+      "id": "src_tauri_icons_64x64_daily_report_app_icon",
+      "community_name": "Medium App Icon"
     },
     {
       "label": "Daily Report App Icon",
@@ -11073,8 +11073,8 @@
       "contributor": null,
       "community": 156,
       "norm_label": "daily report app icon",
-      "community_name": "107px Daily Report Tile",
-      "id": "src_tauri_icons_square107x107logo_daily_report_app_icon"
+      "id": "src_tauri_icons_square107x107logo_daily_report_app_icon",
+      "community_name": "107px Daily Report Tile"
     },
     {
       "label": "Daily Report App Icon",
@@ -11087,8 +11087,8 @@
       "contributor": null,
       "community": 157,
       "norm_label": "daily report app icon",
-      "community_name": "142px Daily Report Tile",
-      "id": "src_tauri_icons_square142x142logo_daily_report_app_icon"
+      "id": "src_tauri_icons_square142x142logo_daily_report_app_icon",
+      "community_name": "142px Daily Report Tile"
     },
     {
       "label": "Daily Report App Icon",
@@ -11101,8 +11101,8 @@
       "contributor": null,
       "community": 158,
       "norm_label": "daily report app icon",
-      "community_name": "150px Daily Report Tile",
-      "id": "src_tauri_icons_square150x150logo_daily_report_app_icon"
+      "id": "src_tauri_icons_square150x150logo_daily_report_app_icon",
+      "community_name": "150px Daily Report Tile"
     },
     {
       "label": "Daily Report App Icon",
@@ -11115,8 +11115,8 @@
       "contributor": null,
       "community": 159,
       "norm_label": "daily report app icon",
-      "community_name": "284px Daily Report Tile",
-      "id": "src_tauri_icons_square284x284logo_daily_report_app_icon"
+      "id": "src_tauri_icons_square284x284logo_daily_report_app_icon",
+      "community_name": "284px Daily Report Tile"
     },
     {
       "label": "Daily Report App Icon",
@@ -11129,8 +11129,8 @@
       "contributor": null,
       "community": 160,
       "norm_label": "daily report app icon",
-      "community_name": "30px Daily Report Tile",
-      "id": "src_tauri_icons_square30x30logo_daily_report_app_icon"
+      "id": "src_tauri_icons_square30x30logo_daily_report_app_icon",
+      "community_name": "30px Daily Report Tile"
     },
     {
       "label": "Daily Report App Icon",
@@ -11143,8 +11143,8 @@
       "contributor": null,
       "community": 161,
       "norm_label": "daily report app icon",
-      "community_name": "310px Daily Report Tile",
-      "id": "src_tauri_icons_square310x310logo_daily_report_app_icon"
+      "id": "src_tauri_icons_square310x310logo_daily_report_app_icon",
+      "community_name": "310px Daily Report Tile"
     },
     {
       "label": "Daily Report App Icon",
@@ -11157,8 +11157,8 @@
       "contributor": null,
       "community": 162,
       "norm_label": "daily report app icon",
-      "community_name": "44px Daily Report Tile",
-      "id": "src_tauri_icons_square44x44logo_daily_report_app_icon"
+      "id": "src_tauri_icons_square44x44logo_daily_report_app_icon",
+      "community_name": "44px Daily Report Tile"
     },
     {
       "label": "Daily Report App Icon",
@@ -11171,8 +11171,8 @@
       "contributor": null,
       "community": 163,
       "norm_label": "daily report app icon",
-      "community_name": "71px Daily Report Tile",
-      "id": "src_tauri_icons_square71x71logo_daily_report_app_icon"
+      "id": "src_tauri_icons_square71x71logo_daily_report_app_icon",
+      "community_name": "71px Daily Report Tile"
     },
     {
       "label": "Daily Report App Icon",
@@ -11185,8 +11185,8 @@
       "contributor": null,
       "community": 164,
       "norm_label": "daily report app icon",
-      "community_name": "89px Daily Report Tile",
-      "id": "src_tauri_icons_square89x89logo_daily_report_app_icon"
+      "id": "src_tauri_icons_square89x89logo_daily_report_app_icon",
+      "community_name": "89px Daily Report Tile"
     },
     {
       "label": "Daily Report App Icon",
@@ -11199,8 +11199,8 @@
       "contributor": null,
       "community": 165,
       "norm_label": "daily report app icon",
-      "community_name": "Daily Report Store Logo",
-      "id": "src_tauri_icons_storelogo_daily_report_app_icon"
+      "id": "src_tauri_icons_storelogo_daily_report_app_icon",
+      "community_name": "Daily Report Store Logo"
     },
     {
       "label": "Daily Report App Icon",
@@ -11213,8 +11213,8 @@
       "contributor": null,
       "community": 137,
       "norm_label": "daily report app icon",
-      "community_name": "512px Daily Report Icon",
-      "id": "src_tauri_icons_icon_daily_report_app_icon"
+      "id": "src_tauri_icons_icon_daily_report_app_icon",
+      "community_name": "512px Daily Report Icon"
     },
     {
       "label": "Tauri Logo",
@@ -11227,8 +11227,8 @@
       "contributor": null,
       "community": 124,
       "norm_label": "tauri logo",
-      "community_name": "128px Tauri Development Icon",
-      "id": "src_tauri_icons_dev_128x128_tauri_logo"
+      "id": "src_tauri_icons_dev_128x128_tauri_logo",
+      "community_name": "128px Tauri Development Icon"
     },
     {
       "label": "Tauri Logo",
@@ -11241,8 +11241,8 @@
       "contributor": null,
       "community": 123,
       "norm_label": "tauri logo",
-      "community_name": "256px Tauri Development Icon",
-      "id": "src_tauri_icons_dev_128x128_2x_tauri_logo"
+      "id": "src_tauri_icons_dev_128x128_2x_tauri_logo",
+      "community_name": "256px Tauri Development Icon"
     },
     {
       "label": "Tauri Logo",
@@ -11255,8 +11255,8 @@
       "contributor": null,
       "community": 125,
       "norm_label": "tauri logo",
-      "community_name": "32px Tauri Development Icon",
-      "id": "src_tauri_icons_dev_32x32_tauri_logo"
+      "id": "src_tauri_icons_dev_32x32_tauri_logo",
+      "community_name": "32px Tauri Development Icon"
     },
     {
       "label": "Tauri Logo",
@@ -11269,8 +11269,8 @@
       "contributor": null,
       "community": 127,
       "norm_label": "tauri logo",
-      "community_name": "107px Tauri Windows Tile",
-      "id": "src_tauri_icons_dev_square107x107logo_tauri_logo"
+      "id": "src_tauri_icons_dev_square107x107logo_tauri_logo",
+      "community_name": "107px Tauri Windows Tile"
     },
     {
       "label": "Tauri Logo",
@@ -11283,8 +11283,8 @@
       "contributor": null,
       "community": 128,
       "norm_label": "tauri logo",
-      "community_name": "142px Tauri Windows Tile",
-      "id": "src_tauri_icons_dev_square142x142logo_tauri_logo"
+      "id": "src_tauri_icons_dev_square142x142logo_tauri_logo",
+      "community_name": "142px Tauri Windows Tile"
     },
     {
       "label": "Two-Tone Interlocking Circular Emblem",
@@ -11297,8 +11297,8 @@
       "contributor": null,
       "community": 129,
       "norm_label": "two-tone interlocking circular emblem",
-      "community_name": "150px Tauri Windows Tile",
-      "id": "src_tauri_icons_dev_square150x150logo_two_tone_interlocking_circular_emblem"
+      "id": "src_tauri_icons_dev_square150x150logo_two_tone_interlocking_circular_emblem",
+      "community_name": "150px Tauri Windows Tile"
     },
     {
       "label": "Two-Tone Interlocking Circular Emblem",
@@ -11311,8 +11311,8 @@
       "contributor": null,
       "community": 130,
       "norm_label": "two-tone interlocking circular emblem",
-      "community_name": "284px Tauri Windows Tile",
-      "id": "src_tauri_icons_dev_square284x284logo_two_tone_interlocking_circular_emblem"
+      "id": "src_tauri_icons_dev_square284x284logo_two_tone_interlocking_circular_emblem",
+      "community_name": "284px Tauri Windows Tile"
     },
     {
       "label": "Two-Tone Interlocking Circular Emblem",
@@ -11325,8 +11325,8 @@
       "contributor": null,
       "community": 131,
       "norm_label": "two-tone interlocking circular emblem",
-      "community_name": "30px Tauri Windows Tile",
-      "id": "src_tauri_icons_dev_square30x30logo_two_tone_interlocking_circular_emblem"
+      "id": "src_tauri_icons_dev_square30x30logo_two_tone_interlocking_circular_emblem",
+      "community_name": "30px Tauri Windows Tile"
     },
     {
       "label": "Two-Tone Interlocking Circular Emblem",
@@ -11339,8 +11339,8 @@
       "contributor": null,
       "community": 132,
       "norm_label": "two-tone interlocking circular emblem",
-      "community_name": "310px Tauri Windows Tile",
-      "id": "src_tauri_icons_dev_square310x310logo_two_tone_interlocking_circular_emblem"
+      "id": "src_tauri_icons_dev_square310x310logo_two_tone_interlocking_circular_emblem",
+      "community_name": "310px Tauri Windows Tile"
     },
     {
       "label": "Two-Tone Interlocking Circular Emblem",
@@ -11353,8 +11353,8 @@
       "contributor": null,
       "community": 133,
       "norm_label": "two-tone interlocking circular emblem",
-      "community_name": "44px Tauri Windows Tile",
-      "id": "src_tauri_icons_dev_square44x44logo_two_tone_interlocking_circular_emblem"
+      "id": "src_tauri_icons_dev_square44x44logo_two_tone_interlocking_circular_emblem",
+      "community_name": "44px Tauri Windows Tile"
     },
     {
       "label": "Two-Tone Interlocking Circular Emblem",
@@ -11367,8 +11367,8 @@
       "contributor": null,
       "community": 134,
       "norm_label": "two-tone interlocking circular emblem",
-      "community_name": "71px Tauri Windows Tile",
-      "id": "src_tauri_icons_dev_square71x71logo_two_tone_interlocking_circular_emblem"
+      "id": "src_tauri_icons_dev_square71x71logo_two_tone_interlocking_circular_emblem",
+      "community_name": "71px Tauri Windows Tile"
     },
     {
       "label": "Two-Tone Interlocking Circular Emblem",
@@ -11381,8 +11381,8 @@
       "contributor": null,
       "community": 135,
       "norm_label": "two-tone interlocking circular emblem",
-      "community_name": "89px Tauri Windows Tile",
-      "id": "src_tauri_icons_dev_square89x89logo_two_tone_interlocking_circular_emblem"
+      "id": "src_tauri_icons_dev_square89x89logo_two_tone_interlocking_circular_emblem",
+      "community_name": "89px Tauri Windows Tile"
     },
     {
       "label": "Two-Tone Interlocking Circular Emblem",
@@ -11395,8 +11395,8 @@
       "contributor": null,
       "community": 136,
       "norm_label": "two-tone interlocking circular emblem",
-      "community_name": "Tauri Development Store Logo",
-      "id": "src_tauri_icons_dev_storelogo_two_tone_interlocking_circular_emblem"
+      "id": "src_tauri_icons_dev_storelogo_two_tone_interlocking_circular_emblem",
+      "community_name": "Tauri Development Store Logo"
     },
     {
       "label": "Two-Tone Interlocking Circular Emblem",
@@ -11409,8 +11409,8 @@
       "contributor": null,
       "community": 126,
       "norm_label": "two-tone interlocking circular emblem",
-      "community_name": "512px Tauri Development Icon",
-      "id": "src_tauri_icons_dev_icon_two_tone_interlocking_circular_emblem"
+      "id": "src_tauri_icons_dev_icon_two_tone_interlocking_circular_emblem",
+      "community_name": "512px Tauri Development Icon"
     },
     {
       "label": "Blue-Cyan House Launcher Icon",
@@ -11423,8 +11423,8 @@
       "contributor": null,
       "community": 108,
       "norm_label": "blue-cyan house launcher icon",
-      "community_name": "Android Launcher Icon",
-      "id": "src_tauri_icons_android_mipmap_hdpi_ic_launcher_blue_cyan_house_launcher_icon"
+      "id": "src_tauri_icons_android_mipmap_hdpi_ic_launcher_blue_cyan_house_launcher_icon",
+      "community_name": "Android Launcher Icon"
     },
     {
       "label": "Gradient House Monogram",
@@ -11437,8 +11437,8 @@
       "contributor": null,
       "community": 109,
       "norm_label": "gradient house monogram",
-      "community_name": "Android Foreground Monogram",
-      "id": "src_tauri_icons_android_mipmap_hdpi_ic_launcher_foreground_gradient_house_monogram"
+      "id": "src_tauri_icons_android_mipmap_hdpi_ic_launcher_foreground_gradient_house_monogram",
+      "community_name": "Android Foreground Monogram"
     },
     {
       "label": "Round Blue-Cyan House Launcher Icon",
@@ -11451,8 +11451,8 @@
       "contributor": null,
       "community": 110,
       "norm_label": "round blue-cyan house launcher icon",
-      "community_name": "HDPI Round Launcher Icon",
-      "id": "src_tauri_icons_android_mipmap_hdpi_ic_launcher_round_round_blue_cyan_house_launcher_icon"
+      "id": "src_tauri_icons_android_mipmap_hdpi_ic_launcher_round_round_blue_cyan_house_launcher_icon",
+      "community_name": "HDPI Round Launcher Icon"
     },
     {
       "label": "Blue-Cyan House Launcher Icon",
@@ -11465,8 +11465,8 @@
       "contributor": null,
       "community": 111,
       "norm_label": "blue-cyan house launcher icon",
-      "community_name": "MDPI Launcher Icon",
-      "id": "src_tauri_icons_android_mipmap_mdpi_ic_launcher_blue_cyan_house_launcher_icon"
+      "id": "src_tauri_icons_android_mipmap_mdpi_ic_launcher_blue_cyan_house_launcher_icon",
+      "community_name": "MDPI Launcher Icon"
     },
     {
       "label": "Gradient House Monogram",
@@ -11479,8 +11479,8 @@
       "contributor": null,
       "community": 112,
       "norm_label": "gradient house monogram",
-      "community_name": "MDPI Launcher Foreground",
-      "id": "src_tauri_icons_android_mipmap_mdpi_ic_launcher_foreground_gradient_house_monogram"
+      "id": "src_tauri_icons_android_mipmap_mdpi_ic_launcher_foreground_gradient_house_monogram",
+      "community_name": "MDPI Launcher Foreground"
     },
     {
       "label": "Round Blue-Cyan House Launcher Icon",
@@ -11493,8 +11493,8 @@
       "contributor": null,
       "community": 113,
       "norm_label": "round blue-cyan house launcher icon",
-      "community_name": "MDPI Round Launcher Icon",
-      "id": "src_tauri_icons_android_mipmap_mdpi_ic_launcher_round_round_blue_cyan_house_launcher_icon"
+      "id": "src_tauri_icons_android_mipmap_mdpi_ic_launcher_round_round_blue_cyan_house_launcher_icon",
+      "community_name": "MDPI Round Launcher Icon"
     },
     {
       "label": "Blue-Cyan House Launcher Icon",
@@ -11507,8 +11507,8 @@
       "contributor": null,
       "community": 114,
       "norm_label": "blue-cyan house launcher icon",
-      "community_name": "XHDPI Launcher Icon",
-      "id": "src_tauri_icons_android_mipmap_xhdpi_ic_launcher_blue_cyan_house_launcher_icon"
+      "id": "src_tauri_icons_android_mipmap_xhdpi_ic_launcher_blue_cyan_house_launcher_icon",
+      "community_name": "XHDPI Launcher Icon"
     },
     {
       "label": "Gradient House Monogram",
@@ -11521,8 +11521,8 @@
       "contributor": null,
       "community": 115,
       "norm_label": "gradient house monogram",
-      "community_name": "XHDPI Launcher Foreground",
-      "id": "src_tauri_icons_android_mipmap_xhdpi_ic_launcher_foreground_gradient_house_monogram"
+      "id": "src_tauri_icons_android_mipmap_xhdpi_ic_launcher_foreground_gradient_house_monogram",
+      "community_name": "XHDPI Launcher Foreground"
     },
     {
       "label": "Round Blue-Cyan House Launcher Icon",
@@ -11535,8 +11535,8 @@
       "contributor": null,
       "community": 116,
       "norm_label": "round blue-cyan house launcher icon",
-      "community_name": "XHDPI Round Launcher Icon",
-      "id": "src_tauri_icons_android_mipmap_xhdpi_ic_launcher_round_round_blue_cyan_house_launcher_icon"
+      "id": "src_tauri_icons_android_mipmap_xhdpi_ic_launcher_round_round_blue_cyan_house_launcher_icon",
+      "community_name": "XHDPI Round Launcher Icon"
     },
     {
       "label": "Blue-Cyan House Launcher Icon",
@@ -11549,8 +11549,8 @@
       "contributor": null,
       "community": 117,
       "norm_label": "blue-cyan house launcher icon",
-      "community_name": "XXHDPI Launcher Icon",
-      "id": "src_tauri_icons_android_mipmap_xxhdpi_ic_launcher_blue_cyan_house_launcher_icon"
+      "id": "src_tauri_icons_android_mipmap_xxhdpi_ic_launcher_blue_cyan_house_launcher_icon",
+      "community_name": "XXHDPI Launcher Icon"
     },
     {
       "label": "Gradient House Monogram",
@@ -11563,8 +11563,8 @@
       "contributor": null,
       "community": 118,
       "norm_label": "gradient house monogram",
-      "community_name": "XXHDPI Launcher Foreground",
-      "id": "src_tauri_icons_android_mipmap_xxhdpi_ic_launcher_foreground_gradient_house_monogram"
+      "id": "src_tauri_icons_android_mipmap_xxhdpi_ic_launcher_foreground_gradient_house_monogram",
+      "community_name": "XXHDPI Launcher Foreground"
     },
     {
       "label": "Round Blue-Cyan House Launcher Icon",
@@ -11577,8 +11577,8 @@
       "contributor": null,
       "community": 119,
       "norm_label": "round blue-cyan house launcher icon",
-      "community_name": "XXHDPI Round Launcher Icon",
-      "id": "src_tauri_icons_android_mipmap_xxhdpi_ic_launcher_round_round_blue_cyan_house_launcher_icon"
+      "id": "src_tauri_icons_android_mipmap_xxhdpi_ic_launcher_round_round_blue_cyan_house_launcher_icon",
+      "community_name": "XXHDPI Round Launcher Icon"
     },
     {
       "label": "Daily Report Android Launcher Icon",
@@ -11591,8 +11591,8 @@
       "contributor": null,
       "community": 120,
       "norm_label": "daily report android launcher icon",
-      "community_name": "XXXHDPI Launcher Icon",
-      "id": "src_tauri_icons_android_mipmap_xxxhdpi_ic_launcher_android_launcher_icon"
+      "id": "src_tauri_icons_android_mipmap_xxxhdpi_ic_launcher_android_launcher_icon",
+      "community_name": "XXXHDPI Launcher Icon"
     },
     {
       "label": "Daily Report Android Launcher Foreground",
@@ -11605,8 +11605,8 @@
       "contributor": null,
       "community": 121,
       "norm_label": "daily report android launcher foreground",
-      "community_name": "XXXHDPI Launcher Foreground",
-      "id": "src_tauri_icons_android_mipmap_xxxhdpi_ic_launcher_foreground_android_launcher_foreground"
+      "id": "src_tauri_icons_android_mipmap_xxxhdpi_ic_launcher_foreground_android_launcher_foreground",
+      "community_name": "XXXHDPI Launcher Foreground"
     },
     {
       "label": "Round Daily Report Android Launcher Icon",
@@ -11619,8 +11619,8 @@
       "contributor": null,
       "community": 122,
       "norm_label": "round daily report android launcher icon",
-      "community_name": "XXXHDPI Round Launcher Icon",
-      "id": "src_tauri_icons_android_mipmap_xxxhdpi_ic_launcher_round_round_android_launcher_icon"
+      "id": "src_tauri_icons_android_mipmap_xxxhdpi_ic_launcher_round_round_android_launcher_icon",
+      "community_name": "XXXHDPI Round Launcher Icon"
     },
     {
       "label": "Daily Report iOS App Icon 20pt 1x",
@@ -11633,8 +11633,8 @@
       "contributor": null,
       "community": 138,
       "norm_label": "daily report ios app icon 20pt 1x",
-      "community_name": "20pt iOS Icon 1x",
-      "id": "src_tauri_icons_ios_appicon_20x20_1x_daily_report_ios_app_icon"
+      "id": "src_tauri_icons_ios_appicon_20x20_1x_daily_report_ios_app_icon",
+      "community_name": "20pt iOS Icon 1x"
     },
     {
       "label": "Daily Report iOS App Icon 20pt 2x Variant",
@@ -11647,8 +11647,8 @@
       "contributor": null,
       "community": 139,
       "norm_label": "daily report ios app icon 20pt 2x variant",
-      "community_name": "20pt iOS Icon 2x Variant",
-      "id": "src_tauri_icons_ios_appicon_20x20_2x_1_daily_report_ios_app_icon"
+      "id": "src_tauri_icons_ios_appicon_20x20_2x_1_daily_report_ios_app_icon",
+      "community_name": "20pt iOS Icon 2x Variant"
     },
     {
       "label": "Daily Report iOS App Icon 20pt 2x",
@@ -11661,8 +11661,8 @@
       "contributor": null,
       "community": 140,
       "norm_label": "daily report ios app icon 20pt 2x",
-      "community_name": "20pt iOS Icon 2x",
-      "id": "src_tauri_icons_ios_appicon_20x20_2x_daily_report_ios_app_icon"
+      "id": "src_tauri_icons_ios_appicon_20x20_2x_daily_report_ios_app_icon",
+      "community_name": "20pt iOS Icon 2x"
     },
     {
       "label": "Daily Report iOS App Icon 20pt 3x",
@@ -11675,8 +11675,8 @@
       "contributor": null,
       "community": 141,
       "norm_label": "daily report ios app icon 20pt 3x",
-      "community_name": "20pt iOS Icon 3x",
-      "id": "src_tauri_icons_ios_appicon_20x20_3x_daily_report_ios_app_icon"
+      "id": "src_tauri_icons_ios_appicon_20x20_3x_daily_report_ios_app_icon",
+      "community_name": "20pt iOS Icon 3x"
     },
     {
       "label": "Daily Report iOS App Icon 29pt 1x",
@@ -11689,8 +11689,8 @@
       "contributor": null,
       "community": 142,
       "norm_label": "daily report ios app icon 29pt 1x",
-      "community_name": "29pt iOS Icon 1x",
-      "id": "src_tauri_icons_ios_appicon_29x29_1x_daily_report_ios_app_icon"
+      "id": "src_tauri_icons_ios_appicon_29x29_1x_daily_report_ios_app_icon",
+      "community_name": "29pt iOS Icon 1x"
     },
     {
       "label": "Daily Report iOS App Icon 29pt 2x Variant",
@@ -11703,8 +11703,8 @@
       "contributor": null,
       "community": 143,
       "norm_label": "daily report ios app icon 29pt 2x variant",
-      "community_name": "29pt iOS Icon 2x Variant",
-      "id": "src_tauri_icons_ios_appicon_29x29_2x_1_daily_report_ios_app_icon"
+      "id": "src_tauri_icons_ios_appicon_29x29_2x_1_daily_report_ios_app_icon",
+      "community_name": "29pt iOS Icon 2x Variant"
     },
     {
       "label": "Daily Report iOS App Icon 29pt 2x",
@@ -11717,8 +11717,8 @@
       "contributor": null,
       "community": 144,
       "norm_label": "daily report ios app icon 29pt 2x",
-      "community_name": "29pt iOS Icon 2x",
-      "id": "src_tauri_icons_ios_appicon_29x29_2x_daily_report_ios_app_icon"
+      "id": "src_tauri_icons_ios_appicon_29x29_2x_daily_report_ios_app_icon",
+      "community_name": "29pt iOS Icon 2x"
     },
     {
       "label": "Daily Report iOS App Icon 29pt 3x",
@@ -11731,8 +11731,8 @@
       "contributor": null,
       "community": 145,
       "norm_label": "daily report ios app icon 29pt 3x",
-      "community_name": "29pt iOS Icon 3x",
-      "id": "src_tauri_icons_ios_appicon_29x29_3x_daily_report_ios_app_icon"
+      "id": "src_tauri_icons_ios_appicon_29x29_3x_daily_report_ios_app_icon",
+      "community_name": "29pt iOS Icon 3x"
     },
     {
       "label": "Daily Report iOS App Icon 40pt 1x",
@@ -11745,8 +11745,8 @@
       "contributor": null,
       "community": 146,
       "norm_label": "daily report ios app icon 40pt 1x",
-      "community_name": "40pt iOS Icon 1x",
-      "id": "src_tauri_icons_ios_appicon_40x40_1x_daily_report_ios_app_icon"
+      "id": "src_tauri_icons_ios_appicon_40x40_1x_daily_report_ios_app_icon",
+      "community_name": "40pt iOS Icon 1x"
     },
     {
       "label": "Daily Report iOS App Icon 40pt 2x Variant",
@@ -11759,8 +11759,8 @@
       "contributor": null,
       "community": 147,
       "norm_label": "daily report ios app icon 40pt 2x variant",
-      "community_name": "40pt iOS Icon 2x Variant",
-      "id": "src_tauri_icons_ios_appicon_40x40_2x_1_daily_report_ios_app_icon"
+      "id": "src_tauri_icons_ios_appicon_40x40_2x_1_daily_report_ios_app_icon",
+      "community_name": "40pt iOS Icon 2x Variant"
     },
     {
       "label": "Daily Report iOS App Icon 40pt 2x",
@@ -11773,8 +11773,8 @@
       "contributor": null,
       "community": 148,
       "norm_label": "daily report ios app icon 40pt 2x",
-      "community_name": "40pt iOS Icon 2x",
-      "id": "src_tauri_icons_ios_appicon_40x40_2x_daily_report_ios_app_icon"
+      "id": "src_tauri_icons_ios_appicon_40x40_2x_daily_report_ios_app_icon",
+      "community_name": "40pt iOS Icon 2x"
     },
     {
       "label": "Daily Report iOS App Icon 40pt 3x",
@@ -11787,8 +11787,8 @@
       "contributor": null,
       "community": 149,
       "norm_label": "daily report ios app icon 40pt 3x",
-      "community_name": "40pt iOS Icon 3x",
-      "id": "src_tauri_icons_ios_appicon_40x40_3x_daily_report_ios_app_icon"
+      "id": "src_tauri_icons_ios_appicon_40x40_3x_daily_report_ios_app_icon",
+      "community_name": "40pt iOS Icon 3x"
     },
     {
       "label": "Daily Report iOS App Store Icon 512pt 2x",
@@ -11801,8 +11801,8 @@
       "contributor": null,
       "community": 150,
       "norm_label": "daily report ios app store icon 512pt 2x",
-      "community_name": "1024px iOS Store Icon",
-      "id": "src_tauri_icons_ios_appicon_512_2x_daily_report_ios_app_store_icon"
+      "id": "src_tauri_icons_ios_appicon_512_2x_daily_report_ios_app_store_icon",
+      "community_name": "1024px iOS Store Icon"
     },
     {
       "label": "Daily Report iOS App Icon 60pt 2x",
@@ -11815,8 +11815,8 @@
       "contributor": null,
       "community": 151,
       "norm_label": "daily report ios app icon 60pt 2x",
-      "community_name": "60pt iOS Icon 2x",
-      "id": "src_tauri_icons_ios_appicon_60x60_2x_daily_report_ios_app_icon"
+      "id": "src_tauri_icons_ios_appicon_60x60_2x_daily_report_ios_app_icon",
+      "community_name": "60pt iOS Icon 2x"
     },
     {
       "label": "Daily Report iOS App Icon 60pt 3x",
@@ -11829,8 +11829,8 @@
       "contributor": null,
       "community": 152,
       "norm_label": "daily report ios app icon 60pt 3x",
-      "community_name": "60pt iOS Icon 3x",
-      "id": "src_tauri_icons_ios_appicon_60x60_3x_daily_report_ios_app_icon"
+      "id": "src_tauri_icons_ios_appicon_60x60_3x_daily_report_ios_app_icon",
+      "community_name": "60pt iOS Icon 3x"
     },
     {
       "label": "Daily Report iPad App Icon 76pt 1x",
@@ -11843,8 +11843,8 @@
       "contributor": null,
       "community": 153,
       "norm_label": "daily report ipad app icon 76pt 1x",
-      "community_name": "76pt iPad Icon 1x",
-      "id": "src_tauri_icons_ios_appicon_76x76_1x_daily_report_ipad_app_icon"
+      "id": "src_tauri_icons_ios_appicon_76x76_1x_daily_report_ipad_app_icon",
+      "community_name": "76pt iPad Icon 1x"
     },
     {
       "label": "Daily Report iPad App Icon 76pt 2x",
@@ -11857,8 +11857,8 @@
       "contributor": null,
       "community": 154,
       "norm_label": "daily report ipad app icon 76pt 2x",
-      "community_name": "76pt iPad Icon 2x",
-      "id": "src_tauri_icons_ios_appicon_76x76_2x_daily_report_ipad_app_icon"
+      "id": "src_tauri_icons_ios_appicon_76x76_2x_daily_report_ipad_app_icon",
+      "community_name": "76pt iPad Icon 2x"
     },
     {
       "label": "Daily Report iPad Pro App Icon 83.5pt 2x",
@@ -11871,8 +11871,8 @@
       "contributor": null,
       "community": 155,
       "norm_label": "daily report ipad pro app icon 83.5pt 2x",
-      "community_name": "83.5pt iPad Pro Icon 2x",
-      "id": "src_tauri_icons_ios_appicon_83_5x83_5_2x_daily_report_ipad_pro_app_icon"
+      "id": "src_tauri_icons_ios_appicon_83_5x83_5_2x_daily_report_ipad_pro_app_icon",
+      "community_name": "83.5pt iPad Pro Icon 2x"
     },
     {
       "label": "CI Workflow",
@@ -11885,8 +11885,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "ci workflow",
-      "community_name": "CI and Release Automation",
-      "id": "github_workflows_ci_ci_workflow"
+      "id": "github_workflows_ci_ci_workflow",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "Frontend CI Job",
@@ -11899,8 +11899,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "frontend ci job",
-      "community_name": "CI and Release Automation",
-      "id": "github_workflows_ci_frontend_job"
+      "id": "github_workflows_ci_frontend_job",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "Rust CI Job",
@@ -11913,8 +11913,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "rust ci job",
-      "community_name": "CI and Release Automation",
-      "id": "github_workflows_ci_rust_job"
+      "id": "github_workflows_ci_rust_job",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "Pull Request CI Cancellation",
@@ -11927,8 +11927,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "pull request ci cancellation",
-      "community_name": "CI and Release Automation",
-      "id": "github_workflows_ci_pull_request_cancellation"
+      "id": "github_workflows_ci_pull_request_cancellation",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "Release Workflow",
@@ -11941,8 +11941,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "release workflow",
-      "community_name": "CI and Release Automation",
-      "id": "github_workflows_release_release_workflow"
+      "id": "github_workflows_release_release_workflow",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "Release Version Guard",
@@ -11955,8 +11955,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "release version guard",
-      "community_name": "CI and Release Automation",
-      "id": "github_workflows_release_version_guard"
+      "id": "github_workflows_release_version_guard",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "Cross-Platform Release Build",
@@ -11969,8 +11969,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "cross-platform release build",
-      "community_name": "CI and Release Automation",
-      "id": "github_workflows_release_cross_platform_build"
+      "id": "github_workflows_release_cross_platform_build",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "macOS Apple Silicon App and DMG Artifacts",
@@ -11983,8 +11983,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "macos apple silicon app and dmg artifacts",
-      "community_name": "CI and Release Automation",
-      "id": "github_workflows_release_macos_artifacts"
+      "id": "github_workflows_release_macos_artifacts",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "Windows NSIS Artifact",
@@ -11997,8 +11997,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "windows nsis artifact",
-      "community_name": "CI and Release Automation",
-      "id": "github_workflows_release_windows_artifacts"
+      "id": "github_workflows_release_windows_artifacts",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "Signed Draft GitHub Release",
@@ -12011,8 +12011,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "signed draft github release",
-      "community_name": "CI and Release Automation",
-      "id": "github_workflows_release_signed_draft_release"
+      "id": "github_workflows_release_signed_draft_release",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "Daily Report",
@@ -12025,8 +12025,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "daily report",
-      "community_name": "Repository Architecture Guides",
-      "id": "agents_daily_report"
+      "id": "agents_daily_report",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Browser Automation Architecture",
@@ -12039,8 +12039,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "browser automation architecture",
-      "community_name": "Repository Architecture Guides",
-      "id": "agents_browser_automation_architecture"
+      "id": "agents_browser_automation_architecture",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Two Browser Instances",
@@ -12053,8 +12053,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "two browser instances",
-      "community_name": "Repository Architecture Guides",
-      "id": "agents_two_browser_instances"
+      "id": "agents_two_browser_instances",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Live Session Probe",
@@ -12067,8 +12067,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "live session probe",
-      "community_name": "Repository Architecture Guides",
-      "id": "agents_live_session_probe"
+      "id": "agents_live_session_probe",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Browser Login Flow",
@@ -12081,8 +12081,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "browser login flow",
-      "community_name": "Repository Architecture Guides",
-      "id": "agents_browser_login_flow"
+      "id": "agents_browser_login_flow",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Browser Lifecycle Cleanup",
@@ -12095,8 +12095,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "browser lifecycle cleanup",
-      "community_name": "Repository Architecture Guides",
-      "id": "agents_browser_lifecycle_cleanup"
+      "id": "agents_browser_lifecycle_cleanup",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Window Startup Anti-Flash Handshake",
@@ -12109,8 +12109,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "window startup anti-flash handshake",
-      "community_name": "Repository Architecture Guides",
-      "id": "agents_anti_flash_handshake"
+      "id": "agents_anti_flash_handshake",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Tauri Command Boundary",
@@ -12123,8 +12123,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "tauri command boundary",
-      "community_name": "Repository Architecture Guides",
-      "id": "agents_tauri_command_boundary"
+      "id": "agents_tauri_command_boundary",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Account Verification Flow",
@@ -12137,8 +12137,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "account verification flow",
-      "community_name": "Repository Architecture Guides",
-      "id": "agents_account_verification_flow"
+      "id": "agents_account_verification_flow",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Task Selection and Project Routing",
@@ -12151,8 +12151,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "task selection and project routing",
-      "community_name": "Repository Architecture Guides",
-      "id": "agents_task_selection_and_routing"
+      "id": "agents_task_selection_and_routing",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Shared Store Contract",
@@ -12165,8 +12165,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "shared store contract",
-      "community_name": "Repository Architecture Guides",
-      "id": "agents_shared_store_contract"
+      "id": "agents_shared_store_contract",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Jira Integration",
@@ -12179,8 +12179,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "jira integration",
-      "community_name": "Repository Architecture Guides",
-      "id": "agents_jira_integration"
+      "id": "agents_jira_integration",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Release Pipeline",
@@ -12193,8 +12193,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "release pipeline",
-      "community_name": "CI and Release Automation",
-      "id": "agents_release_pipeline"
+      "id": "agents_release_pipeline",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "React Query Cache Immutability",
@@ -12207,8 +12207,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "react query cache immutability",
-      "community_name": "Repository Architecture Guides",
-      "id": "agents_react_query_cache_immutability"
+      "id": "agents_react_query_cache_immutability",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Relaunch and Single-Instance Race",
@@ -12221,8 +12221,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "relaunch and single-instance race",
-      "community_name": "Repository Architecture Guides",
-      "id": "agents_relaunch_single_instance_race"
+      "id": "agents_relaunch_single_instance_race",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Submit Task Interpolation Boundary",
@@ -12235,8 +12235,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "submit task interpolation boundary",
-      "community_name": "Repository Architecture Guides",
-      "id": "agents_submit_task_interpolation_boundary"
+      "id": "agents_submit_task_interpolation_boundary",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Graphify Codebase Navigation Workflow",
@@ -12249,8 +12249,8 @@
       "contributor": null,
       "community": 47,
       "norm_label": "graphify codebase navigation workflow",
-      "community_name": "Workflow",
-      "id": "agents_graphify_workflow"
+      "id": "agents_graphify_workflow",
+      "community_name": "Workflow"
     },
     {
       "label": "Daily Report",
@@ -12263,8 +12263,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "daily report",
-      "community_name": "Repository Architecture Guides",
-      "id": "claude_daily_report"
+      "id": "claude_daily_report",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Two Browser Instances",
@@ -12277,8 +12277,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "two browser instances",
-      "community_name": "Repository Architecture Guides",
-      "id": "claude_two_browser_instances"
+      "id": "claude_two_browser_instances",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Live Session Probe",
@@ -12291,8 +12291,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "live session probe",
-      "community_name": "Repository Architecture Guides",
-      "id": "claude_live_session_probe"
+      "id": "claude_live_session_probe",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Browser Lifecycle Cleanup",
@@ -12305,8 +12305,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "browser lifecycle cleanup",
-      "community_name": "Repository Architecture Guides",
-      "id": "claude_browser_lifecycle_cleanup"
+      "id": "claude_browser_lifecycle_cleanup",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Window Startup Anti-Flash Handshake",
@@ -12319,8 +12319,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "window startup anti-flash handshake",
-      "community_name": "Repository Architecture Guides",
-      "id": "claude_anti_flash_handshake"
+      "id": "claude_anti_flash_handshake",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Tauri Command Boundary",
@@ -12333,8 +12333,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "tauri command boundary",
-      "community_name": "Repository Architecture Guides",
-      "id": "claude_tauri_command_boundary"
+      "id": "claude_tauri_command_boundary",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Task Selection and Project Routing",
@@ -12347,8 +12347,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "task selection and project routing",
-      "community_name": "Repository Architecture Guides",
-      "id": "claude_task_selection_and_routing"
+      "id": "claude_task_selection_and_routing",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Shared Store Contract",
@@ -12361,8 +12361,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "shared store contract",
-      "community_name": "Repository Architecture Guides",
-      "id": "claude_shared_store_contract"
+      "id": "claude_shared_store_contract",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Jira Integration",
@@ -12375,8 +12375,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "jira integration",
-      "community_name": "Repository Architecture Guides",
-      "id": "claude_jira_integration"
+      "id": "claude_jira_integration",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Release Pipeline",
@@ -12389,8 +12389,8 @@
       "contributor": null,
       "community": 7,
       "norm_label": "release pipeline",
-      "community_name": "CI and Release Automation",
-      "id": "claude_release_pipeline"
+      "id": "claude_release_pipeline",
+      "community_name": "CI and Release Automation"
     },
     {
       "label": "React Query Cache Immutability",
@@ -12403,8 +12403,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "react query cache immutability",
-      "community_name": "Repository Architecture Guides",
-      "id": "claude_react_query_cache_immutability"
+      "id": "claude_react_query_cache_immutability",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Relaunch and Single-Instance Race",
@@ -12417,8 +12417,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "relaunch and single-instance race",
-      "community_name": "Repository Architecture Guides",
-      "id": "claude_relaunch_single_instance_race"
+      "id": "claude_relaunch_single_instance_race",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Submit Task Interpolation Boundary",
@@ -12431,8 +12431,8 @@
       "contributor": null,
       "community": 8,
       "norm_label": "submit task interpolation boundary",
-      "community_name": "Repository Architecture Guides",
-      "id": "claude_submit_task_interpolation_boundary"
+      "id": "claude_submit_task_interpolation_boundary",
+      "community_name": "Repository Architecture Guides"
     },
     {
       "label": "Graphify Codebase Navigation Workflow",
@@ -12445,8 +12445,8 @@
       "contributor": null,
       "community": 47,
       "norm_label": "graphify codebase navigation workflow",
-      "community_name": "Workflow",
-      "id": "claude_graphify_workflow"
+      "id": "claude_graphify_workflow",
+      "community_name": "Workflow"
     }
   ],
   "links": [
@@ -17822,7 +17822,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/date-card.tsx",
-      "source_location": "L441",
+      "source_location": "L429",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_date_card",
@@ -17844,7 +17844,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/date-card.tsx",
-      "source_location": "L485",
+      "source_location": "L473",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_date_card",
@@ -17855,7 +17855,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/date-card.tsx",
-      "source_location": "L464",
+      "source_location": "L452",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_date_card",
@@ -17878,7 +17878,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/components/date-card.tsx",
-      "source_location": "L236",
+      "source_location": "L233",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_date_card_datecard",
@@ -17902,7 +17902,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/components/date-card.tsx",
-      "source_location": "L320",
+      "source_location": "L308",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_date_card_datecard",
@@ -19712,7 +19712,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/store.ts",
-      "source_location": "L47",
+      "source_location": "L46",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_store",
@@ -19723,7 +19723,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/store.ts",
-      "source_location": "L25",
+      "source_location": "L24",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_store",
@@ -19734,7 +19734,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/store.ts",
-      "source_location": "L29",
+      "source_location": "L28",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_store",
@@ -19745,7 +19745,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/store.ts",
-      "source_location": "L57",
+      "source_location": "L56",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_store",
@@ -19756,7 +19756,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/store.ts",
-      "source_location": "L27",
+      "source_location": "L26",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_store",
@@ -25064,5 +25064,5 @@
       "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md"
     }
   ],
-  "built_at_commit": "0ef6f49347281edfd0ff12f04e8392a865c6c753"
+  "built_at_commit": "f50cdb17a68ab0dd279ca6128505d372b3e68193"
 }
