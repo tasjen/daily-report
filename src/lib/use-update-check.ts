@@ -15,6 +15,7 @@ export function useUpdateCheck() {
         }
         toast.info(`Update available: v${update.version}`, {
           duration: Number.POSITIVE_INFINITY,
+          closeButton: true,
           action: {
             label: "Update & restart",
             onClick: () => {
@@ -24,7 +25,6 @@ export function useUpdateCheck() {
                 loading: "Downloading update…",
                 success: "Restarting…",
                 error: (e) => `Update failed: ${e}`,
-                closeButton: true,
               });
             },
           },
