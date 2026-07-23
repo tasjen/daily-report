@@ -111,7 +111,8 @@ export default function FavoritesForm() {
             <TooltipContent>
               Optional project key (a Jira key or any custom one) — a favorite
               with a key follows the Project mapping preference into that
-              project's form row; without one it goes into the first row
+              project's form row; without one it goes into the default project's
+              row, or the first row when no default project is set
             </TooltipContent>
           </Tooltip>
           <Button type="submit" disabled={!canAdd}>
