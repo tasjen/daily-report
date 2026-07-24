@@ -1822,8 +1822,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "package_dependencies_base_ui_react",
-      "community": 71,
-      "community_name": "Runtime Schema Validation",
+      "community": 67,
+      "community_name": "Desktop Process Control",
       "norm_label": "@base-ui/react"
     },
     {
@@ -1833,8 +1833,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "base_ui_react",
-      "community": 71,
-      "community_name": "Runtime Schema Validation",
+      "community": 67,
+      "community_name": "Desktop Process Control",
       "norm_label": "@base-ui/react"
     },
     {
@@ -2174,8 +2174,8 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "package_dependencies_clsx",
-      "community": 67,
-      "community_name": "Desktop Process Control",
+      "community": 71,
+      "community_name": "Runtime Schema Validation",
       "norm_label": "clsx"
     },
     {
@@ -2185,8 +2185,8 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "clsx",
-      "community": 67,
-      "community_name": "Desktop Process Control",
+      "community": 71,
+      "community_name": "Runtime Schema Validation",
       "norm_label": "clsx"
     },
     {
@@ -4671,30 +4671,30 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_date_card",
-      "community": 4,
-      "community_name": "Biome Code Quality Rules",
+      "community": 72,
+      "community_name": "Main Application Shell",
       "norm_label": "date-card.tsx"
     },
     {
       "label": "Props",
       "file_type": "code",
       "source_file": "src/components/date-card.tsx",
-      "source_location": "L39",
+      "source_location": "L34",
       "_origin": "ast",
       "id": "src_components_date_card_props",
-      "community": 4,
-      "community_name": "Biome Code Quality Rules",
+      "community": 72,
+      "community_name": "Main Application Shell",
       "norm_label": "props"
     },
     {
       "label": "DateCard()",
       "file_type": "code",
       "source_file": "src/components/date-card.tsx",
-      "source_location": "L42",
+      "source_location": "L37",
       "_origin": "ast",
       "id": "src_components_date_card_datecard",
-      "community": 4,
-      "community_name": "Biome Code Quality Rules",
+      "community": 72,
+      "community_name": "Main Application Shell",
       "norm_label": "datecard()"
     },
     {
@@ -4704,8 +4704,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_date_list",
-      "community": 72,
-      "community_name": "Main Application Shell",
+      "community": 87,
+      "community_name": "Text Input Primitive",
       "norm_label": "date-list.tsx"
     },
     {
@@ -4715,8 +4715,8 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "src_components_date_list_datelist",
-      "community": 72,
-      "community_name": "Main Application Shell",
+      "community": 87,
+      "community_name": "Text Input Primitive",
       "norm_label": "datelist()"
     },
     {
@@ -4847,8 +4847,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_open_member_page_button",
-      "community": 190,
-      "community_name": "open-member-page-button.tsx",
+      "community": 72,
+      "community_name": "Main Application Shell",
       "norm_label": "open-member-page-button.tsx"
     },
     {
@@ -4858,8 +4858,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "src_components_open_member_page_button_openmemberpagebutton",
-      "community": 190,
-      "community_name": "open-member-page-button.tsx",
+      "community": 72,
+      "community_name": "Main Application Shell",
       "norm_label": "openmemberpagebutton()"
     },
     {
@@ -4891,8 +4891,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_project_list_select",
-      "community": 72,
-      "community_name": "Main Application Shell",
+      "community": 190,
+      "community_name": "open-member-page-button.tsx",
       "norm_label": "project-list-select.tsx"
     },
     {
@@ -4902,8 +4902,8 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "src_components_project_list_select_projectlistselect",
-      "community": 72,
-      "community_name": "Main Application Shell",
+      "community": 190,
+      "community_name": "open-member-page-button.tsx",
       "norm_label": "projectlistselect()"
     },
     {
@@ -4913,8 +4913,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_project_map_form",
-      "community": 191,
-      "community_name": "project-map-form.tsx",
+      "community": 72,
+      "community_name": "Main Application Shell",
       "norm_label": "project-map-form.tsx"
     },
     {
@@ -4924,8 +4924,8 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "src_components_project_map_form_projectmapform",
-      "community": 191,
-      "community_name": "project-map-form.tsx",
+      "community": 72,
+      "community_name": "Main Application Shell",
       "norm_label": "projectmapform()"
     },
     {
@@ -5815,8 +5815,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_shared_input",
-      "community": 87,
-      "community_name": "Text Input Primitive",
+      "community": 72,
+      "community_name": "Main Application Shell",
       "norm_label": "input.tsx"
     },
     {
@@ -5826,8 +5826,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "src_components_shared_input_input",
-      "community": 87,
-      "community_name": "Text Input Primitive",
+      "community": 72,
+      "community_name": "Main Application Shell",
       "norm_label": "input()"
     },
     {
@@ -6167,8 +6167,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_sign_out_button",
-      "community": 192,
-      "community_name": "sign-out-button.tsx",
+      "community": 72,
+      "community_name": "Main Application Shell",
       "norm_label": "sign-out-button.tsx"
     },
     {
@@ -6178,8 +6178,8 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "src_components_sign_out_button_signoutbutton",
-      "community": 192,
-      "community_name": "sign-out-button.tsx",
+      "community": 72,
+      "community_name": "Main Application Shell",
       "norm_label": "signoutbutton()"
     },
     {
@@ -6332,8 +6332,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_version",
-      "community": 72,
-      "community_name": "Main Application Shell",
+      "community": 32,
+      "community_name": "Daily Report Date Cards",
       "norm_label": "version.tsx"
     },
     {
@@ -6343,8 +6343,8 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "src_components_version_props",
-      "community": 72,
-      "community_name": "Main Application Shell",
+      "community": 32,
+      "community_name": "Daily Report Date Cards",
       "norm_label": "props"
     },
     {
@@ -6354,8 +6354,8 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "src_components_version_version",
-      "community": 72,
-      "community_name": "Main Application Shell",
+      "community": 32,
+      "community_name": "Daily Report Date Cards",
       "norm_label": "version()"
     },
     {
@@ -6373,7 +6373,7 @@
       "label": "issue()",
       "file_type": "code",
       "source_file": "src/lib/date-card-helpers.test.ts",
-      "source_location": "L10",
+      "source_location": "L11",
       "_origin": "ast",
       "id": "src_lib_date_card_helpers_test_issue",
       "community": 4,
@@ -6381,10 +6381,21 @@
       "norm_label": "issue()"
     },
     {
+      "label": "favoriteIssue()",
+      "file_type": "code",
+      "source_file": "src/lib/date-card-helpers.test.ts",
+      "source_location": "L54",
+      "_origin": "ast",
+      "id": "src_lib_date_card_helpers_test_favoriteissue",
+      "community": 4,
+      "community_name": "Biome Code Quality Rules",
+      "norm_label": "favoriteissue()"
+    },
+    {
       "label": "daysAgo()",
       "file_type": "code",
       "source_file": "src/lib/date-card-helpers.test.ts",
-      "source_location": "L51",
+      "source_location": "L232",
       "_origin": "ast",
       "id": "src_lib_date_card_helpers_test_daysago",
       "community": 4,
@@ -6403,10 +6414,65 @@
       "norm_label": "date-card-helpers.ts"
     },
     {
+      "label": "SubmissionInput",
+      "file_type": "code",
+      "source_file": "src/lib/date-card-helpers.ts",
+      "source_location": "L7",
+      "_origin": "ast",
+      "id": "src_lib_date_card_helpers_submissioninput",
+      "community": 4,
+      "community_name": "Biome Code Quality Rules",
+      "norm_label": "submissioninput"
+    },
+    {
+      "label": "bulletLines()",
+      "file_type": "code",
+      "source_file": "src/lib/date-card-helpers.ts",
+      "source_location": "L25",
+      "_origin": "ast",
+      "id": "src_lib_date_card_helpers_bulletlines",
+      "community": 4,
+      "community_name": "Biome Code Quality Rules",
+      "norm_label": "bulletlines()"
+    },
+    {
+      "label": "Bucket",
+      "file_type": "code",
+      "source_file": "src/lib/date-card-helpers.ts",
+      "source_location": "L29",
+      "_origin": "ast",
+      "id": "src_lib_date_card_helpers_bucket",
+      "community": 4,
+      "community_name": "Biome Code Quality Rules",
+      "norm_label": "bucket"
+    },
+    {
+      "label": "bucketSize()",
+      "file_type": "code",
+      "source_file": "src/lib/date-card-helpers.ts",
+      "source_location": "L31",
+      "_origin": "ast",
+      "id": "src_lib_date_card_helpers_bucketsize",
+      "community": 4,
+      "community_name": "Biome Code Quality Rules",
+      "norm_label": "bucketsize()"
+    },
+    {
+      "label": "buildSubmission()",
+      "file_type": "code",
+      "source_file": "src/lib/date-card-helpers.ts",
+      "source_location": "L35",
+      "_origin": "ast",
+      "id": "src_lib_date_card_helpers_buildsubmission",
+      "community": 4,
+      "community_name": "Biome Code Quality Rules",
+      "norm_label": "buildsubmission()"
+    },
+    {
       "label": "buildSummary()",
       "file_type": "code",
       "source_file": "src/lib/date-card-helpers.ts",
-      "source_location": "L3",
+      "source_location": "L128",
       "_origin": "ast",
       "id": "src_lib_date_card_helpers_buildsummary",
       "community": 4,
@@ -6417,7 +6483,7 @@
       "label": "getDateRelation()",
       "file_type": "code",
       "source_file": "src/lib/date-card-helpers.ts",
-      "source_location": "L26",
+      "source_location": "L151",
       "_origin": "ast",
       "id": "src_lib_date_card_helpers_getdaterelation",
       "community": 4,
@@ -6428,7 +6494,7 @@
       "label": "getDateAfter()",
       "file_type": "code",
       "source_file": "src/lib/date-card-helpers.ts",
-      "source_location": "L56",
+      "source_location": "L181",
       "_origin": "ast",
       "id": "src_lib_date_card_helpers_getdateafter",
       "community": 4,
@@ -6860,8 +6926,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_lib_use_update_check",
-      "community": 72,
-      "community_name": "Main Application Shell",
+      "community": 191,
+      "community_name": "project-map-form.tsx",
       "norm_label": "use-update-check.ts"
     },
     {
@@ -6871,8 +6937,8 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "src_lib_use_update_check_useupdatecheck",
-      "community": 72,
-      "community_name": "Main Application Shell",
+      "community": 191,
+      "community_name": "project-map-form.tsx",
       "norm_label": "useupdatecheck()"
     },
     {
@@ -8619,9 +8685,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 32,
+      "community": 3,
       "norm_label": "adr format",
-      "community_name": "Daily Report Date Cards",
+      "community_name": "Engineering Workflow Skills",
       "id": "agents_skills_domain_modeling_adr_format_adr_format"
     },
     {
@@ -8633,9 +8699,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 32,
+      "community": 3,
       "norm_label": "minimal adr",
-      "community_name": "Daily Report Date Cards",
+      "community_name": "Engineering Workflow Skills",
       "id": "agents_skills_domain_modeling_adr_format_minimal_adr"
     },
     {
@@ -8647,9 +8713,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 32,
+      "community": 3,
       "norm_label": "adr eligibility test",
-      "community_name": "Daily Report Date Cards",
+      "community_name": "Engineering Workflow Skills",
       "id": "agents_skills_domain_modeling_adr_format_adr_eligibility_test"
     },
     {
@@ -8661,9 +8727,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 32,
+      "community": 3,
       "norm_label": "context.md format",
-      "community_name": "Daily Report Date Cards",
+      "community_name": "Engineering Workflow Skills",
       "id": "agents_skills_domain_modeling_context_format_context_format"
     },
     {
@@ -8675,9 +8741,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 32,
+      "community": 3,
       "norm_label": "canonical domain language",
-      "community_name": "Daily Report Date Cards",
+      "community_name": "Engineering Workflow Skills",
       "id": "agents_skills_domain_modeling_context_format_canonical_domain_language"
     },
     {
@@ -8689,9 +8755,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 32,
+      "community": 3,
       "norm_label": "single-context layout",
-      "community_name": "Daily Report Date Cards",
+      "community_name": "Engineering Workflow Skills",
       "id": "agents_skills_domain_modeling_context_format_single_context_layout"
     },
     {
@@ -8703,9 +8769,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 32,
+      "community": 3,
       "norm_label": "multi-context map",
-      "community_name": "Daily Report Date Cards",
+      "community_name": "Engineering Workflow Skills",
       "id": "agents_skills_domain_modeling_context_format_context_map"
     },
     {
@@ -8717,9 +8783,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 32,
+      "community": 3,
       "norm_label": "domain modeling",
-      "community_name": "Daily Report Date Cards",
+      "community_name": "Engineering Workflow Skills",
       "id": "agents_skills_domain_modeling_skill_domain_modeling"
     },
     {
@@ -8731,9 +8797,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 32,
+      "community": 3,
       "norm_label": "glossary challenge",
-      "community_name": "Daily Report Date Cards",
+      "community_name": "Engineering Workflow Skills",
       "id": "agents_skills_domain_modeling_skill_glossary_challenge"
     },
     {
@@ -8745,9 +8811,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 32,
+      "community": 3,
       "norm_label": "fuzzy-term sharpening",
-      "community_name": "Daily Report Date Cards",
+      "community_name": "Engineering Workflow Skills",
       "id": "agents_skills_domain_modeling_skill_fuzzy_term_sharpening"
     },
     {
@@ -8759,9 +8825,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 32,
+      "community": 3,
       "norm_label": "concrete scenario testing",
-      "community_name": "Daily Report Date Cards",
+      "community_name": "Engineering Workflow Skills",
       "id": "agents_skills_domain_modeling_skill_concrete_scenario_testing"
     },
     {
@@ -8773,9 +8839,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 32,
+      "community": 3,
       "norm_label": "code-model cross-check",
-      "community_name": "Daily Report Date Cards",
+      "community_name": "Engineering Workflow Skills",
       "id": "agents_skills_domain_modeling_skill_code_model_cross_check"
     },
     {
@@ -8787,9 +8853,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 32,
+      "community": 3,
       "norm_label": "inline context update",
-      "community_name": "Daily Report Date Cards",
+      "community_name": "Engineering Workflow Skills",
       "id": "agents_skills_domain_modeling_skill_inline_context_update"
     },
     {
@@ -8801,9 +8867,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 32,
+      "community": 3,
       "norm_label": "sparse adr offering",
-      "community_name": "Daily Report Date Cards",
+      "community_name": "Engineering Workflow Skills",
       "id": "agents_skills_domain_modeling_skill_sparse_adr_offering"
     },
     {
@@ -8927,9 +8993,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 6,
       "norm_label": "tdd at pre-agreed seams",
-      "community_name": "Engineering Workflow Skills",
+      "community_name": "Deep Module Design",
       "id": "agents_skills_implement_skill_tdd_at_pre_agreed_seams"
     },
     {
@@ -9025,9 +9091,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 32,
+      "community": 3,
       "norm_label": "codebase-design vocabulary compliance",
-      "community_name": "Daily Report Date Cards",
+      "community_name": "Engineering Workflow Skills",
       "id": "agents_skills_improve_codebase_architecture_html_report_vocabulary_compliance"
     },
     {
@@ -14222,7 +14288,7 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/components/date-card.tsx",
-      "source_location": "L11",
+      "source_location": "L10",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_date_card",
@@ -20201,7 +20267,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/date-card.tsx",
-      "source_location": "L42",
+      "source_location": "L37",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_date_card",
@@ -20212,24 +20278,12 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/date-card.tsx",
-      "source_location": "L39",
+      "source_location": "L34",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_date_card",
       "target": "src_components_date_card_props",
       "confidence_score": 1.0
-    },
-    {
-      "relation": "indirect_call",
-      "context": "argument",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "src/components/date-card.tsx",
-      "source_location": "L235",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "src_components_date_card_datecard",
-      "target": "src_lib_date_card_helpers_test_issue"
     },
     {
       "relation": "contains",
@@ -21559,7 +21613,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/date-card-helpers.test.ts",
-      "source_location": "L51",
+      "source_location": "L232",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_date_card_helpers_test",
@@ -21570,7 +21624,18 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/date-card-helpers.test.ts",
-      "source_location": "L10",
+      "source_location": "L54",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_lib_date_card_helpers_test",
+      "target": "src_lib_date_card_helpers_test_favoriteissue",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/date-card-helpers.test.ts",
+      "source_location": "L11",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_date_card_helpers_test",
@@ -21579,11 +21644,23 @@
     },
     {
       "relation": "indirect_call",
+      "context": "argument",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src/lib/date-card-helpers.ts",
+      "source_location": "L51",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_lib_date_card_helpers_buildsubmission",
+      "target": "src_lib_date_card_helpers_test_issue"
+    },
+    {
+      "relation": "indirect_call",
       "context": "collection",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "src/lib/date-card-helpers.ts",
-      "source_location": "L8",
+      "source_location": "L133",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_date_card_helpers_buildsummary",
@@ -21593,7 +21670,40 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/date-card-helpers.ts",
-      "source_location": "L3",
+      "source_location": "L29",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_lib_date_card_helpers",
+      "target": "src_lib_date_card_helpers_bucket",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/date-card-helpers.ts",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_lib_date_card_helpers",
+      "target": "src_lib_date_card_helpers_bucketsize",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/date-card-helpers.ts",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_lib_date_card_helpers",
+      "target": "src_lib_date_card_helpers_buildsubmission",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/date-card-helpers.ts",
+      "source_location": "L128",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_date_card_helpers",
@@ -21604,7 +21714,18 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/date-card-helpers.ts",
-      "source_location": "L56",
+      "source_location": "L25",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_lib_date_card_helpers",
+      "target": "src_lib_date_card_helpers_bulletlines",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/date-card-helpers.ts",
+      "source_location": "L181",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_date_card_helpers",
@@ -21615,11 +21736,58 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/date-card-helpers.ts",
-      "source_location": "L26",
+      "source_location": "L151",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_date_card_helpers",
       "target": "src_lib_date_card_helpers_getdaterelation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/date-card-helpers.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_lib_date_card_helpers",
+      "target": "src_lib_date_card_helpers_submissioninput",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/date-card-helpers.ts",
+      "source_location": "L57",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_lib_date_card_helpers_buildsubmission",
+      "target": "src_lib_date_card_helpers_bulletlines",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/date-card-helpers.ts",
+      "source_location": "L93",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_lib_date_card_helpers_buildsubmission",
+      "target": "src_lib_date_card_helpers_bucketsize",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/date-card-helpers.ts",
+      "source_location": "L58",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_lib_date_card_helpers_buildsubmission",
+      "target": "src_lib_date_card_helpers_buildsummary",
       "confidence_score": 1.0
     },
     {
@@ -27576,5 +27744,5 @@
       "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md"
     }
   ],
-  "built_at_commit": "7d63d58938db9634ba65bbab0ec423bb4675cdb8"
+  "built_at_commit": "b74bcd53fb204f753af3a60153449dc5f719ba92"
 }

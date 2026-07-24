@@ -191,7 +191,6 @@
   "189": "@wdio/spec-reporter",
   "190": "open-member-page-button.tsx",
   "191": "project-map-form.tsx",
-  "192": "sign-out-button.tsx",
   "193": "tauri.ts",
   "194": "smoke.e2e.ts"
 }

@@ -7,7 +7,6 @@ import {
   PlayIcon,
   RefreshCwIcon,
 } from "lucide-react";
-import { create } from "mutative";
 import { useMemo, useState } from "react";
 
 import { Button } from "@/components/shared/button";
@@ -20,21 +19,17 @@ import {
 import { Separator } from "@/components/shared/separator";
 import TaskSelect from "@/components/task-select";
 import {
-  buildSummary,
+  buildSubmission,
+  FAVORITE_KEY_PREFIX,
   getDateAfter,
   getDateRelation,
 } from "@/lib/date-card-helpers";
-import { type SubmitTaskEntry, useSubmitTaskMutation } from "@/lib/mutations";
+import { useSubmitTaskMutation } from "@/lib/mutations";
 import { useFavorites, useJiraTasksQuery, usePreferences } from "@/lib/queries";
 import { DEFAULT_PREFERENCES, type TaskGroupType } from "@/lib/store";
 import { TASK_GROUPS } from "@/lib/task-groups";
 import { cn } from "@/lib/utils";
 import type { JiraIssue } from "@/type";
-
-// Prefix that namespaces favorite keys away from real Jira issue keys, so
-// dedup/selection state can never collide and the summary builder can split
-// favorites back out of the flat selection.
-const FAVORITE_KEY_PREFIX = "favorite:";
 
 type Props = {
   date: string;
@@ -201,126 +196,32 @@ export default function DateCard({ date }: Props) {
   const defaultProject =
     preferences?.default_project ?? DEFAULT_PREFERENCES.default_project;
 
-  // Selected favorites lead the summary as plain "• text" lines outside any
-  // status block; the remaining Jira issues are grouped by status as before.
-  // Issues displayed under the "created" group are relabeled to a synthetic
-  // "Created" status so buildSummary's group-by-status gives them their own
-  // [Created] block. Cloned, not mutated — issues live in the react-query cache.
-  //
-  // `submitEntries` splits the same selection into up to 3 form rows by the
-  // project_map preference (project key → portal project id): an issue's
-  // project key comes from its Jira key prefix, a favorite's from its
-  // optional `project_key` tag. Mapped tasks bucket by portal project — favorites
-  // count toward bucket size — largest bucket first; each row's favorites
-  // lead its comment as plain bullets. Unmapped tasks bucket under the
-  // default project when one is set (joining its mapped bucket, if any);
-  // without a default they ride along in row 1's comment. With no bucket at
-  // all this degrades to a single row whose project the backend defaults.
-  // `summaryText` (the preview/copy text) stays the unsplit combined summary.
-  const { summaryText, submitEntries } = useMemo(() => {
-    const selected = new Set(selectedKeys);
-    const selectedIssues = allIssues.filter((issue) => selected.has(issue.key));
-    const createdKeys = new Set(
-      issueGroups
-        .find((group) => group.id === "created")
-        ?.issues.map((issue) => issue.key) ?? [],
-    );
-    const selectedFavoriteTexts = selectedIssues
-      .filter((issue) => issue.key.startsWith(FAVORITE_KEY_PREFIX))
-      .map((issue) => issue.fields.summary);
-    const jiraIssues = selectedIssues
-      .filter((issue) => !issue.key.startsWith(FAVORITE_KEY_PREFIX))
-      .map((issue) =>
-        createdKeys.has(issue.key)
-          ? create(issue, (draft) => {
-              draft.fields.status.name = "Created";
-            })
-          : issue,
-      );
-    const bulletLines = (texts: string[]) =>
-      texts.map((text) => `• ${text}`).join("\n");
-    const summaryText = [
-      bulletLines(selectedFavoriteTexts),
-      buildSummary(jiraIssues),
-    ]
-      .filter(Boolean)
-      .join("\n\n");
-
-    const favoriteKeyByText = new Map(
-      (favorites ?? []).map((favorite) => [
-        favorite.text,
-        favorite.project_key,
-      ]),
-    );
-    type Bucket = { issues: JiraIssue[]; favoriteTexts: string[] };
-    const buckets = new Map<string, Bucket>();
-    const getBucket = (portalProject: string): Bucket => {
-      let bucket = buckets.get(portalProject);
-      if (!bucket) {
-        bucket = { issues: [], favoriteTexts: [] };
-        buckets.set(portalProject, bucket);
-      }
-      return bucket;
-    };
-    const unmappedIssues: JiraIssue[] = [];
-    const unmappedFavoriteTexts: string[] = [];
-    // No mapping for the task's project key → the default project's bucket
-    // when one is set, else the unmapped arrays appended to row 1 below.
-    const resolvePortalProject = (projectKey: string | null | undefined) =>
-      (projectKey ? projectMap[projectKey] : undefined) ?? defaultProject;
-    for (const issue of jiraIssues) {
-      const portalProject = resolvePortalProject(issue.key.split("-")[0]);
-      if (portalProject) getBucket(portalProject).issues.push(issue);
-      else unmappedIssues.push(issue);
-    }
-    for (const text of selectedFavoriteTexts) {
-      const portalProject = resolvePortalProject(favoriteKeyByText.get(text));
-      if (portalProject) getBucket(portalProject).favoriteTexts.push(text);
-      else unmappedFavoriteTexts.push(text);
-    }
-    // Stable sort by task count (favorites included), so equally-sized
-    // buckets keep display order. The map editor caps distinct portal
-    // projects at 3, but a distinct default-project bucket (or a hand-edited
-    // store) can push past that — merge any overflow into the 3rd row.
-    const size = (bucket: Bucket) =>
-      bucket.issues.length + bucket.favoriteTexts.length;
-    const ranked = [...buckets.entries()].toSorted(
-      (a, b) => size(b[1]) - size(a[1]),
-    );
-    const rows = ranked.slice(0, 3);
-    const lastRow = rows[rows.length - 1];
-    if (lastRow) {
-      for (const [, bucket] of ranked.slice(3)) {
-        lastRow[1].issues.push(...bucket.issues);
-        lastRow[1].favoriteTexts.push(...bucket.favoriteTexts);
-      }
-    }
-    const submitEntries: SubmitTaskEntry[] = rows.length
-      ? rows.map(([project, bucket], i) => ({
-          project,
-          summary: [
-            bulletLines(
-              i === 0
-                ? [...bucket.favoriteTexts, ...unmappedFavoriteTexts]
-                : bucket.favoriteTexts,
-            ),
-            buildSummary(
-              i === 0 ? [...bucket.issues, ...unmappedIssues] : bucket.issues,
-            ),
-          ]
-            .filter(Boolean)
-            .join("\n\n"),
-        }))
-      : [{ project: null, summary: summaryText }];
-    return { summaryText, submitEntries };
-  }, [
-    allIssues,
-    issueGroups,
-    selectedKeys,
-    projectMap,
-    defaultProject,
-    favorites,
-  ]);
+  // `summaryText` is the unsplit preview/copy text; `submitEntries` is the
+  // same selection split into up to 3 form rows. The splitting/bucketing
+  // semantics live in buildSubmission (date-card-helpers.ts).
+  const { summaryText, submitEntries } = useMemo(
+    () =>
+      buildSubmission({
+        selectedKeys,
+        allIssues,
+        createdKeys: new Set(
+          issueGroups
+            .find((group) => group.id === "created")
+            ?.issues.map((issue) => issue.key) ?? [],
+        ),
+        projectMap,
+        defaultProject,
+        favorites: favorites ?? [],
+      }),
+    [
+      allIssues,
+      issueGroups,
+      selectedKeys,
+      projectMap,
+      defaultProject,
+      favorites,
+    ],
+  );
 
   const autofillSummary =
     preferences?.autofill_summary ?? DEFAULT_PREFERENCES.autofill_summary;
