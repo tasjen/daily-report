@@ -19,17 +19,17 @@ import {
 import { Separator } from "@/components/shared/separator";
 import TaskSelect from "@/components/task-select";
 import {
+  buildIssueGroups,
   buildSubmission,
+  defaultCheckedKeysOf,
   FAVORITE_KEY_PREFIX,
   getDateAfter,
   getDateRelation,
 } from "@/lib/date-card-helpers";
 import { useSubmitTaskMutation } from "@/lib/mutations";
 import { useFavorites, useJiraTasksQuery, usePreferences } from "@/lib/queries";
-import { DEFAULT_PREFERENCES, type TaskGroupType } from "@/lib/store";
-import { TASK_GROUPS } from "@/lib/task-groups";
+import { DEFAULT_PREFERENCES } from "@/lib/store";
 import { cn } from "@/lib/utils";
-import type { JiraIssue } from "@/type";
 
 type Props = {
   date: string;
@@ -83,40 +83,27 @@ export default function DateCard({ date }: Props) {
     [preferences],
   );
 
-  // Group issues by the query that surfaced them. Default groups come first
-  // (base TASK_GROUPS order within each partition), and dedup by key runs in
-  // that same display order — so an issue appearing in more than one query
-  // stays in the first group shown on screen. Empty groups are dropped.
-  const issueGroups = useMemo(() => {
-    const seen = new Set<string>();
-    const issuesById: Record<TaskGroupType, JiraIssue[]> = {
-      status: statusQuery.data?.issues ?? [],
-      created: createdQuery.data?.issues ?? [],
-      sprint: sprintQuery.data?.issues ?? [],
-      favorite: favoriteIssues,
-    };
-    const ordered = [
-      ...TASK_GROUPS.filter((group) => defaultGroupIds.has(group.type)),
-      ...TASK_GROUPS.filter((group) => !defaultGroupIds.has(group.type)),
-    ];
-    return ordered
-      .map(({ type: id, label }) => ({
-        id,
-        label,
-        issues: issuesById[id].filter((issue) => {
-          if (seen.has(issue.key)) return false;
-          seen.add(issue.key);
-          return true;
-        }),
-      }))
-      .filter((group) => group.issues.length > 0);
-  }, [
-    statusQuery.data,
-    createdQuery.data,
-    sprintQuery.data,
-    favoriteIssues,
-    defaultGroupIds,
-  ]);
+  // Group issues by the query that surfaced them; ordering/dedup semantics
+  // live in buildIssueGroups (date-card-helpers.ts).
+  const issueGroups = useMemo(
+    () =>
+      buildIssueGroups(
+        {
+          status: statusQuery.data?.issues ?? [],
+          created: createdQuery.data?.issues ?? [],
+          sprint: sprintQuery.data?.issues ?? [],
+          favorite: favoriteIssues,
+        },
+        defaultGroupIds,
+      ),
+    [
+      statusQuery.data,
+      createdQuery.data,
+      sprintQuery.data,
+      favoriteIssues,
+      defaultGroupIds,
+    ],
+  );
 
   // Flat union of every grouped issue, used for selection/summary bookkeeping.
   const allIssues = useMemo(
@@ -151,17 +138,11 @@ export default function DateCard({ date }: Props) {
   );
 
   // Issues displayed under a default task group start checked; everything
-  // else starts unchecked. Membership is post-dedup on purpose: what starts
-  // checked always matches the groups the user sees on screen. `overrides`
-  // records the user's explicit toggles on top of that default, so new issues
-  // from a later refetch still pick up the correct default.
+  // else starts unchecked. `overrides` records the user's explicit toggles on
+  // top of that default, so new issues from a later refetch still pick up the
+  // correct default.
   const defaultCheckedKeys = useMemo(
-    () =>
-      new Set(
-        issueGroups
-          .filter((group) => defaultGroupIds.has(group.id))
-          .flatMap((group) => group.issues.map((issue) => issue.key)),
-      ),
+    () => defaultCheckedKeysOf(issueGroups, defaultGroupIds),
     [issueGroups, defaultGroupIds],
   );
   const [overrides, setOverrides] = useState<Record<string, boolean>>({});

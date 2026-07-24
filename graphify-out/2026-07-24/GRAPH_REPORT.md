@@ -1,16 +1,16 @@
 # Graph Report - daily-report  (2026-07-24)
 
 ## Corpus Check
-- 141 files · ~103,983 words
+- 141 files · ~104,547 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1100 nodes · 1266 edges · 195 communities (68 shown, 127 thin omitted)
+- 1106 nodes · 1275 edges · 194 communities (66 shown, 128 thin omitted)
 - Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 45 edges (avg confidence: 0.9)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `7d63d589`
+- Built from commit: `b74bcd53`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -220,7 +220,7 @@
 - **Parallel Portal and Jira Account Verification Flow** — docs_superpowers_specs_2026_07_12_account_verification_design_candidate_portal_verification, docs_superpowers_specs_2026_07_12_account_verification_design_jira_credentials_check, docs_superpowers_specs_2026_07_12_account_verification_design_parallel_account_verification, docs_superpowers_specs_2026_07_12_account_verification_design_verify_account_error, docs_superpowers_specs_2026_07_12_account_verification_design_save_anyway_escape_hatch [EXTRACTED 1.00]
 - **Signed Release and Update Delivery Chain** — docs_superpowers_specs_2026_07_12_cicd_design_tag_driven_release_pipeline, docs_superpowers_specs_2026_07_12_cicd_design_release_version_guard, docs_superpowers_specs_2026_07_12_cicd_design_updater_signing_key, docs_superpowers_specs_2026_07_12_cicd_design_draft_release_publish_gate, docs_superpowers_specs_2026_07_12_cicd_design_in_app_auto_updater [EXTRACTED 1.00]
 
-## Communities (195 total, 127 thin omitted)
+## Communities (194 total, 128 thin omitted)
 
 ### Community 0 - "Portal Browser Backend"
 Cohesion: 0.14
@@ -235,12 +235,12 @@ Cohesion: 0.22
 Nodes (9): @babel/core, devDependencies, @babel/core, vitest, @wdio/cli, @wdio/local-runner, vitest, @wdio/cli (+1 more)
 
 ### Community 3 - "Engineering Workflow Skills"
-Cohesion: 0.07
-Nodes (33): Architecture Health Loop, Ask Matt, Context Hygiene, Idea-to-Ship Main Flow, Multi-session Issue Flow, Prototype Detour, Triage and Diagnosis On-ramps, Code Review (+25 more)
+Cohesion: 0.05
+Nodes (47): Architecture Health Loop, Ask Matt, Context Hygiene, Idea-to-Ship Main Flow, Multi-session Issue Flow, Prototype Detour, Triage and Diagnosis On-ramps, Code Review (+39 more)
 
 ### Community 4 - "Biome Code Quality Rules"
-Cohesion: 0.05
-Nodes (27): categories, correctness, suspicious, ignorePatterns, graphify-out, src-tauri/gen, src-tauri/target, options (+19 more)
+Cohesion: 0.06
+Nodes (30): categories, correctness, suspicious, ignorePatterns, graphify-out, src-tauri/gen, src-tauri/target, options (+22 more)
 
 ### Community 5 - "Skill Contracts and Triage"
 Cohesion: 0.06
@@ -248,7 +248,7 @@ Nodes (40): PRD Template, Ready-for-Agent PRD Publication, Highest-Level Test Se
 
 ### Community 6 - "Deep Module Design"
 Cohesion: 0.10
-Nodes (33): Deepening, Dependency Classification, In-process Dependency, Local-substitutable Dependency, Ports and Adapters, Remote but Owned Dependency, Replace-don't-layer Testing, True External Dependency (+25 more)
+Nodes (34): Deepening, Dependency Classification, In-process Dependency, Local-substitutable Dependency, Ports and Adapters, Remote but Owned Dependency, Replace-don't-layer Testing, True External Dependency (+26 more)
 
 ### Community 7 - "CI and Release Automation"
 Cohesion: 0.09
@@ -326,10 +326,6 @@ Nodes (4): InputGroupAddon(), inputGroupAddonVariants, InputGroupButton(), input
 Cohesion: 0.25
 Nodes (5): initialState, Theme, ThemeProviderContext, ThemeProviderProps, ThemeProviderState
 
-### Community 32 - "Daily Report Date Cards"
-Cohesion: 0.15
-Nodes (15): ADR Eligibility Test, ADR Format, Minimal ADR, Canonical Domain Language, CONTEXT.md Format, Multi-context Map, Single-context Layout, Code-model Cross-check (+7 more)
-
 ### Community 33 - "Git Hook Quality Gates"
 Cohesion: 0.40
 Nodes (5): Biome Pre-commit Check, Clippy Pre-push Check, Quality Gate Pipeline, Rustfmt Pre-commit Check, TypeScript Pre-push Check
@@ -364,31 +360,31 @@ Nodes (4): Answer, Outcome, Q: Update the README.md file about Graphify usage., 
 
 ### Community 67 - "Desktop Process Control"
 Cohesion: 0.22
-Nodes (9): clsx, dependencies, clsx, @tauri-apps/plugin-process, @tauri-apps/plugin-store, zod, @tauri-apps/plugin-process, @tauri-apps/plugin-store (+1 more)
+Nodes (9): @base-ui/react, dependencies, @base-ui/react, @tauri-apps/plugin-process, @tauri-apps/plugin-store, zod, @tauri-apps/plugin-process, @tauri-apps/plugin-store (+1 more)
 
 ### Community 99 - "CSS Class Composer"
 Cohesion: 0.07
 Nodes (27): arrowParens, bracketSameLine, bracketSpacing, ignorePatterns, graphify-out, src-tauri/gen, src-tauri/target, jsxSingleQuote (+19 more)
 
 ## Knowledge Gaps
-- **411 isolated node(s):** `$schema`, `mcp__claude_ai_Figma__get_design_context`, `superpowers@claude-plugins-official`, `frontend-design@claude-plugins-official`, `andrej-karpathy-skills@karpathy-skills` (+406 more)
+- **413 isolated node(s):** `$schema`, `mcp__claude_ai_Figma__get_design_context`, `superpowers@claude-plugins-official`, `frontend-design@claude-plugins-official`, `andrej-karpathy-skills@karpathy-skills` (+408 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **127 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **128 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `react` connect `Main Application Shell` to `sign-out-button.tsx`, `Biome Code Quality Rules`, `React Application Bootstrap`, `React Query Data Layer`, `Combobox UI Components`, `Dropdown Menu Components`, `Theme State Provider`, `Form Field Components`, `Text Input Primitive`, `Dialog UI Components`, `Select UI Components`, `Input Group Components`, `Card UI Components`, `open-member-page-button.tsx`, `project-map-form.tsx`?**
-  _High betweenness centrality (0.084) - this node is a cross-community bridge._
+- **Why does `react` connect `Main Application Shell` to `Daily Report Date Cards`, `Biome Code Quality Rules`, `React Application Bootstrap`, `React Query Data Layer`, `Combobox UI Components`, `Dropdown Menu Components`, `Theme State Provider`, `Form Field Components`, `Text Input Primitive`, `Dialog UI Components`, `Select UI Components`, `Input Group Components`, `Card UI Components`, `open-member-page-button.tsx`, `project-map-form.tsx`?**
+  _High betweenness centrality (0.087) - this node is a cross-community bridge._
 - **Why does `dependencies` connect `Desktop Process Control` to `Combobox UI Components`, `Persistent Settings Store`, `Account Settings Form`, `@tauri-apps/plugin-opener`, `@lingui/react`, `React`, `mutative`, `Automatic UI Animation`, `@tauri-apps/plugin-http`, `Interface Icon Library`, `Application Theme Library`, `React DOM Rendering`, `React Error Boundaries`, `Shadcn Component Toolkit`, `Sonner Toast Notifications`, `Tailwind Class Merging`, `Tailwind Styling Framework`, `Tailwind Vite Integration`, `TanStack Form Library`, `TanStack Query Cache`, `React Query Devtools`, `Tauri Frontend API`, `Desktop Update Plugin`, `Window State Persistence`, `Tailwind Animation Utilities`, `Runtime Schema Validation`?**
-  _High betweenness centrality (0.070) - this node is a cross-community bridge._
+  _High betweenness centrality (0.069) - this node is a cross-community bridge._
 - **Why does `react` connect `Combobox UI Components` to `Desktop Process Control`?**
   _High betweenness centrality (0.059) - this node is a cross-community bridge._
 - **What connects `$schema`, `mcp__claude_ai_Figma__get_design_context`, `superpowers@claude-plugins-official` to the rest of the system?**
-  _411 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _413 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Portal Browser Backend` be split into smaller, more focused modules?**
   _Cohesion score 0.13556953179594688 - nodes in this community are weakly interconnected._
 - **Should `Test Design Principles` be split into smaller, more focused modules?**
   _Cohesion score 0.1038961038961039 - nodes in this community are weakly interconnected._
 - **Should `Engineering Workflow Skills` be split into smaller, more focused modules?**
-  _Cohesion score 0.06818181818181818 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.04810360777058279 - nodes in this community are weakly interconnected._
