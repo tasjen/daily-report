@@ -1,4 +1,5 @@
 import { Trans } from "@lingui/react/macro";
+
 import { Label } from "@/components/shared/label";
 import { Switch } from "@/components/shared/switch";
 import { useSavePreferencesMutation } from "@/lib/mutations";
@@ -11,7 +12,7 @@ export default function AutofillSummaryToggle() {
   if (!preferences) return null;
 
   return (
-    <Label className="flex items-center gap-2 font-normal text-sm">
+    <Label className="flex items-center gap-2 text-sm font-normal">
       <Switch
         checked={preferences.autofill_summary}
         onCheckedChange={(checked) =>

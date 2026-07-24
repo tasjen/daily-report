@@ -3,6 +3,7 @@ import { msg } from "@lingui/core/macro";
 import { queryOptions, useQuery } from "@tanstack/react-query";
 import { invoke } from "@tauri-apps/api/core";
 import { fetch as tauriFetch } from "@tauri-apps/plugin-http";
+
 import {
   type Account,
   DEFAULT_PREFERENCES,

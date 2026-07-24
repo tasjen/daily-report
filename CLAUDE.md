@@ -16,7 +16,7 @@ Repository guidance.
 - **State/data:** `@tanstack/react-query` (server state and persisted-store front), `@tauri-apps/plugin-store` (secrets + preferences in `store.json`), `mutative` (immutable nested updates of cached objects).
 - **HTTP:** `@tauri-apps/plugin-http` (frontend Jira calls; required to bypass browser CORS).
 - **UI:** Tailwind CSS v4, shadcn-style components on `@base-ui/react`, `lucide-react`, `@formkit/auto-animate`.
-- **Tooling:** Biome (lint + format), lefthook (pre-commit), pnpm.
+- **Tooling:** Oxc — oxlint (lint, type-aware via `oxlint-tsgolint`) and oxfmt (format), lefthook (pre-commit), pnpm.
 
 ## Commands
 
@@ -26,7 +26,8 @@ pnpm dev        # vite only (frontend, no Tauri backend — rarely useful here)
 pnpm build      # tsc + vite build (typecheck + bundle frontend)
 pnpm package    # tauri build — produce distributable bundles
 cargo check --manifest-path src-tauri/Cargo.toml   # typecheck Rust backend only
-npx @biomejs/biome check --write .   # lint + format (also runs on pre-commit)
+pnpm lint:fix   # oxlint --type-aware --fix (also runs on pre-commit)
+pnpm fmt        # oxfmt: format in place (also runs on pre-commit; fmt:check to verify)
 ```
 
 There are no tests. Verify changes with `pnpm start` and exercise the UI.
@@ -184,14 +185,14 @@ Jira Cloud can return 200 with zero issues for bad credentials due to anonymous 
 
 [.github/workflows/ci.yml](.github/workflows/ci.yml) runs on PRs and `main` pushes with two parallel required jobs:
 
-- `frontend`: Biome + `pnpm build` on Ubuntu.
+- `frontend`: oxlint + oxfmt check + `pnpm build` on Ubuntu.
 - `rust`: `cargo check` on macOS, avoiding Linux-only Tauri system dependencies.
 
 Each job uses `dorny/paths-filter` and `if:`-guards toolchain/setup/check steps based on relevant paths. Irrelevant changes still complete required checks without running the work. Preserve these constraints:
 
 - `permissions:` **must** grant `pull-requests: read`; on PR events, the filter reads changed files from the API, which the explicit permissions block otherwise denies.
 - Exclude `graphify-out` with extglob `!(graphify-out)/**/*.{…}`, **not** a leading-`!` line. paths-filter matches when **any** pattern matches, so a negation line matches nearly everything. This matters because `graphify update .` commits `graphify-out/*.json` beside Rust-only changes.
-- The `frontend` filter must cover `src-tauri` JSON (`tauri.conf*.json`, `capabilities/*.json`) because Biome checks it. Keep the filter synchronized with `files.includes` in `biome.json`; excluding all `src-tauri` would allow config formatting violations onto `main`.
+- The `frontend` filter must cover `src-tauri` JSON (`tauri.conf*.json`, `capabilities/*.json`) because oxfmt formats it. Keep the filter synchronized with `ignorePatterns` in `.oxfmtrc.json`/`.oxlintrc.json`; excluding all `src-tauri` would allow config formatting violations onto `main`.
 - Do not add `fetch-depth: 0`; paths-filter deepens the shallow clone itself.
 
 ### Releases
@@ -227,7 +228,7 @@ Additional release rules:
 - **`relaunch()` races `tauri-plugin-single-instance`.** Restart starts the new process before the old exits. If its single-instance check reaches the shutting-down old process, it defers to that dying instance and the app quits. `useResetWhenAway` uses `relaunch()` only as a last resort when the `close_browsers` invoke rejects—an almost unreachable trigger. Verify this combination before using it elsewhere.
 - **`submit_task` interpolates JS strings.** Summaries and projects pass safely through `serde_json::to_string`; `date` is interpolated raw into `evaluate(...)`. It comes from portal option values; keep that trust boundary and never pass untrusted strings there.
 - **Hardcoded values:** `lib.rs` contains only login/form selectors. They are portal-specific; update them when portal markup changes. Portal base URL and Basic-auth credentials are **not** compiled in: users supply `account.portal_url` / `account.portal_credential` through the Account form in `store.json`; Rust reads them per use with `portal_url()` / `portal_credential()`.
-- **Formatting:** Biome enforces sorted Tailwind classes and organized imports; the pre-commit hook auto-fixes staged files.
+- **Formatting:** oxfmt enforces sorted Tailwind classes (`sortTailwindcss`, reading the v4 stylesheet `src/App.css`) and sorted imports (`sortImports`); the pre-commit hook auto-fixes staged files. Linting needs `--type-aware` (wired into `pnpm lint`) or `typescript/no-floating-promises` silently stops running.
 
 ## graphify
 

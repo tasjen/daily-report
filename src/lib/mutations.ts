@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { invoke } from "@tauri-apps/api/core";
 import { toast } from "sonner";
+
 import {
   accountOptions,
   favoritesOptions,
@@ -23,7 +24,7 @@ export function useSubmitTaskMutation() {
     },
     onSuccess: (_, arg) => {
       queryClient.setQueryData(taskParametersOptions().queryKey, (data) => {
-        if (!data) return;
+        if (!data) return data;
         return {
           ...data,
           dates: data.dates.filter((e) => e.value !== arg.date),

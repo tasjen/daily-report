@@ -2,6 +2,7 @@ import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { InfoIcon, MoveRightIcon, PlusIcon, Trash2Icon } from "lucide-react";
 import { useState } from "react";
+
 import { Button } from "@/components/shared/button";
 import { Input } from "@/components/shared/input";
 import { Label } from "@/components/shared/label";
@@ -49,8 +50,8 @@ export default function ProjectMapForm() {
   ]);
   const canAdd = Boolean(
     trimmedKey &&
-      !(trimmedKey in projectMap) &&
-      distinctValues.size <= MAX_DISTINCT_PROJECTS,
+    !(trimmedKey in projectMap) &&
+    distinctValues.size <= MAX_DISTINCT_PROJECTS,
   );
 
   function projectLabel(value: string) {

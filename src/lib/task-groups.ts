@@ -1,5 +1,6 @@
 import type { MessageDescriptor } from "@lingui/core";
 import { msg } from "@lingui/core/macro";
+
 import type { TaskGroupType } from "@/lib/store";
 
 // The task groups shown on each date card, in base priority order: three

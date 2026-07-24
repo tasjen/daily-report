@@ -1,5 +1,6 @@
 import "@/App.css";
 import { Suspense } from "react";
+
 import AccountForm from "@/components/account-form";
 import DateList from "@/components/date-list";
 import FavoritesForm from "@/components/favorites-form";

@@ -1,13 +1,15 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { getCurrentWindow } from "@tauri-apps/api/window";
-import React, { useEffect } from "react";
-import ReactDOM from "react-dom/client";
-import App from "@/App";
-import "@/App.css";
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { getCurrentWindow } from "@tauri-apps/api/window";
+
+import "@/App.css";
+import React, { useEffect } from "react";
+import ReactDOM from "react-dom/client";
 import { ErrorBoundary } from "react-error-boundary";
+
+import App from "@/App";
 import ErrorFallback from "@/components/error-fallback";
 import { TooltipProvider } from "@/components/shared/tooltip";
 import { ThemeProvider } from "@/components/theme-provider";

@@ -1,5 +1,6 @@
 import { Trans, useLingui } from "@lingui/react/macro";
 import { InfoIcon } from "lucide-react";
+
 import { Checkbox } from "@/components/shared/checkbox";
 import { Label } from "@/components/shared/label";
 import {
@@ -54,13 +55,11 @@ export default function DefaultTaskGroupsSelect() {
         {TASK_GROUPS.map((group) => (
           <Label
             key={group.type}
-            className="flex items-center gap-2 font-normal text-sm"
+            className="flex items-center gap-2 text-sm font-normal"
           >
             <Checkbox
               checked={selected.has(group.type)}
-              onCheckedChange={(checked) =>
-                toggle(group.type, checked === true)
-              }
+              onCheckedChange={(checked) => toggle(group.type, checked)}
             />
             {i18n._(group.label)}
           </Label>

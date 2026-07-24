@@ -2,6 +2,7 @@ import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { Trans } from "@lingui/react/macro";
 import { Loader2Icon } from "lucide-react";
 import { useState } from "react";
+
 import DateCard from "@/components/date-card";
 import { Button } from "@/components/shared/button";
 import { useTaskParameters } from "@/lib/queries";
@@ -35,7 +36,7 @@ export default function DateList() {
       {isFetching ? (
         <Loader2Icon className="animate-spin" />
       ) : error ? (
-        <p className="flex flex-col gap-4 whitespace-pre-wrap text-center text-red-500">
+        <p className="flex flex-col gap-4 text-center whitespace-pre-wrap text-red-500">
           {String(error)}
         </p>
       ) : !dates.length ? (
