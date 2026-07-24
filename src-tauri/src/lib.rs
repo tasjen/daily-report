@@ -1,8 +1,10 @@
+mod account;
 mod browser_session;
 mod navigation;
 mod project_options;
 mod submission;
 
+use account::{normalize_portal_url, PortalAccountConfig};
 use base64::{engine::general_purpose::STANDARD, Engine};
 use browser_session::{BrowserHost, BrowserSession};
 use chromiumoxide::browser::{Browser, BrowserConfig};
@@ -123,12 +125,6 @@ impl_browser_state_deref!(HeadlessBrowserState);
 struct VerifyBrowserState(Mutex<Option<Browser>>);
 
 impl ChromiumHost {
-    /// Reads the configured login phone number from `store.json`. Errors before
-    /// any browser is launched if it isn't set.
-    fn phone(&self) -> Result<String, AppError> {
-        account_str_field(&self.app, "phone", "Phone number not configured")
-    }
-
     /// Path to this browser's Chromium user-data dir, under the app's own cache
     /// dir (not the shared system temp). Headed and headless get separate
     /// subdirs so the two instances never contend for the same profile lock.
@@ -157,15 +153,20 @@ impl BrowserHost for ChromiumHost {
 
     /// Launches a fresh Chromium instance and logs into the admin portal.
     async fn launch(&self) -> Result<(Browser, Page), AppError> {
-        // Read the config first so a missing value fails before we spend the
-        // cost of launching a browser.
-        let phone = self.phone()?;
-        let base_url = portal_url(&self.app)?;
-        let credential = portal_credential(&self.app)?;
+        // Read the whole config first: a missing value must fail before we
+        // spend the cost of launching a browser.
+        let account = portal_account(&self.app)?;
 
         let (browser, page) =
             launch_browser(&self.user_data_dir()?, self.with_head, self.label()).await?;
-        login_to_portal(&page, &phone, &base_url, &credential, self.label()).await?;
+        login_to_portal(
+            &page,
+            account.phone(),
+            account.portal_url(),
+            account.portal_credential(),
+            self.label(),
+        )
+        .await?;
 
         // Chromium starts with an initial blank tab in addition to the page we
         // create; close it after login so the headed window doesn't show a
@@ -287,41 +288,19 @@ async fn login_to_portal(
     Ok(())
 }
 
-/// Reads a required string field from the `account` object in `store.json`,
-/// erroring with `missing_msg` when the store key, object, or field is absent
-/// or empty. Free function (not a `BrowserState` method) so commands can read
-/// portal config without holding a browser state reference.
-fn account_str_field(
-    app: &tauri::AppHandle,
-    field: &str,
-    missing_msg: &'static str,
-) -> Result<String, AppError> {
+/// Reads and validates the portal account config from `store.json`. Free
+/// function (not a `ChromiumHost` method) so commands can read portal config
+/// without holding a browser state reference.
+fn portal_account(app: &tauri::AppHandle) -> Result<PortalAccountConfig, AppError> {
     let store = app.store("store.json")?;
-    let value = store
-        .get("account")
-        .and_then(|v| v.get(field).and_then(|f| f.as_str().map(String::from)))
-        .filter(|s| !s.is_empty())
-        .ok_or(missing_msg)?;
-    Ok(value)
+    PortalAccountConfig::from_store_value(store.get("account").as_ref())
 }
 
-/// Trailing slashes are trimmed defensively — callers join paths as
-/// `format!("{base_url}/task.php")` — though the frontend already normalizes
-/// on save.
-fn normalize_portal_url(url: &str) -> &str {
-    url.trim_end_matches('/')
-}
-
-/// The user-configured portal base URL, normalized.
+/// The user-configured portal base URL, normalized. Validates the whole
+/// account, so a command that only needs the URL still reports the first
+/// unconfigured field rather than failing later inside login.
 fn portal_url(app: &tauri::AppHandle) -> Result<String, AppError> {
-    let url = account_str_field(app, "portal_url", "Portal URL not configured")?;
-    Ok(normalize_portal_url(&url).to_string())
-}
-
-/// The user-configured HTTP Basic-auth credential (`user:pass`), encoded
-/// verbatim into the `Authorization` header.
-fn portal_credential(app: &tauri::AppHandle) -> Result<String, AppError> {
-    account_str_field(app, "portal_credential", "Portal credential not configured")
+    Ok(portal_account(app)?.portal_url().to_string())
 }
 
 /// Polls until the page URL starts with `expected`. Prefix match rather than
@@ -409,8 +388,9 @@ async fn verify_portal_login(
 ) -> Result<(), AppError> {
     log::info!("verify_portal_login: checking candidate portal values");
     // The frontend normalizes the trailing slash before saving, but this runs
-    // on pre-save input — trim defensively, matching `portal_url()`.
-    let base_url = portal_url.trim_end_matches('/');
+    // on pre-save input — trim through the same helper the stored value uses,
+    // so a candidate can't be accepted here and behave differently once saved.
+    let base_url = normalize_portal_url(&portal_url);
     let user_data_dir = app.path().app_cache_dir()?.join("profiles").join("verify");
 
     // Hold the lock for the whole check: it serializes concurrent verifies
@@ -672,21 +652,4 @@ pub fn run() {
                 });
             }
         });
-}
-
-#[cfg(test)]
-mod tests {
-    use super::normalize_portal_url;
-
-    #[test]
-    fn normalize_portal_url_trims_trailing_slashes() {
-        assert_eq!(
-            normalize_portal_url("https://portal.example.com/"),
-            "https://portal.example.com"
-        );
-        assert_eq!(
-            normalize_portal_url("https://portal.example.com"),
-            "https://portal.example.com"
-        );
-    }
 }

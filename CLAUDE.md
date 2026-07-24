@@ -41,7 +41,7 @@ Unit tests cover extracted pure logic; UI behavior is still verified with `pnpm 
 - **Frontend:** Vitest 4 + jsdom + React Testing Library. [vitest.config.ts](vitest.config.ts) `mergeConfig`s [vite.config.ts](vite.config.ts), so the `@` alias, lingui macro transform, and react-compiler preset apply in tests. Tests are colocated `*.test.ts(x)` under `src/`; `globals` is off — import `describe`/`it`/`expect` from `"vitest"` explicitly (keeps `tsc -b` and type-aware oxlint working without tsconfig `types` churn).
 - **Tauri mocking:** [src/test/tauri.ts](src/test/tauri.ts) `mockTauri(data, onInvoke?)` answers plugin-store IPC from in-memory data and delegates other commands; [src/test/setup.ts](src/test/setup.ts) runs RTL `cleanup()` + `clearMocks()` after each test. Importing `store.ts` in tests is safe: `LazyStore` does no IPC until first use.
 - **Don't render components whose value comes from an uncached `use(promise)`** (e.g. `Version`): the promise recreates every render and never settles under RTL.
-- **Rust:** `#[cfg(test)]` unit tests colocated in the module under test — `submission.rs` (planning + workflow), `browser_session.rs` (reuse, recovery, teardown), `navigation.rs` (URL matching + polling), `project_options.rs` (cache scope), and `lib.rs` for the remaining pure helpers. Chromium itself stays untested: policy lives behind seams (`SubmissionPortal`, `BrowserHost`, the `current_url` closure, the `scrape` closure) that tests drive with fakes, while `lib.rs` holds the one real implementation of each. Async tests use `#[tokio::test]`, with `start_paused = true` where timing is asserted. Fakes record an ordered event log and assert on that, not on call counts — it catches ordering bugs (killing a stale browser *before* relaunching) that counters miss.
+- **Rust:** `#[cfg(test)]` unit tests colocated in the module under test — `submission.rs` (planning + workflow), `browser_session.rs` (reuse, recovery, teardown), `navigation.rs` (URL matching + polling), `account.rs` (stored portal config), and `project_options.rs` (cache scope). `lib.rs` itself holds no tests — it is the Chromium wiring layer. Chromium itself stays untested: policy lives behind seams (`SubmissionPortal`, `BrowserHost`, the `current_url` closure, the `scrape` closure) that tests drive with fakes, while `lib.rs` holds the one real implementation of each. Async tests use `#[tokio::test]`, with `start_paused = true` where timing is asserted. Fakes record an ordered event log and assert on that, not on call counts — it catches ordering bugs (killing a stale browser *before* relaunching) that counters miss.
 - **E2E:** WebdriverIO + tauri-driver smoke suite in [e2e/](e2e/), Linux/Windows only (no macOS tauri-driver), run by the separate non-required [e2e.yml](.github/workflows/e2e.yml) workflow on `main` pushes and manual dispatch. `e2e/tsconfig.json` is deliberately not referenced from the root tsconfig so pre-push `tsc -b` ignores it.
 
 ## Architecture
@@ -82,7 +82,7 @@ Before reuse, `get_page()` calls the host's `is_page_alive()`, which performs a 
 
 On an instance's first `get_page()`:
 
-1. Read `phone`, `portal_url`, and `portal_credential` from the `account` key in `store.json`. If any is missing, fail before spending Chromium startup.
+1. Read `phone`, `portal_url`, and `portal_credential` from the `account` key in `store.json` through `PortalAccountConfig::from_store_value` ([src-tauri/src/account.rs](src-tauri/src/account.rs)). All three are validated together, so if any is missing the launch fails before spending Chromium startup. Holding a `PortalAccountConfig` is proof login can be attempted — keep reading config through it rather than pulling fields out of the store ad hoc.
 2. Launch Chromium, headed or headless, and enable stealth mode.
 3. Set a Basic-auth `Authorization` header from `portal_credential` (the admin site's HTTP basic gate).
 4. Navigate to `portal_url`, type the phone into the login input, and press Enter.
@@ -189,9 +189,9 @@ favorites:   { text, project_key }[]
 
 - **Account:**
   - `phone` authenticates to the admin portal.
-  - `portal_url` is the portal base URL without a trailing slash.
-  - `portal_credential` is `user:pass` for the portal's HTTP basic gate.
-  - Rust reads all three portal fields.
+  - `portal_url` is the portal base URL without a trailing slash. Rust re-trims defensively through `normalize_portal_url`, which also normalizes pre-save candidates in `verify_portal_login` so a value can't verify one way and behave another once saved.
+  - `portal_credential` is `user:pass` for the portal's HTTP basic gate. Passed through **verbatim** — never trimmed or split on `:`, since any byte may be part of the password.
+  - Rust reads all three portal fields, together, via `PortalAccountConfig`. All are required and validated up front; empty strings and wrongly typed values count as unconfigured, and the field order in `from_store_value` decides which message a half-configured store reports.
   - `email` + `api_token` authenticate to Jira.
 - **Preferences:**
   - Rust reads `default_project`/`project_list` and `auto_submit`/`auto_close` (both default `false`) in `submit_task`.
