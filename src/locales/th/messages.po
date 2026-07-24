@@ -43,7 +43,7 @@ msgstr "ปิด Browser อัตโนมัติ"
 
 #: src/components/autofill-summary-toggle.tsx:27
 msgid "Auto-fill report summary"
-msgstr "เติมสรุปรายงานอัตโนมัติ"
+msgstr "ลงสรุปรายงานอัตโนมัติ"
 
 #: src/components/auto-submit-toggle.tsx:34
 msgid "Auto-submit report"
@@ -242,7 +242,7 @@ msgstr "งานที่ฉันอัปเดตสถานะ"
 
 #: src/components/auto-submit-toggle.tsx:45
 msgid "Submits the task form automatically after filling the summary"
-msgstr "ส่งฟอร์มงานให้อัตโนมัติหลังเติมสรุปแล้ว"
+msgstr "ส่งฟอร์มงานให้อัตโนมัติหลังลงสรุปแล้ว"
 
 #: src/components/locale-toggle.tsx:24
 msgid "Switch language"
