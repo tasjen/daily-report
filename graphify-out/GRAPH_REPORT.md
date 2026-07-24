@@ -1,16 +1,16 @@
 # Graph Report - daily-report  (2026-07-24)
 
 ## Corpus Check
-- 141 files · ~105,388 words
+- 142 files · ~105,703 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1109 nodes · 1278 edges · 194 communities (65 shown, 129 thin omitted)
+- 1112 nodes · 1281 edges · 194 communities (65 shown, 129 thin omitted)
 - Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 45 edges (avg confidence: 0.9)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `22ec885d`
+- Built from commit: `f41b816a`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -233,7 +233,7 @@ Nodes (22): ADR-Aware Architecture Review, Architecture Review HTML Report, Deep
 
 ### Community 2 - "Frontend Build Toolchain"
 Cohesion: 0.22
-Nodes (9): @babel/core, devDependencies, @babel/core, vitest, @wdio/cli, @wdio/local-runner, vitest, @wdio/cli (+1 more)
+Nodes (9): @lingui/cli, devDependencies, @lingui/cli, vitest, @wdio/cli, @wdio/local-runner, vitest, @wdio/cli (+1 more)
 
 ### Community 3 - "Engineering Workflow Skills"
 Cohesion: 0.05
@@ -361,7 +361,7 @@ Nodes (4): Answer, Outcome, Q: Update the README.md file about Graphify usage., 
 
 ### Community 67 - "Desktop Process Control"
 Cohesion: 0.22
-Nodes (9): lucide-react, dependencies, lucide-react, @tauri-apps/plugin-process, @tauri-apps/plugin-store, zod, @tauri-apps/plugin-process, @tauri-apps/plugin-store (+1 more)
+Nodes (9): @base-ui/react, dependencies, @base-ui/react, @tauri-apps/plugin-process, @tauri-apps/plugin-store, zod, @tauri-apps/plugin-process, @tauri-apps/plugin-store (+1 more)
 
 ### Community 99 - "CSS Class Composer"
 Cohesion: 0.07
@@ -378,7 +378,7 @@ _Questions this graph is uniquely positioned to answer:_
 - **Why does `react` connect `Main Application Shell` to `Daily Report Date Cards`, `Biome Code Quality Rules`, `React Application Bootstrap`, `React Query Data Layer`, `Combobox UI Components`, `Dropdown Menu Components`, `Interface Icon Library`, `Form Field Components`, `Theme State Provider`, `Dialog UI Components`, `Select UI Components`, `Input Group Components`, `Card UI Components`, `open-member-page-button.tsx`, `project-map-form.tsx`?**
   _High betweenness centrality (0.088) - this node is a cross-community bridge._
 - **Why does `dependencies` connect `Desktop Process Control` to `Combobox UI Components`, `Persistent Settings Store`, `Account Settings Form`, `@tauri-apps/plugin-opener`, `@lingui/react`, `React`, `mutative`, `Automatic UI Animation`, `@tauri-apps/plugin-http`, `Application Theme Library`, `React DOM Rendering`, `React Error Boundaries`, `Shadcn Component Toolkit`, `Sonner Toast Notifications`, `Tailwind Class Merging`, `Tailwind Styling Framework`, `Tailwind Vite Integration`, `TanStack Form Library`, `TanStack Query Cache`, `React Query Devtools`, `Tauri Frontend API`, `Desktop Update Plugin`, `Window State Persistence`, `Tailwind Animation Utilities`, `Runtime Schema Validation`, `Text Input Primitive`?**
-  _High betweenness centrality (0.069) - this node is a cross-community bridge._
+  _High betweenness centrality (0.070) - this node is a cross-community bridge._
 - **Why does `react` connect `Combobox UI Components` to `Desktop Process Control`?**
   _High betweenness centrality (0.060) - this node is a cross-community bridge._
 - **What connects `$schema`, `mcp__claude_ai_Figma__get_design_context`, `superpowers@claude-plugins-official` to the rest of the system?**
