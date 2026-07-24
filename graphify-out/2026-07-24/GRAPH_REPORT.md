@@ -1,16 +1,16 @@
 # Graph Report - daily-report  (2026-07-24)
 
 ## Corpus Check
-- 129 files · ~102,827 words
+- 130 files · ~102,952 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1019 nodes · 1166 edges · 180 communities (79 shown, 101 thin omitted)
+- 1032 nodes · 1203 edges · 170 communities (68 shown, 102 thin omitted)
 - Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 43 edges (avg confidence: 0.91)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `279c0ff4`
+- Built from commit: `2f4e39db`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -58,7 +58,6 @@
 - Skill Content Pruning
 - Workflow
 - React
-- Class Name Utility
 - Automatic UI Animation
 - macOS Installer Script
 - Interface Icon Library
@@ -81,7 +80,9 @@
 - Window State Persistence
 - Tailwind Animation Utilities
 - Runtime Schema Validation
+- Main Application Shell
 - Available Task Groups
+- CSS Class Composer
 - Tauri Brand Logo
 - Vite Brand Logo
 - Retina App Icon
@@ -160,15 +161,15 @@
 
 ## God Nodes (most connected - your core abstractions)
 1. `AppError` - 26 edges
-2. `compilerOptions` - 23 edges
-3. `compilerOptions` - 16 edges
-4. `BrowserState` - 15 edges
-5. `submit_task()` - 15 edges
-6. `scripts` - 11 edges
-7. `portal_url()` - 11 edges
-8. `get_task_parameters()` - 11 edges
-9. `launch_browser()` - 10 edges
-10. `login_to_portal()` - 10 edges
+2. `react` - 25 edges
+3. `compilerOptions` - 23 edges
+4. `compilerOptions` - 16 edges
+5. `scripts` - 15 edges
+6. `BrowserState` - 15 edges
+7. `submit_task()` - 15 edges
+8. `portal_url()` - 11 edges
+9. `get_task_parameters()` - 11 edges
+10. `launch_browser()` - 10 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Shared Portal Login Helper` --semantically_similar_to--> `Single Source of Truth`  [INFERRED] [semantically similar]
@@ -198,7 +199,7 @@
 - **Parallel Portal and Jira Account Verification Flow** — docs_superpowers_specs_2026_07_12_account_verification_design_candidate_portal_verification, docs_superpowers_specs_2026_07_12_account_verification_design_jira_credentials_check, docs_superpowers_specs_2026_07_12_account_verification_design_parallel_account_verification, docs_superpowers_specs_2026_07_12_account_verification_design_verify_account_error, docs_superpowers_specs_2026_07_12_account_verification_design_save_anyway_escape_hatch [EXTRACTED 1.00]
 - **Signed Release and Update Delivery Chain** — docs_superpowers_specs_2026_07_12_cicd_design_tag_driven_release_pipeline, docs_superpowers_specs_2026_07_12_cicd_design_release_version_guard, docs_superpowers_specs_2026_07_12_cicd_design_updater_signing_key, docs_superpowers_specs_2026_07_12_cicd_design_draft_release_publish_gate, docs_superpowers_specs_2026_07_12_cicd_design_in_app_auto_updater [EXTRACTED 1.00]
 
-## Communities (180 total, 101 thin omitted)
+## Communities (170 total, 102 thin omitted)
 
 ### Community 0 - "Portal Browser Backend"
 Cohesion: 0.14
@@ -209,24 +210,24 @@ Cohesion: 0.18
 Nodes (13): Dependency Injection, Internal Collaborator Mocking, SDK-Style Boundary Interface, System-Boundary Mocking, Behavior Through Public Interfaces, Horizontal Slicing, Implementation-Coupled Test, Tautological Test (+5 more)
 
 ### Community 2 - "Frontend Build Toolchain"
-Cohesion: 0.06
-Nodes (35): @babel/core, babel-plugin-react-compiler, @biomejs/biome, lefthook, @lingui/babel-plugin-lingui-macro, @lingui/cli, @lingui/vite-plugin, devDependencies (+27 more)
+Cohesion: 0.05
+Nodes (39): @babel/core, babel-plugin-react-compiler, lefthook, @lingui/babel-plugin-lingui-macro, @lingui/cli, @lingui/vite-plugin, oxfmt, oxlint (+31 more)
 
 ### Community 3 - "Engineering Workflow Skills"
-Cohesion: 0.07
-Nodes (32): Architecture Health Loop, Ask Matt, Context Hygiene, Idea-to-Ship Main Flow, Multi-session Issue Flow, Prototype Detour, Triage and Diagnosis On-ramps, Code Review (+24 more)
+Cohesion: 0.05
+Nodes (43): Architecture Health Loop, Ask Matt, Context Hygiene, Idea-to-Ship Main Flow, Multi-session Issue Flow, Prototype Detour, Triage and Diagnosis On-ramps, Code Review (+35 more)
 
 ### Community 4 - "Biome Code Quality Rules"
-Cohesion: 0.05
-Nodes (42): source, assist, actions, enabled, noUnusedImports, useExhaustiveDependencies, css, parser (+34 more)
+Cohesion: 0.10
+Nodes (20): categories, correctness, suspicious, ignorePatterns, graphify-out, src-tauri/gen, src-tauri/target, plugins (+12 more)
 
 ### Community 5 - "Skill Contracts and Triage"
 Cohesion: 0.06
 Nodes (40): PRD Template, Ready-for-Agent PRD Publication, Highest-Level Test Seam Selection, To-PRD Skill, Agent Brief, Behavioral, Not Procedural Contract, Complete Acceptance Criteria, Durability over Precision (+32 more)
 
 ### Community 6 - "Deep Module Design"
-Cohesion: 0.10
-Nodes (34): Deepening, Dependency Classification, In-process Dependency, Local-substitutable Dependency, Ports and Adapters, Remote but Owned Dependency, Replace-don't-layer Testing, True External Dependency (+26 more)
+Cohesion: 0.08
+Nodes (38): Deepening, Dependency Classification, In-process Dependency, Local-substitutable Dependency, Ports and Adapters, Remote but Owned Dependency, Replace-don't-layer Testing, True External Dependency (+30 more)
 
 ### Community 7 - "CI and Release Automation"
 Cohesion: 0.09
@@ -237,8 +238,8 @@ Cohesion: 0.08
 Nodes (34): Account Verification Flow, Window Startup Anti-Flash Handshake, Browser Automation Architecture, Browser Lifecycle Cleanup, Browser Login Flow, Daily Report, Jira Integration, Live Session Probe (+26 more)
 
 ### Community 9 - "Research and Teaching Skills"
-Cohesion: 0.08
-Nodes (28): Background Research Agent, Cited Markdown Findings, Primary-Source Research, Research Skill, Evidence-Gated Term Promotion, Decision-Grade Learning Record, Evidence of Learning, Learning Record Format (+20 more)
+Cohesion: 0.07
+Nodes (33): Background Research Agent, Cited Markdown Findings, Primary-Source Research, Research Skill, Glossary Vocabulary Discipline, Canonical Learning Language, Evidence-Gated Term Promotion, Glossary Ambiguity Resolution (+25 more)
 
 ### Community 10 - "Tauri Packaging and Updates"
 Cohesion: 0.06
@@ -313,8 +314,8 @@ Cohesion: 0.40
 Nodes (5): Biome Pre-commit Check, Clippy Pre-push Check, Quality Gate Pipeline, Rustfmt Pre-commit Check, TypeScript Pre-push Check
 
 ### Community 34 - "Account Settings Form"
-Cohesion: 0.12
-Nodes (16): name, packageManager, private, scripts, build, bump, clean, dev (+8 more)
+Cohesion: 0.10
+Nodes (20): name, packageManager, private, scripts, build, bump, clean, dev (+12 more)
 
 ### Community 36 - "Interactive Bug Diagnosis Loop"
 Cohesion: 0.83
@@ -332,57 +333,57 @@ Nodes (3): Desirable Difficulty, Fluency Strength, Storage Strength
 Cohesion: 1.00
 Nodes (3): Frontend HTML Shell, React Root Mount, Vite Frontend Entrypoint
 
-### Community 49 - "Class Name Utility"
-Cohesion: 0.15
-Nodes (15): ADR Eligibility Test, ADR Format, Minimal ADR, Canonical Domain Language, CONTEXT.md Format, Multi-context Map, Single-context Layout, Code-model Cross-check (+7 more)
-
 ### Community 66 - "Core Runtime Dependencies"
 Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: Update the README.md file about Graphify usage., Source Nodes
 
 ### Community 67 - "Desktop Process Control"
 Cohesion: 0.22
-Nodes (9): class-variance-authority, dependencies, class-variance-authority, @tauri-apps/plugin-process, @tauri-apps/plugin-store, zod, @tauri-apps/plugin-process, @tauri-apps/plugin-store (+1 more)
+Nodes (9): @base-ui/react, dependencies, @base-ui/react, @tauri-apps/plugin-process, @tauri-apps/plugin-store, zod, @tauri-apps/plugin-process, @tauri-apps/plugin-store (+1 more)
 
 ### Community 71 - "Runtime Schema Validation"
-Cohesion: 0.18
-Nodes (11): Prototype Answer Capture, Throwaway Prototype, UI Winner Cleanup, Red-Green Loop, Vertical Slice TDD, Issue Breakdown Quiz, Dependency-Ordered Issue Publication, Vertical Slice Issue Body Template (+3 more)
+Cohesion: 0.33
+Nodes (6): Prototype Answer Capture, Throwaway Prototype, UI Winner Cleanup, Dependency-Ordered Issue Publication, Vertical Slice Issue Body Template, Parent Issue Preservation
+
+### Community 99 - "CSS Class Composer"
+Cohesion: 0.07
+Nodes (25): arrowParens, bracketSameLine, bracketSpacing, ignorePatterns, graphify-out, src-tauri/gen, src-tauri/target, jsxSingleQuote (+17 more)
 
 ### Community 169 - "@tauri-apps/plugin-store"
 Cohesion: 0.25
 Nodes (9): ADR-Aware Architecture Review, Architecture Review HTML Report, Deep Module Design Vocabulary, Deepening Opportunity, Deletion Test, Improve Codebase Architecture, ADR Conflict Flagging, Pre-Agreed Test Seams (+1 more)
 
 ### Community 170 - "Domain Docs"
-Cohesion: 0.22
-Nodes (9): Domain Docs, Glossary Vocabulary Discipline, Multi-Context Domain Layout, Single-Context Domain Layout, Domain Docs Layout Decision, Canonical Learning Language, Glossary Ambiguity Resolution, Glossary Format (+1 more)
+Cohesion: 0.25
+Nodes (8): Domain Docs, Multi-Context Domain Layout, Single-Context Domain Layout, Agent Skills Configuration Block, Domain Docs Layout Decision, Engineering Skills Configuration, Prompt-Driven Setup, Triage Label Vocabulary
 
 ### Community 171 - "Engineering Skills Configuration"
-Cohesion: 0.29
-Nodes (7): Agent Skills Configuration Block, Engineering Skills Configuration, Prompt-Driven Setup, Setup Matt Pocock Skills, Triage Label Vocabulary, Prefactoring, To Issues
+Cohesion: 0.25
+Nodes (8): Setup Matt Pocock Skills, Red-Green Loop, Vertical Slice TDD, Issue Breakdown Quiz, Prefactoring, To Issues, Tracer Bullet Issues, Vertical Slice Rules
 
 ### Community 172 - "Triage Label Mapping"
 Cohesion: 0.29
 Nodes (7): needs-info, needs-triage, ready-for-agent, ready-for-human, Triage Label Mapping, wontfix, AFK-Ready Issues
 
 ## Knowledge Gaps
-- **361 isolated node(s):** `$schema`, `mcp__claude_ai_Figma__get_design_context`, `superpowers@claude-plugins-official`, `frontend-design@claude-plugins-official`, `andrej-karpathy-skills@karpathy-skills` (+356 more)
+- **379 isolated node(s):** `$schema`, `mcp__claude_ai_Figma__get_design_context`, `superpowers@claude-plugins-official`, `frontend-design@claude-plugins-official`, `andrej-karpathy-skills@karpathy-skills` (+374 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **101 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **102 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Triage State Machine` connect `Skill Contracts and Triage` to `@tauri-apps/plugin-store`?**
-  _High betweenness centrality (0.017) - this node is a cross-community bridge._
-- **Why does `Grilling and Domain-Modeling Flow` connect `@tauri-apps/plugin-store` to `Skill Contracts and Triage`?**
-  _High betweenness centrality (0.015) - this node is a cross-community bridge._
+- **Why does `react` connect `Main Application Shell` to `Daily Report Date Cards`, `Biome Code Quality Rules`, `React Application Bootstrap`, `React Query Data Layer`, `version.tsx`, `Favorite Task Editor`, `Combobox UI Components`, `Dropdown Menu Components`, `Form Field Components`, `Text Input Primitive`, `Dialog UI Components`, `Select UI Components`, `Input Group Components`, `Card UI Components`, `Theme State Provider`?**
+  _High betweenness centrality (0.057) - this node is a cross-community bridge._
+- **Why does `dependencies` connect `Desktop Process Control` to `Combobox UI Components`, `Persistent Settings Store`, `Account Settings Form`, `@tauri-apps/plugin-opener`, `@lingui/react`, `React`, `mutative`, `Automatic UI Animation`, `@tauri-apps/plugin-http`, `Interface Icon Library`, `Immutable State Updates`, `Application Theme Library`, `React DOM Rendering`, `React Error Boundaries`, `Shadcn Component Toolkit`, `Sonner Toast Notifications`, `Tailwind Class Merging`, `Tailwind Styling Framework`, `Tailwind Vite Integration`, `TanStack Form Library`, `TanStack Query Cache`, `React Query Devtools`, `Tauri Frontend API`, `Desktop Update Plugin`, `Window State Persistence`, `Tailwind Animation Utilities`?**
+  _High betweenness centrality (0.048) - this node is a cross-community bridge._
+- **Why does `react` connect `Combobox UI Components` to `Desktop Process Control`?**
+  _High betweenness centrality (0.039) - this node is a cross-community bridge._
 - **What connects `$schema`, `mcp__claude_ai_Figma__get_design_context`, `superpowers@claude-plugins-official` to the rest of the system?**
-  _361 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _379 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Portal Browser Backend` be split into smaller, more focused modules?**
   _Cohesion score 0.14404223227752638 - nodes in this community are weakly interconnected._
 - **Should `Frontend Build Toolchain` be split into smaller, more focused modules?**
-  _Cohesion score 0.05714285714285714 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.05128205128205128 - nodes in this community are weakly interconnected._
 - **Should `Engineering Workflow Skills` be split into smaller, more focused modules?**
-  _Cohesion score 0.07056451612903226 - nodes in this community are weakly interconnected._
-- **Should `Biome Code Quality Rules` be split into smaller, more focused modules?**
-  _Cohesion score 0.046511627906976744 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.053156146179401995 - nodes in this community are weakly interconnected._

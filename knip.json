@@ -1,4 +1,10 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
-  "tags": ["-lintignore"]
+  "tags": ["-lintignore"],
+  "webdriver-io": {
+    "config": ["e2e/wdio.conf.ts"],
+    "entry": ["e2e/*.e2e.ts"]
+  },
+  "ignoreDependencies": ["@wdio/local-runner"],
+  "ignoreBinaries": ["tauri-driver"]
 }

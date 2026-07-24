@@ -1,16 +1,16 @@
 # Graph Report - daily-report  (2026-07-24)
 
 ## Corpus Check
-- 130 files · ~102,952 words
+- 141 files · ~103,983 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1032 nodes · 1203 edges · 170 communities (68 shown, 102 thin omitted)
-- Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 43 edges (avg confidence: 0.91)
+- 1100 nodes · 1266 edges · 195 communities (68 shown, 127 thin omitted)
+- Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 45 edges (avg confidence: 0.9)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `2f4e39db`
+- Built from commit: `7d63d589`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -58,6 +58,7 @@
 - Skill Content Pruning
 - Workflow
 - React
+- compilerOptions
 - Automatic UI Animation
 - macOS Installer Script
 - Interface Icon Library
@@ -81,7 +82,17 @@
 - Tailwind Animation Utilities
 - Runtime Schema Validation
 - Main Application Shell
+- wdio.conf.ts
+- Favorite Task Editor
+- lefthook
+- @lingui/babel-plugin-lingui-macro
+- @lingui/cli
+- @lingui/vite-plugin
+- oxfmt
+- oxlint
 - Available Task Groups
+- oxlint-tsgolint
+- knip
 - CSS Class Composer
 - Tauri Brand Logo
 - Vite Brand Logo
@@ -158,16 +169,26 @@
 - @lingui/react
 - mutative
 - @tauri-apps/plugin-http
+- @types/babel__core
+- @types/node
+- @types/react
+- @types/react-dom
+- typescript
+- vite
+- @vitejs/plugin-react
+- @wdio/globals
+- @wdio/mocha-framework
+- @wdio/spec-reporter
 
 ## God Nodes (most connected - your core abstractions)
 1. `AppError` - 26 edges
 2. `react` - 25 edges
 3. `compilerOptions` - 23 edges
-4. `compilerOptions` - 16 edges
-5. `scripts` - 15 edges
+4. `scripts` - 18 edges
+5. `compilerOptions` - 16 edges
 6. `BrowserState` - 15 edges
 7. `submit_task()` - 15 edges
-8. `portal_url()` - 11 edges
+8. `portal_url()` - 12 edges
 9. `get_task_parameters()` - 11 edges
 10. `launch_browser()` - 10 edges
 
@@ -199,35 +220,35 @@
 - **Parallel Portal and Jira Account Verification Flow** — docs_superpowers_specs_2026_07_12_account_verification_design_candidate_portal_verification, docs_superpowers_specs_2026_07_12_account_verification_design_jira_credentials_check, docs_superpowers_specs_2026_07_12_account_verification_design_parallel_account_verification, docs_superpowers_specs_2026_07_12_account_verification_design_verify_account_error, docs_superpowers_specs_2026_07_12_account_verification_design_save_anyway_escape_hatch [EXTRACTED 1.00]
 - **Signed Release and Update Delivery Chain** — docs_superpowers_specs_2026_07_12_cicd_design_tag_driven_release_pipeline, docs_superpowers_specs_2026_07_12_cicd_design_release_version_guard, docs_superpowers_specs_2026_07_12_cicd_design_updater_signing_key, docs_superpowers_specs_2026_07_12_cicd_design_draft_release_publish_gate, docs_superpowers_specs_2026_07_12_cicd_design_in_app_auto_updater [EXTRACTED 1.00]
 
-## Communities (170 total, 102 thin omitted)
+## Communities (195 total, 127 thin omitted)
 
 ### Community 0 - "Portal Browser Backend"
 Cohesion: 0.14
-Nodes (42): AppHandle, Box, Browser, CdpError, Error, From, Mutex, Ok (+34 more)
+Nodes (43): AppHandle, Box, Browser, CdpError, Error, From, Mutex, Ok (+35 more)
 
 ### Community 1 - "Test Design Principles"
-Cohesion: 0.18
-Nodes (13): Dependency Injection, Internal Collaborator Mocking, SDK-Style Boundary Interface, System-Boundary Mocking, Behavior Through Public Interfaces, Horizontal Slicing, Implementation-Coupled Test, Tautological Test (+5 more)
+Cohesion: 0.10
+Nodes (22): ADR-Aware Architecture Review, Architecture Review HTML Report, Deep Module Design Vocabulary, Deepening Opportunity, Deletion Test, Improve Codebase Architecture, ADR Conflict Flagging, Dependency Injection (+14 more)
 
 ### Community 2 - "Frontend Build Toolchain"
-Cohesion: 0.05
-Nodes (39): @babel/core, babel-plugin-react-compiler, lefthook, @lingui/babel-plugin-lingui-macro, @lingui/cli, @lingui/vite-plugin, oxfmt, oxlint (+31 more)
+Cohesion: 0.22
+Nodes (9): @babel/core, devDependencies, @babel/core, vitest, @wdio/cli, @wdio/local-runner, vitest, @wdio/cli (+1 more)
 
 ### Community 3 - "Engineering Workflow Skills"
-Cohesion: 0.05
-Nodes (43): Architecture Health Loop, Ask Matt, Context Hygiene, Idea-to-Ship Main Flow, Multi-session Issue Flow, Prototype Detour, Triage and Diagnosis On-ramps, Code Review (+35 more)
+Cohesion: 0.07
+Nodes (33): Architecture Health Loop, Ask Matt, Context Hygiene, Idea-to-Ship Main Flow, Multi-session Issue Flow, Prototype Detour, Triage and Diagnosis On-ramps, Code Review (+25 more)
 
 ### Community 4 - "Biome Code Quality Rules"
-Cohesion: 0.10
-Nodes (20): categories, correctness, suspicious, ignorePatterns, graphify-out, src-tauri/gen, src-tauri/target, plugins (+12 more)
+Cohesion: 0.05
+Nodes (27): categories, correctness, suspicious, ignorePatterns, graphify-out, src-tauri/gen, src-tauri/target, options (+19 more)
 
 ### Community 5 - "Skill Contracts and Triage"
 Cohesion: 0.06
 Nodes (40): PRD Template, Ready-for-Agent PRD Publication, Highest-Level Test Seam Selection, To-PRD Skill, Agent Brief, Behavioral, Not Procedural Contract, Complete Acceptance Criteria, Durability over Precision (+32 more)
 
 ### Community 6 - "Deep Module Design"
-Cohesion: 0.08
-Nodes (38): Deepening, Dependency Classification, In-process Dependency, Local-substitutable Dependency, Ports and Adapters, Remote but Owned Dependency, Replace-don't-layer Testing, True External Dependency (+30 more)
+Cohesion: 0.10
+Nodes (33): Deepening, Dependency Classification, In-process Dependency, Local-substitutable Dependency, Ports and Adapters, Remote but Owned Dependency, Replace-don't-layer Testing, True External Dependency (+25 more)
 
 ### Community 7 - "CI and Release Automation"
 Cohesion: 0.09
@@ -238,8 +259,8 @@ Cohesion: 0.08
 Nodes (34): Account Verification Flow, Window Startup Anti-Flash Handshake, Browser Automation Architecture, Browser Lifecycle Cleanup, Browser Login Flow, Daily Report, Jira Integration, Live Session Probe (+26 more)
 
 ### Community 9 - "Research and Teaching Skills"
-Cohesion: 0.07
-Nodes (33): Background Research Agent, Cited Markdown Findings, Primary-Source Research, Research Skill, Glossary Vocabulary Discipline, Canonical Learning Language, Evidence-Gated Term Promotion, Glossary Ambiguity Resolution (+25 more)
+Cohesion: 0.06
+Nodes (37): Background Research Agent, Cited Markdown Findings, Primary-Source Research, Research Skill, Domain Docs, Glossary Vocabulary Discipline, Multi-Context Domain Layout, Single-Context Domain Layout (+29 more)
 
 ### Community 10 - "Tauri Packaging and Updates"
 Cohesion: 0.06
@@ -262,8 +283,8 @@ Cohesion: 0.09
 Nodes (21): aliases, components, hooks, lib, ui, utils, iconLibrary, menuAccent (+13 more)
 
 ### Community 15 - "Build Tool TypeScript Config"
-Cohesion: 0.10
-Nodes (20): node, vite.config.ts, compilerOptions, allowImportingTsExtensions, erasableSyntaxOnly, lib, module, moduleDetection (+12 more)
+Cohesion: 0.09
+Nodes (21): vite.config.ts, vitest.config.ts, compilerOptions, allowImportingTsExtensions, erasableSyntaxOnly, lib, module, moduleDetection (+13 more)
 
 ### Community 16 - "Combobox UI Components"
 Cohesion: 0.11
@@ -282,8 +303,8 @@ Cohesion: 0.13
 Nodes (14): core:default, core:window:allow-set-background-color, core:window:allow-set-focus, core:window:allow-show, main, opener:default, process:allow-restart, store:default (+6 more)
 
 ### Community 21 - "Issue Tracker Integrations"
-Cohesion: 0.20
-Nodes (12): External Pull Request Triage, GitHub Issue Tracker, GitHub Wayfinding Operations, Shared GitHub Issue and PR Number Space, External Merge Request Triage, GitLab Issue Tracker, Separate GitLab Issue and MR Number Spaces, Local Markdown Issue Tracker (+4 more)
+Cohesion: 0.06
+Nodes (37): Prototype Answer Capture, Throwaway Prototype, UI Winner Cleanup, External Pull Request Triage, GitHub Issue Tracker, GitHub Wayfinding Operations, Shared GitHub Issue and PR Number Space, External Merge Request Triage (+29 more)
 
 ### Community 23 - "Claude Plugin Settings"
 Cohesion: 0.18
@@ -306,24 +327,24 @@ Cohesion: 0.25
 Nodes (5): initialState, Theme, ThemeProviderContext, ThemeProviderProps, ThemeProviderState
 
 ### Community 32 - "Daily Report Date Cards"
-Cohesion: 0.53
-Nodes (5): buildSummary(), DateCard(), getDateAfter(), getDateRelation(), Props
+Cohesion: 0.15
+Nodes (15): ADR Eligibility Test, ADR Format, Minimal ADR, Canonical Domain Language, CONTEXT.md Format, Multi-context Map, Single-context Layout, Code-model Cross-check (+7 more)
 
 ### Community 33 - "Git Hook Quality Gates"
 Cohesion: 0.40
 Nodes (5): Biome Pre-commit Check, Clippy Pre-push Check, Quality Gate Pipeline, Rustfmt Pre-commit Check, TypeScript Pre-push Check
 
 ### Community 34 - "Account Settings Form"
-Cohesion: 0.10
-Nodes (20): name, packageManager, private, scripts, build, bump, clean, dev (+12 more)
+Cohesion: 0.08
+Nodes (23): name, packageManager, private, scripts, build, bump, clean, dev (+15 more)
 
 ### Community 36 - "Interactive Bug Diagnosis Loop"
 Cohesion: 0.83
 Nodes (3): capture(), hitl-loop.template.sh script, step()
 
 ### Community 37 - "Dead Code Analysis Config"
-Cohesion: 0.50
-Nodes (3): $schema, tags, -lintignore
+Cohesion: 0.15
+Nodes (12): ignoreBinaries, ignoreDependencies, $schema, tags, webdriver-io, config, entry, e2e/*.e2e.ts (+4 more)
 
 ### Community 38 - "Learning Retention Techniques"
 Cohesion: 0.67
@@ -333,57 +354,41 @@ Nodes (3): Desirable Difficulty, Fluency Strength, Storage Strength
 Cohesion: 1.00
 Nodes (3): Frontend HTML Shell, React Root Mount, Vite Frontend Entrypoint
 
+### Community 49 - "compilerOptions"
+Cohesion: 0.13
+Nodes (14): compilerOptions, module, moduleResolution, noEmit, skipLibCheck, strict, target, types (+6 more)
+
 ### Community 66 - "Core Runtime Dependencies"
 Cohesion: 0.40
 Nodes (4): Answer, Outcome, Q: Update the README.md file about Graphify usage., Source Nodes
 
 ### Community 67 - "Desktop Process Control"
 Cohesion: 0.22
-Nodes (9): @base-ui/react, dependencies, @base-ui/react, @tauri-apps/plugin-process, @tauri-apps/plugin-store, zod, @tauri-apps/plugin-process, @tauri-apps/plugin-store (+1 more)
-
-### Community 71 - "Runtime Schema Validation"
-Cohesion: 0.33
-Nodes (6): Prototype Answer Capture, Throwaway Prototype, UI Winner Cleanup, Dependency-Ordered Issue Publication, Vertical Slice Issue Body Template, Parent Issue Preservation
+Nodes (9): clsx, dependencies, clsx, @tauri-apps/plugin-process, @tauri-apps/plugin-store, zod, @tauri-apps/plugin-process, @tauri-apps/plugin-store (+1 more)
 
 ### Community 99 - "CSS Class Composer"
 Cohesion: 0.07
-Nodes (25): arrowParens, bracketSameLine, bracketSpacing, ignorePatterns, graphify-out, src-tauri/gen, src-tauri/target, jsxSingleQuote (+17 more)
-
-### Community 169 - "@tauri-apps/plugin-store"
-Cohesion: 0.25
-Nodes (9): ADR-Aware Architecture Review, Architecture Review HTML Report, Deep Module Design Vocabulary, Deepening Opportunity, Deletion Test, Improve Codebase Architecture, ADR Conflict Flagging, Pre-Agreed Test Seams (+1 more)
-
-### Community 170 - "Domain Docs"
-Cohesion: 0.25
-Nodes (8): Domain Docs, Multi-Context Domain Layout, Single-Context Domain Layout, Agent Skills Configuration Block, Domain Docs Layout Decision, Engineering Skills Configuration, Prompt-Driven Setup, Triage Label Vocabulary
-
-### Community 171 - "Engineering Skills Configuration"
-Cohesion: 0.25
-Nodes (8): Setup Matt Pocock Skills, Red-Green Loop, Vertical Slice TDD, Issue Breakdown Quiz, Prefactoring, To Issues, Tracer Bullet Issues, Vertical Slice Rules
-
-### Community 172 - "Triage Label Mapping"
-Cohesion: 0.29
-Nodes (7): needs-info, needs-triage, ready-for-agent, ready-for-human, Triage Label Mapping, wontfix, AFK-Ready Issues
+Nodes (27): arrowParens, bracketSameLine, bracketSpacing, ignorePatterns, graphify-out, src-tauri/gen, src-tauri/target, jsxSingleQuote (+19 more)
 
 ## Knowledge Gaps
-- **379 isolated node(s):** `$schema`, `mcp__claude_ai_Figma__get_design_context`, `superpowers@claude-plugins-official`, `frontend-design@claude-plugins-official`, `andrej-karpathy-skills@karpathy-skills` (+374 more)
+- **411 isolated node(s):** `$schema`, `mcp__claude_ai_Figma__get_design_context`, `superpowers@claude-plugins-official`, `frontend-design@claude-plugins-official`, `andrej-karpathy-skills@karpathy-skills` (+406 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **102 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **127 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `react` connect `Main Application Shell` to `Daily Report Date Cards`, `Biome Code Quality Rules`, `React Application Bootstrap`, `React Query Data Layer`, `version.tsx`, `Favorite Task Editor`, `Combobox UI Components`, `Dropdown Menu Components`, `Form Field Components`, `Text Input Primitive`, `Dialog UI Components`, `Select UI Components`, `Input Group Components`, `Card UI Components`, `Theme State Provider`?**
-  _High betweenness centrality (0.057) - this node is a cross-community bridge._
-- **Why does `dependencies` connect `Desktop Process Control` to `Combobox UI Components`, `Persistent Settings Store`, `Account Settings Form`, `@tauri-apps/plugin-opener`, `@lingui/react`, `React`, `mutative`, `Automatic UI Animation`, `@tauri-apps/plugin-http`, `Interface Icon Library`, `Immutable State Updates`, `Application Theme Library`, `React DOM Rendering`, `React Error Boundaries`, `Shadcn Component Toolkit`, `Sonner Toast Notifications`, `Tailwind Class Merging`, `Tailwind Styling Framework`, `Tailwind Vite Integration`, `TanStack Form Library`, `TanStack Query Cache`, `React Query Devtools`, `Tauri Frontend API`, `Desktop Update Plugin`, `Window State Persistence`, `Tailwind Animation Utilities`?**
-  _High betweenness centrality (0.048) - this node is a cross-community bridge._
+- **Why does `react` connect `Main Application Shell` to `sign-out-button.tsx`, `Biome Code Quality Rules`, `React Application Bootstrap`, `React Query Data Layer`, `Combobox UI Components`, `Dropdown Menu Components`, `Theme State Provider`, `Form Field Components`, `Text Input Primitive`, `Dialog UI Components`, `Select UI Components`, `Input Group Components`, `Card UI Components`, `open-member-page-button.tsx`, `project-map-form.tsx`?**
+  _High betweenness centrality (0.084) - this node is a cross-community bridge._
+- **Why does `dependencies` connect `Desktop Process Control` to `Combobox UI Components`, `Persistent Settings Store`, `Account Settings Form`, `@tauri-apps/plugin-opener`, `@lingui/react`, `React`, `mutative`, `Automatic UI Animation`, `@tauri-apps/plugin-http`, `Interface Icon Library`, `Application Theme Library`, `React DOM Rendering`, `React Error Boundaries`, `Shadcn Component Toolkit`, `Sonner Toast Notifications`, `Tailwind Class Merging`, `Tailwind Styling Framework`, `Tailwind Vite Integration`, `TanStack Form Library`, `TanStack Query Cache`, `React Query Devtools`, `Tauri Frontend API`, `Desktop Update Plugin`, `Window State Persistence`, `Tailwind Animation Utilities`, `Runtime Schema Validation`?**
+  _High betweenness centrality (0.070) - this node is a cross-community bridge._
 - **Why does `react` connect `Combobox UI Components` to `Desktop Process Control`?**
-  _High betweenness centrality (0.039) - this node is a cross-community bridge._
+  _High betweenness centrality (0.059) - this node is a cross-community bridge._
 - **What connects `$schema`, `mcp__claude_ai_Figma__get_design_context`, `superpowers@claude-plugins-official` to the rest of the system?**
-  _379 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _411 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Portal Browser Backend` be split into smaller, more focused modules?**
-  _Cohesion score 0.14404223227752638 - nodes in this community are weakly interconnected._
-- **Should `Frontend Build Toolchain` be split into smaller, more focused modules?**
-  _Cohesion score 0.05128205128205128 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.13556953179594688 - nodes in this community are weakly interconnected._
+- **Should `Test Design Principles` be split into smaller, more focused modules?**
+  _Cohesion score 0.1038961038961039 - nodes in this community are weakly interconnected._
 - **Should `Engineering Workflow Skills` be split into smaller, more focused modules?**
-  _Cohesion score 0.053156146179401995 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06818181818181818 - nodes in this community are weakly interconnected._
