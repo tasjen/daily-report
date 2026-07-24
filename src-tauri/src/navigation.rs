@@ -3,9 +3,15 @@ use std::{future::Future, time::Duration};
 const URL_PROBE_TIMEOUT: Duration = Duration::from_secs(2);
 const URL_POLL_INTERVAL: Duration = Duration::from_millis(200);
 
-/// Expected navigation target. Matching intentionally uses the full string as
-/// a prefix so redirect-added query parameters, fragments, and slashes count.
+/// Expected navigation target. A URL matches when it equals the expectation,
+/// or extends it at a path/query/fragment boundary — so redirect-added query
+/// parameters, fragments, and trailing slashes count as arrival, while a
+/// differently-named sibling route (`/member.php-old`) does not.
 pub(crate) struct UrlExpectation(String);
+
+/// Characters that may follow the expected URL without changing which route it
+/// names.
+const URL_BOUNDARY: [char; 3] = ['?', '#', '/'];
 
 impl UrlExpectation {
     pub(crate) fn new(expected: impl Into<String>) -> Self {
@@ -13,7 +19,9 @@ impl UrlExpectation {
     }
 
     pub(crate) fn matches(&self, actual: &str) -> bool {
-        actual.starts_with(&self.0)
+        actual
+            .strip_prefix(&self.0)
+            .is_some_and(|rest| rest.is_empty() || rest.starts_with(URL_BOUNDARY))
     }
 
     fn as_str(&self) -> &str {
@@ -74,17 +82,32 @@ mod tests {
     }
 
     #[test]
-    fn expected_prefix_accepts_redirect_suffixes_but_not_unrelated_urls() {
+    fn redirect_suffixes_at_a_url_boundary_match() {
         let expectation = UrlExpectation::new("https://portal.example.com/member.php");
         let matches = [
             "https://portal.example.com/member.php?from=login",
             "https://portal.example.com/member.php#report",
             "https://portal.example.com/member.php/",
-            "https://portal.example.com/task.php",
+            "https://portal.example.com/member.php/detail?id=1",
         ]
         .map(|actual| expectation.matches(actual));
 
-        assert_eq!(matches, [true, true, true, false]);
+        assert_eq!(matches, [true; 4]);
+    }
+
+    #[test]
+    fn routes_that_only_share_a_prefix_do_not_match() {
+        let expectation = UrlExpectation::new("https://portal.example.com/member.php");
+        let matches = [
+            "https://portal.example.com/task.php",
+            "https://portal.example.com/member.php-old",
+            "https://portal.example.com/member.phpx",
+            "https://portal.example.com/member.php_backup?from=login",
+            "https://portal.example.com/member.ph",
+        ]
+        .map(|actual| expectation.matches(actual));
+
+        assert_eq!(matches, [false; 5]);
     }
 
     #[tokio::test(start_paused = true)]

@@ -1,6 +1,6 @@
 /// One project/comment row pair sent by the frontend, which has already
 /// bucketed selected tasks through the `project_map` preference.
-#[derive(serde::Deserialize)]
+#[derive(serde::Deserialize, Debug)]
 pub(crate) struct TaskEntry {
     project: Option<String>,
     summary: String,
@@ -30,20 +30,39 @@ impl SubmissionPreferences {
     }
 }
 
+#[derive(Debug)]
 pub(crate) struct SubmissionPlan {
     rows: Vec<TaskEntry>,
     project_filter: Option<Vec<String>>,
 }
 
+/// Project/comment row pairs on the portal task form. More than this cannot be
+/// submitted, and the frontend's `buildSubmission` already merges overflow into
+/// the last row.
+pub(crate) const MAX_ROWS: usize = 3;
+
 impl SubmissionPlan {
-    /// Applies the backend's defensive form constraints before Chromium is
-    /// touched: at most three rows, at least one row, and row-one defaulting.
-    pub(crate) fn build(mut entries: Vec<TaskEntry>, preferences: SubmissionPreferences) -> Self {
+    /// Applies the backend's form constraints before Chromium is touched: at
+    /// least one row, at most `MAX_ROWS`, and row-one defaulting.
+    ///
+    /// Too many rows is a caller contract violation, not user error, so it
+    /// fails loudly. Silently dropping the extras would ship a report missing
+    /// part of the day's work with no signal that anything was lost.
+    pub(crate) fn build(
+        mut entries: Vec<TaskEntry>,
+        preferences: SubmissionPreferences,
+    ) -> Result<Self, crate::AppError> {
+        if entries.len() > MAX_ROWS {
+            return Err(format!(
+                "Cannot submit {} rows: the portal task form has only {MAX_ROWS}",
+                entries.len()
+            )
+            .into());
+        }
         let SubmissionPreferences {
             default_project,
             mut project_list,
         } = preferences;
-        entries.truncate(3);
         if entries.is_empty() {
             entries.push(TaskEntry {
                 project: None,
@@ -65,10 +84,10 @@ impl SubmissionPlan {
         if let Some(first) = entries.first_mut() {
             first.project = first.project.take().or(default_project);
         }
-        Self {
+        Ok(Self {
             rows: entries,
             project_filter,
-        }
+        })
     }
 
     pub(crate) fn rows(&self) -> &[TaskEntry] {
@@ -238,6 +257,7 @@ mod tests {
             }],
             SubmissionPreferences::new(None, vec![]),
         )
+        .unwrap()
     }
 
     #[tokio::test]
@@ -408,7 +428,8 @@ mod tests {
                 summary: "Finished the report".into(),
             }],
             SubmissionPreferences::new(Some("portal-project".into()), vec![]),
-        );
+        )
+        .unwrap();
 
         let row = &plan.rows()[0];
         assert_eq!(
@@ -425,7 +446,8 @@ mod tests {
                 summary: "Finished the report".into(),
             }],
             SubmissionPreferences::new(Some("default-project".into()), vec![]),
-        );
+        )
+        .unwrap();
 
         assert_eq!(plan.rows()[0].project.as_deref(), Some("entry-project"));
     }
@@ -448,7 +470,8 @@ mod tests {
                 },
             ],
             SubmissionPreferences::new(Some("default-project".into()), vec![]),
-        );
+        )
+        .unwrap();
 
         let rows = plan
             .rows()
@@ -465,18 +488,37 @@ mod tests {
         );
     }
 
+    fn rows(summaries: &[&str]) -> Vec<TaskEntry> {
+        summaries
+            .iter()
+            .map(|summary| TaskEntry {
+                project: None,
+                summary: (*summary).into(),
+            })
+            .collect()
+    }
+
     #[test]
-    fn malformed_input_is_limited_to_the_portals_three_rows() {
-        let plan = SubmissionPlan::build(
-            ["First", "Second", "Third", "Fourth"]
-                .into_iter()
-                .map(|summary| TaskEntry {
-                    project: None,
-                    summary: summary.into(),
-                })
-                .collect(),
+    fn more_rows_than_the_portal_form_holds_are_rejected_rather_than_dropped() {
+        let error = SubmissionPlan::build(
+            rows(&["First", "Second", "Third", "Fourth"]),
             SubmissionPreferences::new(None, vec![]),
+        )
+        .unwrap_err();
+
+        assert_eq!(
+            error.to_string(),
+            "Cannot submit 4 rows: the portal task form has only 3"
         );
+    }
+
+    #[test]
+    fn a_full_three_row_submission_is_accepted() {
+        let plan = SubmissionPlan::build(
+            rows(&["First", "Second", "Third"]),
+            SubmissionPreferences::new(None, vec![]),
+        )
+        .unwrap();
 
         assert_eq!(
             plan.rows()
@@ -492,7 +534,8 @@ mod tests {
         let plan = SubmissionPlan::build(
             vec![],
             SubmissionPreferences::new(Some("default-project".into()), vec![]),
-        );
+        )
+        .unwrap();
 
         let row = &plan.rows()[0];
         assert_eq!(
@@ -509,7 +552,8 @@ mod tests {
                 summary: "Finished the report".into(),
             }],
             SubmissionPreferences::new(Some("default-project".into()), vec![]),
-        );
+        )
+        .unwrap();
 
         assert_eq!(plan.project_filter(), None);
     }
@@ -522,7 +566,8 @@ mod tests {
                 summary: "Finished the report".into(),
             }],
             SubmissionPreferences::new(None, vec!["first-project".into(), "second-project".into()]),
-        );
+        )
+        .unwrap();
 
         assert_eq!(
             plan.project_filter(),
@@ -541,7 +586,8 @@ mod tests {
                 Some("default-project".into()),
                 vec!["listed-project".into()],
             ),
-        );
+        )
+        .unwrap();
 
         assert!(plan
             .project_filter()
@@ -565,7 +611,8 @@ mod tests {
                 Some("default-project".into()),
                 vec!["listed-project".into()],
             ),
-        );
+        )
+        .unwrap();
 
         assert_eq!(
             plan.project_filter(),

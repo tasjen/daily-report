@@ -41,7 +41,7 @@ Unit tests cover extracted pure logic; UI behavior is still verified with `pnpm 
 - **Frontend:** Vitest 4 + jsdom + React Testing Library. [vitest.config.ts](vitest.config.ts) `mergeConfig`s [vite.config.ts](vite.config.ts), so the `@` alias, lingui macro transform, and react-compiler preset apply in tests. Tests are colocated `*.test.ts(x)` under `src/`; `globals` is off — import `describe`/`it`/`expect` from `"vitest"` explicitly (keeps `tsc -b` and type-aware oxlint working without tsconfig `types` churn).
 - **Tauri mocking:** [src/test/tauri.ts](src/test/tauri.ts) `mockTauri(data, onInvoke?)` answers plugin-store IPC from in-memory data and delegates other commands; [src/test/setup.ts](src/test/setup.ts) runs RTL `cleanup()` + `clearMocks()` after each test. Importing `store.ts` in tests is safe: `LazyStore` does no IPC until first use.
 - **Don't render components whose value comes from an uncached `use(promise)`** (e.g. `Version`): the promise recreates every render and never settles under RTL.
-- **Rust:** `#[cfg(test)]` unit tests in `lib.rs` for pure helpers only; the chromiumoxide paths need a real browser and stay untested.
+- **Rust:** `#[cfg(test)]` unit tests colocated in the module under test — `submission.rs` (planning + workflow), `navigation.rs` (URL matching + polling), `project_options.rs` (cache scope), and `lib.rs` for the remaining pure helpers. Chromium itself stays untested: policy lives behind seams (`SubmissionPortal`, the `current_url` closure, the `scrape` closure) that tests drive with fakes, while `lib.rs` holds the one real implementation of each. Async tests use `#[tokio::test]`, with `start_paused = true` where timing is asserted.
 - **E2E:** WebdriverIO + tauri-driver smoke suite in [e2e/](e2e/), Linux/Windows only (no macOS tauri-driver), run by the separate non-required [e2e.yml](.github/workflows/e2e.yml) workflow on `main` pushes and manual dispatch. `e2e/tsconfig.json` is deliberately not referenced from the root tsconfig so pre-push `tsc -b` ignores it.
 
 ## Architecture
@@ -62,6 +62,8 @@ Each `BrowserState`:
 - Uses a fixed Chromium user-data dir under the app cache: `app_cache_dir()/profiles/{headed,headless}`. Separate subdirs prevent profile-lock contention.
 - Wipes its dir before each launch. Using the app cache instead of shared system temp avoids macOS “access data from other apps” prompts; wiping removes stale `SingletonLock` files after unclean shutdowns, preventing leftover Chromium from making a new launch hand off and exit.
 
+**Project options are cached per login, not per process.** `ProjectOptionsCache` ([src-tauri/src/project_options.rs](src-tauri/src/project_options.rs)) scrapes the project `<select>` once and shares it; `close_browsers` clears it. That covers both moments the login identity can change — account save and the ≥1h-away reset — so a different member or portal never inherits the previous one's project list. The lock is held across the scrape, so concurrent first readers share one scrape; a failed scrape caches nothing and is retryable. Any new teardown path must clear it too.
+
 Before reuse, `get_page()` calls `is_page_alive()`, which performs a real JS-context round-trip: `page.evaluate("1")` with a 2s timeout.
 
 - **Do not use `page.url()` as the probe.** chromiumoxide serves it from cached frame state without contacting Chromium, so it remains `Ok` after session death (for example, OS suspension during a long idle). This false positive strands the next real command on a ~30s CDP timeout.
@@ -78,7 +80,7 @@ On an instance's first `get_page()`:
 4. Navigate to `portal_url`, type the phone into the login input, and press Enter.
 5. Poll with `wait_for_url` until the current URL starts with `<portal_url>/member.php`, confirming login.
 
-`wait_for_url` uses a prefix match, so redirect-added query parameters or a trailing slash count. It succeeds immediately when the page already has the target URL.
+`wait_for_url` matches the expected URL exactly, or extended at a `?`, `#`, or `/` boundary — so a redirect that appends query parameters, a fragment, or a trailing slash counts as arrival, while a differently-named sibling route (`/member.php-old`) does not. It succeeds immediately when the page already has the target URL. The rule lives in `UrlExpectation::matches` ([src-tauri/src/navigation.rs](src-tauri/src/navigation.rs)) and is shared by login and post-submit confirmation.
 
 ### Lifecycle and cleanup
 
@@ -112,8 +114,9 @@ Define these in [src-tauri/src/lib.rs](src-tauri/src/lib.rs) and register them i
   - Row *n* sets `task_project_id{n}` and fills `task_comment{n}`.
   - A `null` row-1 project falls back to `default_project`, read from the `preferences` key in `store.json`.
   - Every row's project options are filtered to `project_list` + `default_project` + entry projects.
-  - **Never clicks submit; the user does.**
-- **`close_browsers()`:** Tears down both instances. Called after account save to remove the old login and by the ≥1h-away reset in `use-reset-when-away.ts`.
+  - **More than 3 entries is an error, not a truncation.** The form has 3 row pairs and `buildSubmission` already merges overflow into row 3, so a longer list means a caller bug; `SubmissionPlan::build` rejects it rather than silently shipping a report missing part of the day's work.
+  - **Clicks submit only when `auto_submit` is on**; otherwise the user does. See the submission workflow below.
+- **`close_browsers()`:** Tears down both instances and clears the cached project options. Called after account save to remove the old login and by the ≥1h-away reset in `use-reset-when-away.ts`.
 - **`verify_portal_login(portal_url, portal_credential, phone)`:** Logs into the portal with a throwaway headless browser and its own `profiles/verify` dir. Uses the passed *candidate* values and **never** reads `store.json`. The Account form calls it before saving. Kill the browser after the check, pass or fail.
 
 Keep portal selectors synchronized with portal markup:
@@ -121,6 +124,18 @@ Keep portal selectors synchronized with portal markup:
 - `select#task_date`
 - `select#task_leave`
 - Three project/comment pairs: `select#task_project_id1..3` / `textarea#task_comment1..3` (`lib.rs` prefix constants + row number)
+
+### Submission workflow
+
+`submit_task` splits into three seams so the rules are testable without Chromium ([src-tauri/src/submission.rs](src-tauri/src/submission.rs)):
+
+- `SubmissionPlan::build(entries, preferences)` — the deterministic row/project rules above. Fallible: >3 rows is rejected.
+- `SubmissionAutomation::from_preferences` — reads `auto_submit`/`auto_close`, both defaulting to `false` when the key or field is absent.
+- `SubmissionWorkflow::execute(plan, automation, date, portal)` — prepare, then conditionally submit and close, against the `SubmissionPortal` trait. `ChromiumSubmissionPortal` in `lib.rs` is the only real implementation.
+
+Order is load-bearing: prepare always runs; `auto_close` can never close anything unless `auto_submit` also submitted; and closing waits for positive confirmation first.
+
+**Post-submit confirmation is `<portal_url>/task_report.php`**, not `/member.php`. The portal redirects there once a task is saved, so it is the signal `auto_close` waits on (10s bound). `/member.php` is the *login* confirmation only — do not conflate the two. If confirmation times out the browser stays open and the command errors, so the user never loses an unconfirmed submission.
 
 ### Frontend
 
@@ -241,7 +256,7 @@ Additional release rules:
   - For nested updates, use `mutative`'s `create(obj, draft => { ... })` to derive a structurally shared copy without touching cache; see the `[Created]` relabel in `date-card-helpers.ts`.
   - `mutative` does **not** auto-freeze output. Accidental mutation does not throw; it silently corrupts cache.
 - **`relaunch()` races `tauri-plugin-single-instance`.** Restart starts the new process before the old exits. If its single-instance check reaches the shutting-down old process, it defers to that dying instance and the app quits. `useResetWhenAway` uses `relaunch()` only as a last resort when the `close_browsers` invoke rejects—an almost unreachable trigger. Verify this combination before using it elsewhere.
-- **`submit_task` interpolates JS strings.** Summaries and projects pass safely through `serde_json::to_string`; `date` is interpolated raw into `evaluate(...)`. It comes from portal option values; keep that trust boundary and never pass untrusted strings there.
+- **Every value interpolated into `evaluate(...)` goes through `serde_json::to_string`.** That covers summaries, projects, dates, the login phone, and the selectors themselves (several contain single quotes, so hand-wrapping them in `'...'` breaks the JS). No exceptions: the phone is user-supplied and validated only as non-empty, so a raw apostrophe would break the script and a crafted value would inject into the portal page. When adding a new `evaluate` call, escape the literal even if the value looks trusted — Rust enforces no phone or date format, and the trust boundary should not be load-bearing.
 - **Hardcoded values:** `lib.rs` contains only login/form selectors. They are portal-specific; update them when portal markup changes. Portal base URL and Basic-auth credentials are **not** compiled in: users supply `account.portal_url` / `account.portal_credential` through the Account form in `store.json`; Rust reads them per use with `portal_url()` / `portal_credential()`.
 - **Formatting:** oxfmt enforces sorted Tailwind classes (`sortTailwindcss`, reading the v4 stylesheet `src/App.css`) and sorted imports (`sortImports`); the pre-commit hook auto-fixes staged files. Linting needs `--type-aware` (wired into `pnpm lint`) or `typescript/no-floating-promises` silently stops running.
 - **Never switch git branches without asking.** Do not `git checkout`/`git switch` to another branch, create a new branch, or pull `main` mid-session unless the user has explicitly approved it first — even when a merged PR makes moving to a fresh branch seem like the obvious next step. The user coordinates branch state outside the session; unannounced switches cause divergence and merge conflicts.

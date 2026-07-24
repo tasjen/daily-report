@@ -1,4 +1,5 @@
 mod navigation;
+mod project_options;
 mod submission;
 
 use base64::{engine::general_purpose::STANDARD, Engine};
@@ -7,6 +8,7 @@ use chromiumoxide::cdp::browser_protocol::network::{Headers, SetExtraHttpHeaders
 use chromiumoxide::Page;
 use futures::StreamExt;
 use navigation::{wait_for_navigation, UrlExpectation};
+use project_options::ProjectOptionsCache;
 use serde::Serialize;
 use submission::{
     SubmissionAutomation, SubmissionPlan, SubmissionPortal, SubmissionPreferences,
@@ -267,14 +269,17 @@ async fn login_to_portal(
     .await?;
     page.goto(base_url).await?;
 
-    // Build the JS via `serde_json::to_string` so the selector is
-    // properly quoted/escaped. The selector itself contains single quotes
-    // (`input[type='text']`), so hand-wrapping it in `'...'` breaks the JS.
+    // Build every JS literal via `serde_json::to_string` so it is properly
+    // quoted/escaped. The selector itself contains single quotes
+    // (`input[type='text']`), so hand-wrapping it in `'...'` breaks the JS;
+    // the phone is user-supplied and only validated as non-empty, so an
+    // apostrophe would break the script and a crafted value would inject.
     let selector_js = serde_json::to_string(LOGIN_INPUT_SELECTOR)?;
+    let phone_js = serde_json::to_string(phone)?;
     page.evaluate(format!(
         "
             const phoneInput = document.querySelector({selector_js});
-            phoneInput.value = '{phone}';
+            phoneInput.value = {phone_js};
             phoneInput.form.submit();
         "
     ))
@@ -361,7 +366,7 @@ async fn wait_for_url(page: &Page, expected: &str, timeout_ms: u64) -> Result<()
     .await
 }
 
-#[derive(Serialize, Clone)]
+#[derive(Serialize, Clone, Debug, PartialEq, Eq)]
 struct SelectOption {
     label: String,
     value: String,
@@ -387,21 +392,17 @@ async fn get_select_options(page: &Page, selector: &str) -> Result<Vec<SelectOpt
 }
 
 /// The project `<select>` options, scraped from the portal on first use and
-/// cached for the rest of the app's lifetime. The project list is stable, so
-/// callers (parameter scrape, label lookup in `submit_task`) share one scrape
-/// instead of hitting the form each time.
-static PROJECT_OPTIONS: tokio::sync::OnceCell<Vec<SelectOption>> =
-    tokio::sync::OnceCell::const_new();
+/// held until the browser sessions are torn down. See `ProjectOptionsCache`
+/// for why the cache is scoped to a login rather than to the process.
+static PROJECT_OPTIONS: ProjectOptionsCache = ProjectOptionsCache::new();
 
-/// Returns the cached project options, scraping `page` once on the first call.
-/// `page` must already be on the task form.
-async fn get_project_options(page: &Page) -> Result<&'static [SelectOption], AppError> {
+/// Returns the cached project options, scraping `page` on the first call after
+/// a clear. `page` must already be on the task form.
+async fn get_project_options(page: &Page) -> Result<Vec<SelectOption>, AppError> {
+    let selector = format!("{TASK_PROJECT_SELECT_PREFIX}1 option");
     PROJECT_OPTIONS
-        .get_or_try_init(|| async {
-            get_select_options(page, &format!("{TASK_PROJECT_SELECT_PREFIX}1 option")).await
-        })
+        .get_or_scrape(|| get_select_options(page, &selector))
         .await
-        .map(Vec::as_slice)
 }
 
 /// Tears down both browser instances so the next command logs in fresh.
@@ -415,6 +416,9 @@ async fn close_browsers(
 ) -> Result<(), AppError> {
     log::info!("close_browsers: tearing down both browser instances");
     tokio::join!(headless.close(), headed.close());
+    // The scraped project list belongs to the login that was just torn down;
+    // the next one may be a different member or portal.
+    PROJECT_OPTIONS.clear().await;
     Ok(())
 }
 
@@ -462,7 +466,7 @@ async fn get_task_parameters(
 
     let date_options = get_select_options(&page, &format!("{TASK_DATE_SELECT} option")).await?;
     let leave_options = get_select_options(&page, &format!("{TASK_LEAVE_SELECT} option")).await?;
-    let project_options = get_project_options(&page).await?.to_vec();
+    let project_options = get_project_options(&page).await?;
 
     page.goto(format!("{base_url}/member.php")).await?;
 
@@ -500,9 +504,12 @@ impl SubmissionPortal for ChromiumSubmissionPortal<'_> {
             .goto(format!("{}/task.php", self.base_url))
             .await?;
         self.page.bring_to_front().await?;
+        // `date` comes from a portal option value, but escape it like every
+        // other injected literal so the trust boundary isn't load-bearing.
+        let date_js = serde_json::to_string(date)?;
         self.page
             .evaluate(format!(
-                "document.querySelector('{TASK_DATE_SELECT}').value = '{date}'"
+                "document.querySelector('{TASK_DATE_SELECT}').value = {date_js}"
             ))
             .await?;
 
@@ -610,7 +617,7 @@ async fn submit_task(
     let plan = SubmissionPlan::build(
         entries,
         SubmissionPreferences::new(default_project, project_list),
-    );
+    )?;
     let automation = SubmissionAutomation::from_preferences(preferences.as_ref());
     let mut portal = ChromiumSubmissionPortal {
         page: &page,
