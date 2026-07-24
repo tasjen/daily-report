@@ -133,7 +133,7 @@ msgstr "ดูเพิ่ม"
 
 #: src/components/project-map-form.tsx:84
 msgid "Maps project keys to the portal's projects — an issue's key is its Jira key prefix (ABC-123 → ABC), a favorite's is its own optional key. Selected tasks are grouped by portal project and each group fills its own project + comment pair in the task form, largest group first (max {MAX_DISTINCT_PROJECTS} portal projects — the form has {MAX_DISTINCT_PROJECTS} pairs). Unmapped tasks fall back to the default project's group, or the first comment when no default project is set."
-msgstr "จับคู่ Project key กับ Project ในฟอร์ใ โดย task Jira จะใช้ตัวอักษรหน้า issue key (ABC-123 → ABC) ส่วนรายการโปรดจะใช้ key ที่ใส่ไว้ ระบบจะแยกงานที่เลือกตาม Project ในฟอร์มแล้วเติม Project + สรุปงานในฟอร์ม เรียงกลุ่มที่มีงานเยอะสุดก่อน (สูงสุด {MAX_DISTINCT_PROJECTS} Project เพราะฟอร์มมี {MAX_DISTINCT_PROJECTS} แถว) งานที่ยังไม่ได้จับคู่จะไปรวมกับ Project เริ่มต้น หรือรวมในสรุปงานของ Project แรกถ้ายังไม่ได้ตั้ง Project เริ่มต้น"
+msgstr "จับคู่ Project key กับ Project ในฟอร์ม โดย task Jira จะใช้ตัวอักษรหน้า issue key (ABC-123 → ABC) ส่วนรายการโปรดจะใช้ key ที่ใส่ไว้ ระบบจะแยกงานที่เลือกตาม Project ในฟอร์มแล้วเติม Project + สรุปงานในฟอร์ม เรียงกลุ่มที่มีงานเยอะสุดก่อน (สูงสุด {MAX_DISTINCT_PROJECTS} Project เพราะฟอร์มมี {MAX_DISTINCT_PROJECTS} แถว) งานที่ยังไม่ได้จับคู่จะไปรวมกับ Project เริ่มต้น หรือรวมในสรุปงานของ Project แรกถ้ายังไม่ได้ตั้ง Project เริ่มต้น"
 
 #: src/lib/queries.ts:135
 msgid "No account has been set"
