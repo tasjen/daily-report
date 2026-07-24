@@ -41,30 +41,38 @@ Unit tests cover extracted pure logic; UI behavior is still verified with `pnpm 
 - **Frontend:** Vitest 4 + jsdom + React Testing Library. [vitest.config.ts](vitest.config.ts) `mergeConfig`s [vite.config.ts](vite.config.ts), so the `@` alias, lingui macro transform, and react-compiler preset apply in tests. Tests are colocated `*.test.ts(x)` under `src/`; `globals` is off — import `describe`/`it`/`expect` from `"vitest"` explicitly (keeps `tsc -b` and type-aware oxlint working without tsconfig `types` churn).
 - **Tauri mocking:** [src/test/tauri.ts](src/test/tauri.ts) `mockTauri(data, onInvoke?)` answers plugin-store IPC from in-memory data and delegates other commands; [src/test/setup.ts](src/test/setup.ts) runs RTL `cleanup()` + `clearMocks()` after each test. Importing `store.ts` in tests is safe: `LazyStore` does no IPC until first use.
 - **Don't render components whose value comes from an uncached `use(promise)`** (e.g. `Version`): the promise recreates every render and never settles under RTL.
-- **Rust:** `#[cfg(test)]` unit tests colocated in the module under test — `submission.rs` (planning + workflow), `navigation.rs` (URL matching + polling), `project_options.rs` (cache scope), and `lib.rs` for the remaining pure helpers. Chromium itself stays untested: policy lives behind seams (`SubmissionPortal`, the `current_url` closure, the `scrape` closure) that tests drive with fakes, while `lib.rs` holds the one real implementation of each. Async tests use `#[tokio::test]`, with `start_paused = true` where timing is asserted.
+- **Rust:** `#[cfg(test)]` unit tests colocated in the module under test — `submission.rs` (planning + workflow), `browser_session.rs` (reuse, recovery, teardown), `navigation.rs` (URL matching + polling), `project_options.rs` (cache scope), and `lib.rs` for the remaining pure helpers. Chromium itself stays untested: policy lives behind seams (`SubmissionPortal`, `BrowserHost`, the `current_url` closure, the `scrape` closure) that tests drive with fakes, while `lib.rs` holds the one real implementation of each. Async tests use `#[tokio::test]`, with `start_paused = true` where timing is asserted. Fakes record an ordered event log and assert on that, not on call counts — it catches ordering bugs (killing a stale browser *before* relaunching) that counters miss.
 - **E2E:** WebdriverIO + tauri-driver smoke suite in [e2e/](e2e/), Linux/Windows only (no macOS tauri-driver), run by the separate non-required [e2e.yml](.github/workflows/e2e.yml) workflow on `main` pushes and manual dispatch. `e2e/tsconfig.json` is deliberately not referenced from the root tsconfig so pre-push `tsc -b` ignores it.
 
 ## Architecture
 
 ### Browser instances
 
-The backend manages **two separate browser instances**. Both use `BrowserState` in [src-tauri/src/lib.rs](src-tauri/src/lib.rs), distinguished by newtype wrappers registered as Tauri managed state:
+The backend manages **two separate browser instances**, distinguished by newtype wrappers registered as Tauri managed state:
 
 | State | Setting | Purpose |
 |---|---|---|
 | **`HeadlessBrowserState`** | `with_head: false` | Hidden; `get_task_parameters` scrapes form `<select>` options (dates, leaves, projects). |
 | **`HeadedBrowserState`** | `with_head: true` | Visible; `submit_task` pre-fills the form for the user to submit. |
 
-Each `BrowserState`:
+Both wrap `BrowserState`, an alias for `BrowserSession<ChromiumHost>`. The split keeps reuse/teardown policy testable without a real browser:
 
-- Holds `Mutex<Option<(Browser, Page)>>`.
+- **`BrowserSession<H>`** ([src-tauri/src/browser_session.rs](src-tauri/src/browser_session.rs)) holds `Mutex<Option<(H::Browser, H::Page)>>` and owns *all* the policy: lazy launch, liveness probing, stale replacement, and the bounded graceful close.
+- **`BrowserHost`** is the system boundary — `launch` (launch + login), `is_page_alive`, `close`, `kill`, `label`. `ChromiumHost` in [src-tauri/src/lib.rs](src-tauri/src/lib.rs) is the only real implementation; it owns the `AppHandle` and `with_head`, so commands needing the handle go through `state.host().app`.
+
+Put new policy in the session and new Chromium calls in the host. Policy added to `ChromiumHost` becomes untestable.
+
+Each instance:
+
 - Lazily launches through `get_page()` and reuses the browser.
 - Uses a fixed Chromium user-data dir under the app cache: `app_cache_dir()/profiles/{headed,headless}`. Separate subdirs prevent profile-lock contention.
 - Wipes its dir before each launch. Using the app cache instead of shared system temp avoids macOS “access data from other apps” prompts; wiping removes stale `SingletonLock` files after unclean shutdowns, preventing leftover Chromium from making a new launch hand off and exit.
 
+**Every path that gives up a session removes it from the state before shutting it down.** A failed launch, a dead page, and a hung close all leave the state empty rather than holding a pair the next caller might reuse. `get_page` also holds the lock across the launch, so concurrent callers get one session instead of racing two browsers into the same profile dir.
+
 **Project options are cached per login, not per process.** `ProjectOptionsCache` ([src-tauri/src/project_options.rs](src-tauri/src/project_options.rs)) scrapes the project `<select>` once and shares it; `close_browsers` clears it. That covers both moments the login identity can change — account save and the ≥1h-away reset — so a different member or portal never inherits the previous one's project list. The lock is held across the scrape, so concurrent first readers share one scrape; a failed scrape caches nothing and is retryable. Any new teardown path must clear it too.
 
-Before reuse, `get_page()` calls `is_page_alive()`, which performs a real JS-context round-trip: `page.evaluate("1")` with a 2s timeout.
+Before reuse, `get_page()` calls the host's `is_page_alive()`, which performs a real JS-context round-trip: `page.evaluate("1")` with a 2s timeout.
 
 - **Do not use `page.url()` as the probe.** chromiumoxide serves it from cached frame state without contacting Chromium, so it remains `Ok` after session death (for example, OS suspension during a long idle). This false positive strands the next real command on a ~30s CDP timeout.
 - **Do not rely on `Browser::try_wait()`.** On macOS, the process can linger after its last window closes.
@@ -87,7 +95,7 @@ On an instance's first `get_page()`:
 **Terminate all browser instances on app close.**
 
 - `run()` handles `RunEvent::Exit` by calling `.close()` on both managed states. It also kills an in-flight transient `verify_portal_login` browser, parked in `VerifyBrowserState` for this purpose.
-- `close()` attempts graceful shutdown: close page → close browser → `wait()`. It has a 3s timeout, then falls back to `browser.kill()`. If the user already closed the window, the connection is gone; graceful close cannot finish and `wait()` would otherwise block forever.
+- `BrowserSession::close()` attempts graceful shutdown through the host: close page → close browser → `wait()`. The session bounds it with `GRACEFUL_CLOSE_TIMEOUT` (3s), then falls back to `kill()`. If the user already closed the window, the connection is gone; graceful close cannot finish and `wait()` would otherwise block forever. Repeated closes and closing an empty session are both no-ops.
 - Do **not** delete user-data dirs on close. The fixed app-cache paths are bounded to three and wiped on next launch, also reclaiming force-quit leftovers.
 - The `close_browsers` command closes **both** instances. The frontend calls it:
   - after an account change, forcing login with the new phone; otherwise a reused headed session could submit as the previous member;

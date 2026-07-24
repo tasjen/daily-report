@@ -1,8 +1,10 @@
+mod browser_session;
 mod navigation;
 mod project_options;
 mod submission;
 
 use base64::{engine::general_purpose::STANDARD, Engine};
+use browser_session::{BrowserHost, BrowserSession};
 use chromiumoxide::browser::{Browser, BrowserConfig};
 use chromiumoxide::cdp::browser_protocol::network::{Headers, SetExtraHttpHeadersParams};
 use chromiumoxide::Page;
@@ -76,10 +78,22 @@ impl serde::Serialize for AppError {
     }
 }
 
-struct BrowserState {
-    inner: Mutex<Option<(Browser, Page)>>,
+/// The real Chromium boundary behind `BrowserSession`: launches a browser from
+/// this instance's own profile dir, logs it into the portal, and terminates it.
+struct ChromiumHost {
     app: tauri::AppHandle,
     with_head: bool,
+}
+
+/// One lazily-launched, logged-in Chromium instance. All reuse and teardown
+/// policy lives in [`BrowserSession`](browser_session::BrowserSession).
+type BrowserState = BrowserSession<ChromiumHost>;
+
+fn browser_state(app: &tauri::AppHandle, with_head: bool) -> BrowserState {
+    BrowserSession::new(ChromiumHost {
+        app: app.clone(),
+        with_head,
+    })
 }
 
 struct HeadedBrowserState(BrowserState);
@@ -108,77 +122,11 @@ impl_browser_state_deref!(HeadlessBrowserState);
 /// profile dir.
 struct VerifyBrowserState(Mutex<Option<Browser>>);
 
-impl BrowserState {
-    fn new(app: tauri::AppHandle, with_head: bool) -> Self {
-        Self {
-            inner: Mutex::new(None),
-            app,
-            with_head,
-        }
-    }
-
-    /// Which instance this is, for log lines.
-    fn label(&self) -> &'static str {
-        if self.with_head {
-            "headed"
-        } else {
-            "headless"
-        }
-    }
-
-    async fn close(&self) {
-        let mut guard = self.inner.lock().await;
-        if let Some((mut browser, page)) = guard.take() {
-            log::info!("closing {} browser", self.label());
-            // Try a graceful shutdown, but bound it: if the user already closed
-            // the window the connection is gone, so `close`/`wait` can never
-            // complete. Fall back to force-killing the lingering process.
-            let graceful = async {
-                let _ = page.close().await;
-                let _ = browser.close().await;
-                let _ = browser.wait().await;
-            };
-            if tokio::time::timeout(std::time::Duration::from_secs(3), graceful)
-                .await
-                .is_err()
-            {
-                log::warn!(
-                    "graceful close of {} browser timed out, force-killing",
-                    self.label()
-                );
-                let _ = browser.kill().await;
-            }
-        }
-    }
-
+impl ChromiumHost {
     /// Reads the configured login phone number from `store.json`. Errors before
     /// any browser is launched if it isn't set.
     fn phone(&self) -> Result<String, AppError> {
         account_str_field(&self.app, "phone", "Phone number not configured")
-    }
-
-    async fn get_page(&self) -> Result<Page, AppError> {
-        let mut guard = self.inner.lock().await;
-        if let Some((_, page)) = guard.as_ref() {
-            if is_page_alive(page).await {
-                return Ok(page.clone());
-            }
-            log::warn!(
-                "cached {} browser session no longer responds, relaunching",
-                self.label()
-            );
-        }
-        // Either there is no cached browser, or the cached one can no longer be
-        // driven (e.g. the user closed the window). Force-kill any lingering
-        // process and drop it so a fresh instance is launched below. We use
-        // `kill` rather than `close` + `wait`: once the connection is gone the
-        // close command can't be delivered, so `wait` would block forever.
-        if let Some((mut browser, _page)) = guard.take() {
-            let _ = browser.kill().await;
-        }
-        let (browser, page) = self.launch_and_login().await?;
-        *guard = Some((browser, page.clone()));
-        Ok(page)
     }
 
     /// Path to this browser's Chromium user-data dir, under the app's own cache
@@ -193,9 +141,22 @@ impl BrowserState {
             .join("profiles")
             .join(subdir))
     }
+}
+
+impl BrowserHost for ChromiumHost {
+    type Browser = Browser;
+    type Page = Page;
+
+    fn label(&self) -> &'static str {
+        if self.with_head {
+            "headed"
+        } else {
+            "headless"
+        }
+    }
 
     /// Launches a fresh Chromium instance and logs into the admin portal.
-    async fn launch_and_login(&self) -> Result<(Browser, Page), AppError> {
+    async fn launch(&self) -> Result<(Browser, Page), AppError> {
         // Read the config first so a missing value fails before we spend the
         // cost of launching a browser.
         let phone = self.phone()?;
@@ -219,6 +180,35 @@ impl BrowserState {
         }
 
         Ok((browser, page))
+    }
+
+    /// Probes whether the cached page can still be driven over CDP. Issues a
+    /// real round-trip into the page's JS context (`Runtime.evaluate`) and
+    /// returns false if it errors or times out.
+    ///
+    /// Do NOT probe with `page.url()`: chromiumoxide answers that from the
+    /// handler's locally-cached frame state without contacting Chromium, so it
+    /// keeps returning `Ok` even when the renderer/CDP session is dead (e.g.
+    /// after the OS suspends the browser during a long idle) — a false positive
+    /// that then strands the next real command on a ~30s CDP timeout. A
+    /// process-level check (`Browser::try_wait`) is likewise insufficient: on
+    /// macOS the process lingers after its last window closes. Probe the live
+    /// session, not the cache or the process.
+    async fn is_page_alive(&self, page: &Page) -> bool {
+        matches!(
+            tokio::time::timeout(std::time::Duration::from_secs(2), page.evaluate("1")).await,
+            Ok(Ok(_))
+        )
+    }
+
+    async fn close(&self, browser: &mut Browser, page: Page) {
+        let _ = page.close().await;
+        let _ = browser.close().await;
+        let _ = browser.wait().await;
+    }
+
+    async fn kill(&self, browser: &mut Browser) {
+        let _ = browser.kill().await;
     }
 }
 
@@ -334,24 +324,6 @@ fn portal_credential(app: &tauri::AppHandle) -> Result<String, AppError> {
     account_str_field(app, "portal_credential", "Portal credential not configured")
 }
 
-/// Probes whether the cached page can still be driven over CDP. Issues a real
-/// round-trip into the page's JS context (`Runtime.evaluate`) and returns false
-/// if it errors or times out, signalling the browser must be relaunched.
-///
-/// Do NOT probe with `page.url()`: chromiumoxide answers that from the handler's
-/// locally-cached frame state without contacting Chromium, so it keeps returning
-/// `Ok` even when the renderer/CDP session is dead (e.g. after the OS suspends
-/// the browser during a long idle) — a false positive that then strands the next
-/// real command on a ~30s CDP timeout. A process-level check (`Browser::try_wait`)
-/// is likewise insufficient: on macOS the process lingers after its last window
-/// closes. Probe the live session, not the cache or the process.
-async fn is_page_alive(page: &Page) -> bool {
-    matches!(
-        tokio::time::timeout(std::time::Duration::from_secs(2), page.evaluate("1")).await,
-        Ok(Ok(_))
-    )
-}
-
 /// Polls until the page URL starts with `expected`. Prefix match rather than
 /// equality, so a redirect that appends query params, a fragment, or a
 /// trailing slash still counts as arrival. The first probe is immediate, so
@@ -459,7 +431,7 @@ async fn verify_portal_login(
 async fn get_task_parameters(
     state: tauri::State<'_, HeadlessBrowserState>,
 ) -> Result<TaskParameters, AppError> {
-    let base_url = portal_url(&state.app)?;
+    let base_url = portal_url(&state.host().app)?;
     let page = state.get_page().await?;
 
     page.goto(format!("{base_url}/task.php")).await?;
@@ -485,7 +457,7 @@ async fn get_task_parameters(
 
 #[tauri::command]
 async fn open_member_page(state: tauri::State<'_, HeadedBrowserState>) -> Result<(), AppError> {
-    let base_url = portal_url(&state.app)?;
+    let base_url = portal_url(&state.host().app)?;
     let page = state.get_page().await?;
     page.goto(format!("{base_url}/member.php")).await?;
     page.bring_to_front().await?;
@@ -593,10 +565,10 @@ async fn submit_task(
         "submit_task: pre-filling form for date {date} ({} row(s))",
         entries.len().max(1)
     );
-    let base_url = portal_url(&state.app)?;
+    let base_url = portal_url(&state.host().app)?;
     let page = state.get_page().await?;
 
-    let store = state.app.store("store.json")?;
+    let store = state.host().app.store("store.json")?;
     let preferences = store.get("preferences");
     let default_project = preferences.as_ref().and_then(|value| {
         value
@@ -667,14 +639,8 @@ pub fn run() {
         .plugin(tauri_plugin_http::init())
         .plugin(tauri_plugin_opener::init())
         .setup(|app| {
-            app.manage(HeadlessBrowserState(BrowserState::new(
-                app.handle().clone(),
-                false,
-            )));
-            app.manage(HeadedBrowserState(BrowserState::new(
-                app.handle().clone(),
-                true,
-            )));
+            app.manage(HeadlessBrowserState(browser_state(app.handle(), false)));
+            app.manage(HeadedBrowserState(browser_state(app.handle(), true)));
             app.manage(VerifyBrowserState(Mutex::new(None)));
             Ok(())
         })
