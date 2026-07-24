@@ -28,9 +28,21 @@ pnpm package    # tauri build — produce distributable bundles
 cargo check --manifest-path src-tauri/Cargo.toml   # typecheck Rust backend only
 pnpm lint:fix   # oxlint --type-aware --fix (also runs on pre-commit)
 pnpm fmt        # oxfmt: format in place (also runs on pre-commit; fmt:check to verify)
+pnpm test       # vitest run — frontend unit + component tests
+pnpm test:watch # vitest watch mode
+cargo test --manifest-path src-tauri/Cargo.toml    # Rust unit tests
+pnpm e2e        # WebdriverIO smoke suite — fails on macOS (see Testing)
 ```
 
-There are no tests. Verify changes with `pnpm start` and exercise the UI.
+Unit tests cover extracted pure logic; UI behavior is still verified with `pnpm start` and exercising the app.
+
+## Testing
+
+- **Frontend:** Vitest 4 + jsdom + React Testing Library. [vitest.config.ts](vitest.config.ts) `mergeConfig`s [vite.config.ts](vite.config.ts), so the `@` alias, lingui macro transform, and react-compiler preset apply in tests. Tests are colocated `*.test.ts(x)` under `src/`; `globals` is off — import `describe`/`it`/`expect` from `"vitest"` explicitly (keeps `tsc -b` and type-aware oxlint working without tsconfig `types` churn).
+- **Tauri mocking:** [src/test/tauri.ts](src/test/tauri.ts) `mockTauri(data, onInvoke?)` answers plugin-store IPC from in-memory data and delegates other commands; [src/test/setup.ts](src/test/setup.ts) runs RTL `cleanup()` + `clearMocks()` after each test. Importing `store.ts` in tests is safe: `LazyStore` does no IPC until first use.
+- **Don't render components whose value comes from an uncached `use(promise)`** (e.g. `Version`): the promise recreates every render and never settles under RTL.
+- **Rust:** `#[cfg(test)]` unit tests in `lib.rs` for pure helpers only; the chromiumoxide paths need a real browser and stay untested.
+- **E2E:** WebdriverIO + tauri-driver smoke suite in [e2e/](e2e/), Linux/Windows only (no macOS tauri-driver), run by the separate non-required [e2e.yml](.github/workflows/e2e.yml) workflow on `main` pushes and manual dispatch. `e2e/tsconfig.json` is deliberately not referenced from the root tsconfig so pre-push `tsc -b` ignores it.
 
 ## Architecture
 
@@ -132,12 +144,13 @@ Keep portal selectors synchronized with portal markup:
   - Groups in `default_task_groups` render first and start checked. Dedup by issue key follows display order: duplicates land in the first visible group, and defaults follow the *displayed* group.
   - Store user toggles as per-issue `overrides` over defaults; record only actually changed issues.
   - Selected favorites lead `summaryText` as plain bullets, before status-grouped Jira issues; the preview shows/copies it.
-  - The submit (`Play`) button calls `useSubmitTaskMutation` with `submitEntries`: the same selection split into at most 3 rows through `project_map`.
+  - The submit (`Play`) button calls `useSubmitTaskMutation` with `submitEntries` from `buildSubmission` (see `date-card-helpers.ts`): the same selection split into at most 3 rows through `project_map`.
     - Jira project key: part of `issue.key` before `-`; favorite project key: its `project_key` tag.
     - Bucket mapped tasks by portal project; favorites count toward bucket size. Order largest first, with each row's favorites leading its comment as plain bullets.
     - If `default_project` exists, put unmapped tasks in that bucket, joining its mapped bucket if present. Otherwise put them in row 1's summary and merge issues into its status grouping.
     - Merge overflow past 3 buckets into row 3. Overflow can come from a distinct default-project bucket joining 3 mapped buckets or a hand-edited store.
     - With no bucket, send one `{ project: null }` entry for backend defaulting. Do the same when `autofill_summary` is off because there is no text to split.
+- [src/lib/date-card-helpers.ts](src/lib/date-card-helpers.ts): Pure, unit-tested `DateCard` logic — `buildSubmission` (summary text + submit-row bucketing, spec pinned by `date-card-helpers.test.ts`), `buildSummary`, `getDateRelation`, `getDateAfter`, and `FAVORITE_KEY_PREFIX`.
 - [src/lib/queries.ts](src/lib/queries.ts): React-query options/hooks. `taskParametersOptions` wraps `get_task_parameters`; `jiraTasksQueryOptions` calls Jira REST directly; `preferencesOptions` merges stored values over `DEFAULT_PREFERENCES` field-by-field; `favoritesOptions`/`useFavorites` read `favorites` (`?? []` supports stores predating the key).
 - [src/lib/mutations.ts](src/lib/mutations.ts): `useSubmitTaskMutation` invokes `submit_task` and optimistically removes the submitted date. Also defines `useSaveAccountMutation`, `useSavePreferencesMutation`, and `useSaveFavoritesMutation`. The latter two optimistically update cache in `onMutate`; consumers derive the next preferences/favorites from current values, preventing late cache writes from letting rapid edits clobber each other.
 
@@ -177,7 +190,7 @@ favorites:   { text, project_key }[]
 
 Jira Cloud can return 200 with zero issues for bad credentials due to anonymous fallback. Detect authentication failure through the `x-seraph-loginreason` header.
 
-`DateCard` formats selected issues, grouped by `fields.status.name`, as `[Status]\n• KEY: summary` blocks for the report comment. After dedup, relabel issues displayed in “created” to synthetic status “Created” before grouping, placing them in their own `[Created]` block sorted alphabetically among status blocks. Use `mutative` `create`; the originals remain in react-query cache (see immutability below).
+`buildSubmission` in [src/lib/date-card-helpers.ts](src/lib/date-card-helpers.ts) formats selected issues, grouped by `fields.status.name`, as `[Status]\n• KEY: summary` blocks for the report comment. After dedup, it relabels issues displayed in “created” to synthetic status “Created” before grouping, placing them in their own `[Created]` block sorted alphabetically among status blocks. It uses `mutative` `create`; the originals remain in react-query cache (see immutability below).
 
 ## CI/CD and releases
 
@@ -185,8 +198,10 @@ Jira Cloud can return 200 with zero issues for bad credentials due to anonymous 
 
 [.github/workflows/ci.yml](.github/workflows/ci.yml) runs on PRs and `main` pushes with two parallel required jobs:
 
-- `frontend`: oxlint + oxfmt check + `pnpm build` on Ubuntu.
-- `rust`: `cargo check` on macOS, avoiding Linux-only Tauri system dependencies.
+- `frontend`: oxlint + oxfmt check + `pnpm test` + `pnpm build` on Ubuntu.
+- `rust`: `cargo check` + `cargo test` on macOS, avoiding Linux-only Tauri system dependencies.
+
+The E2E smoke suite runs separately in [e2e.yml](.github/workflows/e2e.yml) (non-required; `main` pushes + manual dispatch) — a full Linux Tauri debug build is too slow to gate PRs.
 
 Each job uses `dorny/paths-filter` and `if:`-guards toolchain/setup/check steps based on relevant paths. Irrelevant changes still complete required checks without running the work. Preserve these constraints:
 
@@ -223,7 +238,7 @@ Additional release rules:
 - **Never mutate react-query cache objects.**
   - Derived arrays from `filter`/`flatMap`/`map` are new; their elements still reference `query.data`. In-place writes mutate cache, and `staleTime: Infinity` makes the original unrecoverable until manual refetch.
   - Keep render-phase code, including `useMemo`, pure.
-  - For nested updates, use `mutative`'s `create(obj, draft => { ... })` to derive a structurally shared copy without touching cache; see the `[Created]` relabel in `date-card.tsx`.
+  - For nested updates, use `mutative`'s `create(obj, draft => { ... })` to derive a structurally shared copy without touching cache; see the `[Created]` relabel in `date-card-helpers.ts`.
   - `mutative` does **not** auto-freeze output. Accidental mutation does not throw; it silently corrupts cache.
 - **`relaunch()` races `tauri-plugin-single-instance`.** Restart starts the new process before the old exits. If its single-instance check reaches the shutting-down old process, it defers to that dying instance and the app quits. `useResetWhenAway` uses `relaunch()` only as a last resort when the `close_browsers` invoke rejects—an almost unreachable trigger. Verify this combination before using it elsewhere.
 - **`submit_task` interpolates JS strings.** Summaries and projects pass safely through `serde_json::to_string`; `date` is interpolated raw into `evaluate(...)`. It comes from portal option values; keep that trust boundary and never pass untrusted strings there.
