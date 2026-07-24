@@ -302,12 +302,17 @@ fn account_str_field(
     Ok(value)
 }
 
-/// The user-configured portal base URL. Trailing slashes are trimmed
-/// defensively — callers join paths as `format!("{base_url}/task.php")` —
-/// though the frontend already normalizes on save.
+/// Trailing slashes are trimmed defensively — callers join paths as
+/// `format!("{base_url}/task.php")` — though the frontend already normalizes
+/// on save.
+fn normalize_portal_url(url: &str) -> &str {
+    url.trim_end_matches('/')
+}
+
+/// The user-configured portal base URL, normalized.
 fn portal_url(app: &tauri::AppHandle) -> Result<String, AppError> {
     let url = account_str_field(app, "portal_url", "Portal URL not configured")?;
-    Ok(url.trim_end_matches('/').to_string())
+    Ok(normalize_portal_url(&url).to_string())
 }
 
 /// The user-configured HTTP Basic-auth credential (`user:pass`), encoded
@@ -694,4 +699,21 @@ pub fn run() {
                 });
             }
         });
+}
+
+#[cfg(test)]
+mod tests {
+    use super::normalize_portal_url;
+
+    #[test]
+    fn normalize_portal_url_trims_trailing_slashes() {
+        assert_eq!(
+            normalize_portal_url("https://portal.example.com/"),
+            "https://portal.example.com"
+        );
+        assert_eq!(
+            normalize_portal_url("https://portal.example.com"),
+            "https://portal.example.com"
+        );
+    }
 }
