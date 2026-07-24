@@ -1,8 +1,16 @@
 pre-commit:
   commands:
-    check:
-      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"
-      run: npx @biomejs/biome check --write --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {staged_files}
+    lint:
+      # priority orders lint fixes before formatting, so oxfmt normalizes
+      # whatever --fix rewrites
+      priority: 1
+      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx}"
+      run: npx oxlint --type-aware --fix {staged_files}
+      stage_fixed: true
+    fmt:
+      priority: 2
+      glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc,css}"
+      run: npx oxfmt --no-error-on-unmatched-pattern {staged_files}
       stage_fixed: true
     rust-fmt:
       glob: "*.rs"

@@ -1,7 +1,7 @@
 # Graph Report - daily-report  (2026-07-24)
 
 ## Corpus Check
-- 129 files · ~102,569 words
+- 129 files · ~102,827 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -342,7 +342,7 @@ Nodes (4): Answer, Outcome, Q: Update the README.md file about Graphify usage., 
 
 ### Community 67 - "Desktop Process Control"
 Cohesion: 0.22
-Nodes (9): @lingui/core, dependencies, @lingui/core, @tauri-apps/plugin-process, @tauri-apps/plugin-store, zod, @tauri-apps/plugin-process, @tauri-apps/plugin-store (+1 more)
+Nodes (9): class-variance-authority, dependencies, class-variance-authority, @tauri-apps/plugin-process, @tauri-apps/plugin-store, zod, @tauri-apps/plugin-process, @tauri-apps/plugin-store (+1 more)
 
 ### Community 71 - "Runtime Schema Validation"
 Cohesion: 0.18

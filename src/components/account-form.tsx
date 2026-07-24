@@ -4,6 +4,7 @@ import { openUrl } from "@tauri-apps/plugin-opener";
 import { ExternalLinkIcon, UserIcon } from "lucide-react";
 import { useMemo, useRef, useState } from "react";
 import { z } from "zod";
+
 import { Button } from "@/components/shared/button";
 import {
   Dialog,
@@ -90,13 +91,19 @@ export default function AccountForm() {
   const formSchema = useMemo(
     () =>
       z.object({
-        phone: z.string().trim().min(1, t`Phone number is required`),
+        phone: z
+          .string()
+          .trim()
+          .min(1, t`Phone number is required`),
         email: z
           .string()
           .trim()
           .min(1, t`Jira email is required`)
           .pipe(z.email(t`Enter a valid email address`)),
-        api_token: z.string().trim().min(1, t`Jira API token is required`),
+        api_token: z
+          .string()
+          .trim()
+          .min(1, t`Jira API token is required`),
         portal_url: z
           .string()
           .trim()
@@ -201,7 +208,7 @@ export default function AccountForm() {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              form.handleSubmit();
+              void form.handleSubmit();
             }}
           />
         }
@@ -309,7 +316,7 @@ export default function AccountForm() {
         {verifyAccount.isError && (
           <div
             role="alert"
-            className="mb-4 whitespace-pre-line rounded-lg bg-destructive/10 px-3 py-2 text-destructive text-sm"
+            className="mb-4 rounded-lg bg-destructive/10 px-3 py-2 text-sm whitespace-pre-line text-destructive"
           >
             {verifyAccount.error.message}
           </div>

@@ -1,5 +1,6 @@
 import { Trans, useLingui } from "@lingui/react/macro";
 import { SearchIcon } from "lucide-react";
+
 import {
   Combobox,
   ComboboxContent,
@@ -44,7 +45,7 @@ export default function TaskSelect({
     >
       <div className={className} ref={anchor}>
         {label && (
-          <Label className="mb-2 text-nowrap px-1">
+          <Label className="mb-2 px-1 text-nowrap">
             {label}
             {allSelected && (
               <span className="font-normal text-muted-foreground">

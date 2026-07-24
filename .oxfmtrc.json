@@ -1,0 +1,29 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "useTabs": false,
+  "tabWidth": 2,
+  "printWidth": 80,
+  "singleQuote": false,
+  "jsxSingleQuote": false,
+  "quoteProps": "as-needed",
+  "trailingComma": "all",
+  "semi": true,
+  "arrowParens": "always",
+  "bracketSameLine": false,
+  "bracketSpacing": true,
+  "singleAttributePerLine": false,
+  "sortImports": true,
+  "sortTailwindcss": {
+    "stylesheet": "./src/App.css",
+    "functions": ["cn", "cva", "clsx"]
+  },
+  "ignorePatterns": [
+    "graphify-out",
+    "src-tauri/target",
+    "src-tauri/gen",
+    "**/*.md"
+  ],
+  "options": {
+    "typeAware": true
+  }
+}

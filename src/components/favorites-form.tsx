@@ -2,6 +2,7 @@ import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { Trans, useLingui } from "@lingui/react/macro";
 import { PlusIcon, StarIcon, Trash2Icon } from "lucide-react";
 import { useState } from "react";
+
 import { Button } from "@/components/shared/button";
 import {
   Dialog,
@@ -71,7 +72,7 @@ export default function FavoritesForm() {
             {favorites.map((favorite) => (
               <li key={favorite.text} className="flex items-center gap-2">
                 {favorite.project_key && (
-                  <span className="flex-none rounded bg-muted px-1.5 py-0.5 font-mono text-muted-foreground text-xs">
+                  <span className="flex-none rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-muted-foreground">
                     {favorite.project_key}
                   </span>
                 )}

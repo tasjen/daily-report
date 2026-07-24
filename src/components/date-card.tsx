@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { create } from "mutative";
 import { useMemo, useState } from "react";
+
 import { Button } from "@/components/shared/button";
 import {
   Card,
@@ -144,7 +145,7 @@ export default function DateCard({ date }: Props) {
                   value: issue.key,
                   label: `${issue.key}: ${issue.fields.summary}`,
                 }))
-                .sort((a, b) => a.value.localeCompare(b.value)),
+                .toSorted((a, b) => a.value.localeCompare(b.value)),
       })),
     [issueGroups, i18n.locale],
   );
@@ -278,7 +279,7 @@ export default function DateCard({ date }: Props) {
     // store) can push past that — merge any overflow into the 3rd row.
     const size = (bucket: Bucket) =>
       bucket.issues.length + bucket.favoriteTexts.length;
-    const ranked = [...buckets.entries()].sort(
+    const ranked = [...buckets.entries()].toSorted(
       (a, b) => size(b[1]) - size(a[1]),
     );
     const rows = ranked.slice(0, 3);
@@ -336,7 +337,7 @@ export default function DateCard({ date }: Props) {
         <CardTitle className="flex-1">
           {date}
           {dateRelation && (
-            <span className="ml-2 font-normal text-muted-foreground text-sm">
+            <span className="ml-2 text-sm font-normal text-muted-foreground">
               ({dateRelation})
             </span>
           )}
@@ -345,9 +346,9 @@ export default function DateCard({ date }: Props) {
           size="icon-lg"
           variant="ghost"
           onClick={() => {
-            statusQuery.refetch();
-            createdQuery.refetch();
-            sprintQuery.refetch();
+            void statusQuery.refetch();
+            void createdQuery.refetch();
+            void sprintQuery.refetch();
             setOverrides({});
           }}
           disabled={isFetching}
@@ -456,11 +457,11 @@ function buildSummary(issues: JiraIssue[]): string {
     return acc;
   }, {});
   return Object.entries(byStatus)
-    .sort((a, b) => a[0].localeCompare(b[0]))
+    .toSorted((a, b) => a[0].localeCompare(b[0]))
     .map(
       ([status, statusIssues]) =>
         `[${status}]\n${statusIssues
-          .sort((a, b) => a.key.localeCompare(b.key))
+          .toSorted((a, b) => a.key.localeCompare(b.key))
           .map((issue) => `• ${issue.key}: ${issue.fields.summary}`)
           .join("\n")}`,
     )

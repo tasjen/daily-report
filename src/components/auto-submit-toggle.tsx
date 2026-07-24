@@ -1,5 +1,6 @@
 import { Trans } from "@lingui/react/macro";
 import { InfoIcon } from "lucide-react";
+
 import { Label } from "@/components/shared/label";
 import { Switch } from "@/components/shared/switch";
 import {
@@ -18,7 +19,7 @@ export default function AutoSubmitToggle() {
 
   return (
     <div className="flex items-center gap-1">
-      <Label className="flex items-center gap-2 font-normal text-sm">
+      <Label className="flex items-center gap-2 text-sm font-normal">
         <Switch
           checked={preferences.auto_submit}
           disabled={!preferences.autofill_summary}
