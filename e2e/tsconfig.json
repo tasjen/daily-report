@@ -1,0 +1,17 @@
+{
+  // Standalone project, deliberately NOT referenced from the root
+  // tsconfig.json: `tsc -b` (pre-push) must not require WDIO types on
+  // machines that never run E2E. Type-aware oxlint picks this up as the
+  // nearest tsconfig.
+  "compilerOptions": {
+    "target": "es2023",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "verbatimModuleSyntax": true,
+    "types": ["node", "@wdio/globals/types", "@wdio/mocha-framework"]
+  },
+  "include": ["./**/*.ts"]
+}
