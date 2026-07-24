@@ -21,11 +21,6 @@ msgstr "(all selected)"
 msgid "{dayCount} days ago"
 msgstr "{dayCount} days ago"
 
-#. placeholder {0}: new Date().getFullYear()
-#: src/components/date-list.tsx:33
-msgid "© {0} FlexiRent. All rights reserved."
-msgstr "© {0} FlexiRent. All rights reserved."
-
 #: src/components/account-form.tsx:214
 msgid "Account"
 msgstr "Account"
@@ -132,7 +127,7 @@ msgstr "Language"
 msgid "Limits the portal form's project options to these projects; leave empty to keep all projects"
 msgstr "Limits the portal form's project options to these projects; leave empty to keep all projects"
 
-#: src/components/date-list.tsx:63
+#: src/components/date-list.tsx:61
 msgid "Load more"
 msgstr "Load more"
 
@@ -152,7 +147,7 @@ msgstr "No favorites yet"
 msgid "No items found."
 msgstr "No items found."
 
-#: src/components/date-list.tsx:45
+#: src/components/date-list.tsx:43
 msgid "No reports to submit"
 msgstr "No reports to submit"
 
