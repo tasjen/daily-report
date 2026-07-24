@@ -21,11 +21,6 @@ msgstr "(เลือกทั้งหมดแล้ว)"
 msgid "{dayCount} days ago"
 msgstr "{dayCount} วันที่แล้ว"
 
-#. placeholder {0}: new Date().getFullYear()
-#: src/components/date-list.tsx:33
-msgid "© {0} FlexiRent. All rights reserved."
-msgstr "© {0} FlexiRent สงวนลิขสิทธิ์"
-
 #: src/components/account-form.tsx:214
 msgid "Account"
 msgstr "บัญชี"
@@ -132,7 +127,7 @@ msgstr "ภาษา"
 msgid "Limits the portal form's project options to these projects; leave empty to keep all projects"
 msgstr "เลือกให้ฟอร์มแสดงเฉพาะ Project เหล่านี้ เว้นว่างไว้ถ้าต้องการแสดงทั้งหมด"
 
-#: src/components/date-list.tsx:63
+#: src/components/date-list.tsx:61
 msgid "Load more"
 msgstr "ดูเพิ่ม"
 
@@ -152,7 +147,7 @@ msgstr "ยังไม่มีรายการโปรด"
 msgid "No items found."
 msgstr "ไม่พบรายการ"
 
-#: src/components/date-list.tsx:45
+#: src/components/date-list.tsx:43
 msgid "No reports to submit"
 msgstr "ไม่มีรายงานที่ต้องส่ง"
 

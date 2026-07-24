@@ -30,9 +30,7 @@ export default function DateList() {
   return (
     <div className="flex flex-col items-center gap-4">
       <p className="text-muted-foreground">
-        <Trans>
-          © {new Date().getFullYear()} FlexiRent. All rights reserved.
-        </Trans>
+        © {new Date().getFullYear()} FlexiRent. All rights reserved.
       </p>
       {isFetching ? (
         <Loader2Icon className="animate-spin" />
