@@ -1822,8 +1822,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "package_dependencies_base_ui_react",
-      "community": 87,
-      "community_name": "Text Input Primitive",
+      "community": 67,
+      "community_name": "Desktop Process Control",
       "norm_label": "@base-ui/react"
     },
     {
@@ -1833,8 +1833,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "base_ui_react",
-      "community": 87,
-      "community_name": "Text Input Primitive",
+      "community": 67,
+      "community_name": "Desktop Process Control",
       "norm_label": "@base-ui/react"
     },
     {
@@ -2196,8 +2196,8 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "package_dependencies_lucide_react",
-      "community": 67,
-      "community_name": "Desktop Process Control",
+      "community": 87,
+      "community_name": "Text Input Primitive",
       "norm_label": "lucide-react"
     },
     {
@@ -2207,8 +2207,8 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "lucide_react",
-      "community": 67,
-      "community_name": "Desktop Process Control",
+      "community": 87,
+      "community_name": "Text Input Primitive",
       "norm_label": "lucide-react"
     },
     {
@@ -2471,8 +2471,8 @@
       "source_location": "L57",
       "_origin": "ast",
       "id": "package_devdependencies_babel_core",
-      "community": 2,
-      "community_name": "Frontend Build Toolchain",
+      "community": 84,
+      "community_name": "@lingui/cli",
       "norm_label": "@babel/core"
     },
     {
@@ -2482,8 +2482,8 @@
       "source_location": "L57",
       "_origin": "ast",
       "id": "babel_core",
-      "community": 2,
-      "community_name": "Frontend Build Toolchain",
+      "community": 84,
+      "community_name": "@lingui/cli",
       "norm_label": "@babel/core"
     },
     {
@@ -2515,8 +2515,8 @@
       "source_location": "L59",
       "_origin": "ast",
       "id": "package_devdependencies_lingui_cli",
-      "community": 84,
-      "community_name": "@lingui/cli",
+      "community": 2,
+      "community_name": "Frontend Build Toolchain",
       "norm_label": "@lingui/cli"
     },
     {
@@ -2526,8 +2526,8 @@
       "source_location": "L59",
       "_origin": "ast",
       "id": "lingui_cli",
-      "community": 84,
-      "community_name": "@lingui/cli",
+      "community": 2,
+      "community_name": "Frontend Build Toolchain",
       "norm_label": "@lingui/cli"
     },
     {
@@ -6687,6 +6687,39 @@
       "community": 12,
       "community_name": "React Query Data Layer",
       "norm_label": "usesavefavoritesmutation()"
+    },
+    {
+      "label": "queries.test.ts",
+      "file_type": "code",
+      "source_file": "src/lib/queries.test.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_lib_queries_test",
+      "community": 4,
+      "community_name": "Biome Code Quality Rules",
+      "norm_label": "queries.test.ts"
+    },
+    {
+      "label": "readPreferences()",
+      "file_type": "code",
+      "source_file": "src/lib/queries.test.ts",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "src_lib_queries_test_readpreferences",
+      "community": 4,
+      "community_name": "Biome Code Quality Rules",
+      "norm_label": "readpreferences()"
+    },
+    {
+      "label": "readFavorites()",
+      "file_type": "code",
+      "source_file": "src/lib/queries.test.ts",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "src_lib_queries_test_readfavorites",
+      "community": 4,
+      "community_name": "Biome Code Quality Rules",
+      "norm_label": "readfavorites()"
     },
     {
       "label": "queries.ts",
@@ -14608,6 +14641,18 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "src/lib/queries.test.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_lib_queries_test",
+      "target": "ref_vitest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "src/lib/store.test.ts",
       "source_location": "L1",
       "weight": 1.0,
@@ -22195,6 +22240,28 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "src/lib/queries.test.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_lib_queries_test",
+      "target": "src_lib_queries_test_readfavorites",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/queries.test.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_lib_queries_test",
+      "target": "src_lib_queries_test_readpreferences",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "src/lib/queries.ts",
       "source_location": "L18",
       "weight": 1.0,
@@ -27810,5 +27877,5 @@
       "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md"
     }
   ],
-  "built_at_commit": "22ec885d89af70a164b0108ad74d8b91c65fa785"
+  "built_at_commit": "f41b816a0a36601fbb0eac21396db67d78b577d3"
 }

@@ -35,8 +35,8 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1784903904.2951403,
-    "ast_hash": "b52af9971afc1c089d4f669cc25fdef6",
+    "mtime": 1784906150.199573,
+    "ast_hash": "cd025836efe888a5906375eff7b75ac3",
     "semantic_hash": ""
   },
   "scripts/bump-version.mjs": {
@@ -1057,6 +1057,21 @@
   "src/lib/queries.test.ts": {
     "mtime": 1784906042.9342382,
     "ast_hash": "2030952e6334713d91b74f1a46008b2c",
+    "semantic_hash": ""
+  },
+  "src/components/favorites-form.test.tsx": {
+    "mtime": 1784906172.7544014,
+    "ast_hash": "cfd51ed35f1951dac84ee317d66760e3",
+    "semantic_hash": ""
+  },
+  "src/components/project-map-form.test.tsx": {
+    "mtime": 1784906240.1833916,
+    "ast_hash": "475e48ba3d3660cff49ad335d5a091e9",
+    "semantic_hash": ""
+  },
+  "src/test/render.tsx": {
+    "mtime": 1784906240.630611,
+    "ast_hash": "c177158ec9a1d51bc56e9b674832bf57",
     "semantic_hash": ""
   }
 }
