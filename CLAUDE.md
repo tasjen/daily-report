@@ -12,7 +12,7 @@ Repository guidance.
 ## Stack
 
 - **Backend:** Rust + Tauri 2, `chromiumoxide` (CDP browser automation), `tokio`.
-- **Frontend:** React 19, TypeScript, Vite 7.
+- **Frontend:** React 19, TypeScript 7, Vite 8.
 - **State/data:** `@tanstack/react-query` (server state and persisted-store front), `@tauri-apps/plugin-store` (secrets + preferences in `store.json`), `mutative` (immutable nested updates of cached objects).
 - **HTTP:** `@tauri-apps/plugin-http` (frontend Jira calls; required to bypass browser CORS).
 - **UI:** Tailwind CSS v4, shadcn-style components on `@base-ui/react`, `lucide-react`, `@formkit/auto-animate`.

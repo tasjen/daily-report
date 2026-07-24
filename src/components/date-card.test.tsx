@@ -1,0 +1,287 @@
+import { screen, waitFor, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { expect, it, vi } from "vitest";
+
+import DateCard from "@/components/date-card";
+import type { SubmitTaskEntry } from "@/lib/mutations";
+import type { Account, Favorite, Preferences } from "@/lib/store";
+import { renderWithProviders } from "@/test/render";
+import { mockTauri } from "@/test/tauri";
+import type { JiraIssue } from "@/type";
+
+// The three per-date Jira queries all go through the same plugin-http fetch;
+// dispatch by JQL substring (each query's clause is unique). The exact
+// end-to-end signal is the captured submit_task payload, since the combobox
+// popups are portaled/closed — group labels stay visible regardless.
+vi.mock("@tauri-apps/plugin-http", () => ({
+  fetch: vi.fn<(url: string, init?: RequestInit) => Promise<Response>>(),
+}));
+
+function issue(key: string, summary: string, status: string): JiraIssue {
+  return {
+    id: key,
+    key,
+    fields: { summary, updated: "", duedate: "", status: { name: status } },
+  };
+}
+
+const STATUS_ISSUES = [
+  issue("DR-1", "Fix login bug", "In Progress"),
+  issue("DR-3", "Deploy", "Done"),
+];
+const CREATED_ISSUES = [issue("DR-2", "New ticket", "To Do")];
+const SPRINT_ISSUES = [issue("DR-4", "Refactor module", "In Progress")];
+// STATUS_ISSUES formatted by buildSummary (statuses then keys sorted).
+const STATUS_SUMMARY =
+  "[Done]\n• DR-3: Deploy\n\n[In Progress]\n• DR-1: Fix login bug";
+
+const ACCOUNT: Account = {
+  phone: "0812345678",
+  email: "user@example.com",
+  api_token: "token",
+  portal_url: "https://portal.example.com",
+  portal_credential: "user:pass",
+};
+
+function whichQuery(jql: string): "status" | "created" | "sprint" | "unknown" {
+  if (jql.includes("CHANGED BY")) return "status";
+  if (jql.includes("creator =")) return "created";
+  if (jql.includes("openSprints")) return "sprint";
+  return "unknown";
+}
+
+// queries.ts always sends a JSON string body; narrow it (not String(), which
+// would stringify a non-string BodyInit to "[object Object]").
+function whichQueryOf(init?: RequestInit) {
+  const body = typeof init?.body === "string" ? init.body : "{}";
+  return whichQuery((JSON.parse(body) as { jql: string }).jql);
+}
+
+type JiraSets = {
+  status?: JiraIssue[];
+  created?: JiraIssue[];
+  sprint?: JiraIssue[];
+  // which query should fail with a 400 + errorMessages
+  error?: "status" | "created" | "sprint";
+};
+
+async function setJira(sets: JiraSets) {
+  const { fetch } = await import("@tauri-apps/plugin-http");
+  vi.mocked(fetch).mockImplementation((_url, init) => {
+    const which = whichQueryOf(init);
+    if (sets.error === which) {
+      return Promise.resolve(
+        new Response(JSON.stringify({ errorMessages: ["Bad JQL"] }), {
+          status: 400,
+        }),
+      );
+    }
+    const issues =
+      which === "status"
+        ? (sets.status ?? [])
+        : which === "created"
+          ? (sets.created ?? [])
+          : (sets.sprint ?? []);
+    return Promise.resolve(
+      new Response(JSON.stringify({ issues }), { status: 200 }),
+    );
+  });
+}
+
+type SubmitCall = { date: string; entries: SubmitTaskEntry[] };
+
+function setup(
+  opts: { preferences?: Partial<Preferences>; favorites?: Favorite[] } = {},
+) {
+  const submitCalls: SubmitCall[] = [];
+  mockTauri(
+    {
+      account: ACCOUNT,
+      preferences: opts.preferences ?? {},
+      favorites: opts.favorites ?? [],
+    },
+    (cmd, args) => {
+      if (cmd === "submit_task") {
+        submitCalls.push(args as SubmitCall);
+      }
+      return undefined;
+    },
+  );
+  return submitCalls;
+}
+
+const DATE = "2026-07-20";
+
+async function renderCard(date = DATE) {
+  await renderWithProviders(<DateCard date={date} />);
+}
+
+// Play is the only icon-only button carrying a play glyph (refresh/copy differ).
+function playButton() {
+  return screen
+    .getAllByRole("button")
+    .find((b) => b.querySelector("svg.lucide-play"))!;
+}
+
+it("renders a group per non-empty source and drops empty groups", async () => {
+  setup();
+  await setJira({
+    status: STATUS_ISSUES,
+    created: CREATED_ISSUES,
+    sprint: SPRINT_ISSUES,
+  });
+  await renderCard();
+
+  expect(await screen.findByText("Status updated by me")).toBeInTheDocument();
+  expect(screen.getByText("Created today by me")).toBeInTheDocument();
+  expect(screen.getByText("Assigned to me not done")).toBeInTheDocument();
+  // no favorites configured, so the favorites group is dropped
+  expect(screen.queryByText("Favorites")).not.toBeInTheDocument();
+});
+
+it("default-checks only the status group and submits its issues", async () => {
+  const submitCalls = setup();
+  await setJira({
+    status: STATUS_ISSUES,
+    created: CREATED_ISSUES,
+    sprint: SPRINT_ISSUES,
+  });
+  await renderCard();
+
+  await screen.findByText("Status updated by me");
+  await waitFor(() => expect(playButton()).toBeEnabled());
+  // only the status group is fully checked by default
+  expect(screen.getByText("(all selected)")).toBeInTheDocument();
+
+  await userEvent.click(playButton());
+  await waitFor(() => expect(submitCalls).toHaveLength(1));
+  expect(submitCalls[0]).toEqual({
+    date: DATE,
+    entries: [{ project: null, summary: STATUS_SUMMARY }],
+  });
+});
+
+it("submits one empty row when autofill_summary is off", async () => {
+  const submitCalls = setup({ preferences: { autofill_summary: false } });
+  await setJira({
+    status: STATUS_ISSUES,
+    created: CREATED_ISSUES,
+    sprint: SPRINT_ISSUES,
+  });
+  await renderCard();
+
+  await screen.findByText("Status updated by me");
+  await waitFor(() => expect(playButton()).toBeEnabled());
+  await userEvent.click(playButton());
+
+  await waitFor(() => expect(submitCalls).toHaveLength(1));
+  expect(submitCalls[0]).toEqual({
+    date: DATE,
+    entries: [{ project: null, summary: "" }],
+  });
+});
+
+it("routes the submission through project_map", async () => {
+  const submitCalls = setup({ preferences: { project_map: { DR: "10" } } });
+  await setJira({
+    status: STATUS_ISSUES,
+    created: CREATED_ISSUES,
+    sprint: SPRINT_ISSUES,
+  });
+  await renderCard();
+
+  await screen.findByText("Status updated by me");
+  await waitFor(() => expect(playButton()).toBeEnabled());
+  await userEvent.click(playButton());
+
+  await waitFor(() => expect(submitCalls).toHaveLength(1));
+  expect(submitCalls[0]!.entries).toEqual([
+    { project: "10", summary: STATUS_SUMMARY },
+  ]);
+});
+
+it("renders favorites and leads the summary with favorite bullets", async () => {
+  const submitCalls = setup({
+    preferences: { default_task_groups: ["status", "favorite"] },
+    favorites: [{ text: "Standup", project_key: null }],
+  });
+  await setJira({
+    status: STATUS_ISSUES,
+    created: CREATED_ISSUES,
+    sprint: SPRINT_ISSUES,
+  });
+  await renderCard();
+
+  expect(await screen.findByText("Favorites")).toBeInTheDocument();
+  await waitFor(() => expect(playButton()).toBeEnabled());
+  await userEvent.click(playButton());
+
+  await waitFor(() => expect(submitCalls).toHaveLength(1));
+  expect(submitCalls[0]!.entries).toEqual([
+    { project: null, summary: `• Standup\n\n${STATUS_SUMMARY}` },
+  ]);
+});
+
+it("surfaces a failed Jira query in the card", async () => {
+  setup();
+  await setJira({ status: STATUS_ISSUES, error: "created" });
+  await renderCard();
+
+  expect(await screen.findByText(/Bad JQL/)).toBeInTheDocument();
+});
+
+it("shows a spinner and disables submit while a query is in flight", async () => {
+  setup();
+  let resolveSprint!: (r: Response) => void;
+  const sprintGate = new Promise<Response>((resolve) => {
+    resolveSprint = resolve;
+  });
+  const { fetch } = await import("@tauri-apps/plugin-http");
+  vi.mocked(fetch).mockImplementation((_url, init) => {
+    const which = whichQueryOf(init);
+    if (which === "sprint") return sprintGate;
+    const issues = which === "status" ? STATUS_ISSUES : [];
+    return Promise.resolve(
+      new Response(JSON.stringify({ issues }), { status: 200 }),
+    );
+  });
+  await renderCard();
+
+  // isFetching gates the submit button and shows the content spinner
+  await waitFor(() => expect(playButton()).toBeDisabled());
+  expect(document.querySelector(".animate-spin")).toBeTruthy();
+
+  resolveSprint(
+    new Response(JSON.stringify({ issues: SPRINT_ISSUES }), { status: 200 }),
+  );
+  await waitFor(() => expect(playButton()).toBeEnabled());
+});
+
+it("toggling a created issue on adds it as [Created] to the submission", async () => {
+  const submitCalls = setup();
+  await setJira({ status: STATUS_ISSUES, created: CREATED_ISSUES, sprint: [] });
+  await renderCard();
+
+  await screen.findByText("Created today by me");
+  await waitFor(() => expect(playButton()).toBeEnabled());
+
+  // open the created group's combobox and check DR-2
+  const createdGroup = screen.getByText("Created today by me").closest("div")!;
+  await userEvent.click(
+    within(createdGroup).getByPlaceholderText("Search tasks"),
+  );
+  const option = await screen.findByRole("option", {
+    name: /DR-2.*New ticket/,
+  });
+  await userEvent.click(option);
+  await userEvent.keyboard("{Escape}");
+
+  await userEvent.click(playButton());
+  await waitFor(() => expect(submitCalls).toHaveLength(1));
+  expect(submitCalls[0]!.entries).toEqual([
+    {
+      project: null,
+      summary: `[Created]\n• DR-2: New ticket\n\n${STATUS_SUMMARY}`,
+    },
+  ]);
+});
