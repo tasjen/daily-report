@@ -1,4 +1,129 @@
+import { create } from "mutative";
+
+import type { SubmitTaskEntry } from "@/lib/mutations";
+import type { Favorite } from "@/lib/store";
 import type { JiraIssue } from "@/type";
+
+export type SubmissionInput = {
+  selectedKeys: string[];
+  allIssues: JiraIssue[];
+  // Keys of issues displayed under the "created" group, relabeled to a
+  // synthetic [Created] status block.
+  createdKeys: Set<string>;
+  projectMap: Record<string, string>;
+  defaultProject: string | null;
+  // For project_key tags; favorites appear in allIssues as issue-shaped
+  // objects whose keys carry FAVORITE_KEY_PREFIX.
+  favorites: Favorite[];
+};
+
+// Prefix that namespaces favorite keys away from real Jira issue keys, so
+// dedup/selection state can never collide and buildSubmission can split
+// favorites back out of the flat selection.
+export const FAVORITE_KEY_PREFIX = "favorite:";
+
+function bulletLines(texts: string[]): string {
+  return texts.map((text) => `• ${text}`).join("\n");
+}
+
+type Bucket = { issues: JiraIssue[]; favoriteTexts: string[] };
+
+function bucketSize(bucket: Bucket): number {
+  return bucket.issues.length + bucket.favoriteTexts.length;
+}
+
+export function buildSubmission(input: SubmissionInput): {
+  summaryText: string;
+  submitEntries: SubmitTaskEntry[];
+} {
+  const selected = new Set(input.selectedKeys);
+  const selectedIssues = input.allIssues.filter((issue) =>
+    selected.has(issue.key),
+  );
+  const selectedFavoriteTexts = selectedIssues
+    .filter((issue) => issue.key.startsWith(FAVORITE_KEY_PREFIX))
+    .map((issue) => issue.fields.summary);
+  // Cloned via mutative, not mutated — issues live in the react-query cache.
+  const jiraIssues = selectedIssues
+    .filter((issue) => !issue.key.startsWith(FAVORITE_KEY_PREFIX))
+    .map((issue) =>
+      input.createdKeys.has(issue.key)
+        ? create(issue, (draft) => {
+            draft.fields.status.name = "Created";
+          })
+        : issue,
+    );
+  const summaryText = [
+    bulletLines(selectedFavoriteTexts),
+    buildSummary(jiraIssues),
+  ]
+    .filter(Boolean)
+    .join("\n\n");
+
+  const favoriteKeyByText = new Map(
+    input.favorites.map((favorite) => [favorite.text, favorite.project_key]),
+  );
+  const buckets = new Map<string, Bucket>();
+  const getBucket = (portalProject: string): Bucket => {
+    let bucket = buckets.get(portalProject);
+    if (!bucket) {
+      bucket = { issues: [], favoriteTexts: [] };
+      buckets.set(portalProject, bucket);
+    }
+    return bucket;
+  };
+  const unmappedIssues: JiraIssue[] = [];
+  const unmappedFavoriteTexts: string[] = [];
+  const resolvePortalProject = (projectKey: string | null | undefined) =>
+    (projectKey ? input.projectMap[projectKey] : undefined) ??
+    input.defaultProject;
+  for (const issue of jiraIssues) {
+    const portalProject = resolvePortalProject(issue.key.split("-")[0]);
+    if (portalProject) getBucket(portalProject).issues.push(issue);
+    else unmappedIssues.push(issue);
+  }
+  for (const text of selectedFavoriteTexts) {
+    const portalProject = resolvePortalProject(favoriteKeyByText.get(text));
+    if (portalProject) getBucket(portalProject).favoriteTexts.push(text);
+    else unmappedFavoriteTexts.push(text);
+  }
+  // Stable sort by task count (favorites included), so equally-sized buckets
+  // keep display order.
+  const ranked = [...buckets.entries()].toSorted(
+    (a, b) => bucketSize(b[1]) - bucketSize(a[1]),
+  );
+  // The map editor caps distinct portal projects at 3, but a distinct
+  // default-project bucket (or a hand-edited store) can push past that —
+  // merge any overflow into the 3rd row.
+  const rows = ranked.slice(0, 3);
+  const lastRow = rows[rows.length - 1];
+  if (lastRow) {
+    for (const [, bucket] of ranked.slice(3)) {
+      lastRow[1].issues.push(...bucket.issues);
+      lastRow[1].favoriteTexts.push(...bucket.favoriteTexts);
+    }
+  }
+  // Without a default project, unmapped tasks ride along in row 1's comment,
+  // merged into its favorites/status grouping.
+  const submitEntries: SubmitTaskEntry[] = rows.length
+    ? rows.map(([project, bucket], i) => ({
+        project,
+        summary: [
+          bulletLines(
+            i === 0
+              ? [...bucket.favoriteTexts, ...unmappedFavoriteTexts]
+              : bucket.favoriteTexts,
+          ),
+          buildSummary(
+            i === 0 ? [...bucket.issues, ...unmappedIssues] : bucket.issues,
+          ),
+        ]
+          .filter(Boolean)
+          .join("\n\n"),
+      }))
+    : [{ project: null, summary: summaryText }];
+  return { summaryText, submitEntries };
+}
 
 export function buildSummary(issues: JiraIssue[]): string {
   if (!issues.length) return "";
