@@ -1,8 +1,53 @@
+import type { MessageDescriptor } from "@lingui/core";
 import { create } from "mutative";
 
 import type { SubmitTaskEntry } from "@/lib/mutations";
-import type { Favorite } from "@/lib/store";
+import type { Favorite, TaskGroupType } from "@/lib/store";
+import { TASK_GROUPS } from "@/lib/task-groups";
 import type { JiraIssue } from "@/type";
+
+export type IssueGroup = {
+  id: TaskGroupType;
+  label: MessageDescriptor;
+  issues: JiraIssue[];
+};
+
+export function buildIssueGroups(
+  issuesById: Record<TaskGroupType, JiraIssue[]>,
+  defaultGroupIds: Set<TaskGroupType>,
+): IssueGroup[] {
+  const ordered = [
+    ...TASK_GROUPS.filter((group) => defaultGroupIds.has(group.type)),
+    ...TASK_GROUPS.filter((group) => !defaultGroupIds.has(group.type)),
+  ];
+  // Dedup by key runs in display order, so an issue appearing in more than
+  // one query stays in the first group shown on screen.
+  const seen = new Set<string>();
+  return ordered
+    .map(({ type: id, label }) => ({
+      id,
+      label,
+      issues: issuesById[id].filter((issue) => {
+        if (seen.has(issue.key)) return false;
+        seen.add(issue.key);
+        return true;
+      }),
+    }))
+    .filter((group) => group.issues.length > 0);
+}
+
+// Membership is post-dedup on purpose: what starts checked always matches
+// the groups the user sees on screen.
+export function defaultCheckedKeysOf(
+  groups: IssueGroup[],
+  defaultGroupIds: Set<TaskGroupType>,
+): Set<string> {
+  return new Set(
+    groups
+      .filter((group) => defaultGroupIds.has(group.id))
+      .flatMap((group) => group.issues.map((issue) => issue.key)),
+  );
+}
 
 export type SubmissionInput = {
   selectedKeys: string[];

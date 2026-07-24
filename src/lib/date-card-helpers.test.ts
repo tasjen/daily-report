@@ -1,7 +1,9 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import {
+  buildIssueGroups,
   buildSubmission,
+  defaultCheckedKeysOf,
   buildSummary,
   getDateAfter,
   getDateRelation,
@@ -259,5 +261,90 @@ describe("getDateRelation", () => {
     expect(
       getDateRelation("2026-07-25", "en", "today", "yesterday", daysAgo),
     ).toBeNull();
+  });
+});
+
+describe("buildIssueGroups", () => {
+  it("keeps base group order and drops empty groups", () => {
+    const groups = buildIssueGroups(
+      {
+        status: [issue("DR-1", "Add tests", "In Progress")],
+        created: [],
+        sprint: [issue("DR-2", "Fix login", "To Do")],
+        favorite: [],
+      },
+      new Set(["status"]),
+    );
+    expect(
+      groups.map((group) => ({
+        id: group.id,
+        keys: group.issues.map((i) => i.key),
+      })),
+    ).toEqual([
+      { id: "status", keys: ["DR-1"] },
+      { id: "sprint", keys: ["DR-2"] },
+    ]);
+  });
+
+  it("renders default groups first, base order within each partition", () => {
+    const groups = buildIssueGroups(
+      {
+        status: [issue("DR-1", "Add tests", "In Progress")],
+        created: [issue("DR-2", "Fix login", "To Do")],
+        sprint: [issue("DR-3", "Ship report", "To Do")],
+        favorite: [],
+      },
+      new Set(["sprint"]),
+    );
+    expect(groups.map((group) => group.id)).toEqual([
+      "sprint",
+      "status",
+      "created",
+    ]);
+  });
+
+  it("dedups by key in display order: duplicates land in the first visible group", () => {
+    const groups = buildIssueGroups(
+      {
+        status: [
+          issue("DR-1", "Add tests", "In Progress"),
+          issue("DR-2", "Fix login", "Done"),
+        ],
+        created: [],
+        sprint: [issue("DR-1", "Add tests", "In Progress")],
+        favorite: [],
+      },
+      new Set(["sprint"]),
+    );
+    expect(
+      groups.map((group) => ({
+        id: group.id,
+        keys: group.issues.map((i) => i.key),
+      })),
+    ).toEqual([
+      { id: "sprint", keys: ["DR-1"] },
+      { id: "status", keys: ["DR-2"] },
+    ]);
+  });
+});
+
+describe("defaultCheckedKeysOf", () => {
+  it("checks the post-dedup keys of displayed default groups only", () => {
+    const defaultGroupIds = new Set<"sprint">(["sprint"]);
+    const groups = buildIssueGroups(
+      {
+        status: [
+          issue("DR-1", "Add tests", "In Progress"),
+          issue("DR-2", "Fix login", "Done"),
+        ],
+        created: [],
+        sprint: [issue("DR-1", "Add tests", "In Progress")],
+        favorite: [],
+      },
+      defaultGroupIds,
+    );
+    expect(defaultCheckedKeysOf(groups, defaultGroupIds)).toEqual(
+      new Set(["DR-1"]),
+    );
   });
 });
