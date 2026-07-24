@@ -6,7 +6,10 @@ use chromiumoxide::cdp::browser_protocol::network::{Headers, SetExtraHttpHeaders
 use chromiumoxide::Page;
 use futures::StreamExt;
 use serde::Serialize;
-use submission::{SubmissionPlan, SubmissionPreferences, TaskEntry};
+use submission::{
+    SubmissionAutomation, SubmissionPlan, SubmissionPortal, SubmissionPreferences,
+    SubmissionWorkflow, TaskEntry,
+};
 use tauri::Manager;
 use tauri_plugin_store::StoreExt;
 use tokio::sync::Mutex;
@@ -488,6 +491,94 @@ async fn open_member_page(state: tauri::State<'_, HeadedBrowserState>) -> Result
     Ok(())
 }
 
+struct ChromiumSubmissionPortal<'a> {
+    page: &'a Page,
+    state: &'a HeadedBrowserState,
+    base_url: &'a str,
+}
+
+impl SubmissionPortal for ChromiumSubmissionPortal<'_> {
+    async fn prepare(&mut self, date: &str, plan: &SubmissionPlan) -> Result<(), AppError> {
+        self.page
+            .goto(format!("{}/task.php", self.base_url))
+            .await?;
+        self.page.bring_to_front().await?;
+        self.page
+            .evaluate(format!(
+                "document.querySelector('{TASK_DATE_SELECT}').value = '{date}'"
+            ))
+            .await?;
+
+        for (i, entry) in plan.rows().iter().enumerate() {
+            let row = i + 1;
+            if let Some(project) = entry.project() {
+                let project_js = serde_json::to_string(project)?;
+                self.page
+                    .evaluate(format!(
+                        "document.querySelector('{TASK_PROJECT_SELECT_PREFIX}{row}').value = {project_js};"
+                    ))
+                    .await?;
+            }
+            let summary_js = serde_json::to_string(entry.summary())?;
+            self.page
+                .evaluate(format!(
+                    "document.querySelector('{TASK_COMMENT_TEXTAREA_PREFIX}{row}').value = {summary_js};"
+                ))
+                .await?;
+        }
+
+        if let Some(keep) = plan.project_filter() {
+            // Every value set on a row select must survive the filter, so the
+            // keep list is project_list + default_project + each entry's project.
+            let keep_js = serde_json::to_string(keep)?;
+            self.page
+                .evaluate(format!(
+                    "Array.from(document.querySelectorAll('select')).forEach((e) => {{
+                        if (e.id.includes('task_project_id')) {{
+                            e.querySelectorAll('option').forEach((o) => {{
+                                if (!{keep_js}.includes(o.value) && o.value != '') {{
+                                    o.remove();
+                                }}
+                            }});
+                        }}
+                    }});"
+                ))
+                .await?;
+        }
+
+        Ok(())
+    }
+
+    async fn submit(&mut self) -> Result<(), AppError> {
+        // The selector contains single quotes, so pass it through
+        // `serde_json::to_string` instead of hand-wrapping it in '...'
+        // (same technique as the login selector).
+        log::info!("submit_task: auto-submitting the task form");
+        let form_selector_js = serde_json::to_string(TASK_FORM_SELECTOR)?;
+        self.page
+            .evaluate(format!(
+                "document.querySelector({form_selector_js}).submit();"
+            ))
+            .await?;
+        Ok(())
+    }
+
+    async fn confirm_submission(&mut self) -> Result<(), AppError> {
+        // The portal confirms a saved task by navigating to the report page.
+        wait_for_url(
+            self.page,
+            &format!("{}/task_report.php", self.base_url),
+            10_000,
+        )
+        .await
+    }
+
+    async fn close(&mut self) {
+        log::info!("submit_task: submission confirmed, closing headed browser");
+        self.state.close().await;
+    }
+}
+
 #[tauri::command]
 async fn submit_task(
     state: tauri::State<'_, HeadedBrowserState>,
@@ -500,21 +591,21 @@ async fn submit_task(
     );
     let base_url = portal_url(&state.app)?;
     let page = state.get_page().await?;
-    page.goto(format!("{base_url}/task.php")).await?;
-    page.bring_to_front().await?;
-    page.evaluate(format!(
-        "document.querySelector('{TASK_DATE_SELECT}').value = '{date}'"
-    ))
-    .await?;
 
     let store = state.app.store("store.json")?;
-    let default_project = store.get("preferences").and_then(|v| {
-        v.get("default_project")
+    let preferences = store.get("preferences");
+    let default_project = preferences.as_ref().and_then(|value| {
+        value
+            .get("default_project")
             .and_then(|p| p.as_str().map(String::from))
     });
-    let project_list = store
-        .get("preferences")
-        .and_then(|v| v.get("project_list").and_then(|s| s.as_array().cloned()))
+    let project_list = preferences
+        .as_ref()
+        .and_then(|value| {
+            value
+                .get("project_list")
+                .and_then(|projects| projects.as_array().cloned())
+        })
         .unwrap_or_default()
         .into_iter()
         .filter_map(|project| project.as_str().map(String::from))
@@ -523,82 +614,16 @@ async fn submit_task(
         entries,
         SubmissionPreferences::new(default_project, project_list),
     );
+    let automation = SubmissionAutomation::from_preferences(preferences.as_ref());
+    let mut portal = ChromiumSubmissionPortal {
+        page: &page,
+        state: &state,
+        base_url: &base_url,
+    };
 
-    for (i, entry) in plan.rows().iter().enumerate() {
-        let row = i + 1;
-        if let Some(project) = entry.project() {
-            let project_js = serde_json::to_string(project)?;
-            page.evaluate(format!(
-                "document.querySelector('{TASK_PROJECT_SELECT_PREFIX}{row}').value = {project_js};"
-            ))
-            .await?;
-        }
-        let summary_js = serde_json::to_string(entry.summary())?;
-        page.evaluate(format!(
-            "document.querySelector('{TASK_COMMENT_TEXTAREA_PREFIX}{row}').value = {summary_js};"
-        ))
-        .await?;
-    }
-
-    if let Some(keep) = plan.project_filter() {
-        // Every value set on a row select must survive the filter, so the
-        // keep list is project_list + default_project + each entry's project.
-        let keep_js = serde_json::to_string(keep)?;
-        page.evaluate(format!(
-            "Array.from(document.querySelectorAll('select')).forEach((e) => {{
-                if (e.id.includes('task_project_id')) {{
-                    e.querySelectorAll('option').forEach((o) => {{
-                        if (!{keep_js}.includes(o.value) && o.value != '') {{
-                            o.remove();
-                        }}
-                    }});
-                }}
-            }});"
-        ))
-        .await?;
-    }
-
-    let auto_submit = store
-        .get("preferences")
-        .and_then(|v| v.get("auto_submit").and_then(|b| b.as_bool()))
-        .unwrap_or(false);
-    if !auto_submit {
-        return Ok(());
-    }
-
-    // The selector contains single quotes, so pass it through
-    // `serde_json::to_string` instead of hand-wrapping it in '...'
-    // (same technique as the login selector).
-    log::info!("submit_task: auto-submitting the task form");
-    let form_selector_js = serde_json::to_string(TASK_FORM_SELECTOR)?;
-    page.evaluate(format!(
-        "document.querySelector({form_selector_js}).submit();"
-    ))
-    .await?;
-
-    let auto_close = store
-        .get("preferences")
-        .and_then(|v| v.get("auto_close").and_then(|b| b.as_bool()))
-        .unwrap_or(false);
-    if !auto_close {
-        return Ok(());
-    }
-
-    // Only close once the portal confirms the submission by navigating to
-    // member.php. On timeout the submission state is unknown: return the
-    // error and leave the browser open so the user can see what happened.
-    wait_for_url(&page, &format!("{base_url}/task_report.php"), 10_000)
+    SubmissionWorkflow::execute(&plan, automation, &date, &mut portal)
         .await
-        .map_err(|e| {
-            log::warn!("auto-close skipped, submission not confirmed: {e}");
-            AppError::from(format!(
-                "{e}\nThe portal didn't confirm the submission; leaving the browser open"
-            ))
-        })?;
-    log::info!("submit_task: submission confirmed, closing headed browser");
-    state.close().await;
-
-    Ok(())
+        .map(|_| ())
 }
 
 pub fn run() {

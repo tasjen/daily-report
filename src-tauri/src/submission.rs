@@ -80,9 +80,325 @@ impl SubmissionPlan {
     }
 }
 
+/// Backend automation flags read from the persisted preferences object.
+pub(crate) struct SubmissionAutomation {
+    auto_submit: bool,
+    auto_close: bool,
+}
+
+impl SubmissionAutomation {
+    pub(crate) fn new(auto_submit: bool, auto_close: bool) -> Self {
+        Self {
+            auto_submit,
+            auto_close,
+        }
+    }
+
+    pub(crate) fn from_preferences(preferences: Option<&serde_json::Value>) -> Self {
+        let auto_submit = preferences
+            .and_then(|value| value.get("auto_submit"))
+            .and_then(serde_json::Value::as_bool)
+            .unwrap_or(false);
+        let auto_close = preferences
+            .and_then(|value| value.get("auto_close"))
+            .and_then(serde_json::Value::as_bool)
+            .unwrap_or(false);
+        Self::new(auto_submit, auto_close)
+    }
+}
+
+/// Observable completion state of the submission workflow.
+#[derive(Debug, PartialEq, Eq)]
+pub(crate) enum SubmissionOutcome {
+    Prepared,
+    Submitted,
+    SubmittedAndClosed,
+}
+
+/// Boundary between submission policy and the real portal page/browser.
+#[allow(async_fn_in_trait)]
+pub(crate) trait SubmissionPortal {
+    async fn prepare(&mut self, date: &str, plan: &SubmissionPlan) -> Result<(), crate::AppError>;
+    async fn submit(&mut self) -> Result<(), crate::AppError>;
+    async fn confirm_submission(&mut self) -> Result<(), crate::AppError>;
+    async fn close(&mut self);
+}
+
+/// Prepares every submission, then conditionally submits and closes according
+/// to the stored automation policy.
+pub(crate) struct SubmissionWorkflow;
+
+impl SubmissionWorkflow {
+    pub(crate) async fn execute<P: SubmissionPortal>(
+        plan: &SubmissionPlan,
+        automation: SubmissionAutomation,
+        date: &str,
+        portal: &mut P,
+    ) -> Result<SubmissionOutcome, crate::AppError> {
+        portal.prepare(date, plan).await?;
+        if !automation.auto_submit {
+            return Ok(SubmissionOutcome::Prepared);
+        }
+        portal.submit().await?;
+        if !automation.auto_close {
+            return Ok(SubmissionOutcome::Submitted);
+        }
+        portal.confirm_submission().await.map_err(|error| {
+            log::warn!("auto-close skipped, submission not confirmed: {error}");
+            crate::AppError::from(format!(
+                "{error}\nThe portal didn't confirm the submission; leaving the browser open"
+            ))
+        })?;
+        portal.close().await;
+        Ok(SubmissionOutcome::SubmittedAndClosed)
+    }
+}
+
 #[cfg(test)]
 mod tests {
-    use super::{SubmissionPlan, SubmissionPreferences, TaskEntry};
+    use crate::AppError;
+
+    use super::{
+        SubmissionAutomation, SubmissionOutcome, SubmissionPlan, SubmissionPortal,
+        SubmissionPreferences, SubmissionWorkflow, TaskEntry,
+    };
+
+    #[derive(Debug, Default, PartialEq, Eq)]
+    enum PortalState {
+        #[default]
+        Empty,
+        Prepared,
+        Submitted,
+        Confirmed,
+        Closed,
+        ClosedWithoutConfirmation,
+    }
+
+    #[derive(Clone, Copy, PartialEq, Eq)]
+    enum FailurePoint {
+        Prepare,
+        Submit,
+        Confirm,
+    }
+
+    #[derive(Default)]
+    struct FakePortal {
+        state: PortalState,
+        failure: Option<FailurePoint>,
+    }
+
+    impl FakePortal {
+        fn failing_at(failure: FailurePoint) -> Self {
+            Self {
+                failure: Some(failure),
+                ..Self::default()
+            }
+        }
+    }
+
+    impl SubmissionPortal for FakePortal {
+        async fn prepare(&mut self, _date: &str, _plan: &SubmissionPlan) -> Result<(), AppError> {
+            if self.failure == Some(FailurePoint::Prepare) {
+                return Err("prepare failed".into());
+            }
+            self.state = PortalState::Prepared;
+            Ok(())
+        }
+
+        async fn submit(&mut self) -> Result<(), AppError> {
+            if self.failure == Some(FailurePoint::Submit) {
+                return Err("submit failed".into());
+            }
+            self.state = PortalState::Submitted;
+            Ok(())
+        }
+
+        async fn confirm_submission(&mut self) -> Result<(), AppError> {
+            if self.failure == Some(FailurePoint::Confirm) {
+                return Err("confirmation failed".into());
+            }
+            self.state = PortalState::Confirmed;
+            Ok(())
+        }
+
+        async fn close(&mut self) {
+            self.state = if self.state == PortalState::Confirmed {
+                PortalState::Closed
+            } else {
+                PortalState::ClosedWithoutConfirmation
+            };
+        }
+    }
+
+    fn one_row_plan() -> SubmissionPlan {
+        SubmissionPlan::build(
+            vec![TaskEntry {
+                project: Some("entry-project".into()),
+                summary: "Finished the report".into(),
+            }],
+            SubmissionPreferences::new(None, vec![]),
+        )
+    }
+
+    #[tokio::test]
+    async fn auto_submit_disabled_leaves_the_prepared_form_open() {
+        let mut portal = FakePortal::default();
+
+        let outcome = SubmissionWorkflow::execute(
+            &one_row_plan(),
+            SubmissionAutomation::new(false, true),
+            "2026-07-25",
+            &mut portal,
+        )
+        .await
+        .unwrap();
+
+        assert_eq!(
+            (outcome, portal.state),
+            (SubmissionOutcome::Prepared, PortalState::Prepared)
+        );
+    }
+
+    #[tokio::test]
+    async fn auto_submit_enabled_submits_the_prepared_form_and_leaves_it_open() {
+        let mut portal = FakePortal::default();
+
+        let outcome = SubmissionWorkflow::execute(
+            &one_row_plan(),
+            SubmissionAutomation::new(true, false),
+            "2026-07-25",
+            &mut portal,
+        )
+        .await
+        .unwrap();
+
+        assert_eq!(
+            (outcome, portal.state),
+            (SubmissionOutcome::Submitted, PortalState::Submitted)
+        );
+    }
+
+    #[tokio::test]
+    async fn auto_close_waits_for_confirmation_before_closing_the_browser() {
+        let mut portal = FakePortal::default();
+
+        let outcome = SubmissionWorkflow::execute(
+            &one_row_plan(),
+            SubmissionAutomation::new(true, true),
+            "2026-07-25",
+            &mut portal,
+        )
+        .await
+        .unwrap();
+
+        assert_eq!(
+            (outcome, portal.state),
+            (SubmissionOutcome::SubmittedAndClosed, PortalState::Closed)
+        );
+    }
+
+    #[tokio::test]
+    async fn preparation_failure_prevents_submission() {
+        let mut portal = FakePortal::failing_at(FailurePoint::Prepare);
+
+        let error = SubmissionWorkflow::execute(
+            &one_row_plan(),
+            SubmissionAutomation::new(true, true),
+            "2026-07-25",
+            &mut portal,
+        )
+        .await
+        .unwrap_err();
+
+        assert_eq!(
+            (error.to_string(), portal.state),
+            ("prepare failed".into(), PortalState::Empty)
+        );
+    }
+
+    #[tokio::test]
+    async fn submission_failure_leaves_the_prepared_form_open() {
+        let mut portal = FakePortal::failing_at(FailurePoint::Submit);
+
+        let error = SubmissionWorkflow::execute(
+            &one_row_plan(),
+            SubmissionAutomation::new(true, true),
+            "2026-07-25",
+            &mut portal,
+        )
+        .await
+        .unwrap_err();
+
+        assert_eq!(
+            (error.to_string(), portal.state),
+            ("submit failed".into(), PortalState::Prepared)
+        );
+    }
+
+    #[tokio::test]
+    async fn unconfirmed_submission_returns_context_and_leaves_the_browser_open() {
+        let mut portal = FakePortal::failing_at(FailurePoint::Confirm);
+
+        let error = SubmissionWorkflow::execute(
+            &one_row_plan(),
+            SubmissionAutomation::new(true, true),
+            "2026-07-25",
+            &mut portal,
+        )
+        .await
+        .unwrap_err();
+
+        assert_eq!(
+            (error.to_string(), portal.state),
+            (
+                "confirmation failed\nThe portal didn't confirm the submission; leaving the browser open"
+                    .into(),
+                PortalState::Submitted,
+            )
+        );
+    }
+
+    #[tokio::test]
+    async fn missing_automation_preferences_default_to_manual_submission() {
+        let mut portal = FakePortal::default();
+
+        let outcome = SubmissionWorkflow::execute(
+            &one_row_plan(),
+            SubmissionAutomation::from_preferences(None),
+            "2026-07-25",
+            &mut portal,
+        )
+        .await
+        .unwrap();
+
+        assert_eq!(
+            (outcome, portal.state),
+            (SubmissionOutcome::Prepared, PortalState::Prepared)
+        );
+    }
+
+    #[tokio::test]
+    async fn stored_automation_preferences_enable_submit_and_close() {
+        let preferences = serde_json::json!({
+            "auto_submit": true,
+            "auto_close": true,
+        });
+        let mut portal = FakePortal::default();
+
+        let outcome = SubmissionWorkflow::execute(
+            &one_row_plan(),
+            SubmissionAutomation::from_preferences(Some(&preferences)),
+            "2026-07-25",
+            &mut portal,
+        )
+        .await
+        .unwrap();
+
+        assert_eq!(
+            (outcome, portal.state),
+            (SubmissionOutcome::SubmittedAndClosed, PortalState::Closed)
+        );
+    }
 
     #[test]
     fn missing_first_row_project_uses_the_configured_default() {
