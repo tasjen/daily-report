@@ -31,6 +31,7 @@ pnpm fmt        # oxfmt: format in place (also runs on pre-commit; fmt:check to 
 pnpm test       # vitest run — frontend unit + component tests
 pnpm test:watch # vitest watch mode
 cargo test --manifest-path src-tauri/Cargo.toml    # Rust unit tests
+cargo test --manifest-path src-tauri/Cargo.toml -- --ignored   # portal DOM tests (needs Chromium)
 pnpm e2e        # WebdriverIO smoke suite — fails on macOS (see Testing)
 ```
 
@@ -42,6 +43,14 @@ Unit tests cover extracted pure logic; UI behavior is still verified with `pnpm 
 - **Tauri mocking:** [src/test/tauri.ts](src/test/tauri.ts) `mockTauri(data, onInvoke?)` answers plugin-store IPC from in-memory data and delegates other commands; [src/test/setup.ts](src/test/setup.ts) runs RTL `cleanup()` + `clearMocks()` after each test. Importing `store.ts` in tests is safe: `LazyStore` does no IPC until first use.
 - **Don't render components whose value comes from an uncached `use(promise)`** (e.g. `Version`): the promise recreates every render and never settles under RTL.
 - **Rust:** `#[cfg(test)]` unit tests colocated in the module under test — `submission.rs` (planning + workflow), `browser_session.rs` (reuse, recovery, teardown), `login.rs` (login sequence + verification lifecycle), `navigation.rs` (URL matching + polling), `account.rs` (stored and candidate portal config), and `project_options.rs` (cache scope). `lib.rs` itself holds no tests — it is the Chromium wiring layer. Chromium itself stays untested: policy lives behind seams (`SubmissionPortal`, `BrowserHost`, `LoginPortal`, `VerifyHost`, the `current_url` closure, the `scrape` closure) that tests drive with fakes, while `lib.rs` holds the one real implementation of each. Async tests use `#[tokio::test]`, with `start_paused = true` where timing is asserted. Fakes record an ordered event log and assert on that, not on call counts — it catches ordering bugs (killing a stale browser *before* relaunching) that counters miss.
+- **Portal DOM contract:** [src-tauri/src/portal_dom.rs](src-tauri/src/portal_dom.rs) drives a **real Chromium** against a local `tiny_http` fixture server serving the pages in [src-tauri/src/fixtures/](src-tauri/src/fixtures/). It is the only thing that catches a selector that stopped matching, and it asserts on the **submitted form body** the server received, never on generated JS.
+  - `#[cfg(test)] mod portal_dom` — no production code, and `tiny_http` is a dev-dependency.
+  - Every test is `#[ignore]`d, so the required `cargo test` never needs a Chromium binary. Run with `cargo test --manifest-path src-tauri/Cargo.toml -- --ignored`; `--test-threads=1` if profile dirs collide.
+  - The fixture pages are **sanitized captures of the real portal**, deliberately not generated from the selector constants under test — a fixture built from the same constants passes no matter how wrong they get. Update them by re-capturing, and sanitize member names, phone numbers, session/CSRF tokens, the real hostname, internal URLs, and real project names before committing.
+  - Two marked deviations: `task_date` options are reconstructed (the portal renders selectable days server-side, so a capture holds only the placeholder), and `option_edge_cases.html` is wholly synthetic because every real `<option>` carries a `value`.
+  - Pinned option policy: an `<option>` with **no `value` attribute is dropped**; an empty-valued placeholder (`value=""`) is **kept**.
+  - The real task form puts a `task_work_hour_N` select beside every project select, and the project filter walks *every* `<select>` guarded only by an id check — a test asserts those neighbours come through untouched.
+  - Pinned portal fact: the HTML spec makes a submitting browser normalize textarea line breaks to **CRLF**, so every report reaches the portal with `\r\n`, not the `\n` the summary was built with.
 - **E2E:** WebdriverIO + tauri-driver smoke suite in [e2e/](e2e/), Linux/Windows only (no macOS tauri-driver), run by the separate non-required [e2e.yml](.github/workflows/e2e.yml) workflow on `main` pushes and manual dispatch. `e2e/tsconfig.json` is deliberately not referenced from the root tsconfig so pre-push `tsc -b` ignores it.
 
 ## Architecture

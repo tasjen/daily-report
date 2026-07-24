@@ -1,0 +1,190 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+  </head>
+  <body>
+    <p>
+      <button type="button" onclick="window.location = 'member.php'">
+        Back
+      </button>
+    </p>
+    <form action="task.php" method="post" name="" id="">
+      <div>
+        <input name="action" type="hidden" id="action" value="upload" />
+        <input name="task_id" type="hidden" id="task_id" value="" />
+        <p>
+          <label>ส่งข้อมูลงานวันที่ <font color="red">*</font> : </label>
+
+          <!--
+              RECONSTRUCTED: the captured page carried only the placeholder,
+              because the portal renders the selectable days server-side. These
+              three follow the `YYYY-MM-DD` option value the app relies on (see
+              `getDateAfter` in date-card-helpers.ts). Replace with a real
+              capture if the portal's value format ever differs.
+            -->
+          <select name="task_date" id="task_date">
+            <option value="">เลือกวัน</option>
+            <option value="2026-07-23">2026-07-23</option>
+            <option value="2026-07-24">2026-07-24</option>
+            <option value="2026-07-25">2026-07-25</option>
+          </select>
+        </p>
+        <p>
+          <label>การลา : </label>
+          <select name="task_leave" id="task_leave">
+            <option value="" selected="">ไม่มี</option>
+            <option value="1">ลาป่วยเต็มวัน</option>
+            <option value="2">ลากิจเต็มวัน</option>
+            <option value="3">ลาพักร้อนเต็มวัน</option>
+            <option value="4">ลาป่วยครึ่งวัน</option>
+            <option value="5">ลากิจครึ่งวัน</option>
+            <option value="6">ลาพักร้อนครึ่งวัน</option>
+            <option value="7">ลาเดือนเกิด</option>
+            <option value="8">ลา-ไม่จ่าย</option>
+          </select>
+        </p>
+        <hr />
+        <div id="div_project">
+          <div>
+            <p>
+              <label>โครงการ (1)<font color="red">*</font> :</label>
+              <br />
+              <select name="task_project_id1" id="task_project_id1">
+                <option value="">เลือกโครงการที่ทำ</option>
+                <option value="1">โครงการ 1</option>
+                <option value="2">โครงการ 2</option>
+                <option value="3">โครงการ 3</option>
+                <option value="4">โครงการ 4</option>
+                <option value="5">โครงการ 5</option>
+                <option value="6">โครงการ 6</option>
+                <option value="7">โครงการ 7</option>
+                <option value="8">โครงการ 8</option>
+                <option value="9">โครงการ 9</option>
+              </select>
+
+              <select name="task_work_hour_1" id="task_work_hour_1">
+                <option value="">ชั่วโมงเวลา</option>
+                <option value="8" selected="">8</option>
+                <option value="7.5">7.5</option>
+                <option value="7">7</option>
+                <option value="6.5">6.5</option>
+                <option value="6">6</option>
+                <option value="5.5">5.5</option>
+                <option value="5">5</option>
+                <option value="4.5">4.5</option>
+                <option value="4">4</option>
+                <option value="3.5">3.5</option>
+                <option value="3">3</option>
+                <option value="2.5">2.5</option>
+                <option value="2">2</option>
+                <option value="1.5">1.5</option>
+                <option value="1">1</option>
+                <option value="0.5">0.5</option>
+              </select>
+            </p>
+            <p>
+              <label>งานที่ทำในวันนี้ <font color="red">*</font> :</label><br />
+              <textarea id="task_comment1" name="task_comment1"></textarea>
+            </p>
+            <hr />
+          </div>
+
+          <div>
+            <p>
+              <label>โครงการ (2)<font color="red"></font> :</label><br />
+              <select name="task_project_id2" id="task_project_id2">
+                <option value="">เลือกโครงการที่ทำ</option>
+                <option value="1">โครงการ 1</option>
+                <option value="2">โครงการ 2</option>
+                <option value="3">โครงการ 3</option>
+                <option value="4">โครงการ 4</option>
+                <option value="5">โครงการ 5</option>
+                <option value="6">โครงการ 6</option>
+                <option value="7">โครงการ 7</option>
+                <option value="8">โครงการ 8</option>
+                <option value="9">โครงการ 9</option>
+              </select>
+
+              <select name="task_work_hour_2" id="task_work_hour_2">
+                <option value="">ชั่วโมงเวลา</option>
+                <option value="8">8</option>
+                <option value="7.5">7.5</option>
+                <option value="7">7</option>
+                <option value="6.5">6.5</option>
+                <option value="6">6</option>
+                <option value="5.5">5.5</option>
+                <option value="5">5</option>
+                <option value="4.5">4.5</option>
+                <option value="4">4</option>
+                <option value="3.5">3.5</option>
+                <option value="3">3</option>
+                <option value="2.5">2.5</option>
+                <option value="2">2</option>
+                <option value="1.5">1.5</option>
+                <option value="1">1</option>
+                <option value="0.5">0.5</option>
+              </select>
+            </p>
+            <p>
+              <label>งานที่ทำในวันนี้ <font color="red"></font> :</label><br />
+              <textarea id="task_comment2" name="task_comment2"></textarea>
+            </p>
+            <hr />
+          </div>
+
+          <div>
+            <p>
+              <label>โครงการ (3)<font color="red"></font> :</label><br />
+              <select name="task_project_id3" id="task_project_id3">
+                <option value="">เลือกโครงการที่ทำ</option>
+                <option value="1">โครงการ 1</option>
+                <option value="2">โครงการ 2</option>
+                <option value="3">โครงการ 3</option>
+                <option value="4">โครงการ 4</option>
+                <option value="5">โครงการ 5</option>
+                <option value="6">โครงการ 6</option>
+                <option value="7">โครงการ 7</option>
+                <option value="8">โครงการ 8</option>
+                <option value="9">โครงการ 9</option>
+              </select>
+
+              <select name="task_work_hour_3" id="task_work_hour_3">
+                <option value="">ชั่วโมงเวลา</option>
+                <option value="8">8</option>
+                <option value="7.5">7.5</option>
+                <option value="7">7</option>
+                <option value="6.5">6.5</option>
+                <option value="6">6</option>
+                <option value="5.5">5.5</option>
+                <option value="5">5</option>
+                <option value="4.5">4.5</option>
+                <option value="4">4</option>
+                <option value="3.5">3.5</option>
+                <option value="3">3</option>
+                <option value="2.5">2.5</option>
+                <option value="2">2</option>
+                <option value="1.5">1.5</option>
+                <option value="1">1</option>
+                <option value="0.5">0.5</option>
+              </select>
+            </p>
+            <p>
+              <label>งานที่ทำในวันนี้ <font color="red"></font> :</label><br />
+              <textarea id="task_comment3" name="task_comment3"></textarea>
+            </p>
+            <hr />
+          </div>
+        </div>
+        <p>
+          <button type="submit">Upload</button>
+          <button type="button" onclick="window.location = 'member.php'">
+            Back
+          </button>
+        </p>
+      </div>
+    </form>
+  </body>
+</html>
