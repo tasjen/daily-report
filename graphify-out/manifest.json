@@ -35,8 +35,8 @@
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1784903904.2951403,
-    "ast_hash": "b52af9971afc1c089d4f669cc25fdef6",
+    "mtime": 1784906150.199573,
+    "ast_hash": "cd025836efe888a5906375eff7b75ac3",
     "semantic_hash": ""
   },
   "scripts/bump-version.mjs": {
@@ -565,13 +565,13 @@
     "semantic_hash": ""
   },
   "AGENTS.md": {
-    "mtime": 1784904870.774948,
-    "ast_hash": "6aa14265625abf0515fca69e1f4fe5e5",
+    "mtime": 1784905219.776936,
+    "ast_hash": "5d826f95ce9ecd1dcf2e83407da2b3b6",
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1784904870.774948,
-    "ast_hash": "6aa14265625abf0515fca69e1f4fe5e5",
+    "mtime": 1784905219.776936,
+    "ast_hash": "5d826f95ce9ecd1dcf2e83407da2b3b6",
     "semantic_hash": ""
   },
   "README.md": {
@@ -1052,6 +1052,26 @@
   ".github/workflows/e2e.yml": {
     "mtime": 1784903904.2828767,
     "ast_hash": "b0b9e34459bfedfc685d0b9d0a1b4c80",
+    "semantic_hash": ""
+  },
+  "src/lib/queries.test.ts": {
+    "mtime": 1784906320.9424586,
+    "ast_hash": "51b529ddd72b0808fa2c8b948a4f0543",
+    "semantic_hash": ""
+  },
+  "src/components/favorites-form.test.tsx": {
+    "mtime": 1784906172.7544014,
+    "ast_hash": "cfd51ed35f1951dac84ee317d66760e3",
+    "semantic_hash": ""
+  },
+  "src/components/project-map-form.test.tsx": {
+    "mtime": 1784906240.1833916,
+    "ast_hash": "475e48ba3d3660cff49ad335d5a091e9",
+    "semantic_hash": ""
+  },
+  "src/test/render.tsx": {
+    "mtime": 1784906240.630611,
+    "ast_hash": "c177158ec9a1d51bc56e9b674832bf57",
     "semantic_hash": ""
   }
 }

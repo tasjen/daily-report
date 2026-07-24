@@ -30,13 +30,13 @@
     "semantic_hash": "8a802705765ba1a7e9a5fea48ed52583"
   },
   "knip.json": {
-    "mtime": 1784901695.932511,
+    "mtime": 1784903904.2947433,
     "ast_hash": "b15a3165995bee8577a1a66d1d83b078",
     "semantic_hash": ""
   },
   "package.json": {
-    "mtime": 1784900898.291228,
-    "ast_hash": "b52af9971afc1c089d4f669cc25fdef6",
+    "mtime": 1784906150.199573,
+    "ast_hash": "cd025836efe888a5906375eff7b75ac3",
     "semantic_hash": ""
   },
   "scripts/bump-version.mjs": {
@@ -65,7 +65,7 @@
     "semantic_hash": "ea3aad1d34bf270926daeef7cdcce977"
   },
   "src-tauri/src/lib.rs": {
-    "mtime": 1784900556.062618,
+    "mtime": 1784903904.296591,
     "ast_hash": "65514435ceb2998da769bab523612438",
     "semantic_hash": ""
   },
@@ -110,8 +110,8 @@
     "semantic_hash": ""
   },
   "src/components/date-card.tsx": {
-    "mtime": 1784903317.7404997,
-    "ast_hash": "73d73f8fa07a570b4b6d8a8bc6f8ef85",
+    "mtime": 1784905044.3175287,
+    "ast_hash": "b460c12f1e48337fe7272fe4dfb422f5",
     "semantic_hash": ""
   },
   "src/components/date-list.tsx": {
@@ -335,7 +335,7 @@
     "semantic_hash": "a3d39fa780ebff65444de257f291ce6c"
   },
   "tsconfig.node.json": {
-    "mtime": 1784900432.070882,
+    "mtime": 1784903904.299015,
     "ast_hash": "1cb5a2ceefaa2e7f5a2f964b5b22faae",
     "semantic_hash": ""
   },
@@ -555,7 +555,7 @@
     "semantic_hash": "1c1a505b7b8b95d1079e3d3861275c07"
   },
   ".github/workflows/ci.yml": {
-    "mtime": 1784900767.6208973,
+    "mtime": 1784903904.2825947,
     "ast_hash": "88222a65a81fc8cdceb63f423246b320",
     "semantic_hash": ""
   },
@@ -565,13 +565,13 @@
     "semantic_hash": ""
   },
   "AGENTS.md": {
-    "mtime": 1784898681.3897047,
-    "ast_hash": "ef47cb4e1d439749aacce4d7d1009f32",
+    "mtime": 1784905219.776936,
+    "ast_hash": "5d826f95ce9ecd1dcf2e83407da2b3b6",
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1784898681.3897047,
-    "ast_hash": "ef47cb4e1d439749aacce4d7d1009f32",
+    "mtime": 1784905219.776936,
+    "ast_hash": "5d826f95ce9ecd1dcf2e83407da2b3b6",
     "semantic_hash": ""
   },
   "README.md": {
@@ -990,7 +990,7 @@
     "semantic_hash": ""
   },
   ".oxlintrc.json": {
-    "mtime": 1784900782.2173777,
+    "mtime": 1784903904.2834582,
     "ast_hash": "366313a74ed399932db61891d383f2bc",
     "semantic_hash": ""
   },
@@ -1000,58 +1000,78 @@
     "semantic_hash": ""
   },
   "e2e/smoke.e2e.ts": {
-    "mtime": 1784900908.319149,
+    "mtime": 1784903904.2837353,
     "ast_hash": "623649918cb8e07121e92c3a825f970f",
     "semantic_hash": ""
   },
   "e2e/tsconfig.json": {
-    "mtime": 1784900746.130827,
+    "mtime": 1784903904.283977,
     "ast_hash": "6bb756374f5454a45a1be9269a3e763a",
     "semantic_hash": ""
   },
   "e2e/wdio.conf.ts": {
-    "mtime": 1784900741.6940057,
+    "mtime": 1784903904.2847445,
     "ast_hash": "b9b3ebbf9024b5be3f8992cc4524076c",
     "semantic_hash": ""
   },
   "src/components/error-fallback.test.tsx": {
-    "mtime": 1784900518.5652423,
+    "mtime": 1784903904.2971954,
     "ast_hash": "5f5ca95d396563b11e8652c140cbdcf5",
     "semantic_hash": ""
   },
   "src/lib/date-card-helpers.test.ts": {
-    "mtime": 1784903223.2537894,
-    "ast_hash": "eb17868e335a7e4d9504355153736956",
+    "mtime": 1784905044.3180115,
+    "ast_hash": "8b152bd27c31e85e046fb59e3f982d66",
     "semantic_hash": ""
   },
   "src/lib/date-card-helpers.ts": {
-    "mtime": 1784903238.8397756,
-    "ast_hash": "960273548e103da9c69c7003db7a39ae",
+    "mtime": 1784905044.3184905,
+    "ast_hash": "8e905558f115922da30dcdf2ccda0aad",
     "semantic_hash": ""
   },
   "src/lib/store.test.ts": {
-    "mtime": 1784900520.9330885,
+    "mtime": 1784903904.2982662,
     "ast_hash": "02c18bf20009933cb8257a2454c2eab9",
     "semantic_hash": ""
   },
   "src/test/setup.ts": {
-    "mtime": 1784900407.181263,
+    "mtime": 1784903904.298509,
     "ast_hash": "2387755100e59c8ca2446eba8f81b6a3",
     "semantic_hash": ""
   },
   "src/test/tauri.ts": {
-    "mtime": 1784900420.6645896,
+    "mtime": 1784903904.2986686,
     "ast_hash": "56706484ec95a7d2d81bac6384e254fb",
     "semantic_hash": ""
   },
   "vitest.config.ts": {
-    "mtime": 1784900431.0431037,
+    "mtime": 1784903904.299223,
     "ast_hash": "fa159d8be323d14210299710b103d74b",
     "semantic_hash": ""
   },
   ".github/workflows/e2e.yml": {
-    "mtime": 1784900759.859854,
+    "mtime": 1784903904.2828767,
     "ast_hash": "b0b9e34459bfedfc685d0b9d0a1b4c80",
+    "semantic_hash": ""
+  },
+  "src/lib/queries.test.ts": {
+    "mtime": 1784906042.9342382,
+    "ast_hash": "2030952e6334713d91b74f1a46008b2c",
+    "semantic_hash": ""
+  },
+  "src/components/favorites-form.test.tsx": {
+    "mtime": 1784906172.7544014,
+    "ast_hash": "cfd51ed35f1951dac84ee317d66760e3",
+    "semantic_hash": ""
+  },
+  "src/components/project-map-form.test.tsx": {
+    "mtime": 1784906240.1833916,
+    "ast_hash": "475e48ba3d3660cff49ad335d5a091e9",
+    "semantic_hash": ""
+  },
+  "src/test/render.tsx": {
+    "mtime": 1784906240.630611,
+    "ast_hash": "c177158ec9a1d51bc56e9b674832bf57",
     "semantic_hash": ""
   }
 }
