@@ -21,19 +21,34 @@ impl PortalAccountConfig {
     /// Field order is load-bearing: when a store is missing several fields, the
     /// first one checked is the message the user sees.
     pub(crate) fn from_store_value(account: Option<&Value>) -> Result<Self, AppError> {
-        let phone = required_str(account, "phone", "Phone number not configured")?;
-        let portal_url = required_str(account, "portal_url", "Portal URL not configured")?;
-        let portal_credential = required_str(
-            account,
-            "portal_credential",
-            "Portal credential not configured",
-        )?;
+        Self::new(
+            store_str(account, "phone"),
+            store_str(account, "portal_url"),
+            store_str(account, "portal_credential"),
+        )
+    }
+
+    /// Builds a config from the *candidate* values typed into the Account form,
+    /// before anything is saved. Deliberately shares `new` with the stored
+    /// path: a value must not verify one way and then behave differently once
+    /// it lands in `store.json`.
+    pub(crate) fn from_candidates(
+        phone: String,
+        portal_url: String,
+        portal_credential: String,
+    ) -> Result<Self, AppError> {
+        Self::new(phone, portal_url, portal_credential)
+    }
+
+    fn new(phone: String, portal_url: String, portal_credential: String) -> Result<Self, AppError> {
+        // Field order is what decides the reported message; see the doc above.
         Ok(Self {
-            phone,
-            portal_url: normalize_portal_url(&portal_url).to_string(),
+            phone: required(phone, "Phone number not configured")?,
+            portal_url: normalize_portal_url(&required(portal_url, "Portal URL not configured")?)
+                .to_string(),
             // Basic-auth `user:pass`, encoded verbatim — never trimmed or
             // otherwise reshaped, since any byte may be part of the password.
-            portal_credential,
+            portal_credential: required(portal_credential, "Portal credential not configured")?,
         })
     }
 
@@ -50,21 +65,23 @@ impl PortalAccountConfig {
     }
 }
 
-/// Reads a required string field, erroring with `missing_msg` when the account
-/// value, the field, or its contents are absent, empty, or not a string. The
-/// store is written by our own frontend, so a wrongly typed value is treated
+/// Reads a string field out of the stored account value. An absent account
+/// value, an absent field, and a wrongly typed field all collapse to the empty
+/// string — the store is written by our own frontend, so a bad type is treated
 /// as unconfigured rather than given its own message.
-fn required_str(
-    account: Option<&Value>,
-    field: &str,
-    missing_msg: &'static str,
-) -> Result<String, AppError> {
+fn store_str(account: Option<&Value>, field: &str) -> String {
     account
         .and_then(|value| value.get(field))
         .and_then(Value::as_str)
-        .filter(|value| !value.is_empty())
-        .map(String::from)
-        .ok_or_else(|| AppError::from(missing_msg))
+        .unwrap_or_default()
+        .to_string()
+}
+
+fn required(value: String, missing_msg: &'static str) -> Result<String, AppError> {
+    if value.is_empty() {
+        return Err(AppError::from(missing_msg));
+    }
+    Ok(value)
 }
 
 /// Trailing slashes are trimmed defensively — callers join paths as
@@ -214,6 +231,45 @@ mod tests {
         .unwrap();
 
         assert_eq!(config.portal_credential(), credential);
+    }
+
+    #[test]
+    fn candidate_values_are_validated_and_normalized_like_stored_ones() {
+        let config = PortalAccountConfig::from_candidates(
+            "0812345678".into(),
+            "https://portal.example.com//".into(),
+            "user:pass".into(),
+        )
+        .unwrap();
+
+        assert_eq!(
+            config,
+            PortalAccountConfig::from_store_value(Some(&configured())).unwrap(),
+            "a candidate must behave exactly as it will once saved"
+        );
+    }
+
+    #[test]
+    fn empty_candidate_values_are_rejected_before_a_browser_is_launched() {
+        let messages = [
+            ("", "https://portal.example.com", "user:pass"),
+            ("0812345678", "", "user:pass"),
+            ("0812345678", "https://portal.example.com", ""),
+        ]
+        .map(|(phone, url, credential)| {
+            PortalAccountConfig::from_candidates(phone.into(), url.into(), credential.into())
+                .unwrap_err()
+                .to_string()
+        });
+
+        assert_eq!(
+            messages,
+            [
+                "Phone number not configured",
+                "Portal URL not configured",
+                "Portal credential not configured",
+            ]
+        );
     }
 
     #[test]

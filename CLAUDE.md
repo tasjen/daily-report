@@ -41,7 +41,7 @@ Unit tests cover extracted pure logic; UI behavior is still verified with `pnpm 
 - **Frontend:** Vitest 4 + jsdom + React Testing Library. [vitest.config.ts](vitest.config.ts) `mergeConfig`s [vite.config.ts](vite.config.ts), so the `@` alias, lingui macro transform, and react-compiler preset apply in tests. Tests are colocated `*.test.ts(x)` under `src/`; `globals` is off — import `describe`/`it`/`expect` from `"vitest"` explicitly (keeps `tsc -b` and type-aware oxlint working without tsconfig `types` churn).
 - **Tauri mocking:** [src/test/tauri.ts](src/test/tauri.ts) `mockTauri(data, onInvoke?)` answers plugin-store IPC from in-memory data and delegates other commands; [src/test/setup.ts](src/test/setup.ts) runs RTL `cleanup()` + `clearMocks()` after each test. Importing `store.ts` in tests is safe: `LazyStore` does no IPC until first use.
 - **Don't render components whose value comes from an uncached `use(promise)`** (e.g. `Version`): the promise recreates every render and never settles under RTL.
-- **Rust:** `#[cfg(test)]` unit tests colocated in the module under test — `submission.rs` (planning + workflow), `browser_session.rs` (reuse, recovery, teardown), `navigation.rs` (URL matching + polling), `account.rs` (stored portal config), and `project_options.rs` (cache scope). `lib.rs` itself holds no tests — it is the Chromium wiring layer. Chromium itself stays untested: policy lives behind seams (`SubmissionPortal`, `BrowserHost`, the `current_url` closure, the `scrape` closure) that tests drive with fakes, while `lib.rs` holds the one real implementation of each. Async tests use `#[tokio::test]`, with `start_paused = true` where timing is asserted. Fakes record an ordered event log and assert on that, not on call counts — it catches ordering bugs (killing a stale browser *before* relaunching) that counters miss.
+- **Rust:** `#[cfg(test)]` unit tests colocated in the module under test — `submission.rs` (planning + workflow), `browser_session.rs` (reuse, recovery, teardown), `login.rs` (login sequence + verification lifecycle), `navigation.rs` (URL matching + polling), `account.rs` (stored and candidate portal config), and `project_options.rs` (cache scope). `lib.rs` itself holds no tests — it is the Chromium wiring layer. Chromium itself stays untested: policy lives behind seams (`SubmissionPortal`, `BrowserHost`, `LoginPortal`, `VerifyHost`, the `current_url` closure, the `scrape` closure) that tests drive with fakes, while `lib.rs` holds the one real implementation of each. Async tests use `#[tokio::test]`, with `start_paused = true` where timing is asserted. Fakes record an ordered event log and assert on that, not on call counts — it catches ordering bugs (killing a stale browser *before* relaunching) that counters miss.
 - **E2E:** WebdriverIO + tauri-driver smoke suite in [e2e/](e2e/), Linux/Windows only (no macOS tauri-driver), run by the separate non-required [e2e.yml](.github/workflows/e2e.yml) workflow on `main` pushes and manual dispatch. `e2e/tsconfig.json` is deliberately not referenced from the root tsconfig so pre-push `tsc -b` ignores it.
 
 ## Architecture
@@ -83,10 +83,12 @@ Before reuse, `get_page()` calls the host's `is_page_alive()`, which performs a 
 On an instance's first `get_page()`:
 
 1. Read `phone`, `portal_url`, and `portal_credential` from the `account` key in `store.json` through `PortalAccountConfig::from_store_value` ([src-tauri/src/account.rs](src-tauri/src/account.rs)). All three are validated together, so if any is missing the launch fails before spending Chromium startup. Holding a `PortalAccountConfig` is proof login can be attempted — keep reading config through it rather than pulling fields out of the store ad hoc.
-2. Launch Chromium, headed or headless, and enable stealth mode.
-3. Set a Basic-auth `Authorization` header from `portal_credential` (the admin site's HTTP basic gate).
-4. Navigate to `portal_url`, type the phone into the login input, and press Enter.
-5. Poll with `wait_for_url` until the current URL starts with `<portal_url>/member.php`, confirming login.
+2. Launch Chromium, headed or headless.
+3. Run `PortalLogin::execute` ([src-tauri/src/login.rs](src-tauri/src/login.rs)), which drives the `LoginPortal` boundary in a fixed order: enable stealth mode and set a Basic-auth `Authorization` header from `portal_credential` (the admin site's HTTP basic gate) → navigate to `portal_url` → fill and submit the login input with the phone → poll `wait_for_url` until the current URL reaches `<portal_url>/member.php`, confirming login (`LOGIN_TIMEOUT`, 5s).
+
+The sequence is policy and lives in `PortalLogin`; `ChromiumLoginPortal` in `lib.rs` is the only real `LoginPortal`. Both the persistent sessions (stored values) and `verify_portal_login` (candidate values) go through it, so login cannot drift between them. Only a *timeout* gets the "Wrong phone number, portal URL, or portal credential" explanation appended — CDP and navigation failures propagate unchanged.
+
+`login_script` builds the fill-and-submit JS. Both the selector and the phone go through `serde_json::to_string`; see the escaping rule under Conventions.
 
 `wait_for_url` matches the expected URL exactly, or extended at a `?`, `#`, or `/` boundary — so a redirect that appends query parameters, a fragment, or a trailing slash counts as arrival, while a differently-named sibling route (`/member.php-old`) does not. It succeeds immediately when the page already has the target URL. The rule lives in `UrlExpectation::matches` ([src-tauri/src/navigation.rs](src-tauri/src/navigation.rs)) and is shared by login and post-submit confirmation.
 
@@ -94,7 +96,7 @@ On an instance's first `get_page()`:
 
 **Terminate all browser instances on app close.**
 
-- `run()` handles `RunEvent::Exit` by calling `.close()` on both managed states. It also kills an in-flight transient `verify_portal_login` browser, parked in `VerifyBrowserState` for this purpose.
+- `run()` handles `RunEvent::Exit` by calling `.close()` on both managed states, then `kill_parked()` on `VerifyBrowserState` to terminate an in-flight `verify_portal_login` browser.
 - `BrowserSession::close()` attempts graceful shutdown through the host: close page → close browser → `wait()`. The session bounds it with `GRACEFUL_CLOSE_TIMEOUT` (3s), then falls back to `kill()`. If the user already closed the window, the connection is gone; graceful close cannot finish and `wait()` would otherwise block forever. Repeated closes and closing an empty session are both no-ops.
 - Do **not** delete user-data dirs on close. The fixed app-cache paths are bounded to three and wiped on next launch, also reclaiming force-quit leftovers.
 - The `close_browsers` command closes **both** instances. The frontend calls it:
@@ -125,7 +127,8 @@ Define these in [src-tauri/src/lib.rs](src-tauri/src/lib.rs) and register them i
   - **More than 3 entries is an error, not a truncation.** The form has 3 row pairs and `buildSubmission` already merges overflow into row 3, so a longer list means a caller bug; `SubmissionPlan::build` rejects it rather than silently shipping a report missing part of the day's work.
   - **Clicks submit only when `auto_submit` is on**; otherwise the user does. See the submission workflow below.
 - **`close_browsers()`:** Tears down both instances and clears the cached project options. Called after account save to remove the old login and by the ≥1h-away reset in `use-reset-when-away.ts`.
-- **`verify_portal_login(portal_url, portal_credential, phone)`:** Logs into the portal with a throwaway headless browser and its own `profiles/verify` dir. Uses the passed *candidate* values and **never** reads `store.json`. The Account form calls it before saving. Kill the browser after the check, pass or fail.
+- **`verify_portal_login(portal_url, portal_credential, phone)`:** Logs into the portal with a throwaway headless browser and its own `profiles/verify` dir. Uses the passed *candidate* values and **never** reads `store.json`; they go through `PortalAccountConfig::from_candidates`, which shares validation and trailing-slash normalization with the stored path so a value cannot verify one way and behave another once saved. The Account form calls it before saving. `VerifySession` ([src-tauri/src/login.rs](src-tauri/src/login.rs)) kills the browser after the check, pass or fail.
+  - It holds **two** locks. `running` serializes checks, which share one profile dir. `parked` holds the in-flight browser for the `Exit` handler. They must stay separate: with one lock, exit would block waiting for the very check it is trying to abort. Login runs on the `Page`, which is independent of the parked `Browser`.
 
 Keep portal selectors synchronized with portal markup:
 

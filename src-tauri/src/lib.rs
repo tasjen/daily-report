@@ -1,26 +1,27 @@
 mod account;
 mod browser_session;
+mod login;
 mod navigation;
 mod project_options;
 mod submission;
 
-use account::{normalize_portal_url, PortalAccountConfig};
-use base64::{engine::general_purpose::STANDARD, Engine};
+use account::PortalAccountConfig;
 use browser_session::{BrowserHost, BrowserSession};
 use chromiumoxide::browser::{Browser, BrowserConfig};
 use chromiumoxide::cdp::browser_protocol::network::{Headers, SetExtraHttpHeadersParams};
 use chromiumoxide::Page;
 use futures::StreamExt;
+use login::{login_script, LoginPortal, PortalLogin, VerifyHost, VerifySession};
 use navigation::{wait_for_navigation, UrlExpectation};
 use project_options::ProjectOptionsCache;
 use serde::Serialize;
+use std::time::Duration;
 use submission::{
     SubmissionAutomation, SubmissionPlan, SubmissionPortal, SubmissionPreferences,
     SubmissionWorkflow, TaskEntry,
 };
 use tauri::Manager;
 use tauri_plugin_store::StoreExt;
-use tokio::sync::Mutex;
 
 // Portal-specific selectors. Update these here if the admin site changes its
 // form markup. The portal base URL and Basic-auth credential are NOT compiled
@@ -117,12 +118,47 @@ macro_rules! impl_browser_state_deref {
 impl_browser_state_deref!(HeadedBrowserState);
 impl_browser_state_deref!(HeadlessBrowserState);
 
-/// Holds the throwaway browser used by `verify_portal_login` while a check is
-/// in flight, so the `RunEvent::Exit` handler can kill it if the app closes
-/// mid-verify (invariant: every browser instance must be terminated on app
-/// close). The `Mutex` also serializes concurrent verifies, which share one
-/// profile dir.
-struct VerifyBrowserState(Mutex<Option<Browser>>);
+/// The real Chromium boundary behind `VerifySession`. Always headless and
+/// always in its own `profiles/verify` dir, so a check never contends with the
+/// headed or headless session's profile lock.
+struct ChromiumVerifyHost {
+    app: tauri::AppHandle,
+}
+
+impl VerifyHost for ChromiumVerifyHost {
+    type Browser = Browser;
+    type Page = Page;
+
+    async fn launch(&self) -> Result<(Browser, Page), AppError> {
+        let user_data_dir = self
+            .app
+            .path()
+            .app_cache_dir()?
+            .join("profiles")
+            .join("verify");
+        launch_browser(&user_data_dir, false, "verify").await
+    }
+
+    async fn login(&self, page: &Page, config: &PortalAccountConfig) -> Result<(), AppError> {
+        login_to_portal(page, config, "verify").await
+    }
+
+    async fn kill(&self, browser: &mut Browser) {
+        let _ = browser.kill().await;
+    }
+}
+
+/// Runs `verify_portal_login` checks. Parks the in-flight browser so the
+/// `RunEvent::Exit` handler can kill it if the app closes mid-verify
+/// (invariant: every browser instance must be terminated on app close).
+struct VerifyBrowserState(VerifySession<ChromiumVerifyHost>);
+
+impl std::ops::Deref for VerifyBrowserState {
+    type Target = VerifySession<ChromiumVerifyHost>;
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
 
 impl ChromiumHost {
     /// Path to this browser's Chromium user-data dir, under the app's own cache
@@ -159,14 +195,7 @@ impl BrowserHost for ChromiumHost {
 
         let (browser, page) =
             launch_browser(&self.user_data_dir()?, self.with_head, self.label()).await?;
-        login_to_portal(
-            &page,
-            account.phone(),
-            account.portal_url(),
-            account.portal_credential(),
-            self.label(),
-        )
-        .await?;
+        login_to_portal(&page, &account, self.label()).await?;
 
         // Chromium starts with an initial blank tab in addition to the page we
         // create; close it after login so the headed window doesn't show a
@@ -240,52 +269,47 @@ async fn launch_browser(
     Ok((browser, page))
 }
 
-/// Logs `page` into the admin portal: Basic-auth header, navigate to
-/// `base_url`, type the phone into the login input, confirm arrival at
-/// member.php. Shared by `BrowserState::launch_and_login` (values from
-/// `store.json`) and `verify_portal_login` (candidate values from the
-/// Account form), so the login sequence can't drift between the two.
+/// The real `LoginPortal`: a Chromium page with stealth mode enabled. Holds no
+/// login policy — the sequence lives in `PortalLogin::execute`.
+struct ChromiumLoginPortal<'a>(&'a Page);
+
+impl LoginPortal for ChromiumLoginPortal<'_> {
+    async fn set_basic_auth(&mut self, token: &str) -> Result<(), AppError> {
+        self.0.enable_stealth_mode().await?;
+        self.0
+            .execute(SetExtraHttpHeadersParams::new(Headers::new(
+                serde_json::json!({ "Authorization": format!("Basic {token}") }),
+            )))
+            .await?;
+        Ok(())
+    }
+
+    async fn goto(&mut self, url: &str) -> Result<(), AppError> {
+        self.0.goto(url).await?;
+        Ok(())
+    }
+
+    async fn submit_phone(&mut self, phone: &str) -> Result<(), AppError> {
+        self.0
+            .evaluate(login_script(LOGIN_INPUT_SELECTOR, phone)?)
+            .await?;
+        Ok(())
+    }
+
+    async fn wait_for_url(&mut self, expected: &str, timeout: Duration) -> Result<(), AppError> {
+        wait_for_url(self.0, expected, timeout.as_millis() as u64).await
+    }
+}
+
+/// Logs `page` into the admin portal with `config`. Shared by the persistent
+/// browser sessions (values from `store.json`) and `verify_portal_login`
+/// (candidate values from the Account form), so login can't drift between them.
 async fn login_to_portal(
     page: &Page,
-    phone: &str,
-    base_url: &str,
-    credential: &str,
+    config: &PortalAccountConfig,
     label: &str,
 ) -> Result<(), AppError> {
-    page.enable_stealth_mode().await?;
-    let token = STANDARD.encode(credential);
-    page.execute(SetExtraHttpHeadersParams::new(Headers::new(
-        serde_json::json!({ "Authorization": format!("Basic {}", token) }),
-    )))
-    .await?;
-    page.goto(base_url).await?;
-
-    // Build every JS literal via `serde_json::to_string` so it is properly
-    // quoted/escaped. The selector itself contains single quotes
-    // (`input[type='text']`), so hand-wrapping it in `'...'` breaks the JS;
-    // the phone is user-supplied and only validated as non-empty, so an
-    // apostrophe would break the script and a crafted value would inject.
-    let selector_js = serde_json::to_string(LOGIN_INPUT_SELECTOR)?;
-    let phone_js = serde_json::to_string(phone)?;
-    page.evaluate(format!(
-        "
-            const phoneInput = document.querySelector({selector_js});
-            phoneInput.value = {phone_js};
-            phoneInput.form.submit();
-        "
-    ))
-    .await?;
-
-    wait_for_url(page, &format!("{base_url}/member.php"), 5_000)
-        .await
-        .map_err(|e| {
-            log::warn!("{label} browser login failed: {e}");
-            AppError::from(format!(
-                "{e}\nWrong phone number, portal URL, or portal credential — or the portal was slow to respond"
-            ))
-        })?;
-    log::info!("{label} browser logged into portal");
-    Ok(())
+    PortalLogin::execute(config, label, &mut ChromiumLoginPortal(page)).await
 }
 
 /// Reads and validates the portal account config from `store.json`. Free
@@ -380,31 +404,17 @@ async fn close_browsers(
 /// returning; it exists only for the duration of the check.
 #[tauri::command]
 async fn verify_portal_login(
-    app: tauri::AppHandle,
     state: tauri::State<'_, VerifyBrowserState>,
     portal_url: String,
     portal_credential: String,
     phone: String,
 ) -> Result<(), AppError> {
     log::info!("verify_portal_login: checking candidate portal values");
-    // The frontend normalizes the trailing slash before saving, but this runs
-    // on pre-save input — trim through the same helper the stored value uses,
-    // so a candidate can't be accepted here and behave differently once saved.
-    let base_url = normalize_portal_url(&portal_url);
-    let user_data_dir = app.path().app_cache_dir()?.join("profiles").join("verify");
-
-    // Hold the lock for the whole check: it serializes concurrent verifies
-    // (they share the profile dir) and parking the browser here is what lets
-    // the Exit handler kill it if the app closes mid-login.
-    let mut guard = state.0.lock().await;
-    let (browser, page) = launch_browser(&user_data_dir, false, "verify").await?;
-    *guard = Some(browser);
-    let login_result = login_to_portal(&page, &phone, base_url, &portal_credential, "verify").await;
-    // Throwaway either way: nothing to keep after the check.
-    if let Some(mut browser) = guard.take() {
-        let _ = browser.kill().await;
-    }
-    login_result
+    // Candidates run through the same validation and trailing-slash
+    // normalization as stored values, so nothing can pass here and then behave
+    // differently once the frontend saves it.
+    let candidate = PortalAccountConfig::from_candidates(phone, portal_url, portal_credential)?;
+    state.verify(&candidate).await
 }
 
 #[tauri::command]
@@ -621,7 +631,9 @@ pub fn run() {
         .setup(|app| {
             app.manage(HeadlessBrowserState(browser_state(app.handle(), false)));
             app.manage(HeadedBrowserState(browser_state(app.handle(), true)));
-            app.manage(VerifyBrowserState(Mutex::new(None)));
+            app.manage(VerifyBrowserState(VerifySession::new(ChromiumVerifyHost {
+                app: app.handle().clone(),
+            })));
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
@@ -640,15 +652,7 @@ pub fn run() {
                     app_handle.state::<HeadedBrowserState>().close().await;
                     // The verify browser is throwaway: kill it outright if a
                     // verification was in flight when the app closed.
-                    if let Some(mut browser) = app_handle
-                        .state::<VerifyBrowserState>()
-                        .0
-                        .lock()
-                        .await
-                        .take()
-                    {
-                        let _ = browser.kill().await;
-                    }
+                    app_handle.state::<VerifyBrowserState>().kill_parked().await;
                 });
             }
         });
