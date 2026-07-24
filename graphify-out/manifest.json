@@ -1055,8 +1055,8 @@
     "semantic_hash": ""
   },
   "src/lib/queries.test.ts": {
-    "mtime": 1784906042.9342382,
-    "ast_hash": "2030952e6334713d91b74f1a46008b2c",
+    "mtime": 1784906320.9424586,
+    "ast_hash": "51b529ddd72b0808fa2c8b948a4f0543",
     "semantic_hash": ""
   },
   "src/components/favorites-form.test.tsx": {

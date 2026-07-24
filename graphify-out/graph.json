@@ -1822,8 +1822,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "package_dependencies_base_ui_react",
-      "community": 174,
-      "community_name": "version.tsx",
+      "community": 67,
+      "community_name": "Desktop Process Control",
       "norm_label": "@base-ui/react"
     },
     {
@@ -1833,8 +1833,8 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "base_ui_react",
-      "community": 174,
-      "community_name": "version.tsx",
+      "community": 67,
+      "community_name": "Desktop Process Control",
       "norm_label": "@base-ui/react"
     },
     {
@@ -1844,8 +1844,8 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "package_dependencies_formkit_auto_animate",
-      "community": 67,
-      "community_name": "Desktop Process Control",
+      "community": 174,
+      "community_name": "version.tsx",
       "norm_label": "@formkit/auto-animate"
     },
     {
@@ -1855,8 +1855,8 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "formkit_auto_animate",
-      "community": 67,
-      "community_name": "Desktop Process Control",
+      "community": 174,
+      "community_name": "version.tsx",
       "norm_label": "@formkit/auto-animate"
     },
     {
@@ -4583,8 +4583,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_components_account_form",
-      "community": 12,
-      "community_name": "React Query Data Layer",
+      "community": 43,
+      "community_name": "React Application Bootstrap",
       "norm_label": "account-form.tsx"
     },
     {
@@ -4594,8 +4594,8 @@
       "source_location": "L45",
       "_origin": "ast",
       "id": "src_components_account_form_normalizeportalurl",
-      "community": 12,
-      "community_name": "React Query Data Layer",
+      "community": 43,
+      "community_name": "React Application Bootstrap",
       "norm_label": "normalizeportalurl()"
     },
     {
@@ -4605,8 +4605,8 @@
       "source_location": "L52",
       "_origin": "ast",
       "id": "src_components_account_form_textfield",
-      "community": 12,
-      "community_name": "React Query Data Layer",
+      "community": 43,
+      "community_name": "React Application Bootstrap",
       "norm_label": "textfield()"
     },
     {
@@ -4616,8 +4616,8 @@
       "source_location": "L84",
       "_origin": "ast",
       "id": "src_components_account_form_accountform",
-      "community": 12,
-      "community_name": "React Query Data Layer",
+      "community": 43,
+      "community_name": "React Application Bootstrap",
       "norm_label": "accountform()"
     },
     {
@@ -6799,10 +6799,43 @@
       "norm_label": "queries.test.ts"
     },
     {
+      "label": "mockJiraResponse()",
+      "file_type": "code",
+      "source_file": "src/lib/queries.test.ts",
+      "source_location": "L20",
+      "_origin": "ast",
+      "id": "src_lib_queries_test_mockjiraresponse",
+      "community": 4,
+      "community_name": "Biome Code Quality Rules",
+      "norm_label": "mockjiraresponse()"
+    },
+    {
+      "label": "account",
+      "file_type": "code",
+      "source_file": "src/lib/queries.test.ts",
+      "source_location": "L35",
+      "_origin": "ast",
+      "id": "src_lib_queries_test_account",
+      "community": 4,
+      "community_name": "Biome Code Quality Rules",
+      "norm_label": "account"
+    },
+    {
+      "label": "runJiraQuery()",
+      "file_type": "code",
+      "source_file": "src/lib/queries.test.ts",
+      "source_location": "L43",
+      "_origin": "ast",
+      "id": "src_lib_queries_test_runjiraquery",
+      "community": 4,
+      "community_name": "Biome Code Quality Rules",
+      "norm_label": "runjiraquery()"
+    },
+    {
       "label": "readPreferences()",
       "file_type": "code",
       "source_file": "src/lib/queries.test.ts",
-      "source_location": "L12",
+      "source_location": "L51",
       "_origin": "ast",
       "id": "src_lib_queries_test_readpreferences",
       "community": 4,
@@ -6813,7 +6846,7 @@
       "label": "readFavorites()",
       "file_type": "code",
       "source_file": "src/lib/queries.test.ts",
-      "source_location": "L14",
+      "source_location": "L53",
       "_origin": "ast",
       "id": "src_lib_queries_test_readfavorites",
       "community": 4,
@@ -7135,8 +7168,8 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_main",
-      "community": 43,
-      "community_name": "React Application Bootstrap",
+      "community": 72,
+      "community_name": "Main Application Shell",
       "norm_label": "main.tsx"
     },
     {
@@ -7146,8 +7179,8 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "src_main_showwindowonmount",
-      "community": 43,
-      "community_name": "React Application Bootstrap",
+      "community": 72,
+      "community_name": "Main Application Shell",
       "norm_label": "showwindowonmount()"
     },
     {
@@ -7157,8 +7190,8 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "src_main_queryclient",
-      "community": 43,
-      "community_name": "React Application Bootstrap",
+      "community": 72,
+      "community_name": "Main Application Shell",
       "norm_label": "queryclient"
     },
     {
@@ -9180,9 +9213,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 6,
+      "community": 3,
       "norm_label": "tdd at pre-agreed seams",
-      "community_name": "Deep Module Design",
+      "community_name": "Engineering Workflow Skills",
       "id": "agents_skills_implement_skill_tdd_at_pre_agreed_seams"
     },
     {
@@ -20465,18 +20498,6 @@
       "confidence_score": 1.0
     },
     {
-      "relation": "references",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/components/account-form.tsx",
-      "source_location": "L122",
-      "weight": 1.0,
-      "_origin": "ast",
-      "source": "src_components_account_form_accountform",
-      "target": "src_lib_store_account"
-    },
-    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/auto-close-toggle.tsx",
@@ -22464,7 +22485,29 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/queries.test.ts",
-      "source_location": "L14",
+      "source_location": "L35",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_lib_queries_test",
+      "target": "src_lib_queries_test_account",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/queries.test.ts",
+      "source_location": "L20",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_lib_queries_test",
+      "target": "src_lib_queries_test_mockjiraresponse",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/queries.test.ts",
+      "source_location": "L53",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_queries_test",
@@ -22475,11 +22518,22 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/lib/queries.test.ts",
-      "source_location": "L12",
+      "source_location": "L51",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_lib_queries_test",
       "target": "src_lib_queries_test_readpreferences",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/queries.test.ts",
+      "source_location": "L43",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_lib_queries_test",
+      "target": "src_lib_queries_test_runjiraquery",
       "confidence_score": 1.0
     },
     {
@@ -28111,5 +28165,5 @@
       "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md"
     }
   ],
-  "built_at_commit": "a9284e3a7ab919da698fdad1c35b2513073e57df"
+  "built_at_commit": "171fc4738368ca4d0f5d2d2ff844120b997e11f0"
 }
