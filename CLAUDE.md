@@ -244,6 +244,7 @@ Additional release rules:
 - **`submit_task` interpolates JS strings.** Summaries and projects pass safely through `serde_json::to_string`; `date` is interpolated raw into `evaluate(...)`. It comes from portal option values; keep that trust boundary and never pass untrusted strings there.
 - **Hardcoded values:** `lib.rs` contains only login/form selectors. They are portal-specific; update them when portal markup changes. Portal base URL and Basic-auth credentials are **not** compiled in: users supply `account.portal_url` / `account.portal_credential` through the Account form in `store.json`; Rust reads them per use with `portal_url()` / `portal_credential()`.
 - **Formatting:** oxfmt enforces sorted Tailwind classes (`sortTailwindcss`, reading the v4 stylesheet `src/App.css`) and sorted imports (`sortImports`); the pre-commit hook auto-fixes staged files. Linting needs `--type-aware` (wired into `pnpm lint`) or `typescript/no-floating-promises` silently stops running.
+- **Never switch git branches without asking.** Do not `git checkout`/`git switch` to another branch, create a new branch, or pull `main` mid-session unless the user has explicitly approved it first — even when a merged PR makes moving to a fresh branch seem like the obvious next step. The user coordinates branch state outside the session; unannounced switches cause divergence and merge conflicts.
 
 ## graphify
 
