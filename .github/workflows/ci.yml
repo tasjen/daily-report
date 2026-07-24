@@ -51,6 +51,8 @@ jobs:
       - if: steps.changes.outputs.frontend == 'true'
         run: pnpm fmt:check
       - if: steps.changes.outputs.frontend == 'true'
+        run: pnpm test
+      - if: steps.changes.outputs.frontend == 'true'
         run: pnpm build
 
   rust:
@@ -82,3 +84,5 @@ jobs:
           workspaces: src-tauri
       - if: steps.changes.outputs.rust == 'true'
         run: cargo check --manifest-path src-tauri/Cargo.toml --locked
+      - if: steps.changes.outputs.rust == 'true'
+        run: cargo test --manifest-path src-tauri/Cargo.toml --locked
