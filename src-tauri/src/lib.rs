@@ -1,9 +1,12 @@
+mod submission;
+
 use base64::{engine::general_purpose::STANDARD, Engine};
 use chromiumoxide::browser::{Browser, BrowserConfig};
 use chromiumoxide::cdp::browser_protocol::network::{Headers, SetExtraHttpHeadersParams};
 use chromiumoxide::Page;
 use futures::StreamExt;
 use serde::Serialize;
+use submission::{SubmissionPlan, SubmissionPreferences, TaskEntry};
 use tauri::Manager;
 use tauri_plugin_store::StoreExt;
 use tokio::sync::Mutex;
@@ -485,21 +488,11 @@ async fn open_member_page(state: tauri::State<'_, HeadedBrowserState>) -> Result
     Ok(())
 }
 
-/// One project/comment row pair of the task form, sent by the frontend (which
-/// buckets the selected tasks by the `project_map` preference). `project` is a
-/// portal project option id; `None` on the first row falls back to the
-/// `default_project` preference — the pre-mapping behavior.
-#[derive(serde::Deserialize)]
-struct TaskEntry {
-    project: Option<String>,
-    summary: String,
-}
-
 #[tauri::command]
 async fn submit_task(
     state: tauri::State<'_, HeadedBrowserState>,
     date: String,
-    mut entries: Vec<TaskEntry>,
+    entries: Vec<TaskEntry>,
 ) -> Result<(), AppError> {
     log::info!(
         "submit_task: pre-filling form for date {date} ({} row(s))",
@@ -519,53 +512,38 @@ async fn submit_task(
         v.get("default_project")
             .and_then(|p| p.as_str().map(String::from))
     });
+    let project_list = store
+        .get("preferences")
+        .and_then(|v| v.get("project_list").and_then(|s| s.as_array().cloned()))
+        .unwrap_or_default()
+        .into_iter()
+        .filter_map(|project| project.as_str().map(String::from))
+        .collect();
+    let plan = SubmissionPlan::build(
+        entries,
+        SubmissionPreferences::new(default_project, project_list),
+    );
 
-    // The form has 3 row pairs. The frontend already merges overflow into the
-    // 3rd entry and always sends at least one; both are re-enforced here so a
-    // malformed invoke can't index a row the form doesn't have.
-    entries.truncate(3);
-    if entries.is_empty() {
-        entries.push(TaskEntry {
-            project: None,
-            summary: String::new(),
-        });
-    }
-    for (i, entry) in entries.iter().enumerate() {
+    for (i, entry) in plan.rows().iter().enumerate() {
         let row = i + 1;
-        let project = entry.project.as_ref().or(if row == 1 {
-            default_project.as_ref()
-        } else {
-            None
-        });
-        if let Some(project) = project {
+        if let Some(project) = entry.project() {
             let project_js = serde_json::to_string(project)?;
             page.evaluate(format!(
                 "document.querySelector('{TASK_PROJECT_SELECT_PREFIX}{row}').value = {project_js};"
             ))
             .await?;
         }
-        let summary_js = serde_json::to_string(&entry.summary)?;
+        let summary_js = serde_json::to_string(entry.summary())?;
         page.evaluate(format!(
             "document.querySelector('{TASK_COMMENT_TEXTAREA_PREFIX}{row}').value = {summary_js};"
         ))
         .await?;
     }
 
-    let project_list = store
-        .get("preferences")
-        .and_then(|v| v.get("project_list").and_then(|s| s.as_array().cloned()))
-        .unwrap_or_default();
-    if !project_list.is_empty() {
+    if let Some(keep) = plan.project_filter() {
         // Every value set on a row select must survive the filter, so the
         // keep list is project_list + default_project + each entry's project.
-        let mut keep = project_list;
-        keep.extend(
-            default_project
-                .iter()
-                .chain(entries.iter().filter_map(|e| e.project.as_ref()))
-                .map(|p| serde_json::Value::String(p.clone())),
-        );
-        let keep_js = serde_json::to_string(&keep)?;
+        let keep_js = serde_json::to_string(keep)?;
         page.evaluate(format!(
             "Array.from(document.querySelectorAll('select')).forEach((e) => {{
                 if (e.id.includes('task_project_id')) {{
