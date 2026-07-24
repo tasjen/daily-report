@@ -1,3 +1,4 @@
+import { Trans, useLingui } from "@lingui/react/macro";
 import { InfoIcon } from "lucide-react";
 import { Checkbox } from "@/components/shared/checkbox";
 import { Label } from "@/components/shared/label";
@@ -12,6 +13,7 @@ import type { TaskGroupType } from "@/lib/store";
 import { TASK_GROUPS } from "@/lib/task-groups";
 
 export default function DefaultTaskGroupsSelect() {
+  const { i18n } = useLingui();
   const { data: preferences } = usePreferences();
   const savePreferences = useSavePreferencesMutation();
 
@@ -32,7 +34,7 @@ export default function DefaultTaskGroupsSelect() {
   return (
     <div className="flex flex-col items-start gap-2">
       <Label className="flex flex-none items-center gap-1">
-        Default selected task groups
+        <Trans>Default selected task groups</Trans>
         <Tooltip>
           <TooltipTrigger
             render={
@@ -42,7 +44,9 @@ export default function DefaultTaskGroupsSelect() {
             }
           />
           <TooltipContent>
-            The task groups whose issues start all checked by default
+            <Trans>
+              The task groups whose issues start all checked by default
+            </Trans>
           </TooltipContent>
         </Tooltip>
       </Label>
@@ -58,7 +62,7 @@ export default function DefaultTaskGroupsSelect() {
                 toggle(group.type, checked === true)
               }
             />
-            {group.label}
+            {i18n._(group.label)}
           </Label>
         ))}
       </div>

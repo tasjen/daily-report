@@ -1,3 +1,4 @@
+import { Trans } from "@lingui/react/macro";
 import { relaunch } from "@tauri-apps/plugin-process";
 import type { FallbackProps } from "react-error-boundary";
 import { Button } from "@/components/shared/button";
@@ -8,15 +9,19 @@ export default function ErrorFallback({
 }: FallbackProps) {
   return (
     <main className="flex h-screen flex-col items-center justify-center gap-4 p-8">
-      <h1 className="font-semibold text-xl">Something went wrong</h1>
+      <h1 className="font-semibold text-xl">
+        <Trans>Something went wrong</Trans>
+      </h1>
       <p className="max-w-2xl whitespace-pre-wrap text-center text-red-500">
         {String(error)}
       </p>
       <div className="flex gap-2">
         <Button variant="outline" onClick={resetErrorBoundary}>
-          Try again
+          <Trans>Try again</Trans>
         </Button>
-        <Button onClick={() => relaunch()}>Restart app</Button>
+        <Button onClick={() => relaunch()}>
+          <Trans>Restart app</Trans>
+        </Button>
       </div>
     </main>
   );

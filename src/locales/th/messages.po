@@ -1,0 +1,303 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-07-24 11:38+0700\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: th\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/components/task-select.tsx:51
+msgid "(all selected)"
+msgstr "(เลือกทั้งหมดแล้ว)"
+
+#: src/components/date-card.tsx:327
+msgid "{dayCount} days ago"
+msgstr "{dayCount} วันที่แล้ว"
+
+#. placeholder {0}: new Date().getFullYear()
+#: src/components/date-list.tsx:33
+msgid "© {0} FlexiRent. All rights reserved."
+msgstr "© {0} FlexiRent สงวนลิขสิทธิ์"
+
+#: src/components/account-form.tsx:214
+msgid "Account"
+msgstr "บัญชี"
+
+#: src/components/favorites-form.tsx:102
+msgid "Add a favorite task"
+msgstr "เพิ่มงานโปรด"
+
+#: src/components/project-list-select.tsx:82
+msgid "Add project"
+msgstr "เพิ่ม Project"
+
+#: src/lib/task-groups.ts:15
+msgid "Assigned to me not done"
+msgstr "งานของฉันที่ยังไม่เสร็จ"
+
+#: src/components/auto-close-toggle.tsx:32
+msgid "Auto-close browser"
+msgstr "ปิด Browser อัตโนมัติ"
+
+#: src/components/autofill-summary-toggle.tsx:27
+msgid "Auto-fill report summary"
+msgstr "เติมสรุปรายงานอัตโนมัติ"
+
+#: src/components/auto-submit-toggle.tsx:34
+msgid "Auto-submit report"
+msgstr "ส่งรายงานอัตโนมัติ"
+
+#: src/components/shared/dialog.tsx:73
+#: src/components/shared/dialog.tsx:112
+msgid "Close"
+msgstr "ปิด"
+
+#: src/components/auto-close-toggle.tsx:43
+msgid "Closes the browser window after the form is submitted"
+msgstr "ปิดหน้าต่าง Browser หลังส่งฟอร์มเรียบร้อย"
+
+#: src/lib/task-groups.ts:14
+msgid "Created today by me"
+msgstr "งานที่ฉันสร้างวันนี้"
+
+#: src/components/default-project-select.tsx:31
+msgid "Default project"
+msgstr "Project เริ่มต้น"
+
+#: src/components/default-task-groups-select.tsx:37
+msgid "Default selected task groups"
+msgstr "กลุ่มงานที่เลือกไว้โดยอัตโนมัติ"
+
+#: src/lib/use-update-check.ts:28
+msgid "Downloading update…"
+msgstr "กำลังดาวน์โหลดอัปเดต…"
+
+#: src/components/account-form.tsx:98
+msgid "Enter a valid email address"
+msgstr "กรอก Email ให้ถูกต้องก่อนนะ"
+
+#: src/components/account-form.tsx:107
+msgid "Enter a valid http(s) URL"
+msgstr "กรอก URL แบบ http(s) ให้ถูกต้อง"
+
+#: src/components/favorites-form.tsx:66
+#: src/lib/task-groups.ts:16
+msgid "Favorites"
+msgstr "รายการโปรด"
+
+#: src/components/account-form.tsx:282
+msgid "Jira API token"
+msgstr "Jira API token"
+
+#: src/components/account-form.tsx:99
+msgid "Jira API token is required"
+msgstr "กรอก Jira API token ก่อนนะ"
+
+#: src/lib/queries.ts:123
+msgid "Jira authentication failed — check your Jira email and API token"
+msgstr "เข้าใช้ Jira ไม่ได้ เช็ก Jira Email กับ API token อีกทีนะ"
+
+#: src/lib/queries.ts:115
+#: src/lib/queries.ts:160
+msgid "Jira authentication failed ({loginReason}) — check your Jira email and API token"
+msgstr "เข้าใช้ Jira ไม่ได้ ({loginReason}) เช็ก Jira Email กับ API token อีกทีนะ"
+
+#: src/components/account-form.tsx:268
+msgid "Jira email"
+msgstr "Jira Email"
+
+#: src/components/account-form.tsx:97
+msgid "Jira email is required"
+msgstr "กรอก Jira Email ก่อนนะ"
+
+#. placeholder {0}: res.status
+#. placeholder {1}: res.statusText
+#: src/lib/queries.ts:125
+#: src/lib/queries.ts:175
+msgid "Jira request failed ({0} {1})"
+msgstr "เรียก Jira ไม่สำเร็จ ({0} {1})"
+
+#: src/components/locale-toggle.tsx:15
+msgid "Language"
+msgstr "ภาษา"
+
+#: src/components/project-list-select.tsx:50
+msgid "Limits the portal form's project options to these projects; leave empty to keep all projects"
+msgstr "เลือกให้ฟอร์มแสดงเฉพาะ Project เหล่านี้ เว้นว่างไว้ถ้าต้องการแสดงทั้งหมด"
+
+#: src/components/date-list.tsx:63
+msgid "Load more"
+msgstr "ดูเพิ่ม"
+
+#: src/components/project-map-form.tsx:84
+msgid "Maps project keys to the portal's projects — an issue's key is its Jira key prefix (ABC-123 → ABC), a favorite's is its own optional key. Selected tasks are grouped by portal project and each group fills its own project + comment pair in the task form, largest group first (max {MAX_DISTINCT_PROJECTS} portal projects — the form has {MAX_DISTINCT_PROJECTS} pairs). Unmapped tasks fall back to the default project's group, or the first comment when no default project is set."
+msgstr "จับคู่ Project key กับ Project ในฟอร์ใ โดย task Jira จะใช้ตัวอักษรหน้า issue key (ABC-123 → ABC) ส่วนรายการโปรดจะใช้ key ที่ใส่ไว้ ระบบจะแยกงานที่เลือกตาม Project ในฟอร์มแล้วเติม Project + สรุปงานในฟอร์ม เรียงกลุ่มที่มีงานเยอะสุดก่อน (สูงสุด {MAX_DISTINCT_PROJECTS} Project เพราะฟอร์มมี {MAX_DISTINCT_PROJECTS} แถว) งานที่ยังไม่ได้จับคู่จะไปรวมกับ Project เริ่มต้น หรือรวมในสรุปงานของ Project แรกถ้ายังไม่ได้ตั้ง Project เริ่มต้น"
+
+#: src/lib/queries.ts:135
+msgid "No account has been set"
+msgstr "ยังไม่ได้ตั้งค่า Account"
+
+#: src/components/favorites-form.tsx:95
+msgid "No favorites yet"
+msgstr "ยังไม่มีรายการโปรด"
+
+#: src/components/project-list-select.tsx:93
+msgid "No items found."
+msgstr "ไม่พบรายการ"
+
+#: src/components/date-list.tsx:45
+msgid "No reports to submit"
+msgstr "ไม่มีรายงานที่ต้องส่ง"
+
+#: src/components/date-card.tsx:421
+msgid "No tasks found"
+msgstr "ไม่พบงาน"
+
+#: src/components/task-select.tsx:70
+msgid "No tasks found."
+msgstr "ไม่พบงาน"
+
+#: src/components/date-card.tsx:419
+msgid "No tasks selected"
+msgstr "ยังไม่ได้เลือกงาน"
+
+#: src/components/favorites-form.tsx:116
+msgid "Optional project key (a Jira key or any custom one) — a favorite with a key follows the Project mapping preference into that project's form row; without one it goes into the default project's row, or the first row when no default project is set"
+msgstr "ใส่ Project key ได้ถ้าต้องการ จะใช้ Jira key หรือคำที่ตั้งเองก็ได้ รายการโปรดที่มี key จะไปอยู่ในแถวของ Project ตามการจับคู่ ส่วนรายการที่ไม่มี key จะอยู่ในแถว Project เริ่มต้น หรือแถวแรกถ้ายังไม่ได้ตั้ง Project เริ่มต้น"
+
+#: src/components/account-form.tsx:254
+msgid "Phone number"
+msgstr "เบอร์โทรศัพท์"
+
+#: src/components/account-form.tsx:93
+msgid "Phone number is required"
+msgstr "กรอกเบอร์โทรก่อนนะ"
+
+#: src/components/account-form.tsx:240
+msgid "Portal credential"
+msgstr "username/password ของเว็บลง task"
+
+#: src/components/account-form.tsx:113
+msgid "Portal credential is required"
+msgstr "กรอก username/password ของเว็บลง task ก่อนนะ"
+
+#: src/components/account-form.tsx:226
+msgid "Portal URL"
+msgstr "URL เว็บลง task"
+
+#: src/components/account-form.tsx:103
+msgid "Portal URL is required"
+msgstr "กรอก URL เว็บลง task ก่อนนะ"
+
+#: src/components/preferences-form.tsx:36
+msgid "Preferences"
+msgstr "การตั้งค่า"
+
+#: src/components/favorites-form.tsx:110
+#: src/components/project-map-form.tsx:124
+msgid "Project key"
+msgstr "Project key"
+
+#: src/components/project-list-select.tsx:40
+msgid "Project list"
+msgstr "รายการ Project"
+
+#: src/components/project-map-form.tsx:74
+msgid "Project mapping"
+msgstr "จับคู่ Project"
+
+#: src/components/error-fallback.tsx:23
+msgid "Restart app"
+msgstr "เปิดแอปใหม่"
+
+#: src/lib/use-update-check.ts:29
+msgid "Restarting…"
+msgstr "กำลังเปิดแอปใหม่…"
+
+#: src/components/account-form.tsx:344
+msgid "Save"
+msgstr "บันทึก"
+
+#: src/components/account-form.tsx:333
+msgid "Save anyway"
+msgstr "ข้ามการตรวจสอบแล้วบันทึก"
+
+#: src/components/task-select.tsx:58
+msgid "Search tasks"
+msgstr "ค้นหางาน"
+
+#: src/components/sign-out-button.tsx:31
+msgid "Sign out"
+msgstr "ออกจากระบบ"
+
+#: src/components/error-fallback.tsx:13
+msgid "Something went wrong"
+msgstr "มีบางอย่างผิดพลาด"
+
+#: src/lib/task-groups.ts:13
+msgid "Status updated by me"
+msgstr "งานที่ฉันอัปเดตสถานะ"
+
+#: src/components/auto-submit-toggle.tsx:45
+msgid "Submits the task form automatically after filling the summary"
+msgstr "ส่งฟอร์มงานให้อัตโนมัติหลังเติมสรุปแล้ว"
+
+#: src/components/locale-toggle.tsx:24
+msgid "Switch language"
+msgstr "เปลี่ยนภาษา"
+
+#: src/components/default-project-select.tsx:41
+msgid "The portal project that tasks without a Project mapping entry fall back to — and the first dropdown's default when the form is otherwise empty"
+msgstr "Project ใน Portal ที่จะใช้กับงานที่ยังไม่ได้จับคู่ และเป็นค่าเริ่มต้นของช่องแรกเมื่อฟอร์มยังว่าง"
+
+#: src/components/default-task-groups-select.tsx:47
+msgid "The task groups whose issues start all checked by default"
+msgstr "กลุ่มงานที่จะถูกเลือกไว้ทั้งหมดโดยอัตโนมัติ"
+
+#: src/components/theme-toggle.tsx:14
+msgid "Theme"
+msgstr "ธีม"
+
+#: src/components/date-card.tsx:325
+msgid "Today"
+msgstr "วันนี้"
+
+#: src/components/theme-toggle.tsx:24
+msgid "Toggle theme"
+msgstr "สลับธีม"
+
+#: src/components/error-fallback.tsx:20
+msgid "Try again"
+msgstr "ลองอีกครั้ง"
+
+#: src/lib/use-update-check.ts:23
+msgid "Update & restart"
+msgstr "อัปเดตแล้วเปิดแอปใหม่"
+
+#: src/lib/use-update-check.ts:19
+msgid "Update available: v{version}"
+msgstr "มีอัปเดตใหม่: v{version}"
+
+#. placeholder {0}: String(error)
+#: src/lib/use-update-check.ts:30
+msgid "Update failed: {0}"
+msgstr "อัปเดตไม่สำเร็จ: {0}"
+
+#: src/components/account-form.tsx:116
+msgid "Use the username:password format"
+msgstr "ใช้รูปแบบ username:password"
+
+#: src/components/account-form.tsx:342
+msgid "Verifying…"
+msgstr "กำลังเช็ก…"
+
+#: src/components/date-card.tsx:326
+msgid "Yesterday"
+msgstr "เมื่อวาน"

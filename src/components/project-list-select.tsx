@@ -1,3 +1,4 @@
+import { Trans, useLingui } from "@lingui/react/macro";
 import { InfoIcon } from "lucide-react";
 import { Fragment } from "react";
 import {
@@ -24,6 +25,7 @@ import { usePreferences, useTaskParameters } from "@/lib/queries";
 import type { SelectOption } from "@/type";
 
 export function ProjectListSelect() {
+  const { t } = useLingui();
   const { data: preferences } = usePreferences();
   const savePreferences = useSavePreferencesMutation();
   const { data } = useTaskParameters();
@@ -35,7 +37,7 @@ export function ProjectListSelect() {
   return (
     <div className="flex flex-col items-start gap-2">
       <Label className="flex flex-none items-center gap-1">
-        Project list
+        <Trans>Project list</Trans>
         <Tooltip>
           <TooltipTrigger
             render={
@@ -45,8 +47,10 @@ export function ProjectListSelect() {
             }
           />
           <TooltipContent>
-            Limits the portal form's project options to these projects; leave
-            empty to keep all projects
+            <Trans>
+              Limits the portal form's project options to these projects; leave
+              empty to keep all projects
+            </Trans>
           </TooltipContent>
         </Tooltip>
       </Label>
@@ -75,7 +79,7 @@ export function ProjectListSelect() {
                       </ComboboxChip>
                     ))}
                     <ComboboxChipsInput
-                      placeholder={!values.length ? "Add project" : undefined}
+                      placeholder={!values.length ? t`Add project` : undefined}
                     />
                   </Fragment>
                 )}
@@ -85,7 +89,9 @@ export function ProjectListSelect() {
         />
 
         <ComboboxContent anchor={anchor}>
-          <ComboboxEmpty>No items found.</ComboboxEmpty>
+          <ComboboxEmpty>
+            <Trans>No items found.</Trans>
+          </ComboboxEmpty>
           <ComboboxList>
             {(project: SelectOption) => (
               <ComboboxItem key={project.value} value={project.value}>

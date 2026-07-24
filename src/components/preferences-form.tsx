@@ -1,9 +1,11 @@
+import { Trans } from "@lingui/react/macro";
 import { Settings2Icon } from "lucide-react";
 import AutoCloseToggle from "@/components/auto-close-toggle";
 import AutoSubmitToggle from "@/components/auto-submit-toggle";
 import AutofillSummaryToggle from "@/components/autofill-summary-toggle";
 import DefaultProjectSelect from "@/components/default-project-select";
 import DefaultTaskGroupsSelect from "@/components/default-task-groups-select";
+import LocaleToggle from "@/components/locale-toggle";
 import { ProjectListSelect } from "@/components/project-list-select";
 import ProjectMapForm from "@/components/project-map-form";
 import { Button } from "@/components/shared/button";
@@ -31,7 +33,7 @@ export default function PreferencesForm() {
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Settings2Icon />
-            Preferences
+            <Trans>Preferences</Trans>
           </DialogTitle>
         </DialogHeader>
         <div className="flex gap-4">
@@ -47,6 +49,7 @@ export default function PreferencesForm() {
             <AutoSubmitToggle />
             <AutoCloseToggle />
             <ThemeToggle />
+            <LocaleToggle />
           </div>
         </div>
       </DialogContent>

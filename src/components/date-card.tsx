@@ -1,3 +1,4 @@
+import { Trans, useLingui } from "@lingui/react/macro";
 import {
   CircleAlertIcon,
   CopyCheckIcon,
@@ -33,6 +34,7 @@ type Props = {
   date: string;
 };
 export default function DateCard({ date }: Props) {
+  const { i18n, t } = useLingui();
   const dateAfter = getDateAfter(date);
   const jqlStatusUpdatedByMe = `status CHANGED BY currentUser() DURING ("${date}", "${dateAfter}")`;
   const jqlCreatedByMe = `creator = currentUser() AND created >= "${date}" AND created < "${dateAfter}"`;
@@ -127,7 +129,7 @@ export default function DateCard({ date }: Props) {
     () =>
       issueGroups.map((group) => ({
         type: group.id,
-        label: group.label,
+        label: i18n._(group.label),
         keys: group.issues.map((issue) => issue.key),
         // Favorites show their text alone, in the order they were added;
         // Jira issues show "KEY: summary" sorted by key.
@@ -144,7 +146,7 @@ export default function DateCard({ date }: Props) {
                 }))
                 .sort((a, b) => a.value.localeCompare(b.value)),
       })),
-    [issueGroups],
+    [issueGroups, i18n.locale],
   );
 
   // Issues displayed under a default task group start checked; everything
@@ -317,7 +319,13 @@ export default function DateCard({ date }: Props) {
   const autofillSummary =
     preferences?.autofill_summary ?? DEFAULT_PREFERENCES.autofill_summary;
 
-  const dateRelation = getDateRelation(date);
+  const dateRelation = getDateRelation(
+    date,
+    i18n.locale,
+    t`Today`,
+    t`Yesterday`,
+    (dayCount) => t`${dayCount} days ago`,
+  );
 
   const [isCopied, setIsCopied] = useState(false);
   const { mutate: submitTask, isPending: isSubmitting } =
@@ -408,9 +416,9 @@ export default function DateCard({ date }: Props) {
               // no tasks at all vs. tasks exist but none selected (reachable
               // when `default_task_groups` is empty or all were unchecked)
               allIssues.length ? (
-                "No tasks selected"
+                <Trans>No tasks selected</Trans>
               ) : (
-                "No tasks found"
+                <Trans>No tasks found</Trans>
               )
             ) : (
               <>
@@ -461,7 +469,13 @@ function buildSummary(issues: JiraIssue[]): string {
 
 // "Today"/"Yesterday", the weekday name within the last week, then "N days
 // ago". Diffed at UTC midnight so a DST shift can't skew the day count.
-function getDateRelation(date: string): string | null {
+function getDateRelation(
+  date: string,
+  locale: string,
+  today: string,
+  yesterday: string,
+  daysAgo: (dayCount: number) => string,
+): string | null {
   const [year, month, day] = date.split("-").map(Number);
   if (year === undefined || month === undefined || day === undefined) {
     return null;
@@ -471,15 +485,18 @@ function getDateRelation(date: string): string | null {
   const todayUtc = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
   const diffDays = Math.round((todayUtc - dateUtc) / 86_400_000);
   if (Number.isNaN(diffDays) || diffDays < 0) return null;
-  if (diffDays === 0) return "Today";
-  if (diffDays === 1) return "Yesterday";
+  if (diffDays === 0) return today;
+  if (diffDays === 1) return yesterday;
   if (diffDays < 7) {
-    return new Date(dateUtc).toLocaleDateString("en-US", {
-      weekday: "long",
-      timeZone: "UTC",
-    });
+    return new Date(dateUtc).toLocaleDateString(
+      locale === "th" ? "th-TH" : "en-US",
+      {
+        weekday: "long",
+        timeZone: "UTC",
+      },
+    );
   }
-  return `${diffDays} days ago`;
+  return daysAgo(diffDays);
 }
 
 function getDateAfter(date: string): string {

@@ -1,4 +1,5 @@
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { PlusIcon, StarIcon, Trash2Icon } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/shared/button";
@@ -19,6 +20,7 @@ import { useSaveFavoritesMutation } from "@/lib/mutations";
 import { useFavorites } from "@/lib/queries";
 
 export default function FavoritesForm() {
+  const { t } = useLingui();
   const { data: favorites } = useFavorites();
   const saveFavorites = useSaveFavoritesMutation();
   const [text, setText] = useState("");
@@ -61,7 +63,7 @@ export default function FavoritesForm() {
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <StarIcon />
-            Favorites
+            <Trans>Favorites</Trans>
           </DialogTitle>
         </DialogHeader>
         {favorites?.length ? (
@@ -89,13 +91,15 @@ export default function FavoritesForm() {
             ))}
           </ul>
         ) : (
-          <p className="text-muted-foreground italic">No favorites yet</p>
+          <p className="text-muted-foreground italic">
+            <Trans>No favorites yet</Trans>
+          </p>
         )}
         <form onSubmit={handleAdd} className="flex gap-2">
           <Input
             value={text}
             onChange={(e) => setText(e.target.value)}
-            placeholder="Add a favorite task"
+            placeholder={t`Add a favorite task`}
           />
           <Tooltip>
             <TooltipTrigger
@@ -103,16 +107,18 @@ export default function FavoritesForm() {
                 <Input
                   value={projectKey}
                   onChange={(e) => setProjectKey(e.target.value)}
-                  placeholder="Project key"
+                  placeholder={t`Project key`}
                   className="w-30 flex-none font-mono"
                 />
               }
             />
             <TooltipContent>
-              Optional project key (a Jira key or any custom one) — a favorite
-              with a key follows the Project mapping preference into that
-              project's form row; without one it goes into the default project's
-              row, or the first row when no default project is set
+              <Trans>
+                Optional project key (a Jira key or any custom one) — a favorite
+                with a key follows the Project mapping preference into that
+                project's form row; without one it goes into the default
+                project's row, or the first row when no default project is set
+              </Trans>
             </TooltipContent>
           </Tooltip>
           <Button type="submit" disabled={!canAdd}>

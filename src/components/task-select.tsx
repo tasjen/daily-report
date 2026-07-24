@@ -1,3 +1,4 @@
+import { Trans, useLingui } from "@lingui/react/macro";
 import { SearchIcon } from "lucide-react";
 import {
   Combobox,
@@ -31,6 +32,7 @@ export default function TaskSelect({
   className,
   plainLabels,
 }: Props) {
+  const { t } = useLingui();
   const anchor = useComboboxAnchor();
   const allSelected = items.length > 0 && value.length === items.length;
   return (
@@ -46,14 +48,14 @@ export default function TaskSelect({
             {label}
             {allSelected && (
               <span className="font-normal text-muted-foreground">
-                (all selected)
+                <Trans>(all selected)</Trans>
               </span>
             )}
           </Label>
         )}
         <ComboboxInput
           startAddon={<SearchIcon className="pointer-events-none" />}
-          placeholder="Search tasks"
+          placeholder={t`Search tasks`}
         />
       </div>
       <ComboboxContent
@@ -64,7 +66,9 @@ export default function TaskSelect({
           collisionPadding: { bottom: 0 },
         }}
       >
-        <ComboboxEmpty>No tasks found.</ComboboxEmpty>
+        <ComboboxEmpty>
+          <Trans>No tasks found.</Trans>
+        </ComboboxEmpty>
         <ComboboxList className="scrollbar-thin scrollbar-thumb-muted-foreground space-y-1">
           {(option: SelectOption) => {
             if (plainLabels) {
