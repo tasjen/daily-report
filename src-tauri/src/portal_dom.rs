@@ -38,9 +38,10 @@ use tiny_http::{Header, Response, Server};
 
 use crate::{
     account::PortalAccountConfig, fill_task_form, get_select_options, launch_browser,
-    login_to_portal, submit_task_form, wait_for_url, AppError, SelectOption, SubmissionPlan,
-    SubmissionPreferences, TaskEntry, TASK_DATE_SELECT, TASK_LEAVE_SELECT,
-    TASK_PROJECT_SELECT_PREFIX,
+    login_to_portal, project_options::ProjectOptionsCache, submit_task_form,
+    task_parameters::TaskParametersScrape, wait_for_url, AppError, ChromiumTaskFormSource,
+    SelectOption, SubmissionPlan, SubmissionPreferences, TaskEntry, TASK_DATE_SELECT,
+    TASK_LEAVE_SELECT, TASK_PROJECT_SELECT_PREFIX,
 };
 
 const LOGIN_HTML: &str = include_str!("fixtures/login.html");
@@ -374,6 +375,42 @@ async fn task_form_selects_are_scraped_in_portal_order() {
         values(&projects),
         ["", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
         "the empty-valued placeholder is kept, ahead of the selectable projects"
+    );
+}
+
+#[tokio::test]
+#[ignore = "needs a real Chromium; run with --ignored"]
+async fn a_parameter_scrape_reads_the_task_form_and_leaves_the_browser_on_the_member_page() {
+    let server = FixtureServer::start();
+    let browser = TestBrowser::launch("parameters").await;
+    browser.login(&server, "0812345678").await.unwrap();
+
+    let source = ChromiumTaskFormSource {
+        page: &browser.page,
+        base_url: &server.base_url,
+    };
+    let parameters = TaskParametersScrape::run(&source, &ProjectOptionsCache::new())
+        .await
+        .unwrap();
+    let landed_on = browser.page.url().await.unwrap();
+    browser.close().await;
+
+    assert_eq!(
+        (
+            values(&parameters.dates),
+            values(&parameters.leaves).len(),
+            values(&parameters.projects),
+        ),
+        (
+            vec!["", "2026-07-23", "2026-07-24", "2026-07-25"],
+            9,
+            vec!["", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
+        )
+    );
+    assert_eq!(
+        landed_on.as_deref(),
+        Some(format!("{}/member.php", server.base_url).as_str()),
+        "the scrape must leave the browser on the member page"
     );
 }
 

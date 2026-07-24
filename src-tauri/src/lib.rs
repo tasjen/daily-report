@@ -6,6 +6,7 @@ mod navigation;
 mod portal_dom;
 mod project_options;
 mod submission;
+mod task_parameters;
 
 use account::PortalAccountConfig;
 use browser_session::{BrowserHost, BrowserSession};
@@ -22,6 +23,7 @@ use submission::{
     SubmissionAutomation, SubmissionPlan, SubmissionPortal, SubmissionPreferences,
     SubmissionWorkflow, TaskEntry,
 };
+use task_parameters::{TaskFormSource, TaskParameters, TaskParametersScrape};
 use tauri::Manager;
 use tauri_plugin_store::StoreExt;
 
@@ -349,13 +351,6 @@ struct SelectOption {
     value: String,
 }
 
-#[derive(Serialize)]
-struct TaskParameters {
-    dates: Vec<SelectOption>,
-    leaves: Vec<SelectOption>,
-    projects: Vec<SelectOption>,
-}
-
 async fn get_select_options(page: &Page, selector: &str) -> Result<Vec<SelectOption>, AppError> {
     let elements = page.find_elements(selector).await?;
     let mut options = Vec::with_capacity(elements.len());
@@ -373,13 +368,40 @@ async fn get_select_options(page: &Page, selector: &str) -> Result<Vec<SelectOpt
 /// for why the cache is scoped to a login rather than to the process.
 static PROJECT_OPTIONS: ProjectOptionsCache = ProjectOptionsCache::new();
 
-/// Returns the cached project options, scraping `page` on the first call after
-/// a clear. `page` must already be on the task form.
-async fn get_project_options(page: &Page) -> Result<Vec<SelectOption>, AppError> {
-    let selector = format!("{TASK_PROJECT_SELECT_PREFIX}1 option");
-    PROJECT_OPTIONS
-        .get_or_scrape(|| get_select_options(page, &selector))
-        .await
+/// The real `TaskFormSource`: a logged-in page plus the portal base URL. Holds
+/// the selectors and nothing else — the scrape order and the caching rule live
+/// in `TaskParametersScrape`.
+struct ChromiumTaskFormSource<'a> {
+    page: &'a Page,
+    base_url: &'a str,
+}
+
+impl TaskFormSource for ChromiumTaskFormSource<'_> {
+    async fn goto_task_form(&self) -> Result<(), AppError> {
+        self.page
+            .goto(format!("{}/task.php", self.base_url))
+            .await?;
+        Ok(())
+    }
+
+    async fn scrape_dates(&self) -> Result<Vec<SelectOption>, AppError> {
+        get_select_options(self.page, &format!("{TASK_DATE_SELECT} option")).await
+    }
+
+    async fn scrape_leaves(&self) -> Result<Vec<SelectOption>, AppError> {
+        get_select_options(self.page, &format!("{TASK_LEAVE_SELECT} option")).await
+    }
+
+    async fn scrape_projects(&self) -> Result<Vec<SelectOption>, AppError> {
+        get_select_options(self.page, &format!("{TASK_PROJECT_SELECT_PREFIX}1 option")).await
+    }
+
+    async fn goto_member_page(&self) -> Result<(), AppError> {
+        self.page
+            .goto(format!("{}/member.php", self.base_url))
+            .await?;
+        Ok(())
+    }
 }
 
 /// Tears down both browser instances so the next command logs in fresh.
@@ -425,26 +447,20 @@ async fn get_task_parameters(
 ) -> Result<TaskParameters, AppError> {
     let base_url = portal_url(&state.host().app)?;
     let page = state.get_page().await?;
+    let source = ChromiumTaskFormSource {
+        page: &page,
+        base_url: &base_url,
+    };
 
-    page.goto(format!("{base_url}/task.php")).await?;
-
-    let date_options = get_select_options(&page, &format!("{TASK_DATE_SELECT} option")).await?;
-    let leave_options = get_select_options(&page, &format!("{TASK_LEAVE_SELECT} option")).await?;
-    let project_options = get_project_options(&page).await?;
-
-    page.goto(format!("{base_url}/member.php")).await?;
+    let parameters = TaskParametersScrape::run(&source, &PROJECT_OPTIONS).await?;
 
     log::info!(
         "get_task_parameters: scraped {} dates, {} leaves, {} projects",
-        date_options.len(),
-        leave_options.len(),
-        project_options.len()
+        parameters.dates.len(),
+        parameters.leaves.len(),
+        parameters.projects.len()
     );
-    Ok(TaskParameters {
-        dates: date_options,
-        leaves: leave_options,
-        projects: project_options,
-    })
+    Ok(parameters)
 }
 
 #[tauri::command]
