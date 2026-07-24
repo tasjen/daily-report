@@ -1,3 +1,4 @@
+mod navigation;
 mod submission;
 
 use base64::{engine::general_purpose::STANDARD, Engine};
@@ -5,6 +6,7 @@ use chromiumoxide::browser::{Browser, BrowserConfig};
 use chromiumoxide::cdp::browser_protocol::network::{Headers, SetExtraHttpHeadersParams};
 use chromiumoxide::Page;
 use futures::StreamExt;
+use navigation::{wait_for_navigation, UrlExpectation};
 use serde::Serialize;
 use submission::{
     SubmissionAutomation, SubmissionPlan, SubmissionPortal, SubmissionPreferences,
@@ -347,21 +349,16 @@ async fn is_page_alive(page: &Page) -> bool {
 
 /// Polls until the page URL starts with `expected`. Prefix match rather than
 /// equality, so a redirect that appends query params, a fragment, or a
-/// trailing slash still counts as arrival.
+/// trailing slash still counts as arrival. The first probe is immediate, so
+/// an already-reached URL returns without waiting for the polling interval.
 async fn wait_for_url(page: &Page, expected: &str, timeout_ms: u64) -> Result<(), AppError> {
-    let deadline = std::time::Instant::now() + std::time::Duration::from_millis(timeout_ms);
-    loop {
-        if std::time::Instant::now() > deadline {
-            return Err(format!("Timed out waiting for URL: {expected}").into());
-        }
-        tokio::time::sleep(std::time::Duration::from_millis(200)).await;
-        let url = tokio::time::timeout(std::time::Duration::from_millis(2_000), page.url())
-            .await
-            .map_err(|_| "page.url() timed out")??;
-        if url.as_deref().is_some_and(|u| u.starts_with(expected)) {
-            return Ok(());
-        }
-    }
+    let expectation = UrlExpectation::new(expected);
+    wait_for_navigation(
+        &expectation,
+        std::time::Duration::from_millis(timeout_ms),
+        || async { page.url().await.map_err(AppError::from) },
+    )
+    .await
 }
 
 #[derive(Serialize, Clone)]
