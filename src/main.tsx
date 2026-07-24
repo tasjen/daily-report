@@ -4,11 +4,14 @@ import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import App from "@/App";
 import "@/App.css";
+import { i18n } from "@lingui/core";
+import { I18nProvider } from "@lingui/react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "@/components/error-fallback";
 import { TooltipProvider } from "@/components/shared/tooltip";
 import { ThemeProvider } from "@/components/theme-provider";
+import { activateLocale, getStoredLocale } from "@/lib/i18n";
 
 // The window is created hidden (`visible: false` in tauri.conf.json) so it
 // never appears before the UI has rendered. This must stay the outermost
@@ -34,19 +37,24 @@ const queryClient = new QueryClient({
     },
   },
 });
+// Activate before render so the first paint (the window is still hidden until
+// ShowWindowOnMount) never flashes untranslated message ids.
+await activateLocale(getStoredLocale());
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <ShowWindowOnMount>
       <ErrorBoundary FallbackComponent={ErrorFallback}>
-        <QueryClientProvider client={queryClient}>
-          <ThemeProvider storageKey="vite-ui-theme">
-            <TooltipProvider>
-              <App />
-            </TooltipProvider>
-          </ThemeProvider>
-          <ReactQueryDevtools />
-        </QueryClientProvider>
+        <I18nProvider i18n={i18n}>
+          <QueryClientProvider client={queryClient}>
+            <ThemeProvider storageKey="vite-ui-theme">
+              <TooltipProvider>
+                <App />
+              </TooltipProvider>
+            </ThemeProvider>
+            <ReactQueryDevtools />
+          </QueryClientProvider>
+        </I18nProvider>
       </ErrorBoundary>
     </ShowWindowOnMount>
   </React.StrictMode>,

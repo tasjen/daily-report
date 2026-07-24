@@ -1,4 +1,5 @@
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { InfoIcon, MoveRightIcon, PlusIcon, Trash2Icon } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/shared/button";
@@ -25,6 +26,7 @@ import { usePreferences, useTaskParameters } from "@/lib/queries";
 const MAX_DISTINCT_PROJECTS = 3;
 
 export default function ProjectMapForm() {
+  const { t } = useLingui();
   const { data: preferences } = usePreferences();
   const savePreferences = useSavePreferencesMutation();
   const { data } = useTaskParameters();
@@ -69,7 +71,7 @@ export default function ProjectMapForm() {
   return (
     <div className="flex flex-col items-start gap-2">
       <Label className="flex flex-none items-center gap-1">
-        Project mapping
+        <Trans>Project mapping</Trans>
         <Tooltip>
           <TooltipTrigger
             render={
@@ -79,14 +81,16 @@ export default function ProjectMapForm() {
             }
           />
           <TooltipContent>
-            Maps project keys to the portal's projects — an issue's key is its
-            Jira key prefix (ABC-123 → ABC), a favorite's is its own optional
-            key. Selected tasks are grouped by portal project and each group
-            fills its own project + comment pair in the task form, largest group
-            first (max {MAX_DISTINCT_PROJECTS} portal projects — the form has{" "}
-            {MAX_DISTINCT_PROJECTS} pairs). Unmapped tasks fall back to the
-            default project's group, or the first comment when no default
-            project is set.
+            <Trans>
+              Maps project keys to the portal's projects — an issue's key is its
+              Jira key prefix (ABC-123 → ABC), a favorite's is its own optional
+              key. Selected tasks are grouped by portal project and each group
+              fills its own project + comment pair in the task form, largest
+              group first (max {MAX_DISTINCT_PROJECTS} portal projects — the
+              form has {MAX_DISTINCT_PROJECTS} pairs). Unmapped tasks fall back
+              to the default project's group, or the first comment when no
+              default project is set.
+            </Trans>
           </TooltipContent>
         </Tooltip>
       </Label>
@@ -117,7 +121,7 @@ export default function ProjectMapForm() {
         <Input
           value={key}
           onChange={(e) => setKey(e.target.value)}
-          placeholder="Project key"
+          placeholder={t`Project key`}
           className="w-30 flex-none font-mono"
         />
         <Select

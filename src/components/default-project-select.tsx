@@ -1,3 +1,4 @@
+import { Trans } from "@lingui/react/macro";
 import { InfoIcon } from "lucide-react";
 import { Label } from "@/components/shared/label";
 import {
@@ -27,7 +28,7 @@ export default function DefaultProjectSelect() {
   return (
     <div className="flex flex-col items-start gap-2">
       <Label className="flex flex-none items-center gap-1">
-        Default project
+        <Trans>Default project</Trans>
         <Tooltip>
           <TooltipTrigger
             render={
@@ -37,9 +38,11 @@ export default function DefaultProjectSelect() {
             }
           />
           <TooltipContent>
-            The portal project that tasks without a Project mapping entry fall
-            back to — and the first dropdown's default when the form is
-            otherwise empty
+            <Trans>
+              The portal project that tasks without a Project mapping entry fall
+              back to — and the first dropdown's default when the form is
+              otherwise empty
+            </Trans>
           </TooltipContent>
         </Tooltip>
       </Label>

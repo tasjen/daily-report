@@ -1,3 +1,5 @@
+import { i18n } from "@lingui/core";
+import { msg } from "@lingui/core/macro";
 import { queryOptions, useQuery } from "@tanstack/react-query";
 import { invoke } from "@tauri-apps/api/core";
 import { fetch as tauriFetch } from "@tauri-apps/plugin-http";
@@ -109,14 +111,18 @@ export async function verifyJiraCredentials(
   const loginReason = res.headers.get("x-seraph-loginreason");
   if (loginReason && loginReason !== "OK") {
     throw new Error(
-      `Jira authentication failed (${loginReason}) — check your Jira email and API token`,
+      i18n._(
+        msg`Jira authentication failed (${loginReason}) — check your Jira email and API token`,
+      ),
     );
   }
   if (!res.ok) {
     throw new Error(
       res.status === 401
-        ? "Jira authentication failed — check your Jira email and API token"
-        : `Jira request failed (${res.status} ${res.statusText})`,
+        ? i18n._(
+            msg`Jira authentication failed — check your Jira email and API token`,
+          )
+        : i18n._(msg`Jira request failed (${res.status} ${res.statusText})`),
     );
   }
 }
@@ -126,7 +132,7 @@ export function jiraTasksQueryOptions(jql: string, account?: Account | null) {
     queryKey: ["jira_tasks", jql],
     staleTime: Infinity,
     queryFn: async () => {
-      if (!account) throw new Error("No account has been set");
+      if (!account) throw new Error(i18n._(msg`No account has been set`));
       const EMAIL = account.email;
       const API_TOKEN = account.api_token;
       const res = await tauriFetch(`${JIRA_DOMAIN}/rest/api/3/search/jql`, {
@@ -150,7 +156,9 @@ export function jiraTasksQueryOptions(jql: string, account?: Account | null) {
       const loginReason = res.headers.get("x-seraph-loginreason");
       if (loginReason && loginReason !== "OK") {
         throw new Error(
-          `Jira authentication failed (${loginReason}) — check your Jira email and API token`,
+          i18n._(
+            msg`Jira authentication failed (${loginReason}) — check your Jira email and API token`,
+          ),
         );
       }
       if (!res.ok) {
@@ -163,7 +171,9 @@ export function jiraTasksQueryOptions(jql: string, account?: Account | null) {
         throw new Error(
           messages?.length
             ? `Jira: ${messages.join("\n")}`
-            : `Jira request failed (${res.status} ${res.statusText})`,
+            : i18n._(
+                msg`Jira request failed (${res.status} ${res.statusText})`,
+              ),
         );
       }
       return res.json() as Promise<{ issues: JiraIssue[] }>;

@@ -1,4 +1,5 @@
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { Trans } from "@lingui/react/macro";
 import { Loader2Icon } from "lucide-react";
 import { useState } from "react";
 import DateCard from "@/components/date-card";
@@ -29,7 +30,9 @@ export default function DateList() {
   return (
     <div className="flex flex-col items-center gap-4">
       <p className="text-muted-foreground">
-        © {new Date().getFullYear()} FlexiRent. All rights reserved.
+        <Trans>
+          © {new Date().getFullYear()} FlexiRent. All rights reserved.
+        </Trans>
       </p>
       {isFetching ? (
         <Loader2Icon className="animate-spin" />
@@ -38,7 +41,9 @@ export default function DateList() {
           {String(error)}
         </p>
       ) : !dates.length ? (
-        <p className="text-muted-foreground italic">No reports to submit</p>
+        <p className="text-muted-foreground italic">
+          <Trans>No reports to submit</Trans>
+        </p>
       ) : (
         <>
           <ol ref={animateRef} className="flex w-full max-w-5xl flex-col gap-4">
@@ -55,7 +60,7 @@ export default function DateList() {
                 setTimeout(() => setEnabled(true), 500);
               }}
             >
-              Load more
+              <Trans>Load more</Trans>
             </Button>
           )}
         </>

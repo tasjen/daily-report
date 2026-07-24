@@ -1,3 +1,5 @@
+import { i18n } from "@lingui/core";
+import { msg } from "@lingui/core/macro";
 import { relaunch } from "@tauri-apps/plugin-process";
 import { check } from "@tauri-apps/plugin-updater";
 import { useEffect } from "react";
@@ -13,18 +15,19 @@ export function useUpdateCheck() {
         if (!update) {
           return;
         }
-        toast.info(`Update available: v${update.version}`, {
+        const version = update.version;
+        toast.info(i18n._(msg`Update available: v${version}`), {
           duration: Number.POSITIVE_INFINITY,
           closeButton: true,
           action: {
-            label: "Update & restart",
+            label: i18n._(msg`Update & restart`),
             onClick: () => {
               // On Windows the NSIS installer exits the app itself before
               // relaunch() is reached; the relaunch matters on macOS.
               toast.promise(update.downloadAndInstall().then(relaunch), {
-                loading: "Downloading update…",
-                success: "Restarting…",
-                error: (e) => `Update failed: ${e}`,
+                loading: i18n._(msg`Downloading update…`),
+                success: i18n._(msg`Restarting…`),
+                error: (error) => i18n._(msg`Update failed: ${String(error)}`),
               });
             },
           },

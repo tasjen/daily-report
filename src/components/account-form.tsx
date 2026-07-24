@@ -1,7 +1,8 @@
+import { Trans, useLingui } from "@lingui/react/macro";
 import { type AnyFieldApi, useForm } from "@tanstack/react-form";
 import { openUrl } from "@tauri-apps/plugin-opener";
 import { ExternalLinkIcon, UserIcon } from "lucide-react";
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { z } from "zod";
 import { Button } from "@/components/shared/button";
 import {
@@ -36,26 +37,6 @@ import type { Account } from "@/lib/store";
 
 const jiraTokenUrl =
   "https://id.atlassian.com/manage-profile/security/api-tokens";
-
-const formSchema = z.object({
-  phone: z.string().trim().min(1, "Phone number is required"),
-  email: z
-    .string()
-    .trim()
-    .min(1, "Jira email is required")
-    .pipe(z.email("Enter a valid email address")),
-  api_token: z.string().trim().min(1, "Jira API token is required"),
-  portal_url: z
-    .string()
-    .trim()
-    .min(1, "Portal URL is required")
-    .pipe(z.url({ protocol: /^https?$/, error: "Enter a valid http(s) URL" })),
-  portal_credential: z
-    .string()
-    .trim()
-    .min(1, "Portal credential is required")
-    .refine((value) => value.includes(":"), "Use the username:password format"),
-});
 
 // TanStack Form submits the raw field values, not zod's parsed output, so
 // schema transforms would never reach the submitted value — normalize the
@@ -100,6 +81,43 @@ function TextField({
 }
 
 export default function AccountForm() {
+  const { t } = useLingui();
+  // Built inside the component so validation messages come from the active
+  // locale and re-translate on locale change. The schema must stay inline:
+  // the Lingui macro only transforms t`...` where `t` lexically resolves to
+  // the useLingui() destructure, so hoisting this behind a t parameter would
+  // silently skip extraction.
+  const formSchema = useMemo(
+    () =>
+      z.object({
+        phone: z.string().trim().min(1, t`Phone number is required`),
+        email: z
+          .string()
+          .trim()
+          .min(1, t`Jira email is required`)
+          .pipe(z.email(t`Enter a valid email address`)),
+        api_token: z.string().trim().min(1, t`Jira API token is required`),
+        portal_url: z
+          .string()
+          .trim()
+          .min(1, t`Portal URL is required`)
+          .pipe(
+            z.url({
+              protocol: /^https?$/,
+              error: t`Enter a valid http(s) URL`,
+            }),
+          ),
+        portal_credential: z
+          .string()
+          .trim()
+          .min(1, t`Portal credential is required`)
+          .refine(
+            (value) => value.includes(":"),
+            t`Use the username:password format`,
+          ),
+      }),
+    [t],
+  );
   const { data: account } = useAccount();
   const saveAccount = useSaveAccountMutation();
   // Open automatically until fully configured: covers both a fresh install
@@ -193,7 +211,7 @@ export default function AccountForm() {
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <UserIcon />
-            Account
+            <Trans>Account</Trans>
           </DialogTitle>
         </DialogHeader>
         <ScrollArea className="-mr-3 max-h-[60dvh] pt-4 pr-3">
@@ -205,7 +223,7 @@ export default function AccountForm() {
                   type="url"
                   label={
                     <>
-                      Portal URL <SpanRequired />
+                      <Trans>Portal URL</Trans> <SpanRequired />
                     </>
                   }
                 />
@@ -219,7 +237,7 @@ export default function AccountForm() {
                   type="password"
                   label={
                     <>
-                      Portal credential <SpanRequired />
+                      <Trans>Portal credential</Trans> <SpanRequired />
                     </>
                   }
                 />
@@ -233,7 +251,7 @@ export default function AccountForm() {
                   type="tel"
                   label={
                     <>
-                      Phone number <SpanRequired />
+                      <Trans>Phone number</Trans> <SpanRequired />
                     </>
                   }
                 />
@@ -247,7 +265,7 @@ export default function AccountForm() {
                   type="email"
                   label={
                     <>
-                      Jira email <SpanRequired />
+                      <Trans>Jira email</Trans> <SpanRequired />
                     </>
                   }
                 />
@@ -261,7 +279,7 @@ export default function AccountForm() {
                   type="password"
                   label={
                     <>
-                      Jira API token <SpanRequired />
+                      <Trans>Jira API token</Trans> <SpanRequired />
                       <Tooltip>
                         <TooltipTrigger
                           className="cursor-pointer"
@@ -312,7 +330,7 @@ export default function AccountForm() {
                       setOpen(false);
                     }}
                   >
-                    Save anyway
+                    <Trans>Save anyway</Trans>
                   </Button>
                 )}
                 <Button
@@ -320,7 +338,11 @@ export default function AccountForm() {
                   className="flex-1"
                   disabled={!canSubmit || verifyAccount.isPending}
                 >
-                  {verifyAccount.isPending ? "Verifying…" : "Save"}
+                  {verifyAccount.isPending ? (
+                    <Trans>Verifying…</Trans>
+                  ) : (
+                    <Trans>Save</Trans>
+                  )}
                 </Button>
               </>
             )}

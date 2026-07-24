@@ -1,3 +1,4 @@
+import { Trans } from "@lingui/react/macro";
 import { relaunch } from "@tauri-apps/plugin-process";
 import { Loader2Icon } from "lucide-react";
 import { useState } from "react";
@@ -24,7 +25,11 @@ export default function SignOutButton() {
         setIsLoading(false);
       }}
     >
-      {isLoading ? <Loader2Icon className="animate-spin" /> : "Sign out"}
+      {isLoading ? (
+        <Loader2Icon className="animate-spin" />
+      ) : (
+        <Trans>Sign out</Trans>
+      )}
     </Button>
   );
 }

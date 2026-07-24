@@ -1,3 +1,4 @@
+import { Trans } from "@lingui/react/macro";
 import { InfoIcon } from "lucide-react";
 import { Label } from "@/components/shared/label";
 import { Switch } from "@/components/shared/switch";
@@ -30,7 +31,7 @@ export default function AutoSubmitToggle() {
             })
           }
         />
-        Auto-submit report
+        <Trans>Auto-submit report</Trans>
       </Label>
       <Tooltip>
         <TooltipTrigger
@@ -41,7 +42,9 @@ export default function AutoSubmitToggle() {
           }
         />
         <TooltipContent>
-          Submits the task form automatically after filling the summary
+          <Trans>
+            Submits the task form automatically after filling the summary
+          </Trans>
         </TooltipContent>
       </Tooltip>
     </div>

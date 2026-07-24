@@ -1,4 +1,5 @@
 import path from "node:path";
+import { lingui } from "@lingui/vite-plugin";
 import babel from "@rolldown/plugin-babel";
 import tailwindcss from "@tailwindcss/vite";
 import react, { reactCompilerPreset } from "@vitejs/plugin-react";
@@ -10,8 +11,12 @@ const host = process.env.TAURI_DEV_HOST;
 export default defineConfig(async () => ({
   plugins: [
     react(),
-    babel({ presets: [reactCompilerPreset()] }),
+    babel({
+      plugins: ["@lingui/babel-plugin-lingui-macro"],
+      presets: [reactCompilerPreset()],
+    }),
     tailwindcss(),
+    lingui(),
   ],
   resolve: {
     alias: { "@": path.resolve(__dirname, "./src") },

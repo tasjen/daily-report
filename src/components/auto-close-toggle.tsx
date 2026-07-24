@@ -1,3 +1,4 @@
+import { Trans } from "@lingui/react/macro";
 import { InfoIcon } from "lucide-react";
 import { Label } from "@/components/shared/label";
 import { Switch } from "@/components/shared/switch";
@@ -28,7 +29,7 @@ export default function AutoCloseToggle() {
             })
           }
         />
-        Auto-close browser
+        <Trans>Auto-close browser</Trans>
       </Label>
       <Tooltip>
         <TooltipTrigger
@@ -39,7 +40,7 @@ export default function AutoCloseToggle() {
           }
         />
         <TooltipContent>
-          Closes the browser window after the form is submitted
+          <Trans>Closes the browser window after the form is submitted</Trans>
         </TooltipContent>
       </Tooltip>
     </div>
