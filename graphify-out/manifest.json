@@ -40,8 +40,8 @@
     "semantic_hash": ""
   },
   "scripts/bump-version.mjs": {
-    "mtime": 1785018886.3780675,
-    "ast_hash": "dc97acd6e29b61709f441ba983fd32ac",
+    "mtime": 1785019864.9065626,
+    "ast_hash": "fe4ef41a2475a2924f6dec8f606b0d56",
     "semantic_hash": ""
   },
   "skills-lock.json": {
@@ -1170,8 +1170,8 @@
     "semantic_hash": ""
   },
   "scripts/bump-version.test.mjs": {
-    "mtime": 1785018886.8043218,
-    "ast_hash": "28be1866ee0a15521cf54ddadb955cd2",
+    "mtime": 1785019823.471802,
+    "ast_hash": "7a9c60a329e6a695b2b2b470a15ce251",
     "semantic_hash": ""
   }
 }

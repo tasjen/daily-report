@@ -62,19 +62,37 @@ function readMatchedVersion(file, pattern) {
   return matches[0][1];
 }
 
+function readCargoPackage() {
+  const matches = [
+    ...readFileSync("src-tauri/Cargo.toml", "utf8").matchAll(
+      /^\[package\]\nname = "([^"]+)"\nversion = "([^"]+)"$/gm,
+    ),
+  ];
+  if (matches.length !== 1) {
+    fail(`expected exactly one package identity in src-tauri/Cargo.toml`);
+  }
+  return { name: matches[0][1], version: matches[0][2] };
+}
+
+function cargoLockVersionPattern(packageName) {
+  const escapedName = packageName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return new RegExp(
+    `^\\[\\[package\\]\\]\\nname = "${escapedName}"\\nversion = "([^"]+)"$`,
+    "gm",
+  );
+}
+
 function readSynchronizedVersion() {
+  const cargoPackage = readCargoPackage();
   const versions = [
     ["package.json", JSON.parse(readFileSync("package.json", "utf8")).version],
     ["src-tauri/tauri.conf.json", readTauriVersion()],
-    [
-      "src-tauri/Cargo.toml",
-      readMatchedVersion("src-tauri/Cargo.toml", /^version = "([^"]+)"$/gm),
-    ],
+    ["src-tauri/Cargo.toml", cargoPackage.version],
     [
       "src-tauri/Cargo.lock",
       readMatchedVersion(
         "src-tauri/Cargo.lock",
-        /^\[\[package\]\]\nname = "flexireport"\nversion = "([^"]+)"$/gm,
+        cargoLockVersionPattern(cargoPackage.name),
       ),
     ],
   ];
@@ -155,10 +173,12 @@ function bump(arg) {
       stdio: ["ignore", "ignore", "inherit"],
     },
   );
-  const lockPattern = new RegExp(
-    `name = "flexireport"\\nversion = "${next.replaceAll(".", "\\.")}"`,
+  const cargoPackage = readCargoPackage();
+  const lockVersion = readMatchedVersion(
+    "src-tauri/Cargo.lock",
+    cargoLockVersionPattern(cargoPackage.name),
   );
-  if (!lockPattern.test(readFileSync("src-tauri/Cargo.lock", "utf8"))) {
+  if (lockVersion !== next) {
     fail(`Cargo.lock did not pick up ${next}`);
   }
 

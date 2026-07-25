@@ -12,6 +12,7 @@ import { join } from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 
 const SCRIPT = join(process.cwd(), "scripts/bump-version.mjs");
+const FIXTURE_CARGO_PACKAGE = "fixture-app";
 const temporaryDirectories = [];
 
 afterEach(() => {
@@ -40,11 +41,11 @@ function writeVersions(repository, versions) {
   );
   writeFileSync(
     join(repository, "src-tauri/Cargo.toml"),
-    `[package]\nname = "flexireport"\nversion = "${versions.cargo}"\n`,
+    `[package]\nname = "${FIXTURE_CARGO_PACKAGE}"\nversion = "${versions.cargo}"\n`,
   );
   writeFileSync(
     join(repository, "src-tauri/Cargo.lock"),
-    `[[package]]\nname = "flexireport"\nversion = "${versions.lock}"\n`,
+    `[[package]]\nname = "${FIXTURE_CARGO_PACKAGE}"\nversion = "${versions.lock}"\n`,
   );
 }
 
@@ -154,6 +155,36 @@ describe("automatic release tagging", () => {
     expect(git(origin, "rev-list", "-n", "1", "refs/tags/v2.0.1")).toBe(
       git(repository, "rev-parse", "HEAD"),
     );
+  });
+
+  it("refuses to move a remote tag that points to another commit", () => {
+    const { origin, repository } = createRepository();
+    const conflictingTarget = git(repository, "rev-parse", "HEAD");
+    git(repository, "tag", "v2.0.1");
+    git(repository, "push", "origin", "v2.0.1");
+    const before = commitVersions(repository, "2.0.1");
+
+    const result = runTagIfChanged(repository, before);
+
+    expect(result.status).toBe(1);
+    expect(result.stderr).toContain("already exists on origin");
+    expect(git(origin, "rev-parse", "refs/tags/v2.0.1")).toBe(
+      conflictingTarget,
+    );
+  });
+
+  it("refuses to move a local tag that points to another commit", () => {
+    const { origin, repository } = createRepository();
+    const before = commitVersions(repository, "2.0.1");
+    git(repository, "tag", "v2.0.1", before);
+
+    const result = runTagIfChanged(repository, before);
+
+    expect(result.status).toBe(1);
+    expect(result.stderr).toContain(
+      "already exists locally at a different commit",
+    );
+    expect(git(origin, "tag", "-l")).toBe("");
   });
 
   it("does not tag an ordinary main commit", () => {
