@@ -1,16 +1,16 @@
 # Graph Report - daily-report  (2026-07-25)
 
 ## Corpus Check
-- 167 files · ~127,409 words
+- 167 files · ~127,925 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1197 nodes · 1448 edges · 221 communities (83 shown, 138 thin omitted)
+- 1197 nodes · 1448 edges · 221 communities (82 shown, 139 thin omitted)
 - Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 42 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `b8ffa2fc`
+- Built from commit: `b09878f0`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -207,6 +207,8 @@
 - main.tsx
 - date-card-summary.tsx
 - task-select-grid.tsx
+- project-list-select.tsx
+- use-update-check.ts
 
 ## God Nodes (most connected - your core abstractions)
 1. `AppError` - 34 edges
@@ -227,10 +229,10 @@
   README.md → CLAUDE.md
 - `Before-and-after Diagram` --semantically_similar_to--> `Design Comparison`  [INFERRED] [semantically similar]
   .agents/skills/improve-codebase-architecture/HTML-REPORT.md → .agents/skills/codebase-design/DESIGN-IT-TWICE.md
-- `Fixed-point Diff` --semantically_similar_to--> `Red-capable Command`  [INFERRED] [semantically similar]
-  .agents/skills/code-review/SKILL.md → .agents/skills/diagnosing-bugs/SKILL.md
-- `Cleanup and Architecture Post-mortem` --conceptually_related_to--> `Codebase Design`  [INFERRED]
-  .agents/skills/diagnosing-bugs/SKILL.md → .agents/skills/codebase-design/SKILL.md
+- `ThemeProvider()` --indirect_call--> `toastError()`  [INFERRED]
+  src/components/theme-provider.tsx → src/lib/utils.ts
+- `ShowWindowOnMount()` --indirect_call--> `toastError()`  [INFERRED]
+  src/main.tsx → src/lib/utils.ts
 
 ## Import Cycles
 - 2-file cycle: `src-tauri/src/lib.rs -> src-tauri/src/submission.rs -> src-tauri/src/lib.rs`
@@ -246,7 +248,7 @@
 - **Parallel Portal and Jira Account Verification Flow** — docs_superpowers_specs_2026_07_12_account_verification_design_candidate_portal_verification, docs_superpowers_specs_2026_07_12_account_verification_design_jira_credentials_check, docs_superpowers_specs_2026_07_12_account_verification_design_parallel_account_verification, docs_superpowers_specs_2026_07_12_account_verification_design_verify_account_error, docs_superpowers_specs_2026_07_12_account_verification_design_save_anyway_escape_hatch [EXTRACTED 1.00]
 - **Signed Release and Update Delivery Chain** — docs_superpowers_specs_2026_07_12_cicd_design_tag_driven_release_pipeline, docs_superpowers_specs_2026_07_12_cicd_design_release_version_guard, docs_superpowers_specs_2026_07_12_cicd_design_updater_signing_key, docs_superpowers_specs_2026_07_12_cicd_design_draft_release_publish_gate, docs_superpowers_specs_2026_07_12_cicd_design_in_app_auto_updater [EXTRACTED 1.00]
 
-## Communities (221 total, 138 thin omitted)
+## Communities (221 total, 139 thin omitted)
 
 ### Community 0 - "Rust Backend Browser Automation"
 Cohesion: 0.12
@@ -400,6 +402,10 @@ Nodes (3): Graphify Codebase Navigation Workflow, Query: Update README about Gra
 Cohesion: 0.25
 Nodes (9): ADR-Aware Architecture Review, Architecture Review HTML Report, Deep Module Design Vocabulary, Deepening Opportunity, Deletion Test, Improve Codebase Architecture, ADR Conflict Flagging, Pre-Agreed Test Seams (+1 more)
 
+### Community 51 - "Props"
+Cohesion: 0.29
+Nodes (5): Theme, ThemeProvider(), ThemeProviderContext, ThemeProviderProps, ThemeProviderState
+
 ### Community 57 - "Domain Docs"
 Cohesion: 0.22
 Nodes (9): Domain Docs, Glossary Vocabulary Discipline, Multi-Context Domain Layout, Single-Context Domain Layout, Domain Docs Layout Decision, Canonical Learning Language, Glossary Ambiguity Resolution, Glossary Format (+1 more)
@@ -429,8 +435,8 @@ Cohesion: 0.47
 Nodes (9): Deepening, Ports and Adapters, Adapter, Codebase Design, Implementation, Interface, Module, Real Seam Requires Two Adapters (+1 more)
 
 ### Community 114 - "LocaleToggle"
-Cohesion: 0.09
-Nodes (18): AccountForm(), normalizePortalUrl(), LocaleToggle(), Theme, ThemeProvider(), ThemeProviderContext, ThemeProviderProps, ThemeProviderState (+10 more)
+Cohesion: 0.18
+Nodes (9): LocaleToggle(), SubmitTaskEntry, useSaveAccountMutation(), useSaveFavoritesMutation(), useSavePreferencesMutation(), useSubmitTaskMutation(), VerifyAccountError, useResetWhenAway() (+1 more)
 
 ### Community 198 - "Interface as Test Surface"
 Cohesion: 0.40
@@ -465,20 +471,20 @@ Cohesion: 0.67
 Nodes (3): fire(), flushMicrotasks(), T0
 
 ## Knowledge Gaps
-- **437 isolated node(s):** `Props`, `Props`, `Props`, `Props`, `DateCardTasks` (+432 more)
+- **437 isolated node(s):** `Props`, `STATUS_ISSUES`, `CREATED_ISSUES`, `SPRINT_ISSUES`, `ACCOUNT` (+432 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **138 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **139 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `react` connect `React App Components` to `select.tsx`, `InputGroup`, `Card`, `oxlint Linter Config`, `LocaleToggle`, `Combobox Component`, `Props`, `Dropdown Menu Component`, `use-task-selection.ts`, `project-list-select.tsx`, `use-update-check.ts`, `Dialog`?**
-  _High betweenness centrality (0.083) - this node is a cross-community bridge._
+- **Why does `react` connect `React App Components` to `select.tsx`, `InputGroup`, `Card`, `oxlint Linter Config`, `LocaleToggle`, `Combobox Component`, `Props`, `date-card.tsx`, `Dropdown Menu Component`, `use-task-selection.ts`, `use-update-check.ts`, `Dialog`?**
+  _High betweenness centrality (0.082) - this node is a cross-community bridge._
 - **Why does `dependencies` connect `lucide-react` to `@tauri-apps/plugin-opener`, `package.json Scripts`, `Combobox Component`, `class-variance-authority`, `clsx`, `@formkit/auto-animate`, `@lingui/core`, `@lingui/react`, `mutative`, `next-themes`, `lucide-react`, `react-dom`, `react-error-boundary`, `shadcn`, `sonner`, `tailwind-merge`, `tailwindcss`, `@tailwindcss/vite`, `@tanstack/react-form`, `@tanstack/react-query`, `@tanstack/react-query-devtools`, `@tauri-apps/api`, `@tauri-apps/plugin-http`, `@tauri-apps/plugin-updater`, `@tauri-apps/plugin-window-state`, `tw-animate-css`?**
   _High betweenness centrality (0.064) - this node is a cross-community bridge._
 - **Why does `react` connect `Combobox Component` to `lucide-react`?**
   _High betweenness centrality (0.056) - this node is a cross-community bridge._
-- **What connects `Props`, `Props`, `Props` to the rest of the system?**
+- **What connects `Props`, `STATUS_ISSUES`, `CREATED_ISSUES` to the rest of the system?**
   _437 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Rust Backend Browser Automation` be split into smaller, more focused modules?**
   _Cohesion score 0.12280701754385964 - nodes in this community are weakly interconnected._

@@ -88,63 +88,119 @@
         "confidence": "EXTRACTED",
         "confidence_score": 1.0,
         "source_file": ".agents/skills/teach/SKILL.md"
-      },
-      {
-        "id": "auto_submit_dependency_chain",
-        "label": "Auto-Fill, Auto-Submit, and Auto-Close Dependency Chain",
-        "nodes": [
-          "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_submit",
-          "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_close",
-          "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_cascade_rule"
-        ],
-        "relation": "form",
-        "confidence": "EXTRACTED",
-        "confidence_score": 1.0,
-        "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md"
-      },
-      {
-        "id": "parallel_account_verification_flow",
-        "label": "Parallel Portal and Jira Account Verification Flow",
-        "nodes": [
-          "docs_superpowers_specs_2026_07_12_account_verification_design_candidate_portal_verification",
-          "docs_superpowers_specs_2026_07_12_account_verification_design_jira_credentials_check",
-          "docs_superpowers_specs_2026_07_12_account_verification_design_parallel_account_verification",
-          "docs_superpowers_specs_2026_07_12_account_verification_design_verify_account_error",
-          "docs_superpowers_specs_2026_07_12_account_verification_design_save_anyway_escape_hatch"
-        ],
-        "relation": "participate_in",
-        "confidence": "EXTRACTED",
-        "confidence_score": 1.0,
-        "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md"
-      },
-      {
-        "id": "signed_release_delivery_chain",
-        "label": "Signed Release and Update Delivery Chain",
-        "nodes": [
-          "docs_superpowers_specs_2026_07_12_cicd_design_tag_driven_release_pipeline",
-          "docs_superpowers_specs_2026_07_12_cicd_design_release_version_guard",
-          "docs_superpowers_specs_2026_07_12_cicd_design_updater_signing_key",
-          "docs_superpowers_specs_2026_07_12_cicd_design_draft_release_publish_gate",
-          "docs_superpowers_specs_2026_07_12_cicd_design_in_app_auto_updater"
-        ],
-        "relation": "form",
-        "confidence": "EXTRACTED",
-        "confidence_score": 1.0,
-        "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md"
       }
     ]
   },
   "nodes": [
+    {
+      "label": "auto-close-toggle.tsx",
+      "file_type": "code",
+      "source_file": "src/components/auto-close-toggle.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_components_auto_close_toggle",
+      "community": 108,
+      "community_name": "AutoCloseToggle",
+      "norm_label": "auto-close-toggle.tsx"
+    },
+    {
+      "label": "AutoCloseToggle()",
+      "file_type": "code",
+      "source_file": "src/components/auto-close-toggle.tsx",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "src_components_auto_close_toggle_autoclosetoggle",
+      "community": 108,
+      "community_name": "AutoCloseToggle",
+      "norm_label": "autoclosetoggle()"
+    },
+    {
+      "label": "auto-submit-toggle.tsx",
+      "file_type": "code",
+      "source_file": "src/components/auto-submit-toggle.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_components_auto_submit_toggle",
+      "community": 109,
+      "community_name": "AutoSubmitToggle",
+      "norm_label": "auto-submit-toggle.tsx"
+    },
+    {
+      "label": "AutoSubmitToggle()",
+      "file_type": "code",
+      "source_file": "src/components/auto-submit-toggle.tsx",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "src_components_auto_submit_toggle_autosubmittoggle",
+      "community": 109,
+      "community_name": "AutoSubmitToggle",
+      "norm_label": "autosubmittoggle()"
+    },
+    {
+      "label": "autofill-summary-toggle.tsx",
+      "file_type": "code",
+      "source_file": "src/components/autofill-summary-toggle.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_components_autofill_summary_toggle",
+      "community": 110,
+      "community_name": "AutofillSummaryToggle",
+      "norm_label": "autofill-summary-toggle.tsx"
+    },
+    {
+      "label": "AutofillSummaryToggle()",
+      "file_type": "code",
+      "source_file": "src/components/autofill-summary-toggle.tsx",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "src_components_autofill_summary_toggle_autofillsummarytoggle",
+      "community": 110,
+      "community_name": "AutofillSummaryToggle",
+      "norm_label": "autofillsummarytoggle()"
+    },
+    {
+      "label": "preference-toggles.test.tsx",
+      "file_type": "code",
+      "source_file": "src/components/preference-toggles.test.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_components_preference_toggles_test",
+      "community": 1,
+      "community_name": "Frontend Component Tests",
+      "norm_label": "preference-toggles.test.tsx"
+    },
+    {
+      "label": "setup()",
+      "file_type": "code",
+      "source_file": "src/components/preference-toggles.test.tsx",
+      "source_location": "L23",
+      "_origin": "ast",
+      "id": "src_components_preference_toggles_test_setup",
+      "community": 1,
+      "community_name": "Frontend Component Tests",
+      "norm_label": "setup()"
+    },
+    {
+      "label": "ALL_ARMED",
+      "file_type": "code",
+      "source_file": "src/components/preference-toggles.test.tsx",
+      "source_location": "L42",
+      "_origin": "ast",
+      "id": "src_components_preference_toggles_test_all_armed",
+      "community": 1,
+      "community_name": "Frontend Component Tests",
+      "norm_label": "all_armed"
+    },
     {
       "label": "header.tsx",
       "file_type": "code",
       "source_file": "src/components/date-card/header.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "src_components_date_card_header",
       "community": 216,
       "community_name": "main.tsx",
-      "norm_label": "header.tsx"
+      "norm_label": "header.tsx",
+      "id": "src_components_date_card_header"
     },
     {
       "label": "Props",
@@ -152,10 +208,10 @@
       "source_file": "src/components/date-card/header.tsx",
       "source_location": "L8",
       "_origin": "ast",
-      "id": "src_components_date_card_header_props",
       "community": 216,
       "community_name": "main.tsx",
-      "norm_label": "props"
+      "norm_label": "props",
+      "id": "src_components_date_card_header_props"
     },
     {
       "label": "DateCardHeader()",
@@ -163,10 +219,10 @@
       "source_file": "src/components/date-card/header.tsx",
       "source_location": "L19",
       "_origin": "ast",
-      "id": "src_components_date_card_header_datecardheader",
       "community": 216,
       "community_name": "main.tsx",
-      "norm_label": "datecardheader()"
+      "norm_label": "datecardheader()",
+      "id": "src_components_date_card_header_datecardheader"
     },
     {
       "label": "index.test.tsx",
@@ -174,10 +230,10 @@
       "source_file": "src/components/date-card/index.test.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "src_components_date_card_index_test",
       "community": 1,
       "community_name": "Frontend Component Tests",
-      "norm_label": "index.test.tsx"
+      "norm_label": "index.test.tsx",
+      "id": "src_components_date_card_index_test"
     },
     {
       "label": "issue()",
@@ -185,10 +241,10 @@
       "source_file": "src/components/date-card/index.test.tsx",
       "source_location": "L22",
       "_origin": "ast",
-      "id": "src_components_date_card_index_test_issue",
       "community": 1,
       "community_name": "Frontend Component Tests",
-      "norm_label": "issue()"
+      "norm_label": "issue()",
+      "id": "src_components_date_card_index_test_issue"
     },
     {
       "label": "STATUS_ISSUES",
@@ -196,10 +252,10 @@
       "source_file": "src/components/date-card/index.test.tsx",
       "source_location": "L30",
       "_origin": "ast",
-      "id": "src_components_date_card_index_test_status_issues",
       "community": 1,
       "community_name": "Frontend Component Tests",
-      "norm_label": "status_issues"
+      "norm_label": "status_issues",
+      "id": "src_components_date_card_index_test_status_issues"
     },
     {
       "label": "CREATED_ISSUES",
@@ -207,10 +263,10 @@
       "source_file": "src/components/date-card/index.test.tsx",
       "source_location": "L34",
       "_origin": "ast",
-      "id": "src_components_date_card_index_test_created_issues",
       "community": 1,
       "community_name": "Frontend Component Tests",
-      "norm_label": "created_issues"
+      "norm_label": "created_issues",
+      "id": "src_components_date_card_index_test_created_issues"
     },
     {
       "label": "SPRINT_ISSUES",
@@ -218,10 +274,10 @@
       "source_file": "src/components/date-card/index.test.tsx",
       "source_location": "L35",
       "_origin": "ast",
-      "id": "src_components_date_card_index_test_sprint_issues",
       "community": 1,
       "community_name": "Frontend Component Tests",
-      "norm_label": "sprint_issues"
+      "norm_label": "sprint_issues",
+      "id": "src_components_date_card_index_test_sprint_issues"
     },
     {
       "label": "ACCOUNT",
@@ -229,10 +285,10 @@
       "source_file": "src/components/date-card/index.test.tsx",
       "source_location": "L40",
       "_origin": "ast",
-      "id": "src_components_date_card_index_test_account",
       "community": 1,
       "community_name": "Frontend Component Tests",
-      "norm_label": "account"
+      "norm_label": "account",
+      "id": "src_components_date_card_index_test_account"
     },
     {
       "label": "whichQuery()",
@@ -240,10 +296,10 @@
       "source_file": "src/components/date-card/index.test.tsx",
       "source_location": "L48",
       "_origin": "ast",
-      "id": "src_components_date_card_index_test_whichquery",
       "community": 1,
       "community_name": "Frontend Component Tests",
-      "norm_label": "whichquery()"
+      "norm_label": "whichquery()",
+      "id": "src_components_date_card_index_test_whichquery"
     },
     {
       "label": "whichQueryOf()",
@@ -251,10 +307,10 @@
       "source_file": "src/components/date-card/index.test.tsx",
       "source_location": "L57",
       "_origin": "ast",
-      "id": "src_components_date_card_index_test_whichqueryof",
       "community": 1,
       "community_name": "Frontend Component Tests",
-      "norm_label": "whichqueryof()"
+      "norm_label": "whichqueryof()",
+      "id": "src_components_date_card_index_test_whichqueryof"
     },
     {
       "label": "JiraSets",
@@ -262,10 +318,10 @@
       "source_file": "src/components/date-card/index.test.tsx",
       "source_location": "L62",
       "_origin": "ast",
-      "id": "src_components_date_card_index_test_jirasets",
       "community": 1,
       "community_name": "Frontend Component Tests",
-      "norm_label": "jirasets"
+      "norm_label": "jirasets",
+      "id": "src_components_date_card_index_test_jirasets"
     },
     {
       "label": "setJira()",
@@ -273,10 +329,10 @@
       "source_file": "src/components/date-card/index.test.tsx",
       "source_location": "L70",
       "_origin": "ast",
-      "id": "src_components_date_card_index_test_setjira",
       "community": 1,
       "community_name": "Frontend Component Tests",
-      "norm_label": "setjira()"
+      "norm_label": "setjira()",
+      "id": "src_components_date_card_index_test_setjira"
     },
     {
       "label": "SubmitCall",
@@ -284,10 +340,10 @@
       "source_file": "src/components/date-card/index.test.tsx",
       "source_location": "L93",
       "_origin": "ast",
-      "id": "src_components_date_card_index_test_submitcall",
       "community": 1,
       "community_name": "Frontend Component Tests",
-      "norm_label": "submitcall"
+      "norm_label": "submitcall",
+      "id": "src_components_date_card_index_test_submitcall"
     },
     {
       "label": "setup()",
@@ -295,10 +351,10 @@
       "source_file": "src/components/date-card/index.test.tsx",
       "source_location": "L95",
       "_origin": "ast",
-      "id": "src_components_date_card_index_test_setup",
       "community": 1,
       "community_name": "Frontend Component Tests",
-      "norm_label": "setup()"
+      "norm_label": "setup()",
+      "id": "src_components_date_card_index_test_setup"
     },
     {
       "label": "renderCard()",
@@ -306,10 +362,10 @@
       "source_file": "src/components/date-card/index.test.tsx",
       "source_location": "L117",
       "_origin": "ast",
-      "id": "src_components_date_card_index_test_rendercard",
       "community": 1,
       "community_name": "Frontend Component Tests",
-      "norm_label": "rendercard()"
+      "norm_label": "rendercard()",
+      "id": "src_components_date_card_index_test_rendercard"
     },
     {
       "label": "card()",
@@ -317,10 +373,10 @@
       "source_file": "src/components/date-card/index.test.tsx",
       "source_location": "L128",
       "_origin": "ast",
-      "id": "src_components_date_card_index_test_card",
       "community": 1,
       "community_name": "Frontend Component Tests",
-      "norm_label": "card()"
+      "norm_label": "card()",
+      "id": "src_components_date_card_index_test_card"
     },
     {
       "label": "playButton()",
@@ -328,10 +384,10 @@
       "source_file": "src/components/date-card/index.test.tsx",
       "source_location": "L132",
       "_origin": "ast",
-      "id": "src_components_date_card_index_test_playbutton",
       "community": 1,
       "community_name": "Frontend Component Tests",
-      "norm_label": "playbutton()"
+      "norm_label": "playbutton()",
+      "id": "src_components_date_card_index_test_playbutton"
     },
     {
       "label": "index.tsx",
@@ -339,10 +395,10 @@
       "source_file": "src/components/date-card/index.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "src_components_date_card_index",
       "community": 218,
       "community_name": "task-select-grid.tsx",
-      "norm_label": "index.tsx"
+      "norm_label": "index.tsx",
+      "id": "src_components_date_card_index"
     },
     {
       "label": "Props",
@@ -350,10 +406,10 @@
       "source_file": "src/components/date-card/index.tsx",
       "source_location": "L13",
       "_origin": "ast",
-      "id": "src_components_date_card_index_props",
       "community": 218,
       "community_name": "task-select-grid.tsx",
-      "norm_label": "props"
+      "norm_label": "props",
+      "id": "src_components_date_card_index_props"
     },
     {
       "label": "DateCard()",
@@ -361,10 +417,10 @@
       "source_file": "src/components/date-card/index.tsx",
       "source_location": "L16",
       "_origin": "ast",
-      "id": "src_components_date_card_index_datecard",
       "community": 218,
       "community_name": "task-select-grid.tsx",
-      "norm_label": "datecard()"
+      "norm_label": "datecard()",
+      "id": "src_components_date_card_index_datecard"
     },
     {
       "label": "summary.tsx",
@@ -372,10 +428,10 @@
       "source_file": "src/components/date-card/summary.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "src_components_date_card_summary",
       "community": 217,
       "community_name": "date-card-summary.tsx",
-      "norm_label": "summary.tsx"
+      "norm_label": "summary.tsx",
+      "id": "src_components_date_card_summary"
     },
     {
       "label": "Props",
@@ -383,10 +439,10 @@
       "source_file": "src/components/date-card/summary.tsx",
       "source_location": "L13",
       "_origin": "ast",
-      "id": "src_components_date_card_summary_props",
       "community": 217,
       "community_name": "date-card-summary.tsx",
-      "norm_label": "props"
+      "norm_label": "props",
+      "id": "src_components_date_card_summary_props"
     },
     {
       "label": "DateCardSummary()",
@@ -394,10 +450,10 @@
       "source_file": "src/components/date-card/summary.tsx",
       "source_location": "L24",
       "_origin": "ast",
-      "id": "src_components_date_card_summary_datecardsummary",
       "community": 217,
       "community_name": "date-card-summary.tsx",
-      "norm_label": "datecardsummary()"
+      "norm_label": "datecardsummary()",
+      "id": "src_components_date_card_summary_datecardsummary"
     },
     {
       "label": "task-select-grid.tsx",
@@ -405,10 +461,10 @@
       "source_file": "src/components/date-card/task-select-grid.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "src_components_date_card_task_select_grid",
       "community": 219,
       "community_name": "project-list-select.tsx",
-      "norm_label": "task-select-grid.tsx"
+      "norm_label": "task-select-grid.tsx",
+      "id": "src_components_date_card_task_select_grid"
     },
     {
       "label": "Props",
@@ -416,10 +472,10 @@
       "source_file": "src/components/date-card/task-select-grid.tsx",
       "source_location": "L16",
       "_origin": "ast",
-      "id": "src_components_date_card_task_select_grid_props",
       "community": 219,
       "community_name": "project-list-select.tsx",
-      "norm_label": "props"
+      "norm_label": "props",
+      "id": "src_components_date_card_task_select_grid_props"
     },
     {
       "label": "TaskSelectGrid()",
@@ -427,10 +483,10 @@
       "source_file": "src/components/date-card/task-select-grid.tsx",
       "source_location": "L23",
       "_origin": "ast",
-      "id": "src_components_date_card_task_select_grid_taskselectgrid",
       "community": 219,
       "community_name": "project-list-select.tsx",
-      "norm_label": "taskselectgrid()"
+      "norm_label": "taskselectgrid()",
+      "id": "src_components_date_card_task_select_grid_taskselectgrid"
     },
     {
       "label": "use-copy-to-clipboard.ts",
@@ -493,8 +549,8 @@
       "source_file": "src/lib/use-task-selection.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 211,
-      "community_name": "account-form.tsx",
+      "community": 1,
+      "community_name": "Frontend Component Tests",
       "norm_label": "use-task-selection.test.ts",
       "id": "src_lib_use_task_selection_test"
     },
@@ -504,8 +560,8 @@
       "source_file": "src/lib/use-task-selection.test.ts",
       "source_location": "L9",
       "_origin": "ast",
-      "community": 211,
-      "community_name": "account-form.tsx",
+      "community": 1,
+      "community_name": "Frontend Component Tests",
       "norm_label": "issue()",
       "id": "src_lib_use_task_selection_test_issue"
     },
@@ -515,8 +571,8 @@
       "source_file": "src/lib/use-task-selection.test.ts",
       "source_location": "L17",
       "_origin": "ast",
-      "community": 211,
-      "community_name": "account-form.tsx",
+      "community": 1,
+      "community_name": "Frontend Component Tests",
       "norm_label": "sets",
       "id": "src_lib_use_task_selection_test_sets"
     },
@@ -526,8 +582,8 @@
       "source_file": "src/lib/use-task-selection.test.ts",
       "source_location": "L21",
       "_origin": "ast",
-      "community": 211,
-      "community_name": "account-form.tsx",
+      "community": 1,
+      "community_name": "Frontend Component Tests",
       "norm_label": "groups()",
       "id": "src_lib_use_task_selection_test_groups"
     },
@@ -537,8 +593,8 @@
       "source_file": "src/lib/use-task-selection.test.ts",
       "source_location": "L33",
       "_origin": "ast",
-      "community": 211,
-      "community_name": "account-form.tsx",
+      "community": 1,
+      "community_name": "Frontend Component Tests",
       "norm_label": "setup()",
       "id": "src_lib_use_task_selection_test_setup"
     },
@@ -548,8 +604,8 @@
       "source_file": "src/lib/use-task-selection.test.ts",
       "source_location": "L41",
       "_origin": "ast",
-      "community": 211,
-      "community_name": "account-form.tsx",
+      "community": 1,
+      "community_name": "Frontend Component Tests",
       "norm_label": "defaults",
       "id": "src_lib_use_task_selection_test_defaults"
     },
@@ -977,8 +1033,8 @@
       "source_file": ".oxlintrc.json",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 113,
-      "community_name": "vitest",
+      "community": 1,
+      "community_name": "Frontend Component Tests",
       "norm_label": "vitest",
       "id": "ref_vitest"
     },
@@ -1230,8 +1286,8 @@
       "source_file": "src/components/account-form.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 214,
-      "community_name": "date-card.tsx",
+      "community": 114,
+      "community_name": "LocaleToggle",
       "norm_label": "account-form.tsx",
       "id": "src_components_account_form"
     },
@@ -1241,8 +1297,8 @@
       "source_file": "src/components/account-form.tsx",
       "source_location": "L46",
       "_origin": "ast",
-      "community": 214,
-      "community_name": "date-card.tsx",
+      "community": 114,
+      "community_name": "LocaleToggle",
       "norm_label": "normalizeportalurl()",
       "id": "src_components_account_form_normalizeportalurl"
     },
@@ -1252,8 +1308,8 @@
       "source_file": "src/components/account-form.tsx",
       "source_location": "L53",
       "_origin": "ast",
-      "community": 214,
-      "community_name": "date-card.tsx",
+      "community": 114,
+      "community_name": "LocaleToggle",
       "norm_label": "textfield()",
       "id": "src_components_account_form_textfield"
     },
@@ -1263,8 +1319,8 @@
       "source_file": "src/components/account-form.tsx",
       "source_location": "L87",
       "_origin": "ast",
-      "community": 214,
-      "community_name": "date-card.tsx",
+      "community": 114,
+      "community_name": "LocaleToggle",
       "norm_label": "accountform()",
       "id": "src_components_account_form_accountform"
     },
@@ -1296,8 +1352,8 @@
       "source_file": "src/components/error-fallback.test.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 113,
-      "community_name": "vitest",
+      "community": 1,
+      "community_name": "Frontend Component Tests",
       "norm_label": "error-fallback.test.tsx",
       "id": "src_components_error_fallback_test"
     },
@@ -1307,8 +1363,8 @@
       "source_file": "src/components/error-fallback.test.tsx",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 113,
-      "community_name": "vitest",
+      "community": 1,
+      "community_name": "Frontend Component Tests",
       "norm_label": "{ relaunch }",
       "id": "src_components_error_fallback_test_relaunch"
     },
@@ -1560,8 +1616,8 @@
       "source_file": "src/components/theme-provider.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 51,
-      "community_name": "Props",
+      "community": 114,
+      "community_name": "LocaleToggle",
       "norm_label": "theme-provider.tsx",
       "id": "src_components_theme_provider"
     },
@@ -1571,8 +1627,8 @@
       "source_file": "src/components/theme-provider.tsx",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 51,
-      "community_name": "Props",
+      "community": 114,
+      "community_name": "LocaleToggle",
       "norm_label": "theme",
       "id": "src_components_theme_provider_theme"
     },
@@ -1582,8 +1638,8 @@
       "source_file": "src/components/theme-provider.tsx",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 51,
-      "community_name": "Props",
+      "community": 114,
+      "community_name": "LocaleToggle",
       "norm_label": "themeproviderprops",
       "id": "src_components_theme_provider_themeproviderprops"
     },
@@ -1593,8 +1649,8 @@
       "source_file": "src/components/theme-provider.tsx",
       "source_location": "L19",
       "_origin": "ast",
-      "community": 51,
-      "community_name": "Props",
+      "community": 114,
+      "community_name": "LocaleToggle",
       "norm_label": "themeproviderstate",
       "id": "src_components_theme_provider_themeproviderstate"
     },
@@ -1604,8 +1660,8 @@
       "source_file": "src/components/theme-provider.tsx",
       "source_location": "L24",
       "_origin": "ast",
-      "community": 51,
-      "community_name": "Props",
+      "community": 114,
+      "community_name": "LocaleToggle",
       "norm_label": "themeprovidercontext",
       "id": "src_components_theme_provider_themeprovidercontext"
     },
@@ -1615,8 +1671,8 @@
       "source_file": "src/components/theme-provider.tsx",
       "source_location": "L28",
       "_origin": "ast",
-      "community": 51,
-      "community_name": "Props",
+      "community": 114,
+      "community_name": "LocaleToggle",
       "norm_label": "themeprovider()",
       "id": "src_components_theme_provider_themeprovider"
     },
@@ -1626,8 +1682,8 @@
       "source_file": "src/components/theme-provider.tsx",
       "source_location": "L75",
       "_origin": "ast",
-      "community": 51,
-      "community_name": "Props",
+      "community": 114,
+      "community_name": "LocaleToggle",
       "norm_label": "usetheme()",
       "id": "src_components_theme_provider_usetheme"
     },
@@ -1791,8 +1847,8 @@
       "source_file": "src/main.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 220,
-      "community_name": "use-update-check.ts",
+      "community": 114,
+      "community_name": "LocaleToggle",
       "norm_label": "main.tsx",
       "id": "src_main"
     },
@@ -1802,8 +1858,8 @@
       "source_file": "src/main.tsx",
       "source_location": "L23",
       "_origin": "ast",
-      "community": 220,
-      "community_name": "use-update-check.ts",
+      "community": 114,
+      "community_name": "LocaleToggle",
       "norm_label": "showwindowonmount()",
       "id": "src_main_showwindowonmount"
     },
@@ -1813,8 +1869,8 @@
       "source_file": "src/main.tsx",
       "source_location": "L34",
       "_origin": "ast",
-      "community": 220,
-      "community_name": "use-update-check.ts",
+      "community": 114,
+      "community_name": "LocaleToggle",
       "norm_label": "queryclient",
       "id": "src_main_queryclient"
     },
@@ -1945,8 +2001,8 @@
       "source_file": "src/components/favorites-form.test.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 113,
-      "community_name": "vitest",
+      "community": 1,
+      "community_name": "Frontend Component Tests",
       "norm_label": "favorites-form.test.tsx",
       "id": "src_components_favorites_form_test"
     },
@@ -1956,8 +2012,8 @@
       "source_file": "src/components/favorites-form.test.tsx",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 113,
-      "community_name": "vitest",
+      "community": 1,
+      "community_name": "Frontend Component Tests",
       "norm_label": "setup()",
       "id": "src_components_favorites_form_test_setup"
     },
@@ -1967,8 +2023,8 @@
       "source_file": "src/components/favorites-form.test.tsx",
       "source_location": "L25",
       "_origin": "ast",
-      "community": 113,
-      "community_name": "vitest",
+      "community": 1,
+      "community_name": "Frontend Component Tests",
       "norm_label": "opendialog()",
       "id": "src_components_favorites_form_test_opendialog"
     },
@@ -2000,8 +2056,8 @@
       "source_file": "src/components/project-map-form.test.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 212,
-      "community_name": "project-map-form.test.tsx",
+      "community": 1,
+      "community_name": "Frontend Component Tests",
       "norm_label": "project-map-form.test.tsx",
       "id": "src_components_project_map_form_test"
     },
@@ -2011,8 +2067,8 @@
       "source_file": "src/components/project-map-form.test.tsx",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 212,
-      "community_name": "project-map-form.test.tsx",
+      "community": 1,
+      "community_name": "Frontend Component Tests",
       "norm_label": "setup()",
       "id": "src_components_project_map_form_test_setup"
     },
@@ -2022,8 +2078,8 @@
       "source_file": "src/components/project-map-form.test.tsx",
       "source_location": "L33",
       "_origin": "ast",
-      "community": 212,
-      "community_name": "project-map-form.test.tsx",
+      "community": 1,
+      "community_name": "Frontend Component Tests",
       "norm_label": "renderform()",
       "id": "src_components_project_map_form_test_renderform"
     },
@@ -2033,8 +2089,8 @@
       "source_file": "src/components/project-map-form.test.tsx",
       "source_location": "L38",
       "_origin": "ast",
-      "community": 212,
-      "community_name": "project-map-form.test.tsx",
+      "community": 1,
+      "community_name": "Frontend Component Tests",
       "norm_label": "submitbutton()",
       "id": "src_components_project_map_form_test_submitbutton"
     },
@@ -6793,72 +6849,6 @@
       "id": "src_app_app"
     },
     {
-      "label": "auto-close-toggle.tsx",
-      "file_type": "code",
-      "source_file": "src/components/auto-close-toggle.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 108,
-      "community_name": "AutoCloseToggle",
-      "norm_label": "auto-close-toggle.tsx",
-      "id": "src_components_auto_close_toggle"
-    },
-    {
-      "label": "AutoCloseToggle()",
-      "file_type": "code",
-      "source_file": "src/components/auto-close-toggle.tsx",
-      "source_location": "L14",
-      "_origin": "ast",
-      "community": 108,
-      "community_name": "AutoCloseToggle",
-      "norm_label": "autoclosetoggle()",
-      "id": "src_components_auto_close_toggle_autoclosetoggle"
-    },
-    {
-      "label": "auto-submit-toggle.tsx",
-      "file_type": "code",
-      "source_file": "src/components/auto-submit-toggle.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 109,
-      "community_name": "AutoSubmitToggle",
-      "norm_label": "auto-submit-toggle.tsx",
-      "id": "src_components_auto_submit_toggle"
-    },
-    {
-      "label": "AutoSubmitToggle()",
-      "file_type": "code",
-      "source_file": "src/components/auto-submit-toggle.tsx",
-      "source_location": "L14",
-      "_origin": "ast",
-      "community": 109,
-      "community_name": "AutoSubmitToggle",
-      "norm_label": "autosubmittoggle()",
-      "id": "src_components_auto_submit_toggle_autosubmittoggle"
-    },
-    {
-      "label": "autofill-summary-toggle.tsx",
-      "file_type": "code",
-      "source_file": "src/components/autofill-summary-toggle.tsx",
-      "source_location": "L1",
-      "_origin": "ast",
-      "community": 110,
-      "community_name": "AutofillSummaryToggle",
-      "norm_label": "autofill-summary-toggle.tsx",
-      "id": "src_components_autofill_summary_toggle"
-    },
-    {
-      "label": "AutofillSummaryToggle()",
-      "file_type": "code",
-      "source_file": "src/components/autofill-summary-toggle.tsx",
-      "source_location": "L8",
-      "_origin": "ast",
-      "community": 110,
-      "community_name": "AutofillSummaryToggle",
-      "norm_label": "autofillsummarytoggle()",
-      "id": "src_components_autofill_summary_toggle_autofillsummarytoggle"
-    },
-    {
       "label": "default-project-select.tsx",
       "file_type": "code",
       "source_file": "src/components/default-project-select.tsx",
@@ -6930,8 +6920,8 @@
       "source_file": "src/components/project-list-select.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 17,
-      "community_name": "React App Components",
+      "community": 21,
+      "community_name": "Auto-Submit/Close & Favorites",
       "norm_label": "project-list-select.tsx",
       "id": "src_components_project_list_select"
     },
@@ -6941,8 +6931,8 @@
       "source_file": "src/components/project-list-select.tsx",
       "source_location": "L28",
       "_origin": "ast",
-      "community": 17,
-      "community_name": "React App Components",
+      "community": 21,
+      "community_name": "Auto-Submit/Close & Favorites",
       "norm_label": "projectlistselect()",
       "id": "src_components_project_list_select_projectlistselect"
     },
@@ -8052,8 +8042,8 @@
       "source_file": "src/components/version.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 17,
-      "community_name": "React App Components",
+      "community": 20,
+      "community_name": "Account Verification Feature",
       "norm_label": "version.tsx",
       "id": "src_components_version"
     },
@@ -8063,8 +8053,8 @@
       "source_file": "src/components/version.tsx",
       "source_location": "L6",
       "_origin": "ast",
-      "community": 17,
-      "community_name": "React App Components",
+      "community": 20,
+      "community_name": "Account Verification Feature",
       "norm_label": "props",
       "id": "src_components_version_props"
     },
@@ -8074,8 +8064,8 @@
       "source_file": "src/components/version.tsx",
       "source_location": "L7",
       "_origin": "ast",
-      "community": 17,
-      "community_name": "React App Components",
+      "community": 20,
+      "community_name": "Account Verification Feature",
       "norm_label": "version()",
       "id": "src_components_version_version"
     },
@@ -8140,8 +8130,8 @@
       "source_file": "src/lib/queries.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 210,
-      "community_name": "queries.test.ts",
+      "community": 1,
+      "community_name": "Frontend Component Tests",
       "norm_label": "queries.test.ts",
       "id": "src_lib_queries_test"
     },
@@ -8151,8 +8141,8 @@
       "source_file": "src/lib/queries.test.ts",
       "source_location": "L22",
       "_origin": "ast",
-      "community": 210,
-      "community_name": "queries.test.ts",
+      "community": 1,
+      "community_name": "Frontend Component Tests",
       "norm_label": "mockjiraresponse()",
       "id": "src_lib_queries_test_mockjiraresponse"
     },
@@ -8162,8 +8152,8 @@
       "source_file": "src/lib/queries.test.ts",
       "source_location": "L37",
       "_origin": "ast",
-      "community": 210,
-      "community_name": "queries.test.ts",
+      "community": 1,
+      "community_name": "Frontend Component Tests",
       "norm_label": "account",
       "id": "src_lib_queries_test_account"
     },
@@ -8173,8 +8163,8 @@
       "source_file": "src/lib/queries.test.ts",
       "source_location": "L45",
       "_origin": "ast",
-      "community": 210,
-      "community_name": "queries.test.ts",
+      "community": 1,
+      "community_name": "Frontend Component Tests",
       "norm_label": "runjiraquery()",
       "id": "src_lib_queries_test_runjiraquery"
     },
@@ -8184,8 +8174,8 @@
       "source_file": "src/lib/queries.test.ts",
       "source_location": "L53",
       "_origin": "ast",
-      "community": 210,
-      "community_name": "queries.test.ts",
+      "community": 1,
+      "community_name": "Frontend Component Tests",
       "norm_label": "readpreferences()",
       "id": "src_lib_queries_test_readpreferences"
     },
@@ -8195,8 +8185,8 @@
       "source_file": "src/lib/queries.test.ts",
       "source_location": "L55",
       "_origin": "ast",
-      "community": 210,
-      "community_name": "queries.test.ts",
+      "community": 1,
+      "community_name": "Frontend Component Tests",
       "norm_label": "readfavorites()",
       "id": "src_lib_queries_test_readfavorites"
     },
@@ -8338,8 +8328,8 @@
       "source_file": "src/lib/store.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 113,
-      "community_name": "vitest",
+      "community": 1,
+      "community_name": "Frontend Component Tests",
       "norm_label": "store.test.ts",
       "id": "src_lib_store_test"
     },
@@ -8426,8 +8416,8 @@
       "source_file": "src/lib/use-reset-when-away.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 213,
-      "community_name": "use-reset-when-away.test.ts",
+      "community": 1,
+      "community_name": "Frontend Component Tests",
       "norm_label": "use-reset-when-away.test.ts",
       "id": "src_lib_use_reset_when_away_test"
     },
@@ -8437,8 +8427,8 @@
       "source_file": "src/lib/use-reset-when-away.test.ts",
       "source_location": "L18",
       "_origin": "ast",
-      "community": 213,
-      "community_name": "use-reset-when-away.test.ts",
+      "community": 1,
+      "community_name": "Frontend Component Tests",
       "norm_label": "t0",
       "id": "src_lib_use_reset_when_away_test_t0"
     },
@@ -8448,8 +8438,8 @@
       "source_file": "src/lib/use-reset-when-away.test.ts",
       "source_location": "L55",
       "_origin": "ast",
-      "community": 213,
-      "community_name": "use-reset-when-away.test.ts",
+      "community": 1,
+      "community_name": "Frontend Component Tests",
       "norm_label": "flushmicrotasks()",
       "id": "src_lib_use_reset_when_away_test_flushmicrotasks"
     },
@@ -8459,8 +8449,8 @@
       "source_file": "src/lib/use-reset-when-away.test.ts",
       "source_location": "L63",
       "_origin": "ast",
-      "community": 213,
-      "community_name": "use-reset-when-away.test.ts",
+      "community": 1,
+      "community_name": "Frontend Component Tests",
       "norm_label": "fire()",
       "id": "src_lib_use_reset_when_away_test_fire"
     },
@@ -8470,8 +8460,8 @@
       "source_file": "src/lib/use-update-check.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 17,
-      "community_name": "React App Components",
+      "community": 47,
+      "community_name": "Props",
       "norm_label": "use-update-check.ts",
       "id": "src_lib_use_update_check"
     },
@@ -8481,8 +8471,8 @@
       "source_file": "src/lib/use-update-check.ts",
       "source_location": "L8",
       "_origin": "ast",
-      "community": 17,
-      "community_name": "React App Components",
+      "community": 47,
+      "community_name": "Props",
       "norm_label": "useupdatecheck()",
       "id": "src_lib_use_update_check_useupdatecheck"
     },
@@ -8492,8 +8482,8 @@
       "source_file": "src/test/setup.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 113,
-      "community_name": "vitest",
+      "community": 1,
+      "community_name": "Frontend Component Tests",
       "norm_label": "setup.ts",
       "id": "src_test_setup"
     },
@@ -10344,9 +10334,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 36,
       "norm_label": "improve codebase architecture",
-      "community_name": "Props",
+      "community_name": "Test-Driven Development",
       "id": "_agents_skills_improve_codebase_architecture_skill_improve_codebase_architecture"
     },
     {
@@ -10359,9 +10349,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 36,
       "norm_label": "deepening opportunity",
-      "community_name": "Props",
+      "community_name": "Test-Driven Development",
       "id": "_agents_skills_improve_codebase_architecture_skill_deepening_opportunity"
     },
     {
@@ -10373,9 +10363,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 36,
       "norm_label": "deep module design vocabulary",
-      "community_name": "Props",
+      "community_name": "Test-Driven Development",
       "id": "_agents_skills_improve_codebase_architecture_skill_deep_module_design_vocabulary"
     },
     {
@@ -10388,9 +10378,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 36,
       "norm_label": "deletion test",
-      "community_name": "Props",
+      "community_name": "Test-Driven Development",
       "id": "_agents_skills_improve_codebase_architecture_skill_deletion_test"
     },
     {
@@ -10402,9 +10392,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 36,
       "norm_label": "architecture review html report",
-      "community_name": "Props",
+      "community_name": "Test-Driven Development",
       "id": "_agents_skills_improve_codebase_architecture_skill_architecture_review_html_report"
     },
     {
@@ -10417,9 +10407,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 36,
       "norm_label": "adr-aware architecture review",
-      "community_name": "Props",
+      "community_name": "Test-Driven Development",
       "id": "_agents_skills_improve_codebase_architecture_skill_adr_aware_review"
     },
     {
@@ -10819,9 +10809,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 199,
+      "community": 4,
       "norm_label": "setup matt pocock skills",
-      "community_name": "Engineering Skills Configuration",
+      "community_name": "Issue-Tracker Wayfinding",
       "id": "_agents_skills_setup_matt_pocock_skills_skill_setup_matt_pocock_skills"
     },
     {
@@ -10833,9 +10823,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 199,
+      "community": 4,
       "norm_label": "engineering skills configuration",
-      "community_name": "Engineering Skills Configuration",
+      "community_name": "Issue-Tracker Wayfinding",
       "id": "_agents_skills_setup_matt_pocock_skills_skill_engineering_skills_configuration"
     },
     {
@@ -10876,9 +10866,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 199,
+      "community": 4,
       "norm_label": "triage label vocabulary",
-      "community_name": "Engineering Skills Configuration",
+      "community_name": "Issue-Tracker Wayfinding",
       "id": "_agents_skills_setup_matt_pocock_skills_skill_triage_label_vocabulary"
     },
     {
@@ -10890,9 +10880,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 57,
+      "community": 5,
       "norm_label": "domain docs layout decision",
-      "community_name": "Domain Docs",
+      "community_name": "Research & Domain Modeling",
       "id": "_agents_skills_setup_matt_pocock_skills_skill_domain_docs_layout"
     },
     {
@@ -10904,9 +10894,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 199,
+      "community": 4,
       "norm_label": "agent skills configuration block",
-      "community_name": "Engineering Skills Configuration",
+      "community_name": "Issue-Tracker Wayfinding",
       "id": "_agents_skills_setup_matt_pocock_skills_skill_agent_skills_block"
     },
     {
@@ -10919,9 +10909,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 199,
+      "community": 4,
       "norm_label": "prompt-driven setup",
-      "community_name": "Engineering Skills Configuration",
+      "community_name": "Issue-Tracker Wayfinding",
       "id": "_agents_skills_setup_matt_pocock_skills_skill_prompt_driven_setup"
     },
     {
@@ -10933,9 +10923,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 57,
+      "community": 5,
       "norm_label": "domain docs",
-      "community_name": "Domain Docs",
+      "community_name": "Research & Domain Modeling",
       "id": "_agents_skills_setup_matt_pocock_skills_domain_domain_docs"
     },
     {
@@ -10947,9 +10937,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 57,
+      "community": 5,
       "norm_label": "single-context domain layout",
-      "community_name": "Domain Docs",
+      "community_name": "Research & Domain Modeling",
       "id": "_agents_skills_setup_matt_pocock_skills_domain_single_context_layout"
     },
     {
@@ -10961,9 +10951,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 57,
+      "community": 5,
       "norm_label": "multi-context domain layout",
-      "community_name": "Domain Docs",
+      "community_name": "Research & Domain Modeling",
       "id": "_agents_skills_setup_matt_pocock_skills_domain_multi_context_layout"
     },
     {
@@ -10976,9 +10966,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 57,
+      "community": 5,
       "norm_label": "glossary vocabulary discipline",
-      "community_name": "Domain Docs",
+      "community_name": "Research & Domain Modeling",
       "id": "_agents_skills_setup_matt_pocock_skills_domain_glossary_vocabulary_discipline"
     },
     {
@@ -10991,9 +10981,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 36,
       "norm_label": "adr conflict flagging",
-      "community_name": "Props",
+      "community_name": "Test-Driven Development",
       "id": "_agents_skills_setup_matt_pocock_skills_domain_adr_conflict_flagging"
     },
     {
@@ -11145,9 +11135,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 209,
+      "community": 4,
       "norm_label": "triage label mapping",
-      "community_name": "Triage Label Mapping",
+      "community_name": "Issue-Tracker Wayfinding",
       "id": "_agents_skills_setup_matt_pocock_skills_triage_labels_triage_label_mapping"
     },
     {
@@ -11159,9 +11149,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 209,
+      "community": 4,
       "norm_label": "needs-triage",
-      "community_name": "Triage Label Mapping",
+      "community_name": "Issue-Tracker Wayfinding",
       "id": "_agents_skills_setup_matt_pocock_skills_triage_labels_needs_triage"
     },
     {
@@ -11173,9 +11163,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 209,
+      "community": 4,
       "norm_label": "needs-info",
-      "community_name": "Triage Label Mapping",
+      "community_name": "Issue-Tracker Wayfinding",
       "id": "_agents_skills_setup_matt_pocock_skills_triage_labels_needs_info"
     },
     {
@@ -11187,9 +11177,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 209,
+      "community": 4,
       "norm_label": "ready-for-agent",
-      "community_name": "Triage Label Mapping",
+      "community_name": "Issue-Tracker Wayfinding",
       "id": "_agents_skills_setup_matt_pocock_skills_triage_labels_ready_for_agent"
     },
     {
@@ -11201,9 +11191,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 209,
+      "community": 4,
       "norm_label": "ready-for-human",
-      "community_name": "Triage Label Mapping",
+      "community_name": "Issue-Tracker Wayfinding",
       "id": "_agents_skills_setup_matt_pocock_skills_triage_labels_ready_for_human"
     },
     {
@@ -11215,9 +11205,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 209,
+      "community": 4,
       "norm_label": "wontfix",
-      "community_name": "Triage Label Mapping",
+      "community_name": "Issue-Tracker Wayfinding",
       "id": "_agents_skills_setup_matt_pocock_skills_triage_labels_wontfix"
     },
     {
@@ -11243,9 +11233,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 97,
+      "community": 4,
       "norm_label": "red-green loop",
-      "community_name": "Tracer Bullet Issues",
+      "community_name": "Issue-Tracker Wayfinding",
       "id": "_agents_skills_tdd_skill_red_green_loop"
     },
     {
@@ -11273,9 +11263,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 36,
       "norm_label": "pre-agreed test seams",
-      "community_name": "Props",
+      "community_name": "Test-Driven Development",
       "id": "_agents_skills_tdd_skill_pre_agreed_test_seams"
     },
     {
@@ -11330,9 +11320,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 97,
+      "community": 4,
       "norm_label": "vertical slice tdd",
-      "community_name": "Tracer Bullet Issues",
+      "community_name": "Issue-Tracker Wayfinding",
       "id": "_agents_skills_tdd_skill_vertical_slice_tdd"
     },
     {
@@ -11460,9 +11450,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 57,
+      "community": 5,
       "norm_label": "glossary format",
-      "community_name": "Domain Docs",
+      "community_name": "Research & Domain Modeling",
       "id": "_agents_skills_teach_glossary_format_glossary_format"
     },
     {
@@ -11475,9 +11465,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 57,
+      "community": 5,
       "norm_label": "canonical learning language",
-      "community_name": "Domain Docs",
+      "community_name": "Research & Domain Modeling",
       "id": "_agents_skills_teach_glossary_format_canonical_learning_language"
     },
     {
@@ -11504,9 +11494,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 57,
+      "community": 5,
       "norm_label": "glossary ambiguity resolution",
-      "community_name": "Domain Docs",
+      "community_name": "Research & Domain Modeling",
       "id": "_agents_skills_teach_glossary_format_glossary_ambiguity_resolution"
     },
     {
@@ -11881,9 +11871,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 57,
+      "community": 5,
       "norm_label": "reference documents",
-      "community_name": "Domain Docs",
+      "community_name": "Research & Domain Modeling",
       "id": "_agents_skills_teach_skill_reference_documents"
     },
     {
@@ -11909,9 +11899,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 199,
+      "community": 4,
       "norm_label": "to issues",
-      "community_name": "Engineering Skills Configuration",
+      "community_name": "Issue-Tracker Wayfinding",
       "id": "_agents_skills_to_issues_skill_to_issues"
     },
     {
@@ -11924,9 +11914,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 199,
+      "community": 4,
       "norm_label": "prefactoring",
-      "community_name": "Engineering Skills Configuration",
+      "community_name": "Issue-Tracker Wayfinding",
       "id": "_agents_skills_to_issues_skill_prefactoring"
     },
     {
@@ -11939,9 +11929,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 97,
+      "community": 4,
       "norm_label": "tracer bullet issues",
-      "community_name": "Tracer Bullet Issues",
+      "community_name": "Issue-Tracker Wayfinding",
       "id": "_agents_skills_to_issues_skill_tracer_bullet_issues"
     },
     {
@@ -11953,9 +11943,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 97,
+      "community": 4,
       "norm_label": "vertical slice rules",
-      "community_name": "Tracer Bullet Issues",
+      "community_name": "Issue-Tracker Wayfinding",
       "id": "_agents_skills_to_issues_skill_vertical_slice_rules"
     },
     {
@@ -11967,9 +11957,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 97,
+      "community": 4,
       "norm_label": "issue breakdown quiz",
-      "community_name": "Tracer Bullet Issues",
+      "community_name": "Issue-Tracker Wayfinding",
       "id": "_agents_skills_to_issues_skill_breakdown_quiz"
     },
     {
@@ -11982,9 +11972,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 97,
+      "community": 4,
       "norm_label": "dependency-ordered issue publication",
-      "community_name": "Tracer Bullet Issues",
+      "community_name": "Issue-Tracker Wayfinding",
       "id": "_agents_skills_to_issues_skill_dependency_ordered_publication"
     },
     {
@@ -11996,9 +11986,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 209,
+      "community": 4,
       "norm_label": "afk-ready issues",
-      "community_name": "Triage Label Mapping",
+      "community_name": "Issue-Tracker Wayfinding",
       "id": "_agents_skills_to_issues_skill_afk_ready_issues"
     },
     {
@@ -12010,9 +12000,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 97,
+      "community": 4,
       "norm_label": "vertical slice issue body template",
-      "community_name": "Tracer Bullet Issues",
+      "community_name": "Issue-Tracker Wayfinding",
       "id": "_agents_skills_to_issues_skill_issue_body_template"
     },
     {
@@ -12025,9 +12015,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 97,
+      "community": 4,
       "norm_label": "parent issue preservation",
-      "community_name": "Tracer Bullet Issues",
+      "community_name": "Issue-Tracker Wayfinding",
       "id": "_agents_skills_to_issues_skill_parent_issue_preservation"
     },
     {
@@ -12305,9 +12295,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 47,
+      "community": 36,
       "norm_label": "grilling and domain-modeling flow",
-      "community_name": "Props",
+      "community_name": "Test-Driven Development",
       "id": "_agents_skills_triage_skill_grilling_flow"
     },
     {
@@ -12333,9 +12323,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
+      "community": 3,
       "norm_label": "building great skills glossary",
-      "community_name": "Account Verification Feature",
+      "community_name": "PRD & Agent-Brief Authoring",
       "id": "_agents_skills_writing_great_skills_glossary_building_great_skills_glossary"
     },
     {
@@ -12347,9 +12337,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
+      "community": 3,
       "norm_label": "predictability",
-      "community_name": "Account Verification Feature",
+      "community_name": "PRD & Agent-Brief Authoring",
       "id": "_agents_skills_writing_great_skills_glossary_predictability"
     },
     {
@@ -12361,9 +12351,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
+      "community": 3,
       "norm_label": "model-invoked skill",
-      "community_name": "Account Verification Feature",
+      "community_name": "PRD & Agent-Brief Authoring",
       "id": "_agents_skills_writing_great_skills_glossary_model_invoked_skill"
     },
     {
@@ -12375,9 +12365,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
+      "community": 3,
       "norm_label": "user-invoked skill",
-      "community_name": "Account Verification Feature",
+      "community_name": "PRD & Agent-Brief Authoring",
       "id": "_agents_skills_writing_great_skills_glossary_user_invoked_skill"
     },
     {
@@ -12389,9 +12379,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
+      "community": 3,
       "norm_label": "context pointer",
-      "community_name": "Account Verification Feature",
+      "community_name": "PRD & Agent-Brief Authoring",
       "id": "_agents_skills_writing_great_skills_glossary_context_pointer"
     },
     {
@@ -12403,9 +12393,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
+      "community": 3,
       "norm_label": "context load",
-      "community_name": "Account Verification Feature",
+      "community_name": "PRD & Agent-Brief Authoring",
       "id": "_agents_skills_writing_great_skills_glossary_context_load"
     },
     {
@@ -12417,9 +12407,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
+      "community": 3,
       "norm_label": "cognitive load",
-      "community_name": "Account Verification Feature",
+      "community_name": "PRD & Agent-Brief Authoring",
       "id": "_agents_skills_writing_great_skills_glossary_cognitive_load"
     },
     {
@@ -12431,9 +12421,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
+      "community": 3,
       "norm_label": "router skill",
-      "community_name": "Account Verification Feature",
+      "community_name": "PRD & Agent-Brief Authoring",
       "id": "_agents_skills_writing_great_skills_glossary_router_skill"
     },
     {
@@ -12445,9 +12435,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
+      "community": 3,
       "norm_label": "skill granularity",
-      "community_name": "Account Verification Feature",
+      "community_name": "PRD & Agent-Brief Authoring",
       "id": "_agents_skills_writing_great_skills_glossary_granularity"
     },
     {
@@ -12459,9 +12449,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
+      "community": 3,
       "norm_label": "information hierarchy",
-      "community_name": "Account Verification Feature",
+      "community_name": "PRD & Agent-Brief Authoring",
       "id": "_agents_skills_writing_great_skills_glossary_information_hierarchy"
     },
     {
@@ -12473,9 +12463,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
+      "community": 3,
       "norm_label": "progressive disclosure",
-      "community_name": "Account Verification Feature",
+      "community_name": "PRD & Agent-Brief Authoring",
       "id": "_agents_skills_writing_great_skills_glossary_progressive_disclosure"
     },
     {
@@ -12487,9 +12477,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
+      "community": 3,
       "norm_label": "leading word",
-      "community_name": "Account Verification Feature",
+      "community_name": "PRD & Agent-Brief Authoring",
       "id": "_agents_skills_writing_great_skills_glossary_leading_word"
     },
     {
@@ -12557,9 +12547,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
+      "community": 3,
       "norm_label": "single source of truth",
-      "community_name": "Account Verification Feature",
+      "community_name": "PRD & Agent-Brief Authoring",
       "id": "_agents_skills_writing_great_skills_glossary_single_source_of_truth"
     },
     {
@@ -12571,9 +12561,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
+      "community": 3,
       "norm_label": "duplication",
-      "community_name": "Account Verification Feature",
+      "community_name": "PRD & Agent-Brief Authoring",
       "id": "_agents_skills_writing_great_skills_glossary_duplication"
     },
     {
@@ -12613,9 +12603,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
+      "community": 3,
       "norm_label": "no-op instruction",
-      "community_name": "Account Verification Feature",
+      "community_name": "PRD & Agent-Brief Authoring",
       "id": "_agents_skills_writing_great_skills_glossary_no_op"
     },
     {
@@ -12627,9 +12617,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 20,
+      "community": 3,
       "norm_label": "writing great skills",
-      "community_name": "Account Verification Feature",
+      "community_name": "PRD & Agent-Brief Authoring",
       "id": "_agents_skills_writing_great_skills_skill_writing_great_skills"
     },
     {
@@ -12687,720 +12677,6 @@
       "norm_label": "weekly cargo updates",
       "community_name": "CI/CD & Release Pipeline",
       "id": "_github_dependabot_cargo_updates"
-    },
-    {
-      "label": "Auto-Submit and Auto-Close Implementation Plan",
-      "file_type": "document",
-      "source_file": "docs/superpowers/plans/2026-07-08-auto-submit-auto-close.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 21,
-      "norm_label": "auto-submit and auto-close implementation plan",
-      "community_name": "Auto-Submit/Close & Favorites",
-      "id": "docs_superpowers_plans_2026_07_08_auto_submit_auto_close_auto_submit_auto_close_implementation_plan"
-    },
-    {
-      "label": "Auto-Submit and Auto-Close Design",
-      "file_type": "document",
-      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 21,
-      "norm_label": "auto-submit and auto-close design",
-      "community_name": "Auto-Submit/Close & Favorites",
-      "id": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_submit_auto_close_design"
-    },
-    {
-      "label": "Auto-Submit Preference",
-      "file_type": "concept",
-      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 21,
-      "norm_label": "auto-submit preference",
-      "community_name": "Auto-Submit/Close & Favorites",
-      "id": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_submit"
-    },
-    {
-      "label": "Auto-Close Preference",
-      "file_type": "concept",
-      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 21,
-      "norm_label": "auto-close preference",
-      "community_name": "Auto-Submit/Close & Favorites",
-      "id": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_close"
-    },
-    {
-      "label": "Auto-Fill to Auto-Submit to Auto-Close Cascade Rule",
-      "file_type": "rationale",
-      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 21,
-      "norm_label": "auto-fill to auto-submit to auto-close cascade rule",
-      "community_name": "Auto-Submit/Close & Favorites",
-      "id": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_cascade_rule"
-    },
-    {
-      "label": "Auto-Submit Preference Schema",
-      "file_type": "concept",
-      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 21,
-      "norm_label": "auto-submit preference schema",
-      "community_name": "Auto-Submit/Close & Favorites",
-      "id": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_preference_schema"
-    },
-    {
-      "label": "Backend Automatic Submission Flow",
-      "file_type": "concept",
-      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 21,
-      "norm_label": "backend automatic submission flow",
-      "community_name": "Auto-Submit/Close & Favorites",
-      "id": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_backend_submit_flow"
-    },
-    {
-      "label": "Submission Uncertainty Leaves Browser Open",
-      "file_type": "rationale",
-      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 21,
-      "norm_label": "submission uncertainty leaves browser open",
-      "community_name": "Auto-Submit/Close & Favorites",
-      "id": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_uncertainty_leaves_browser_open"
-    },
-    {
-      "label": "Favorites Implementation Plan",
-      "file_type": "document",
-      "source_file": "docs/superpowers/plans/2026-07-08-favorites.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 21,
-      "norm_label": "favorites implementation plan",
-      "community_name": "Auto-Submit/Close & Favorites",
-      "id": "docs_superpowers_plans_2026_07_08_favorites_favorites_implementation_plan"
-    },
-    {
-      "label": "Favorites Design",
-      "file_type": "document",
-      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 21,
-      "norm_label": "favorites design",
-      "community_name": "Auto-Submit/Close & Favorites",
-      "id": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_design"
-    },
-    {
-      "label": "Free-Form Favorite Tasks",
-      "file_type": "concept",
-      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 21,
-      "norm_label": "free-form favorite tasks",
-      "community_name": "Auto-Submit/Close & Favorites",
-      "id": "docs_superpowers_specs_2026_07_08_favorites_design_free_form_favorite_tasks"
-    },
-    {
-      "label": "Top-Level Favorites Store Key",
-      "file_type": "concept",
-      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 21,
-      "norm_label": "top-level favorites store key",
-      "community_name": "Auto-Submit/Close & Favorites",
-      "id": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_store_key"
-    },
-    {
-      "label": "Optimistic Favorites Save",
-      "file_type": "rationale",
-      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 21,
-      "norm_label": "optimistic favorites save",
-      "community_name": "Auto-Submit/Close & Favorites",
-      "id": "docs_superpowers_specs_2026_07_08_favorites_design_optimistic_favorites_save"
-    },
-    {
-      "label": "Synthetic Issue-Shaped Favorites Adapter",
-      "file_type": "rationale",
-      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 21,
-      "norm_label": "synthetic issue-shaped favorites adapter",
-      "community_name": "Auto-Submit/Close & Favorites",
-      "id": "docs_superpowers_specs_2026_07_08_favorites_design_synthetic_issue_adapter"
-    },
-    {
-      "label": "Favorites Task Group",
-      "file_type": "concept",
-      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 21,
-      "norm_label": "favorites task group",
-      "community_name": "Auto-Submit/Close & Favorites",
-      "id": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_task_group"
-    },
-    {
-      "label": "Favorites-First Summary Formatting",
-      "file_type": "concept",
-      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 21,
-      "norm_label": "favorites-first summary formatting",
-      "community_name": "Auto-Submit/Close & Favorites",
-      "id": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_first_summary"
-    },
-    {
-      "label": "Custom Portal Credentials Design",
-      "file_type": "document",
-      "source_file": "docs/superpowers/specs/2026-07-11-custom-portal-credentials-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 20,
-      "norm_label": "custom portal credentials design",
-      "community_name": "Account Verification Feature",
-      "id": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_custom_portal_credentials_design"
-    },
-    {
-      "label": "Account Portal URL and Credential Fields",
-      "file_type": "concept",
-      "source_file": "docs/superpowers/specs/2026-07-11-custom-portal-credentials-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 20,
-      "norm_label": "account portal url and credential fields",
-      "community_name": "Account Verification Feature",
-      "id": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_account_portal_fields"
-    },
-    {
-      "label": "No Compiled-In Portal Defaults",
-      "file_type": "rationale",
-      "source_file": "docs/superpowers/specs/2026-07-11-custom-portal-credentials-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 20,
-      "norm_label": "no compiled-in portal defaults",
-      "community_name": "Account Verification Feature",
-      "id": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_no_compiled_defaults"
-    },
-    {
-      "label": "Fail-Fast Portal Configuration Read",
-      "file_type": "rationale",
-      "source_file": "docs/superpowers/specs/2026-07-11-custom-portal-credentials-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 20,
-      "norm_label": "fail-fast portal configuration read",
-      "community_name": "Account Verification Feature",
-      "id": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_fail_fast_configuration"
-    },
-    {
-      "label": "Portal Store-Reading Helpers",
-      "file_type": "concept",
-      "source_file": "docs/superpowers/specs/2026-07-11-custom-portal-credentials-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 20,
-      "norm_label": "portal store-reading helpers",
-      "community_name": "Account Verification Feature",
-      "id": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_portal_store_helpers"
-    },
-    {
-      "label": "Browser Session Reset on Account Save",
-      "file_type": "rationale",
-      "source_file": "docs/superpowers/specs/2026-07-11-custom-portal-credentials-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 20,
-      "norm_label": "browser session reset on account save",
-      "community_name": "Account Verification Feature",
-      "id": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_browser_session_reset"
-    },
-    {
-      "label": "Account Verification Implementation Plan",
-      "file_type": "document",
-      "source_file": "docs/superpowers/plans/2026-07-12-account-verification.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 20,
-      "norm_label": "account verification implementation plan",
-      "community_name": "Account Verification Feature",
-      "id": "docs_superpowers_plans_2026_07_12_account_verification_account_verification_implementation_plan"
-    },
-    {
-      "label": "Account Verification Design",
-      "file_type": "document",
-      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 20,
-      "norm_label": "account verification design",
-      "community_name": "Account Verification Feature",
-      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_account_verification_design"
-    },
-    {
-      "label": "Candidate-Only Portal Verification Command",
-      "file_type": "concept",
-      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 20,
-      "norm_label": "candidate-only portal verification command",
-      "community_name": "Account Verification Feature",
-      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_candidate_portal_verification"
-    },
-    {
-      "label": "Shared Portal Login Helper",
-      "file_type": "rationale",
-      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 20,
-      "norm_label": "shared portal login helper",
-      "community_name": "Account Verification Feature",
-      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_shared_portal_login_helper"
-    },
-    {
-      "label": "Throwaway Verification Browser Isolation",
-      "file_type": "rationale",
-      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 20,
-      "norm_label": "throwaway verification browser isolation",
-      "community_name": "Account Verification Feature",
-      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_verification_browser_isolation"
-    },
-    {
-      "label": "Verification Browser Exit-Cleanup Invariant",
-      "file_type": "concept",
-      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 20,
-      "norm_label": "verification browser exit-cleanup invariant",
-      "community_name": "Account Verification Feature",
-      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_exit_cleanup_invariant"
-    },
-    {
-      "label": "Jira Credentials Check",
-      "file_type": "concept",
-      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 20,
-      "norm_label": "jira credentials check",
-      "community_name": "Account Verification Feature",
-      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_jira_credentials_check"
-    },
-    {
-      "label": "Parallel Account Verification",
-      "file_type": "concept",
-      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 20,
-      "norm_label": "parallel account verification",
-      "community_name": "Account Verification Feature",
-      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_parallel_account_verification"
-    },
-    {
-      "label": "Labeled VerifyAccountError",
-      "file_type": "concept",
-      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 20,
-      "norm_label": "labeled verifyaccounterror",
-      "community_name": "Account Verification Feature",
-      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_verify_account_error"
-    },
-    {
-      "label": "Save Anyway Escape Hatch",
-      "file_type": "rationale",
-      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 20,
-      "norm_label": "save anyway escape hatch",
-      "community_name": "Account Verification Feature",
-      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_save_anyway_escape_hatch"
-    },
-    {
-      "label": "Verification Error-State Lifecycle",
-      "file_type": "concept",
-      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 20,
-      "norm_label": "verification error-state lifecycle",
-      "community_name": "Account Verification Feature",
-      "id": "docs_superpowers_specs_2026_07_12_account_verification_design_verification_error_lifecycle"
-    },
-    {
-      "label": "CI/CD Implementation Plan",
-      "file_type": "document",
-      "source_file": "docs/superpowers/plans/2026-07-12-cicd.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 14,
-      "norm_label": "ci/cd implementation plan",
-      "community_name": "CI/CD & Release Pipeline",
-      "id": "docs_superpowers_plans_2026_07_12_cicd_ci_cd_implementation_plan"
-    },
-    {
-      "label": "CI/CD Design",
-      "file_type": "document",
-      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 14,
-      "norm_label": "ci/cd design",
-      "community_name": "CI/CD & Release Pipeline",
-      "id": "docs_superpowers_specs_2026_07_12_cicd_design_ci_cd_design"
-    },
-    {
-      "label": "Continuous Integration Checks",
-      "file_type": "concept",
-      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 14,
-      "norm_label": "continuous integration checks",
-      "community_name": "CI/CD & Release Pipeline",
-      "id": "docs_superpowers_specs_2026_07_12_cicd_design_continuous_integration_checks"
-    },
-    {
-      "label": "Tag-Driven Release Pipeline",
-      "file_type": "concept",
-      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 14,
-      "norm_label": "tag-driven release pipeline",
-      "community_name": "CI/CD & Release Pipeline",
-      "id": "docs_superpowers_specs_2026_07_12_cicd_design_tag_driven_release_pipeline"
-    },
-    {
-      "label": "In-App Auto-Updater",
-      "file_type": "concept",
-      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 14,
-      "norm_label": "in-app auto-updater",
-      "community_name": "CI/CD & Release Pipeline",
-      "id": "docs_superpowers_specs_2026_07_12_cicd_design_in_app_auto_updater"
-    },
-    {
-      "label": "Updater Signing Key",
-      "file_type": "concept",
-      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 14,
-      "norm_label": "updater signing key",
-      "community_name": "CI/CD & Release Pipeline",
-      "id": "docs_superpowers_specs_2026_07_12_cicd_design_updater_signing_key"
-    },
-    {
-      "label": "curl-Based macOS Installer",
-      "file_type": "rationale",
-      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 14,
-      "norm_label": "curl-based macos installer",
-      "community_name": "CI/CD & Release Pipeline",
-      "id": "docs_superpowers_specs_2026_07_12_cicd_design_curl_based_macos_installer"
-    },
-    {
-      "label": "Draft Release Publish Gate",
-      "file_type": "rationale",
-      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 14,
-      "norm_label": "draft release publish gate",
-      "community_name": "CI/CD & Release Pipeline",
-      "id": "docs_superpowers_specs_2026_07_12_cicd_design_draft_release_publish_gate"
-    },
-    {
-      "label": "Unsigned Distribution Strategy",
-      "file_type": "rationale",
-      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 14,
-      "norm_label": "unsigned distribution strategy",
-      "community_name": "CI/CD & Release Pipeline",
-      "id": "docs_superpowers_specs_2026_07_12_cicd_design_unsigned_distribution_strategy"
-    },
-    {
-      "label": "Release Tag-to-Version Guard",
-      "file_type": "concept",
-      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 14,
-      "norm_label": "release tag-to-version guard",
-      "community_name": "CI/CD & Release Pipeline",
-      "id": "docs_superpowers_specs_2026_07_12_cicd_design_release_version_guard"
-    },
-    {
-      "label": "Version-Bump Script Design",
-      "file_type": "document",
-      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 14,
-      "norm_label": "version-bump script design",
-      "community_name": "CI/CD & Release Pipeline",
-      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_version_bump_script_design"
-    },
-    {
-      "label": "Version Bump Mode",
-      "file_type": "concept",
-      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 14,
-      "norm_label": "version bump mode",
-      "community_name": "CI/CD & Release Pipeline",
-      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_bump_mode"
-    },
-    {
-      "label": "Release Tag Mode",
-      "file_type": "concept",
-      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 14,
-      "norm_label": "release tag mode",
-      "community_name": "CI/CD & Release Pipeline",
-      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_tag_mode"
-    },
-    {
-      "label": "Clean Current Main Preconditions",
-      "file_type": "rationale",
-      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 14,
-      "norm_label": "clean current main preconditions",
-      "community_name": "CI/CD & Release Pipeline",
-      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_clean_current_main_preconditions"
-    },
-    {
-      "label": "tauri.conf.json Version Source of Truth",
-      "file_type": "rationale",
-      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 14,
-      "norm_label": "tauri.conf.json version source of truth",
-      "community_name": "CI/CD & Release Pipeline",
-      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_tauri_config_version_source_of_truth"
-    },
-    {
-      "label": "Targeted Verified Version Replacements",
-      "file_type": "rationale",
-      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 14,
-      "norm_label": "targeted verified version replacements",
-      "community_name": "CI/CD & Release Pipeline",
-      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_targeted_version_replacements"
-    },
-    {
-      "label": "Cargo.lock Refresh via cargo metadata",
-      "file_type": "concept",
-      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 14,
-      "norm_label": "cargo.lock refresh via cargo metadata",
-      "community_name": "CI/CD & Release Pipeline",
-      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_cargo_lock_refresh"
-    },
-    {
-      "label": "Human PR Merge Gate",
-      "file_type": "rationale",
-      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "community": 14,
-      "norm_label": "human pr merge gate",
-      "community_name": "CI/CD & Release Pipeline",
-      "id": "docs_superpowers_specs_2026_07_13_version_bump_script_design_human_pr_gate"
     },
     {
       "label": "Tauri Logo",
@@ -14499,13 +13775,80 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "src/components/auto-close-toggle.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_auto_close_toggle",
+      "target": "src_components_auto_close_toggle_autoclosetoggle",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/auto-submit-toggle.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_auto_submit_toggle",
+      "target": "src_components_auto_submit_toggle_autosubmittoggle",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/autofill-summary-toggle.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_autofill_summary_toggle",
+      "target": "src_components_autofill_summary_toggle_autofillsummarytoggle",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/preference-toggles.test.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_preference_toggles_test",
+      "target": "ref_vitest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/preference-toggles.test.tsx",
+      "source_location": "L42",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_preference_toggles_test",
+      "target": "src_components_preference_toggles_test_all_armed",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/preference-toggles.test.tsx",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_preference_toggles_test",
+      "target": "src_components_preference_toggles_test_setup",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "src/components/date-card/header.tsx",
       "source_location": "L19",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "src_components_date_card_header",
-      "target": "src_components_date_card_header_datecardheader",
-      "confidence_score": 1.0
+      "target": "src_components_date_card_header_datecardheader"
     },
     {
       "relation": "contains",
@@ -14514,9 +13857,9 @@
       "source_location": "L8",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "src_components_date_card_header",
-      "target": "src_components_date_card_header_props",
-      "confidence_score": 1.0
+      "target": "src_components_date_card_header_props"
     },
     {
       "relation": "imports_from",
@@ -14526,9 +13869,9 @@
       "source_location": "L4",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "src_components_date_card_index_test",
-      "target": "ref_vitest",
-      "confidence_score": 1.0
+      "target": "ref_vitest"
     },
     {
       "relation": "contains",
@@ -14537,9 +13880,9 @@
       "source_location": "L40",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "src_components_date_card_index_test",
-      "target": "src_components_date_card_index_test_account",
-      "confidence_score": 1.0
+      "target": "src_components_date_card_index_test_account"
     },
     {
       "relation": "contains",
@@ -14548,9 +13891,9 @@
       "source_location": "L128",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "src_components_date_card_index_test",
-      "target": "src_components_date_card_index_test_card",
-      "confidence_score": 1.0
+      "target": "src_components_date_card_index_test_card"
     },
     {
       "relation": "contains",
@@ -14559,9 +13902,9 @@
       "source_location": "L34",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "src_components_date_card_index_test",
-      "target": "src_components_date_card_index_test_created_issues",
-      "confidence_score": 1.0
+      "target": "src_components_date_card_index_test_created_issues"
     },
     {
       "relation": "contains",
@@ -14570,9 +13913,9 @@
       "source_location": "L22",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "src_components_date_card_index_test",
-      "target": "src_components_date_card_index_test_issue",
-      "confidence_score": 1.0
+      "target": "src_components_date_card_index_test_issue"
     },
     {
       "relation": "contains",
@@ -14581,9 +13924,9 @@
       "source_location": "L62",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "src_components_date_card_index_test",
-      "target": "src_components_date_card_index_test_jirasets",
-      "confidence_score": 1.0
+      "target": "src_components_date_card_index_test_jirasets"
     },
     {
       "relation": "contains",
@@ -14592,9 +13935,9 @@
       "source_location": "L132",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "src_components_date_card_index_test",
-      "target": "src_components_date_card_index_test_playbutton",
-      "confidence_score": 1.0
+      "target": "src_components_date_card_index_test_playbutton"
     },
     {
       "relation": "contains",
@@ -14603,9 +13946,9 @@
       "source_location": "L117",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "src_components_date_card_index_test",
-      "target": "src_components_date_card_index_test_rendercard",
-      "confidence_score": 1.0
+      "target": "src_components_date_card_index_test_rendercard"
     },
     {
       "relation": "contains",
@@ -14614,9 +13957,9 @@
       "source_location": "L70",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "src_components_date_card_index_test",
-      "target": "src_components_date_card_index_test_setjira",
-      "confidence_score": 1.0
+      "target": "src_components_date_card_index_test_setjira"
     },
     {
       "relation": "contains",
@@ -14625,9 +13968,9 @@
       "source_location": "L95",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "src_components_date_card_index_test",
-      "target": "src_components_date_card_index_test_setup",
-      "confidence_score": 1.0
+      "target": "src_components_date_card_index_test_setup"
     },
     {
       "relation": "contains",
@@ -14636,9 +13979,9 @@
       "source_location": "L35",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "src_components_date_card_index_test",
-      "target": "src_components_date_card_index_test_sprint_issues",
-      "confidence_score": 1.0
+      "target": "src_components_date_card_index_test_sprint_issues"
     },
     {
       "relation": "contains",
@@ -14647,9 +13990,9 @@
       "source_location": "L30",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "src_components_date_card_index_test",
-      "target": "src_components_date_card_index_test_status_issues",
-      "confidence_score": 1.0
+      "target": "src_components_date_card_index_test_status_issues"
     },
     {
       "relation": "contains",
@@ -14658,9 +14001,9 @@
       "source_location": "L93",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "src_components_date_card_index_test",
-      "target": "src_components_date_card_index_test_submitcall",
-      "confidence_score": 1.0
+      "target": "src_components_date_card_index_test_submitcall"
     },
     {
       "relation": "contains",
@@ -14669,9 +14012,9 @@
       "source_location": "L48",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "src_components_date_card_index_test",
-      "target": "src_components_date_card_index_test_whichquery",
-      "confidence_score": 1.0
+      "target": "src_components_date_card_index_test_whichquery"
     },
     {
       "relation": "contains",
@@ -14680,9 +14023,9 @@
       "source_location": "L57",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "src_components_date_card_index_test",
-      "target": "src_components_date_card_index_test_whichqueryof",
-      "confidence_score": 1.0
+      "target": "src_components_date_card_index_test_whichqueryof"
     },
     {
       "relation": "calls",
@@ -14692,9 +14035,9 @@
       "source_location": "L59",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "src_components_date_card_index_test_whichqueryof",
-      "target": "src_components_date_card_index_test_whichquery",
-      "confidence_score": 1.0
+      "target": "src_components_date_card_index_test_whichquery"
     },
     {
       "relation": "calls",
@@ -14704,9 +14047,9 @@
       "source_location": "L73",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "src_components_date_card_index_test_setjira",
-      "target": "src_components_date_card_index_test_whichqueryof",
-      "confidence_score": 1.0
+      "target": "src_components_date_card_index_test_whichqueryof"
     },
     {
       "relation": "calls",
@@ -14716,9 +14059,9 @@
       "source_location": "L133",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "src_components_date_card_index_test_playbutton",
-      "target": "src_components_date_card_index_test_card",
-      "confidence_score": 1.0
+      "target": "src_components_date_card_index_test_card"
     },
     {
       "relation": "contains",
@@ -14727,9 +14070,9 @@
       "source_location": "L16",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "src_components_date_card_index",
-      "target": "src_components_date_card_index_datecard",
-      "confidence_score": 1.0
+      "target": "src_components_date_card_index_datecard"
     },
     {
       "relation": "contains",
@@ -14738,9 +14081,9 @@
       "source_location": "L13",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "src_components_date_card_index",
-      "target": "src_components_date_card_index_props",
-      "confidence_score": 1.0
+      "target": "src_components_date_card_index_props"
     },
     {
       "relation": "contains",
@@ -14749,9 +14092,9 @@
       "source_location": "L24",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "src_components_date_card_summary",
-      "target": "src_components_date_card_summary_datecardsummary",
-      "confidence_score": 1.0
+      "target": "src_components_date_card_summary_datecardsummary"
     },
     {
       "relation": "contains",
@@ -14760,9 +14103,9 @@
       "source_location": "L13",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "src_components_date_card_summary",
-      "target": "src_components_date_card_summary_props",
-      "confidence_score": 1.0
+      "target": "src_components_date_card_summary_props"
     },
     {
       "relation": "contains",
@@ -14771,9 +14114,9 @@
       "source_location": "L16",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "src_components_date_card_task_select_grid",
-      "target": "src_components_date_card_task_select_grid_props",
-      "confidence_score": 1.0
+      "target": "src_components_date_card_task_select_grid_props"
     },
     {
       "relation": "contains",
@@ -14782,9 +14125,9 @@
       "source_location": "L23",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "src_components_date_card_task_select_grid",
-      "target": "src_components_date_card_task_select_grid_taskselectgrid",
-      "confidence_score": 1.0
+      "target": "src_components_date_card_task_select_grid_taskselectgrid"
     },
     {
       "relation": "imports_from",
@@ -24613,39 +23956,6 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "src/components/auto-close-toggle.tsx",
-      "source_location": "L14",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "src_components_auto_close_toggle",
-      "target": "src_components_auto_close_toggle_autoclosetoggle"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/auto-submit-toggle.tsx",
-      "source_location": "L14",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "src_components_auto_submit_toggle",
-      "target": "src_components_auto_submit_toggle_autosubmittoggle"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/components/autofill-summary-toggle.tsx",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_origin": "ast",
-      "confidence_score": 1.0,
-      "source": "src_components_autofill_summary_toggle",
-      "target": "src_components_autofill_summary_toggle_autofillsummarytoggle"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
       "source_file": "src/components/default-project-select.tsx",
       "source_location": "L21",
       "weight": 1.0,
@@ -29561,16 +28871,6 @@
       "target": "_agents_skills_writing_great_skills_glossary_duplication"
     },
     {
-      "relation": "semantically_similar_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_12_account_verification_design_shared_portal_login_helper",
-      "target": "_agents_skills_writing_great_skills_glossary_single_source_of_truth"
-    },
-    {
       "relation": "conceptually_related_to",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -29609,826 +28909,6 @@
       "weight": 1.0,
       "source": "_github_dependabot_dependabot_configuration",
       "target": "_github_dependabot_npm_updates"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-07-12-cicd.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_plans_2026_07_12_cicd_ci_cd_implementation_plan",
-      "target": "_github_dependabot_dependabot_configuration"
-    },
-    {
-      "relation": "cites",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-07-08-auto-submit-auto-close.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_plans_2026_07_08_auto_submit_auto_close_auto_submit_auto_close_implementation_plan",
-      "target": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_submit_auto_close_design"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-07-08-auto-submit-auto-close.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_plans_2026_07_08_auto_submit_auto_close_auto_submit_auto_close_implementation_plan",
-      "target": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_backend_submit_flow"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-07-08-auto-submit-auto-close.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_plans_2026_07_08_auto_submit_auto_close_auto_submit_auto_close_implementation_plan",
-      "target": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_cascade_rule"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-07-08-auto-submit-auto-close.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_plans_2026_07_08_auto_submit_auto_close_auto_submit_auto_close_implementation_plan",
-      "target": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_preference_schema"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_submit_auto_close_design",
-      "target": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_close"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_submit_auto_close_design",
-      "target": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_submit"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_submit_auto_close_design",
-      "target": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_backend_submit_flow"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_submit_auto_close_design",
-      "target": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_cascade_rule"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_submit_auto_close_design",
-      "target": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_preference_schema"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_submit",
-      "target": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_backend_submit_flow"
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_cascade_rule",
-      "target": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_submit"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_close",
-      "target": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_backend_submit_flow"
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_cascade_rule",
-      "target": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_close"
-    },
-    {
-      "relation": "shares_data_with",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_store_key",
-      "target": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_preference_schema"
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_uncertainty_leaves_browser_open",
-      "target": "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_backend_submit_flow"
-    },
-    {
-      "relation": "cites",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-07-08-favorites.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_plans_2026_07_08_favorites_favorites_implementation_plan",
-      "target": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_design"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-07-08-favorites.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_plans_2026_07_08_favorites_favorites_implementation_plan",
-      "target": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_first_summary"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-07-08-favorites.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_plans_2026_07_08_favorites_favorites_implementation_plan",
-      "target": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_store_key"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-07-08-favorites.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_plans_2026_07_08_favorites_favorites_implementation_plan",
-      "target": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_task_group"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-07-08-favorites.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_plans_2026_07_08_favorites_favorites_implementation_plan",
-      "target": "docs_superpowers_specs_2026_07_08_favorites_design_synthetic_issue_adapter"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_design",
-      "target": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_first_summary"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_design",
-      "target": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_store_key"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_design",
-      "target": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_task_group"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_design",
-      "target": "docs_superpowers_specs_2026_07_08_favorites_design_free_form_favorite_tasks"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_design",
-      "target": "docs_superpowers_specs_2026_07_08_favorites_design_optimistic_favorites_save"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_design",
-      "target": "docs_superpowers_specs_2026_07_08_favorites_design_synthetic_issue_adapter"
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_08_favorites_design_optimistic_favorites_save",
-      "target": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_store_key"
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_08_favorites_design_synthetic_issue_adapter",
-      "target": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_task_group"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-08-favorites-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_task_group",
-      "target": "docs_superpowers_specs_2026_07_08_favorites_design_favorites_first_summary"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-11-custom-portal-credentials-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_custom_portal_credentials_design",
-      "target": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_account_portal_fields"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-11-custom-portal-credentials-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_custom_portal_credentials_design",
-      "target": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_browser_session_reset"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-11-custom-portal-credentials-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_custom_portal_credentials_design",
-      "target": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_fail_fast_configuration"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-11-custom-portal-credentials-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_custom_portal_credentials_design",
-      "target": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_no_compiled_defaults"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-11-custom-portal-credentials-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_custom_portal_credentials_design",
-      "target": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_portal_store_helpers"
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-11-custom-portal-credentials-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_browser_session_reset",
-      "target": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_account_portal_fields"
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-11-custom-portal-credentials-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_no_compiled_defaults",
-      "target": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_account_portal_fields"
-    },
-    {
-      "relation": "shares_data_with",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_12_account_verification_design_candidate_portal_verification",
-      "target": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_account_portal_fields"
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-11-custom-portal-credentials-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_fail_fast_configuration",
-      "target": "docs_superpowers_specs_2026_07_11_custom_portal_credentials_design_portal_store_helpers"
-    },
-    {
-      "relation": "cites",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-07-12-account-verification.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_plans_2026_07_12_account_verification_account_verification_implementation_plan",
-      "target": "docs_superpowers_specs_2026_07_12_account_verification_design_account_verification_design"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-07-12-account-verification.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_plans_2026_07_12_account_verification_account_verification_implementation_plan",
-      "target": "docs_superpowers_specs_2026_07_12_account_verification_design_candidate_portal_verification"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-07-12-account-verification.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_plans_2026_07_12_account_verification_account_verification_implementation_plan",
-      "target": "docs_superpowers_specs_2026_07_12_account_verification_design_parallel_account_verification"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-07-12-account-verification.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_plans_2026_07_12_account_verification_account_verification_implementation_plan",
-      "target": "docs_superpowers_specs_2026_07_12_account_verification_design_save_anyway_escape_hatch"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-07-12-account-verification.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_plans_2026_07_12_account_verification_account_verification_implementation_plan",
-      "target": "docs_superpowers_specs_2026_07_12_account_verification_design_shared_portal_login_helper"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_12_account_verification_design_account_verification_design",
-      "target": "docs_superpowers_specs_2026_07_12_account_verification_design_candidate_portal_verification"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_12_account_verification_design_account_verification_design",
-      "target": "docs_superpowers_specs_2026_07_12_account_verification_design_jira_credentials_check"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_12_account_verification_design_account_verification_design",
-      "target": "docs_superpowers_specs_2026_07_12_account_verification_design_parallel_account_verification"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_12_account_verification_design_account_verification_design",
-      "target": "docs_superpowers_specs_2026_07_12_account_verification_design_save_anyway_escape_hatch"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_12_account_verification_design_account_verification_design",
-      "target": "docs_superpowers_specs_2026_07_12_account_verification_design_shared_portal_login_helper"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_12_account_verification_design_account_verification_design",
-      "target": "docs_superpowers_specs_2026_07_12_account_verification_design_verification_browser_isolation"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_12_account_verification_design_candidate_portal_verification",
-      "target": "docs_superpowers_specs_2026_07_12_account_verification_design_shared_portal_login_helper"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_12_account_verification_design_parallel_account_verification",
-      "target": "docs_superpowers_specs_2026_07_12_account_verification_design_candidate_portal_verification"
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_12_account_verification_design_verification_browser_isolation",
-      "target": "docs_superpowers_specs_2026_07_12_account_verification_design_exit_cleanup_invariant"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_12_account_verification_design_parallel_account_verification",
-      "target": "docs_superpowers_specs_2026_07_12_account_verification_design_jira_credentials_check"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_12_account_verification_design_parallel_account_verification",
-      "target": "docs_superpowers_specs_2026_07_12_account_verification_design_verify_account_error"
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_12_account_verification_design_save_anyway_escape_hatch",
-      "target": "docs_superpowers_specs_2026_07_12_account_verification_design_verify_account_error"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_12_account_verification_design_verification_error_lifecycle",
-      "target": "docs_superpowers_specs_2026_07_12_account_verification_design_verify_account_error"
-    },
-    {
-      "relation": "cites",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-07-12-cicd.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_plans_2026_07_12_cicd_ci_cd_implementation_plan",
-      "target": "docs_superpowers_specs_2026_07_12_cicd_design_ci_cd_design"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-07-12-cicd.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_plans_2026_07_12_cicd_ci_cd_implementation_plan",
-      "target": "docs_superpowers_specs_2026_07_12_cicd_design_curl_based_macos_installer"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/plans/2026-07-12-cicd.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_plans_2026_07_12_cicd_ci_cd_implementation_plan",
-      "target": "docs_superpowers_specs_2026_07_12_cicd_design_in_app_auto_updater"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_12_cicd_design_ci_cd_design",
-      "target": "docs_superpowers_specs_2026_07_12_cicd_design_continuous_integration_checks"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_12_cicd_design_ci_cd_design",
-      "target": "docs_superpowers_specs_2026_07_12_cicd_design_curl_based_macos_installer"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_12_cicd_design_ci_cd_design",
-      "target": "docs_superpowers_specs_2026_07_12_cicd_design_draft_release_publish_gate"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_12_cicd_design_ci_cd_design",
-      "target": "docs_superpowers_specs_2026_07_12_cicd_design_in_app_auto_updater"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_12_cicd_design_ci_cd_design",
-      "target": "docs_superpowers_specs_2026_07_12_cicd_design_release_version_guard"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_12_cicd_design_ci_cd_design",
-      "target": "docs_superpowers_specs_2026_07_12_cicd_design_tag_driven_release_pipeline"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_12_cicd_design_ci_cd_design",
-      "target": "docs_superpowers_specs_2026_07_12_cicd_design_unsigned_distribution_strategy"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_12_cicd_design_ci_cd_design",
-      "target": "docs_superpowers_specs_2026_07_12_cicd_design_updater_signing_key"
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_12_cicd_design_unsigned_distribution_strategy",
-      "target": "docs_superpowers_specs_2026_07_12_cicd_design_curl_based_macos_installer"
-    },
-    {
-      "relation": "semantically_similar_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.75,
-      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_13_version_bump_script_design_human_pr_gate",
-      "target": "docs_superpowers_specs_2026_07_12_cicd_design_draft_release_publish_gate"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_13_version_bump_script_design_version_bump_script_design",
-      "target": "docs_superpowers_specs_2026_07_13_version_bump_script_design_bump_mode"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_13_version_bump_script_design_version_bump_script_design",
-      "target": "docs_superpowers_specs_2026_07_13_version_bump_script_design_cargo_lock_refresh"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_13_version_bump_script_design_version_bump_script_design",
-      "target": "docs_superpowers_specs_2026_07_13_version_bump_script_design_clean_current_main_preconditions"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_13_version_bump_script_design_version_bump_script_design",
-      "target": "docs_superpowers_specs_2026_07_13_version_bump_script_design_human_pr_gate"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_13_version_bump_script_design_version_bump_script_design",
-      "target": "docs_superpowers_specs_2026_07_13_version_bump_script_design_tag_mode"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_13_version_bump_script_design_version_bump_script_design",
-      "target": "docs_superpowers_specs_2026_07_13_version_bump_script_design_targeted_version_replacements"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_13_version_bump_script_design_version_bump_script_design",
-      "target": "docs_superpowers_specs_2026_07_13_version_bump_script_design_tauri_config_version_source_of_truth"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_13_version_bump_script_design_cargo_lock_refresh",
-      "target": "docs_superpowers_specs_2026_07_13_version_bump_script_design_bump_mode"
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_13_version_bump_script_design_clean_current_main_preconditions",
-      "target": "docs_superpowers_specs_2026_07_13_version_bump_script_design_bump_mode"
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_13_version_bump_script_design_targeted_version_replacements",
-      "target": "docs_superpowers_specs_2026_07_13_version_bump_script_design_bump_mode"
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_13_version_bump_script_design_clean_current_main_preconditions",
-      "target": "docs_superpowers_specs_2026_07_13_version_bump_script_design_tag_mode"
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-13-version-bump-script-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_13_version_bump_script_design_human_pr_gate",
-      "target": "docs_superpowers_specs_2026_07_13_version_bump_script_design_tag_mode"
     },
     {
       "relation": "conceptually_related_to",
@@ -30607,50 +29087,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".agents/skills/teach/SKILL.md"
-    },
-    {
-      "id": "auto_submit_dependency_chain",
-      "label": "Auto-Fill, Auto-Submit, and Auto-Close Dependency Chain",
-      "nodes": [
-        "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_submit",
-        "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_close",
-        "docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_cascade_rule"
-      ],
-      "relation": "form",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-08-auto-submit-auto-close-design.md"
-    },
-    {
-      "id": "parallel_account_verification_flow",
-      "label": "Parallel Portal and Jira Account Verification Flow",
-      "nodes": [
-        "docs_superpowers_specs_2026_07_12_account_verification_design_candidate_portal_verification",
-        "docs_superpowers_specs_2026_07_12_account_verification_design_jira_credentials_check",
-        "docs_superpowers_specs_2026_07_12_account_verification_design_parallel_account_verification",
-        "docs_superpowers_specs_2026_07_12_account_verification_design_verify_account_error",
-        "docs_superpowers_specs_2026_07_12_account_verification_design_save_anyway_escape_hatch"
-      ],
-      "relation": "participate_in",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-12-account-verification-design.md"
-    },
-    {
-      "id": "signed_release_delivery_chain",
-      "label": "Signed Release and Update Delivery Chain",
-      "nodes": [
-        "docs_superpowers_specs_2026_07_12_cicd_design_tag_driven_release_pipeline",
-        "docs_superpowers_specs_2026_07_12_cicd_design_release_version_guard",
-        "docs_superpowers_specs_2026_07_12_cicd_design_updater_signing_key",
-        "docs_superpowers_specs_2026_07_12_cicd_design_draft_release_publish_gate",
-        "docs_superpowers_specs_2026_07_12_cicd_design_in_app_auto_updater"
-      ],
-      "relation": "form",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md"
     }
   ],
-  "built_at_commit": "b09878f0b6ffcfd40c21e4316af1eb5ce97a3257"
+  "built_at_commit": "9ba52fd6d22281b437f227a3a2aa151f4c723b8b"
 }
