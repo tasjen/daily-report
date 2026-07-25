@@ -11,9 +11,19 @@ import { join } from "node:path";
 
 import { afterEach, describe, expect, it } from "vitest";
 
+// The script under test stays .mjs so the release workflow keeps running it
+// through bare `node`, with no type-stripping floor on the runner's Node. Only
+// this file goes through Vitest's TypeScript transform.
 const SCRIPT = join(process.cwd(), "scripts/bump-version.mjs");
 const FIXTURE_CARGO_PACKAGE = "fixture-app";
-const temporaryDirectories = [];
+const temporaryDirectories: string[] = [];
+
+type FixtureVersions = {
+  cargo: string;
+  lock: string;
+  package: string;
+  tauri: string;
+};
 
 afterEach(() => {
   for (const directory of temporaryDirectories.splice(0)) {
@@ -21,7 +31,7 @@ afterEach(() => {
   }
 });
 
-function git(cwd, ...args) {
+function git(cwd: string, ...args: string[]): string {
   return execFileSync("git", args, {
     cwd,
     encoding: "utf8",
@@ -29,7 +39,7 @@ function git(cwd, ...args) {
   }).trim();
 }
 
-function writeVersions(repository, versions) {
+function writeVersions(repository: string, versions: FixtureVersions) {
   mkdirSync(join(repository, "src-tauri"), { recursive: true });
   writeFileSync(
     join(repository, "package.json"),
@@ -74,7 +84,7 @@ function createRepository(version = "2.0.0") {
   return { origin, repository };
 }
 
-function commitVersions(repository, version) {
+function commitVersions(repository: string, version: string): string {
   const before = git(repository, "rev-parse", "HEAD");
   writeVersions(repository, {
     cargo: version,
@@ -89,7 +99,7 @@ function commitVersions(repository, version) {
   return before;
 }
 
-function runTagIfChanged(repository, before) {
+function runTagIfChanged(repository: string, before: string) {
   const head = git(repository, "rev-parse", "HEAD");
   const githubOutput = join(repository, ".github-output");
   writeFileSync(githubOutput, "");

@@ -8,6 +8,7 @@
 
     /* Bundler mode */
     "module": "nodenext",
+    "allowJs": true,
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
@@ -20,5 +21,15 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["vite.config.ts", "vitest.config.ts"]
+  // The release script and its test live here rather than in tsconfig.app.json:
+  // they are Node code, not browser code, and need `types: ["node"]`. Including
+  // them is what makes `tsc -b` (and so CI's `pnpm build`) check them —
+  // `allowJs` alone would only make the `// @ts-check`ed .mjs script visible,
+  // leaving its annotations as editor-only decoration.
+  "include": [
+    "vite.config.ts",
+    "vitest.config.ts",
+    "scripts/bump-version.mjs",
+    "scripts/bump-version.test.ts"
+  ]
 }

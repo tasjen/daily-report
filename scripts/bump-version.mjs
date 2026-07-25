@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// @ts-check
 import { execFileSync } from "node:child_process";
 import { appendFileSync, readFileSync, writeFileSync } from "node:fs";
 import { createInterface } from "node:readline/promises";
@@ -10,15 +11,24 @@ const USAGE = `Usage:
   pnpm bump --tag-if-changed <commit>         tag when the version changed since <commit> (CI only)
   pnpm bump --verify-tag <vX.Y.Z>             verify a release tag against every version file`;
 
+/**
+ * @param {string} message
+ * @returns {never}
+ */
 function fail(message) {
   console.error(`error: ${message}`);
   process.exit(1);
 }
 
+/**
+ * @param {string[]} args
+ * @returns {string}
+ */
 function git(...args) {
   return execFileSync("git", args, { encoding: "utf8" }).trim();
 }
 
+/** @returns {string} */
 function readTauriVersion() {
   return JSON.parse(readFileSync("src-tauri/tauri.conf.json", "utf8")).version;
 }
@@ -48,12 +58,21 @@ function requireReleasableState() {
   }
 }
 
+/**
+ * @param {string} name
+ * @param {string} value
+ */
 function writeGitHubOutput(name, value) {
   if (process.env.GITHUB_OUTPUT) {
     appendFileSync(process.env.GITHUB_OUTPUT, `${name}=${value}\n`);
   }
 }
 
+/**
+ * @param {string} file
+ * @param {RegExp} pattern
+ * @returns {string}
+ */
 function readMatchedVersion(file, pattern) {
   const matches = [...readFileSync(file, "utf8").matchAll(pattern)];
   if (matches.length !== 1) {
@@ -62,6 +81,7 @@ function readMatchedVersion(file, pattern) {
   return matches[0][1];
 }
 
+/** @returns {{ name: string; version: string }} */
 function readCargoPackage() {
   const matches = [
     ...readFileSync("src-tauri/Cargo.toml", "utf8").matchAll(
@@ -74,6 +94,10 @@ function readCargoPackage() {
   return { name: matches[0][1], version: matches[0][2] };
 }
 
+/**
+ * @param {string} packageName
+ * @returns {RegExp}
+ */
 function cargoLockVersionPattern(packageName) {
   const escapedName = packageName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   return new RegExp(
@@ -82,8 +106,10 @@ function cargoLockVersionPattern(packageName) {
   );
 }
 
+/** @returns {string} */
 function readSynchronizedVersion() {
   const cargoPackage = readCargoPackage();
+  /** @type {[string, string][]} */
   const versions = [
     ["package.json", JSON.parse(readFileSync("package.json", "utf8")).version],
     ["src-tauri/tauri.conf.json", readTauriVersion()],
@@ -107,6 +133,11 @@ function readSynchronizedVersion() {
   return versions[0][1];
 }
 
+/**
+ * @param {string} a
+ * @param {string} b
+ * @returns {number}
+ */
 function compareVersions(a, b) {
   const pa = a.split(".").map(Number);
   const pb = b.split(".").map(Number);
@@ -118,8 +149,14 @@ function compareVersions(a, b) {
   return 0;
 }
 
+/**
+ * @param {string} arg
+ * @param {string} current
+ * @returns {string}
+ */
 function targetVersion(arg, current) {
   const [major, minor, patch] = current.split(".").map(Number);
+  /** @type {Record<string, string | undefined>} */
   const keywordBumps = {
     major: `${major + 1}.0.0`,
     minor: `${major}.${minor + 1}.0`,
@@ -135,6 +172,11 @@ function targetVersion(arg, current) {
   return next;
 }
 
+/**
+ * @param {string} file
+ * @param {string} pattern
+ * @param {string} next
+ */
 function replaceVersionLine(file, pattern, next) {
   const source = readFileSync(file, "utf8");
   const count = (source.match(new RegExp(pattern, "gm")) ?? []).length;
@@ -144,6 +186,7 @@ function replaceVersionLine(file, pattern, next) {
   writeFileSync(file, source.replace(new RegExp(pattern, "m"), `$1${next}$2`));
 }
 
+/** @param {string} arg */
 function bump(arg) {
   requireReleasableState();
   const current = readTauriVersion();
@@ -213,6 +256,10 @@ function bump(arg) {
   );
 }
 
+/**
+ * @param {string} tagName
+ * @returns {string | undefined}
+ */
 function remoteTagTarget(tagName) {
   // An annotated tag is listed twice: the tag object, then a `^{}` line
   // carrying the commit it points at. The commit is what to compare against,
@@ -235,6 +282,10 @@ function remoteTagTarget(tagName) {
   return (peeled ?? lines[0]).split(/\s/)[0];
 }
 
+/**
+ * @param {boolean} skipConfirm
+ * @returns {Promise<string>}
+ */
 async function tag(skipConfirm) {
   requireReleasableState();
   const tagName = `v${readSynchronizedVersion()}`;
@@ -279,10 +330,12 @@ async function tag(skipConfirm) {
   return tagName;
 }
 
+/** @param {string} before */
 async function tagIfVersionChanged(before) {
   if (!/^[0-9a-f]{40}$/.test(before)) {
     fail(`"${before}" is not a full Git commit SHA`);
   }
+  /** @type {string} */
   const previous = JSON.parse(
     git("show", `${before}:src-tauri/tauri.conf.json`),
   ).version;
@@ -303,6 +356,7 @@ async function tagIfVersionChanged(before) {
   writeGitHubOutput("tag", tagName);
 }
 
+/** @param {string} tagName */
 function verifyTag(tagName) {
   const expected = `v${readSynchronizedVersion()}`;
   if (tagName !== expected) {

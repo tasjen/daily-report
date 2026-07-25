@@ -1,16 +1,16 @@
 # Graph Report - flexi-report  (2026-07-26)
 
 ## Corpus Check
-- 159 files · ~114,616 words
+- 159 files · ~114,775 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1484 nodes · 2184 edges · 230 communities (90 shown, 140 thin omitted)
+- 1486 nodes · 2192 edges · 230 communities (90 shown, 140 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 41 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `9f695bd1`
+- Built from commit: `298c0f76`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -347,8 +347,8 @@ Cohesion: 0.18
 Nodes (10): enabledPlugins, andrej-karpathy-skills@karpathy-skills, frontend-design@claude-plugins-official, superpowers@claude-plugins-official, hooks, PreToolUse, permissions, allow (+2 more)
 
 ### Community 29 - "Version Bump Script"
-Cohesion: 0.33
-Nodes (16): args, bump(), compareVersions(), fail(), git(), readMatchedVersion(), readSynchronizedVersion(), readTauriVersion() (+8 more)
+Cohesion: 0.31
+Nodes (18): args, bump(), cargoLockVersionPattern(), compareVersions(), fail(), git(), readCargoPackage(), readMatchedVersion() (+10 more)
 
 ### Community 31 - "icon"
 Cohesion: 0.18
@@ -499,7 +499,7 @@ Cohesion: 0.67
 Nodes (3): react, react, useComboboxAnchor()
 
 ## Knowledge Gaps
-- **426 isolated node(s):** `config`, `install.sh script`, `name`, `version`, `private` (+421 more)
+- **426 isolated node(s):** `args`, `SCRIPT`, `temporaryDirectories`, `config`, `install.sh script` (+421 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **140 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -507,12 +507,12 @@ Nodes (3): react, react, useComboboxAnchor()
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `react` connect `React App Components` to `select.tsx`, `InputGroup`, `Card`, `oxlint Linter Config`, `LocaleToggle`, `Combobox Component`, `Dropdown Menu Component`, `version.tsx`, `use-task-selection.ts`, `Dialog`?**
-  _High betweenness centrality (0.043) - this node is a cross-community bridge._
+  _High betweenness centrality (0.049) - this node is a cross-community bridge._
 - **Why does `AppError` connect `Rust Backend Browser Automation` to `@lingui/core`, `Mutations & Queries`, `account.rs`, `Auto-Submit/Close & Favorites`, `.run`, `@base-ui/react`, `@formkit/auto-animate`?**
   _High betweenness centrality (0.042) - this node is a cross-community bridge._
 - **Why does `dependencies` connect `lucide-react` to `package.json Scripts`, `class-variance-authority`, `clsx`, `@lingui/react`, `mutative`, `next-themes`, `react-dom`, `react-error-boundary`, `shadcn`, `sonner`, `tailwind-merge`, `@tauri-apps/plugin-opener`, `@tanstack/react-form`, `@tanstack/react-query`, `use-copy-to-clipboard.ts`, `@tauri-apps/api`, `@tauri-apps/plugin-updater`, `@tauri-apps/plugin-window-state`, `tw-animate-css`, `@formkit/auto-animate`, `@lingui/core`, `tailwindcss`, `@tailwindcss/vite`?**
-  _High betweenness centrality (0.037) - this node is a cross-community bridge._
-- **What connects `config`, `install.sh script`, `name` to the rest of the system?**
+  _High betweenness centrality (0.040) - this node is a cross-community bridge._
+- **What connects `args`, `SCRIPT`, `temporaryDirectories` to the rest of the system?**
   _426 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Rust Backend Browser Automation` be split into smaller, more focused modules?**
   _Cohesion score 0.06964443138407288 - nodes in this community are weakly interconnected._

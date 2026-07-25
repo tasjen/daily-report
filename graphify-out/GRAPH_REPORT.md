@@ -1,16 +1,16 @@
 # Graph Report - flexi-report  (2026-07-26)
 
 ## Corpus Check
-- 159 files · ~114,775 words
+- 159 files · ~115,060 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1486 nodes · 2192 edges · 230 communities (90 shown, 140 thin omitted)
+- 1490 nodes · 2196 edges · 227 communities (88 shown, 139 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 41 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `298c0f76`
+- Built from commit: `1db7e23d`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -115,7 +115,6 @@
 - @wdio/local-runner
 - @wdio/mocha-framework
 - @wdio/spec-reporter
-- Engineering Skills Configuration
 - LocaleToggle
 - Pre-commit Hooks (lint/fmt/rustfmt)
 - Pre-push Hooks (tsc/clippy)
@@ -187,16 +186,13 @@
 - Daily Report App Icon
 - Interface as Test Surface
 - Triage Label Mapping
-- store.ts
 - Design It Twice
-- lucide-react
 - @tauri-apps/plugin-opener
 - @testing-library/dom
 - @testing-library/jest-dom
 - @types/babel__core
 - react
 - preference-toggles.test.tsx
-- open-member-page-button.tsx
 - sign-out-button.tsx
 - use-copy-to-clipboard.ts
 - version.tsx
@@ -223,10 +219,10 @@
 3. `compilerOptions` - 23 edges
 4. `scripts` - 18 edges
 5. `FakeHost` - 18 edges
-6. `FixtureServer` - 17 edges
-7. `PortalAccountConfig` - 17 edges
-8. `FakeTaskForm` - 16 edges
-9. `compilerOptions` - 16 edges
+6. `compilerOptions` - 17 edges
+7. `FixtureServer` - 17 edges
+8. `PortalAccountConfig` - 17 edges
+9. `FakeTaskForm` - 16 edges
 10. `session()` - 15 edges
 
 ## Surprising Connections (you probably didn't know these)
@@ -252,7 +248,7 @@
 - **Portable Logic Prototype Module Shapes** — _agents_skills_prototype_logic_pure_reducer, _agents_skills_prototype_logic_state_machine, _agents_skills_prototype_logic_pure_function_set, _agents_skills_prototype_logic_stateful_module_interface [EXTRACTED 1.00]
 - **Knowledge Skills and Wisdom Learning Model** — _agents_skills_teach_resources_format_high_trust_resources, _agents_skills_teach_skill_self_contained_html_lesson, _agents_skills_teach_skill_community_wisdom [EXTRACTED 1.00]
 
-## Communities (230 total, 140 thin omitted)
+## Communities (227 total, 139 thin omitted)
 
 ### Community 0 - "Rust Backend Browser Automation"
 Cohesion: 0.07
@@ -275,8 +271,8 @@ Cohesion: 0.20
 Nodes (12): External Pull Request Triage, GitHub Issue Tracker, GitHub Wayfinding Operations, Shared GitHub Issue and PR Number Space, External Merge Request Triage, GitLab Issue Tracker, Separate GitLab Issue and MR Number Spaces, Local Markdown Issue Tracker (+4 more)
 
 ### Community 5 - "Research & Domain Modeling"
-Cohesion: 0.20
-Nodes (12): Concrete Learning Mission, Mission Format, One Mission per Workspace, Mission Success, Constraints, and Scope, Knowledge, Skills, and Wisdom, Mission-Grounded Teaching, Reusable Lesson Assets, Self-Contained HTML Lesson (+4 more)
+Cohesion: 0.07
+Nodes (33): Background Research Agent, Cited Markdown Findings, Primary-Source Research, Research Skill, Glossary Vocabulary Discipline, Canonical Learning Language, Evidence-Gated Term Promotion, Glossary Ambiguity Resolution (+25 more)
 
 ### Community 6 - "Deep Module Design Vocabulary"
 Cohesion: 0.20
@@ -311,16 +307,16 @@ Cohesion: 0.09
 Nodes (21): aliases, components, hooks, lib, ui, utils, iconLibrary, menuAccent (+13 more)
 
 ### Community 16 - "Vite/Vitest tsconfig"
-Cohesion: 0.09
-Nodes (21): vite.config.ts, vitest.config.ts, compilerOptions, allowImportingTsExtensions, erasableSyntaxOnly, lib, module, moduleDetection (+13 more)
+Cohesion: 0.08
+Nodes (24): ES2023, node, scripts/bump-version.mjs, scripts/bump-version.test.ts, vite.config.ts, vitest.config.ts, compilerOptions, allowImportingTsExtensions (+16 more)
 
 ### Community 18 - "Prototype & Logic Modules"
-Cohesion: 0.17
-Nodes (13): Explicit Prototype Question, In-Memory Prototype State, Lightweight TUI, Logic Prototype, Portable Pure Logic Module, Pure Function Set, Pure Reducer, State Machine (+5 more)
+Cohesion: 0.12
+Nodes (20): Explicit Prototype Question, In-Memory Prototype State, Lightweight TUI, Logic Prototype, Portable Pure Logic Module, Pure Function Set, Pure Reducer, State Machine (+12 more)
 
 ### Community 20 - "Account Verification Feature"
-Cohesion: 0.22
-Nodes (9): Background Research Agent, Cited Markdown Findings, Primary-Source Research, Research Skill, High-Trust Resources, Knowledge and Wisdom Resources, Resource Gaps and Pruning, Resources Format (+1 more)
+Cohesion: 0.67
+Nodes (3): fire(), flushMicrotasks(), T0
 
 ### Community 21 - "Auto-Submit/Close & Favorites"
 Cohesion: 0.09
@@ -428,7 +424,7 @@ Nodes (13): BTreeSet, collect_sources(), every_command_the_frontend_invokes_is_r
 
 ### Community 84 - "@tanstack/react-query-devtools"
 Cohesion: 0.14
-Nodes (6): vitest, { relaunch }, ALL_ARMED, fire(), flushMicrotasks(), T0
+Nodes (4): vitest, { relaunch }, ALL_ARMED, account
 
 ### Community 86 - "@tauri-apps/plugin-http"
 Cohesion: 0.33
@@ -443,8 +439,8 @@ Cohesion: 0.25
 Nodes (9): ADR-Aware Architecture Review, Architecture Review HTML Report, Deep Module Design Vocabulary, Deepening Opportunity, Deletion Test, Improve Codebase Architecture, ADR Conflict Flagging, Pre-Agreed Test Seams (+1 more)
 
 ### Community 97 - "Domain Docs"
-Cohesion: 0.29
-Nodes (7): Domain Docs, Glossary Vocabulary Discipline, Multi-Context Domain Layout, Single-Context Domain Layout, Domain Docs Layout Decision, Canonical Learning Language, Glossary Ambiguity Resolution
+Cohesion: 0.25
+Nodes (8): Domain Docs, Multi-Context Domain Layout, Single-Context Domain Layout, Agent Skills Configuration Block, Domain Docs Layout Decision, Engineering Skills Configuration, Prompt-Driven Setup, Triage Label Vocabulary
 
 ### Community 98 - "Red-capable Command"
 Cohesion: 0.25
@@ -453,10 +449,6 @@ Nodes (8): Triage and Diagnosis On-ramps, Diagnosing Bugs, Performance Measureme
 ### Community 101 - "@vitejs/plugin-react"
 Cohesion: 0.20
 Nodes (19): Deepening, Ports and Adapters, Common-caller Constraint, Design Comparison, Design It Twice, Minimal Interface Constraint, Parallel Interface Alternatives, Problem-space Framing (+11 more)
-
-### Community 113 - "Engineering Skills Configuration"
-Cohesion: 0.29
-Nodes (7): Agent Skills Configuration Block, Engineering Skills Configuration, Prompt-Driven Setup, Setup Matt Pocock Skills, Triage Label Vocabulary, Prefactoring, To Issues
 
 ### Community 114 - "LocaleToggle"
 Cohesion: 0.07
@@ -474,46 +466,38 @@ Nodes (7): needs-info, needs-triage, ready-for-agent, ready-for-human, Triage La
 Cohesion: 0.40
 Nodes (4): DEFAULTS, groups(), Sets, setup()
 
-### Community 203 - "lucide-react"
-Cohesion: 0.22
-Nodes (9): Evidence-Gated Term Promotion, Glossary Format, Decision-Grade Learning Record, Evidence of Learning, Learning Record Format, Learning Record Supersession, Zone of Proximal Development Input, Reference Documents (+1 more)
-
 ### Community 209 - "react"
 Cohesion: 0.28
 Nodes (10): PortalAccountConfig, is_present(), live_config(), LiveSession, Browser, Page, Self, the_live_portal_still_accepts_our_login_and_shuts_down_cleanly() (+2 more)
 
 ### Community 210 - "preference-toggles.test.tsx"
-Cohesion: 0.43
-Nodes (7): commitVersions(), createRepository(), git(), runTagIfChanged(), SCRIPT, temporaryDirectories, writeVersions()
-
-### Community 211 - "open-member-page-button.tsx"
-Cohesion: 0.33
-Nodes (7): Existing Page Sub-Shape, New Page Sub-Shape, Prototype Production Gate, Prototype Switcher, Radically Different UI Variants, UI Prototype, Variant URL Parameter
+Cohesion: 0.36
+Nodes (8): commitVersions(), createRepository(), FixtureVersions, git(), runTagIfChanged(), SCRIPT, temporaryDirectories, writeVersions()
 
 ### Community 212 - "sign-out-button.tsx"
-Cohesion: 0.40
-Nodes (5): Red-Green Loop, Vertical Slice TDD, Issue Breakdown Quiz, Tracer Bullet Issues, Vertical Slice Rules
+Cohesion: 0.25
+Nodes (8): Setup Matt Pocock Skills, Red-Green Loop, Vertical Slice TDD, Issue Breakdown Quiz, Prefactoring, To Issues, Tracer Bullet Issues, Vertical Slice Rules
 
 ### Community 213 - "use-copy-to-clipboard.ts"
 Cohesion: 0.67
 Nodes (3): react, react, useComboboxAnchor()
 
 ## Knowledge Gaps
-- **426 isolated node(s):** `args`, `SCRIPT`, `temporaryDirectories`, `config`, `install.sh script` (+421 more)
+- **430 isolated node(s):** `args`, `SCRIPT`, `temporaryDirectories`, `FixtureVersions`, `tsBuildInfoFile` (+425 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **140 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **139 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `react` connect `React App Components` to `select.tsx`, `InputGroup`, `Card`, `oxlint Linter Config`, `LocaleToggle`, `Combobox Component`, `Dropdown Menu Component`, `version.tsx`, `use-task-selection.ts`, `Dialog`?**
-  _High betweenness centrality (0.049) - this node is a cross-community bridge._
-- **Why does `AppError` connect `Rust Backend Browser Automation` to `@lingui/core`, `Mutations & Queries`, `account.rs`, `Auto-Submit/Close & Favorites`, `.run`, `@base-ui/react`, `@formkit/auto-animate`?**
-  _High betweenness centrality (0.042) - this node is a cross-community bridge._
+  _High betweenness centrality (0.057) - this node is a cross-community bridge._
 - **Why does `dependencies` connect `lucide-react` to `package.json Scripts`, `class-variance-authority`, `clsx`, `@lingui/react`, `mutative`, `next-themes`, `react-dom`, `react-error-boundary`, `shadcn`, `sonner`, `tailwind-merge`, `@tauri-apps/plugin-opener`, `@tanstack/react-form`, `@tanstack/react-query`, `use-copy-to-clipboard.ts`, `@tauri-apps/api`, `@tauri-apps/plugin-updater`, `@tauri-apps/plugin-window-state`, `tw-animate-css`, `@formkit/auto-animate`, `@lingui/core`, `tailwindcss`, `@tailwindcss/vite`?**
-  _High betweenness centrality (0.040) - this node is a cross-community bridge._
+  _High betweenness centrality (0.046) - this node is a cross-community bridge._
+- **Why does `react` connect `use-copy-to-clipboard.ts` to `lucide-react`?**
+  _High betweenness centrality (0.039) - this node is a cross-community bridge._
 - **What connects `args`, `SCRIPT`, `temporaryDirectories` to the rest of the system?**
-  _426 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _430 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Rust Backend Browser Automation` be split into smaller, more focused modules?**
   _Cohesion score 0.06964443138407288 - nodes in this community are weakly interconnected._
 - **Should `Agent Workflow Skills` be split into smaller, more focused modules?**
