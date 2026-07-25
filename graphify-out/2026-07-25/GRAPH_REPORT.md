@@ -5,12 +5,12 @@
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1472 nodes · 2152 edges · 233 communities (88 shown, 145 thin omitted)
+- 1468 nodes · 2149 edges · 228 communities (83 shown, 145 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 41 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `72e754ca`
+- Built from commit: `1c1ea636`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -29,7 +29,6 @@
 - package.json Scripts
 - oxlint Linter Config
 - Architecture Review Skill
-- CI/CD & Release Pipeline
 - shadcn components.json
 - Vite/Vitest tsconfig
 - React App Components
@@ -199,10 +198,6 @@
 - @types/babel__core
 - react
 - preference-toggles.test.tsx
-- @tauri-apps/plugin-process
-- @tauri-apps/plugin-store
-- zod
-- @types/react
 - use-task-selection.ts
 - main.tsx
 - date-card-summary.tsx
@@ -257,7 +252,7 @@
 - **Portable Logic Prototype Module Shapes** — _agents_skills_prototype_logic_pure_reducer, _agents_skills_prototype_logic_state_machine, _agents_skills_prototype_logic_pure_function_set, _agents_skills_prototype_logic_stateful_module_interface [EXTRACTED 1.00]
 - **Knowledge Skills and Wisdom Learning Model** — _agents_skills_teach_resources_format_high_trust_resources, _agents_skills_teach_skill_self_contained_html_lesson, _agents_skills_teach_skill_community_wisdom [EXTRACTED 1.00]
 
-## Communities (233 total, 145 thin omitted)
+## Communities (228 total, 145 thin omitted)
 
 ### Community 0 - "Rust Backend Browser Automation"
 Cohesion: 0.07
@@ -280,8 +275,8 @@ Cohesion: 0.20
 Nodes (12): External Pull Request Triage, GitHub Issue Tracker, GitHub Wayfinding Operations, Shared GitHub Issue and PR Number Space, External Merge Request Triage, GitLab Issue Tracker, Separate GitLab Issue and MR Number Spaces, Local Markdown Issue Tracker (+4 more)
 
 ### Community 5 - "Research & Domain Modeling"
-Cohesion: 0.20
-Nodes (12): Concrete Learning Mission, Mission Format, One Mission per Workspace, Mission Success, Constraints, and Scope, Knowledge, Skills, and Wisdom, Mission-Grounded Teaching, Reusable Lesson Assets, Self-Contained HTML Lesson (+4 more)
+Cohesion: 0.08
+Nodes (28): Background Research Agent, Cited Markdown Findings, Primary-Source Research, Research Skill, Evidence-Gated Term Promotion, Decision-Grade Learning Record, Evidence of Learning, Learning Record Format (+20 more)
 
 ### Community 6 - "Deep Module Design Vocabulary"
 Cohesion: 0.20
@@ -311,10 +306,6 @@ Nodes (23): name, packageManager, private, scripts, build, bump, clean, dev (+15
 Cohesion: 0.07
 Nodes (27): categories, correctness, suspicious, ignorePatterns, graphify-out, src-tauri/gen, src-tauri/target, options (+19 more)
 
-### Community 14 - "CI/CD & Release Pipeline"
-Cohesion: 0.50
-Nodes (4): Weekly Cargo Updates, Dependabot Configuration, Weekly GitHub Actions Updates, Weekly npm Updates
-
 ### Community 15 - "shadcn components.json"
 Cohesion: 0.09
 Nodes (21): aliases, components, hooks, lib, ui, utils, iconLibrary, menuAccent (+13 more)
@@ -324,8 +315,8 @@ Cohesion: 0.09
 Nodes (21): vite.config.ts, vitest.config.ts, compilerOptions, allowImportingTsExtensions, erasableSyntaxOnly, lib, module, moduleDetection (+13 more)
 
 ### Community 18 - "Prototype & Logic Modules"
-Cohesion: 0.17
-Nodes (13): Explicit Prototype Question, In-Memory Prototype State, Lightweight TUI, Logic Prototype, Portable Pure Logic Module, Pure Function Set, Pure Reducer, State Machine (+5 more)
+Cohesion: 0.12
+Nodes (20): Explicit Prototype Question, In-Memory Prototype State, Lightweight TUI, Logic Prototype, Portable Pure Logic Module, Pure Function Set, Pure Reducer, State Machine (+12 more)
 
 ### Community 19 - "Combobox Component"
 Cohesion: 0.11
@@ -436,8 +427,8 @@ Cohesion: 0.26
 Nodes (13): BTreeSet, collect_sources(), every_command_the_frontend_invokes_is_registered(), every_registered_command_is_reachable_from_the_frontend(), invoked_commands(), invoked_in(), registered_commands(), Option (+5 more)
 
 ### Community 86 - "@tauri-apps/plugin-http"
-Cohesion: 0.33
-Nodes (6): Prototype Answer Capture, Throwaway Prototype, UI Winner Cleanup, Dependency-Ordered Issue Publication, Vertical Slice Issue Body Template, Parent Issue Preservation
+Cohesion: 0.18
+Nodes (11): Prototype Answer Capture, Throwaway Prototype, UI Winner Cleanup, Red-Green Loop, Vertical Slice TDD, Issue Breakdown Quiz, Dependency-Ordered Issue Publication, Vertical Slice Issue Body Template (+3 more)
 
 ### Community 87 - "@tauri-apps/plugin-process"
 Cohesion: 0.29
@@ -448,8 +439,8 @@ Cohesion: 0.25
 Nodes (9): ADR-Aware Architecture Review, Architecture Review HTML Report, Deep Module Design Vocabulary, Deepening Opportunity, Deletion Test, Improve Codebase Architecture, ADR Conflict Flagging, Pre-Agreed Test Seams (+1 more)
 
 ### Community 97 - "Domain Docs"
-Cohesion: 0.29
-Nodes (7): Domain Docs, Glossary Vocabulary Discipline, Multi-Context Domain Layout, Single-Context Domain Layout, Domain Docs Layout Decision, Canonical Learning Language, Glossary Ambiguity Resolution
+Cohesion: 0.22
+Nodes (9): Domain Docs, Glossary Vocabulary Discipline, Multi-Context Domain Layout, Single-Context Domain Layout, Domain Docs Layout Decision, Canonical Learning Language, Glossary Ambiguity Resolution, Glossary Format (+1 more)
 
 ### Community 98 - "Red-capable Command"
 Cohesion: 0.25
@@ -487,24 +478,8 @@ Nodes (3): fire(), flushMicrotasks(), T0
 Cohesion: 0.28
 Nodes (10): PortalAccountConfig, is_present(), live_config(), LiveSession, Browser, Page, Self, the_live_portal_still_accepts_our_login_and_shuts_down_cleanly() (+2 more)
 
-### Community 211 - "@tauri-apps/plugin-process"
-Cohesion: 0.22
-Nodes (9): Background Research Agent, Cited Markdown Findings, Primary-Source Research, Research Skill, High-Trust Resources, Knowledge and Wisdom Resources, Resource Gaps and Pruning, Resources Format (+1 more)
-
-### Community 212 - "@tauri-apps/plugin-store"
-Cohesion: 0.22
-Nodes (9): Evidence-Gated Term Promotion, Glossary Format, Decision-Grade Learning Record, Evidence of Learning, Learning Record Format, Learning Record Supersession, Zone of Proximal Development Input, Reference Documents (+1 more)
-
-### Community 213 - "zod"
-Cohesion: 0.33
-Nodes (7): Existing Page Sub-Shape, New Page Sub-Shape, Prototype Production Gate, Prototype Switcher, Radically Different UI Variants, UI Prototype, Variant URL Parameter
-
-### Community 214 - "@types/react"
-Cohesion: 0.40
-Nodes (5): Red-Green Loop, Vertical Slice TDD, Issue Breakdown Quiz, Tracer Bullet Issues, Vertical Slice Rules
-
 ## Knowledge Gaps
-- **426 isolated node(s):** `config`, `install.sh script`, `name`, `version`, `private` (+421 more)
+- **423 isolated node(s):** `config`, `install.sh script`, `name`, `version`, `private` (+418 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **145 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -516,9 +491,9 @@ _Questions this graph is uniquely positioned to answer:_
 - **Why does `react` connect `React App Components` to `select.tsx`, `InputGroup`, `Card`, `oxlint Linter Config`, `LocaleToggle`, `Combobox Component`, `Account Verification Feature`, `Dropdown Menu Component`, `use-task-selection.ts`, `Dialog`?**
   _High betweenness centrality (0.040) - this node is a cross-community bridge._
 - **Why does `dependencies` connect `lucide-react` to `package.json Scripts`, `Combobox Component`, `class-variance-authority`, `clsx`, `@lingui/react`, `mutative`, `next-themes`, `lucide-react`, `react-dom`, `react-error-boundary`, `shadcn`, `sonner`, `tailwind-merge`, `@tauri-apps/plugin-opener`, `@tanstack/react-form`, `@tanstack/react-query`, `@tauri-apps/api`, `@tauri-apps/plugin-updater`, `@tauri-apps/plugin-window-state`, `tw-animate-css`, `@formkit/auto-animate`, `@lingui/core`, `tailwindcss`, `@tailwindcss/vite`, `@tanstack/react-query-devtools`, `@tauri-apps/plugin-http`?**
-  _High betweenness centrality (0.035) - this node is a cross-community bridge._
+  _High betweenness centrality (0.036) - this node is a cross-community bridge._
 - **What connects `config`, `install.sh script`, `name` to the rest of the system?**
-  _426 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _423 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Rust Backend Browser Automation` be split into smaller, more focused modules?**
   _Cohesion score 0.06964443138407288 - nodes in this community are weakly interconnected._
 - **Should `Agent Workflow Skills` be split into smaller, more focused modules?**

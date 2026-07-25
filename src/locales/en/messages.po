@@ -17,7 +17,7 @@ msgstr ""
 msgid "(all selected)"
 msgstr "(all selected)"
 
-#: src/components/date-card.tsx:182
+#: src/components/date-card/header.tsx:33
 msgid "{dayCount} days ago"
 msgstr "{dayCount} days ago"
 
@@ -37,15 +37,15 @@ msgstr "Add project"
 msgid "Assigned to you not done"
 msgstr "Assigned to you not done"
 
-#: src/components/auto-close-toggle.tsx:33
+#: src/components/auto-close-toggle.tsx:34
 msgid "Auto-close browser"
 msgstr "Auto-close browser"
 
-#: src/components/autofill-summary-toggle.tsx:28
+#: src/components/autofill-summary-toggle.tsx:29
 msgid "Auto-fill report summary"
 msgstr "Auto-fill report summary"
 
-#: src/components/auto-submit-toggle.tsx:35
+#: src/components/auto-submit-toggle.tsx:36
 msgid "Auto-submit report"
 msgstr "Auto-submit report"
 
@@ -54,7 +54,7 @@ msgstr "Auto-submit report"
 msgid "Close"
 msgstr "Close"
 
-#: src/components/auto-close-toggle.tsx:44
+#: src/components/auto-close-toggle.tsx:45
 msgid "Closes the browser window after the form is submitted"
 msgstr "Closes the browser window after the form is submitted"
 
@@ -132,7 +132,7 @@ msgid "Jira request failed ({0} {1})"
 msgstr "Jira request failed ({0} {1})"
 
 #: src/components/favorites-form.tsx:113
-#: src/components/project-map-form.tsx:125
+#: src/components/project-map-form.tsx:127
 msgid "Key"
 msgstr "KEY"
 
@@ -148,7 +148,7 @@ msgstr "Limits the portal form's project options to these projects; leave empty 
 msgid "Load more"
 msgstr "Load more"
 
-#: src/components/project-map-form.tsx:85
+#: src/components/project-map-form.tsx:87
 msgid "Maps project keys to the portal's projects — an issue's key is its Jira key prefix (ABC-123 → ABC), a favorite's is its own optional key. Selected tasks are grouped by portal project and each group fills its own project + comment pair in the task form, largest group first (max {MAX_DISTINCT_PROJECTS} portal projects — the form has {MAX_DISTINCT_PROJECTS} pairs). Unmapped tasks fall back to the default project's group, or the first comment when no default project is set."
 msgstr "Maps project keys to the portal's projects — an issue's key is its Jira key prefix (ABC-123 → ABC), a favorite's is its own optional key. Selected tasks are grouped by portal project and each group fills its own project + comment pair in the task form, largest group first (max {MAX_DISTINCT_PROJECTS} portal projects — the form has {MAX_DISTINCT_PROJECTS} pairs). Unmapped tasks fall back to the default project's group, or the first comment when no default project is set."
 
@@ -168,7 +168,7 @@ msgstr "No items found."
 msgid "No reports to submit"
 msgstr "No reports to submit"
 
-#: src/components/date-card.tsx:285
+#: src/components/date-card/summary.tsx:54
 msgid "No tasks found"
 msgstr "No tasks found"
 
@@ -176,7 +176,7 @@ msgstr "No tasks found"
 msgid "No tasks found."
 msgstr "No tasks found."
 
-#: src/components/date-card.tsx:283
+#: src/components/date-card/summary.tsx:52
 msgid "No tasks selected"
 msgstr "No tasks selected"
 
@@ -212,11 +212,15 @@ msgstr "Portal URL is required"
 msgid "Preferences"
 msgstr "Preferences"
 
+#: src/components/project-map-form.tsx:150
+msgid "Project"
+msgstr "Project"
+
 #: src/components/project-list-select.tsx:41
 msgid "Project list"
 msgstr "Project list"
 
-#: src/components/project-map-form.tsx:75
+#: src/components/project-map-form.tsx:77
 msgid "Project mapping"
 msgstr "Project mapping"
 
@@ -260,7 +264,7 @@ msgstr "Something went wrong"
 msgid "Status updated by you"
 msgstr "Status updated by you"
 
-#: src/components/auto-submit-toggle.tsx:46
+#: src/components/auto-submit-toggle.tsx:47
 msgid "Submits the task form automatically after filling the summary"
 msgstr "Submits the task form automatically after filling the summary"
 
@@ -280,7 +284,7 @@ msgstr "The task groups whose issues start all checked by default"
 msgid "Theme"
 msgstr "Theme"
 
-#: src/components/date-card.tsx:180
+#: src/components/date-card/header.tsx:31
 msgid "Today"
 msgstr "Today"
 
@@ -313,6 +317,6 @@ msgstr "Use the username:password format"
 msgid "Verifying…"
 msgstr "Verifying…"
 
-#: src/components/date-card.tsx:181
+#: src/components/date-card/header.tsx:32
 msgid "Yesterday"
 msgstr "Yesterday"

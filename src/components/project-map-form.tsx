@@ -35,35 +35,37 @@ export default function ProjectMapForm() {
   const [projectId, setProjectId] = useState<string | null>(null);
   const [listRef] = useAutoAnimate();
 
-  const firstProject = data?.projects[0];
-  if (!firstProject || !preferences) return null;
+  const projects = data?.projects;
+  if (!projects?.length || !preferences) return null;
 
   const projectMap = preferences.project_map;
   // A project key is either a Jira issue-key prefix (e.g. "ABC-123" → "ABC")
   // or a favorite's custom key. Normalize to uppercase so lookups can't miss
   // on casing (favorite keys are normalized the same way).
   const trimmedKey = key.trim().toUpperCase();
-  const selectedProject = projectId ?? firstProject.value;
+  // Only `null` means "nothing picked yet" — the portal keeps an empty-valued
+  // placeholder option, and picking it is a real selection.
   const distinctValues = new Set([
     ...Object.values(projectMap),
-    selectedProject,
+    ...(projectId === null ? [] : [projectId]),
   ]);
   const canAdd = Boolean(
     trimmedKey &&
+    projectId !== null &&
     !(trimmedKey in projectMap) &&
     distinctValues.size <= MAX_DISTINCT_PROJECTS,
   );
 
   function projectLabel(value: string) {
-    return data?.projects.find((p) => p.value === value)?.label ?? value;
+    return projects?.find((p) => p.value === value)?.label ?? value;
   }
 
   function handleAdd(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!canAdd || !preferences) return;
+    if (!canAdd || !preferences || projectId === null) return;
     savePreferences.mutate({
       ...preferences,
-      project_map: { ...projectMap, [trimmedKey]: selectedProject },
+      project_map: { ...projectMap, [trimmedKey]: projectId },
     });
     setKey("");
     setProjectId(null);
@@ -127,17 +129,30 @@ export default function ProjectMapForm() {
           data-testid="project-map-key"
         />
         <Select
-          items={data.projects}
-          value={selectedProject}
-          onValueChange={(val) => setProjectId(val ?? firstProject.value)}
+          items={projects}
+          value={projectId}
+          onValueChange={(val) => setProjectId(val)}
         >
-          <SelectTrigger className="min-w-0 flex-1">
-            <SelectValue />
+          <SelectTrigger
+            className="min-w-0 flex-1"
+            data-testid="project-map-project"
+          >
+            <SelectValue
+              className={projectId === null ? undefined : "text-foreground"}
+            >
+              {(value: string | null) =>
+                value === null ? t`Project` : projectLabel(value)
+              }
+            </SelectValue>
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="w-2xs">
             <SelectGroup>
-              {data.projects.map((item) => (
-                <SelectItem key={item.value} value={item.value}>
+              {projects.map((item) => (
+                <SelectItem
+                  key={item.value}
+                  value={item.value}
+                  data-testid={`project-map-option-${item.value}`}
+                >
                   {item.label}
                 </SelectItem>
               ))}

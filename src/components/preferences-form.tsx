@@ -30,7 +30,7 @@ export default function PreferencesForm() {
           </Button>
         }
       />
-      <DialogContent initialFocus={false} className="max-w-2xl">
+      <DialogContent initialFocus={false} className="min-w-2xl">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Settings2Icon />
@@ -38,7 +38,7 @@ export default function PreferencesForm() {
           </DialogTitle>
         </DialogHeader>
         <div className="flex gap-4">
-          <div className="flex max-w-sm flex-col gap-4">
+          <div className="flex max-w-sm flex-1 flex-col gap-4">
             <DefaultProjectSelect />
             <ProjectListSelect />
             <ProjectMapForm />
