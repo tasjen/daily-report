@@ -1,6 +1,6 @@
 import { browser } from "@wdio/globals";
 
-describe("flexi-report", () => {
+describe("flexireport", () => {
   it("launches and renders the UI", async () => {
     await browser.waitUntil(() => browser.$("#root *").isExisting(), {
       timeout: 30_000,

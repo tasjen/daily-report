@@ -241,7 +241,7 @@ struct TestBrowser {
 impl TestBrowser {
     async fn launch(label: &str) -> Self {
         let user_data_dir = std::env::temp_dir()
-            .join("flexi-report-portal-dom")
+            .join("flexireport-portal-dom")
             .join(format!("{label}-{}", std::process::id()));
         let (browser, page) = launch_browser(&user_data_dir, false, "portal-dom")
             .await

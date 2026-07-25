@@ -67,7 +67,7 @@ impl LiveSession {
     /// never contend for one Chromium profile lock.
     async fn login(label: &str) -> Self {
         let config = live_config();
-        let user_data_dir = profile_dir(&std::env::temp_dir().join("flexi-report-smoke"), label);
+        let user_data_dir = profile_dir(&std::env::temp_dir().join("flexireport-smoke"), label);
         let (browser, page) = launch_browser(&user_data_dir, false, "smoke")
             .await
             .expect("Chromium failed to launch");

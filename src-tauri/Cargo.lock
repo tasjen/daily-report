@@ -1228,7 +1228,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "flexi-report"
+name = "flexireport"
 version = "2.1.1"
 dependencies = [
  "base64 0.23.0",

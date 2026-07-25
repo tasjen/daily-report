@@ -40,16 +40,16 @@ function writeVersions(repository, versions) {
   );
   writeFileSync(
     join(repository, "src-tauri/Cargo.toml"),
-    `[package]\nname = "flexi-report"\nversion = "${versions.cargo}"\n`,
+    `[package]\nname = "flexireport"\nversion = "${versions.cargo}"\n`,
   );
   writeFileSync(
     join(repository, "src-tauri/Cargo.lock"),
-    `[[package]]\nname = "flexi-report"\nversion = "${versions.lock}"\n`,
+    `[[package]]\nname = "flexireport"\nversion = "${versions.lock}"\n`,
   );
 }
 
 function createRepository(version = "2.0.0") {
-  const root = mkdtempSync(join(tmpdir(), "flexi-report-release-"));
+  const root = mkdtempSync(join(tmpdir(), "flexireport-release-"));
   temporaryDirectories.push(root);
   const origin = join(root, "origin.git");
   const repository = join(root, "work");

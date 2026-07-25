@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-REPO="tasjen/flexi-report"
+REPO="tasjen/flexireport"
 APP_NAME="FlexiReport"
 APP_PATH="/Applications/$APP_NAME.app"
 

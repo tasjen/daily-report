@@ -35,8 +35,8 @@
     "semantic_hash": "b15a3165995bee8577a1a66d1d83b078"
   },
   "package.json": {
-    "mtime": 1784994474.0172026,
-    "ast_hash": "56829bec8b07ac84c3eb6afdaeb7f833",
+    "mtime": 1785002535.213486,
+    "ast_hash": "e42f8179674aacd01a276c3d8139af15",
     "semantic_hash": ""
   },
   "scripts/bump-version.mjs": {
@@ -55,9 +55,9 @@
     "semantic_hash": "1be34a5c61c2c35365de3dab14298f0b"
   },
   "src-tauri/capabilities/default.json": {
-    "mtime": 1784824096.510832,
-    "ast_hash": "3341d292aefd9712ca0a8dec6576b6fa",
-    "semantic_hash": "3341d292aefd9712ca0a8dec6576b6fa"
+    "mtime": 1785003053.8884482,
+    "ast_hash": "252bbc71fe6bba1de4b4c62ef04ee2ec",
+    "semantic_hash": ""
   },
   "src-tauri/capabilities/desktop.json": {
     "mtime": 1783854497.030876,
@@ -80,8 +80,8 @@
     "semantic_hash": ""
   },
   "src-tauri/tauri.conf.json": {
-    "mtime": 1784994474.021212,
-    "ast_hash": "07c8e6b78c3b128c0426beb12ea01f5e",
+    "mtime": 1785002535.2145624,
+    "ast_hash": "75b6dc676f69deb605a643a0bd60cede",
     "semantic_hash": ""
   },
   "src/App.tsx": {

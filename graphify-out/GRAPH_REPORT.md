@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `e8e16a2d`
+- Built from commit: `9f695bd1`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -284,7 +284,7 @@ Nodes (10): Dependency Classification, In-process Dependency, Local-substitutabl
 
 ### Community 7 - "Tauri Build Configuration"
 Cohesion: 0.06
-Nodes (33): https://github.com/tasjen/flexi-report/releases/latest/download/latest.json, icons/128x128@2x.png, icons/128x128.png, icons/32x32.png, icons/icon.icns, icons/icon.ico, app, security (+25 more)
+Nodes (33): https://github.com/tasjen/flexireport/releases/latest/download/latest.json, icons/128x128@2x.png, icons/128x128.png, icons/32x32.png, icons/icon.icns, icons/icon.ico, app, security (+25 more)
 
 ### Community 8 - "oxfmt Formatter Config"
 Cohesion: 0.07
@@ -499,7 +499,7 @@ Cohesion: 0.67
 Nodes (3): react, react, useComboboxAnchor()
 
 ## Knowledge Gaps
-- **426 isolated node(s):** `$schema`, `identifier`, `description`, `main`, `core:default` (+421 more)
+- **426 isolated node(s):** `config`, `install.sh script`, `name`, `version`, `private` (+421 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **140 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -507,12 +507,12 @@ Nodes (3): react, react, useComboboxAnchor()
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `react` connect `React App Components` to `select.tsx`, `InputGroup`, `Card`, `oxlint Linter Config`, `LocaleToggle`, `Combobox Component`, `Dropdown Menu Component`, `version.tsx`, `use-task-selection.ts`, `Dialog`?**
-  _High betweenness centrality (0.049) - this node is a cross-community bridge._
-- **Why does `dependencies` connect `lucide-react` to `package.json Scripts`, `class-variance-authority`, `clsx`, `@lingui/react`, `mutative`, `next-themes`, `react-dom`, `react-error-boundary`, `shadcn`, `sonner`, `tailwind-merge`, `@tauri-apps/plugin-opener`, `@tanstack/react-form`, `@tanstack/react-query`, `use-copy-to-clipboard.ts`, `@tauri-apps/api`, `@tauri-apps/plugin-updater`, `@tauri-apps/plugin-window-state`, `tw-animate-css`, `@formkit/auto-animate`, `@lingui/core`, `tailwindcss`, `@tailwindcss/vite`?**
-  _High betweenness centrality (0.044) - this node is a cross-community bridge._
+  _High betweenness centrality (0.043) - this node is a cross-community bridge._
 - **Why does `AppError` connect `Rust Backend Browser Automation` to `@lingui/core`, `Mutations & Queries`, `account.rs`, `Auto-Submit/Close & Favorites`, `.run`, `@base-ui/react`, `@formkit/auto-animate`?**
   _High betweenness centrality (0.042) - this node is a cross-community bridge._
-- **What connects `$schema`, `identifier`, `description` to the rest of the system?**
+- **Why does `dependencies` connect `lucide-react` to `package.json Scripts`, `class-variance-authority`, `clsx`, `@lingui/react`, `mutative`, `next-themes`, `react-dom`, `react-error-boundary`, `shadcn`, `sonner`, `tailwind-merge`, `@tauri-apps/plugin-opener`, `@tanstack/react-form`, `@tanstack/react-query`, `use-copy-to-clipboard.ts`, `@tauri-apps/api`, `@tauri-apps/plugin-updater`, `@tauri-apps/plugin-window-state`, `tw-animate-css`, `@formkit/auto-animate`, `@lingui/core`, `tailwindcss`, `@tailwindcss/vite`?**
+  _High betweenness centrality (0.037) - this node is a cross-community bridge._
+- **What connects `config`, `install.sh script`, `name` to the rest of the system?**
   _426 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Rust Backend Browser Automation` be split into smaller, more focused modules?**
   _Cohesion score 0.06964443138407288 - nodes in this community are weakly interconnected._
