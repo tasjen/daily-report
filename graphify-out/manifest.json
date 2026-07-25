@@ -1060,14 +1060,14 @@
     "semantic_hash": "70da3ac7646f806327357e4942246b00"
   },
   "src/components/favorites-form.test.tsx": {
-    "mtime": 1784907168.89077,
-    "ast_hash": "cfd51ed35f1951dac84ee317d66760e3",
-    "semantic_hash": "cfd51ed35f1951dac84ee317d66760e3"
+    "mtime": 1784970087.6377513,
+    "ast_hash": "4a45016c759f6134bd4944c67a88603a",
+    "semantic_hash": ""
   },
   "src/components/project-map-form.test.tsx": {
-    "mtime": 1784907168.8911543,
-    "ast_hash": "475e48ba3d3660cff49ad335d5a091e9",
-    "semantic_hash": "475e48ba3d3660cff49ad335d5a091e9"
+    "mtime": 1784970096.2742877,
+    "ast_hash": "24be599c48c4c1cf722a4b10c28976bb",
+    "semantic_hash": ""
   },
   "src/test/render.tsx": {
     "mtime": 1784907168.8926811,
