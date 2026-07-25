@@ -1,16 +1,16 @@
 # Graph Report - daily-report  (2026-07-25)
 
 ## Corpus Check
-- 149 files · ~109,547 words
+- 149 files · ~110,224 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1135 nodes · 1327 edges · 209 communities (79 shown, 130 thin omitted)
+- 1167 nodes · 1425 edges · 206 communities (77 shown, 129 thin omitted)
 - Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 41 edges (avg confidence: 0.87)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `72a8aaec`
+- Built from commit: `a6953cbe`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -66,7 +66,6 @@
 - files
 - Sediment
 - @babel/core
-- babel-plugin-react-compiler
 - @base-ui/react
 - class-variance-authority
 - clsx
@@ -196,16 +195,16 @@
 - @types/babel__core
 
 ## God Nodes (most connected - your core abstractions)
-1. `AppError` - 26 edges
+1. `AppError` - 34 edges
 2. `react` - 25 edges
 3. `compilerOptions` - 23 edges
 4. `scripts` - 18 edges
 5. `compilerOptions` - 16 edges
 6. `BrowserState` - 15 edges
-7. `submit_task()` - 15 edges
-8. `portal_url()` - 12 edges
-9. `vitest` - 11 edges
-10. `get_task_parameters()` - 11 edges
+7. `portal_url()` - 12 edges
+8. `SubmissionPlan` - 12 edges
+9. `one_row_plan()` - 12 edges
+10. `vitest` - 11 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `Shared Portal Login Helper` --semantically_similar_to--> `Single Source of Truth`  [INFERRED] [semantically similar]
@@ -220,7 +219,7 @@
   .agents/skills/improve-codebase-architecture/HTML-REPORT.md → .agents/skills/codebase-design/DESIGN-IT-TWICE.md
 
 ## Import Cycles
-- None detected.
+- 2-file cycle: `src-tauri/src/lib.rs -> src-tauri/src/submission.rs -> src-tauri/src/lib.rs`
 
 ## Hyperedges (group relationships)
 - **CI/CD Pipeline Jobs** — github_workflows_ci_frontend, github_workflows_ci_rust, github_workflows_e2e_e2e [INFERRED 0.85]
@@ -235,11 +234,11 @@
 - **Parallel Portal and Jira Account Verification Flow** — docs_superpowers_specs_2026_07_12_account_verification_design_candidate_portal_verification, docs_superpowers_specs_2026_07_12_account_verification_design_jira_credentials_check, docs_superpowers_specs_2026_07_12_account_verification_design_parallel_account_verification, docs_superpowers_specs_2026_07_12_account_verification_design_verify_account_error, docs_superpowers_specs_2026_07_12_account_verification_design_save_anyway_escape_hatch [EXTRACTED 1.00]
 - **Signed Release and Update Delivery Chain** — docs_superpowers_specs_2026_07_12_cicd_design_tag_driven_release_pipeline, docs_superpowers_specs_2026_07_12_cicd_design_release_version_guard, docs_superpowers_specs_2026_07_12_cicd_design_updater_signing_key, docs_superpowers_specs_2026_07_12_cicd_design_draft_release_publish_gate, docs_superpowers_specs_2026_07_12_cicd_design_in_app_auto_updater [EXTRACTED 1.00]
 
-## Communities (209 total, 130 thin omitted)
+## Communities (206 total, 129 thin omitted)
 
 ### Community 0 - "Rust Backend Browser Automation"
-Cohesion: 0.14
-Nodes (42): AppHandle, Box, Browser, CdpError, Error, From, Mutex, Ok (+34 more)
+Cohesion: 0.12
+Nodes (43): AppHandle, Box, Browser, CdpError, Error, From, Mutex, Ok (+35 more)
 
 ### Community 1 - "Frontend Component Tests"
 Cohesion: 0.05
@@ -367,7 +366,7 @@ Nodes (7): CI/CD Pipeline, Frontend CI Job, CI paths-filter change detection, Ru
 
 ### Community 38 - "devDependencies"
 Cohesion: 0.22
-Nodes (9): oxlint, devDependencies, oxlint, @testing-library/react, @types/react-dom, @vitejs/plugin-react, @testing-library/react, @types/react-dom (+1 more)
+Nodes (9): babel-plugin-react-compiler, devDependencies, babel-plugin-react-compiler, @testing-library/react, @types/react-dom, @vitejs/plugin-react, @testing-library/react, @types/react-dom (+1 more)
 
 ### Community 39 - "Releasing (README)"
 Cohesion: 0.47
@@ -390,8 +389,8 @@ Cohesion: 1.00
 Nodes (3): Graphify Codebase Navigation Workflow, Query: Update README about Graphify usage, Codebase Navigation with Graphify (README)
 
 ### Community 58 - "@base-ui/react"
-Cohesion: 0.24
-Nodes (16): configured_default_project_survives_filtering(), configured_projects_define_the_filter(), empty_input_produces_one_blank_row(), empty_project_list_disables_filtering(), explicit_first_row_project_overrides_the_configured_default(), malformed_input_is_limited_to_the_portals_three_rows(), missing_first_row_project_uses_the_configured_default(), Option (+8 more)
+Cohesion: 0.11
+Nodes (35): P, auto_close_waits_for_confirmation_before_closing_the_browser(), auto_submit_disabled_leaves_the_prepared_form_open(), auto_submit_enabled_submits_the_prepared_form_and_leaves_it_open(), configured_default_project_survives_filtering(), configured_projects_define_the_filter(), empty_input_produces_one_blank_row(), empty_project_list_disables_filtering() (+27 more)
 
 ### Community 74 - "oxlint"
 Cohesion: 0.15
@@ -436,21 +435,21 @@ Nodes (5): Design Comparison, Deletion Test, Depth, Leverage, Locality
 ## Knowledge Gaps
 - **419 isolated node(s):** `$schema`, `mcp__claude_ai_Figma__get_design_context`, `superpowers@claude-plugins-official`, `frontend-design@claude-plugins-official`, `andrej-karpathy-skills@karpathy-skills` (+414 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **130 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **129 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `react` connect `React App Components` to `select.tsx`, `InputGroup`, `Card`, `Theme`, `oxlint Linter Config`, `TextField`, `Props`, `OpenMemberPageButton`, `Combobox Component`, `ProjectListSelect`, `Dropdown Menu Component`, `Props`, `main.tsx`, `Field Component`, `Dialog`?**
-  _High betweenness centrality (0.090) - this node is a cross-community bridge._
+- **Why does `react` connect `React App Components` to `select.tsx`, `InputGroup`, `Card`, `Theme`, `oxlint Linter Config`, `TextField`, `Props`, `Combobox Component`, `Props`, `Dropdown Menu Component`, `Field Component`, `Dialog`?**
+  _High betweenness centrality (0.075) - this node is a cross-community bridge._
 - **Why does `dependencies` connect `lucide-react` to `@tauri-apps/plugin-opener`, `package.json Scripts`, `Combobox Component`, `class-variance-authority`, `clsx`, `@formkit/auto-animate`, `@lingui/core`, `@lingui/react`, `mutative`, `next-themes`, `lucide-react`, `react-dom`, `react-error-boundary`, `shadcn`, `sonner`, `tailwind-merge`, `tailwindcss`, `@tailwindcss/vite`, `@tanstack/react-form`, `@tanstack/react-query`, `@tanstack/react-query-devtools`, `@tauri-apps/api`, `@tauri-apps/plugin-http`, `@tauri-apps/plugin-updater`, `@tauri-apps/plugin-window-state`, `tw-animate-css`?**
-  _High betweenness centrality (0.071) - this node is a cross-community bridge._
+  _High betweenness centrality (0.064) - this node is a cross-community bridge._
 - **Why does `react` connect `Combobox Component` to `lucide-react`?**
-  _High betweenness centrality (0.061) - this node is a cross-community bridge._
+  _High betweenness centrality (0.055) - this node is a cross-community bridge._
 - **What connects `$schema`, `mcp__claude_ai_Figma__get_design_context`, `superpowers@claude-plugins-official` to the rest of the system?**
   _419 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Rust Backend Browser Automation` be split into smaller, more focused modules?**
-  _Cohesion score 0.1378809869375907 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.12280701754385964 - nodes in this community are weakly interconnected._
 - **Should `Frontend Component Tests` be split into smaller, more focused modules?**
   _Cohesion score 0.045068027210884355 - nodes in this community are weakly interconnected._
 - **Should `Agent Workflow Skills` be split into smaller, more focused modules?**

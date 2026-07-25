@@ -65,8 +65,8 @@
     "semantic_hash": "ea3aad1d34bf270926daeef7cdcce977"
   },
   "src-tauri/src/lib.rs": {
-    "mtime": 1784914459.7033372,
-    "ast_hash": "5279dc844466fbf890878145810f172d",
+    "mtime": 1784915693.1521559,
+    "ast_hash": "5462a9761e3fe528805c7a8bf4cb3eae",
     "semantic_hash": ""
   },
   "src-tauri/src/main.rs": {
@@ -1090,8 +1090,8 @@
     "semantic_hash": "310afb7a67ab51686b409d2ac97311f5"
   },
   "src-tauri/src/submission.rs": {
-    "mtime": 1784914508.3325078,
-    "ast_hash": "aeb6884470e6e59e4b96ecbc3d82deb4",
+    "mtime": 1784915705.8471532,
+    "ast_hash": "d0d2c194b59a119d95530350c74a91df",
     "semantic_hash": ""
   }
 }
