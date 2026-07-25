@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "prepare": "lefthook install",
+    "prepare": "lefthook install && graphify hook install",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
