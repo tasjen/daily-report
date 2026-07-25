@@ -7,6 +7,8 @@ import {
   useState,
 } from "react";
 
+import { toastError } from "@/lib/utils";
+
 type Theme = "dark" | "light" | "system";
 
 type ThemeProviderProps = PropsWithChildren<{
@@ -19,12 +21,9 @@ type ThemeProviderState = {
   setTheme: (theme: Theme) => void;
 };
 
-const initialState: ThemeProviderState = {
-  theme: "system",
-  setTheme: () => null,
-};
-
-const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
+const ThemeProviderContext = createContext<ThemeProviderState | undefined>(
+  undefined,
+);
 
 export function ThemeProvider({
   children,
@@ -32,9 +31,12 @@ export function ThemeProvider({
   storageKey = "vite-ui-theme",
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme,
-  );
+  const [theme, setTheme] = useState<Theme>(() => {
+    const stored = localStorage.getItem(storageKey);
+    return stored === "dark" || stored === "light" || stored === "system"
+      ? stored
+      : defaultTheme;
+  });
 
   useEffect(() => {
     const root = window.document.documentElement;
@@ -51,15 +53,15 @@ export function ThemeProvider({
       return;
     }
 
-    getCurrentWindow().setTheme(theme).catch(console.error);
+    getCurrentWindow().setTheme(theme).catch(toastError);
     root.classList.add(theme);
   }, [theme]);
 
   const value = {
     theme,
-    setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme);
-      setTheme(theme);
+    setTheme: (next: Theme) => {
+      localStorage.setItem(storageKey, next);
+      setTheme(next);
     },
   };
 

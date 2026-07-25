@@ -6,11 +6,16 @@
     "suspicious": "warn"
   },
   "rules": {
-    "no-unused-vars": "warn",
-    "no-shadow": "off",
+    "no-unused-vars": "error",
+    "no-shadow": "error",
     "react/react-in-jsx-scope": "off",
-    "react-hooks/exhaustive-deps": "off",
+    "react-hooks/exhaustive-deps": "error",
+    "typescript/await-thenable": "error",
+    "typescript/no-base-to-string": "error",
     "typescript/no-floating-promises": "error",
+    "typescript/no-misused-promises": "error",
+    "typescript/no-unnecessary-condition": "error",
+    "typescript/no-unnecessary-type-assertion": "error",
     "typescript/no-unsafe-type-assertion": "off"
   },
   "ignorePatterns": [

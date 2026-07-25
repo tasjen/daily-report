@@ -18,7 +18,10 @@ export default function DateList() {
 
   const dates = data?.dates.filter((e) => e.value) ?? [];
 
+  // Hand-flipped dev switch: TS narrows the const to `true`, so the rule sees
+  // a dead `&&`. That is the point — it stays here to be toggled by editing.
   const isMocking = true;
+  // oxlint-disable-next-line typescript/no-unnecessary-condition
   if (import.meta.env.DEV && isMocking && !dates.length) {
     dates.push(
       { value: "2026-06-30", label: "2023-06-30" },

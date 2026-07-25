@@ -13,19 +13,19 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/components/task-select.tsx:52
+#: src/components/task-select.tsx:60
 msgid "(all selected)"
 msgstr "(เลือกทั้งหมดแล้ว)"
 
-#: src/components/date-card.tsx:215
+#: src/components/date-card.tsx:171
 msgid "{dayCount} days ago"
 msgstr "{dayCount} วันที่แล้ว"
 
-#: src/components/account-form.tsx:221
+#: src/components/account-form.tsx:222
 msgid "Account"
 msgstr "บัญชี"
 
-#: src/components/favorites-form.tsx:103
+#: src/components/favorites-form.tsx:104
 msgid "Add a favorite task"
 msgstr "เพิ่มงานโปรด"
 
@@ -74,11 +74,11 @@ msgstr "กลุ่มงานที่เลือกไว้โดยอั
 msgid "Downloading update…"
 msgstr "กำลังดาวน์โหลดอัปเดต…"
 
-#: src/components/account-form.tsx:102
+#: src/components/account-form.tsx:103
 msgid "Enter a valid email address"
 msgstr "กรอก Email ให้ถูกต้องก่อนนะ"
 
-#: src/components/account-form.tsx:114
+#: src/components/account-form.tsx:115
 msgid "Enter a valid http(s) URL"
 msgstr "กรอก URL แบบ http(s) ให้ถูกต้อง"
 
@@ -87,11 +87,11 @@ msgstr "กรอก URL แบบ http(s) ให้ถูกต้อง"
 msgid "Favorites"
 msgstr "รายการโปรด"
 
-#: src/components/account-form.tsx:289
+#: src/components/account-form.tsx:290
 msgid "Jira API token"
 msgstr "Jira API token"
 
-#: src/components/account-form.tsx:106
+#: src/components/account-form.tsx:107
 msgid "Jira API token is required"
 msgstr "กรอก Jira API token ก่อนนะ"
 
@@ -104,11 +104,11 @@ msgstr "เข้าใช้ Jira ไม่ได้ เช็ก Jira Email �
 msgid "Jira authentication failed ({loginReason}) — check your Jira email and API token"
 msgstr "เข้าใช้ Jira ไม่ได้ ({loginReason}) เช็ก Jira Email กับ API token อีกทีนะ"
 
-#: src/components/account-form.tsx:275
+#: src/components/account-form.tsx:276
 msgid "Jira email"
 msgstr "Jira Email"
 
-#: src/components/account-form.tsx:101
+#: src/components/account-form.tsx:102
 msgid "Jira email is required"
 msgstr "กรอก Jira Email ก่อนนะ"
 
@@ -119,12 +119,12 @@ msgstr "กรอก Jira Email ก่อนนะ"
 msgid "Jira request failed ({0} {1})"
 msgstr "เรียก Jira ไม่สำเร็จ ({0} {1})"
 
-#: src/components/favorites-form.tsx:111
+#: src/components/favorites-form.tsx:113
 #: src/components/project-map-form.tsx:125
 msgid "Key"
 msgstr "KEY"
 
-#: src/components/locale-toggle.tsx:15
+#: src/components/locale-toggle.tsx:16
 msgid "Language"
 msgstr "ภาษา"
 
@@ -132,7 +132,7 @@ msgstr "ภาษา"
 msgid "Limits the portal form's project options to these projects; leave empty to keep all projects"
 msgstr "เลือกให้ฟอร์มแสดงเฉพาะ Project เหล่านี้ เว้นว่างไว้ถ้าต้องการแสดงทั้งหมด"
 
-#: src/components/date-list.tsx:62
+#: src/components/date-list.tsx:65
 msgid "Load more"
 msgstr "ดูเพิ่ม"
 
@@ -144,7 +144,7 @@ msgstr "จับคู่ Project key กับ Project ในฟอร์ม �
 msgid "No account has been set"
 msgstr "ยังไม่ได้ตั้งค่า Account"
 
-#: src/components/favorites-form.tsx:96
+#: src/components/favorites-form.tsx:97
 msgid "No favorites yet"
 msgstr "ยังไม่มีรายการโปรด"
 
@@ -152,47 +152,47 @@ msgstr "ยังไม่มีรายการโปรด"
 msgid "No items found."
 msgstr "ไม่พบรายการ"
 
-#: src/components/date-list.tsx:44
+#: src/components/date-list.tsx:47
 msgid "No reports to submit"
 msgstr "ไม่มีรายงานที่ต้องส่ง"
 
-#: src/components/date-card.tsx:309
+#: src/components/date-card.tsx:272
 msgid "No tasks found"
 msgstr "ไม่พบงาน"
 
-#: src/components/task-select.tsx:71
+#: src/components/task-select.tsx:80
 msgid "No tasks found."
 msgstr "ไม่พบงาน"
 
-#: src/components/date-card.tsx:307
+#: src/components/date-card.tsx:270
 msgid "No tasks selected"
 msgstr "ยังไม่ได้เลือกงาน"
 
-#: src/components/favorites-form.tsx:117
+#: src/components/favorites-form.tsx:120
 msgid "Optional project key (a Jira key or any custom one) — a favorite with a key follows the Project mapping preference into that project's form row; without one it goes into the default project's row, or the first row when no default project is set"
 msgstr "ใส่ Project key ได้ถ้าต้องการ จะใช้ Jira key หรือคำที่ตั้งเองก็ได้ รายการโปรดที่มี key จะไปอยู่ในแถวของ Project ตามการจับคู่ ส่วนรายการที่ไม่มี key จะอยู่ในแถว Project เริ่มต้น หรือแถวแรกถ้ายังไม่ได้ตั้ง Project เริ่มต้น"
 
-#: src/components/account-form.tsx:261
+#: src/components/account-form.tsx:262
 msgid "Phone number"
 msgstr "เบอร์โทรศัพท์"
 
-#: src/components/account-form.tsx:97
+#: src/components/account-form.tsx:98
 msgid "Phone number is required"
 msgstr "กรอกเบอร์โทรก่อนนะ"
 
-#: src/components/account-form.tsx:247
+#: src/components/account-form.tsx:248
 msgid "Portal credential"
 msgstr "username/password ของเว็บลง task"
 
-#: src/components/account-form.tsx:120
+#: src/components/account-form.tsx:121
 msgid "Portal credential is required"
 msgstr "กรอก username/password ของเว็บลง task ก่อนนะ"
 
-#: src/components/account-form.tsx:233
+#: src/components/account-form.tsx:234
 msgid "Portal URL"
 msgstr "URL เว็บลง task"
 
-#: src/components/account-form.tsx:110
+#: src/components/account-form.tsx:111
 msgid "Portal URL is required"
 msgstr "กรอก URL เว็บลง task ก่อนนะ"
 
@@ -208,31 +208,35 @@ msgstr "รายการ Project"
 msgid "Project mapping"
 msgstr "จับคู่ Project"
 
-#: src/components/error-fallback.tsx:24
+#: src/components/error-fallback.tsx:37
 msgid "Restart app"
 msgstr "เปิดแอปใหม่"
+
+#: src/components/error-fallback.tsx:45
+msgid "Restart failed:"
+msgstr "เปิดแอปใหม่ไม่สำเร็จ:"
 
 #: src/lib/use-update-check.ts:29
 msgid "Restarting…"
 msgstr "กำลังเปิดแอปใหม่…"
 
-#: src/components/account-form.tsx:351
+#: src/components/account-form.tsx:359
 msgid "Save"
 msgstr "บันทึก"
 
-#: src/components/account-form.tsx:340
+#: src/components/account-form.tsx:346
 msgid "Save anyway"
 msgstr "ข้ามการตรวจสอบแล้วบันทึก"
 
-#: src/components/task-select.tsx:59
+#: src/components/task-select.tsx:67
 msgid "Search tasks"
 msgstr "ค้นหางาน"
 
-#: src/components/sign-out-button.tsx:32
+#: src/components/sign-out-button.tsx:35
 msgid "Sign out"
 msgstr "ออกจากระบบ"
 
-#: src/components/error-fallback.tsx:14
+#: src/components/error-fallback.tsx:20
 msgid "Something went wrong"
 msgstr "มีบางอย่างผิดพลาด"
 
@@ -244,7 +248,7 @@ msgstr "งานที่ฉันอัปเดตสถานะ"
 msgid "Submits the task form automatically after filling the summary"
 msgstr "ส่งฟอร์มงานให้อัตโนมัติหลังลงสรุปแล้ว"
 
-#: src/components/locale-toggle.tsx:24
+#: src/components/locale-toggle.tsx:27
 msgid "Switch language"
 msgstr "เปลี่ยนภาษา"
 
@@ -260,7 +264,7 @@ msgstr "กลุ่มงานที่จะถูกเลือกไว้
 msgid "Theme"
 msgstr "ธีม"
 
-#: src/components/date-card.tsx:213
+#: src/components/date-card.tsx:169
 msgid "Today"
 msgstr "วันนี้"
 
@@ -268,7 +272,7 @@ msgstr "วันนี้"
 msgid "Toggle theme"
 msgstr "สลับธีม"
 
-#: src/components/error-fallback.tsx:21
+#: src/components/error-fallback.tsx:27
 msgid "Try again"
 msgstr "ลองอีกครั้ง"
 
@@ -285,14 +289,14 @@ msgstr "มีอัปเดตใหม่: v{version}"
 msgid "Update failed: {0}"
 msgstr "อัปเดตไม่สำเร็จ: {0}"
 
-#: src/components/account-form.tsx:123
+#: src/components/account-form.tsx:124
 msgid "Use the username:password format"
 msgstr "ใช้รูปแบบ username:password"
 
-#: src/components/account-form.tsx:349
+#: src/components/account-form.tsx:357
 msgid "Verifying…"
 msgstr "กำลังเช็ก…"
 
-#: src/components/date-card.tsx:214
+#: src/components/date-card.tsx:170
 msgid "Yesterday"
 msgstr "เมื่อวาน"

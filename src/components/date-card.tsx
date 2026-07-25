@@ -7,7 +7,7 @@ import {
   PlayIcon,
   RefreshCwIcon,
 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 import { Button } from "@/components/shared/button";
 import {
@@ -29,7 +29,7 @@ import {
 import { useSubmitTaskMutation } from "@/lib/mutations";
 import { useFavorites, useJiraTasksQuery, usePreferences } from "@/lib/queries";
 import { DEFAULT_PREFERENCES } from "@/lib/store";
-import { cn } from "@/lib/utils";
+import { cn, toastError } from "@/lib/utils";
 
 type Props = {
   date: string;
@@ -58,102 +58,69 @@ export default function DateCard({ date }: Props) {
   // Favorites masquerade as issues so the existing dedup/default-checked/
   // override machinery applies unchanged. buildSummary never sees them —
   // they're split back out into plain leading lines.
-  const favoriteIssues = useMemo(
-    () =>
-      (favorites ?? []).map((favorite) => ({
-        id: favorite.text,
-        key: `${FAVORITE_KEY_PREFIX}${favorite.text}`,
-        fields: {
-          summary: favorite.text,
-          status: { name: "" },
-          updated: "",
-          duedate: "",
-        },
-      })),
-    [favorites],
-  );
+  const favoriteIssues = (favorites ?? []).map((favorite) => ({
+    id: favorite.text,
+    key: `${FAVORITE_KEY_PREFIX}${favorite.text}`,
+    fields: {
+      summary: favorite.text,
+      status: { name: "" },
+      updated: "",
+      duedate: "",
+    },
+  }));
 
   const { data: preferences } = usePreferences();
-  const defaultGroupIds = useMemo(
-    () =>
-      new Set(
-        preferences?.default_task_groups ??
-          DEFAULT_PREFERENCES.default_task_groups,
-      ),
-    [preferences],
+  const defaultGroupIds = new Set(
+    preferences?.default_task_groups ?? DEFAULT_PREFERENCES.default_task_groups,
   );
 
   // Group issues by the query that surfaced them; ordering/dedup semantics
   // live in buildIssueGroups (date-card-helpers.ts).
-  const issueGroups = useMemo(
-    () =>
-      buildIssueGroups(
-        {
-          status: statusQuery.data?.issues ?? [],
-          created: createdQuery.data?.issues ?? [],
-          sprint: sprintQuery.data?.issues ?? [],
-          favorite: favoriteIssues,
-        },
-        defaultGroupIds,
-      ),
-    [
-      statusQuery.data,
-      createdQuery.data,
-      sprintQuery.data,
-      favoriteIssues,
-      defaultGroupIds,
-    ],
+  const issueGroups = buildIssueGroups(
+    {
+      status: statusQuery.data?.issues ?? [],
+      created: createdQuery.data?.issues ?? [],
+      sprint: sprintQuery.data?.issues ?? [],
+      favorite: favoriteIssues,
+    },
+    defaultGroupIds,
   );
 
   // Flat union of every grouped issue, used for selection/summary bookkeeping.
-  const allIssues = useMemo(
-    () => issueGroups.flatMap((group) => group.issues),
-    [issueGroups],
-  );
+  const allIssues = issueGroups.flatMap((group) => group.issues);
 
   // One option list per source query, rendered as its own TaskSelect. `keys`
   // is kept alongside so the per-group selection handler can scope its toggles.
-  const optionGroups = useMemo(
-    () =>
-      issueGroups.map((group) => ({
-        type: group.id,
-        label: i18n._(group.label),
-        keys: group.issues.map((issue) => issue.key),
-        // Favorites show their text alone, in the order they were added;
-        // Jira issues show "KEY: summary" sorted by key.
-        items:
-          group.id === "favorite"
-            ? group.issues.map((issue) => ({
-                value: issue.key,
-                label: issue.fields.summary,
-              }))
-            : group.issues
-                .map((issue) => ({
-                  value: issue.key,
-                  label: `${issue.key}: ${issue.fields.summary}`,
-                }))
-                .toSorted((a, b) => a.value.localeCompare(b.value)),
-      })),
-    [issueGroups, i18n.locale],
-  );
+  const optionGroups = issueGroups.map((group) => ({
+    type: group.id,
+    label: i18n._(group.label),
+    keys: group.issues.map((issue) => issue.key),
+    // Favorites show their text alone, in the order they were added;
+    // Jira issues show "KEY: summary" sorted by key.
+    items:
+      group.id === "favorite"
+        ? group.issues.map((issue) => ({
+            value: issue.key,
+            label: issue.fields.summary,
+          }))
+        : group.issues
+            .map((issue) => ({
+              value: issue.key,
+              label: `${issue.key}: ${issue.fields.summary}`,
+            }))
+            .toSorted((a, b) => a.value.localeCompare(b.value)),
+  }));
 
   // Issues displayed under a default task group start checked; everything
   // else starts unchecked. `overrides` records the user's explicit toggles on
   // top of that default, so new issues from a later refetch still pick up the
   // correct default.
-  const defaultCheckedKeys = useMemo(
-    () => defaultCheckedKeysOf(issueGroups, defaultGroupIds),
-    [issueGroups, defaultGroupIds],
-  );
+  const defaultCheckedKeys = defaultCheckedKeysOf(issueGroups, defaultGroupIds);
   const [overrides, setOverrides] = useState<Record<string, boolean>>({});
-  const selectedKeys = useMemo(
-    () =>
-      allIssues
-        .map((issue) => issue.key)
-        .filter((key) => overrides[key] ?? defaultCheckedKeys.has(key)),
-    [allIssues, overrides, defaultCheckedKeys],
-  );
-  const selectedKeySet = useMemo(() => new Set(selectedKeys), [selectedKeys]);
+  const selectedKeys = allIssues
+    .map((issue) => issue.key)
+    .filter((key) => overrides[key] ?? defaultCheckedKeys.has(key));
+  const selectedKeySet = new Set(selectedKeys);
 
   // Each TaskSelect reports its group's entire new selection, not which issue
   // was clicked — so diff it against the current effective selection and
@@ -180,29 +147,18 @@ export default function DateCard({ date }: Props) {
   // `summaryText` is the unsplit preview/copy text; `submitEntries` is the
   // same selection split into up to 3 form rows. The splitting/bucketing
   // semantics live in buildSubmission (date-card-helpers.ts).
-  const { summaryText, submitEntries } = useMemo(
-    () =>
-      buildSubmission({
-        selectedKeys,
-        allIssues,
-        createdKeys: new Set(
-          issueGroups
-            .find((group) => group.id === "created")
-            ?.issues.map((issue) => issue.key) ?? [],
-        ),
-        projectMap,
-        defaultProject,
-        favorites: favorites ?? [],
-      }),
-    [
-      allIssues,
-      issueGroups,
-      selectedKeys,
-      projectMap,
-      defaultProject,
-      favorites,
-    ],
-  );
+  const { summaryText, submitEntries } = buildSubmission({
+    selectedKeys,
+    allIssues,
+    createdKeys: new Set(
+      issueGroups
+        .find((group) => group.id === "created")
+        ?.issues.map((issue) => issue.key) ?? [],
+    ),
+    projectMap,
+    defaultProject,
+    favorites: favorites ?? [],
+  });
 
   const autofillSummary =
     preferences?.autofill_summary ?? DEFAULT_PREFERENCES.autofill_summary;
@@ -323,11 +279,15 @@ export default function DateCard({ date }: Props) {
                   className={cn("absolute -top-2 right-0", {
                     "not-hover:text-muted-foreground": !isCopied,
                   })}
-                  onClick={async () => {
+                  onClick={() => {
                     if (isCopied) return;
-                    await navigator.clipboard.writeText(summaryText);
-                    setIsCopied(true);
-                    setTimeout(() => setIsCopied(false), 2000);
+                    navigator.clipboard
+                      .writeText(summaryText)
+                      .then(() => {
+                        setIsCopied(true);
+                        setTimeout(() => setIsCopied(false), 2000);
+                      })
+                      .catch(toastError);
                   }}
                 >
                   {isCopied ? <CopyCheckIcon /> : <CopyIcon />}

@@ -1,6 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { invoke } from "@tauri-apps/api/core";
-import { toast } from "sonner";
 
 import {
   accountOptions,
@@ -10,6 +9,7 @@ import {
   verifyJiraCredentials,
 } from "./queries";
 import { type Account, type Favorite, type Preferences, store } from "./store";
+import { toastError } from "./utils";
 
 // One project/comment row pair of the portal's task form. `project` is a
 // portal project option id; null lets the backend fall back to the
@@ -31,7 +31,7 @@ export function useSubmitTaskMutation() {
         };
       });
     },
-    onError: (error) => toast.error(String(error)),
+    onError: toastError,
   });
 }
 
@@ -107,7 +107,7 @@ export function useSaveAccountMutation() {
       queryClient.setQueryData(accountOptions().queryKey, account);
       await queryClient.invalidateQueries(taskParametersOptions());
     },
-    onError: (error) => toast.error(String(error)),
+    onError: toastError,
   });
 }
 
@@ -136,7 +136,7 @@ export function useSavePreferencesMutation() {
           context.previous,
         );
       }
-      toast.error(String(error));
+      toastError(error);
     },
   });
 }
@@ -162,7 +162,7 @@ export function useSaveFavoritesMutation() {
       if (context?.previous) {
         queryClient.setQueryData(favoritesOptions().queryKey, context.previous);
       }
-      toast.error(String(error));
+      toastError(error);
     },
   });
 }

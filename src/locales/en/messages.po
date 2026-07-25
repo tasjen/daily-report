@@ -13,19 +13,19 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/components/task-select.tsx:52
+#: src/components/task-select.tsx:60
 msgid "(all selected)"
 msgstr "(all selected)"
 
-#: src/components/date-card.tsx:215
+#: src/components/date-card.tsx:171
 msgid "{dayCount} days ago"
 msgstr "{dayCount} days ago"
 
-#: src/components/account-form.tsx:221
+#: src/components/account-form.tsx:222
 msgid "Account"
 msgstr "Account"
 
-#: src/components/favorites-form.tsx:103
+#: src/components/favorites-form.tsx:104
 msgid "Add a favorite task"
 msgstr "Add a favorite task"
 
@@ -74,11 +74,11 @@ msgstr "Default selected task groups"
 msgid "Downloading update…"
 msgstr "Downloading update…"
 
-#: src/components/account-form.tsx:102
+#: src/components/account-form.tsx:103
 msgid "Enter a valid email address"
 msgstr "Enter a valid email address"
 
-#: src/components/account-form.tsx:114
+#: src/components/account-form.tsx:115
 msgid "Enter a valid http(s) URL"
 msgstr "Enter a valid http(s) URL"
 
@@ -87,11 +87,11 @@ msgstr "Enter a valid http(s) URL"
 msgid "Favorites"
 msgstr "Favorites"
 
-#: src/components/account-form.tsx:289
+#: src/components/account-form.tsx:290
 msgid "Jira API token"
 msgstr "Jira API token"
 
-#: src/components/account-form.tsx:106
+#: src/components/account-form.tsx:107
 msgid "Jira API token is required"
 msgstr "Jira API token is required"
 
@@ -104,11 +104,11 @@ msgstr "Jira authentication failed — check your Jira email and API token"
 msgid "Jira authentication failed ({loginReason}) — check your Jira email and API token"
 msgstr "Jira authentication failed ({loginReason}) — check your Jira email and API token"
 
-#: src/components/account-form.tsx:275
+#: src/components/account-form.tsx:276
 msgid "Jira email"
 msgstr "Jira email"
 
-#: src/components/account-form.tsx:101
+#: src/components/account-form.tsx:102
 msgid "Jira email is required"
 msgstr "Jira email is required"
 
@@ -119,12 +119,12 @@ msgstr "Jira email is required"
 msgid "Jira request failed ({0} {1})"
 msgstr "Jira request failed ({0} {1})"
 
-#: src/components/favorites-form.tsx:111
+#: src/components/favorites-form.tsx:113
 #: src/components/project-map-form.tsx:125
 msgid "Key"
 msgstr "KEY"
 
-#: src/components/locale-toggle.tsx:15
+#: src/components/locale-toggle.tsx:16
 msgid "Language"
 msgstr "Language"
 
@@ -132,7 +132,7 @@ msgstr "Language"
 msgid "Limits the portal form's project options to these projects; leave empty to keep all projects"
 msgstr "Limits the portal form's project options to these projects; leave empty to keep all projects"
 
-#: src/components/date-list.tsx:62
+#: src/components/date-list.tsx:65
 msgid "Load more"
 msgstr "Load more"
 
@@ -144,7 +144,7 @@ msgstr "Maps project keys to the portal's projects — an issue's key is its Jir
 msgid "No account has been set"
 msgstr "No account has been set"
 
-#: src/components/favorites-form.tsx:96
+#: src/components/favorites-form.tsx:97
 msgid "No favorites yet"
 msgstr "No favorites yet"
 
@@ -152,47 +152,47 @@ msgstr "No favorites yet"
 msgid "No items found."
 msgstr "No items found."
 
-#: src/components/date-list.tsx:44
+#: src/components/date-list.tsx:47
 msgid "No reports to submit"
 msgstr "No reports to submit"
 
-#: src/components/date-card.tsx:309
+#: src/components/date-card.tsx:272
 msgid "No tasks found"
 msgstr "No tasks found"
 
-#: src/components/task-select.tsx:71
+#: src/components/task-select.tsx:80
 msgid "No tasks found."
 msgstr "No tasks found."
 
-#: src/components/date-card.tsx:307
+#: src/components/date-card.tsx:270
 msgid "No tasks selected"
 msgstr "No tasks selected"
 
-#: src/components/favorites-form.tsx:117
+#: src/components/favorites-form.tsx:120
 msgid "Optional project key (a Jira key or any custom one) — a favorite with a key follows the Project mapping preference into that project's form row; without one it goes into the default project's row, or the first row when no default project is set"
 msgstr "Optional project key (a Jira key or any custom one) — a favorite with a key follows the Project mapping preference into that project's form row; without one it goes into the default project's row, or the first row when no default project is set"
 
-#: src/components/account-form.tsx:261
+#: src/components/account-form.tsx:262
 msgid "Phone number"
 msgstr "Phone number"
 
-#: src/components/account-form.tsx:97
+#: src/components/account-form.tsx:98
 msgid "Phone number is required"
 msgstr "Phone number is required"
 
-#: src/components/account-form.tsx:247
+#: src/components/account-form.tsx:248
 msgid "Portal credential"
 msgstr "Portal credential"
 
-#: src/components/account-form.tsx:120
+#: src/components/account-form.tsx:121
 msgid "Portal credential is required"
 msgstr "Portal credential is required"
 
-#: src/components/account-form.tsx:233
+#: src/components/account-form.tsx:234
 msgid "Portal URL"
 msgstr "Portal URL"
 
-#: src/components/account-form.tsx:110
+#: src/components/account-form.tsx:111
 msgid "Portal URL is required"
 msgstr "Portal URL is required"
 
@@ -208,31 +208,35 @@ msgstr "Project list"
 msgid "Project mapping"
 msgstr "Project mapping"
 
-#: src/components/error-fallback.tsx:24
+#: src/components/error-fallback.tsx:37
 msgid "Restart app"
 msgstr "Restart app"
+
+#: src/components/error-fallback.tsx:45
+msgid "Restart failed:"
+msgstr "Restart failed:"
 
 #: src/lib/use-update-check.ts:29
 msgid "Restarting…"
 msgstr "Restarting…"
 
-#: src/components/account-form.tsx:351
+#: src/components/account-form.tsx:359
 msgid "Save"
 msgstr "Save"
 
-#: src/components/account-form.tsx:340
+#: src/components/account-form.tsx:346
 msgid "Save anyway"
 msgstr "Save anyway"
 
-#: src/components/task-select.tsx:59
+#: src/components/task-select.tsx:67
 msgid "Search tasks"
 msgstr "Search tasks"
 
-#: src/components/sign-out-button.tsx:32
+#: src/components/sign-out-button.tsx:35
 msgid "Sign out"
 msgstr "Sign out"
 
-#: src/components/error-fallback.tsx:14
+#: src/components/error-fallback.tsx:20
 msgid "Something went wrong"
 msgstr "Something went wrong"
 
@@ -244,7 +248,7 @@ msgstr "Status updated by me"
 msgid "Submits the task form automatically after filling the summary"
 msgstr "Submits the task form automatically after filling the summary"
 
-#: src/components/locale-toggle.tsx:24
+#: src/components/locale-toggle.tsx:27
 msgid "Switch language"
 msgstr "Switch language"
 
@@ -260,7 +264,7 @@ msgstr "The task groups whose issues start all checked by default"
 msgid "Theme"
 msgstr "Theme"
 
-#: src/components/date-card.tsx:213
+#: src/components/date-card.tsx:169
 msgid "Today"
 msgstr "Today"
 
@@ -268,7 +272,7 @@ msgstr "Today"
 msgid "Toggle theme"
 msgstr "Toggle theme"
 
-#: src/components/error-fallback.tsx:21
+#: src/components/error-fallback.tsx:27
 msgid "Try again"
 msgstr "Try again"
 
@@ -285,14 +289,14 @@ msgstr "Update available: v{version}"
 msgid "Update failed: {0}"
 msgstr "Update failed: {0}"
 
-#: src/components/account-form.tsx:123
+#: src/components/account-form.tsx:124
 msgid "Use the username:password format"
 msgstr "Use the username:password format"
 
-#: src/components/account-form.tsx:349
+#: src/components/account-form.tsx:357
 msgid "Verifying…"
 msgstr "Verifying…"
 
-#: src/components/date-card.tsx:214
+#: src/components/date-card.tsx:170
 msgid "Yesterday"
 msgstr "Yesterday"

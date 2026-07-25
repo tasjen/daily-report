@@ -2,7 +2,7 @@ import { Trans, useLingui } from "@lingui/react/macro";
 import { type AnyFieldApi, useForm } from "@tanstack/react-form";
 import { openUrl } from "@tauri-apps/plugin-opener";
 import { ExternalLinkIcon, UserIcon } from "lucide-react";
-import { useMemo, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { z } from "zod";
 
 import { Button } from "@/components/shared/button";
@@ -35,6 +35,7 @@ import {
 } from "@/lib/mutations";
 import { useAccount } from "@/lib/queries";
 import type { Account } from "@/lib/store";
+import { toastError } from "@/lib/utils";
 
 const jiraTokenUrl =
   "https://id.atlassian.com/manage-profile/security/api-tokens";
@@ -90,43 +91,39 @@ export default function AccountForm() {
   // the Lingui macro only transforms t`...` where `t` lexically resolves to
   // the useLingui() destructure, so hoisting this behind a t parameter would
   // silently skip extraction.
-  const formSchema = useMemo(
-    () =>
-      z.object({
-        phone: z
-          .string()
-          .trim()
-          .min(1, t`Phone number is required`),
-        email: z
-          .string()
-          .trim()
-          .min(1, t`Jira email is required`)
-          .pipe(z.email(t`Enter a valid email address`)),
-        api_token: z
-          .string()
-          .trim()
-          .min(1, t`Jira API token is required`),
-        portal_url: z
-          .string()
-          .trim()
-          .min(1, t`Portal URL is required`)
-          .pipe(
-            z.url({
-              protocol: /^https?$/,
-              error: t`Enter a valid http(s) URL`,
-            }),
-          ),
-        portal_credential: z
-          .string()
-          .trim()
-          .min(1, t`Portal credential is required`)
-          .refine(
-            (value) => value.includes(":"),
-            t`Use the username:password format`,
-          ),
-      }),
-    [t],
-  );
+  const formSchema = z.object({
+    phone: z
+      .string()
+      .trim()
+      .min(1, t`Phone number is required`),
+    email: z
+      .string()
+      .trim()
+      .min(1, t`Jira email is required`)
+      .pipe(z.email(t`Enter a valid email address`)),
+    api_token: z
+      .string()
+      .trim()
+      .min(1, t`Jira API token is required`),
+    portal_url: z
+      .string()
+      .trim()
+      .min(1, t`Portal URL is required`)
+      .pipe(
+        z.url({
+          protocol: /^https?$/,
+          error: t`Enter a valid http(s) URL`,
+        }),
+      ),
+    portal_credential: z
+      .string()
+      .trim()
+      .min(1, t`Portal credential is required`)
+      .refine(
+        (value) => value.includes(":"),
+        t`Use the username:password format`,
+      ),
+  });
   const { data: account } = useAccount();
   const saveAccount = useSaveAccountMutation();
   // Open automatically until fully configured: covers both a fresh install
@@ -134,7 +131,9 @@ export default function AccountForm() {
   // existed. Any account saved through this form always has every field, so
   // checking the two newest fields subsumes the old `!account` check.
   const [open, setOpen] = useState(
-    !account?.portal_url || !account?.portal_credential,
+    // the second check needs no `?.`: it only runs once portal_url was
+    // truthy, which already proves `account` is there
+    !account?.portal_url || !account.portal_credential,
   );
 
   const verifyAccount = useVerifyAccountMutation();
@@ -292,7 +291,9 @@ export default function AccountForm() {
                       <Tooltip>
                         <TooltipTrigger
                           className="cursor-pointer"
-                          onClick={() => openUrl(jiraTokenUrl)}
+                          onClick={() => {
+                            openUrl(jiraTokenUrl).catch(toastError);
+                          }}
                           render={
                             <span>
                               <ExternalLinkIcon size={16} className="inline" />
@@ -302,7 +303,9 @@ export default function AccountForm() {
                         <TooltipContent className="max-w-none">
                           <p
                             className="cursor-pointer font-semibold hover:underline"
-                            onClick={() => openUrl(jiraTokenUrl)}
+                            onClick={() => {
+                              openUrl(jiraTokenUrl).catch(toastError);
+                            }}
                           >
                             {jiraTokenUrl}
                           </p>

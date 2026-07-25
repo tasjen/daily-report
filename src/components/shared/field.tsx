@@ -1,5 +1,4 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import { useMemo } from "react";
 
 import { Label } from "@/components/shared/label";
 import { Separator } from "@/components/shared/separator";
@@ -179,7 +178,7 @@ function FieldError({
 }: React.ComponentProps<"div"> & {
   errors?: Array<{ message?: string } | undefined>;
 }) {
-  const content = useMemo(() => {
+  function buildContent() {
     if (children) {
       return children;
     }
@@ -192,7 +191,7 @@ function FieldError({
       ...new Map(errors.map((error) => [error?.message, error])).values(),
     ];
 
-    if (uniqueErrors?.length === 1) {
+    if (uniqueErrors.length === 1) {
       return uniqueErrors[0]?.message;
     }
 
@@ -204,7 +203,9 @@ function FieldError({
         )}
       </ul>
     );
-  }, [children, errors]);
+  }
+
+  const content = buildContent();
 
   if (!content) {
     return null;

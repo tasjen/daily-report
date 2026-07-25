@@ -1,16 +1,16 @@
 # Graph Report - daily-report  (2026-07-25)
 
 ## Corpus Check
-- 160 files · ~124,434 words
+- 160 files · ~124,700 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1161 nodes · 1414 edges · 207 communities (74 shown, 133 thin omitted)
+- 1163 nodes · 1420 edges · 205 communities (73 shown, 132 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 33 edges (avg confidence: 0.86)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `3af43caf`
+- Built from commit: `2cb69ece`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -231,15 +231,15 @@
 - **Parallel Portal and Jira Account Verification Flow** — docs_superpowers_specs_2026_07_12_account_verification_design_candidate_portal_verification, docs_superpowers_specs_2026_07_12_account_verification_design_jira_credentials_check, docs_superpowers_specs_2026_07_12_account_verification_design_parallel_account_verification, docs_superpowers_specs_2026_07_12_account_verification_design_verify_account_error, docs_superpowers_specs_2026_07_12_account_verification_design_save_anyway_escape_hatch [EXTRACTED 1.00]
 - **Signed Release and Update Delivery Chain** — docs_superpowers_specs_2026_07_12_cicd_design_tag_driven_release_pipeline, docs_superpowers_specs_2026_07_12_cicd_design_release_version_guard, docs_superpowers_specs_2026_07_12_cicd_design_updater_signing_key, docs_superpowers_specs_2026_07_12_cicd_design_draft_release_publish_gate, docs_superpowers_specs_2026_07_12_cicd_design_in_app_auto_updater [EXTRACTED 1.00]
 
-## Communities (207 total, 133 thin omitted)
+## Communities (205 total, 132 thin omitted)
 
 ### Community 0 - "Rust Backend Browser Automation"
 Cohesion: 0.12
 Nodes (43): AppHandle, Box, Browser, CdpError, Error, From, Mutex, Ok (+35 more)
 
 ### Community 1 - "Frontend Component Tests"
-Cohesion: 0.05
-Nodes (19): vitest, fillField(), fillValidFields(), PortalBehavior, saveButton(), submit(), ACCOUNT, CREATED_ISSUES (+11 more)
+Cohesion: 0.06
+Nodes (12): vitest, field(), fillField(), fillValidFields(), PortalBehavior, renderForm(), saveButton(), submit() (+4 more)
 
 ### Community 2 - "Agent Workflow Skills"
 Cohesion: 0.14
@@ -373,6 +373,10 @@ Nodes (4): Repository Guidance (AGENTS.md), Two Browser Instances (BrowserState)
 Cohesion: 0.83
 Nodes (3): capture(), hitl-loop.template.sh script, step()
 
+### Community 44 - "TextField"
+Cohesion: 0.13
+Nodes (13): AccountForm(), normalizePortalUrl(), ACCOUNT, card(), CREATED_ISSUES, JiraSets, playButton(), setJira() (+5 more)
+
 ### Community 45 - "Fluency Strength"
 Cohesion: 0.67
 Nodes (3): Desirable Difficulty, Fluency Strength, Storage Strength
@@ -410,24 +414,24 @@ Cohesion: 0.50
 Nodes (5): Design Comparison, Deletion Test, Depth, Leverage, Locality
 
 ## Knowledge Gaps
-- **420 isolated node(s):** `name`, `version`, `private`, `type`, `prepare` (+415 more)
+- **419 isolated node(s):** `PortalBehavior`, `STATUS_ISSUES`, `CREATED_ISSUES`, `SPRINT_ISSUES`, `JiraSets` (+414 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **133 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **132 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `react` connect `React App Components` to `select.tsx`, `@types/react`, `@types/react-dom`, `Card`, `InputGroup`, `Theme`, `oxlint Linter Config`, `TextField`, `Props`, `Combobox Component`, `Props`, `Dropdown Menu Component`, `main.tsx`, `Field Component`, `Dialog`?**
-  _High betweenness centrality (0.071) - this node is a cross-community bridge._
+- **Why does `react` connect `React App Components` to `select.tsx`, `InputGroup`, `Card`, `Theme`, `oxlint Linter Config`, `TextField`, `Props`, `Combobox Component`, `Props`, `Dropdown Menu Component`, `main.tsx`, `Field Component`, `Dialog`?**
+  _High betweenness centrality (0.061) - this node is a cross-community bridge._
 - **Why does `dependencies` connect `lucide-react` to `@tauri-apps/plugin-opener`, `package.json Scripts`, `Combobox Component`, `class-variance-authority`, `clsx`, `@formkit/auto-animate`, `@lingui/core`, `@lingui/react`, `mutative`, `next-themes`, `lucide-react`, `react-dom`, `react-error-boundary`, `shadcn`, `sonner`, `tailwind-merge`, `tailwindcss`, `@tailwindcss/vite`, `@tanstack/react-form`, `@tanstack/react-query`, `@tanstack/react-query-devtools`, `@tauri-apps/api`, `@tauri-apps/plugin-http`, `@tauri-apps/plugin-updater`, `@tauri-apps/plugin-window-state`, `tw-animate-css`?**
-  _High betweenness centrality (0.055) - this node is a cross-community bridge._
-- **Why does `react` connect `Combobox Component` to `lucide-react`?**
-  _High betweenness centrality (0.049) - this node is a cross-community bridge._
-- **What connects `name`, `version`, `private` to the rest of the system?**
-  _420 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.059) - this node is a cross-community bridge._
+- **What connects `PortalBehavior`, `STATUS_ISSUES`, `CREATED_ISSUES` to the rest of the system?**
+  _419 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Rust Backend Browser Automation` be split into smaller, more focused modules?**
   _Cohesion score 0.12280701754385964 - nodes in this community are weakly interconnected._
 - **Should `Frontend Component Tests` be split into smaller, more focused modules?**
-  _Cohesion score 0.045068027210884355 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06349206349206349 - nodes in this community are weakly interconnected._
 - **Should `Agent Workflow Skills` be split into smaller, more focused modules?**
   _Cohesion score 0.14166666666666666 - nodes in this community are weakly interconnected._
+- **Should `PRD & Agent-Brief Authoring` be split into smaller, more focused modules?**
+  _Cohesion score 0.05641025641025641 - nodes in this community are weakly interconnected._

@@ -10,7 +10,7 @@ export default function RefreshDateListButton() {
       size="icon-xl"
       variant="ghost"
       disabled={isFetching}
-      onClick={() => refetch()}
+      onClick={() => void refetch()}
     >
       <RefreshCwIcon className="size-6" />
     </Button>

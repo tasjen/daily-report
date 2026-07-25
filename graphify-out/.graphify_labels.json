@@ -96,6 +96,8 @@
   "94": "@tauri-apps/cli",
   "95": "@testing-library/user-event",
   "96": "@types/node",
+  "97": "Triage Label Mapping",
+  "98": "Deepening Opportunity",
   "99": "typescript",
   "100": "vite",
   "101": "@vitejs/plugin-react",
@@ -196,6 +198,8 @@
   "196": "Daily Report App Icon",
   "197": "Daily Report App Icon",
   "198": "Interface as Test Surface",
+  "199": "Tracer Bullet Issues",
+  "200": "store.ts",
   "201": "Design It Twice",
   "202": "Depth",
   "203": "lucide-react",
@@ -203,5 +207,6 @@
   "205": "@tauri-apps/plugin-opener",
   "206": "@testing-library/dom",
   "207": "@testing-library/jest-dom",
-  "208": "@types/babel__core"
+  "208": "@types/babel__core",
+  "209": "account-form.tsx"
 }

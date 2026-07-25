@@ -3,6 +3,8 @@ import { getCurrentWindow } from "@tauri-apps/api/window";
 import { relaunch } from "@tauri-apps/plugin-process";
 import { useEffect, useRef } from "react";
 
+import { toastError } from "./utils";
+
 const IDLE_RESET_MS = 60 * 60 * 1000; // 1 hour unfocused → reset on return
 
 /**
@@ -50,7 +52,7 @@ export function useResetWhenAway() {
         if (cleanedUp) fn();
         else unlisten = fn;
       })
-      .catch(console.error);
+      .catch(toastError);
     return () => {
       cleanedUp = true;
       unlisten?.();

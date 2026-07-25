@@ -3,6 +3,7 @@ import { Trans, useLingui } from "@lingui/react/macro";
 import { Button } from "@/components/shared/button";
 import { Label } from "@/components/shared/label";
 import { activateLocale, LOCALES, type Locale } from "@/lib/i18n";
+import { toastError } from "@/lib/utils";
 
 export default function LocaleToggle() {
   const { i18n } = useLingui();
@@ -17,7 +18,9 @@ export default function LocaleToggle() {
       <Button
         variant="outline"
         size="icon-xl"
-        onClick={() => activateLocale(nextLocale)}
+        onClick={() => {
+          activateLocale(nextLocale).catch(toastError);
+        }}
       >
         {LOCALES[locale]}
         <span className="sr-only">

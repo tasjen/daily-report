@@ -6,18 +6,21 @@ import { Button } from "@/components/shared/button";
 
 export default function OpenMemberPageButton() {
   const [isPending, setIsPending] = useState(false);
+
+  async function handleClick() {
+    setIsPending(true);
+    try {
+      await invoke("open_member_page");
+    } catch {}
+    setIsPending(false);
+  }
+
   return (
     <Button
       size="icon-xl"
       variant="ghost"
       disabled={isPending}
-      onClick={async () => {
-        setIsPending(true);
-        try {
-          await invoke("open_member_page");
-        } catch {}
-        setIsPending(false);
-      }}
+      onClick={() => void handleClick()}
     >
       <PlayIcon className="size-6" />
     </Button>

@@ -14,6 +14,7 @@ import ErrorFallback from "@/components/error-fallback";
 import { TooltipProvider } from "@/components/shared/tooltip";
 import { ThemeProvider } from "@/components/theme-provider";
 import { activateLocale, getStoredLocale } from "@/lib/i18n";
+import { toastError } from "@/lib/utils";
 
 // The window is created hidden (`visible: false` in tauri.conf.json) so it
 // never appears before the UI has rendered. This must stay the outermost
@@ -25,7 +26,7 @@ function ShowWindowOnMount({ children }: { children: React.ReactNode }) {
     appWindow
       .show()
       .then(() => appWindow.setFocus())
-      .catch(console.error);
+      .catch(toastError);
   }, []);
   return children;
 }
