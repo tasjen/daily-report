@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-07-25T13:32:03.447792+00:00",
+  "generated_at": "2026-07-25T14:15:22.820877+00:00",
   "nodes": {
     "claude_graphify_workflow": {
-      "code_fingerprint": "3baefe5e469d1763c21877e06ce1d6250ad98e07151a64ee5912391785498708",
+      "code_fingerprint": "e8390d48b4dfaed3c7a889ae7bae1185e772fa7a839d60b592d0f16521c0c544",
       "label": "Graphify Codebase Navigation Workflow",
       "last": "2026-07-20T16:19:01.048775+00:00",
       "provenance": [
@@ -12,7 +12,7 @@
           "q": "Update the README.md file about Graphify usage."
         }
       ],
-      "score": 0.893288534,
+      "score": 0.892667808,
       "source_file": "CLAUDE.md",
       "status": "tentative",
       "uses": 1

@@ -545,9 +545,9 @@
     "semantic_hash": "5844fe91d73c2c250e94a610c067a889"
   },
   ".github/dependabot.yml": {
-    "mtime": 1784023006.8478956,
-    "ast_hash": "1c1a505b7b8b95d1079e3d3861275c07",
-    "semantic_hash": "1c1a505b7b8b95d1079e3d3861275c07"
+    "mtime": 1784988778.989216,
+    "ast_hash": "3e42934d316d4e2725011ef867246119",
+    "semantic_hash": ""
   },
   ".github/workflows/ci.yml": {
     "mtime": 1784968546.2944171,
