@@ -89,29 +89,27 @@ process.
 Releases are cut with `pnpm bump` ([scripts/bump-version.mjs](scripts/bump-version.mjs)),
 which keeps the version in sync across `package.json`,
 `src-tauri/tauri.conf.json`, `src-tauri/Cargo.toml`, and `Cargo.lock`, and
-drives the branch/tag flow. Run it **once per release, from an up-to-date
-`main`**.
+drives the release-branch flow. Run it **once per release, from an up-to-date
+`main`**; CI creates the tag after the bump PR merges.
 
 ```sh
-# 1. Bump the version. Pass an explicit X.Y.Z or a keyword.
+# Bump the version. Pass an explicit X.Y.Z or a keyword.
 pnpm bump 1.2.0          # or: pnpm bump patch | minor | major
 
-# 2. Merge the release/vX.Y.Z PR it opened, then pull main:
-git switch main && git pull
-
-# 3. Tag the release. This is what triggers the build.
-pnpm bump --tag
+# Then create and merge the release/vX.Y.Z PR it opens.
 ```
 
-**Step 1 — `pnpm bump <version>`** verifies you're on a clean, up-to-date
+`pnpm bump <version>` verifies you're on a clean, up-to-date
 `main`, rewrites the version in all four files (refusing downgrades), then
 creates a `release/vX.Y.Z` branch, commits, pushes, and opens the pre-filled
 PR page. `patch`/`minor`/`major` increment the current version; or pass an
 exact version such as `1.0.0`.
 
-**Step 3 — `pnpm bump --tag`** re-checks that `main` is current and the tag
-doesn't already exist, asks for confirmation, then pushes the `vX.Y.Z` tag —
-which starts the release workflow. Add `--yes` to skip the prompt.
+After the PR merges and `main` CI succeeds, the release workflow verifies that
+all four version files agree, creates the `vX.Y.Z` tag on the tested commit,
+and starts the build. Ordinary `main` commits do nothing because their version
+matches the previous commit. `pnpm bump --tag` remains available as a manual
+fallback.
 
 The tag build produces a **draft** GitHub Release for macOS (Apple Silicon)
 and Windows. Before publishing, confirm the draft carries all expected

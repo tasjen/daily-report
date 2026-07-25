@@ -273,14 +273,16 @@ Each job uses `dorny/paths-filter` and `if:`-guards toolchain/setup/check steps 
 
 [.github/workflows/release.yml](.github/workflows/release.yml):
 
-- A `vX.Y.Z` tag builds macOS Apple Silicon (`app` + dmg; `app` supplies the `.app.tar.gz` updater artifact) and Windows NSIS through `tauri-apps/tauri-action`.
+- After `CI` succeeds for a `main` push, the workflow compares the tested commit's version with its first parent. A version increase creates `vX.Y.Z` on that exact commit and continues into the release jobs; an ordinary push stops after the prepare job.
+- Tags pushed with `GITHUB_TOKEN` do not trigger a second workflow, so automatic tagging and building deliberately live in the same workflow run. A manually pushed `vX.Y.Z` tag still enters the same guard and build jobs.
+- The tag build produces macOS Apple Silicon (`app` + dmg; `app` supplies the `.app.tar.gz` updater artifact) and Windows NSIS through `tauri-apps/tauri-action`.
 - It uploads installers, updater artifacts, and `latest.json` to a **draft** GitHub Release.
-- A guard job fails when the tag differs from `version` in `src-tauri/tauri.conf.json`.
+- A guard job fails unless the tag matches the synchronized versions in `package.json`, `src-tauri/tauri.conf.json`, `src-tauri/Cargo.toml`, and `Cargo.lock`.
 
 Release checklist:
 
-1. Run `pnpm bump <X.Y.Z|major|minor|patch>` ([scripts/bump-version.mjs](scripts/bump-version.mjs)). It updates `package.json`, `src-tauri/tauri.conf.json`, `src-tauri/Cargo.toml`, and `Cargo.lock` through `cargo metadata`; only tauri.conf.json is guard-enforced, while the others remain synchronized for hygiene. It then creates `release/vX.Y.Z`, commits, pushes, and opens the prefilled PR page. Requires clean, up-to-date `main`.
-2. Merge the bump PR, pull `main`, then run `pnpm bump --tag`. It verifies current `main` and a new tag, creates `vX.Y.Z`, and pushes it, triggering the release build.
+1. Run `pnpm bump <X.Y.Z|major|minor|patch>` ([scripts/bump-version.mjs](scripts/bump-version.mjs)). It updates `package.json`, `src-tauri/tauri.conf.json`, `src-tauri/Cargo.toml`, and `Cargo.lock` through `cargo metadata`, then creates `release/vX.Y.Z`, commits, pushes, and opens the prefilled PR page. Requires clean, up-to-date `main`.
+2. Merge the bump PR. After the resulting `main` CI run succeeds, the release workflow verifies the four versions, creates the tag idempotently, and starts the build. `pnpm bump --tag` remains a manual fallback, not a normal release step.
 3. When the draft appears, first verify `.dmg`, `.app.tar.gz` + `.sig`, `-setup.exe` + `.sig`, and `latest.json` with both `darwin-aarch64` and `windows-x86_64`. A missing platform means a bundling regression. Then write notes and **Publish**. Publication makes `releases/latest/download/latest.json` live; installed apps see the update at next launch.
 
 Additional release rules:

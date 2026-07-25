@@ -4,26 +4,62 @@ on:
   push:
     tags:
       - "v*"
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
 
 permissions:
   contents: write
 
+concurrency:
+  group: release-${{ github.event_name == 'push' && github.ref || github.event.workflow_run.head_sha }}
+  cancel-in-progress: false
+
 jobs:
+  prepare:
+    if: >-
+      github.event_name == 'push' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.head_branch == 'main')
+    runs-on: ubuntu-latest
+    outputs:
+      should_release: ${{ steps.release.outputs.should_release }}
+      tag: ${{ steps.release.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.ref }}
+          fetch-depth: 2
+      - name: Resolve release tag
+        id: release
+        env:
+          RELEASE_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = "push" ]; then
+            echo "should_release=true" >> "$GITHUB_OUTPUT"
+            echo "tag=$GITHUB_REF_NAME" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          BEFORE_SHA="$(git rev-parse "${RELEASE_HEAD_SHA}^")"
+          node scripts/bump-version.mjs --tag-if-changed "$BEFORE_SHA"
+
   guard:
+    needs: prepare
+    if: needs.prepare.outputs.should_release == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - name: Verify tag matches tauri.conf.json version
-        run: |
-          TAG_VERSION="${GITHUB_REF_NAME#v}"
-          CONF_VERSION="$(jq -r .version src-tauri/tauri.conf.json)"
-          if [ "$TAG_VERSION" != "$CONF_VERSION" ]; then
-            echo "Tag v${TAG_VERSION} does not match tauri.conf.json version ${CONF_VERSION}" >&2
-            exit 1
-          fi
+        with:
+          ref: ${{ needs.prepare.outputs.tag }}
+      - name: Verify tag matches every version file
+        env:
+          RELEASE_TAG: ${{ needs.prepare.outputs.tag }}
+        run: node scripts/bump-version.mjs --verify-tag "$RELEASE_TAG"
 
   build:
-    needs: guard
+    needs: [prepare, guard]
+    if: needs.prepare.outputs.should_release == 'true'
     strategy:
       fail-fast: false
       matrix:
@@ -37,6 +73,8 @@ jobs:
     runs-on: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.prepare.outputs.tag }}
       - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
       - uses: actions/setup-node@v7
         with:

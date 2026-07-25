@@ -40,8 +40,8 @@
     "semantic_hash": ""
   },
   "scripts/bump-version.mjs": {
-    "mtime": 1784998463.056364,
-    "ast_hash": "ac20e7cf02c8b9f5202323ecaf9eaa49",
+    "mtime": 1784994474.0188363,
+    "ast_hash": "26c0e47878b03e6ea8db1a1e860aa6c6",
     "semantic_hash": ""
   },
   "skills-lock.json": {
@@ -140,7 +140,7 @@
     "semantic_hash": ""
   },
   "src/components/preferences-form.tsx": {
-    "mtime": 1784996454.402163,
+    "mtime": 1784994594.1258228,
     "ast_hash": "17141f087de2a12442e5bfb08be91de0",
     "semantic_hash": ""
   },
@@ -150,7 +150,7 @@
     "semantic_hash": "078109943746eb95bf09c3ceac39bdaa"
   },
   "src/components/project-map-form.tsx": {
-    "mtime": 1784996454.4026346,
+    "mtime": 1784994526.3173425,
     "ast_hash": "0dff844ef6f566041682054d29c45167",
     "semantic_hash": ""
   },
@@ -255,7 +255,7 @@
     "semantic_hash": ""
   },
   "src/components/task-select.tsx": {
-    "mtime": 1784996454.4029577,
+    "mtime": 1784994941.3468518,
     "ast_hash": "a5e609195e0afae5314a4074868faca4",
     "semantic_hash": ""
   },
@@ -555,23 +555,23 @@
     "semantic_hash": ""
   },
   ".github/workflows/release.yml": {
-    "mtime": 1784997167.4220679,
-    "ast_hash": "c4804b7f9565b69cef40b9fcf3b54202",
+    "mtime": 1784994473.9911726,
+    "ast_hash": "d79ba762ab75b360fe2fc83bb0576c06",
     "semantic_hash": ""
   },
   "AGENTS.md": {
-    "mtime": 1784997210.9390564,
-    "ast_hash": "35d1dc8fac2269fed3cf11ab82a94e2a",
+    "mtime": 1784994526.3159976,
+    "ast_hash": "77eb577f3f3619d0c8063acee34679c4",
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1784997210.9390564,
-    "ast_hash": "35d1dc8fac2269fed3cf11ab82a94e2a",
+    "mtime": 1784994526.3159976,
+    "ast_hash": "77eb577f3f3619d0c8063acee34679c4",
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1784997193.143323,
-    "ast_hash": "fbd7ec094f5801bf4d354f97008c5a12",
+    "mtime": 1784994473.9928753,
+    "ast_hash": "b5682619def63f370be94e81518d2820",
     "semantic_hash": ""
   },
   "index.html": {
@@ -1010,7 +1010,7 @@
     "semantic_hash": ""
   },
   "src/components/project-map-form.test.tsx": {
-    "mtime": 1784996454.4024446,
+    "mtime": 1784994526.3168793,
     "ast_hash": "192764be03f8b45e0882cf939923859a",
     "semantic_hash": ""
   },
@@ -1167,11 +1167,6 @@
   "src/components/preference-toggles.test.tsx": {
     "mtime": 1784994474.026799,
     "ast_hash": "ae98f98e98c45c77d623989792b0fe4b",
-    "semantic_hash": ""
-  },
-  "scripts/bump-version.test.mjs": {
-    "mtime": 1784997633.5850441,
-    "ast_hash": "f077012e3a1e8e2c1b5c9993f7209b12",
     "semantic_hash": ""
   }
 }
