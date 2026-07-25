@@ -2,11 +2,16 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 
 import {
   buildIssueGroups,
+  buildJqlForDate,
   buildSubmission,
   defaultCheckedKeysOf,
   buildSummary,
+  favoritesAsIssues,
+  FAVORITE_KEY_PREFIX,
   getDateAfter,
   getDateRelation,
+  jqlFor,
+  toOptionItems,
 } from "@/lib/date-card-helpers";
 import type { JiraIssue } from "@/type";
 
@@ -346,5 +351,92 @@ describe("defaultCheckedKeysOf", () => {
     expect(defaultCheckedKeysOf(groups, defaultGroupIds)).toEqual(
       new Set(["DR-1"]),
     );
+  });
+});
+
+describe("buildJqlForDate", () => {
+  // Asserted verbatim: these strings are both what Jira runs and what the
+  // group tooltips display, so a silent edit to either is a behavior change.
+  it("bounds every query by the date inclusive and the next day exclusive", () => {
+    expect(buildJqlForDate("2026-07-20")).toEqual({
+      status:
+        'status CHANGED BY currentUser() DURING ("2026-07-20", "2026-07-21")',
+      created:
+        'creator = currentUser() AND created >= "2026-07-20" AND created < "2026-07-21"',
+      sprint:
+        'assignee = currentUser() AND created < "2026-07-21" AND sprint in openSprints() AND statusCategory != Done',
+    });
+  });
+});
+
+describe("jqlFor", () => {
+  const jqlByGroup = buildJqlForDate("2026-07-20");
+
+  it("returns the query each Jira-backed group was built from", () => {
+    expect(jqlFor(jqlByGroup, "status")).toBe(jqlByGroup.status);
+    expect(jqlFor(jqlByGroup, "created")).toBe(jqlByGroup.created);
+    expect(jqlFor(jqlByGroup, "sprint")).toBe(jqlByGroup.sprint);
+  });
+
+  it("has nothing to show for favorites, which are local", () => {
+    expect(jqlFor(jqlByGroup, "favorite")).toBeUndefined();
+  });
+});
+
+describe("favoritesAsIssues", () => {
+  it("prefixes keys so favorites can never collide with a Jira key", () => {
+    const [favorite] = favoritesAsIssues([
+      { text: "Standup", project_key: "OPS" },
+    ]);
+    expect(favorite?.key).toBe(`${FAVORITE_KEY_PREFIX}Standup`);
+    expect(favorite?.fields.summary).toBe("Standup");
+  });
+
+  it("leaves the status blank, so a leaked favorite can't form a status block", () => {
+    expect(
+      favoritesAsIssues([{ text: "Standup", project_key: null }])[0]?.fields
+        .status.name,
+    ).toBe("");
+  });
+
+  it("keeps insertion order", () => {
+    expect(
+      favoritesAsIssues([
+        { text: "Standup", project_key: null },
+        { text: "Code review", project_key: null },
+      ]).map((asIssue) => asIssue.fields.summary),
+    ).toEqual(["Standup", "Code review"]);
+  });
+});
+
+describe("toOptionItems", () => {
+  it("labels Jira issues 'KEY: summary' and sorts them by key", () => {
+    expect(
+      toOptionItems({
+        id: "status",
+        issues: [
+          issue("DR-9", "Ship report", "Done"),
+          issue("DR-1", "Add tests", "In Progress"),
+        ],
+      }),
+    ).toEqual([
+      { value: "DR-1", label: "DR-1: Add tests" },
+      { value: "DR-9", label: "DR-9: Ship report" },
+    ]);
+  });
+
+  it("shows favorites as bare text in the order they were added", () => {
+    expect(
+      toOptionItems({
+        id: "favorite",
+        issues: favoritesAsIssues([
+          { text: "Standup", project_key: null },
+          { text: "Code review", project_key: null },
+        ]),
+      }),
+    ).toEqual([
+      { value: `${FAVORITE_KEY_PREFIX}Standup`, label: "Standup" },
+      { value: `${FAVORITE_KEY_PREFIX}Code review`, label: "Code review" },
+    ]);
   });
 });

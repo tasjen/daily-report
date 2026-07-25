@@ -20,15 +20,17 @@ import { Separator } from "@/components/shared/separator";
 import TaskSelect from "@/components/task-select";
 import {
   buildIssueGroups,
+  buildJqlForDate,
   buildSubmission,
   defaultCheckedKeysOf,
-  FAVORITE_KEY_PREFIX,
-  getDateAfter,
+  favoritesAsIssues,
   getDateRelation,
+  jqlFor,
+  toOptionItems,
 } from "@/lib/date-card-helpers";
 import { useSubmitTaskMutation } from "@/lib/mutations";
 import { useFavorites, useJiraTasksQuery, usePreferences } from "@/lib/queries";
-import { DEFAULT_PREFERENCES, type TaskGroupType } from "@/lib/store";
+import { DEFAULT_PREFERENCES } from "@/lib/store";
 import { cn, toastError } from "@/lib/utils";
 
 type Props = {
@@ -36,47 +38,25 @@ type Props = {
 };
 export default function DateCard({ date }: Props) {
   const { i18n, t } = useLingui();
-  const dateAfter = getDateAfter(date);
-  const jqlStatusUpdatedByMe = `status CHANGED BY currentUser() DURING ("${date}", "${dateAfter}")`;
-  const jqlCreatedByMe = `creator = currentUser() AND created >= "${date}" AND created < "${dateAfter}"`;
-  const jqlMyActiveSprintNotDone = `assignee = currentUser() AND created < "${dateAfter}" AND sprint in openSprints() AND statusCategory != Done`;
-
-  // Each group's TaskSelect tooltip shows the very string its query ran, so
-  // what the user is told can't drift from what was asked of Jira. Favorites
-  // are local, so they have no entry.
-  const jqlByGroup: Partial<Record<TaskGroupType, string>> = {
-    status: jqlStatusUpdatedByMe,
-    created: jqlCreatedByMe,
-    sprint: jqlMyActiveSprintNotDone,
-  };
+  // The same strings feed the queries below and each group's TaskSelect
+  // tooltip, so displayed and executed JQL cannot drift.
+  const jqlByGroup = buildJqlForDate(date);
 
   // Each set is queried separately so its issues can be grouped by source and
   // defaulted per the user's `default_task_groups` preference.
   const queryOptions = {
     refetchOnMount: "always",
   } as const;
-  const statusQuery = useJiraTasksQuery(jqlStatusUpdatedByMe, queryOptions);
-  const createdQuery = useJiraTasksQuery(jqlCreatedByMe, queryOptions);
-  const sprintQuery = useJiraTasksQuery(jqlMyActiveSprintNotDone, queryOptions);
+  const statusQuery = useJiraTasksQuery(jqlByGroup.status, queryOptions);
+  const createdQuery = useJiraTasksQuery(jqlByGroup.created, queryOptions);
+  const sprintQuery = useJiraTasksQuery(jqlByGroup.sprint, queryOptions);
 
   const error = statusQuery.error ?? createdQuery.error ?? sprintQuery.error;
   const isFetching =
     statusQuery.isFetching || createdQuery.isFetching || sprintQuery.isFetching;
 
   const { data: favorites } = useFavorites();
-  // Favorites masquerade as issues so the existing dedup/default-checked/
-  // override machinery applies unchanged. buildSummary never sees them —
-  // they're split back out into plain leading lines.
-  const favoriteIssues = (favorites ?? []).map((favorite) => ({
-    id: favorite.text,
-    key: `${FAVORITE_KEY_PREFIX}${favorite.text}`,
-    fields: {
-      summary: favorite.text,
-      status: { name: "" },
-      updated: "",
-      duedate: "",
-    },
-  }));
+  const favoriteIssues = favoritesAsIssues(favorites ?? []);
 
   const { data: preferences } = usePreferences();
   const defaultGroupIds = new Set(
@@ -104,22 +84,9 @@ export default function DateCard({ date }: Props) {
     type: group.id,
     label: i18n._(group.label),
     description: i18n._(group.description),
-    jql: jqlByGroup[group.id],
+    jql: jqlFor(jqlByGroup, group.id),
     keys: group.issues.map((issue) => issue.key),
-    // Favorites show their text alone, in the order they were added;
-    // Jira issues show "KEY: summary" sorted by key.
-    items:
-      group.id === "favorite"
-        ? group.issues.map((issue) => ({
-            value: issue.key,
-            label: issue.fields.summary,
-          }))
-        : group.issues
-            .map((issue) => ({
-              value: issue.key,
-              label: `${issue.key}: ${issue.fields.summary}`,
-            }))
-            .toSorted((a, b) => a.value.localeCompare(b.value)),
+    items: toOptionItems(group),
   }));
 
   // Issues displayed under a default task group start checked; everything

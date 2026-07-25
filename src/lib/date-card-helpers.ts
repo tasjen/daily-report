@@ -14,6 +14,73 @@ export type IssueGroup = {
   issues: JiraIssue[];
 };
 
+// Prefix that namespaces favorite keys away from real Jira issue keys, so
+// dedup/selection state can never collide and buildSubmission can split
+// favorites back out of the flat selection.
+export const FAVORITE_KEY_PREFIX = "favorite:";
+
+// The Jira-backed task groups. Favorites are local, so they are the one
+// TaskGroupType with no query behind them.
+export type JqlByGroup = Record<Exclude<TaskGroupType, "favorite">, string>;
+
+// The three Jira queries a date card runs, bounded by <date> inclusive and
+// <date+1> exclusive. One source for both the strings handed to
+// useJiraTasksQuery and the strings shown in each group's tooltip, so what the
+// user is told can't drift from what was asked of Jira.
+export function buildJqlForDate(date: string): JqlByGroup {
+  const dateAfter = getDateAfter(date);
+  return {
+    status: `status CHANGED BY currentUser() DURING ("${date}", "${dateAfter}")`,
+    created: `creator = currentUser() AND created >= "${date}" AND created < "${dateAfter}"`,
+    sprint: `assignee = currentUser() AND created < "${dateAfter}" AND sprint in openSprints() AND statusCategory != Done`,
+  };
+}
+
+// Total lookup over every TaskGroupType, so the tooltip can ask about any
+// group without a cast: favorites simply have no JQL to show.
+export function jqlFor(
+  jqlByGroup: JqlByGroup,
+  id: TaskGroupType,
+): string | undefined {
+  return id === "favorite" ? undefined : jqlByGroup[id];
+}
+
+// Favorites masquerade as issues so the existing dedup/default-checked/
+// override machinery applies unchanged. buildSummary never sees them —
+// buildSubmission splits them back out into plain leading lines by their
+// FAVORITE_KEY_PREFIX.
+export function favoritesAsIssues(favorites: Favorite[]): JiraIssue[] {
+  return favorites.map((favorite) => ({
+    id: favorite.text,
+    key: `${FAVORITE_KEY_PREFIX}${favorite.text}`,
+    fields: {
+      summary: favorite.text,
+      status: { name: "" },
+      updated: "",
+      duedate: "",
+    },
+  }));
+}
+
+// Favorites show their text alone, in the order they were added; Jira issues
+// show "KEY: summary" sorted by key.
+export function toOptionItems(
+  group: Pick<IssueGroup, "id" | "issues">,
+): { value: string; label: string }[] {
+  if (group.id === "favorite") {
+    return group.issues.map((issue) => ({
+      value: issue.key,
+      label: issue.fields.summary,
+    }));
+  }
+  return group.issues
+    .map((issue) => ({
+      value: issue.key,
+      label: `${issue.key}: ${issue.fields.summary}`,
+    }))
+    .toSorted((a, b) => a.value.localeCompare(b.value));
+}
+
 export function buildIssueGroups(
   issuesById: Record<TaskGroupType, JiraIssue[]>,
   defaultGroupIds: Set<TaskGroupType>,
@@ -64,11 +131,6 @@ export type SubmissionInput = {
   // objects whose keys carry FAVORITE_KEY_PREFIX.
   favorites: Favorite[];
 };
-
-// Prefix that namespaces favorite keys away from real Jira issue keys, so
-// dedup/selection state can never collide and buildSubmission can split
-// favorites back out of the flat selection.
-export const FAVORITE_KEY_PREFIX = "favorite:";
 
 function bulletLines(texts: string[]): string {
   return texts.map((text) => `• ${text}`).join("\n");
