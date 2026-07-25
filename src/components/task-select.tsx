@@ -23,6 +23,10 @@ type Props = {
   // "KEY: description" columns (used by the favorites group, whose labels
   // are free text)
   plainLabels?: boolean;
+  // Stable identity for tests. `label` is translated copy, so it can't be
+  // queried on; the caller passes a locale-independent id instead, and the
+  // input and the "(all selected)" marker derive their own from it.
+  testId?: string;
 };
 
 export default function TaskSelect({
@@ -32,6 +36,7 @@ export default function TaskSelect({
   label,
   className,
   plainLabels,
+  testId,
 }: Props) {
   const { t } = useLingui();
   const anchor = useComboboxAnchor();
@@ -43,12 +48,15 @@ export default function TaskSelect({
       value={value}
       onValueChange={onValueChange}
     >
-      <div className={className} ref={anchor}>
+      <div className={className} ref={anchor} data-testid={testId}>
         {label && (
           <Label className="mb-2 px-1 text-nowrap">
             {label}
             {allSelected && (
-              <span className="font-normal text-muted-foreground">
+              <span
+                className="font-normal text-muted-foreground"
+                data-testid={testId && `${testId}-all-selected`}
+              >
                 <Trans>(all selected)</Trans>
               </span>
             )}
@@ -57,6 +65,7 @@ export default function TaskSelect({
         <ComboboxInput
           startAddon={<SearchIcon className="pointer-events-none" />}
           placeholder={t`Search tasks`}
+          data-testid={testId && `${testId}-input`}
         />
       </div>
       <ComboboxContent

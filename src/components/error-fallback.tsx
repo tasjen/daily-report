@@ -10,7 +10,7 @@ export default function ErrorFallback({
 }: FallbackProps) {
   return (
     <main className="flex h-screen flex-col items-center justify-center gap-4 p-8">
-      <h1 className="text-xl font-semibold">
+      <h1 className="text-xl font-semibold" data-testid="error-title">
         <Trans>Something went wrong</Trans>
       </h1>
       <p className="max-w-2xl text-center whitespace-pre-wrap text-red-500">

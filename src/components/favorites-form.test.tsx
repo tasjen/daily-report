@@ -18,10 +18,14 @@ function setup(favorites: (string | Favorite)[]) {
   return saved;
 }
 
+// Elements are queried by data-testid, never by their rendered copy: every
+// visible string here goes through lingui, so a message or catalog edit would
+// otherwise break the test. Favorite text and project keys are user data, not
+// copy, so those stay asserted by text.
 async function openDialog() {
   await renderWithProviders(<FavoritesForm />);
-  await userEvent.click(screen.getByRole("button"));
-  return await screen.findByPlaceholderText("Add a favorite task");
+  await userEvent.click(screen.getByTestId("favorites-open"));
+  return await screen.findByTestId("favorite-text");
 }
 
 it("lists stored favorites and disables add for blank and duplicate text", async () => {
@@ -30,23 +34,17 @@ it("lists stored favorites and disables add for blank and duplicate text", async
   expect(screen.getByText("Standup")).toBeInTheDocument();
   expect(screen.getByText("OPS")).toBeInTheDocument();
 
-  const submit = screen
-    .getAllByRole("button")
-    .find((b) => b.getAttribute("type") === "submit")!;
-  expect(submit).toBeDisabled();
+  expect(screen.getByTestId("favorite-add")).toBeDisabled();
   await userEvent.type(textInput, "  Standup  ");
-  expect(submit).toBeDisabled();
+  expect(screen.getByTestId("favorite-add")).toBeDisabled();
 });
 
 it("adds a favorite with a trimmed text and uppercased project key", async () => {
   const saved = setup([]);
   const textInput = await openDialog();
   await userEvent.type(textInput, "  Deploy  ");
-  await userEvent.type(screen.getByPlaceholderText("KEY"), "ops");
-  const submit = screen
-    .getAllByRole("button")
-    .find((b) => b.getAttribute("type") === "submit")!;
-  await userEvent.click(submit);
+  await userEvent.type(screen.getByTestId("favorite-key"), "ops");
+  await userEvent.click(screen.getByTestId("favorite-add"));
   expect(saved).toEqual([[{ text: "Deploy", project_key: "OPS" }]]);
 });
 
@@ -56,9 +54,7 @@ it("deletes a favorite by saving the remaining list", async () => {
     { text: "Deploy", project_key: "OPS" },
   ]);
   await openDialog();
-  const deleteButtons = screen
-    .getAllByRole("button")
-    .filter((b) => b.querySelector("svg.lucide-trash-2"));
+  const deleteButtons = screen.getAllByTestId("favorite-delete");
   expect(deleteButtons).toHaveLength(2);
   await userEvent.click(deleteButtons[0]!);
   expect(saved).toEqual([[{ text: "Deploy", project_key: "OPS" }]]);

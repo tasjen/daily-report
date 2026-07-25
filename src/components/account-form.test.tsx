@@ -62,15 +62,21 @@ function TaskParamsProbe() {
   return null;
 }
 
+// Fields are addressed by `account-<field name>` testids rather than their
+// labels: every label is a lingui message, so label-text queries would break
+// on a copy or catalog edit. The field names are the store schema's, which the
+// test already asserts on.
+const field = (name: keyof Account) => `account-${name}`;
+
 // The dialog opens itself on mount (account is undefined on first render), so
 // the fields are present without clicking the trigger.
 async function renderForm() {
   await renderWithProviders(<AccountForm />);
-  await screen.findByLabelText(/portal url/i);
+  await screen.findByTestId(field("portal_url"));
 }
 
-async function fillField(label: RegExp, value: string) {
-  const input = screen.getByLabelText(label);
+async function fillField(name: keyof Account, value: string) {
+  const input = screen.getByTestId(field(name));
   // clear first: with a stored account, TanStack Form reconciles its values
   // into the pristine fields, so typing would otherwise append to them
   await userEvent.clear(input);
@@ -86,17 +92,15 @@ async function fillValidFields(overrides: Partial<Account> = {}) {
     api_token: "token",
     ...overrides,
   };
-  await fillField(/portal url/i, values.portal_url);
-  await fillField(/portal credential/i, values.portal_credential);
-  await fillField(/phone number/i, values.phone);
-  await fillField(/jira email/i, values.email);
-  await fillField(/jira api token/i, values.api_token);
+  await fillField("portal_url", values.portal_url);
+  await fillField("portal_credential", values.portal_credential);
+  await fillField("phone", values.phone);
+  await fillField("email", values.email);
+  await fillField("api_token", values.api_token);
 }
 
 function saveButton() {
-  return screen
-    .getAllByRole("button")
-    .find((b) => b.getAttribute("type") === "submit")!;
+  return screen.getByTestId("account-save");
 }
 
 async function submit() {
@@ -121,7 +125,7 @@ it("verifies, saves the normalized account, and closes on success", async () => 
     api_token: "token",
   });
   await waitFor(() =>
-    expect(screen.queryByLabelText(/portal url/i)).not.toBeInTheDocument(),
+    expect(screen.queryByTestId(field("portal_url"))).not.toBeInTheDocument(),
   );
   // fresh install: no previous account cached, so no browser teardown
   expect(invoked).not.toContain("close_browsers");
@@ -134,13 +138,14 @@ it("lists both failed checks, saves nothing, and offers Save anyway", async () =
   await fillValidFields();
   await submit();
 
+  // "Portal:"/"Jira:" are VerifyAccountError's own untranslated line prefixes,
+  // and "portal login failed" is this test's stubbed backend reason. The Jira
+  // failure text itself is a lingui message, so only its presence is asserted.
   const alert = await screen.findByRole("alert");
   expect(alert).toHaveTextContent(/Portal: portal login failed/);
-  expect(alert).toHaveTextContent(/Jira:.*check your Jira email/);
+  expect(alert).toHaveTextContent(/Jira:/);
   expect(saved).toEqual([]);
-  expect(
-    screen.getByRole("button", { name: /save anyway/i }),
-  ).toBeInTheDocument();
+  expect(screen.getByTestId("account-save-anyway")).toBeInTheDocument();
 });
 
 it("lists only the check that failed when the other passes", async () => {
@@ -165,7 +170,7 @@ it("saves via Save anyway without a passing verification", async () => {
 
   await screen.findByRole("alert");
   expect(saved).toEqual([]);
-  await userEvent.click(screen.getByRole("button", { name: /save anyway/i }));
+  await userEvent.click(screen.getByTestId("account-save-anyway"));
 
   await waitFor(() => expect(saved).toHaveLength(1));
   expect(saved[0]).toMatchObject({
@@ -173,7 +178,7 @@ it("saves via Save anyway without a passing verification", async () => {
     email: "user@example.com",
   });
   await waitFor(() =>
-    expect(screen.queryByLabelText(/portal url/i)).not.toBeInTheDocument(),
+    expect(screen.queryByTestId(field("portal_url"))).not.toBeInTheDocument(),
   );
 });
 
@@ -188,7 +193,8 @@ it("shows Verifying… and disables Save while the checks are in flight", async 
   await fillValidFields();
   await submit();
 
-  await waitFor(() => expect(saveButton()).toHaveTextContent(/verifying/i));
+  // data-pending, not the "Verifying…" label, which is translated copy
+  await waitFor(() => expect(saveButton()).toHaveAttribute("data-pending"));
   expect(saveButton()).toBeDisabled();
   expect(saved).toEqual([]);
 
@@ -212,7 +218,7 @@ it("tears down browsers and refreshes task parameters on save with an existing a
       <TaskParamsProbe />
     </>,
   );
-  await screen.findByLabelText(/portal url/i);
+  await screen.findByTestId(field("portal_url"));
   // the probe fetches task parameters once the stored account resolves
   const taskParamCalls = () =>
     invoked.filter((c) => c === "get_task_parameters").length;
