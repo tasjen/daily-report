@@ -19,17 +19,15 @@ import {
 import { Separator } from "@/components/shared/separator";
 import TaskSelect from "@/components/task-select";
 import {
-  buildIssueGroups,
-  buildJqlForDate,
   buildSubmission,
-  favoritesAsIssues,
   getDateRelation,
   jqlFor,
   toOptionItems,
 } from "@/lib/date-card-helpers";
 import { useSubmitTaskMutation } from "@/lib/mutations";
-import { useFavorites, useJiraTasksQuery, usePreferences } from "@/lib/queries";
+import { usePreferences } from "@/lib/queries";
 import { DEFAULT_PREFERENCES } from "@/lib/store";
+import { useDateCardTasks } from "@/lib/use-date-card-tasks";
 import { useTaskSelection } from "@/lib/use-task-selection";
 import { cn, toastError } from "@/lib/utils";
 
@@ -38,45 +36,21 @@ type Props = {
 };
 export default function DateCard({ date }: Props) {
   const { i18n, t } = useLingui();
-  // The same strings feed the queries below and each group's TaskSelect
-  // tooltip, so displayed and executed JQL cannot drift.
-  const jqlByGroup = buildJqlForDate(date);
-
-  // Each set is queried separately so its issues can be grouped by source and
-  // defaulted per the user's `default_task_groups` preference.
-  const queryOptions = {
-    refetchOnMount: "always",
-  } as const;
-  const statusQuery = useJiraTasksQuery(jqlByGroup.status, queryOptions);
-  const createdQuery = useJiraTasksQuery(jqlByGroup.created, queryOptions);
-  const sprintQuery = useJiraTasksQuery(jqlByGroup.sprint, queryOptions);
-
-  const error = statusQuery.error ?? createdQuery.error ?? sprintQuery.error;
-  const isFetching =
-    statusQuery.isFetching || createdQuery.isFetching || sprintQuery.isFetching;
-
-  const { data: favorites } = useFavorites();
-  const favoriteIssues = favoritesAsIssues(favorites ?? []);
-
   const { data: preferences } = usePreferences();
   const defaultGroupIds = new Set(
     preferences?.default_task_groups ?? DEFAULT_PREFERENCES.default_task_groups,
   );
 
-  // Group issues by the query that surfaced them; ordering/dedup semantics
-  // live in buildIssueGroups (date-card-helpers.ts).
-  const issueGroups = buildIssueGroups(
-    {
-      status: statusQuery.data?.issues ?? [],
-      created: createdQuery.data?.issues ?? [],
-      sprint: sprintQuery.data?.issues ?? [],
-      favorite: favoriteIssues,
-    },
-    defaultGroupIds,
-  );
-
-  // Flat union of every grouped issue, used for selection/summary bookkeeping.
-  const allIssues = issueGroups.flatMap((group) => group.issues);
+  const {
+    jqlByGroup,
+    issueGroups,
+    allIssues,
+    createdKeys,
+    favorites,
+    error,
+    isFetching,
+    refetchAll,
+  } = useDateCardTasks(date, defaultGroupIds);
 
   // One option list per source query, rendered as its own TaskSelect. `keys`
   // is kept alongside so the per-group selection handler can scope its toggles.
@@ -107,14 +81,10 @@ export default function DateCard({ date }: Props) {
   const { summaryText, submitEntries } = buildSubmission({
     selectedKeys,
     allIssues,
-    createdKeys: new Set(
-      issueGroups
-        .find((group) => group.id === "created")
-        ?.issues.map((issue) => issue.key) ?? [],
-    ),
+    createdKeys,
     projectMap,
     defaultProject,
-    favorites: favorites ?? [],
+    favorites,
   });
 
   const autofillSummary =
@@ -148,9 +118,7 @@ export default function DateCard({ date }: Props) {
           size="icon-lg"
           variant="ghost"
           onClick={() => {
-            void statusQuery.refetch();
-            void createdQuery.refetch();
-            void sprintQuery.refetch();
+            refetchAll();
             // Refetched issues should come back on their group defaults, not
             // carrying overrides recorded against the previous result set.
             resetSelection();
