@@ -111,8 +111,10 @@ impl<H: BrowserHost> BrowserSession<H> {
     }
 }
 
+/// A scriptable `BrowserHost` shared by this module's tests and the app
+/// lifecycle tests, so both drive teardown through the same fake.
 #[cfg(test)]
-mod tests {
+pub(crate) mod test_support {
     use std::{
         cell::{Cell, RefCell},
         future::pending,
@@ -121,12 +123,12 @@ mod tests {
 
     use crate::AppError;
 
-    use super::{BrowserHost, BrowserSession, GRACEFUL_CLOSE_TIMEOUT};
+    use super::{BrowserHost, BrowserSession};
 
     /// What the session did to the system boundary, in order. Ids distinguish
     /// one launched instance from its replacement.
     #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-    enum Event {
+    pub(crate) enum Event {
         Launched(usize),
         Probed(usize),
         ClosedGracefully(usize),
@@ -134,24 +136,24 @@ mod tests {
     }
 
     #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-    struct FakeBrowser(usize);
+    pub(crate) struct FakeBrowser(pub(crate) usize);
 
     #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-    struct FakePage(usize);
+    pub(crate) struct FakePage(pub(crate) usize);
 
     #[derive(Default)]
-    struct FakeHost {
-        label: &'static str,
-        events: RefCell<Vec<Event>>,
-        launches: Cell<usize>,
-        page_alive: Cell<bool>,
-        launch_fails: Cell<bool>,
-        close_hangs: Cell<bool>,
-        launch_delay: Cell<Duration>,
+    pub(crate) struct FakeHost {
+        pub(crate) label: &'static str,
+        pub(crate) events: RefCell<Vec<Event>>,
+        pub(crate) launches: Cell<usize>,
+        pub(crate) page_alive: Cell<bool>,
+        pub(crate) launch_fails: Cell<bool>,
+        pub(crate) close_hangs: Cell<bool>,
+        pub(crate) launch_delay: Cell<Duration>,
     }
 
     impl FakeHost {
-        fn new(label: &'static str) -> Self {
+        pub(crate) fn new(label: &'static str) -> Self {
             Self {
                 label,
                 page_alive: Cell::new(true),
@@ -159,13 +161,18 @@ mod tests {
             }
         }
 
-        fn events(&self) -> Vec<Event> {
+        pub(crate) fn events(&self) -> Vec<Event> {
             self.events.borrow().clone()
         }
 
         fn record(&self, event: Event) {
             self.events.borrow_mut().push(event);
         }
+    }
+
+    /// A session backed by a fresh `FakeHost`.
+    pub(crate) fn fake_session(label: &'static str) -> BrowserSession<FakeHost> {
+        BrowserSession::new(FakeHost::new(label))
     }
 
     impl BrowserHost for FakeHost {
@@ -206,9 +213,17 @@ mod tests {
             self.record(Event::Killed(browser.0));
         }
     }
+}
+
+#[cfg(test)]
+mod tests {
+    use std::time::Duration;
+
+    use super::test_support::{fake_session, Event, FakeHost, FakePage};
+    use super::{BrowserSession, GRACEFUL_CLOSE_TIMEOUT};
 
     fn session() -> BrowserSession<FakeHost> {
-        BrowserSession::new(FakeHost::new("headless"))
+        fake_session("headless")
     }
 
     #[tokio::test]

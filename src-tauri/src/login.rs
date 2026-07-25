@@ -137,19 +137,110 @@ impl<H: VerifyHost> VerifySession<H> {
     }
 }
 
+/// A scriptable `VerifyHost` shared by this module's tests and the app
+/// lifecycle tests, so both drive verification teardown through one fake.
 #[cfg(test)]
-mod tests {
+pub(crate) mod test_support {
     use std::{
         cell::{Cell, RefCell},
         future::pending,
         time::Duration,
     };
 
+    use crate::{account::PortalAccountConfig, AppError};
+
+    use super::{VerifyHost, VerifySession};
+
+    #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+    pub(crate) enum VerifyEvent {
+        Launched(usize),
+        LoggedIn(usize),
+        Killed(usize),
+    }
+
+    #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+    pub(crate) struct FakeBrowser(pub(crate) usize);
+
+    #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+    pub(crate) struct FakePage(pub(crate) usize);
+
+    #[derive(Default)]
+    pub(crate) struct FakeVerifyHost {
+        pub(crate) events: RefCell<Vec<VerifyEvent>>,
+        pub(crate) launches: Cell<usize>,
+        pub(crate) launch_fails: Cell<bool>,
+        pub(crate) login_fails: Cell<bool>,
+        pub(crate) login_hangs: Cell<bool>,
+        pub(crate) login_delay: Cell<Duration>,
+        pub(crate) seen_config: RefCell<Vec<String>>,
+    }
+
+    impl FakeVerifyHost {
+        pub(crate) fn events(&self) -> Vec<VerifyEvent> {
+            self.events.borrow().clone()
+        }
+    }
+
+    pub(crate) fn verify_session() -> VerifySession<FakeVerifyHost> {
+        VerifySession::new(FakeVerifyHost::default())
+    }
+
+    impl VerifyHost for FakeVerifyHost {
+        type Browser = FakeBrowser;
+        type Page = FakePage;
+
+        async fn launch(&self) -> Result<(FakeBrowser, FakePage), AppError> {
+            if self.launch_fails.get() {
+                return Err("launch failed".into());
+            }
+            let id = self.launches.get() + 1;
+            self.launches.set(id);
+            self.events.borrow_mut().push(VerifyEvent::Launched(id));
+            Ok((FakeBrowser(id), FakePage(id)))
+        }
+
+        async fn login(
+            &self,
+            page: &FakePage,
+            config: &PortalAccountConfig,
+        ) -> Result<(), AppError> {
+            self.seen_config.borrow_mut().push(format!(
+                "{}|{}|{}",
+                config.phone(),
+                config.portal_url(),
+                config.portal_credential()
+            ));
+            if self.login_hangs.get() {
+                pending::<()>().await;
+            }
+            let delay = self.login_delay.get();
+            if !delay.is_zero() {
+                tokio::time::sleep(delay).await;
+            }
+            if self.login_fails.get() {
+                return Err("wrong phone number".into());
+            }
+            self.events.borrow_mut().push(VerifyEvent::LoggedIn(page.0));
+            Ok(())
+        }
+
+        async fn kill(&self, browser: &mut FakeBrowser) {
+            self.events
+                .borrow_mut()
+                .push(VerifyEvent::Killed(browser.0));
+        }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use std::{cell::RefCell, time::Duration};
+
     use base64::{engine::general_purpose::STANDARD, Engine};
 
     use crate::{account::PortalAccountConfig, AppError};
 
-    use super::{login_script, LoginPortal, PortalLogin, VerifyHost, VerifySession, LOGIN_TIMEOUT};
+    use super::{login_script, LoginPortal, PortalLogin, LOGIN_TIMEOUT};
 
     fn config() -> PortalAccountConfig {
         PortalAccountConfig::from_candidates(
@@ -325,85 +416,7 @@ mod tests {
         );
     }
 
-    #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-    enum VerifyEvent {
-        Launched(usize),
-        LoggedIn(usize),
-        Killed(usize),
-    }
-
-    #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-    struct FakeBrowser(usize);
-
-    #[derive(Debug, Clone, Copy, PartialEq, Eq)]
-    struct FakePage(usize);
-
-    #[derive(Default)]
-    struct FakeVerifyHost {
-        events: RefCell<Vec<VerifyEvent>>,
-        launches: Cell<usize>,
-        launch_fails: Cell<bool>,
-        login_fails: Cell<bool>,
-        login_hangs: Cell<bool>,
-        login_delay: Cell<Duration>,
-        seen_config: RefCell<Vec<String>>,
-    }
-
-    impl FakeVerifyHost {
-        fn events(&self) -> Vec<VerifyEvent> {
-            self.events.borrow().clone()
-        }
-    }
-
-    impl VerifyHost for FakeVerifyHost {
-        type Browser = FakeBrowser;
-        type Page = FakePage;
-
-        async fn launch(&self) -> Result<(FakeBrowser, FakePage), AppError> {
-            if self.launch_fails.get() {
-                return Err("launch failed".into());
-            }
-            let id = self.launches.get() + 1;
-            self.launches.set(id);
-            self.events.borrow_mut().push(VerifyEvent::Launched(id));
-            Ok((FakeBrowser(id), FakePage(id)))
-        }
-
-        async fn login(
-            &self,
-            page: &FakePage,
-            config: &PortalAccountConfig,
-        ) -> Result<(), AppError> {
-            self.seen_config.borrow_mut().push(format!(
-                "{}|{}|{}",
-                config.phone(),
-                config.portal_url(),
-                config.portal_credential()
-            ));
-            if self.login_hangs.get() {
-                pending::<()>().await;
-            }
-            let delay = self.login_delay.get();
-            if !delay.is_zero() {
-                tokio::time::sleep(delay).await;
-            }
-            if self.login_fails.get() {
-                return Err("wrong phone number".into());
-            }
-            self.events.borrow_mut().push(VerifyEvent::LoggedIn(page.0));
-            Ok(())
-        }
-
-        async fn kill(&self, browser: &mut FakeBrowser) {
-            self.events
-                .borrow_mut()
-                .push(VerifyEvent::Killed(browser.0));
-        }
-    }
-
-    fn verify_session() -> VerifySession<FakeVerifyHost> {
-        VerifySession::new(FakeVerifyHost::default())
-    }
+    use super::test_support::{verify_session, VerifyEvent};
 
     #[tokio::test]
     async fn a_successful_verification_kills_its_throwaway_browser() {

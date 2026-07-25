@@ -1,5 +1,8 @@
 mod account;
 mod browser_session;
+#[cfg(test)]
+mod command_registry;
+mod lifecycle;
 mod login;
 mod navigation;
 #[cfg(test)]
@@ -414,10 +417,7 @@ async fn close_browsers(
     headed: tauri::State<'_, HeadedBrowserState>,
 ) -> Result<(), AppError> {
     log::info!("close_browsers: tearing down both browser instances");
-    tokio::join!(headless.close(), headed.close());
-    // The scraped project list belongs to the login that was just torn down;
-    // the next one may be a different member or portal.
-    PROJECT_OPTIONS.clear().await;
+    lifecycle::close_persistent_sessions(&headless, &headed, &PROJECT_OPTIONS).await;
     Ok(())
 }
 
@@ -674,11 +674,12 @@ pub fn run() {
         .run(|app_handle, event| {
             if let tauri::RunEvent::Exit = event {
                 tauri::async_runtime::block_on(async {
-                    app_handle.state::<HeadlessBrowserState>().close().await;
-                    app_handle.state::<HeadedBrowserState>().close().await;
-                    // The verify browser is throwaway: kill it outright if a
-                    // verification was in flight when the app closed.
-                    app_handle.state::<VerifyBrowserState>().kill_parked().await;
+                    lifecycle::shutdown(
+                        &app_handle.state::<HeadlessBrowserState>(),
+                        &app_handle.state::<HeadedBrowserState>(),
+                        &app_handle.state::<VerifyBrowserState>(),
+                    )
+                    .await;
                 });
             }
         });
