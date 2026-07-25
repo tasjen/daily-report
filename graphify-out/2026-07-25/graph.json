@@ -136,6 +136,72 @@
   },
   "nodes": [
     {
+      "label": "date-card-header.tsx",
+      "file_type": "code",
+      "source_file": "src/components/date-card-header.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_components_date_card_header",
+      "community": 216,
+      "community_name": "main.tsx",
+      "norm_label": "date-card-header.tsx"
+    },
+    {
+      "label": "Props",
+      "file_type": "code",
+      "source_file": "src/components/date-card-header.tsx",
+      "source_location": "L8",
+      "_origin": "ast",
+      "id": "src_components_date_card_header_props",
+      "community": 216,
+      "community_name": "main.tsx",
+      "norm_label": "props"
+    },
+    {
+      "label": "DateCardHeader()",
+      "file_type": "code",
+      "source_file": "src/components/date-card-header.tsx",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "src_components_date_card_header_datecardheader",
+      "community": 216,
+      "community_name": "main.tsx",
+      "norm_label": "datecardheader()"
+    },
+    {
+      "label": "date-card-summary.tsx",
+      "file_type": "code",
+      "source_file": "src/components/date-card-summary.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_components_date_card_summary",
+      "community": 217,
+      "community_name": "date-card-summary.tsx",
+      "norm_label": "date-card-summary.tsx"
+    },
+    {
+      "label": "Props",
+      "file_type": "code",
+      "source_file": "src/components/date-card-summary.tsx",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "src_components_date_card_summary_props",
+      "community": 217,
+      "community_name": "date-card-summary.tsx",
+      "norm_label": "props"
+    },
+    {
+      "label": "DateCardSummary()",
+      "file_type": "code",
+      "source_file": "src/components/date-card-summary.tsx",
+      "source_location": "L24",
+      "_origin": "ast",
+      "id": "src_components_date_card_summary_datecardsummary",
+      "community": 217,
+      "community_name": "date-card-summary.tsx",
+      "norm_label": "datecardsummary()"
+    },
+    {
       "label": "date-card.tsx",
       "file_type": "code",
       "source_file": "src/components/date-card.tsx",
@@ -150,7 +216,7 @@
       "label": "Props",
       "file_type": "code",
       "source_file": "src/components/date-card.tsx",
-      "source_location": "L34",
+      "source_location": "L13",
       "_origin": "ast",
       "id": "src_components_date_card_props",
       "community": 214,
@@ -161,7 +227,7 @@
       "label": "DateCard()",
       "file_type": "code",
       "source_file": "src/components/date-card.tsx",
-      "source_location": "L37",
+      "source_location": "L16",
       "_origin": "ast",
       "id": "src_components_date_card_datecard",
       "community": 214,
@@ -169,15 +235,70 @@
       "norm_label": "datecard()"
     },
     {
+      "label": "task-select-grid.tsx",
+      "file_type": "code",
+      "source_file": "src/components/task-select-grid.tsx",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_components_task_select_grid",
+      "community": 218,
+      "community_name": "task-select-grid.tsx",
+      "norm_label": "task-select-grid.tsx"
+    },
+    {
+      "label": "Props",
+      "file_type": "code",
+      "source_file": "src/components/task-select-grid.tsx",
+      "source_location": "L16",
+      "_origin": "ast",
+      "id": "src_components_task_select_grid_props",
+      "community": 218,
+      "community_name": "task-select-grid.tsx",
+      "norm_label": "props"
+    },
+    {
+      "label": "TaskSelectGrid()",
+      "file_type": "code",
+      "source_file": "src/components/task-select-grid.tsx",
+      "source_location": "L23",
+      "_origin": "ast",
+      "id": "src_components_task_select_grid_taskselectgrid",
+      "community": 218,
+      "community_name": "task-select-grid.tsx",
+      "norm_label": "taskselectgrid()"
+    },
+    {
+      "label": "use-copy-to-clipboard.ts",
+      "file_type": "code",
+      "source_file": "src/lib/use-copy-to-clipboard.ts",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "src_lib_use_copy_to_clipboard",
+      "community": 17,
+      "community_name": "React App Components",
+      "norm_label": "use-copy-to-clipboard.ts"
+    },
+    {
+      "label": "useCopyToClipboard()",
+      "file_type": "code",
+      "source_file": "src/lib/use-copy-to-clipboard.ts",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "src_lib_use_copy_to_clipboard_usecopytoclipboard",
+      "community": 17,
+      "community_name": "React App Components",
+      "norm_label": "usecopytoclipboard()"
+    },
+    {
       "label": "use-date-card-tasks.ts",
       "file_type": "code",
       "source_file": "src/lib/use-date-card-tasks.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "id": "src_lib_use_date_card_tasks",
       "community": 13,
       "community_name": "Architecture Review Skill",
-      "norm_label": "use-date-card-tasks.ts"
+      "norm_label": "use-date-card-tasks.ts",
+      "id": "src_lib_use_date_card_tasks"
     },
     {
       "label": "DateCardTasks",
@@ -185,10 +306,10 @@
       "source_file": "src/lib/use-date-card-tasks.ts",
       "source_location": "L12",
       "_origin": "ast",
-      "id": "src_lib_use_date_card_tasks_datecardtasks",
       "community": 13,
       "community_name": "Architecture Review Skill",
-      "norm_label": "datecardtasks"
+      "norm_label": "datecardtasks",
+      "id": "src_lib_use_date_card_tasks_datecardtasks"
     },
     {
       "label": "useDateCardTasks()",
@@ -196,10 +317,10 @@
       "source_file": "src/lib/use-date-card-tasks.ts",
       "source_location": "L38",
       "_origin": "ast",
-      "id": "src_lib_use_date_card_tasks_usedatecardtasks",
       "community": 13,
       "community_name": "Architecture Review Skill",
-      "norm_label": "usedatecardtasks()"
+      "norm_label": "usedatecardtasks()",
+      "id": "src_lib_use_date_card_tasks_usedatecardtasks"
     },
     {
       "label": "use-task-selection.test.ts",
@@ -207,8 +328,8 @@
       "source_file": "src/lib/use-task-selection.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 27,
-      "community_name": "Date-Card Submission Helpers",
+      "community": 211,
+      "community_name": "account-form.tsx",
       "norm_label": "use-task-selection.test.ts",
       "id": "src_lib_use_task_selection_test"
     },
@@ -218,8 +339,8 @@
       "source_file": "src/lib/use-task-selection.test.ts",
       "source_location": "L9",
       "_origin": "ast",
-      "community": 27,
-      "community_name": "Date-Card Submission Helpers",
+      "community": 211,
+      "community_name": "account-form.tsx",
       "norm_label": "issue()",
       "id": "src_lib_use_task_selection_test_issue"
     },
@@ -229,8 +350,8 @@
       "source_file": "src/lib/use-task-selection.test.ts",
       "source_location": "L17",
       "_origin": "ast",
-      "community": 27,
-      "community_name": "Date-Card Submission Helpers",
+      "community": 211,
+      "community_name": "account-form.tsx",
       "norm_label": "sets",
       "id": "src_lib_use_task_selection_test_sets"
     },
@@ -240,8 +361,8 @@
       "source_file": "src/lib/use-task-selection.test.ts",
       "source_location": "L21",
       "_origin": "ast",
-      "community": 27,
-      "community_name": "Date-Card Submission Helpers",
+      "community": 211,
+      "community_name": "account-form.tsx",
       "norm_label": "groups()",
       "id": "src_lib_use_task_selection_test_groups"
     },
@@ -251,8 +372,8 @@
       "source_file": "src/lib/use-task-selection.test.ts",
       "source_location": "L33",
       "_origin": "ast",
-      "community": 27,
-      "community_name": "Date-Card Submission Helpers",
+      "community": 211,
+      "community_name": "account-form.tsx",
       "norm_label": "setup()",
       "id": "src_lib_use_task_selection_test_setup"
     },
@@ -262,8 +383,8 @@
       "source_file": "src/lib/use-task-selection.test.ts",
       "source_location": "L41",
       "_origin": "ast",
-      "community": 27,
-      "community_name": "Date-Card Submission Helpers",
+      "community": 211,
+      "community_name": "account-form.tsx",
       "norm_label": "defaults",
       "id": "src_lib_use_task_selection_test_defaults"
     },
@@ -856,8 +977,8 @@
       "source_file": ".oxlintrc.json",
       "source_location": "L3",
       "_origin": "ast",
-      "community": 27,
-      "community_name": "Date-Card Submission Helpers",
+      "community": 113,
+      "community_name": "vitest",
       "norm_label": "vitest",
       "id": "ref_vitest"
     },
@@ -1109,8 +1230,8 @@
       "source_file": "src/components/account-form.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 211,
-      "community_name": "account-form.tsx",
+      "community": 114,
+      "community_name": "LocaleToggle",
       "norm_label": "account-form.tsx",
       "id": "src_components_account_form"
     },
@@ -1120,8 +1241,8 @@
       "source_file": "src/components/account-form.tsx",
       "source_location": "L46",
       "_origin": "ast",
-      "community": 211,
-      "community_name": "account-form.tsx",
+      "community": 114,
+      "community_name": "LocaleToggle",
       "norm_label": "normalizeportalurl()",
       "id": "src_components_account_form_normalizeportalurl"
     },
@@ -1131,8 +1252,8 @@
       "source_file": "src/components/account-form.tsx",
       "source_location": "L53",
       "_origin": "ast",
-      "community": 211,
-      "community_name": "account-form.tsx",
+      "community": 114,
+      "community_name": "LocaleToggle",
       "norm_label": "textfield()",
       "id": "src_components_account_form_textfield"
     },
@@ -1142,8 +1263,8 @@
       "source_file": "src/components/account-form.tsx",
       "source_location": "L87",
       "_origin": "ast",
-      "community": 211,
-      "community_name": "account-form.tsx",
+      "community": 114,
+      "community_name": "LocaleToggle",
       "norm_label": "accountform()",
       "id": "src_components_account_form_accountform"
     },
@@ -1175,8 +1296,8 @@
       "source_file": "src/components/error-fallback.test.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 27,
-      "community_name": "Date-Card Submission Helpers",
+      "community": 113,
+      "community_name": "vitest",
       "norm_label": "error-fallback.test.tsx",
       "id": "src_components_error_fallback_test"
     },
@@ -1186,8 +1307,8 @@
       "source_file": "src/components/error-fallback.test.tsx",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 27,
-      "community_name": "Date-Card Submission Helpers",
+      "community": 113,
+      "community_name": "vitest",
       "norm_label": "{ relaunch }",
       "id": "src_components_error_fallback_test_relaunch"
     },
@@ -1439,8 +1560,8 @@
       "source_file": "src/components/theme-provider.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 47,
-      "community_name": "Props",
+      "community": 114,
+      "community_name": "LocaleToggle",
       "norm_label": "theme-provider.tsx",
       "id": "src_components_theme_provider"
     },
@@ -1450,8 +1571,8 @@
       "source_file": "src/components/theme-provider.tsx",
       "source_location": "L12",
       "_origin": "ast",
-      "community": 47,
-      "community_name": "Props",
+      "community": 114,
+      "community_name": "LocaleToggle",
       "norm_label": "theme",
       "id": "src_components_theme_provider_theme"
     },
@@ -1461,8 +1582,8 @@
       "source_file": "src/components/theme-provider.tsx",
       "source_location": "L14",
       "_origin": "ast",
-      "community": 47,
-      "community_name": "Props",
+      "community": 114,
+      "community_name": "LocaleToggle",
       "norm_label": "themeproviderprops",
       "id": "src_components_theme_provider_themeproviderprops"
     },
@@ -1472,8 +1593,8 @@
       "source_file": "src/components/theme-provider.tsx",
       "source_location": "L19",
       "_origin": "ast",
-      "community": 47,
-      "community_name": "Props",
+      "community": 114,
+      "community_name": "LocaleToggle",
       "norm_label": "themeproviderstate",
       "id": "src_components_theme_provider_themeproviderstate"
     },
@@ -1483,8 +1604,8 @@
       "source_file": "src/components/theme-provider.tsx",
       "source_location": "L24",
       "_origin": "ast",
-      "community": 47,
-      "community_name": "Props",
+      "community": 114,
+      "community_name": "LocaleToggle",
       "norm_label": "themeprovidercontext",
       "id": "src_components_theme_provider_themeprovidercontext"
     },
@@ -1494,8 +1615,8 @@
       "source_file": "src/components/theme-provider.tsx",
       "source_location": "L28",
       "_origin": "ast",
-      "community": 47,
-      "community_name": "Props",
+      "community": 114,
+      "community_name": "LocaleToggle",
       "norm_label": "themeprovider()",
       "id": "src_components_theme_provider_themeprovider"
     },
@@ -1505,8 +1626,8 @@
       "source_file": "src/components/theme-provider.tsx",
       "source_location": "L75",
       "_origin": "ast",
-      "community": 47,
-      "community_name": "Props",
+      "community": 114,
+      "community_name": "LocaleToggle",
       "norm_label": "usetheme()",
       "id": "src_components_theme_provider_usetheme"
     },
@@ -1670,8 +1791,8 @@
       "source_file": "src/main.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 216,
-      "community_name": "main.tsx",
+      "community": 114,
+      "community_name": "LocaleToggle",
       "norm_label": "main.tsx",
       "id": "src_main"
     },
@@ -1681,8 +1802,8 @@
       "source_file": "src/main.tsx",
       "source_location": "L23",
       "_origin": "ast",
-      "community": 216,
-      "community_name": "main.tsx",
+      "community": 114,
+      "community_name": "LocaleToggle",
       "norm_label": "showwindowonmount()",
       "id": "src_main_showwindowonmount"
     },
@@ -1692,8 +1813,8 @@
       "source_file": "src/main.tsx",
       "source_location": "L34",
       "_origin": "ast",
-      "community": 216,
-      "community_name": "main.tsx",
+      "community": 114,
+      "community_name": "LocaleToggle",
       "norm_label": "queryclient",
       "id": "src_main_queryclient"
     },
@@ -1824,8 +1945,8 @@
       "source_file": "src/components/favorites-form.test.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 27,
-      "community_name": "Date-Card Submission Helpers",
+      "community": 113,
+      "community_name": "vitest",
       "norm_label": "favorites-form.test.tsx",
       "id": "src_components_favorites_form_test"
     },
@@ -1835,8 +1956,8 @@
       "source_file": "src/components/favorites-form.test.tsx",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 27,
-      "community_name": "Date-Card Submission Helpers",
+      "community": 113,
+      "community_name": "vitest",
       "norm_label": "setup()",
       "id": "src_components_favorites_form_test_setup"
     },
@@ -1846,8 +1967,8 @@
       "source_file": "src/components/favorites-form.test.tsx",
       "source_location": "L25",
       "_origin": "ast",
-      "community": 27,
-      "community_name": "Date-Card Submission Helpers",
+      "community": 113,
+      "community_name": "vitest",
       "norm_label": "opendialog()",
       "id": "src_components_favorites_form_test_opendialog"
     },
@@ -1879,8 +2000,8 @@
       "source_file": "src/components/project-map-form.test.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 27,
-      "community_name": "Date-Card Submission Helpers",
+      "community": 212,
+      "community_name": "project-map-form.test.tsx",
       "norm_label": "project-map-form.test.tsx",
       "id": "src_components_project_map_form_test"
     },
@@ -1890,8 +2011,8 @@
       "source_file": "src/components/project-map-form.test.tsx",
       "source_location": "L10",
       "_origin": "ast",
-      "community": 27,
-      "community_name": "Date-Card Submission Helpers",
+      "community": 212,
+      "community_name": "project-map-form.test.tsx",
       "norm_label": "setup()",
       "id": "src_components_project_map_form_test_setup"
     },
@@ -1901,8 +2022,8 @@
       "source_file": "src/components/project-map-form.test.tsx",
       "source_location": "L33",
       "_origin": "ast",
-      "community": 27,
-      "community_name": "Date-Card Submission Helpers",
+      "community": 212,
+      "community_name": "project-map-form.test.tsx",
       "norm_label": "renderform()",
       "id": "src_components_project_map_form_test_renderform"
     },
@@ -1912,8 +2033,8 @@
       "source_file": "src/components/project-map-form.test.tsx",
       "source_location": "L38",
       "_origin": "ast",
-      "community": 27,
-      "community_name": "Date-Card Submission Helpers",
+      "community": 212,
+      "community_name": "project-map-form.test.tsx",
       "norm_label": "submitbutton()",
       "id": "src_components_project_map_form_test_submitbutton"
     },
@@ -6809,8 +6930,8 @@
       "source_file": "src/components/project-list-select.tsx",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 17,
-      "community_name": "React App Components",
+      "community": 219,
+      "community_name": "project-list-select.tsx",
       "norm_label": "project-list-select.tsx",
       "id": "src_components_project_list_select"
     },
@@ -6820,8 +6941,8 @@
       "source_file": "src/components/project-list-select.tsx",
       "source_location": "L28",
       "_origin": "ast",
-      "community": 17,
-      "community_name": "React App Components",
+      "community": 219,
+      "community_name": "project-list-select.tsx",
       "norm_label": "projectlistselect()",
       "id": "src_components_project_list_select_projectlistselect"
     },
@@ -8019,8 +8140,8 @@
       "source_file": "src/lib/queries.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 27,
-      "community_name": "Date-Card Submission Helpers",
+      "community": 210,
+      "community_name": "queries.test.ts",
       "norm_label": "queries.test.ts",
       "id": "src_lib_queries_test"
     },
@@ -8030,8 +8151,8 @@
       "source_file": "src/lib/queries.test.ts",
       "source_location": "L22",
       "_origin": "ast",
-      "community": 27,
-      "community_name": "Date-Card Submission Helpers",
+      "community": 210,
+      "community_name": "queries.test.ts",
       "norm_label": "mockjiraresponse()",
       "id": "src_lib_queries_test_mockjiraresponse"
     },
@@ -8041,8 +8162,8 @@
       "source_file": "src/lib/queries.test.ts",
       "source_location": "L37",
       "_origin": "ast",
-      "community": 27,
-      "community_name": "Date-Card Submission Helpers",
+      "community": 210,
+      "community_name": "queries.test.ts",
       "norm_label": "account",
       "id": "src_lib_queries_test_account"
     },
@@ -8052,8 +8173,8 @@
       "source_file": "src/lib/queries.test.ts",
       "source_location": "L45",
       "_origin": "ast",
-      "community": 27,
-      "community_name": "Date-Card Submission Helpers",
+      "community": 210,
+      "community_name": "queries.test.ts",
       "norm_label": "runjiraquery()",
       "id": "src_lib_queries_test_runjiraquery"
     },
@@ -8063,8 +8184,8 @@
       "source_file": "src/lib/queries.test.ts",
       "source_location": "L53",
       "_origin": "ast",
-      "community": 27,
-      "community_name": "Date-Card Submission Helpers",
+      "community": 210,
+      "community_name": "queries.test.ts",
       "norm_label": "readpreferences()",
       "id": "src_lib_queries_test_readpreferences"
     },
@@ -8074,8 +8195,8 @@
       "source_file": "src/lib/queries.test.ts",
       "source_location": "L55",
       "_origin": "ast",
-      "community": 27,
-      "community_name": "Date-Card Submission Helpers",
+      "community": 210,
+      "community_name": "queries.test.ts",
       "norm_label": "readfavorites()",
       "id": "src_lib_queries_test_readfavorites"
     },
@@ -8217,8 +8338,8 @@
       "source_file": "src/lib/store.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 27,
-      "community_name": "Date-Card Submission Helpers",
+      "community": 113,
+      "community_name": "vitest",
       "norm_label": "store.test.ts",
       "id": "src_lib_store_test"
     },
@@ -8305,8 +8426,8 @@
       "source_file": "src/lib/use-reset-when-away.test.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 27,
-      "community_name": "Date-Card Submission Helpers",
+      "community": 213,
+      "community_name": "use-reset-when-away.test.ts",
       "norm_label": "use-reset-when-away.test.ts",
       "id": "src_lib_use_reset_when_away_test"
     },
@@ -8316,8 +8437,8 @@
       "source_file": "src/lib/use-reset-when-away.test.ts",
       "source_location": "L18",
       "_origin": "ast",
-      "community": 27,
-      "community_name": "Date-Card Submission Helpers",
+      "community": 213,
+      "community_name": "use-reset-when-away.test.ts",
       "norm_label": "t0",
       "id": "src_lib_use_reset_when_away_test_t0"
     },
@@ -8327,8 +8448,8 @@
       "source_file": "src/lib/use-reset-when-away.test.ts",
       "source_location": "L55",
       "_origin": "ast",
-      "community": 27,
-      "community_name": "Date-Card Submission Helpers",
+      "community": 213,
+      "community_name": "use-reset-when-away.test.ts",
       "norm_label": "flushmicrotasks()",
       "id": "src_lib_use_reset_when_away_test_flushmicrotasks"
     },
@@ -8338,8 +8459,8 @@
       "source_file": "src/lib/use-reset-when-away.test.ts",
       "source_location": "L63",
       "_origin": "ast",
-      "community": 27,
-      "community_name": "Date-Card Submission Helpers",
+      "community": 213,
+      "community_name": "use-reset-when-away.test.ts",
       "norm_label": "fire()",
       "id": "src_lib_use_reset_when_away_test_fire"
     },
@@ -8349,8 +8470,8 @@
       "source_file": "src/lib/use-update-check.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 17,
-      "community_name": "React App Components",
+      "community": 220,
+      "community_name": "use-update-check.ts",
       "norm_label": "use-update-check.ts",
       "id": "src_lib_use_update_check"
     },
@@ -8360,8 +8481,8 @@
       "source_file": "src/lib/use-update-check.ts",
       "source_location": "L8",
       "_origin": "ast",
-      "community": 17,
-      "community_name": "React App Components",
+      "community": 220,
+      "community_name": "use-update-check.ts",
       "norm_label": "useupdatecheck()",
       "id": "src_lib_use_update_check_useupdatecheck"
     },
@@ -8371,8 +8492,8 @@
       "source_file": "src/test/setup.ts",
       "source_location": "L1",
       "_origin": "ast",
-      "community": 27,
-      "community_name": "Date-Card Submission Helpers",
+      "community": 113,
+      "community_name": "vitest",
       "norm_label": "setup.ts",
       "id": "src_test_setup"
     },
@@ -9145,9 +9266,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 87,
+      "community": 98,
       "norm_label": "triage and diagnosis on-ramps",
-      "community_name": "@tauri-apps/plugin-process",
+      "community_name": "Red-capable Command",
       "id": "agents_skills_ask_matt_skill_triage_and_diagnosis_on_ramps"
     },
     {
@@ -9663,9 +9784,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 87,
+      "community": 98,
       "norm_label": "diagnosing bugs",
-      "community_name": "@tauri-apps/plugin-process",
+      "community_name": "Red-capable Command",
       "id": "agents_skills_diagnosing_bugs_skill_diagnosing_bugs"
     },
     {
@@ -9677,9 +9798,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 87,
+      "community": 98,
       "norm_label": "tight feedback loop",
-      "community_name": "@tauri-apps/plugin-process",
+      "community_name": "Red-capable Command",
       "id": "agents_skills_diagnosing_bugs_skill_tight_feedback_loop"
     },
     {
@@ -9691,9 +9812,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 87,
+      "community": 98,
       "norm_label": "red-capable command",
-      "community_name": "@tauri-apps/plugin-process",
+      "community_name": "Red-capable Command",
       "id": "agents_skills_diagnosing_bugs_skill_red_capable_command"
     },
     {
@@ -9705,9 +9826,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 198,
+      "community": 98,
       "norm_label": "reproduce and minimise",
-      "community_name": "Interface as Test Surface",
+      "community_name": "Red-capable Command",
       "id": "agents_skills_diagnosing_bugs_skill_reproduce_and_minimise"
     },
     {
@@ -9719,9 +9840,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 198,
+      "community": 98,
       "norm_label": "ranked falsifiable hypotheses",
-      "community_name": "Interface as Test Surface",
+      "community_name": "Red-capable Command",
       "id": "agents_skills_diagnosing_bugs_skill_ranked_falsifiable_hypotheses"
     },
     {
@@ -9733,9 +9854,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 198,
+      "community": 98,
       "norm_label": "prediction-driven instrumentation",
-      "community_name": "Interface as Test Surface",
+      "community_name": "Red-capable Command",
       "id": "agents_skills_diagnosing_bugs_skill_prediction_driven_instrumentation"
     },
     {
@@ -9747,9 +9868,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 198,
+      "community": 98,
       "norm_label": "performance measurement branch",
-      "community_name": "Interface as Test Surface",
+      "community_name": "Red-capable Command",
       "id": "agents_skills_diagnosing_bugs_skill_performance_measurement_branch"
     },
     {
@@ -9985,9 +10106,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 74,
       "norm_label": "grill me",
-      "community_name": "Agent Workflow Skills",
+      "community_name": "oxlint",
       "id": "agents_skills_grill_me_skill_grill_me"
     },
     {
@@ -9999,9 +10120,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 74,
       "norm_label": "grill with docs",
-      "community_name": "Agent Workflow Skills",
+      "community_name": "oxlint",
       "id": "agents_skills_grill_with_docs_skill_grill_with_docs"
     },
     {
@@ -10013,9 +10134,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 2,
+      "community": 74,
       "norm_label": "grilling interview",
-      "community_name": "Agent Workflow Skills",
+      "community_name": "oxlint",
       "id": "agents_skills_grilling_skill_grilling"
     },
     {
@@ -10223,9 +10344,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 47,
       "norm_label": "improve codebase architecture",
-      "community_name": "PRD & Agent-Brief Authoring",
+      "community_name": "Props",
       "id": "_agents_skills_improve_codebase_architecture_skill_improve_codebase_architecture"
     },
     {
@@ -10238,9 +10359,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 47,
       "norm_label": "deepening opportunity",
-      "community_name": "PRD & Agent-Brief Authoring",
+      "community_name": "Props",
       "id": "_agents_skills_improve_codebase_architecture_skill_deepening_opportunity"
     },
     {
@@ -10252,9 +10373,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 47,
       "norm_label": "deep module design vocabulary",
-      "community_name": "PRD & Agent-Brief Authoring",
+      "community_name": "Props",
       "id": "_agents_skills_improve_codebase_architecture_skill_deep_module_design_vocabulary"
     },
     {
@@ -10267,9 +10388,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 47,
       "norm_label": "deletion test",
-      "community_name": "PRD & Agent-Brief Authoring",
+      "community_name": "Props",
       "id": "_agents_skills_improve_codebase_architecture_skill_deletion_test"
     },
     {
@@ -10281,9 +10402,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 47,
       "norm_label": "architecture review html report",
-      "community_name": "PRD & Agent-Brief Authoring",
+      "community_name": "Props",
       "id": "_agents_skills_improve_codebase_architecture_skill_architecture_review_html_report"
     },
     {
@@ -10296,9 +10417,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 47,
       "norm_label": "adr-aware architecture review",
-      "community_name": "PRD & Agent-Brief Authoring",
+      "community_name": "Props",
       "id": "_agents_skills_improve_codebase_architecture_skill_adr_aware_review"
     },
     {
@@ -10325,9 +10446,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 18,
       "norm_label": "throwaway prototype",
-      "community_name": "Issue-Tracker Wayfinding",
+      "community_name": "Prototype & Logic Modules",
       "id": "_agents_skills_prototype_skill_throwaway_prototype"
     },
     {
@@ -10382,9 +10503,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 18,
       "norm_label": "prototype answer capture",
-      "community_name": "Issue-Tracker Wayfinding",
+      "community_name": "Prototype & Logic Modules",
       "id": "_agents_skills_prototype_skill_prototype_answer_capture"
     },
     {
@@ -10626,9 +10747,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 18,
       "norm_label": "ui winner cleanup",
-      "community_name": "Issue-Tracker Wayfinding",
+      "community_name": "Prototype & Logic Modules",
       "id": "_agents_skills_prototype_ui_ui_winner_cleanup"
     },
     {
@@ -10698,9 +10819,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 199,
       "norm_label": "setup matt pocock skills",
-      "community_name": "Issue-Tracker Wayfinding",
+      "community_name": "Engineering Skills Configuration",
       "id": "_agents_skills_setup_matt_pocock_skills_skill_setup_matt_pocock_skills"
     },
     {
@@ -10712,9 +10833,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 199,
       "norm_label": "engineering skills configuration",
-      "community_name": "Issue-Tracker Wayfinding",
+      "community_name": "Engineering Skills Configuration",
       "id": "_agents_skills_setup_matt_pocock_skills_skill_engineering_skills_configuration"
     },
     {
@@ -10755,9 +10876,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 199,
       "norm_label": "triage label vocabulary",
-      "community_name": "Issue-Tracker Wayfinding",
+      "community_name": "Engineering Skills Configuration",
       "id": "_agents_skills_setup_matt_pocock_skills_skill_triage_label_vocabulary"
     },
     {
@@ -10769,9 +10890,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 57,
       "norm_label": "domain docs layout decision",
-      "community_name": "Research & Domain Modeling",
+      "community_name": "Domain Docs",
       "id": "_agents_skills_setup_matt_pocock_skills_skill_domain_docs_layout"
     },
     {
@@ -10783,9 +10904,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 199,
       "norm_label": "agent skills configuration block",
-      "community_name": "Issue-Tracker Wayfinding",
+      "community_name": "Engineering Skills Configuration",
       "id": "_agents_skills_setup_matt_pocock_skills_skill_agent_skills_block"
     },
     {
@@ -10798,9 +10919,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 199,
       "norm_label": "prompt-driven setup",
-      "community_name": "Issue-Tracker Wayfinding",
+      "community_name": "Engineering Skills Configuration",
       "id": "_agents_skills_setup_matt_pocock_skills_skill_prompt_driven_setup"
     },
     {
@@ -10812,9 +10933,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 57,
       "norm_label": "domain docs",
-      "community_name": "Research & Domain Modeling",
+      "community_name": "Domain Docs",
       "id": "_agents_skills_setup_matt_pocock_skills_domain_domain_docs"
     },
     {
@@ -10826,9 +10947,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 57,
       "norm_label": "single-context domain layout",
-      "community_name": "Research & Domain Modeling",
+      "community_name": "Domain Docs",
       "id": "_agents_skills_setup_matt_pocock_skills_domain_single_context_layout"
     },
     {
@@ -10840,9 +10961,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 57,
       "norm_label": "multi-context domain layout",
-      "community_name": "Research & Domain Modeling",
+      "community_name": "Domain Docs",
       "id": "_agents_skills_setup_matt_pocock_skills_domain_multi_context_layout"
     },
     {
@@ -10855,9 +10976,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 57,
       "norm_label": "glossary vocabulary discipline",
-      "community_name": "Research & Domain Modeling",
+      "community_name": "Domain Docs",
       "id": "_agents_skills_setup_matt_pocock_skills_domain_glossary_vocabulary_discipline"
     },
     {
@@ -10870,9 +10991,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 47,
       "norm_label": "adr conflict flagging",
-      "community_name": "PRD & Agent-Brief Authoring",
+      "community_name": "Props",
       "id": "_agents_skills_setup_matt_pocock_skills_domain_adr_conflict_flagging"
     },
     {
@@ -11024,9 +11145,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 209,
       "norm_label": "triage label mapping",
-      "community_name": "Issue-Tracker Wayfinding",
+      "community_name": "Triage Label Mapping",
       "id": "_agents_skills_setup_matt_pocock_skills_triage_labels_triage_label_mapping"
     },
     {
@@ -11038,9 +11159,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 209,
       "norm_label": "needs-triage",
-      "community_name": "Issue-Tracker Wayfinding",
+      "community_name": "Triage Label Mapping",
       "id": "_agents_skills_setup_matt_pocock_skills_triage_labels_needs_triage"
     },
     {
@@ -11052,9 +11173,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 209,
       "norm_label": "needs-info",
-      "community_name": "Issue-Tracker Wayfinding",
+      "community_name": "Triage Label Mapping",
       "id": "_agents_skills_setup_matt_pocock_skills_triage_labels_needs_info"
     },
     {
@@ -11066,9 +11187,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 209,
       "norm_label": "ready-for-agent",
-      "community_name": "Issue-Tracker Wayfinding",
+      "community_name": "Triage Label Mapping",
       "id": "_agents_skills_setup_matt_pocock_skills_triage_labels_ready_for_agent"
     },
     {
@@ -11080,9 +11201,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 209,
       "norm_label": "ready-for-human",
-      "community_name": "Issue-Tracker Wayfinding",
+      "community_name": "Triage Label Mapping",
       "id": "_agents_skills_setup_matt_pocock_skills_triage_labels_ready_for_human"
     },
     {
@@ -11094,9 +11215,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 209,
       "norm_label": "wontfix",
-      "community_name": "Issue-Tracker Wayfinding",
+      "community_name": "Triage Label Mapping",
       "id": "_agents_skills_setup_matt_pocock_skills_triage_labels_wontfix"
     },
     {
@@ -11108,9 +11229,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 36,
       "norm_label": "test-driven development",
-      "community_name": "PRD & Agent-Brief Authoring",
+      "community_name": "Test-Driven Development",
       "id": "_agents_skills_tdd_skill_test_driven_development"
     },
     {
@@ -11122,9 +11243,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 97,
       "norm_label": "red-green loop",
-      "community_name": "Issue-Tracker Wayfinding",
+      "community_name": "Tracer Bullet Issues",
       "id": "_agents_skills_tdd_skill_red_green_loop"
     },
     {
@@ -11137,9 +11258,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 36,
       "norm_label": "behavior through public interfaces",
-      "community_name": "PRD & Agent-Brief Authoring",
+      "community_name": "Test-Driven Development",
       "id": "_agents_skills_tdd_skill_behavior_through_public_interfaces"
     },
     {
@@ -11152,9 +11273,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 47,
       "norm_label": "pre-agreed test seams",
-      "community_name": "PRD & Agent-Brief Authoring",
+      "community_name": "Props",
       "id": "_agents_skills_tdd_skill_pre_agreed_test_seams"
     },
     {
@@ -11166,9 +11287,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 36,
       "norm_label": "implementation-coupled test",
-      "community_name": "PRD & Agent-Brief Authoring",
+      "community_name": "Test-Driven Development",
       "id": "_agents_skills_tdd_skill_implementation_coupled_test"
     },
     {
@@ -11180,9 +11301,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 36,
       "norm_label": "tautological test",
-      "community_name": "PRD & Agent-Brief Authoring",
+      "community_name": "Test-Driven Development",
       "id": "_agents_skills_tdd_skill_tautological_test"
     },
     {
@@ -11194,9 +11315,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 36,
       "norm_label": "horizontal slicing",
-      "community_name": "PRD & Agent-Brief Authoring",
+      "community_name": "Test-Driven Development",
       "id": "_agents_skills_tdd_skill_horizontal_slicing"
     },
     {
@@ -11209,9 +11330,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 97,
       "norm_label": "vertical slice tdd",
-      "community_name": "Issue-Tracker Wayfinding",
+      "community_name": "Tracer Bullet Issues",
       "id": "_agents_skills_tdd_skill_vertical_slice_tdd"
     },
     {
@@ -11223,9 +11344,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 36,
       "norm_label": "system-boundary mocking",
-      "community_name": "PRD & Agent-Brief Authoring",
+      "community_name": "Test-Driven Development",
       "id": "_agents_skills_tdd_mocking_system_boundary_mocking"
     },
     {
@@ -11238,9 +11359,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 36,
       "norm_label": "dependency injection",
-      "community_name": "PRD & Agent-Brief Authoring",
+      "community_name": "Test-Driven Development",
       "id": "_agents_skills_tdd_mocking_dependency_injection"
     },
     {
@@ -11253,9 +11374,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 36,
       "norm_label": "sdk-style boundary interface",
-      "community_name": "PRD & Agent-Brief Authoring",
+      "community_name": "Test-Driven Development",
       "id": "_agents_skills_tdd_mocking_sdk_style_boundary_interface"
     },
     {
@@ -11267,9 +11388,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 36,
       "norm_label": "internal collaborator mocking",
-      "community_name": "PRD & Agent-Brief Authoring",
+      "community_name": "Test-Driven Development",
       "id": "_agents_skills_tdd_mocking_internal_collaborator_mocking"
     },
     {
@@ -11281,9 +11402,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 36,
       "norm_label": "good and bad tests",
-      "community_name": "PRD & Agent-Brief Authoring",
+      "community_name": "Test-Driven Development",
       "id": "_agents_skills_tdd_tests_good_and_bad_tests"
     },
     {
@@ -11295,9 +11416,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 36,
       "norm_label": "integration-style behavior test",
-      "community_name": "PRD & Agent-Brief Authoring",
+      "community_name": "Test-Driven Development",
       "id": "_agents_skills_tdd_tests_integration_style_behavior_test"
     },
     {
@@ -11310,9 +11431,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 36,
       "norm_label": "interface-based verification",
-      "community_name": "PRD & Agent-Brief Authoring",
+      "community_name": "Test-Driven Development",
       "id": "_agents_skills_tdd_tests_interface_based_verification"
     },
     {
@@ -11325,9 +11446,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 36,
       "norm_label": "independent expected value",
-      "community_name": "PRD & Agent-Brief Authoring",
+      "community_name": "Test-Driven Development",
       "id": "_agents_skills_tdd_tests_independent_expected_value"
     },
     {
@@ -11339,9 +11460,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 57,
       "norm_label": "glossary format",
-      "community_name": "Research & Domain Modeling",
+      "community_name": "Domain Docs",
       "id": "_agents_skills_teach_glossary_format_glossary_format"
     },
     {
@@ -11354,9 +11475,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 57,
       "norm_label": "canonical learning language",
-      "community_name": "Research & Domain Modeling",
+      "community_name": "Domain Docs",
       "id": "_agents_skills_teach_glossary_format_canonical_learning_language"
     },
     {
@@ -11383,9 +11504,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 57,
       "norm_label": "glossary ambiguity resolution",
-      "community_name": "Research & Domain Modeling",
+      "community_name": "Domain Docs",
       "id": "_agents_skills_teach_glossary_format_glossary_ambiguity_resolution"
     },
     {
@@ -11760,9 +11881,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 5,
+      "community": 57,
       "norm_label": "reference documents",
-      "community_name": "Research & Domain Modeling",
+      "community_name": "Domain Docs",
       "id": "_agents_skills_teach_skill_reference_documents"
     },
     {
@@ -11788,9 +11909,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 199,
       "norm_label": "to issues",
-      "community_name": "Issue-Tracker Wayfinding",
+      "community_name": "Engineering Skills Configuration",
       "id": "_agents_skills_to_issues_skill_to_issues"
     },
     {
@@ -11803,9 +11924,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 199,
       "norm_label": "prefactoring",
-      "community_name": "Issue-Tracker Wayfinding",
+      "community_name": "Engineering Skills Configuration",
       "id": "_agents_skills_to_issues_skill_prefactoring"
     },
     {
@@ -11818,9 +11939,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 97,
       "norm_label": "tracer bullet issues",
-      "community_name": "Issue-Tracker Wayfinding",
+      "community_name": "Tracer Bullet Issues",
       "id": "_agents_skills_to_issues_skill_tracer_bullet_issues"
     },
     {
@@ -11832,9 +11953,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 97,
       "norm_label": "vertical slice rules",
-      "community_name": "Issue-Tracker Wayfinding",
+      "community_name": "Tracer Bullet Issues",
       "id": "_agents_skills_to_issues_skill_vertical_slice_rules"
     },
     {
@@ -11846,9 +11967,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 97,
       "norm_label": "issue breakdown quiz",
-      "community_name": "Issue-Tracker Wayfinding",
+      "community_name": "Tracer Bullet Issues",
       "id": "_agents_skills_to_issues_skill_breakdown_quiz"
     },
     {
@@ -11861,9 +11982,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 97,
       "norm_label": "dependency-ordered issue publication",
-      "community_name": "Issue-Tracker Wayfinding",
+      "community_name": "Tracer Bullet Issues",
       "id": "_agents_skills_to_issues_skill_dependency_ordered_publication"
     },
     {
@@ -11875,9 +11996,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 209,
       "norm_label": "afk-ready issues",
-      "community_name": "Issue-Tracker Wayfinding",
+      "community_name": "Triage Label Mapping",
       "id": "_agents_skills_to_issues_skill_afk_ready_issues"
     },
     {
@@ -11889,9 +12010,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 97,
       "norm_label": "vertical slice issue body template",
-      "community_name": "Issue-Tracker Wayfinding",
+      "community_name": "Tracer Bullet Issues",
       "id": "_agents_skills_to_issues_skill_issue_body_template"
     },
     {
@@ -11904,9 +12025,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 4,
+      "community": 97,
       "norm_label": "parent issue preservation",
-      "community_name": "Issue-Tracker Wayfinding",
+      "community_name": "Tracer Bullet Issues",
       "id": "_agents_skills_to_issues_skill_parent_issue_preservation"
     },
     {
@@ -12184,9 +12305,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 3,
+      "community": 47,
       "norm_label": "grilling and domain-modeling flow",
-      "community_name": "PRD & Agent-Brief Authoring",
+      "community_name": "Props",
       "id": "_agents_skills_triage_skill_grilling_flow"
     },
     {
@@ -14376,22 +14497,54 @@
   ],
   "links": [
     {
-      "relation": "imports_from",
-      "context": "import",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "source_file": "src/components/date-card.tsx",
-      "source_location": "L10",
+      "source_file": "src/components/date-card-header.tsx",
+      "source_location": "L19",
       "weight": 1.0,
       "_origin": "ast",
-      "source": "src_components_date_card",
-      "target": "ref_react",
+      "source": "src_components_date_card_header",
+      "target": "src_components_date_card_header_datecardheader",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/date-card-header.tsx",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_date_card_header",
+      "target": "src_components_date_card_header_props",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/date-card-summary.tsx",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_date_card_summary",
+      "target": "src_components_date_card_summary_datecardsummary",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/date-card-summary.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_date_card_summary",
+      "target": "src_components_date_card_summary_props",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/date-card.tsx",
-      "source_location": "L37",
+      "source_location": "L16",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_date_card",
@@ -14402,7 +14555,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/date-card.tsx",
-      "source_location": "L34",
+      "source_location": "L13",
       "weight": 1.0,
       "_origin": "ast",
       "source": "src_components_date_card",
@@ -14412,13 +14565,58 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "src/components/task-select-grid.tsx",
+      "source_location": "L16",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_task_select_grid",
+      "target": "src_components_task_select_grid_props",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/task-select-grid.tsx",
+      "source_location": "L23",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_components_task_select_grid",
+      "target": "src_components_task_select_grid_taskselectgrid",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/use-copy-to-clipboard.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_lib_use_copy_to_clipboard",
+      "target": "ref_react",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/use-copy-to-clipboard.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "src_lib_use_copy_to_clipboard",
+      "target": "src_lib_use_copy_to_clipboard_usecopytoclipboard",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "src/lib/use-date-card-tasks.ts",
       "source_location": "L12",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "src_lib_use_date_card_tasks",
-      "target": "src_lib_use_date_card_tasks_datecardtasks",
-      "confidence_score": 1.0
+      "target": "src_lib_use_date_card_tasks_datecardtasks"
     },
     {
       "relation": "contains",
@@ -14427,9 +14625,9 @@
       "source_location": "L38",
       "weight": 1.0,
       "_origin": "ast",
+      "confidence_score": 1.0,
       "source": "src_lib_use_date_card_tasks",
-      "target": "src_lib_use_date_card_tasks_usedatecardtasks",
-      "confidence_score": 1.0
+      "target": "src_lib_use_date_card_tasks_usedatecardtasks"
     },
     {
       "relation": "imports_from",
@@ -30454,5 +30652,5 @@
       "source_file": "docs/superpowers/specs/2026-07-12-cicd-design.md"
     }
   ],
-  "built_at_commit": "2074deca75b91b823f9feb927ab22ee084aa3763"
+  "built_at_commit": "b8ffa2fc7306dc45a1cd9874dce47ed890035a5d"
 }

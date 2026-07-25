@@ -1,8 +1,8 @@
-import DateCardHeader from "@/components/date-card-header";
-import DateCardSummary from "@/components/date-card-summary";
+import DateCardHeader from "@/components/date-card/header";
+import DateCardSummary from "@/components/date-card/summary";
+import TaskSelectGrid from "@/components/date-card/task-select-grid";
 import { Card, CardContent } from "@/components/shared/card";
 import { Separator } from "@/components/shared/separator";
-import TaskSelectGrid from "@/components/task-select-grid";
 import { buildSubmission } from "@/lib/date-card-helpers";
 import { useSubmitTaskMutation } from "@/lib/mutations";
 import { usePreferences } from "@/lib/queries";
