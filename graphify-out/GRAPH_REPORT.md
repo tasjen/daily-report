@@ -5,12 +5,12 @@
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1464 nodes · 2167 edges · 220 communities (84 shown, 136 thin omitted)
-- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 56 edges (avg confidence: 0.83)
+- 1468 nodes · 2149 edges · 228 communities (83 shown, 145 thin omitted)
+- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 41 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `0982ddf3`
+- Built from commit: `1c1ea636`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -29,11 +29,11 @@
 - package.json Scripts
 - oxlint Linter Config
 - Architecture Review Skill
-- CI/CD & Release Pipeline
 - shadcn components.json
 - Vite/Vitest tsconfig
 - React App Components
 - Prototype & Logic Modules
+- Combobox Component
 - Account Verification Feature
 - Auto-Submit/Close & Favorites
 - Root tsconfig
@@ -198,24 +198,33 @@
 - @types/babel__core
 - react
 - preference-toggles.test.tsx
-- @tauri-apps/plugin-process
-- @tauri-apps/plugin-store
-- zod
-- @types/react
 - use-task-selection.ts
 - main.tsx
 - date-card-summary.tsx
 - task-select-grid.tsx
 - project-list-select.tsx
+- @formkit/auto-animate
+- @lingui/core
+- tailwindcss
+- @tailwindcss/vite
+- @tanstack/react-query-devtools
+- @tauri-apps/plugin-http
+- @vitejs/plugin-react
+- Mutex
+- Option
+- Result
+- SelectOption
+- String
+- Vec
 
 ## God Nodes (most connected - your core abstractions)
-1. `AppError` - 73 edges
+1. `AppError` - 72 edges
 2. `react` - 26 edges
 3. `compilerOptions` - 23 edges
-4. `PortalAccountConfig` - 19 edges
-5. `scripts` - 18 edges
-6. `FakeHost` - 18 edges
-7. `FixtureServer` - 17 edges
+4. `scripts` - 18 edges
+5. `FakeHost` - 18 edges
+6. `FixtureServer` - 17 edges
+7. `PortalAccountConfig` - 17 edges
 8. `FakeTaskForm` - 16 edges
 9. `compilerOptions` - 16 edges
 10. `session()` - 15 edges
@@ -243,7 +252,7 @@
 - **Portable Logic Prototype Module Shapes** — _agents_skills_prototype_logic_pure_reducer, _agents_skills_prototype_logic_state_machine, _agents_skills_prototype_logic_pure_function_set, _agents_skills_prototype_logic_stateful_module_interface [EXTRACTED 1.00]
 - **Knowledge Skills and Wisdom Learning Model** — _agents_skills_teach_resources_format_high_trust_resources, _agents_skills_teach_skill_self_contained_html_lesson, _agents_skills_teach_skill_community_wisdom [EXTRACTED 1.00]
 
-## Communities (220 total, 136 thin omitted)
+## Communities (228 total, 145 thin omitted)
 
 ### Community 0 - "Rust Backend Browser Automation"
 Cohesion: 0.07
@@ -297,10 +306,6 @@ Nodes (23): name, packageManager, private, scripts, build, bump, clean, dev (+15
 Cohesion: 0.07
 Nodes (27): categories, correctness, suspicious, ignorePatterns, graphify-out, src-tauri/gen, src-tauri/target, options (+19 more)
 
-### Community 14 - "CI/CD & Release Pipeline"
-Cohesion: 0.50
-Nodes (4): Weekly Cargo Updates, Dependabot Configuration, Weekly GitHub Actions Updates, Weekly npm Updates
-
 ### Community 15 - "shadcn components.json"
 Cohesion: 0.09
 Nodes (21): aliases, components, hooks, lib, ui, utils, iconLibrary, menuAccent (+13 more)
@@ -312,6 +317,10 @@ Nodes (21): vite.config.ts, vitest.config.ts, compilerOptions, allowImportingTsE
 ### Community 18 - "Prototype & Logic Modules"
 Cohesion: 0.12
 Nodes (20): Explicit Prototype Question, In-Memory Prototype State, Lightweight TUI, Logic Prototype, Portable Pure Logic Module, Pure Function Set, Pure Reducer, State Machine (+12 more)
+
+### Community 19 - "Combobox Component"
+Cohesion: 0.11
+Nodes (3): react, react, useComboboxAnchor()
 
 ### Community 21 - "Auto-Submit/Close & Favorites"
 Cohesion: 0.09
@@ -350,8 +359,8 @@ Cohesion: 0.28
 Nodes (4): InputGroupAddon(), inputGroupAddonVariants, InputGroupButton(), inputGroupButtonVariants
 
 ### Community 34 - "lucide-react"
-Cohesion: 0.13
-Nodes (15): class-variance-authority, @formkit/auto-animate, @lingui/core, dependencies, class-variance-authority, @formkit/auto-animate, @lingui/core, tailwindcss (+7 more)
+Cohesion: 0.22
+Nodes (9): class-variance-authority, dependencies, class-variance-authority, @tauri-apps/plugin-process, @tauri-apps/plugin-store, zod, @tauri-apps/plugin-process, @tauri-apps/plugin-store (+1 more)
 
 ### Community 36 - "Test-Driven Development"
 Cohesion: 0.18
@@ -359,15 +368,15 @@ Nodes (13): Dependency Injection, Internal Collaborator Mocking, SDK-Style Bound
 
 ### Community 38 - "devDependencies"
 Cohesion: 0.22
-Nodes (9): babel-plugin-react-compiler, devDependencies, babel-plugin-react-compiler, @testing-library/react, @types/react-dom, @vitejs/plugin-react, @testing-library/react, @types/react-dom (+1 more)
+Nodes (9): babel-plugin-react-compiler, devDependencies, babel-plugin-react-compiler, @testing-library/react, @types/react, @types/react-dom, @testing-library/react, @types/react (+1 more)
 
 ### Community 39 - "Releasing (README)"
 Cohesion: 0.50
 Nodes (4): Release Process (pnpm bump), Updater Mechanism (tauri-plugin-updater), Install Instructions, Releasing (README)
 
 ### Community 42 - "Daily Report App"
-Cohesion: 0.50
-Nodes (4): Repository Guidance (AGENTS.md), Two Browser Instances (BrowserState), Daily Report App, App Root Mount Point (index.html)
+Cohesion: 0.67
+Nodes (3): Repository Guidance (AGENTS.md), Two Browser Instances (BrowserState), Daily Report App
 
 ### Community 43 - "step"
 Cohesion: 0.83
@@ -386,12 +395,12 @@ Cohesion: 1.00
 Nodes (3): Graphify Codebase Navigation Workflow, Query: Update README about Graphify usage, Codebase Navigation with Graphify (README)
 
 ### Community 47 - "Props"
-Cohesion: 0.11
-Nodes (35): Arc, AtomicBool, Cursor, Drop, Empty, HashMap, JoinHandle, Response (+27 more)
+Cohesion: 0.10
+Nodes (37): AppError, Arc, AtomicBool, Cursor, Drop, Empty, HashMap, JoinHandle (+29 more)
 
 ### Community 51 - "account.rs"
-Cohesion: 0.11
-Nodes (32): a_fully_configured_account_is_read(), a_late_missing_field_still_fails_before_any_config_is_usable(), a_portal_url_that_normalizes_away_is_rejected(), an_absent_or_unusable_account_value_reports_the_first_required_field(), candidate_values_are_validated_and_normalized_like_stored_ones(), configured(), each_missing_field_reports_its_own_message(), empty_candidate_values_are_rejected_before_a_browser_is_launched() (+24 more)
+Cohesion: 0.17
+Nodes (23): a_fully_configured_account_is_read(), a_late_missing_field_still_fails_before_any_config_is_usable(), a_portal_url_that_normalizes_away_is_rejected(), an_absent_or_unusable_account_value_reports_the_first_required_field(), candidate_values_are_validated_and_normalized_like_stored_ones(), configured(), each_missing_field_reports_its_own_message(), empty_candidate_values_are_rejected_before_a_browser_is_launched() (+15 more)
 
 ### Community 57 - ".run"
 Cohesion: 0.16
@@ -466,25 +475,25 @@ Cohesion: 0.67
 Nodes (3): fire(), flushMicrotasks(), T0
 
 ### Community 209 - "react"
-Cohesion: 0.67
-Nodes (3): react, react, useComboboxAnchor()
+Cohesion: 0.28
+Nodes (10): PortalAccountConfig, is_present(), live_config(), LiveSession, Browser, Page, Self, the_live_portal_still_accepts_our_login_and_shuts_down_cleanly() (+2 more)
 
 ## Knowledge Gaps
-- **427 isolated node(s):** `$schema`, `mcp__claude_ai_Figma__get_design_context`, `superpowers@claude-plugins-official`, `frontend-design@claude-plugins-official`, `andrej-karpathy-skills@karpathy-skills` (+422 more)
+- **423 isolated node(s):** `config`, `install.sh script`, `name`, `version`, `private` (+418 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **136 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **145 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
+- **Why does `AppError` connect `Rust Backend Browser Automation` to `@lingui/core`, `Mutations & Queries`, `account.rs`, `Auto-Submit/Close & Favorites`, `.run`, `@base-ui/react`, `@formkit/auto-animate`?**
+  _High betweenness centrality (0.047) - this node is a cross-community bridge._
 - **Why does `react` connect `React App Components` to `select.tsx`, `InputGroup`, `Card`, `oxlint Linter Config`, `LocaleToggle`, `Combobox Component`, `Account Verification Feature`, `Dropdown Menu Component`, `use-task-selection.ts`, `Dialog`?**
-  _High betweenness centrality (0.060) - this node is a cross-community bridge._
-- **Why does `AppError` connect `Rust Backend Browser Automation` to `@lingui/core`, `Mutations & Queries`, `Props`, `account.rs`, `Auto-Submit/Close & Favorites`, `.run`, `@base-ui/react`, `@formkit/auto-animate`?**
-  _High betweenness centrality (0.052) - this node is a cross-community bridge._
-- **Why does `dependencies` connect `lucide-react` to `package.json Scripts`, `class-variance-authority`, `clsx`, `@lingui/react`, `mutative`, `next-themes`, `lucide-react`, `react-dom`, `react-error-boundary`, `shadcn`, `sonner`, `tailwind-merge`, `react`, `@tanstack/react-form`, `@tanstack/react-query`, `@tauri-apps/plugin-opener`, `@tauri-apps/api`, `@tauri-apps/plugin-process`, `@tauri-apps/plugin-store`, `@tauri-apps/plugin-updater`, `@tauri-apps/plugin-window-state`, `tw-animate-css`, `zod`?**
-  _High betweenness centrality (0.048) - this node is a cross-community bridge._
-- **What connects `$schema`, `mcp__claude_ai_Figma__get_design_context`, `superpowers@claude-plugins-official` to the rest of the system?**
-  _427 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.040) - this node is a cross-community bridge._
+- **Why does `dependencies` connect `lucide-react` to `package.json Scripts`, `Combobox Component`, `class-variance-authority`, `clsx`, `@lingui/react`, `mutative`, `next-themes`, `lucide-react`, `react-dom`, `react-error-boundary`, `shadcn`, `sonner`, `tailwind-merge`, `@tauri-apps/plugin-opener`, `@tanstack/react-form`, `@tanstack/react-query`, `@tauri-apps/api`, `@tauri-apps/plugin-updater`, `@tauri-apps/plugin-window-state`, `tw-animate-css`, `@formkit/auto-animate`, `@lingui/core`, `tailwindcss`, `@tailwindcss/vite`, `@tanstack/react-query-devtools`, `@tauri-apps/plugin-http`?**
+  _High betweenness centrality (0.036) - this node is a cross-community bridge._
+- **What connects `config`, `install.sh script`, `name` to the rest of the system?**
+  _423 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Rust Backend Browser Automation` be split into smaller, more focused modules?**
   _Cohesion score 0.06964443138407288 - nodes in this community are weakly interconnected._
 - **Should `Agent Workflow Skills` be split into smaller, more focused modules?**
