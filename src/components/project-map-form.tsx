@@ -122,8 +122,8 @@ export default function ProjectMapForm() {
         <Input
           value={key}
           onChange={(e) => setKey(e.target.value)}
-          placeholder={t`Project key`}
-          className="w-30 flex-none font-mono"
+          placeholder={t`Key`}
+          className="w-16 flex-none font-mono"
         />
         <Select
           items={data.projects}

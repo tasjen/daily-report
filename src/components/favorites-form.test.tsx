@@ -42,7 +42,7 @@ it("adds a favorite with a trimmed text and uppercased project key", async () =>
   const saved = setup([]);
   const textInput = await openDialog();
   await userEvent.type(textInput, "  Deploy  ");
-  await userEvent.type(screen.getByPlaceholderText("Project key"), "ops");
+  await userEvent.type(screen.getByPlaceholderText("KEY"), "ops");
   const submit = screen
     .getAllByRole("button")
     .find((b) => b.getAttribute("type") === "submit")!;
