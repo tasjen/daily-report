@@ -1,16 +1,16 @@
-# Graph Report - daily-report  (2026-07-25)
+# Graph Report - flexi-report  (2026-07-25)
 
 ## Corpus Check
-- 158 files · ~112,914 words
+- 158 files · ~113,248 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1468 nodes · 2149 edges · 228 communities (83 shown, 145 thin omitted)
+- 1469 nodes · 2150 edges · 232 communities (88 shown, 144 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 41 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `1c1ea636`
+- Built from commit: `e72e78c0`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -234,12 +234,12 @@
   README.md → CLAUDE.md
 - `Before-and-after Diagram` --semantically_similar_to--> `Design Comparison`  [INFERRED] [semantically similar]
   .agents/skills/improve-codebase-architecture/HTML-REPORT.md → .agents/skills/codebase-design/DESIGN-IT-TWICE.md
+- `ShowWindowOnMount()` --indirect_call--> `toastError()`  [INFERRED]
+  src/main.tsx → src/lib/utils.ts
 - `Fixed-point Diff` --semantically_similar_to--> `Red-capable Command`  [INFERRED] [semantically similar]
   .agents/skills/code-review/SKILL.md → .agents/skills/diagnosing-bugs/SKILL.md
 - `Cleanup and Architecture Post-mortem` --conceptually_related_to--> `Codebase Design`  [INFERRED]
   .agents/skills/diagnosing-bugs/SKILL.md → .agents/skills/codebase-design/SKILL.md
-- `Tracer Bullet Issues` --semantically_similar_to--> `Vertical Slice TDD`  [INFERRED] [semantically similar]
-  .agents/skills/to-issues/SKILL.md → .agents/skills/tdd/SKILL.md
 
 ## Import Cycles
 - None detected.
@@ -252,11 +252,11 @@
 - **Portable Logic Prototype Module Shapes** — _agents_skills_prototype_logic_pure_reducer, _agents_skills_prototype_logic_state_machine, _agents_skills_prototype_logic_pure_function_set, _agents_skills_prototype_logic_stateful_module_interface [EXTRACTED 1.00]
 - **Knowledge Skills and Wisdom Learning Model** — _agents_skills_teach_resources_format_high_trust_resources, _agents_skills_teach_skill_self_contained_html_lesson, _agents_skills_teach_skill_community_wisdom [EXTRACTED 1.00]
 
-## Communities (228 total, 145 thin omitted)
+## Communities (232 total, 144 thin omitted)
 
 ### Community 0 - "Rust Backend Browser Automation"
 Cohesion: 0.07
-Nodes (54): AppHandle, Box, BrowserState, CdpError, Deref, Error, From, Ok (+46 more)
+Nodes (55): AppHandle, Box, BrowserState, CdpError, Deref, Error, From, Ok (+47 more)
 
 ### Community 1 - "Frontend Component Tests"
 Cohesion: 0.16
@@ -399,8 +399,8 @@ Cohesion: 0.10
 Nodes (37): AppError, Arc, AtomicBool, Cursor, Drop, Empty, HashMap, JoinHandle (+29 more)
 
 ### Community 51 - "account.rs"
-Cohesion: 0.17
-Nodes (23): a_fully_configured_account_is_read(), a_late_missing_field_still_fails_before_any_config_is_usable(), a_portal_url_that_normalizes_away_is_rejected(), an_absent_or_unusable_account_value_reports_the_first_required_field(), candidate_values_are_validated_and_normalized_like_stored_ones(), configured(), each_missing_field_reports_its_own_message(), empty_candidate_values_are_rejected_before_a_browser_is_launched() (+15 more)
+Cohesion: 0.19
+Nodes (22): a_fully_configured_account_is_read(), a_late_missing_field_still_fails_before_any_config_is_usable(), a_portal_url_that_normalizes_away_is_rejected(), an_absent_or_unusable_account_value_reports_the_first_required_field(), candidate_values_are_validated_and_normalized_like_stored_ones(), configured(), each_missing_field_reports_its_own_message(), empty_candidate_values_are_rejected_before_a_browser_is_launched() (+14 more)
 
 ### Community 57 - ".run"
 Cohesion: 0.16
@@ -425,6 +425,10 @@ Nodes (15): ADR Eligibility Test, ADR Format, Minimal ADR, Canonical Domain Lang
 ### Community 81 - "tailwindcss"
 Cohesion: 0.26
 Nodes (13): BTreeSet, collect_sources(), every_command_the_frontend_invokes_is_registered(), every_registered_command_is_reachable_from_the_frontend(), invoked_commands(), invoked_in(), registered_commands(), Option (+5 more)
+
+### Community 84 - "@tanstack/react-query-devtools"
+Cohesion: 0.18
+Nodes (3): vitest, { relaunch }, ALL_ARMED
 
 ### Community 86 - "@tauri-apps/plugin-http"
 Cohesion: 0.18
@@ -455,8 +459,8 @@ Cohesion: 0.29
 Nodes (7): Agent Skills Configuration Block, Engineering Skills Configuration, Prompt-Driven Setup, Setup Matt Pocock Skills, Triage Label Vocabulary, Prefactoring, To Issues
 
 ### Community 114 - "LocaleToggle"
-Cohesion: 0.07
-Nodes (36): AccountForm(), normalizePortalUrl(), LocaleToggle(), Theme, ThemeProvider(), ThemeProviderContext, ThemeProviderProps, ThemeProviderState (+28 more)
+Cohesion: 0.08
+Nodes (32): LocaleToggle(), Theme, ThemeProvider(), ThemeProviderContext, ThemeProviderProps, ThemeProviderState, SubmitTaskEntry, useSaveAccountMutation() (+24 more)
 
 ### Community 198 - "Interface as Test Surface"
 Cohesion: 0.40
@@ -481,21 +485,21 @@ Nodes (10): PortalAccountConfig, is_present(), live_config(), LiveSession, Brows
 ## Knowledge Gaps
 - **423 isolated node(s):** `config`, `install.sh script`, `name`, `version`, `private` (+418 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **145 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **144 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
+- **Why does `react` connect `React App Components` to `select.tsx`, `InputGroup`, `Card`, `oxlint Linter Config`, `LocaleToggle`, `Combobox Component`, `open-member-page-button.tsx`, `Account Verification Feature`, `Dropdown Menu Component`, `sign-out-button.tsx`, `use-copy-to-clipboard.ts`, `preference-toggles.test.tsx`, `use-task-selection.ts`, `Dialog`?**
+  _High betweenness centrality (0.041) - this node is a cross-community bridge._
 - **Why does `AppError` connect `Rust Backend Browser Automation` to `@lingui/core`, `Mutations & Queries`, `account.rs`, `Auto-Submit/Close & Favorites`, `.run`, `@base-ui/react`, `@formkit/auto-animate`?**
-  _High betweenness centrality (0.047) - this node is a cross-community bridge._
-- **Why does `react` connect `React App Components` to `select.tsx`, `InputGroup`, `Card`, `oxlint Linter Config`, `LocaleToggle`, `Combobox Component`, `Account Verification Feature`, `Dropdown Menu Component`, `use-task-selection.ts`, `Dialog`?**
-  _High betweenness centrality (0.040) - this node is a cross-community bridge._
+  _High betweenness centrality (0.041) - this node is a cross-community bridge._
 - **Why does `dependencies` connect `lucide-react` to `package.json Scripts`, `Combobox Component`, `class-variance-authority`, `clsx`, `@lingui/react`, `mutative`, `next-themes`, `lucide-react`, `react-dom`, `react-error-boundary`, `shadcn`, `sonner`, `tailwind-merge`, `@tauri-apps/plugin-opener`, `@tanstack/react-form`, `@tanstack/react-query`, `@tauri-apps/api`, `@tauri-apps/plugin-updater`, `@tauri-apps/plugin-window-state`, `tw-animate-css`, `@formkit/auto-animate`, `@lingui/core`, `tailwindcss`, `@tailwindcss/vite`, `@tanstack/react-query-devtools`, `@tauri-apps/plugin-http`?**
-  _High betweenness centrality (0.036) - this node is a cross-community bridge._
+  _High betweenness centrality (0.035) - this node is a cross-community bridge._
 - **What connects `config`, `install.sh script`, `name` to the rest of the system?**
   _423 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Rust Backend Browser Automation` be split into smaller, more focused modules?**
-  _Cohesion score 0.06964443138407288 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.06549051055867415 - nodes in this community are weakly interconnected._
 - **Should `Agent Workflow Skills` be split into smaller, more focused modules?**
   _Cohesion score 0.14166666666666666 - nodes in this community are weakly interconnected._
 - **Should `PRD & Agent-Brief Authoring` be split into smaller, more focused modules?**

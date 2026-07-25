@@ -39,13 +39,50 @@ function submitButton() {
   return screen.getByTestId("project-map-add");
 }
 
+async function selectProject(value: string) {
+  await userEvent.click(screen.getByTestId("project-map-project"));
+  await userEvent.click(
+    await screen.findByTestId(`project-map-option-${value}`),
+  );
+}
+
 it("adds a mapping with the key trimmed and uppercased", async () => {
   const saved = setup([{ label: "Alpha", value: "1" }], {});
   const keyInput = await renderForm();
   await userEvent.type(keyInput, "  dr  ");
+  await selectProject("1");
   await userEvent.click(submitButton());
   expect(saved).toHaveLength(1);
   expect(saved[0]!.project_map).toEqual({ DR: "1" });
+});
+
+it("disables add until a project is picked", async () => {
+  setup([{ label: "Alpha", value: "1" }], {});
+  const keyInput = await renderForm();
+  await userEvent.type(keyInput, "dr");
+  expect(submitButton()).toBeDisabled();
+  await selectProject("1");
+  expect(submitButton()).toBeEnabled();
+});
+
+// The portal keeps its empty-valued placeholder option, which Base UI would
+// otherwise treat as no selection at all.
+it("treats an empty-valued option as a real selection", async () => {
+  const saved = setup(
+    [
+      { label: "No project", value: "" },
+      { label: "Alpha", value: "1" },
+    ],
+    {},
+  );
+  const keyInput = await renderForm();
+  const trigger = screen.getByTestId("project-map-project");
+  expect(trigger).not.toHaveTextContent("No project");
+  await userEvent.type(keyInput, "dr");
+  await selectProject("");
+  expect(trigger).toHaveTextContent("No project");
+  await userEvent.click(submitButton());
+  expect(saved[0]!.project_map).toEqual({ DR: "" });
 });
 
 it("rejects a duplicate key regardless of casing", async () => {
@@ -57,8 +94,8 @@ it("rejects a duplicate key regardless of casing", async () => {
 });
 
 it("disables add when it would exceed 3 distinct portal projects", async () => {
-  // The selected project defaults to the first option ("4"), which would be
-  // a 4th distinct portal project beyond the map's existing three.
+  // "Delta" ("4") would be a 4th distinct portal project beyond the map's
+  // existing three.
   setup(
     [
       { label: "Delta", value: "4" },
@@ -68,6 +105,7 @@ it("disables add when it would exceed 3 distinct portal projects", async () => {
   );
   const keyInput = await renderForm();
   await userEvent.type(keyInput, "D");
+  await selectProject("4");
   expect(submitButton()).toBeDisabled();
 });
 
@@ -79,6 +117,7 @@ it("allows a new key that reuses an already-mapped portal project", async () => 
   });
   const keyInput = await renderForm();
   await userEvent.type(keyInput, "D");
+  await selectProject("1");
   await userEvent.click(submitButton());
   expect(saved).toHaveLength(1);
   expect(saved[0]!.project_map).toEqual({ A: "1", B: "2", C: "3", D: "1" });
