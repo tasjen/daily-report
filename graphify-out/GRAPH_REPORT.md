@@ -1,16 +1,16 @@
 # Graph Report - flexi-report  (2026-07-26)
 
 ## Corpus Check
-- 159 files · ~114,615 words
+- 159 files · ~114,616 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1483 nodes · 2183 edges · 231 communities (91 shown, 140 thin omitted)
+- 1484 nodes · 2184 edges · 230 communities (90 shown, 140 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 41 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `50f12124`
+- Built from commit: `e8e16a2d`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -190,7 +190,6 @@
 - store.ts
 - Design It Twice
 - lucide-react
-- @tailwindcss/vite
 - @tauri-apps/plugin-opener
 - @testing-library/dom
 - @testing-library/jest-dom
@@ -253,7 +252,7 @@
 - **Portable Logic Prototype Module Shapes** — _agents_skills_prototype_logic_pure_reducer, _agents_skills_prototype_logic_state_machine, _agents_skills_prototype_logic_pure_function_set, _agents_skills_prototype_logic_stateful_module_interface [EXTRACTED 1.00]
 - **Knowledge Skills and Wisdom Learning Model** — _agents_skills_teach_resources_format_high_trust_resources, _agents_skills_teach_skill_self_contained_html_lesson, _agents_skills_teach_skill_community_wisdom [EXTRACTED 1.00]
 
-## Communities (231 total, 140 thin omitted)
+## Communities (230 total, 140 thin omitted)
 
 ### Community 0 - "Rust Backend Browser Automation"
 Cohesion: 0.07
@@ -289,7 +288,7 @@ Nodes (33): https://github.com/tasjen/flexi-report/releases/latest/download/late
 
 ### Community 8 - "oxfmt Formatter Config"
 Cohesion: 0.07
-Nodes (26): arrowParens, bracketSameLine, bracketSpacing, ignorePatterns, graphify-out, src-tauri/gen, src-tauri/target, jsxSingleQuote (+18 more)
+Nodes (27): arrowParens, bracketSameLine, bracketSpacing, ignorePatterns, graphify-out, src-tauri/gen, src-tauri/target, jsxSingleQuote (+19 more)
 
 ### Community 9 - "TypeScript App tsconfig"
 Cohesion: 0.07
@@ -332,8 +331,8 @@ Cohesion: 0.13
 Nodes (14): compilerOptions, module, moduleResolution, noEmit, skipLibCheck, strict, target, types (+6 more)
 
 ### Community 24 - "Tauri Capabilities Permissions"
-Cohesion: 0.13
-Nodes (14): core:default, core:window:allow-set-background-color, core:window:allow-set-focus, core:window:allow-show, main, opener:default, process:allow-restart, store:default (+6 more)
+Cohesion: 0.12
+Nodes (15): core:default, core:window:allow-set-background-color, core:window:allow-set-focus, core:window:allow-set-theme, core:window:allow-show, main, opener:default, process:allow-restart (+7 more)
 
 ### Community 25 - "Knip Config"
 Cohesion: 0.15
@@ -428,8 +427,8 @@ Cohesion: 0.26
 Nodes (13): BTreeSet, collect_sources(), every_command_the_frontend_invokes_is_registered(), every_registered_command_is_reachable_from_the_frontend(), invoked_commands(), invoked_in(), registered_commands(), Option (+5 more)
 
 ### Community 84 - "@tanstack/react-query-devtools"
-Cohesion: 0.18
-Nodes (3): vitest, { relaunch }, ALL_ARMED
+Cohesion: 0.14
+Nodes (6): vitest, { relaunch }, ALL_ARMED, fire(), flushMicrotasks(), T0
 
 ### Community 86 - "@tauri-apps/plugin-http"
 Cohesion: 0.33
@@ -460,8 +459,8 @@ Cohesion: 0.29
 Nodes (7): Agent Skills Configuration Block, Engineering Skills Configuration, Prompt-Driven Setup, Setup Matt Pocock Skills, Triage Label Vocabulary, Prefactoring, To Issues
 
 ### Community 114 - "LocaleToggle"
-Cohesion: 0.06
-Nodes (37): clsx, AccountForm(), normalizePortalUrl(), LocaleToggle(), Theme, ThemeProvider(), ThemeProviderContext, ThemeProviderProps (+29 more)
+Cohesion: 0.07
+Nodes (36): AccountForm(), normalizePortalUrl(), LocaleToggle(), Theme, ThemeProvider(), ThemeProviderContext, ThemeProviderProps, ThemeProviderState (+28 more)
 
 ### Community 198 - "Interface as Test Surface"
 Cohesion: 0.40
@@ -478,10 +477,6 @@ Nodes (4): DEFAULTS, groups(), Sets, setup()
 ### Community 203 - "lucide-react"
 Cohesion: 0.22
 Nodes (9): Evidence-Gated Term Promotion, Glossary Format, Decision-Grade Learning Record, Evidence of Learning, Learning Record Format, Learning Record Supersession, Zone of Proximal Development Input, Reference Documents (+1 more)
-
-### Community 204 - "@tailwindcss/vite"
-Cohesion: 0.67
-Nodes (3): fire(), flushMicrotasks(), T0
 
 ### Community 209 - "react"
 Cohesion: 0.28
@@ -504,7 +499,7 @@ Cohesion: 0.67
 Nodes (3): react, react, useComboboxAnchor()
 
 ## Knowledge Gaps
-- **425 isolated node(s):** `args`, `SCRIPT`, `temporaryDirectories`, `config`, `install.sh script` (+420 more)
+- **426 isolated node(s):** `$schema`, `identifier`, `description`, `main`, `core:default` (+421 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **140 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -512,13 +507,13 @@ Nodes (3): react, react, useComboboxAnchor()
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `react` connect `React App Components` to `select.tsx`, `InputGroup`, `Card`, `oxlint Linter Config`, `LocaleToggle`, `Combobox Component`, `Dropdown Menu Component`, `version.tsx`, `use-task-selection.ts`, `Dialog`?**
-  _High betweenness centrality (0.051) - this node is a cross-community bridge._
-- **Why does `AppError` connect `Rust Backend Browser Automation` to `@lingui/core`, `Mutations & Queries`, `account.rs`, `Auto-Submit/Close & Favorites`, `.run`, `@base-ui/react`, `@formkit/auto-animate`?**
-  _High betweenness centrality (0.045) - this node is a cross-community bridge._
+  _High betweenness centrality (0.049) - this node is a cross-community bridge._
 - **Why does `dependencies` connect `lucide-react` to `package.json Scripts`, `class-variance-authority`, `clsx`, `@lingui/react`, `mutative`, `next-themes`, `react-dom`, `react-error-boundary`, `shadcn`, `sonner`, `tailwind-merge`, `@tauri-apps/plugin-opener`, `@tanstack/react-form`, `@tanstack/react-query`, `use-copy-to-clipboard.ts`, `@tauri-apps/api`, `@tauri-apps/plugin-updater`, `@tauri-apps/plugin-window-state`, `tw-animate-css`, `@formkit/auto-animate`, `@lingui/core`, `tailwindcss`, `@tailwindcss/vite`?**
-  _High betweenness centrality (0.043) - this node is a cross-community bridge._
-- **What connects `args`, `SCRIPT`, `temporaryDirectories` to the rest of the system?**
-  _425 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.044) - this node is a cross-community bridge._
+- **Why does `AppError` connect `Rust Backend Browser Automation` to `@lingui/core`, `Mutations & Queries`, `account.rs`, `Auto-Submit/Close & Favorites`, `.run`, `@base-ui/react`, `@formkit/auto-animate`?**
+  _High betweenness centrality (0.042) - this node is a cross-community bridge._
+- **What connects `$schema`, `identifier`, `description` to the rest of the system?**
+  _426 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Rust Backend Browser Automation` be split into smaller, more focused modules?**
   _Cohesion score 0.06964443138407288 - nodes in this community are weakly interconnected._
 - **Should `Agent Workflow Skills` be split into smaller, more focused modules?**
