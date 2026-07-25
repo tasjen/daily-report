@@ -67,14 +67,6 @@ export default function TaskSelect({
         {label && (
           <Label className="mb-2 px-1 text-nowrap">
             {label}
-            {allSelected && (
-              <span
-                className="font-normal text-muted-foreground"
-                data-testid={testId && `${testId}-all-selected`}
-              >
-                <Trans>(all selected)</Trans>
-              </span>
-            )}
             {description && (
               <Tooltip>
                 <TooltipTrigger
@@ -98,6 +90,14 @@ export default function TaskSelect({
                   )}
                 </TooltipContent>
               </Tooltip>
+            )}
+            {allSelected && (
+              <span
+                className="font-normal text-muted-foreground"
+                data-testid={testId && `${testId}-all-selected`}
+              >
+                <Trans>(all selected)</Trans>
+              </span>
             )}
           </Label>
         )}
