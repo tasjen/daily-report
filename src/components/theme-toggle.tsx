@@ -9,7 +9,7 @@ export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
 
   return (
-    <div className="flex gap-2">
+    <div className="flex flex-col gap-2">
       <Label>
         <Trans>Theme</Trans>
       </Label>

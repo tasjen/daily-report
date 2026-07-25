@@ -38,14 +38,14 @@ export default function PreferencesForm() {
           </DialogTitle>
         </DialogHeader>
         <div className="flex gap-4">
-          <div className="flex flex-col gap-4">
+          <div className="flex max-w-sm flex-col gap-4">
             <DefaultProjectSelect />
             <ProjectListSelect />
             <ProjectMapForm />
             <DefaultTaskGroupsSelect />
           </div>
           <Separator orientation="vertical" />
-          <div className="flex flex-none flex-col gap-4">
+          <div className="flex flex-1 flex-col gap-4">
             <AutofillSummaryToggle />
             <AutoSubmitToggle />
             <AutoCloseToggle />

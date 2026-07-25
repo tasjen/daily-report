@@ -108,7 +108,7 @@ export default function FavoritesForm() {
                 <Input
                   value={projectKey}
                   onChange={(e) => setProjectKey(e.target.value)}
-                  placeholder={t`Project key`}
+                  placeholder={t`Key`}
                   className="w-30 flex-none font-mono"
                 />
               }

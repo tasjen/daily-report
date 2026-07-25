@@ -10,7 +10,7 @@ export default function LocaleToggle() {
   const nextLocale: Locale = locale === "en" ? "th" : "en";
 
   return (
-    <div className="flex gap-2">
+    <div className="flex flex-col gap-2">
       <Label>
         <Trans>Language</Trans>
       </Label>
