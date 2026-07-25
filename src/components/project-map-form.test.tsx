@@ -31,7 +31,7 @@ function setup(
 
 async function renderForm() {
   await renderWithProviders(<ProjectMapForm />);
-  return await screen.findByPlaceholderText("Project key");
+  return await screen.findByPlaceholderText("KEY");
 }
 
 function submitButton() {
