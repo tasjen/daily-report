@@ -1,16 +1,16 @@
 # Graph Report - daily-report  (2026-07-25)
 
 ## Corpus Check
-- 167 files · ~127,925 words
+- 158 files · ~112,932 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1197 nodes · 1448 edges · 221 communities (82 shown, 139 thin omitted)
-- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 42 edges (avg confidence: 0.85)
+- 1149 nodes · 1368 edges · 209 communities (73 shown, 136 thin omitted)
+- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 38 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `b09878f0`
+- Built from commit: `9ba52fd6`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -36,7 +36,6 @@
 - Prototype & Logic Modules
 - Combobox Component
 - Account Verification Feature
-- Auto-Submit/Close & Favorites
 - Root tsconfig
 - Tauri Capabilities Permissions
 - Knip Config
@@ -57,16 +56,13 @@
 - TextField
 - Fluency Strength
 - Graphify Codebase Navigation Workflow
-- Props
 - Button
-- Props
 - Props
 - main.tsx
 - type.ts
 - files
 - Sediment
 - @babel/core
-- Domain Docs
 - @base-ui/react
 - class-variance-authority
 - clsx
@@ -106,7 +102,6 @@
 - @tauri-apps/cli
 - @testing-library/user-event
 - @types/node
-- Tracer Bullet Issues
 - Red-capable Command
 - typescript
 - vite
@@ -117,7 +112,6 @@
 - @wdio/local-runner
 - @wdio/mocha-framework
 - @wdio/spec-reporter
-- vitest
 - LocaleToggle
 - Pre-commit Hooks (lint/fmt/rustfmt)
 - Pre-push Hooks (tsc/clippy)
@@ -188,7 +182,6 @@
 - Daily Report App Icon
 - Daily Report App Icon
 - Interface as Test Surface
-- Engineering Skills Configuration
 - store.ts
 - Design It Twice
 - Depth
@@ -198,17 +191,11 @@
 - @testing-library/dom
 - @testing-library/jest-dom
 - @types/babel__core
-- Triage Label Mapping
-- queries.test.ts
-- account-form.tsx
-- use-reset-when-away.test.ts
-- date-card.tsx
 - use-task-selection.ts
 - main.tsx
 - date-card-summary.tsx
 - task-select-grid.tsx
 - project-list-select.tsx
-- use-update-check.ts
 
 ## God Nodes (most connected - your core abstractions)
 1. `AppError` - 34 edges
@@ -217,22 +204,22 @@
 4. `scripts` - 18 edges
 5. `compilerOptions` - 16 edges
 6. `BrowserState` - 15 edges
-7. `vitest` - 12 edges
+7. `vitest` - 13 edges
 8. `rules` - 12 edges
 9. `toastError()` - 12 edges
 10. `portal_url()` - 12 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `Shared Portal Login Helper` --semantically_similar_to--> `Single Source of Truth`  [INFERRED] [semantically similar]
-  docs/superpowers/specs/2026-07-12-account-verification-design.md → .agents/skills/writing-great-skills/GLOSSARY.md
 - `Releasing (README)` --semantically_similar_to--> `Release Process (pnpm bump)`  [INFERRED] [semantically similar]
   README.md → CLAUDE.md
 - `Before-and-after Diagram` --semantically_similar_to--> `Design Comparison`  [INFERRED] [semantically similar]
   .agents/skills/improve-codebase-architecture/HTML-REPORT.md → .agents/skills/codebase-design/DESIGN-IT-TWICE.md
-- `ThemeProvider()` --indirect_call--> `toastError()`  [INFERRED]
-  src/components/theme-provider.tsx → src/lib/utils.ts
-- `ShowWindowOnMount()` --indirect_call--> `toastError()`  [INFERRED]
-  src/main.tsx → src/lib/utils.ts
+- `Fixed-point Diff` --semantically_similar_to--> `Red-capable Command`  [INFERRED] [semantically similar]
+  .agents/skills/code-review/SKILL.md → .agents/skills/diagnosing-bugs/SKILL.md
+- `Cleanup and Architecture Post-mortem` --conceptually_related_to--> `Codebase Design`  [INFERRED]
+  .agents/skills/diagnosing-bugs/SKILL.md → .agents/skills/codebase-design/SKILL.md
+- `Tracer Bullet Issues` --semantically_similar_to--> `Vertical Slice TDD`  [INFERRED] [semantically similar]
+  .agents/skills/to-issues/SKILL.md → .agents/skills/tdd/SKILL.md
 
 ## Import Cycles
 - 2-file cycle: `src-tauri/src/lib.rs -> src-tauri/src/submission.rs -> src-tauri/src/lib.rs`
@@ -244,35 +231,32 @@
 - **Supported Issue Tracker Implementations** — _agents_skills_setup_matt_pocock_skills_issue_tracker_github_github_issue_tracker, _agents_skills_setup_matt_pocock_skills_issue_tracker_gitlab_gitlab_issue_tracker, _agents_skills_setup_matt_pocock_skills_issue_tracker_local_local_markdown_issue_tracker [EXTRACTED 1.00]
 - **Portable Logic Prototype Module Shapes** — _agents_skills_prototype_logic_pure_reducer, _agents_skills_prototype_logic_state_machine, _agents_skills_prototype_logic_pure_function_set, _agents_skills_prototype_logic_stateful_module_interface [EXTRACTED 1.00]
 - **Knowledge Skills and Wisdom Learning Model** — _agents_skills_teach_resources_format_high_trust_resources, _agents_skills_teach_skill_self_contained_html_lesson, _agents_skills_teach_skill_community_wisdom [EXTRACTED 1.00]
-- **Auto-Fill, Auto-Submit, and Auto-Close Dependency Chain** — docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_submit, docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_auto_close, docs_superpowers_specs_2026_07_08_auto_submit_auto_close_design_cascade_rule [EXTRACTED 1.00]
-- **Parallel Portal and Jira Account Verification Flow** — docs_superpowers_specs_2026_07_12_account_verification_design_candidate_portal_verification, docs_superpowers_specs_2026_07_12_account_verification_design_jira_credentials_check, docs_superpowers_specs_2026_07_12_account_verification_design_parallel_account_verification, docs_superpowers_specs_2026_07_12_account_verification_design_verify_account_error, docs_superpowers_specs_2026_07_12_account_verification_design_save_anyway_escape_hatch [EXTRACTED 1.00]
-- **Signed Release and Update Delivery Chain** — docs_superpowers_specs_2026_07_12_cicd_design_tag_driven_release_pipeline, docs_superpowers_specs_2026_07_12_cicd_design_release_version_guard, docs_superpowers_specs_2026_07_12_cicd_design_updater_signing_key, docs_superpowers_specs_2026_07_12_cicd_design_draft_release_publish_gate, docs_superpowers_specs_2026_07_12_cicd_design_in_app_auto_updater [EXTRACTED 1.00]
 
-## Communities (221 total, 139 thin omitted)
+## Communities (209 total, 136 thin omitted)
 
 ### Community 0 - "Rust Backend Browser Automation"
 Cohesion: 0.12
 Nodes (43): AppHandle, Box, Browser, CdpError, Error, From, Mutex, Ok (+35 more)
 
 ### Community 1 - "Frontend Component Tests"
-Cohesion: 0.16
-Nodes (11): ACCOUNT, card(), CREATED_ISSUES, JiraSets, playButton(), setJira(), SPRINT_ISSUES, STATUS_ISSUES (+3 more)
+Cohesion: 0.05
+Nodes (22): vitest, ACCOUNT, card(), CREATED_ISSUES, JiraSets, playButton(), setJira(), SPRINT_ISSUES (+14 more)
 
 ### Community 2 - "Agent Workflow Skills"
 Cohesion: 0.18
 Nodes (13): Architecture Health Loop, Ask Matt, Context Hygiene, Idea-to-Ship Main Flow, Multi-session Issue Flow, Prototype Detour, Artifact Referencing, Handoff (+5 more)
 
 ### Community 3 - "PRD & Agent-Brief Authoring"
-Cohesion: 0.09
-Nodes (24): PRD Template, Ready-for-Agent PRD Publication, Highest-Level Test Seam Selection, To-PRD Skill, Agent Brief, Behavioral, Not Procedural Contract, Complete Acceptance Criteria, Durability over Precision (+16 more)
+Cohesion: 0.06
+Nodes (40): PRD Template, Ready-for-Agent PRD Publication, Highest-Level Test Seam Selection, To-PRD Skill, Agent Brief, Behavioral, Not Procedural Contract, Complete Acceptance Criteria, Durability over Precision (+32 more)
 
 ### Community 4 - "Issue-Tracker Wayfinding"
-Cohesion: 0.20
-Nodes (12): External Pull Request Triage, GitHub Issue Tracker, GitHub Wayfinding Operations, Shared GitHub Issue and PR Number Space, External Merge Request Triage, GitLab Issue Tracker, Separate GitLab Issue and MR Number Spaces, Local Markdown Issue Tracker (+4 more)
+Cohesion: 0.06
+Nodes (34): External Pull Request Triage, GitHub Issue Tracker, GitHub Wayfinding Operations, Shared GitHub Issue and PR Number Space, External Merge Request Triage, GitLab Issue Tracker, Separate GitLab Issue and MR Number Spaces, Local Markdown Issue Tracker (+26 more)
 
 ### Community 5 - "Research & Domain Modeling"
-Cohesion: 0.08
-Nodes (28): Background Research Agent, Cited Markdown Findings, Primary-Source Research, Research Skill, Evidence-Gated Term Promotion, Decision-Grade Learning Record, Evidence of Learning, Learning Record Format (+20 more)
+Cohesion: 0.06
+Nodes (37): Background Research Agent, Cited Markdown Findings, Primary-Source Research, Research Skill, Domain Docs, Glossary Vocabulary Discipline, Multi-Context Domain Layout, Single-Context Domain Layout (+29 more)
 
 ### Community 6 - "Deep Module Design Vocabulary"
 Cohesion: 0.20
@@ -303,8 +287,8 @@ Cohesion: 0.07
 Nodes (27): categories, correctness, suspicious, ignorePatterns, options, typeAware, plugins, rules (+19 more)
 
 ### Community 14 - "CI/CD & Release Pipeline"
-Cohesion: 0.13
-Nodes (22): Weekly Cargo Updates, Dependabot Configuration, Weekly GitHub Actions Updates, Weekly npm Updates, CI/CD Implementation Plan, CI/CD Design, Continuous Integration Checks, curl-Based macOS Installer (+14 more)
+Cohesion: 0.50
+Nodes (4): Weekly Cargo Updates, Dependabot Configuration, Weekly GitHub Actions Updates, Weekly npm Updates
 
 ### Community 15 - "shadcn components.json"
 Cohesion: 0.09
@@ -321,14 +305,6 @@ Nodes (23): Explicit Prototype Question, In-Memory Prototype State, Lightweight 
 ### Community 19 - "Combobox Component"
 Cohesion: 0.11
 Nodes (3): react, react, useComboboxAnchor()
-
-### Community 20 - "Account Verification Feature"
-Cohesion: 0.09
-Nodes (33): Building Great Skills Glossary, Cognitive Load, Context Load, Context Pointer, Duplication, Skill Granularity, Information Hierarchy, Leading Word (+25 more)
-
-### Community 21 - "Auto-Submit/Close & Favorites"
-Cohesion: 0.24
-Nodes (16): Auto-Submit and Auto-Close Implementation Plan, Favorites Implementation Plan, Auto-Close Preference, Auto-Submit Preference, Auto-Submit and Auto-Close Design, Backend Automatic Submission Flow, Auto-Fill to Auto-Submit to Auto-Close Cascade Rule, Auto-Submit Preference Schema (+8 more)
 
 ### Community 23 - "Root tsconfig"
 Cohesion: 0.13
@@ -367,8 +343,8 @@ Cohesion: 0.22
 Nodes (9): class-variance-authority, dependencies, class-variance-authority, @tauri-apps/plugin-process, @tauri-apps/plugin-store, zod, @tauri-apps/plugin-process, @tauri-apps/plugin-store (+1 more)
 
 ### Community 36 - "Test-Driven Development"
-Cohesion: 0.18
-Nodes (13): Dependency Injection, Internal Collaborator Mocking, SDK-Style Boundary Interface, System-Boundary Mocking, Behavior Through Public Interfaces, Horizontal Slicing, Implementation-Coupled Test, Tautological Test (+5 more)
+Cohesion: 0.10
+Nodes (22): ADR-Aware Architecture Review, Architecture Review HTML Report, Deep Module Design Vocabulary, Deepening Opportunity, Deletion Test, Improve Codebase Architecture, ADR Conflict Flagging, Dependency Injection (+14 more)
 
 ### Community 38 - "devDependencies"
 Cohesion: 0.22
@@ -398,18 +374,6 @@ Nodes (3): Desirable Difficulty, Fluency Strength, Storage Strength
 Cohesion: 1.00
 Nodes (3): Graphify Codebase Navigation Workflow, Query: Update README about Graphify usage, Codebase Navigation with Graphify (README)
 
-### Community 47 - "Props"
-Cohesion: 0.25
-Nodes (9): ADR-Aware Architecture Review, Architecture Review HTML Report, Deep Module Design Vocabulary, Deepening Opportunity, Deletion Test, Improve Codebase Architecture, ADR Conflict Flagging, Pre-Agreed Test Seams (+1 more)
-
-### Community 51 - "Props"
-Cohesion: 0.29
-Nodes (5): Theme, ThemeProvider(), ThemeProviderContext, ThemeProviderProps, ThemeProviderState
-
-### Community 57 - "Domain Docs"
-Cohesion: 0.22
-Nodes (9): Domain Docs, Glossary Vocabulary Discipline, Multi-Context Domain Layout, Single-Context Domain Layout, Domain Docs Layout Decision, Canonical Learning Language, Glossary Ambiguity Resolution, Glossary Format (+1 more)
-
 ### Community 58 - "@base-ui/react"
 Cohesion: 0.11
 Nodes (35): P, auto_close_waits_for_confirmation_before_closing_the_browser(), auto_submit_disabled_leaves_the_prepared_form_open(), auto_submit_enabled_submits_the_prepared_form_and_leaves_it_open(), configured_default_project_survives_filtering(), configured_projects_define_the_filter(), empty_input_produces_one_blank_row(), empty_project_list_disables_filtering() (+27 more)
@@ -422,10 +386,6 @@ Nodes (18): ADR Eligibility Test, ADR Format, Minimal ADR, Canonical Domain Lang
 Cohesion: 0.29
 Nodes (8): Code Review, Fixed-point Diff, Fowler Smell Baseline, Separate Axis Reporting, Spec Axis, Spec Source Discovery, Standards Axis, Two-axis Review
 
-### Community 97 - "Tracer Bullet Issues"
-Cohesion: 0.25
-Nodes (8): Red-Green Loop, Vertical Slice TDD, Issue Breakdown Quiz, Dependency-Ordered Issue Publication, Vertical Slice Issue Body Template, Parent Issue Preservation, Tracer Bullet Issues, Vertical Slice Rules
-
 ### Community 98 - "Red-capable Command"
 Cohesion: 0.25
 Nodes (8): Triage and Diagnosis On-ramps, Diagnosing Bugs, Performance Measurement Branch, Prediction-driven Instrumentation, Ranked Falsifiable Hypotheses, Red-capable Command, Reproduce and Minimise, Tight Feedback Loop
@@ -435,16 +395,12 @@ Cohesion: 0.47
 Nodes (9): Deepening, Ports and Adapters, Adapter, Codebase Design, Implementation, Interface, Module, Real Seam Requires Two Adapters (+1 more)
 
 ### Community 114 - "LocaleToggle"
-Cohesion: 0.18
-Nodes (9): LocaleToggle(), SubmitTaskEntry, useSaveAccountMutation(), useSaveFavoritesMutation(), useSavePreferencesMutation(), useSubmitTaskMutation(), VerifyAccountError, useResetWhenAway() (+1 more)
+Cohesion: 0.09
+Nodes (18): AccountForm(), normalizePortalUrl(), LocaleToggle(), Theme, ThemeProvider(), ThemeProviderContext, ThemeProviderProps, ThemeProviderState (+10 more)
 
 ### Community 198 - "Interface as Test Surface"
 Cohesion: 0.40
 Nodes (5): Replace-don't-layer Testing, Interface as Test Surface, Cleanup and Architecture Post-mortem, Regression Test at Correct Seam, TDD at Pre-agreed Seams
-
-### Community 199 - "Engineering Skills Configuration"
-Cohesion: 0.29
-Nodes (7): Agent Skills Configuration Block, Engineering Skills Configuration, Prompt-Driven Setup, Setup Matt Pocock Skills, Triage Label Vocabulary, Prefactoring, To Issues
 
 ### Community 200 - "store.ts"
 Cohesion: 0.29
@@ -458,37 +414,25 @@ Nodes (5): Common-caller Constraint, Design It Twice, Minimal Interface Constrai
 Cohesion: 0.50
 Nodes (5): Design Comparison, Deletion Test, Depth, Leverage, Locality
 
-### Community 209 - "Triage Label Mapping"
-Cohesion: 0.29
-Nodes (7): needs-info, needs-triage, ready-for-agent, ready-for-human, Triage Label Mapping, wontfix, AFK-Ready Issues
-
-### Community 211 - "account-form.tsx"
-Cohesion: 0.40
-Nodes (4): DEFAULTS, groups(), Sets, setup()
-
-### Community 213 - "use-reset-when-away.test.ts"
-Cohesion: 0.67
-Nodes (3): fire(), flushMicrotasks(), T0
-
 ## Knowledge Gaps
-- **437 isolated node(s):** `Props`, `STATUS_ISSUES`, `CREATED_ISSUES`, `SPRINT_ISSUES`, `ACCOUNT` (+432 more)
+- **431 isolated node(s):** `ALL_ARMED`, `Props`, `STATUS_ISSUES`, `CREATED_ISSUES`, `SPRINT_ISSUES` (+426 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **139 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **136 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `react` connect `React App Components` to `select.tsx`, `InputGroup`, `Card`, `oxlint Linter Config`, `LocaleToggle`, `Combobox Component`, `Props`, `date-card.tsx`, `Dropdown Menu Component`, `use-task-selection.ts`, `use-update-check.ts`, `Dialog`?**
-  _High betweenness centrality (0.082) - this node is a cross-community bridge._
+- **Why does `react` connect `React App Components` to `select.tsx`, `InputGroup`, `Card`, `oxlint Linter Config`, `Props`, `LocaleToggle`, `Combobox Component`, `Account Verification Feature`, `Auto-Submit/Close & Favorites`, `Dropdown Menu Component`, `use-task-selection.ts`, `Dialog`?**
+  _High betweenness centrality (0.095) - this node is a cross-community bridge._
 - **Why does `dependencies` connect `lucide-react` to `@tauri-apps/plugin-opener`, `package.json Scripts`, `Combobox Component`, `class-variance-authority`, `clsx`, `@formkit/auto-animate`, `@lingui/core`, `@lingui/react`, `mutative`, `next-themes`, `lucide-react`, `react-dom`, `react-error-boundary`, `shadcn`, `sonner`, `tailwind-merge`, `tailwindcss`, `@tailwindcss/vite`, `@tanstack/react-form`, `@tanstack/react-query`, `@tanstack/react-query-devtools`, `@tauri-apps/api`, `@tauri-apps/plugin-http`, `@tauri-apps/plugin-updater`, `@tauri-apps/plugin-window-state`, `tw-animate-css`?**
-  _High betweenness centrality (0.064) - this node is a cross-community bridge._
+  _High betweenness centrality (0.074) - this node is a cross-community bridge._
 - **Why does `react` connect `Combobox Component` to `lucide-react`?**
-  _High betweenness centrality (0.056) - this node is a cross-community bridge._
-- **What connects `Props`, `STATUS_ISSUES`, `CREATED_ISSUES` to the rest of the system?**
-  _437 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.064) - this node is a cross-community bridge._
+- **What connects `ALL_ARMED`, `Props`, `STATUS_ISSUES` to the rest of the system?**
+  _431 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Rust Backend Browser Automation` be split into smaller, more focused modules?**
   _Cohesion score 0.12280701754385964 - nodes in this community are weakly interconnected._
+- **Should `Frontend Component Tests` be split into smaller, more focused modules?**
+  _Cohesion score 0.04830917874396135 - nodes in this community are weakly interconnected._
 - **Should `PRD & Agent-Brief Authoring` be split into smaller, more focused modules?**
-  _Cohesion score 0.09057971014492754 - nodes in this community are weakly interconnected._
-- **Should `Research & Domain Modeling` be split into smaller, more focused modules?**
-  _Cohesion score 0.07936507936507936 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.05641025641025641 - nodes in this community are weakly interconnected._

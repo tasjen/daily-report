@@ -1,8 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
-REPO="tasjen/daily-report"
-APP_NAME="Daily Report"
+REPO="tasjen/flexi-report"
+APP_NAME="FlexiReport"
 APP_PATH="/Applications/$APP_NAME.app"
 
 if [ "$(uname -s)" != "Darwin" ]; then

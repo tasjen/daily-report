@@ -3,7 +3,7 @@ import { execFileSync } from "node:child_process";
 import { readFileSync, writeFileSync } from "node:fs";
 import { createInterface } from "node:readline/promises";
 
-const REPO_URL = "https://github.com/tasjen/daily-report";
+const REPO_URL = "https://github.com/tasjen/flexi-report";
 const USAGE = `Usage:
   pnpm bump <X.Y.Z | major | minor | patch>   bump versions, branch, commit, push, open the PR page
   pnpm bump --tag [--yes]                     tag v<current version> on up-to-date main and push it`;
@@ -101,7 +101,7 @@ function bump(arg) {
     },
   );
   const lockPattern = new RegExp(
-    `name = "daily-report"\\nversion = "${next.replaceAll(".", "\\.")}"`,
+    `name = "flexi-report"\\nversion = "${next.replaceAll(".", "\\.")}"`,
   );
   if (!lockPattern.test(readFileSync("src-tauri/Cargo.lock", "utf8"))) {
     fail(`Cargo.lock did not pick up ${next}`);

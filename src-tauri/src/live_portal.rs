@@ -9,9 +9,9 @@
 //! a normal build and cannot slow or break the required CI job:
 //!
 //! ```text
-//! DAILY_REPORT_SMOKE_PORTAL_URL=https://portal.example.com \
-//! DAILY_REPORT_SMOKE_PORTAL_CREDENTIAL=user:pass \
-//! DAILY_REPORT_SMOKE_PHONE=0812345678 \
+//! SMOKE_PORTAL_URL=https://portal.example.com \
+//! SMOKE_PORTAL_CREDENTIAL=user:pass \
+//! SMOKE_PHONE=0812345678 \
 //! cargo test --manifest-path src-tauri/Cargo.toml --features live-portal-smoke live_portal
 //! ```
 //!
@@ -35,9 +35,9 @@ use crate::{
     TASK_LEAVE_SELECT, TASK_PROJECT_SELECT_PREFIX,
 };
 
-const PORTAL_URL: &str = "DAILY_REPORT_SMOKE_PORTAL_URL";
-const PORTAL_CREDENTIAL: &str = "DAILY_REPORT_SMOKE_PORTAL_CREDENTIAL";
-const PHONE: &str = "DAILY_REPORT_SMOKE_PHONE";
+const PORTAL_URL: &str = "SMOKE_PORTAL_URL";
+const PORTAL_CREDENTIAL: &str = "SMOKE_PORTAL_CREDENTIAL";
+const PHONE: &str = "SMOKE_PHONE";
 
 /// Credentials come from the environment only. They are never read from
 /// `store.json` and never committed — enabling the feature without supplying
@@ -67,7 +67,7 @@ impl LiveSession {
     /// never contend for one Chromium profile lock.
     async fn login(label: &str) -> Self {
         let config = live_config();
-        let user_data_dir = profile_dir(&std::env::temp_dir().join("daily-report-smoke"), label);
+        let user_data_dir = profile_dir(&std::env::temp_dir().join("flexi-report-smoke"), label);
         let (browser, page) = launch_browser(&user_data_dir, false, "smoke")
             .await
             .expect("Chromium failed to launch");

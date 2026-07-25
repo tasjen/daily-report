@@ -4,7 +4,7 @@ Repository guidance.
 
 ## Product
 
-**Daily Report** is a Tauri 2 desktop app that automates daily work-report submissions to the LivingInsider admin portal (`portal.example.com/team`). It pulls each day's completed work from Jira and pre-fills the portal task form through browser automation; the user only clicks submit.
+**FlexiReport** is a Tauri 2 desktop app that automates daily work-report submissions to the LivingInsider admin portal (`portal.example.com/team`). It pulls each day's completed work from Jira and pre-fills the portal task form through browser automation; the user only clicks submit.
 
 - The portal has no public API. The Rust backend drives a real Chromium instance with [chromiumoxide](https://github.com/mattsse/chromiumoxide).
 - Jira has a REST API and is queried directly from the frontend.
@@ -53,7 +53,7 @@ Unit tests cover extracted pure logic; UI behavior is still verified with `pnpm 
   - The real task form puts a `task_work_hour_N` select beside every project select, and the project filter walks *every* `<select>` guarded only by an id check — a test asserts those neighbours come through untouched.
   - Pinned portal fact: the HTML spec makes a submitting browser normalize textarea line breaks to **CRLF**, so every report reaches the portal with `\r\n`, not the `\n` the summary was built with.
 - **Live portal smoke:** [src-tauri/src/live_portal.rs](src-tauri/src/live_portal.rs) logs into the **real** portal and checks that login, the task form, its selectors, and the three selects all still work. It is the only thing that catches portal markup the sanitized fixtures haven't caught up with.
-  - Behind the `live-portal-smoke` cargo feature, so it does not compile in the required CI job. Credentials come from `DAILY_REPORT_SMOKE_PORTAL_URL` / `_PORTAL_CREDENTIAL` / `_PHONE` — never `store.json`, never committed. Missing env fails loudly rather than passing vacuously.
+  - Behind the `live-portal-smoke` cargo feature, so it does not compile in the required CI job. Credentials come from `SMOKE_PORTAL_URL` / `_PORTAL_CREDENTIAL` / `_PHONE` — never `store.json`, never committed. Missing env fails loudly rather than passing vacuously.
   - **It never submits a report, and must never be made to.** It navigates and reads only; it never fills the form or calls `submit_task_form`. Filing a bogus report into a colleague-visible system is worse than having no smoke test.
   - Use a dedicated test account. Run it with `cargo test --manifest-path src-tauri/Cargo.toml --features live-portal-smoke live_portal -- --test-threads=1`, or manually via the non-required [live-portal-smoke.yml](.github/workflows/live-portal-smoke.yml) workflow, which needs the `SMOKE_PORTAL_URL`, `SMOKE_PORTAL_CREDENTIAL` and `SMOKE_PHONE` repo secrets and reports a notice instead of failing when they are absent.
   - Expect flakiness: network, portal uptime and credential validity all affect it. Keep it manual and non-required.
