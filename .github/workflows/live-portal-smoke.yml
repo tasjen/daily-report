@@ -47,9 +47,9 @@ jobs:
       # compile in the required CI job.
       - if: steps.creds.outputs.configured == 'true'
         env:
-          DAILY_REPORT_SMOKE_PORTAL_URL: ${{ secrets.SMOKE_PORTAL_URL }}
-          DAILY_REPORT_SMOKE_PORTAL_CREDENTIAL: ${{ secrets.SMOKE_PORTAL_CREDENTIAL }}
-          DAILY_REPORT_SMOKE_PHONE: ${{ secrets.SMOKE_PHONE }}
+          SMOKE_PORTAL_URL: ${{ secrets.SMOKE_PORTAL_URL }}
+          SMOKE_PORTAL_CREDENTIAL: ${{ secrets.SMOKE_PORTAL_CREDENTIAL }}
+          SMOKE_PHONE: ${{ secrets.SMOKE_PHONE }}
         run: |
           cargo test --manifest-path src-tauri/Cargo.toml --locked \
             --features live-portal-smoke live_portal -- --test-threads=1

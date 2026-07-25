@@ -2,5 +2,5 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 fn main() {
-    daily_report_lib::run()
+    flexi_report_lib::run()
 }

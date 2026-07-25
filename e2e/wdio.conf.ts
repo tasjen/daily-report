@@ -17,7 +17,7 @@ export const config: WebdriverIO.Config = {
       "tauri:options": {
         application: path.resolve(
           import.meta.dirname,
-          "../src-tauri/target/debug/daily-report",
+          "../src-tauri/target/debug/flexi-report",
         ),
       },
     },

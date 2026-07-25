@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Daily Report",
+  "productName": "FlexiReport",
   "version": "1.3.0",
-  "identifier": "com.livinginsider.daily-report",
+  "identifier": "com.livinginsider.flexi-report",
   "build": {
     "beforeDevCommand": "pnpm dev",
     "devUrl": "http://localhost:1420",
@@ -13,7 +13,7 @@
   "app": {
     "windows": [
       {
-        "title": "Daily Report",
+        "title": "FlexiReport",
         "width": 1200,
         "height": 900,
         "visible": false
@@ -41,7 +41,7 @@
   "plugins": {
     "updater": {
       "endpoints": [
-        "https://github.com/tasjen/daily-report/releases/latest/download/latest.json"
+        "https://github.com/tasjen/flexi-report/releases/latest/download/latest.json"
       ],
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDRDQjZCRTc2NTg2RkIwMEIKUldRTHNHOVlkcjYyVEJ6ejFvTzE2Nlhtc2RXVXR5QmFBdjFVdkNlNjVsZ2NTSTdxQ0NhY3lpSzIK",
       "windows": {
