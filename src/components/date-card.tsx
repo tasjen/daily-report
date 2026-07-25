@@ -22,7 +22,6 @@ import {
   buildIssueGroups,
   buildJqlForDate,
   buildSubmission,
-  defaultCheckedKeysOf,
   favoritesAsIssues,
   getDateRelation,
   jqlFor,
@@ -31,6 +30,7 @@ import {
 import { useSubmitTaskMutation } from "@/lib/mutations";
 import { useFavorites, useJiraTasksQuery, usePreferences } from "@/lib/queries";
 import { DEFAULT_PREFERENCES } from "@/lib/store";
+import { useTaskSelection } from "@/lib/use-task-selection";
 import { cn, toastError } from "@/lib/utils";
 
 type Props = {
@@ -89,33 +89,12 @@ export default function DateCard({ date }: Props) {
     items: toOptionItems(group),
   }));
 
-  // Issues displayed under a default task group start checked; everything
-  // else starts unchecked. `overrides` records the user's explicit toggles on
-  // top of that default, so new issues from a later refetch still pick up the
-  // correct default.
-  const defaultCheckedKeys = defaultCheckedKeysOf(issueGroups, defaultGroupIds);
-  const [overrides, setOverrides] = useState<Record<string, boolean>>({});
-  const selectedKeys = allIssues
-    .map((issue) => issue.key)
-    .filter((key) => overrides[key] ?? defaultCheckedKeys.has(key));
-  const selectedKeySet = new Set(selectedKeys);
-
-  // Each TaskSelect reports its group's entire new selection, not which issue
-  // was clicked — so diff it against the current effective selection and
-  // record overrides only for issues whose state actually changed. Issues the
-  // user never touched keep following `defaultCheckedKeys` when the default
-  // task groups preference changes.
-  function handleSelectionChange(groupKeys: string[], selected: string[]) {
-    const next = new Set(selected);
-    setOverrides((prev) => ({
-      ...prev,
-      ...Object.fromEntries(
-        groupKeys
-          .filter((key) => next.has(key) !== selectedKeySet.has(key))
-          .map((key) => [key, next.has(key)]),
-      ),
-    }));
-  }
+  const {
+    selectedKeys,
+    selectedKeySet,
+    handleSelectionChange,
+    reset: resetSelection,
+  } = useTaskSelection(issueGroups, defaultGroupIds);
 
   const projectMap =
     preferences?.project_map ?? DEFAULT_PREFERENCES.project_map;
@@ -172,7 +151,9 @@ export default function DateCard({ date }: Props) {
             void statusQuery.refetch();
             void createdQuery.refetch();
             void sprintQuery.refetch();
-            setOverrides({});
+            // Refetched issues should come back on their group defaults, not
+            // carrying overrides recorded against the previous result set.
+            resetSelection();
           }}
           disabled={isFetching}
         >
