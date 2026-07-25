@@ -32,6 +32,7 @@ pnpm test       # vitest run — frontend unit + component tests
 pnpm test:watch # vitest watch mode
 cargo test --manifest-path src-tauri/Cargo.toml    # Rust unit tests
 cargo test --manifest-path src-tauri/Cargo.toml -- --ignored   # portal DOM tests (needs Chromium)
+cargo test --manifest-path src-tauri/Cargo.toml --features live-portal-smoke live_portal -- --test-threads=1  # live portal (needs credentials)
 pnpm e2e        # WebdriverIO smoke suite — fails on macOS (see Testing)
 ```
 
@@ -51,6 +52,11 @@ Unit tests cover extracted pure logic; UI behavior is still verified with `pnpm 
   - Pinned option policy: an `<option>` with **no `value` attribute is dropped**; an empty-valued placeholder (`value=""`) is **kept**.
   - The real task form puts a `task_work_hour_N` select beside every project select, and the project filter walks *every* `<select>` guarded only by an id check — a test asserts those neighbours come through untouched.
   - Pinned portal fact: the HTML spec makes a submitting browser normalize textarea line breaks to **CRLF**, so every report reaches the portal with `\r\n`, not the `\n` the summary was built with.
+- **Live portal smoke:** [src-tauri/src/live_portal.rs](src-tauri/src/live_portal.rs) logs into the **real** portal and checks that login, the task form, its selectors, and the three selects all still work. It is the only thing that catches portal markup the sanitized fixtures haven't caught up with.
+  - Behind the `live-portal-smoke` cargo feature, so it does not compile in the required CI job. Credentials come from `DAILY_REPORT_SMOKE_PORTAL_URL` / `_PORTAL_CREDENTIAL` / `_PHONE` — never `store.json`, never committed. Missing env fails loudly rather than passing vacuously.
+  - **It never submits a report, and must never be made to.** It navigates and reads only; it never fills the form or calls `submit_task_form`. Filing a bogus report into a colleague-visible system is worse than having no smoke test.
+  - Use a dedicated test account. Run it with `cargo test --manifest-path src-tauri/Cargo.toml --features live-portal-smoke live_portal -- --test-threads=1`, or manually via the non-required [live-portal-smoke.yml](.github/workflows/live-portal-smoke.yml) workflow, which needs the `SMOKE_PORTAL_URL`, `SMOKE_PORTAL_CREDENTIAL` and `SMOKE_PHONE` repo secrets and reports a notice instead of failing when they are absent.
+  - Expect flakiness: network, portal uptime and credential validity all affect it. Keep it manual and non-required.
 - **E2E:** WebdriverIO + tauri-driver smoke suite in [e2e/](e2e/), Linux/Windows only (no macOS tauri-driver), run by the separate non-required [e2e.yml](.github/workflows/e2e.yml) workflow on `main` pushes and manual dispatch. `e2e/tsconfig.json` is deliberately not referenced from the root tsconfig so pre-push `tsc -b` ignores it.
 
 ## Architecture

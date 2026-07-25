@@ -4,6 +4,8 @@ mod browser_session;
 mod command_registry;
 mod error;
 mod lifecycle;
+#[cfg(all(test, feature = "live-portal-smoke"))]
+mod live_portal;
 mod login;
 mod navigation;
 #[cfg(test)]
