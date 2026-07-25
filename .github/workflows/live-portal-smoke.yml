@@ -1,0 +1,55 @@
+name: Live portal smoke
+
+# Manual only, and never a required check. This suite logs into the real admin
+# portal, so it depends on the network, on the portal being up, and on the
+# credentials of a dedicated test account staying valid — none of which should
+# ever be able to block a PR. It exists to detect real portal markup changes
+# that the sanitized fixtures in `src-tauri/src/fixtures/` have not caught up
+# with yet.
+#
+# Requires three repository secrets. Without them the job reports a notice and
+# succeeds, so a fork or an unconfigured repo does not show a spurious failure:
+#   SMOKE_PORTAL_URL         - portal base URL, no trailing slash
+#   SMOKE_PORTAL_CREDENTIAL  - `user:pass` for the portal's HTTP basic gate
+#   SMOKE_PHONE              - login phone of the dedicated test account
+on:
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Check smoke-test credentials are configured
+        id: creds
+        env:
+          PORTAL_URL: ${{ secrets.SMOKE_PORTAL_URL }}
+          PORTAL_CREDENTIAL: ${{ secrets.SMOKE_PORTAL_CREDENTIAL }}
+          PHONE: ${{ secrets.SMOKE_PHONE }}
+        run: |
+          if [ -z "$PORTAL_URL" ] || [ -z "$PORTAL_CREDENTIAL" ] || [ -z "$PHONE" ]; then
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Smoke-test secrets are not configured; skipping the live portal run."
+          else
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          fi
+      - if: steps.creds.outputs.configured == 'true'
+        uses: dtolnay/rust-toolchain@2c7215f132e9ebf062739d9130488b56d53c060c # master
+        # Pinning by SHA drops the per-branch default the `@stable` ref would
+        # have supplied, so the toolchain must be named explicitly.
+        with:
+          toolchain: stable
+      - if: steps.creds.outputs.configured == 'true'
+        uses: swatinem/rust-cache@c19371144df3bb44fab255c43d04cbc2ab54d1c4 # v2.9.1
+        with:
+          workspaces: src-tauri
+      # `live-portal-smoke` is off by default, so the suite does not even
+      # compile in the required CI job.
+      - if: steps.creds.outputs.configured == 'true'
+        env:
+          DAILY_REPORT_SMOKE_PORTAL_URL: ${{ secrets.SMOKE_PORTAL_URL }}
+          DAILY_REPORT_SMOKE_PORTAL_CREDENTIAL: ${{ secrets.SMOKE_PORTAL_CREDENTIAL }}
+          DAILY_REPORT_SMOKE_PHONE: ${{ secrets.SMOKE_PHONE }}
+        run: |
+          cargo test --manifest-path src-tauri/Cargo.toml --locked \
+            --features live-portal-smoke live_portal -- --test-threads=1

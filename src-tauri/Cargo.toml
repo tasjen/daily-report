@@ -34,6 +34,16 @@ tauri-plugin-opener = "2"
 tauri-plugin-log = "2"
 log = "0.4"
 
+[features]
+# Compiles the live-portal smoke test (src/live_portal.rs). Off by default so
+# the required CI job never depends on the real portal, the network, or
+# credentials. See that module for the environment variables it needs.
+live-portal-smoke = []
+
+[dev-dependencies]
+tiny_http = "0.12.0"
+tokio = { version = "1", features = ["test-util"] }
+
 # https://v2.tauri.app/concept/size/
 [profile.dev]
 incremental = true

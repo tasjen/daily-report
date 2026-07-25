@@ -49,7 +49,9 @@ jobs:
       - uses: swatinem/rust-cache@c19371144df3bb44fab255c43d04cbc2ab54d1c4 # v2.9.1
         with:
           workspaces: src-tauri
-      - run: pnpm install --frozen-lockfile
+      # --ignore-scripts skips the `prepare` lifecycle, which installs
+      # graphify's git hooks. CI has no use for hooks and no graphify binary.
+      - run: pnpm install --frozen-lockfile --ignore-scripts
       - uses: tauri-apps/tauri-action@1deb371b0cd8bd54025b384f1cd735e725c4060f # v1.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

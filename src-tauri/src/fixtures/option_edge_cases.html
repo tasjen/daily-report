@@ -1,0 +1,27 @@
+<!--
+  SYNTHETIC, unlike the other fixtures in this directory.
+
+  The captured portal pages give every `<option>` a `value` attribute, so they
+  cannot pin what `get_select_options` does with the ones that don't. This page
+  exists only to hold those edge cases:
+
+    - an option with no `value` attribute at all  -> dropped
+    - an empty-valued placeholder (`value=""`)    -> kept
+    - labels and values carrying Unicode          -> preserved verbatim
+
+  If the real portal ever starts emitting value-less options, prefer a real
+  capture over this file.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <select name="task_project_id1" id="task_project_id1">
+      <option value="">เลือกโครงการที่ทำ</option>
+      <option value="1">โครงการ 1</option>
+      <option>ไม่มี value attribute</option>
+      <option value="ค่า-ยูนิโค้ด">Unicode — ค่า</option>
+    </select>
+  </body>
+</html>

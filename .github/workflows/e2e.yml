@@ -37,7 +37,9 @@ jobs:
         with:
           node-version: 24
           cache: pnpm
-      - run: pnpm install --frozen-lockfile
+      # --ignore-scripts skips the `prepare` lifecycle, which installs
+      # graphify's git hooks. CI has no use for hooks and no graphify binary.
+      - run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Install tauri-driver
         run: cargo install tauri-driver --locked
       - name: Build app (debug)

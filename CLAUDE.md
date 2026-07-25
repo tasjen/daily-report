@@ -31,6 +31,8 @@ pnpm fmt        # oxfmt: format in place (also runs on pre-commit; fmt:check to 
 pnpm test       # vitest run — frontend unit + component tests
 pnpm test:watch # vitest watch mode
 cargo test --manifest-path src-tauri/Cargo.toml    # Rust unit tests
+cargo test --manifest-path src-tauri/Cargo.toml -- --ignored   # portal DOM tests (needs Chromium)
+cargo test --manifest-path src-tauri/Cargo.toml --features live-portal-smoke live_portal -- --test-threads=1  # live portal (needs credentials)
 pnpm e2e        # WebdriverIO smoke suite — fails on macOS (see Testing)
 ```
 
@@ -41,28 +43,51 @@ Unit tests cover extracted pure logic; UI behavior is still verified with `pnpm 
 - **Frontend:** Vitest 4 + jsdom + React Testing Library. [vitest.config.ts](vitest.config.ts) `mergeConfig`s [vite.config.ts](vite.config.ts), so the `@` alias, lingui macro transform, and react-compiler preset apply in tests. Tests are colocated `*.test.ts(x)` under `src/`; `globals` is off — import `describe`/`it`/`expect` from `"vitest"` explicitly (keeps `tsc -b` and type-aware oxlint working without tsconfig `types` churn).
 - **Tauri mocking:** [src/test/tauri.ts](src/test/tauri.ts) `mockTauri(data, onInvoke?)` answers plugin-store IPC from in-memory data and delegates other commands; [src/test/setup.ts](src/test/setup.ts) runs RTL `cleanup()` + `clearMocks()` after each test. Importing `store.ts` in tests is safe: `LazyStore` does no IPC until first use.
 - **Don't render components whose value comes from an uncached `use(promise)`** (e.g. `Version`): the promise recreates every render and never settles under RTL.
-- **Rust:** `#[cfg(test)]` unit tests in `lib.rs` for pure helpers only; the chromiumoxide paths need a real browser and stay untested.
+- **Rust:** `#[cfg(test)]` unit tests colocated in the module under test — `submission.rs` (planning + workflow), `browser_session.rs` (reuse, recovery, teardown), `login.rs` (login sequence + verification lifecycle), `navigation.rs` (URL matching + polling), `account.rs` (stored and candidate portal config), `task_parameters.rs` (scrape order + what is cached), `lifecycle.rs` (teardown completeness), `error.rs` (the command error contract), and `project_options.rs` (cache scope). Reusable fakes live in each module's `#[cfg(test)] pub(crate) mod test_support`, so `lifecycle.rs` drives teardown through the same `FakeHost`/`FakeVerifyHost` their own tests use. `lib.rs` itself holds no tests — it is the Chromium wiring layer. Chromium itself stays untested: policy lives behind seams (`SubmissionPortal`, `BrowserHost`, `LoginPortal`, `VerifyHost`, `TaskFormSource`, the `current_url` closure, the `scrape` closure) that tests drive with fakes, while `lib.rs` holds the one real implementation of each. Async tests use `#[tokio::test]`, with `start_paused = true` where timing is asserted. Fakes record an ordered event log and assert on that, not on call counts — it catches ordering bugs (killing a stale browser *before* relaunching) that counters miss.
+- **Portal DOM contract:** [src-tauri/src/portal_dom.rs](src-tauri/src/portal_dom.rs) drives a **real Chromium** against a local `tiny_http` fixture server serving the pages in [src-tauri/src/fixtures/](src-tauri/src/fixtures/). It is the only thing that catches a selector that stopped matching, and it asserts on the **submitted form body** the server received, never on generated JS.
+  - `#[cfg(test)] mod portal_dom` — no production code, and `tiny_http` is a dev-dependency.
+  - Every test is `#[ignore]`d, so the required `cargo test` never needs a Chromium binary. Run with `cargo test --manifest-path src-tauri/Cargo.toml -- --ignored`; `--test-threads=1` if profile dirs collide.
+  - The fixture pages are **sanitized captures of the real portal**, deliberately not generated from the selector constants under test — a fixture built from the same constants passes no matter how wrong they get. Update them by re-capturing, and sanitize member names, phone numbers, session/CSRF tokens, the real hostname, internal URLs, and real project names before committing.
+  - Two marked deviations: `task_date` options are reconstructed (the portal renders selectable days server-side, so a capture holds only the placeholder), and `option_edge_cases.html` is wholly synthetic because every real `<option>` carries a `value`.
+  - Pinned option policy: an `<option>` with **no `value` attribute is dropped**; an empty-valued placeholder (`value=""`) is **kept**.
+  - The real task form puts a `task_work_hour_N` select beside every project select, and the project filter walks *every* `<select>` guarded only by an id check — a test asserts those neighbours come through untouched.
+  - Pinned portal fact: the HTML spec makes a submitting browser normalize textarea line breaks to **CRLF**, so every report reaches the portal with `\r\n`, not the `\n` the summary was built with.
+- **Live portal smoke:** [src-tauri/src/live_portal.rs](src-tauri/src/live_portal.rs) logs into the **real** portal and checks that login, the task form, its selectors, and the three selects all still work. It is the only thing that catches portal markup the sanitized fixtures haven't caught up with.
+  - Behind the `live-portal-smoke` cargo feature, so it does not compile in the required CI job. Credentials come from `DAILY_REPORT_SMOKE_PORTAL_URL` / `_PORTAL_CREDENTIAL` / `_PHONE` — never `store.json`, never committed. Missing env fails loudly rather than passing vacuously.
+  - **It never submits a report, and must never be made to.** It navigates and reads only; it never fills the form or calls `submit_task_form`. Filing a bogus report into a colleague-visible system is worse than having no smoke test.
+  - Use a dedicated test account. Run it with `cargo test --manifest-path src-tauri/Cargo.toml --features live-portal-smoke live_portal -- --test-threads=1`, or manually via the non-required [live-portal-smoke.yml](.github/workflows/live-portal-smoke.yml) workflow, which needs the `SMOKE_PORTAL_URL`, `SMOKE_PORTAL_CREDENTIAL` and `SMOKE_PHONE` repo secrets and reports a notice instead of failing when they are absent.
+  - Expect flakiness: network, portal uptime and credential validity all affect it. Keep it manual and non-required.
 - **E2E:** WebdriverIO + tauri-driver smoke suite in [e2e/](e2e/), Linux/Windows only (no macOS tauri-driver), run by the separate non-required [e2e.yml](.github/workflows/e2e.yml) workflow on `main` pushes and manual dispatch. `e2e/tsconfig.json` is deliberately not referenced from the root tsconfig so pre-push `tsc -b` ignores it.
 
 ## Architecture
 
 ### Browser instances
 
-The backend manages **two separate browser instances**. Both use `BrowserState` in [src-tauri/src/lib.rs](src-tauri/src/lib.rs), distinguished by newtype wrappers registered as Tauri managed state:
+The backend manages **two separate browser instances**, distinguished by newtype wrappers registered as Tauri managed state:
 
 | State | Setting | Purpose |
 |---|---|---|
 | **`HeadlessBrowserState`** | `with_head: false` | Hidden; `get_task_parameters` scrapes form `<select>` options (dates, leaves, projects). |
 | **`HeadedBrowserState`** | `with_head: true` | Visible; `submit_task` pre-fills the form for the user to submit. |
 
-Each `BrowserState`:
+Both wrap `BrowserState`, an alias for `BrowserSession<ChromiumHost>`. The split keeps reuse/teardown policy testable without a real browser:
 
-- Holds `Mutex<Option<(Browser, Page)>>`.
+- **`BrowserSession<H>`** ([src-tauri/src/browser_session.rs](src-tauri/src/browser_session.rs)) holds `Mutex<Option<(H::Browser, H::Page)>>` and owns *all* the policy: lazy launch, liveness probing, stale replacement, and the bounded graceful close.
+- **`BrowserHost`** is the system boundary — `launch` (launch + login), `is_page_alive`, `close`, `kill`, `label`. `ChromiumHost` in [src-tauri/src/lib.rs](src-tauri/src/lib.rs) is the only real implementation; it owns the `AppHandle` and `with_head`, so commands needing the handle go through `state.host().app`.
+
+Put new policy in the session and new Chromium calls in the host. Policy added to `ChromiumHost` becomes untestable.
+
+Each instance:
+
 - Lazily launches through `get_page()` and reuses the browser.
 - Uses a fixed Chromium user-data dir under the app cache: `app_cache_dir()/profiles/{headed,headless}`. Separate subdirs prevent profile-lock contention.
 - Wipes its dir before each launch. Using the app cache instead of shared system temp avoids macOS “access data from other apps” prompts; wiping removes stale `SingletonLock` files after unclean shutdowns, preventing leftover Chromium from making a new launch hand off and exit.
 
-Before reuse, `get_page()` calls `is_page_alive()`, which performs a real JS-context round-trip: `page.evaluate("1")` with a 2s timeout.
+**Every path that gives up a session removes it from the state before shutting it down.** A failed launch, a dead page, and a hung close all leave the state empty rather than holding a pair the next caller might reuse. `get_page` also holds the lock across the launch, so concurrent callers get one session instead of racing two browsers into the same profile dir.
+
+**Project options are cached per login, not per process.** `ProjectOptionsCache` ([src-tauri/src/project_options.rs](src-tauri/src/project_options.rs)) scrapes the project `<select>` once and shares it; `close_browsers` clears it. That covers both moments the login identity can change — account save and the ≥1h-away reset — so a different member or portal never inherits the previous one's project list. The lock is held across the scrape, so concurrent first readers share one scrape; a failed scrape caches nothing and is retryable. Any new teardown path must clear it too.
+
+Before reuse, `get_page()` calls the host's `is_page_alive()`, which performs a real JS-context round-trip: `page.evaluate("1")` with a 2s timeout.
 
 - **Do not use `page.url()` as the probe.** chromiumoxide serves it from cached frame state without contacting Chromium, so it remains `Ok` after session death (for example, OS suspension during a long idle). This false positive strands the next real command on a ~30s CDP timeout.
 - **Do not rely on `Browser::try_wait()`.** On macOS, the process can linger after its last window closes.
@@ -72,20 +97,27 @@ Before reuse, `get_page()` calls `is_page_alive()`, which performs a real JS-con
 
 On an instance's first `get_page()`:
 
-1. Read `phone`, `portal_url`, and `portal_credential` from the `account` key in `store.json`. If any is missing, fail before spending Chromium startup.
-2. Launch Chromium, headed or headless, and enable stealth mode.
-3. Set a Basic-auth `Authorization` header from `portal_credential` (the admin site's HTTP basic gate).
-4. Navigate to `portal_url`, type the phone into the login input, and press Enter.
-5. Poll with `wait_for_url` until the current URL starts with `<portal_url>/member.php`, confirming login.
+1. Read `phone`, `portal_url`, and `portal_credential` from the `account` key in `store.json` through `PortalAccountConfig::from_store_value` ([src-tauri/src/account.rs](src-tauri/src/account.rs)). All three are validated together, so if any is missing the launch fails before spending Chromium startup. Holding a `PortalAccountConfig` is proof login can be attempted — keep reading config through it rather than pulling fields out of the store ad hoc.
+2. Launch Chromium, headed or headless.
+3. Run `PortalLogin::execute` ([src-tauri/src/login.rs](src-tauri/src/login.rs)), which drives the `LoginPortal` boundary in a fixed order: enable stealth mode and set a Basic-auth `Authorization` header from `portal_credential` (the admin site's HTTP basic gate) → navigate to `portal_url` → fill and submit the login input with the phone → poll `wait_for_url` until the current URL reaches `<portal_url>/member.php`, confirming login (`LOGIN_TIMEOUT`, 5s).
 
-`wait_for_url` uses a prefix match, so redirect-added query parameters or a trailing slash count. It succeeds immediately when the page already has the target URL.
+The sequence is policy and lives in `PortalLogin`; `ChromiumLoginPortal` in `lib.rs` is the only real `LoginPortal`. Both the persistent sessions (stored values) and `verify_portal_login` (candidate values) go through it, so login cannot drift between them. Only a *timeout* gets the "Wrong phone number, portal URL, or portal credential" explanation appended — CDP and navigation failures propagate unchanged.
+
+`login_script` builds the fill-and-submit JS. Both the selector and the phone go through `serde_json::to_string`; see the escaping rule under Conventions.
+
+`wait_for_url` matches the expected URL exactly, or extended at a `?`, `#`, or `/` boundary — so a redirect that appends query parameters, a fragment, or a trailing slash counts as arrival, while a differently-named sibling route (`/member.php-old`) does not. It succeeds immediately when the page already has the target URL. The rule lives in `UrlExpectation::matches` ([src-tauri/src/navigation.rs](src-tauri/src/navigation.rs)) and is shared by login and post-submit confirmation.
 
 ### Lifecycle and cleanup
 
 **Terminate all browser instances on app close.**
 
-- `run()` handles `RunEvent::Exit` by calling `.close()` on both managed states. It also kills an in-flight transient `verify_portal_login` browser, parked in `VerifyBrowserState` for this purpose.
-- `close()` attempts graceful shutdown: close page → close browser → `wait()`. It has a 3s timeout, then falls back to `browser.kill()`. If the user already closed the window, the connection is gone; graceful close cannot finish and `wait()` would otherwise block forever.
+Both teardown paths live in [src-tauri/src/lifecycle.rs](src-tauri/src/lifecycle.rs), generic over the session hosts so their ordering and completeness are testable with fakes:
+
+- `close_persistent_sessions(headless, headed, projects)` backs the `close_browsers` command — both sessions **and** the project cache, since a surviving cache would show the previous member's project list.
+- `shutdown(headless, headed, verify)` backs `RunEvent::Exit`. It deliberately leaves the project cache alone (the process is ending) and *kills* the verification browser rather than closing it. **Add any new browser instance or long-lived resource here.**
+
+- `run()` handles `RunEvent::Exit` by calling `lifecycle::shutdown`, which closes both managed states and then kills an in-flight `verify_portal_login` browser.
+- `BrowserSession::close()` attempts graceful shutdown through the host: close page → close browser → `wait()`. The session bounds it with `GRACEFUL_CLOSE_TIMEOUT` (3s), then falls back to `kill()`. If the user already closed the window, the connection is gone; graceful close cannot finish and `wait()` would otherwise block forever. Repeated closes and closing an empty session are both no-ops.
 - Do **not** delete user-data dirs on close. The fixed app-cache paths are bounded to three and wiped on next launch, also reclaiming force-quit leftovers.
 - The `close_browsers` command closes **both** instances. The frontend calls it:
   - after an account change, forcing login with the new phone; otherwise a reused headed session could submit as the previous member;
@@ -104,23 +136,40 @@ Breaking either backend safeguard restores the flash or makes the app look dead.
 
 ### Tauri commands: frontend ↔ backend
 
-Define these in [src-tauri/src/lib.rs](src-tauri/src/lib.rs) and register them in `invoke_handler`:
+Define these in [src-tauri/src/lib.rs](src-tauri/src/lib.rs) and register them in `invoke_handler`. [command_registry.rs](src-tauri/src/command_registry.rs) parses the real `generate_handler!` list and the frontend's `invoke("…")` call sites and fails if either side names something the other doesn't — renaming one half is otherwise a runtime-only "command not found".
 
 - **`get_task_parameters() -> TaskParameters`:** Headless scrape of form `<select>` options. Returns `{ dates, leaves, projects }`, each `Vec<SelectOption {label, value}>`.
+  - Order lives in `TaskParametersScrape::run` ([src-tauri/src/task_parameters.rs](src-tauri/src/task_parameters.rs)): open `task.php` → dates → leaves → projects → back to `member.php`. `ChromiumTaskFormSource` in `lib.rs` is the only real `TaskFormSource` and owns the selectors.
+  - **Dates and leaves are re-read every call; only projects are cached.** The portal's selectable days move as its reporting window advances, so caching them would hand the user a stale date list.
+  - Returning to `member.php` is deliberate — the next command, and the headed window if the user looks at it, should start from the portal's home rather than a half-filled form. A scrape failure skips that return and leaves the browser on the form.
 - **`submit_task(date, entries)`:** Headed; navigates the form and sets the date select.
   - `entries` contains up to 3 `{ project, summary }` row pairs built by `DateCard` from `project_map`, largest bucket first.
   - Row *n* sets `task_project_id{n}` and fills `task_comment{n}`.
   - A `null` row-1 project falls back to `default_project`, read from the `preferences` key in `store.json`.
   - Every row's project options are filtered to `project_list` + `default_project` + entry projects.
-  - **Never clicks submit; the user does.**
-- **`close_browsers()`:** Tears down both instances. Called after account save to remove the old login and by the ≥1h-away reset in `use-reset-when-away.ts`.
-- **`verify_portal_login(portal_url, portal_credential, phone)`:** Logs into the portal with a throwaway headless browser and its own `profiles/verify` dir. Uses the passed *candidate* values and **never** reads `store.json`. The Account form calls it before saving. Kill the browser after the check, pass or fail.
+  - **More than 3 entries is an error, not a truncation.** The form has 3 row pairs and `buildSubmission` already merges overflow into row 3, so a longer list means a caller bug; `SubmissionPlan::build` rejects it rather than silently shipping a report missing part of the day's work.
+  - **Clicks submit only when `auto_submit` is on**; otherwise the user does. See the submission workflow below.
+- **`close_browsers()`:** Tears down both instances and clears the cached project options. Called after account save to remove the old login and by the ≥1h-away reset in `use-reset-when-away.ts`.
+- **`verify_portal_login(portal_url, portal_credential, phone)`:** Logs into the portal with a throwaway headless browser and its own `profiles/verify` dir. Uses the passed *candidate* values and **never** reads `store.json`; they go through `PortalAccountConfig::from_candidates`, which shares validation and trailing-slash normalization with the stored path so a value cannot verify one way and behave another once saved. The Account form calls it before saving. `VerifySession` ([src-tauri/src/login.rs](src-tauri/src/login.rs)) kills the browser after the check, pass or fail.
+  - It holds **two** locks. `running` serializes checks, which share one profile dir. `parked` holds the in-flight browser for the `Exit` handler. They must stay separate: with one lock, exit would block waiting for the very check it is trying to abort. Login runs on the `Page`, which is independent of the parked `Browser`.
 
 Keep portal selectors synchronized with portal markup:
 
 - `select#task_date`
 - `select#task_leave`
 - Three project/comment pairs: `select#task_project_id1..3` / `textarea#task_comment1..3` (`lib.rs` prefix constants + row number)
+
+### Submission workflow
+
+`submit_task` splits into three seams so the rules are testable without Chromium ([src-tauri/src/submission.rs](src-tauri/src/submission.rs)):
+
+- `SubmissionPlan::build(entries, preferences)` — the deterministic row/project rules above. Fallible: >3 rows is rejected.
+- `SubmissionAutomation::from_preferences` — reads `auto_submit`/`auto_close`, both defaulting to `false` when the key or field is absent.
+- `SubmissionWorkflow::execute(plan, automation, date, portal)` — prepare, then conditionally submit and close, against the `SubmissionPortal` trait. `ChromiumSubmissionPortal` in `lib.rs` is the only real implementation.
+
+Order is load-bearing: prepare always runs; `auto_close` can never close anything unless `auto_submit` also submitted; and closing waits for positive confirmation first.
+
+**Post-submit confirmation is `<portal_url>/task_report.php`**, not `/member.php`. The portal redirects there once a task is saved, so it is the signal `auto_close` waits on (10s bound). `/member.php` is the *login* confirmation only — do not conflate the two. If confirmation times out the browser stays open and the command errors, so the user never loses an unconfirmed submission.
 
 ### Frontend
 
@@ -166,9 +215,9 @@ favorites:   { text, project_key }[]
 
 - **Account:**
   - `phone` authenticates to the admin portal.
-  - `portal_url` is the portal base URL without a trailing slash.
-  - `portal_credential` is `user:pass` for the portal's HTTP basic gate.
-  - Rust reads all three portal fields.
+  - `portal_url` is the portal base URL without a trailing slash. Rust re-trims defensively through `normalize_portal_url`, which also normalizes pre-save candidates in `verify_portal_login` so a value can't verify one way and behave another once saved. **Normalization runs before the non-empty check** — a URL of nothing but slashes is non-empty yet trims away to nothing, and an empty base URL sends login to `""` and then times out blaming the phone number.
+  - `portal_credential` is `user:pass` for the portal's HTTP basic gate. Passed through **verbatim** — never trimmed or split on `:`, since any byte may be part of the password.
+  - Rust reads all three portal fields, together, via `PortalAccountConfig`. All are required and validated up front; empty strings and wrongly typed values count as unconfigured, and the field order in `from_store_value` decides which message a half-configured store reports.
   - `email` + `api_token` authenticate to Jira.
 - **Preferences:**
   - Rust reads `default_project`/`project_list` and `auto_submit`/`auto_close` (both default `false`) in `submit_task`.
@@ -241,7 +290,8 @@ Additional release rules:
   - For nested updates, use `mutative`'s `create(obj, draft => { ... })` to derive a structurally shared copy without touching cache; see the `[Created]` relabel in `date-card-helpers.ts`.
   - `mutative` does **not** auto-freeze output. Accidental mutation does not throw; it silently corrupts cache.
 - **`relaunch()` races `tauri-plugin-single-instance`.** Restart starts the new process before the old exits. If its single-instance check reaches the shutting-down old process, it defers to that dying instance and the app quits. `useResetWhenAway` uses `relaunch()` only as a last resort when the `close_browsers` invoke rejects—an almost unreachable trigger. Verify this combination before using it elsewhere.
-- **`submit_task` interpolates JS strings.** Summaries and projects pass safely through `serde_json::to_string`; `date` is interpolated raw into `evaluate(...)`. It comes from portal option values; keep that trust boundary and never pass untrusted strings there.
+- **Every value interpolated into `evaluate(...)` goes through `serde_json::to_string`.** That covers summaries, projects, dates, the login phone, and the selectors themselves (several contain single quotes, so hand-wrapping them in `'...'` breaks the JS). No exceptions: the phone is user-supplied and validated only as non-empty, so a raw apostrophe would break the script and a crafted value would inject into the portal page. When adding a new `evaluate` call, escape the literal even if the value looks trusted — Rust enforces no phone or date format, and the trust boundary should not be load-bearing.
+- **Command errors are plain strings.** `AppError` ([src-tauri/src/error.rs](src-tauri/src/error.rs)) serializes as its `Display` text because the frontend renders `String(reason)` directly — serializing as a struct would put `[object Object]` in the Account dialog. Keep the wrapping variants `#[error(transparent)]` so `?` never replaces a specific cause with a vaguer one; add context by prefixing the original message, as login and submit confirmation do.
 - **Hardcoded values:** `lib.rs` contains only login/form selectors. They are portal-specific; update them when portal markup changes. Portal base URL and Basic-auth credentials are **not** compiled in: users supply `account.portal_url` / `account.portal_credential` through the Account form in `store.json`; Rust reads them per use with `portal_url()` / `portal_credential()`.
 - **Formatting:** oxfmt enforces sorted Tailwind classes (`sortTailwindcss`, reading the v4 stylesheet `src/App.css`) and sorted imports (`sortImports`); the pre-commit hook auto-fixes staged files. Linting needs `--type-aware` (wired into `pnpm lint`) or `typescript/no-floating-promises` silently stops running.
 - **Never switch git branches without asking.** Do not `git checkout`/`git switch` to another branch, create a new branch, or pull `main` mid-session unless the user has explicitly approved it first — even when a merged PR makes moving to a fresh branch seem like the obvious next step. The user coordinates branch state outside the session; unannounced switches cause divergence and merge conflicts.
@@ -253,4 +303,3 @@ The project knowledge graph at `graphify-out/` contains god nodes, community str
 - For codebase questions, first run `graphify query "<question>"` when `graphify-out/graph.json` exists. Use `graphify path "<A>" "<B>"` for relationships and `graphify explain "<concept>"` for focused concepts. These return scoped subgraphs, usually much smaller than `GRAPH_REPORT.md` or raw grep output.
 - If `graphify-out/wiki/index.md` exists, use it for broad navigation instead of raw source browsing.
 - Read `graphify-out/GRAPH_REPORT.md` only for broad architecture review or when query/path/explain lacks enough context.
-- After modifying code, run `graphify update .` to keep the graph current (AST-only, no API cost).
