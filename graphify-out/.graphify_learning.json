@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-25T12:45:06.611355+00:00",
+  "generated_at": "2026-07-25T13:03:31.509677+00:00",
   "nodes": {
     "claude_graphify_workflow": {
       "code_fingerprint": "e7d85a43262413f1cd6e241c936658f1ac35f15a6f338c0b050a410f9c4d077d",
@@ -12,7 +12,7 @@
           "q": "Update the README.md file about Graphify usage."
         }
       ],
-      "score": 0.893961677,
+      "score": 0.893697577,
       "source_file": "CLAUDE.md",
       "status": "tentative",
       "uses": 1

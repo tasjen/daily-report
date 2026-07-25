@@ -110,8 +110,8 @@
     "semantic_hash": "d3f27259c49f3bfbd4499e4600ec756a"
   },
   "src/components/date-card.tsx": {
-    "mtime": 1784982386.8230498,
-    "ast_hash": "b8ab1df8475c85c7906e118bd7938413",
+    "mtime": 1784984553.1340733,
+    "ast_hash": "3a43b0cd45360e15953022a5da682dea",
     "semantic_hash": ""
   },
   "src/components/date-list.tsx": {
@@ -1020,13 +1020,13 @@
     "semantic_hash": ""
   },
   "src/lib/date-card-helpers.test.ts": {
-    "mtime": 1784905044.3180115,
-    "ast_hash": "8b152bd27c31e85e046fb59e3f982d66",
-    "semantic_hash": "8b152bd27c31e85e046fb59e3f982d66"
+    "mtime": 1784984157.7031736,
+    "ast_hash": "52da4d20074f384eb91ce9aec49bc734",
+    "semantic_hash": ""
   },
   "src/lib/date-card-helpers.ts": {
-    "mtime": 1784982323.040914,
-    "ast_hash": "ec4a580cd6f29332869901e94eaf0363",
+    "mtime": 1784984118.970047,
+    "ast_hash": "81108a0c2b75f2f81aa8870cb21a1b70",
     "semantic_hash": ""
   },
   "src/lib/store.test.ts": {
@@ -1177,6 +1177,41 @@
   "src-tauri/src/fixtures/task_report.html": {
     "mtime": 1784968546.3118408,
     "ast_hash": "38ce697b6d619572f8a109d1238bbaa7",
+    "semantic_hash": ""
+  },
+  "src/lib/use-task-selection.test.ts": {
+    "mtime": 1784984335.1789954,
+    "ast_hash": "f9557553121f368c642522b53b516a1a",
+    "semantic_hash": ""
+  },
+  "src/lib/use-task-selection.ts": {
+    "mtime": 1784984275.3300238,
+    "ast_hash": "2de28945e510b831ba60fca6a7cee351",
+    "semantic_hash": ""
+  },
+  "src/lib/use-date-card-tasks.ts": {
+    "mtime": 1784984386.4044619,
+    "ast_hash": "8ac5ad11923302ff58e4ec22f1a11eb3",
+    "semantic_hash": ""
+  },
+  "src/components/date-card-header.tsx": {
+    "mtime": 1784984498.1849089,
+    "ast_hash": "44224f1ce0ab9c4e2539c2b9723427f4",
+    "semantic_hash": ""
+  },
+  "src/components/date-card-summary.tsx": {
+    "mtime": 1784984582.832894,
+    "ast_hash": "176ad2e1734dad4f3862139631f3480e",
+    "semantic_hash": ""
+  },
+  "src/components/task-select-grid.tsx": {
+    "mtime": 1784984507.5226965,
+    "ast_hash": "d9cf1c839735cc04c86a5408af71be3d",
+    "semantic_hash": ""
+  },
+  "src/lib/use-copy-to-clipboard.ts": {
+    "mtime": 1784984474.8127046,
+    "ast_hash": "9ab6c76295d74e03450ed61ac915d0fb",
     "semantic_hash": ""
   }
 }
