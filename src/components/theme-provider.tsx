@@ -9,12 +9,16 @@ import {
 
 import { toastError } from "@/lib/utils";
 
-type Theme = "dark" | "light" | "system";
+type Theme = "dark" | "light";
 
 type ThemeProviderProps = PropsWithChildren<{
-  defaultTheme?: Theme;
   storageKey?: string;
 }>;
+
+// Read once at init rather than kept live: the toggle stores an explicit
+// "dark"/"light", so the OS preference only ever decides the first launch.
+const systemTheme = (): Theme =>
+  window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 
 type ThemeProviderState = {
   theme: Theme;
@@ -27,34 +31,22 @@ const ThemeProviderContext = createContext<ThemeProviderState | undefined>(
 
 export function ThemeProvider({
   children,
-  defaultTheme = "system",
   storageKey = "vite-ui-theme",
   ...props
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(() => {
     const stored = localStorage.getItem(storageKey);
-    return stored === "dark" || stored === "light" || stored === "system"
-      ? stored
-      : defaultTheme;
+    return stored === "dark" || stored === "light" ? stored : systemTheme();
   });
 
   useEffect(() => {
     const root = window.document.documentElement;
 
     root.classList.remove("light", "dark");
-
-    if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches
-        ? "dark"
-        : "light";
-
-      root.classList.add(systemTheme);
-      return;
-    }
+    root.classList.add(theme);
+    root.style.colorScheme = theme;
 
     getCurrentWindow().setTheme(theme).catch(toastError);
-    root.classList.add(theme);
   }, [theme]);
 
   const value = {

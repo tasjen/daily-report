@@ -260,8 +260,8 @@
     "semantic_hash": ""
   },
   "src/components/theme-provider.tsx": {
-    "mtime": 1785018825.234522,
-    "ast_hash": "968ec70a90bec4f01aa560afcc65e64a",
+    "mtime": 1785023430.553816,
+    "ast_hash": "ce89fc895e7594634e126027f667cf20",
     "semantic_hash": ""
   },
   "src/components/theme-toggle.tsx": {
