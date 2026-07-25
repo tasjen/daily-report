@@ -14,6 +14,7 @@ export default function AutofillSummaryToggle() {
   return (
     <Label className="flex items-center gap-2 text-sm font-normal">
       <Switch
+        data-testid="autofill-summary-toggle"
         checked={preferences.autofill_summary}
         onCheckedChange={(checked) =>
           savePreferences.mutate({

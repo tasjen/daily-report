@@ -21,6 +21,7 @@ export default function AutoSubmitToggle() {
     <div className="flex items-center gap-1">
       <Label className="flex items-center gap-2 text-sm font-normal">
         <Switch
+          data-testid="auto-submit-toggle"
           checked={preferences.auto_submit}
           disabled={!preferences.autofill_summary}
           onCheckedChange={(checked) =>

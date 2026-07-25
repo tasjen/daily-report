@@ -21,6 +21,7 @@ export default function AutoCloseToggle() {
     <div className="flex items-center gap-1">
       <Label className="flex items-center gap-2 text-sm font-normal">
         <Switch
+          data-testid="auto-close-toggle"
           checked={preferences.auto_close}
           disabled={!preferences.auto_submit}
           onCheckedChange={(checked) =>

@@ -228,6 +228,11 @@ favorites:   { text, project_key }[]
   - Frontend-only `default_task_groups` controls initially checked date-card groups; default: `["status"]`.
   - Frontend-only `autofill_summary` controls whether submit sends the built summary or an empty string; default: `true`. When `true`, Jira fetching also disables submit.
   - Frontend-only `project_map` maps project key → portal project option id; default: `{}`; at most 3 distinct values. `DateCard` uses it to split submission into per-project rows.
+  - **`autofill_summary` → `auto_submit` → `auto_close` is a cascade, not just a disabled chain.** A parent turning off **saves its children as `false`**, it does not merely gray them out — see [autofill-summary-toggle.tsx](src/components/autofill-summary-toggle.tsx) and [auto-submit-toggle.tsx](src/components/auto-submit-toggle.tsx). Two things depend on it:
+    - Re-enabling a parent leaves its children off until explicitly re-armed, so the app never auto-submits on the strength of a preference the user disarmed long ago.
+    - Stored values stay internally consistent (`auto_close` implies `auto_submit` implies `autofill_summary`), which is why `SubmissionAutomation::from_preferences` reads both flags raw instead of re-deriving the chain. The Rust workflow ordering is the second line of defense, not the first.
+
+    Pinned by [preference-toggles.test.tsx](src/components/preference-toggles.test.tsx). Any new dependent toggle must disarm on its parent's save, not just render disabled.
 - **Favorites:** Frontend-only, unlike `preferences`; Rust never reads it. Favorites are insertion-ordered free-form tasks whose `text` is identity. Optional `project_key` accepts a Jira key or custom label; null means none. It routes through `project_map` like a real issue. Pre-`project_key` favorites are plain strings; `favoritesOptions` normalizes them to objects on read.
 - **Synchronization:** Frontend `LazyStore` and backend `app.store("store.json")` read the **same file**. Keep field names synchronized between [src/lib/store.ts](src/lib/store.ts) and Rust. For every new `Preferences` field, add a `DEFAULT_PREFERENCES` default; `preferencesOptions`' per-field merge upgrades older stores.
 
