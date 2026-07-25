@@ -109,13 +109,8 @@
     "ast_hash": "d3f27259c49f3bfbd4499e4600ec756a",
     "semantic_hash": "d3f27259c49f3bfbd4499e4600ec756a"
   },
-  "src/components/date-card.tsx": {
-    "mtime": 1784981135.9349763,
-    "ast_hash": "b0afdaf189f099907ba46c9424e2b3cb",
-    "semantic_hash": ""
-  },
   "src/components/date-list.tsx": {
-    "mtime": 1784972985.4593685,
+    "mtime": 1784984845.9231699,
     "ast_hash": "37cc8726329f850d1435bae32efaf212",
     "semantic_hash": ""
   },
@@ -260,8 +255,8 @@
     "semantic_hash": ""
   },
   "src/components/task-select.tsx": {
-    "mtime": 1784971729.9325397,
-    "ast_hash": "a2f446ddc56886bf47491941c0456671",
+    "mtime": 1784982660.58808,
+    "ast_hash": "23997b958b313d50d49c0cf179d5ffcf",
     "semantic_hash": ""
   },
   "src/components/theme-provider.tsx": {
@@ -290,9 +285,9 @@
     "semantic_hash": "a9a2975e7787b91bc077b0cc3d93ff29"
   },
   "src/lib/task-groups.ts": {
-    "mtime": 1784898681.4122634,
-    "ast_hash": "e0da27b0f2b1021ac2801463207117ae",
-    "semantic_hash": "e0da27b0f2b1021ac2801463207117ae"
+    "mtime": 1784983228.566359,
+    "ast_hash": "9ba70bfd11bcb6491e711fc1a3d4a545",
+    "semantic_hash": ""
   },
   "src/lib/use-reset-when-away.ts": {
     "mtime": 1784981162.0187466,
@@ -565,13 +560,13 @@
     "semantic_hash": ""
   },
   "AGENTS.md": {
-    "mtime": 1784968546.2959802,
-    "ast_hash": "2c3293487d5dc6b136f015b059eecec2",
+    "mtime": 1784985123.7625642,
+    "ast_hash": "38b15bcdd605005e9b300f5d504396c1",
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1784968546.2959802,
-    "ast_hash": "2c3293487d5dc6b136f015b059eecec2",
+    "mtime": 1784985123.7625642,
+    "ast_hash": "38b15bcdd605005e9b300f5d504396c1",
     "semantic_hash": ""
   },
   "README.md": {
@@ -1020,14 +1015,14 @@
     "semantic_hash": ""
   },
   "src/lib/date-card-helpers.test.ts": {
-    "mtime": 1784905044.3180115,
-    "ast_hash": "8b152bd27c31e85e046fb59e3f982d66",
-    "semantic_hash": "8b152bd27c31e85e046fb59e3f982d66"
+    "mtime": 1784984157.7031736,
+    "ast_hash": "52da4d20074f384eb91ce9aec49bc734",
+    "semantic_hash": ""
   },
   "src/lib/date-card-helpers.ts": {
-    "mtime": 1784905044.3184905,
-    "ast_hash": "8e905558f115922da30dcdf2ccda0aad",
-    "semantic_hash": "8e905558f115922da30dcdf2ccda0aad"
+    "mtime": 1784984118.970047,
+    "ast_hash": "81108a0c2b75f2f81aa8870cb21a1b70",
+    "semantic_hash": ""
   },
   "src/lib/store.test.ts": {
     "mtime": 1784903904.2982662,
@@ -1070,18 +1065,13 @@
     "semantic_hash": ""
   },
   "src/test/render.tsx": {
-    "mtime": 1784970984.4185083,
-    "ast_hash": "c177158ec9a1d51bc56e9b674832bf57",
-    "semantic_hash": "c177158ec9a1d51bc56e9b674832bf57"
+    "mtime": 1784982503.5960946,
+    "ast_hash": "22f277b9a86ce683b68b93fe930c98b4",
+    "semantic_hash": ""
   },
   "src/components/account-form.test.tsx": {
     "mtime": 1784971729.9267447,
     "ast_hash": "1ca317f329ca13ee2d0eae002c7606f7",
-    "semantic_hash": ""
-  },
-  "src/components/date-card.test.tsx": {
-    "mtime": 1784971729.9281135,
-    "ast_hash": "33b71634f1560cffb6a6bcfd38248390",
     "semantic_hash": ""
   },
   "src/lib/use-reset-when-away.test.ts": {
@@ -1177,6 +1167,51 @@
   "src-tauri/src/fixtures/task_report.html": {
     "mtime": 1784968546.3118408,
     "ast_hash": "38ce697b6d619572f8a109d1238bbaa7",
+    "semantic_hash": ""
+  },
+  "src/lib/use-task-selection.test.ts": {
+    "mtime": 1784984335.1789954,
+    "ast_hash": "f9557553121f368c642522b53b516a1a",
+    "semantic_hash": ""
+  },
+  "src/lib/use-task-selection.ts": {
+    "mtime": 1784984275.3300238,
+    "ast_hash": "2de28945e510b831ba60fca6a7cee351",
+    "semantic_hash": ""
+  },
+  "src/lib/use-date-card-tasks.ts": {
+    "mtime": 1784984386.4044619,
+    "ast_hash": "8ac5ad11923302ff58e4ec22f1a11eb3",
+    "semantic_hash": ""
+  },
+  "src/lib/use-copy-to-clipboard.ts": {
+    "mtime": 1784984474.8127046,
+    "ast_hash": "9ab6c76295d74e03450ed61ac915d0fb",
+    "semantic_hash": ""
+  },
+  "src/components/date-card/header.tsx": {
+    "mtime": 1784984498.1849089,
+    "ast_hash": "44224f1ce0ab9c4e2539c2b9723427f4",
+    "semantic_hash": ""
+  },
+  "src/components/date-card/index.test.tsx": {
+    "mtime": 1784984845.9373825,
+    "ast_hash": "64acd6ea1d2d82014619968395b07fa5",
+    "semantic_hash": ""
+  },
+  "src/components/date-card/index.tsx": {
+    "mtime": 1784985136.5448232,
+    "ast_hash": "f8f319d1456c9c39a4799309e0ee3741",
+    "semantic_hash": ""
+  },
+  "src/components/date-card/summary.tsx": {
+    "mtime": 1784984582.832894,
+    "ast_hash": "176ad2e1734dad4f3862139631f3480e",
+    "semantic_hash": ""
+  },
+  "src/components/date-card/task-select-grid.tsx": {
+    "mtime": 1784984507.5226965,
+    "ast_hash": "d9cf1c839735cc04c86a5408af71be3d",
     "semantic_hash": ""
   }
 }

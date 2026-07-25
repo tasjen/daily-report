@@ -1,5 +1,5 @@
 import { Trans, useLingui } from "@lingui/react/macro";
-import { SearchIcon } from "lucide-react";
+import { InfoIcon, SearchIcon } from "lucide-react";
 
 import {
   Combobox,
@@ -11,6 +11,11 @@ import {
   useComboboxAnchor,
 } from "@/components/shared/combobox";
 import { Label } from "@/components/shared/label";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/shared/tooltip";
 import type { SelectOption } from "@/type";
 
 type Props = {
@@ -18,6 +23,14 @@ type Props = {
   value: string[];
   onValueChange: (keys: string[]) => void;
   label?: string;
+  // Plain-English gloss of how this group's items are derived, shown in an
+  // info tooltip beside the label. Needs `label` to render — the tooltip
+  // trigger sits inside it.
+  description?: string;
+  // The literal JQL the group's issues came from, shown under `description` so
+  // the tooltip states what was actually asked of Jira. Omitted by groups that
+  // aren't Jira-backed (favorites).
+  jql?: string;
   className?: string;
   // render item labels as-is instead of splitting on ": " into
   // "KEY: description" columns (used by the favorites group, whose labels
@@ -34,6 +47,8 @@ export default function TaskSelect({
   value,
   onValueChange,
   label,
+  description,
+  jql,
   className,
   plainLabels,
   testId,
@@ -59,6 +74,30 @@ export default function TaskSelect({
               >
                 <Trans>(all selected)</Trans>
               </span>
+            )}
+            {description && (
+              <Tooltip>
+                <TooltipTrigger
+                  render={
+                    <span
+                      className="ml-1"
+                      data-testid={testId && `${testId}-info`}
+                    >
+                      <InfoIcon size={16} className="inline" />
+                    </span>
+                  }
+                />
+                <TooltipContent className="max-w-sm flex-col items-start gap-1.5">
+                  <span>{description}</span>
+                  {jql && (
+                    // The label is `text-nowrap`, but the portaled tooltip is
+                    // outside it — a long JQL still needs to wrap itself.
+                    <code className="font-mono break-words whitespace-pre-wrap text-background/70">
+                      {jql}
+                    </code>
+                  )}
+                </TooltipContent>
+              </Tooltip>
             )}
           </Label>
         )}
@@ -91,7 +130,7 @@ export default function TaskSelect({
             const splitStr = ": ";
             const splitIndex = option.label.indexOf(splitStr);
             const key = option.label.slice(0, splitIndex);
-            const description = option.label.slice(
+            const itemDescription = option.label.slice(
               splitIndex + splitStr.length,
             );
             return (
@@ -101,7 +140,7 @@ export default function TaskSelect({
                 className="flex items-start gap-2"
               >
                 <span className="flex-none">{key}</span>
-                <span>{description}</span>
+                <span>{itemDescription}</span>
               </ComboboxItem>
             );
           }}

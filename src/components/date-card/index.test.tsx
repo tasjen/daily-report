@@ -1,3 +1,4 @@
+import { i18n } from "@lingui/core";
 import { screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { expect, it, vi } from "vitest";
@@ -5,6 +6,7 @@ import { expect, it, vi } from "vitest";
 import DateCard from "@/components/date-card";
 import type { SubmitTaskEntry } from "@/lib/mutations";
 import type { Account, Favorite, Preferences } from "@/lib/store";
+import { TASK_GROUPS } from "@/lib/task-groups";
 import { renderWithProviders } from "@/test/render";
 import { mockTauri } from "@/test/tauri";
 import type { JiraIssue } from "@/type";
@@ -145,6 +147,38 @@ it("renders a group per non-empty source and drops empty groups", async () => {
   expect(card().getByTestId("task-group-sprint")).toBeInTheDocument();
   // no favorites configured, so the favorites group is dropped
   expect(card().queryByTestId("task-group-favorite")).not.toBeInTheDocument();
+});
+
+it("explains each group in a tooltip, with the JQL it actually ran", async () => {
+  setup({ favorites: [{ text: "Standup", project_key: null }] });
+  await setJira({
+    status: STATUS_ISSUES,
+    created: CREATED_ISSUES,
+    sprint: SPRINT_ISSUES,
+  });
+  await renderCard();
+
+  // The JQL is data, not copy, so it is asserted verbatim — this is what
+  // catches a tooltip drifting from the query the group was built from. The
+  // tooltip is portaled outside the card, hence the unscoped screen queries
+  // (and base-ui's popup carries no role to query it by).
+  await userEvent.hover(await card().findByTestId("task-group-status-info"));
+  expect(
+    await screen.findByText(
+      `status CHANGED BY currentUser() DURING ("${DATE}", "2026-07-21")`,
+    ),
+  ).toBeInTheDocument();
+  await userEvent.unhover(card().getByTestId("task-group-status-info"));
+
+  // Favorites aren't Jira-backed, so their tooltip carries no JQL. The
+  // description is read back through TASK_GROUPS rather than hardcoded, so it
+  // stays a copy-independent signal that the tooltip opened at all.
+  await userEvent.hover(card().getByTestId("task-group-favorite-info"));
+  const favoriteGroup = TASK_GROUPS.find((group) => group.type === "favorite")!;
+  expect(
+    await screen.findByText(i18n._(favoriteGroup.description)),
+  ).toBeInTheDocument();
+  expect(screen.queryByText(/currentUser\(\)/)).not.toBeInTheDocument();
 });
 
 it("default-checks only the status group and submits its issues", async () => {
