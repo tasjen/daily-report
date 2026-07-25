@@ -28,7 +28,7 @@ import {
 } from "@/lib/date-card-helpers";
 import { useSubmitTaskMutation } from "@/lib/mutations";
 import { useFavorites, useJiraTasksQuery, usePreferences } from "@/lib/queries";
-import { DEFAULT_PREFERENCES } from "@/lib/store";
+import { DEFAULT_PREFERENCES, type TaskGroupType } from "@/lib/store";
 import { cn, toastError } from "@/lib/utils";
 
 type Props = {
@@ -40,6 +40,15 @@ export default function DateCard({ date }: Props) {
   const jqlStatusUpdatedByMe = `status CHANGED BY currentUser() DURING ("${date}", "${dateAfter}")`;
   const jqlCreatedByMe = `creator = currentUser() AND created >= "${date}" AND created < "${dateAfter}"`;
   const jqlMyActiveSprintNotDone = `assignee = currentUser() AND created < "${dateAfter}" AND sprint in openSprints() AND statusCategory != Done`;
+
+  // Each group's TaskSelect tooltip shows the very string its query ran, so
+  // what the user is told can't drift from what was asked of Jira. Favorites
+  // are local, so they have no entry.
+  const jqlByGroup: Partial<Record<TaskGroupType, string>> = {
+    status: jqlStatusUpdatedByMe,
+    created: jqlCreatedByMe,
+    sprint: jqlMyActiveSprintNotDone,
+  };
 
   // Each set is queried separately so its issues can be grouped by source and
   // defaulted per the user's `default_task_groups` preference.
@@ -94,6 +103,8 @@ export default function DateCard({ date }: Props) {
   const optionGroups = issueGroups.map((group) => ({
     type: group.id,
     label: i18n._(group.label),
+    description: i18n._(group.description),
+    jql: jqlByGroup[group.id],
     keys: group.issues.map((issue) => issue.key),
     // Favorites show their text alone, in the order they were added;
     // Jira issues show "KEY: summary" sorted by key.
@@ -237,6 +248,8 @@ export default function DateCard({ date }: Props) {
               className="min-w-0 flex-1"
               testId={`task-group-${group.type}`}
               label={group.label}
+              description={group.description}
+              jql={group.jql}
               items={group.items}
               plainLabels={group.type === "favorite"}
               value={group.keys.filter((key) => selectedKeySet.has(key))}

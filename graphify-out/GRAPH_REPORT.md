@@ -1,16 +1,16 @@
 # Graph Report - daily-report  (2026-07-25)
 
 ## Corpus Check
-- 160 files · ~124,974 words
+- 160 files · ~125,742 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1169 nodes · 1422 edges · 210 communities (77 shown, 133 thin omitted)
-- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 41 edges (avg confidence: 0.85)
+- 1169 nodes · 1423 edges · 208 communities (78 shown, 130 thin omitted)
+- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 42 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `72701850`
+- Built from commit: `f3f7c188`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -41,13 +41,11 @@
 - Tauri Capabilities Permissions
 - Knip Config
 - Field Component
-- Date-Card Submission Helpers
 - Claude Settings & Plugins
 - Version Bump Script
 - icon
 - InputGroup
 - lucide-react
-- Theme
 - Rust CI Job
 - devDependencies
 - Releasing (README)
@@ -57,7 +55,6 @@
 - TextField
 - Fluency Strength
 - Graphify Codebase Navigation Workflow
-- Props
 - Button
 - Props
 - Props
@@ -66,7 +63,6 @@
 - files
 - Sediment
 - @babel/core
-- main.tsx
 - @base-ui/react
 - class-variance-authority
 - clsx
@@ -198,7 +194,6 @@
 - @testing-library/dom
 - @testing-library/jest-dom
 - @types/babel__core
-- account-form.tsx
 
 ## God Nodes (most connected - your core abstractions)
 1. `AppError` - 34 edges
@@ -207,8 +202,8 @@
 4. `scripts` - 18 edges
 5. `compilerOptions` - 16 edges
 6. `BrowserState` - 15 edges
-7. `toastError()` - 13 edges
-8. `rules` - 12 edges
+7. `rules` - 12 edges
+8. `toastError()` - 12 edges
 9. `portal_url()` - 12 edges
 10. `SubmissionPlan` - 12 edges
 
@@ -219,10 +214,10 @@
   README.md → CLAUDE.md
 - `Before-and-after Diagram` --semantically_similar_to--> `Design Comparison`  [INFERRED] [semantically similar]
   .agents/skills/improve-codebase-architecture/HTML-REPORT.md → .agents/skills/codebase-design/DESIGN-IT-TWICE.md
-- `DateCard()` --indirect_call--> `toastError()`  [INFERRED]
-  src/components/date-card.tsx → src/lib/utils.ts
-- `ThemeProvider()` --indirect_call--> `toastError()`  [INFERRED]
-  src/components/theme-provider.tsx → src/lib/utils.ts
+- `Cleanup and Architecture Post-mortem` --conceptually_related_to--> `Codebase Design`  [INFERRED]
+  .agents/skills/diagnosing-bugs/SKILL.md → .agents/skills/codebase-design/SKILL.md
+- `Tracer Bullet Issues` --semantically_similar_to--> `Vertical Slice TDD`  [INFERRED] [semantically similar]
+  .agents/skills/to-issues/SKILL.md → .agents/skills/tdd/SKILL.md
 
 ## Import Cycles
 - 2-file cycle: `src-tauri/src/lib.rs -> src-tauri/src/submission.rs -> src-tauri/src/lib.rs`
@@ -238,7 +233,7 @@
 - **Parallel Portal and Jira Account Verification Flow** — docs_superpowers_specs_2026_07_12_account_verification_design_candidate_portal_verification, docs_superpowers_specs_2026_07_12_account_verification_design_jira_credentials_check, docs_superpowers_specs_2026_07_12_account_verification_design_parallel_account_verification, docs_superpowers_specs_2026_07_12_account_verification_design_verify_account_error, docs_superpowers_specs_2026_07_12_account_verification_design_save_anyway_escape_hatch [EXTRACTED 1.00]
 - **Signed Release and Update Delivery Chain** — docs_superpowers_specs_2026_07_12_cicd_design_tag_driven_release_pipeline, docs_superpowers_specs_2026_07_12_cicd_design_release_version_guard, docs_superpowers_specs_2026_07_12_cicd_design_updater_signing_key, docs_superpowers_specs_2026_07_12_cicd_design_draft_release_publish_gate, docs_superpowers_specs_2026_07_12_cicd_design_in_app_auto_updater [EXTRACTED 1.00]
 
-## Communities (210 total, 133 thin omitted)
+## Communities (208 total, 130 thin omitted)
 
 ### Community 0 - "Rust Backend Browser Automation"
 Cohesion: 0.12
@@ -336,10 +331,6 @@ Nodes (14): core:default, core:window:allow-set-background-color, core:window:al
 Cohesion: 0.15
 Nodes (12): ignoreBinaries, ignoreDependencies, $schema, tags, webdriver-io, config, entry, e2e/*.e2e.ts (+4 more)
 
-### Community 27 - "Date-Card Submission Helpers"
-Cohesion: 0.21
-Nodes (7): Bucket, bucketSize(), buildSubmission(), buildSummary(), bulletLines(), IssueGroup, SubmissionInput
-
 ### Community 28 - "Claude Settings & Plugins"
 Cohesion: 0.18
 Nodes (10): enabledPlugins, andrej-karpathy-skills@karpathy-skills, frontend-design@claude-plugins-official, superpowers@claude-plugins-official, hooks, PreToolUse, permissions, allow (+2 more)
@@ -360,10 +351,6 @@ Nodes (4): InputGroupAddon(), inputGroupAddonVariants, InputGroupButton(), input
 Cohesion: 0.22
 Nodes (9): class-variance-authority, dependencies, class-variance-authority, @tauri-apps/plugin-process, @tauri-apps/plugin-store, zod, @tauri-apps/plugin-process, @tauri-apps/plugin-store (+1 more)
 
-### Community 36 - "Theme"
-Cohesion: 0.29
-Nodes (5): Theme, ThemeProvider(), ThemeProviderContext, ThemeProviderProps, ThemeProviderState
-
 ### Community 38 - "devDependencies"
 Cohesion: 0.22
 Nodes (9): babel-plugin-react-compiler, devDependencies, babel-plugin-react-compiler, @testing-library/react, @types/react, @types/react-dom, @testing-library/react, @types/react (+1 more)
@@ -381,8 +368,8 @@ Cohesion: 0.83
 Nodes (3): capture(), hitl-loop.template.sh script, step()
 
 ### Community 44 - "TextField"
-Cohesion: 0.16
-Nodes (11): ACCOUNT, card(), CREATED_ISSUES, JiraSets, playButton(), setJira(), SPRINT_ISSUES, STATUS_ISSUES (+3 more)
+Cohesion: 0.09
+Nodes (19): ACCOUNT, card(), CREATED_ISSUES, issue(), JiraSets, playButton(), setJira(), SPRINT_ISSUES (+11 more)
 
 ### Community 45 - "Fluency Strength"
 Cohesion: 0.67
@@ -421,8 +408,8 @@ Cohesion: 0.25
 Nodes (8): Domain Docs, Multi-Context Domain Layout, Single-Context Domain Layout, Agent Skills Configuration Block, Domain Docs Layout Decision, Engineering Skills Configuration, Prompt-Driven Setup, Triage Label Vocabulary
 
 ### Community 114 - "LocaleToggle"
-Cohesion: 0.18
-Nodes (9): LocaleToggle(), SubmitTaskEntry, useSaveAccountMutation(), useSaveFavoritesMutation(), useSavePreferencesMutation(), useSubmitTaskMutation(), VerifyAccountError, useResetWhenAway() (+1 more)
+Cohesion: 0.09
+Nodes (18): AccountForm(), normalizePortalUrl(), LocaleToggle(), Theme, ThemeProvider(), ThemeProviderContext, ThemeProviderProps, ThemeProviderState (+10 more)
 
 ### Community 198 - "Interface as Test Surface"
 Cohesion: 0.22
@@ -445,18 +432,20 @@ Cohesion: 0.50
 Nodes (5): Design Comparison, Deletion Test, Depth, Leverage, Locality
 
 ## Knowledge Gaps
-- **429 isolated node(s):** `$schema`, `unicorn`, `typescript`, `oxc`, `correctness` (+424 more)
+- **429 isolated node(s):** `STATUS_ISSUES`, `CREATED_ISSUES`, `SPRINT_ISSUES`, `ACCOUNT`, `JiraSets` (+424 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **133 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **130 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `react` connect `React App Components` to `select.tsx`, `InputGroup`, `Card`, `Theme`, `oxlint Linter Config`, `Props`, `account-form.tsx`, `LocaleToggle`, `Combobox Component`, `Props`, `Dropdown Menu Component`, `main.tsx`, `Dialog`?**
-  _High betweenness centrality (0.069) - this node is a cross-community bridge._
+- **Why does `react` connect `React App Components` to `select.tsx`, `InputGroup`, `Card`, `Theme`, `oxlint Linter Config`, `Props`, `LocaleToggle`, `Combobox Component`, `Props`, `Dropdown Menu Component`, `Date-Card Submission Helpers`, `Dialog`?**
+  _High betweenness centrality (0.095) - this node is a cross-community bridge._
 - **Why does `dependencies` connect `lucide-react` to `@tauri-apps/plugin-opener`, `package.json Scripts`, `Combobox Component`, `class-variance-authority`, `clsx`, `@formkit/auto-animate`, `@lingui/core`, `@lingui/react`, `mutative`, `next-themes`, `lucide-react`, `react-dom`, `react-error-boundary`, `shadcn`, `sonner`, `tailwind-merge`, `tailwindcss`, `@tailwindcss/vite`, `@tanstack/react-form`, `@tanstack/react-query`, `@tanstack/react-query-devtools`, `@tauri-apps/api`, `@tauri-apps/plugin-http`, `@tauri-apps/plugin-updater`, `@tauri-apps/plugin-window-state`, `tw-animate-css`?**
-  _High betweenness centrality (0.061) - this node is a cross-community bridge._
-- **What connects `$schema`, `unicorn`, `typescript` to the rest of the system?**
+  _High betweenness centrality (0.072) - this node is a cross-community bridge._
+- **Why does `react` connect `Combobox Component` to `lucide-react`?**
+  _High betweenness centrality (0.059) - this node is a cross-community bridge._
+- **What connects `STATUS_ISSUES`, `CREATED_ISSUES`, `SPRINT_ISSUES` to the rest of the system?**
   _429 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Rust Backend Browser Automation` be split into smaller, more focused modules?**
   _Cohesion score 0.12280701754385964 - nodes in this community are weakly interconnected._
@@ -464,5 +453,3 @@ _Questions this graph is uniquely positioned to answer:_
   _Cohesion score 0.06156156156156156 - nodes in this community are weakly interconnected._
 - **Should `Agent Workflow Skills` be split into smaller, more focused modules?**
   _Cohesion score 0.14166666666666666 - nodes in this community are weakly interconnected._
-- **Should `PRD & Agent-Brief Authoring` be split into smaller, more focused modules?**
-  _Cohesion score 0.05641025641025641 - nodes in this community are weakly interconnected._

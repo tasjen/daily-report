@@ -13,11 +13,11 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/components/task-select.tsx:60
+#: src/components/task-select.tsx:75
 msgid "(all selected)"
 msgstr "(all selected)"
 
-#: src/components/date-card.tsx:171
+#: src/components/date-card.tsx:182
 msgid "{dayCount} days ago"
 msgstr "{dayCount} days ago"
 
@@ -33,9 +33,9 @@ msgstr "Add a favorite task"
 msgid "Add project"
 msgstr "Add project"
 
-#: src/lib/task-groups.ts:16
-msgid "Assigned to me not done"
-msgstr "Assigned to me not done"
+#: src/lib/task-groups.ts:32
+msgid "Assigned to you not done"
+msgstr "Assigned to you not done"
 
 #: src/components/auto-close-toggle.tsx:33
 msgid "Auto-close browser"
@@ -58,9 +58,9 @@ msgstr "Close"
 msgid "Closes the browser window after the form is submitted"
 msgstr "Closes the browser window after the form is submitted"
 
-#: src/lib/task-groups.ts:15
-msgid "Created today by me"
-msgstr "Created today by me"
+#: src/lib/task-groups.ts:27
+msgid "Created today by you"
+msgstr "Created today by you"
 
 #: src/components/default-project-select.tsx:32
 msgid "Default project"
@@ -83,9 +83,21 @@ msgid "Enter a valid http(s) URL"
 msgstr "Enter a valid http(s) URL"
 
 #: src/components/favorites-form.tsx:67
-#: src/lib/task-groups.ts:17
+#: src/lib/task-groups.ts:37
 msgid "Favorites"
 msgstr "Favorites"
+
+#: src/lib/task-groups.ts:33
+msgid "Issues assigned to you in an open sprint that aren't done yet, created on or before this date."
+msgstr "Issues assigned to you in an open sprint that aren't done yet, created on or before this date."
+
+#: src/lib/task-groups.ts:23
+msgid "Issues whose status you changed on this date."
+msgstr "Issues whose status you changed on this date."
+
+#: src/lib/task-groups.ts:28
+msgid "Issues you created on this date."
+msgstr "Issues you created on this date."
 
 #: src/components/account-form.tsx:290
 msgid "Jira API token"
@@ -156,15 +168,15 @@ msgstr "No items found."
 msgid "No reports to submit"
 msgstr "No reports to submit"
 
-#: src/components/date-card.tsx:272
+#: src/components/date-card.tsx:285
 msgid "No tasks found"
 msgstr "No tasks found"
 
-#: src/components/task-select.tsx:80
+#: src/components/task-select.tsx:119
 msgid "No tasks found."
 msgstr "No tasks found."
 
-#: src/components/date-card.tsx:270
+#: src/components/date-card.tsx:283
 msgid "No tasks selected"
 msgstr "No tasks selected"
 
@@ -208,6 +220,10 @@ msgstr "Project list"
 msgid "Project mapping"
 msgstr "Project mapping"
 
+#: src/lib/task-groups.ts:38
+msgid "Recurring tasks you saved yourself. Local to this app — no Jira query involved."
+msgstr "Recurring tasks you saved yourself. Local to this app — no Jira query involved."
+
 #: src/components/error-fallback.tsx:37
 msgid "Restart app"
 msgstr "Restart app"
@@ -228,7 +244,7 @@ msgstr "Save"
 msgid "Save anyway"
 msgstr "Save anyway"
 
-#: src/components/task-select.tsx:67
+#: src/components/task-select.tsx:106
 msgid "Search tasks"
 msgstr "Search tasks"
 
@@ -240,9 +256,9 @@ msgstr "Sign out"
 msgid "Something went wrong"
 msgstr "Something went wrong"
 
-#: src/lib/task-groups.ts:14
-msgid "Status updated by me"
-msgstr "Status updated by me"
+#: src/lib/task-groups.ts:22
+msgid "Status updated by you"
+msgstr "Status updated by you"
 
 #: src/components/auto-submit-toggle.tsx:46
 msgid "Submits the task form automatically after filling the summary"
@@ -264,7 +280,7 @@ msgstr "The task groups whose issues start all checked by default"
 msgid "Theme"
 msgstr "Theme"
 
-#: src/components/date-card.tsx:169
+#: src/components/date-card.tsx:180
 msgid "Today"
 msgstr "Today"
 
@@ -297,6 +313,6 @@ msgstr "Use the username:password format"
 msgid "Verifying…"
 msgstr "Verifying…"
 
-#: src/components/date-card.tsx:170
+#: src/components/date-card.tsx:181
 msgid "Yesterday"
 msgstr "Yesterday"

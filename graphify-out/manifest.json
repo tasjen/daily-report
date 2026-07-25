@@ -110,8 +110,8 @@
     "semantic_hash": "d3f27259c49f3bfbd4499e4600ec756a"
   },
   "src/components/date-card.tsx": {
-    "mtime": 1784981135.9349763,
-    "ast_hash": "b0afdaf189f099907ba46c9424e2b3cb",
+    "mtime": 1784982386.8230498,
+    "ast_hash": "b8ab1df8475c85c7906e118bd7938413",
     "semantic_hash": ""
   },
   "src/components/date-list.tsx": {
@@ -260,8 +260,8 @@
     "semantic_hash": ""
   },
   "src/components/task-select.tsx": {
-    "mtime": 1784971729.9325397,
-    "ast_hash": "a2f446ddc56886bf47491941c0456671",
+    "mtime": 1784982660.58808,
+    "ast_hash": "23997b958b313d50d49c0cf179d5ffcf",
     "semantic_hash": ""
   },
   "src/components/theme-provider.tsx": {
@@ -290,9 +290,9 @@
     "semantic_hash": "a9a2975e7787b91bc077b0cc3d93ff29"
   },
   "src/lib/task-groups.ts": {
-    "mtime": 1784898681.4122634,
-    "ast_hash": "e0da27b0f2b1021ac2801463207117ae",
-    "semantic_hash": "e0da27b0f2b1021ac2801463207117ae"
+    "mtime": 1784983228.566359,
+    "ast_hash": "9ba70bfd11bcb6491e711fc1a3d4a545",
+    "semantic_hash": ""
   },
   "src/lib/use-reset-when-away.ts": {
     "mtime": 1784981162.0187466,
@@ -565,13 +565,13 @@
     "semantic_hash": ""
   },
   "AGENTS.md": {
-    "mtime": 1784968546.2959802,
-    "ast_hash": "2c3293487d5dc6b136f015b059eecec2",
+    "mtime": 1784983356.3264327,
+    "ast_hash": "2d444b3ac83d263d3f4e945b5126d605",
     "semantic_hash": ""
   },
   "CLAUDE.md": {
-    "mtime": 1784968546.2959802,
-    "ast_hash": "2c3293487d5dc6b136f015b059eecec2",
+    "mtime": 1784983356.3264327,
+    "ast_hash": "2d444b3ac83d263d3f4e945b5126d605",
     "semantic_hash": ""
   },
   "README.md": {
@@ -1025,9 +1025,9 @@
     "semantic_hash": "8b152bd27c31e85e046fb59e3f982d66"
   },
   "src/lib/date-card-helpers.ts": {
-    "mtime": 1784905044.3184905,
-    "ast_hash": "8e905558f115922da30dcdf2ccda0aad",
-    "semantic_hash": "8e905558f115922da30dcdf2ccda0aad"
+    "mtime": 1784982323.040914,
+    "ast_hash": "ec4a580cd6f29332869901e94eaf0363",
+    "semantic_hash": ""
   },
   "src/lib/store.test.ts": {
     "mtime": 1784903904.2982662,
@@ -1070,9 +1070,9 @@
     "semantic_hash": ""
   },
   "src/test/render.tsx": {
-    "mtime": 1784970984.4185083,
-    "ast_hash": "c177158ec9a1d51bc56e9b674832bf57",
-    "semantic_hash": "c177158ec9a1d51bc56e9b674832bf57"
+    "mtime": 1784982503.5960946,
+    "ast_hash": "22f277b9a86ce683b68b93fe930c98b4",
+    "semantic_hash": ""
   },
   "src/components/account-form.test.tsx": {
     "mtime": 1784971729.9267447,
@@ -1080,8 +1080,8 @@
     "semantic_hash": ""
   },
   "src/components/date-card.test.tsx": {
-    "mtime": 1784971729.9281135,
-    "ast_hash": "33b71634f1560cffb6a6bcfd38248390",
+    "mtime": 1784982586.0349174,
+    "ast_hash": "64acd6ea1d2d82014619968395b07fa5",
     "semantic_hash": ""
   },
   "src/lib/use-reset-when-away.test.ts": {

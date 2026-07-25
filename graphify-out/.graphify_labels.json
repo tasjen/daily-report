@@ -56,7 +56,6 @@
   "54": "files",
   "55": "Sediment",
   "56": "@babel/core",
-  "57": "main.tsx",
   "58": "@base-ui/react",
   "59": "class-variance-authority",
   "60": "clsx",
@@ -207,6 +206,5 @@
   "205": "@tauri-apps/plugin-opener",
   "206": "@testing-library/dom",
   "207": "@testing-library/jest-dom",
-  "208": "@types/babel__core",
-  "209": "account-form.tsx"
+  "208": "@types/babel__core"
 }

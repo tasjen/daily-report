@@ -9,6 +9,8 @@ import type { JiraIssue } from "@/type";
 export type IssueGroup = {
   id: TaskGroupType;
   label: MessageDescriptor;
+  // How the group is derived, shown in its TaskSelect tooltip.
+  description: MessageDescriptor;
   issues: JiraIssue[];
 };
 
@@ -24,9 +26,10 @@ export function buildIssueGroups(
   // one query stays in the first group shown on screen.
   const seen = new Set<string>();
   return ordered
-    .map(({ type: id, label }) => ({
+    .map(({ type: id, label, description }) => ({
       id,
       label,
+      description,
       issues: issuesById[id].filter((issue) => {
         if (seen.has(issue.key)) return false;
         seen.add(issue.key);
