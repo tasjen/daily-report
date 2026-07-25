@@ -96,8 +96,6 @@
   "94": "@tauri-apps/cli",
   "95": "@testing-library/user-event",
   "96": "@types/node",
-  "97": "@types/react",
-  "98": "@types/react-dom",
   "99": "typescript",
   "100": "vite",
   "101": "@vitejs/plugin-react",

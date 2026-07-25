@@ -65,6 +65,8 @@ function TextField({
       <Input
         id={field.name}
         name={field.name}
+        // stable query hook for tests — the visible label is translated copy
+        data-testid={`account-${field.name}`}
         type={type}
         value={field.state.value}
         onBlur={field.handleBlur}
@@ -332,6 +334,7 @@ export default function AccountForm() {
                     variant="outline"
                     className="flex-1"
                     disabled={!canSubmit}
+                    data-testid="account-save-anyway"
                     onClick={() => {
                       saveAccount.mutate(normalizePortalUrl(form.state.values));
                       setOpen(false);
@@ -344,6 +347,8 @@ export default function AccountForm() {
                   type="submit"
                   className="flex-1"
                   disabled={!canSubmit || verifyAccount.isPending}
+                  data-testid="account-save"
+                  data-pending={verifyAccount.isPending || undefined}
                 >
                   {verifyAccount.isPending ? (
                     <Trans>Verifying…</Trans>

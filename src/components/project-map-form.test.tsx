@@ -29,15 +29,14 @@ function setup(
   return saved;
 }
 
+// Queried by data-testid, not by the translated placeholder/label copy.
 async function renderForm() {
   await renderWithProviders(<ProjectMapForm />);
-  return await screen.findByPlaceholderText("KEY");
+  return await screen.findByTestId("project-map-key");
 }
 
 function submitButton() {
-  return screen
-    .getAllByRole("button")
-    .find((b) => b.getAttribute("type") === "submit")!;
+  return screen.getByTestId("project-map-add");
 }
 
 it("adds a mapping with the key trimmed and uppercased", async () => {

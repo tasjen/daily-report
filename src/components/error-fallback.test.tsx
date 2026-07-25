@@ -16,6 +16,7 @@ it("renders the error message", async () => {
       />
     </I18nProvider>,
   );
-  expect(screen.getByText("Something went wrong")).toBeInTheDocument();
+  // heading is translated copy (testid); the message is the error itself (text)
+  expect(screen.getByTestId("error-title")).toBeInTheDocument();
   expect(screen.getByText("Error: boom")).toBeInTheDocument();
 });

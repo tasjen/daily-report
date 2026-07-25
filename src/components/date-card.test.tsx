@@ -116,11 +116,19 @@ async function renderCard(date = DATE) {
   await renderWithProviders(<DateCard date={date} />);
 }
 
-// Play is the only icon-only button carrying a play glyph (refresh/copy differ).
+// Groups, the submit button and the "(all selected)" marker are addressed by
+// data-testid: their visible labels are lingui messages, so querying them by
+// text would break on a copy or catalog edit. Jira issue text and error text
+// are data, not copy, so those stay asserted by text.
+//
+// Every inner testid is scoped through the card's own, since DateList renders
+// one card per date and they would otherwise collide across cards.
+function card(date = DATE) {
+  return within(screen.getByTestId(`date-card-${date}`));
+}
+
 function playButton() {
-  return screen
-    .getAllByRole("button")
-    .find((b) => b.querySelector("svg.lucide-play"))!;
+  return card().getByTestId("submit-task");
 }
 
 it("renders a group per non-empty source and drops empty groups", async () => {
@@ -132,11 +140,11 @@ it("renders a group per non-empty source and drops empty groups", async () => {
   });
   await renderCard();
 
-  expect(await screen.findByText("Status updated by me")).toBeInTheDocument();
-  expect(screen.getByText("Created today by me")).toBeInTheDocument();
-  expect(screen.getByText("Assigned to me not done")).toBeInTheDocument();
+  expect(await card().findByTestId("task-group-status")).toBeInTheDocument();
+  expect(card().getByTestId("task-group-created")).toBeInTheDocument();
+  expect(card().getByTestId("task-group-sprint")).toBeInTheDocument();
   // no favorites configured, so the favorites group is dropped
-  expect(screen.queryByText("Favorites")).not.toBeInTheDocument();
+  expect(card().queryByTestId("task-group-favorite")).not.toBeInTheDocument();
 });
 
 it("default-checks only the status group and submits its issues", async () => {
@@ -148,10 +156,15 @@ it("default-checks only the status group and submits its issues", async () => {
   });
   await renderCard();
 
-  await screen.findByText("Status updated by me");
+  await card().findByTestId("task-group-status");
   await waitFor(() => expect(playButton()).toBeEnabled());
   // only the status group is fully checked by default
-  expect(screen.getByText("(all selected)")).toBeInTheDocument();
+  expect(
+    card().getByTestId("task-group-status-all-selected"),
+  ).toBeInTheDocument();
+  expect(
+    card().queryByTestId("task-group-created-all-selected"),
+  ).not.toBeInTheDocument();
 
   await userEvent.click(playButton());
   await waitFor(() => expect(submitCalls).toHaveLength(1));
@@ -170,7 +183,7 @@ it("submits one empty row when autofill_summary is off", async () => {
   });
   await renderCard();
 
-  await screen.findByText("Status updated by me");
+  await card().findByTestId("task-group-status");
   await waitFor(() => expect(playButton()).toBeEnabled());
   await userEvent.click(playButton());
 
@@ -190,7 +203,7 @@ it("routes the submission through project_map", async () => {
   });
   await renderCard();
 
-  await screen.findByText("Status updated by me");
+  await card().findByTestId("task-group-status");
   await waitFor(() => expect(playButton()).toBeEnabled());
   await userEvent.click(playButton());
 
@@ -212,7 +225,7 @@ it("renders favorites and leads the summary with favorite bullets", async () => 
   });
   await renderCard();
 
-  expect(await screen.findByText("Favorites")).toBeInTheDocument();
+  expect(await card().findByTestId("task-group-favorite")).toBeInTheDocument();
   await waitFor(() => expect(playButton()).toBeEnabled());
   await userEvent.click(playButton());
 
@@ -227,7 +240,8 @@ it("surfaces a failed Jira query in the card", async () => {
   await setJira({ status: STATUS_ISSUES, error: "created" });
   await renderCard();
 
-  expect(await screen.findByText(/Bad JQL/)).toBeInTheDocument();
+  // the Jira error text is data, not copy — assert it inside the alert region
+  expect(await card().findByRole("alert")).toHaveTextContent(/Bad JQL/);
 });
 
 it("shows a spinner and disables submit while a query is in flight", async () => {
@@ -262,14 +276,11 @@ it("toggling a created issue on adds it as [Created] to the submission", async (
   await setJira({ status: STATUS_ISSUES, created: CREATED_ISSUES, sprint: [] });
   await renderCard();
 
-  await screen.findByText("Created today by me");
+  await card().findByTestId("task-group-created");
   await waitFor(() => expect(playButton()).toBeEnabled());
 
   // open the created group's combobox and check DR-2
-  const createdGroup = screen.getByText("Created today by me").closest("div")!;
-  await userEvent.click(
-    within(createdGroup).getByPlaceholderText("Search tasks"),
-  );
+  await userEvent.click(card().getByTestId("task-group-created-input"));
   const option = await screen.findByRole("option", {
     name: /DR-2.*New ticket/,
   });

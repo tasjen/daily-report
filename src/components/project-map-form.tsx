@@ -124,6 +124,7 @@ export default function ProjectMapForm() {
           onChange={(e) => setKey(e.target.value)}
           placeholder={t`Key`}
           className="w-16 flex-none font-mono"
+          data-testid="project-map-key"
         />
         <Select
           items={data.projects}
@@ -143,7 +144,12 @@ export default function ProjectMapForm() {
             </SelectGroup>
           </SelectContent>
         </Select>
-        <Button type="submit" size="icon" disabled={!canAdd}>
+        <Button
+          type="submit"
+          size="icon"
+          disabled={!canAdd}
+          data-testid="project-map-add"
+        >
           <PlusIcon />
         </Button>
       </form>

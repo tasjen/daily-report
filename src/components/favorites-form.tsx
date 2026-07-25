@@ -55,7 +55,7 @@ export default function FavoritesForm() {
     <Dialog>
       <DialogTrigger
         render={
-          <Button size="icon-xl" variant="ghost">
+          <Button size="icon-xl" variant="ghost" data-testid="favorites-open">
             <StarIcon className="size-6" />
           </Button>
         }
@@ -80,6 +80,7 @@ export default function FavoritesForm() {
                 <Button
                   size="icon"
                   variant="ghost"
+                  data-testid="favorite-delete"
                   onClick={() =>
                     saveFavorites.mutate(
                       favorites.filter((f) => f.text !== favorite.text),
@@ -101,6 +102,7 @@ export default function FavoritesForm() {
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder={t`Add a favorite task`}
+            data-testid="favorite-text"
           />
           <Tooltip>
             <TooltipTrigger
@@ -110,6 +112,7 @@ export default function FavoritesForm() {
                   onChange={(e) => setProjectKey(e.target.value)}
                   placeholder={t`Key`}
                   className="w-30 flex-none font-mono"
+                  data-testid="favorite-key"
                 />
               }
             />
@@ -122,7 +125,7 @@ export default function FavoritesForm() {
               </Trans>
             </TooltipContent>
           </Tooltip>
-          <Button type="submit" disabled={!canAdd}>
+          <Button type="submit" disabled={!canAdd} data-testid="favorite-add">
             <PlusIcon />
           </Button>
         </form>

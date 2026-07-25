@@ -219,7 +219,9 @@ export default function DateCard({ date }: Props) {
   const { mutate: submitTask, isPending: isSubmitting } =
     useSubmitTaskMutation();
   return (
-    <Card as="li">
+    // DateList renders one card per date, so the card's own testid is what
+    // scopes the inner ones (`submit-task`, `task-group-*`) to a single date.
+    <Card as="li" data-testid={`date-card-${date}`}>
       <CardHeader className="flex flex-none items-center gap-2">
         <CardTitle className="flex-1">
           {date}
@@ -244,6 +246,7 @@ export default function DateCard({ date }: Props) {
         </Button>
         <Button
           variant="secondary"
+          data-testid="submit-task"
           onClick={() =>
             submitTask({
               date,
@@ -276,6 +279,7 @@ export default function DateCard({ date }: Props) {
             <TaskSelect
               key={group.type}
               className="min-w-0 flex-1"
+              testId={`task-group-${group.type}`}
               label={group.label}
               items={group.items}
               plainLabels={group.type === "favorite"}
@@ -289,7 +293,10 @@ export default function DateCard({ date }: Props) {
         {isFetching ? (
           <Loader2Icon className="animate-spin" />
         ) : error ? (
-          <p className="flex items-start gap-2 whitespace-pre-wrap text-red-500">
+          <p
+            role="alert"
+            className="flex items-start gap-2 whitespace-pre-wrap text-red-500"
+          >
             <CircleAlertIcon className="mt-1 size-4" />
             {error instanceof Error ? error.message : String(error)}
           </p>
