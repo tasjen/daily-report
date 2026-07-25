@@ -44,8 +44,13 @@ impl PortalAccountConfig {
         // Field order is what decides the reported message; see the doc above.
         Ok(Self {
             phone: required(phone, "Phone number not configured")?,
-            portal_url: normalize_portal_url(&required(portal_url, "Portal URL not configured")?)
-                .to_string(),
+            // Normalize *before* validating. A URL of nothing but slashes is
+            // non-empty yet trims away to nothing, and an empty base URL would
+            // send login to "" and then time out waiting for "/member.php".
+            portal_url: required(
+                normalize_portal_url(&portal_url).to_string(),
+                "Portal URL not configured",
+            )?,
             // Basic-auth `user:pass`, encoded verbatim — never trimmed or
             // otherwise reshaped, since any byte may be part of the password.
             portal_credential: required(portal_credential, "Portal credential not configured")?,
@@ -216,6 +221,24 @@ mod tests {
                 "https://portal.example.com/team",
             ]
         );
+    }
+
+    #[test]
+    fn a_portal_url_that_normalizes_away_is_rejected() {
+        // `///` is non-empty but trims to nothing. Accepting it would hand
+        // login an empty base URL: it would navigate to "" and then wait for
+        // "/member.php", failing with a timeout that blames the phone number.
+        let messages = ["/", "//", "///"].map(|url| {
+            PortalAccountConfig::from_candidates(
+                "0812345678".into(),
+                url.into(),
+                "user:pass".into(),
+            )
+            .unwrap_err()
+            .to_string()
+        });
+
+        assert_eq!(messages, ["Portal URL not configured"; 3]);
     }
 
     #[test]

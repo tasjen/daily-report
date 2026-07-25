@@ -2,6 +2,7 @@ mod account;
 mod browser_session;
 #[cfg(test)]
 mod command_registry;
+mod error;
 mod lifecycle;
 mod login;
 mod navigation;
@@ -16,6 +17,7 @@ use browser_session::{BrowserHost, BrowserSession};
 use chromiumoxide::browser::{Browser, BrowserConfig};
 use chromiumoxide::cdp::browser_protocol::network::{Headers, SetExtraHttpHeadersParams};
 use chromiumoxide::Page;
+pub(crate) use error::AppError;
 use futures::StreamExt;
 use login::{login_script, LoginPortal, PortalLogin, VerifyHost, VerifySession};
 use navigation::{wait_for_navigation, UrlExpectation};
@@ -44,49 +46,26 @@ const TASK_PROJECT_SELECT_PREFIX: &str = "select#task_project_id";
 const TASK_COMMENT_TEXTAREA_PREFIX: &str = "textarea#task_comment";
 const TASK_FORM_SELECTOR: &str = "form[action='task.php']";
 
-#[derive(thiserror::Error, Debug)]
-enum AppError {
-    #[error("{0}")]
-    Msg(String),
-    // `CdpError` is large; box it so `Result<_, AppError>` stays small.
-    #[error(transparent)]
-    Cdp(Box<chromiumoxide::error::CdpError>),
-    #[error(transparent)]
-    Io(#[from] std::io::Error),
-    #[error(transparent)]
-    Store(#[from] tauri_plugin_store::Error),
-    #[error(transparent)]
-    Json(#[from] serde_json::Error),
-    #[error(transparent)]
-    Tauri(#[from] tauri::Error),
+/// Path to one of the app's Chromium profile dirs, under the app's own cache
+/// dir (not the shared system temp). Each browser instance gets its own subdir
+/// so they never contend for the same profile lock; the set is bounded to the
+/// three names below, which is why they can be wiped rather than cleaned up.
+fn profile_dir(cache_dir: &std::path::Path, name: &str) -> std::path::PathBuf {
+    cache_dir.join("profiles").join(name)
 }
 
-// Manual `From` (rather than `#[from]`) so `?` boxes the error at the call site
-// and the variant can stay boxed.
-impl From<chromiumoxide::error::CdpError> for AppError {
-    fn from(e: chromiumoxide::error::CdpError) -> Self {
-        AppError::Cdp(Box::new(e))
+/// Which browser instance this is, for log lines and its profile subdir.
+fn browser_label(with_head: bool) -> &'static str {
+    if with_head {
+        "headed"
+    } else {
+        "headless"
     }
 }
 
-impl From<String> for AppError {
-    fn from(s: String) -> Self {
-        AppError::Msg(s)
-    }
-}
-
-impl From<&str> for AppError {
-    fn from(s: &str) -> Self {
-        AppError::Msg(s.to_string())
-    }
-}
-
-// Tauri command errors must be `Serialize`; serialize as the `Display` string.
-impl serde::Serialize for AppError {
-    fn serialize<S: serde::Serializer>(&self, serializer: S) -> Result<S::Ok, S::Error> {
-        serializer.serialize_str(&self.to_string())
-    }
-}
+/// The throwaway `verify_portal_login` profile, kept apart from the persistent
+/// instances so a check never contends with them.
+const VERIFY_PROFILE: &str = "verify";
 
 /// The real Chromium boundary behind `BrowserSession`: launches a browser from
 /// this instance's own profile dir, logs it into the portal, and terminates it.
@@ -137,13 +116,8 @@ impl VerifyHost for ChromiumVerifyHost {
     type Page = Page;
 
     async fn launch(&self) -> Result<(Browser, Page), AppError> {
-        let user_data_dir = self
-            .app
-            .path()
-            .app_cache_dir()?
-            .join("profiles")
-            .join("verify");
-        launch_browser(&user_data_dir, false, "verify").await
+        let user_data_dir = profile_dir(&self.app.path().app_cache_dir()?, VERIFY_PROFILE);
+        launch_browser(&user_data_dir, false, VERIFY_PROFILE).await
     }
 
     async fn login(&self, page: &Page, config: &PortalAccountConfig) -> Result<(), AppError> {
@@ -168,17 +142,10 @@ impl std::ops::Deref for VerifyBrowserState {
 }
 
 impl ChromiumHost {
-    /// Path to this browser's Chromium user-data dir, under the app's own cache
-    /// dir (not the shared system temp). Headed and headless get separate
-    /// subdirs so the two instances never contend for the same profile lock.
+    /// This browser's Chromium user-data dir. The subdir is the instance label,
+    /// so headed and headless never contend for the same profile lock.
     fn user_data_dir(&self) -> Result<std::path::PathBuf, AppError> {
-        let subdir = if self.with_head { "headed" } else { "headless" };
-        Ok(self
-            .app
-            .path()
-            .app_cache_dir()?
-            .join("profiles")
-            .join(subdir))
+        Ok(profile_dir(&self.app.path().app_cache_dir()?, self.label()))
     }
 }
 
@@ -187,11 +154,7 @@ impl BrowserHost for ChromiumHost {
     type Page = Page;
 
     fn label(&self) -> &'static str {
-        if self.with_head {
-            "headed"
-        } else {
-            "headless"
-        }
+        browser_label(self.with_head)
     }
 
     /// Launches a fresh Chromium instance and logs into the admin portal.
@@ -683,4 +646,39 @@ pub fn run() {
                 });
             }
         });
+}
+
+#[cfg(test)]
+mod tests {
+    use std::path::Path;
+
+    use super::{browser_label, profile_dir, VERIFY_PROFILE};
+
+    #[test]
+    fn each_browser_instance_gets_its_own_profile_directory() {
+        let cache = Path::new("/tmp/app-cache");
+
+        let dirs = [browser_label(false), browser_label(true), VERIFY_PROFILE]
+            .map(|name| profile_dir(cache, name));
+
+        // Bounded to three fixed paths, which is what lets each launch wipe
+        // its own dir instead of tracking temporary ones for cleanup.
+        assert_eq!(
+            dirs,
+            [
+                Path::new("/tmp/app-cache/profiles/headless").to_path_buf(),
+                Path::new("/tmp/app-cache/profiles/headed").to_path_buf(),
+                Path::new("/tmp/app-cache/profiles/verify").to_path_buf(),
+            ]
+        );
+    }
+
+    #[test]
+    fn headed_and_headless_instances_are_labelled_apart() {
+        // The label names the instance in log lines *and* picks its profile
+        // subdir, so a collision here would put both browsers in one profile.
+        assert_ne!(browser_label(true), browser_label(false));
+        assert_ne!(browser_label(true), VERIFY_PROFILE);
+        assert_ne!(browser_label(false), VERIFY_PROFILE);
+    }
 }
