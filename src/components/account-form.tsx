@@ -150,7 +150,7 @@ export default function AccountForm() {
       portal_url: account?.portal_url ?? "",
       portal_credential: account?.portal_credential ?? "",
     },
-    validators: { onChange: formSchema },
+    validators: { onSubmit: formSchema },
     onSubmit: async ({ value }) => {
       const accountNormalized = normalizePortalUrl(value);
       const session = submitSessionRef.current;
