@@ -11,6 +11,7 @@ import { ErrorBoundary } from "react-error-boundary";
 
 import App from "@/App";
 import ErrorFallback from "@/components/error-fallback";
+import { Toaster } from "@/components/shared/sonner";
 import { TooltipProvider } from "@/components/shared/tooltip";
 import { ThemeProvider } from "@/components/theme-provider";
 import { activateLocale, getStoredLocale } from "@/lib/i18n";
@@ -53,6 +54,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
             <ThemeProvider storageKey="vite-ui-theme">
               <TooltipProvider>
                 <App />
+                <Toaster />
               </TooltipProvider>
             </ThemeProvider>
             <ReactQueryDevtools />

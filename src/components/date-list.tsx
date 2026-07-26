@@ -31,42 +31,39 @@ export default function DateList() {
     );
   }
 
-  return (
-    <div className="flex flex-col items-center gap-4">
-      <p className="text-muted-foreground">
-        © {new Date().getFullYear()} FlexiRent. All rights reserved.
+  if (isFetching) return <Loader2Icon className="animate-spin" />;
+  if (error)
+    return (
+      <p className="flex flex-col gap-4 text-center whitespace-pre-wrap text-red-500">
+        {String(error)}
       </p>
-      {isFetching ? (
-        <Loader2Icon className="animate-spin" />
-      ) : error ? (
-        <p className="flex flex-col gap-4 text-center whitespace-pre-wrap text-red-500">
-          {String(error)}
-        </p>
-      ) : !dates.length ? (
-        <p className="text-muted-foreground italic">
-          <Trans>No reports to submit</Trans>
-        </p>
-      ) : (
-        <>
-          <ol ref={animateRef} className="flex w-full max-w-5xl flex-col gap-4">
-            {dates.slice(0, visibleCount).map((option) => (
-              <DateCard key={option.value} date={option.value} />
-            ))}
-          </ol>
-          {visibleCount < dates.length && (
-            <Button
-              variant="outline"
-              onClick={() => {
-                setEnabled(false);
-                setVisibleCount((prev) => prev + PAGE_SIZE);
-                setTimeout(() => setEnabled(true), 500);
-              }}
-            >
-              <Trans>Load more</Trans>
-            </Button>
-          )}
-        </>
+    );
+  if (!dates.length)
+    return (
+      <p className="text-muted-foreground italic">
+        <Trans>No reports to submit</Trans>
+      </p>
+    );
+
+  return (
+    <>
+      <ol ref={animateRef} className="flex w-full max-w-5xl flex-col gap-4">
+        {dates.slice(0, visibleCount).map((option) => (
+          <DateCard key={option.value} date={option.value} />
+        ))}
+      </ol>
+      {visibleCount < dates.length && (
+        <Button
+          variant="outline"
+          onClick={() => {
+            setEnabled(false);
+            setVisibleCount((prev) => prev + PAGE_SIZE);
+            setTimeout(() => setEnabled(true), 500);
+          }}
+        >
+          <Trans>Load more</Trans>
+        </Button>
       )}
-    </div>
+    </>
   );
 }
