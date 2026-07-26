@@ -222,8 +222,13 @@ export default function AccountForm() {
             <Trans>Account</Trans>
           </DialogTitle>
         </DialogHeader>
-        <ScrollArea className="-mr-3 max-h-[60dvh] pt-4 pr-3">
-          <FieldGroup className="pb-4">
+        {/* The scroll viewport clips at its own box, so the inputs' 3px focus
+            ring needs room *inside* it: pad the scrolling content and pull the
+            whole area out by the same amount, keeping fields flush with the
+            dialog. The right gutter (-mr-3 minus pr-2) is where the scrollbar
+            sits, outside the content column. */}
+        <ScrollArea className="-mr-3 -ml-1 max-h-[60dvh] pt-4 pr-2">
+          <FieldGroup className="px-1 pb-4">
             <form.Field name="portal_url">
               {(field) => (
                 <TextField
