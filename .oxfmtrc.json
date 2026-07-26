@@ -17,12 +17,7 @@
     "stylesheet": "./src/App.css",
     "functions": ["cn", "cva", "clsx"]
   },
-  "ignorePatterns": [
-    "graphify-out",
-    "src-tauri/target",
-    "src-tauri/gen",
-    "**/*.md"
-  ],
+  "ignorePatterns": ["src-tauri/target", "src-tauri/gen", "**/*.md"],
   "options": {
     "typeAware": true
   }

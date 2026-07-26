@@ -1,5 +1,3 @@
 .agents/** linguist-vendored
 .claude/** linguist-vendored
-graphify-out/** linguist-generated
 pnpm-lock.yaml linguist-generated
-graphify-out/graph.json merge=graphify

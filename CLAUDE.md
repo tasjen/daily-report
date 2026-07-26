@@ -265,7 +265,7 @@ The E2E smoke suite runs separately in [e2e.yml](.github/workflows/e2e.yml) (non
 Each job uses `dorny/paths-filter` and `if:`-guards toolchain/setup/check steps based on relevant paths. Irrelevant changes still complete required checks without running the work. Preserve these constraints:
 
 - `permissions:` **must** grant `pull-requests: read`; on PR events, the filter reads changed files from the API, which the explicit permissions block otherwise denies.
-- Exclude `graphify-out` with extglob `!(graphify-out)/**/*.{…}`, **not** a leading-`!` line. paths-filter matches when **any** pattern matches, so a negation line matches nearly everything. This matters because `graphify update .` commits `graphify-out/*.json` beside Rust-only changes.
+- Exclude generated directories by keeping them untracked, **not** with a leading-`!` line. paths-filter matches when **any** pattern matches, so a negation line matches nearly everything and defeats the filter.
 - The `frontend` filter must cover `src-tauri` JSON (`tauri.conf*.json`, `capabilities/*.json`) because oxfmt formats it. Keep the filter synchronized with `ignorePatterns` in `.oxfmtrc.json`/`.oxlintrc.json`; excluding all `src-tauri` would allow config formatting violations onto `main`.
 - Do not add `fetch-depth: 0`; paths-filter deepens the shallow clone itself.
 
@@ -308,11 +308,3 @@ Additional release rules:
 - **Formatting:** oxfmt enforces sorted Tailwind classes (`sortTailwindcss`, reading the v4 stylesheet `src/App.css`) and sorted imports (`sortImports`); the pre-commit hook auto-fixes staged files. Linting needs `--type-aware` (wired into `pnpm lint`) or `typescript/no-floating-promises` silently stops running.
 - **UI copy stays second person.** Address the user as "you"/"your" (Thai: `คุณ`), never first person ("I"/"me"/"my", Thai: `ฉัน`). Source strings live in `msg`/`t` macro calls under `src/`; `.po` `msgid`s regenerate from them via `pnpm extract`, so fix the source string first, then re-run `pnpm extract --clean` and fill in the resulting blank `msgstr`s per locale.
 - **Never switch git branches without asking.** Do not `git checkout`/`git switch` to another branch, create a new branch, or pull `main` mid-session unless the user has explicitly approved it first — even when a merged PR makes moving to a fresh branch seem like the obvious next step. The user coordinates branch state outside the session; unannounced switches cause divergence and merge conflicts.
-
-## graphify
-
-The project knowledge graph at `graphify-out/` contains god nodes, community structure, and cross-file relationships.
-
-- For codebase questions, first run `graphify query "<question>"` when `graphify-out/graph.json` exists. Use `graphify path "<A>" "<B>"` for relationships and `graphify explain "<concept>"` for focused concepts. These return scoped subgraphs, usually much smaller than `GRAPH_REPORT.md` or raw grep output.
-- If `graphify-out/wiki/index.md` exists, use it for broad navigation instead of raw source browsing.
-- Read `graphify-out/GRAPH_REPORT.md` only for broad architecture review or when query/path/explain lacks enough context.

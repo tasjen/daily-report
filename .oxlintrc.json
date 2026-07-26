@@ -18,12 +18,7 @@
     "typescript/no-unnecessary-type-assertion": "error",
     "typescript/no-unsafe-type-assertion": "off"
   },
-  "ignorePatterns": [
-    "dist",
-    "graphify-out",
-    "src-tauri/target",
-    "src-tauri/gen"
-  ],
+  "ignorePatterns": ["dist", "src-tauri/target", "src-tauri/gen"],
   "options": {
     "typeAware": true
   }
